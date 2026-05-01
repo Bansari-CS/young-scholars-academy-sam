@@ -1,0 +1,47 @@
+---
+import type { HeroDashboardData } from '../../types/home';
+import '../../styles/components/dashboard-preview.css';
+
+interface Props {
+	dashboard: HeroDashboardData;
+}
+
+const { dashboard } = Astro.props;
+---
+
+<aside class="dashboard-card">
+	<div class="dashboard-header">
+		<div>
+			<p class="student">{dashboard.studentName}</p>
+			<p class="course">{dashboard.course}</p>
+		</div>
+		<span class="streak">{dashboard.streakLabel}</span>
+	</div>
+
+	<div class="lesson-card">
+		<span class="progress-tag">{dashboard.progressTag}</span>
+		<h3>{dashboard.lessonTitle}</h3>
+		<p>{dashboard.lessonDescription}</p>
+
+		<div class="progress-wrap">
+			<div class="progress-track">
+				<div class="progress-fill" style={`width: ${dashboard.progressPercent}%;`}></div>
+			</div>
+			<strong>{dashboard.progressPercent}%</strong>
+		</div>
+	</div>
+
+	<div class="stats-grid">
+		{
+			dashboard.stats.map((item) => (
+				<article class="stat">
+					<p class="stat-label">{item.label}</p>
+					<div class="stat-value-wrap">
+						<strong>{item.value}</strong>
+						{item.change && <span>{item.change}</span>}
+					</div>
+				</article>
+			))
+		}
+	</div>
+</aside>

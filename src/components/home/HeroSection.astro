@@ -1,0 +1,39 @@
+---
+import { heroData } from '../../data/home';
+import Header from '../common/Header.astro';
+import '../../styles/components/hero-section.css';
+import DashboardPreview from './DashboardPreview.astro';
+---
+
+<main class="home">
+	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+
+	<div class="home-container">
+		<section class="hero">
+			<div class="hero-content">
+				<span class="hero-badge">{heroData.badgeText}</span>
+				<h1>
+					<span class="title-line">{heroData.titleLineOne}</span>
+					<span class="title-line highlight">{heroData.titleHighlight}</span>
+				</h1>
+				<p>{heroData.description}</p>
+
+				<div class="hero-cta-group">
+					<a class="hero-primary" href={heroData.primaryCta.href}>{heroData.primaryCta.label}</a>
+					<a class="hero-secondary" href={heroData.secondaryCta.href}>{heroData.secondaryCta.label}</a>
+				</div>
+
+				<div class="hero-social-proof">
+					<div class="hero-avatars" aria-hidden="true">
+						<span>AR</span>
+						<span>JM</span>
+						<span>+2k</span>
+					</div>
+					<strong>{heroData.ratingText}</strong>
+				</div>
+			</div>
+
+			<DashboardPreview dashboard={heroData.dashboard} />
+		</section>
+	</div>
+</main>
