@@ -1,0 +1,48 @@
+---
+import { learnerSectionData } from '../../data/home';
+import '../../styles/components/learner-needs-section.css';
+---
+
+<section class="learner-section">
+	<div class="learner-container">
+		<div class="org-strip">
+			<p>{learnerSectionData.organizationsTitle}</p>
+			<div class="org-grid">
+				{
+					learnerSectionData.organizations.map((org) => (
+						<article class="org-item">
+							<div class={`org-icon org-icon-${org.icon}`} aria-hidden="true"></div>
+							<div>
+								<strong>{org.name}</strong>
+								<span>{org.subtitle}</span>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="learner-heading">
+			<span>{learnerSectionData.badgeText}</span>
+			<h2>{learnerSectionData.title}</h2>
+			<p>{learnerSectionData.description}</p>
+		</div>
+
+		<div class="learner-cards">
+			{
+				learnerSectionData.cards.map((card) => (
+					<article class="learner-card">
+						<div class={`card-icon card-icon-${card.icon}`} aria-hidden="true"></div>
+						<h3>{card.title}</h3>
+						<p>{card.description}</p>
+						<div class="card-divider"></div>
+						<div class="card-highlight">
+							<span class="dot"></span>
+							<strong>{card.highlight}</strong>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
