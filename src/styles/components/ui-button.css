@@ -1,0 +1,60 @@
+.ui-primary-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	text-decoration: none;
+	font-family: 'Plus Jakarta Sans', var(--ysa-font-body);
+	font-weight: 500;
+	color: #fff;
+	background: var(--ysa-figma-primary);
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
+}
+
+.ui-primary-btn__shadow {
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	box-shadow: 0 2px 16px -4px rgba(0, 0, 0, 0.06);
+}
+
+.ui-primary-btn__label {
+	position: relative;
+	z-index: 1;
+}
+
+.ui-primary-btn__icon {
+	position: relative;
+	z-index: 1;
+	width: 12.25px;
+	height: 14px;
+	display: block;
+	flex-shrink: 0;
+}
+
+.ui-primary-btn--lg {
+	padding: 16px 32px;
+	font-size: 16px;
+	line-height: 24px;
+	min-height: 56px;
+}
+
+.ui-primary-btn--sm {
+	padding: 12px 24px;
+	font-size: 14px;
+	line-height: 20px;
+	min-height: 44px;
+}
+
+.ui-primary-btn:hover {
+	filter: brightness(1.03);
+}
+
+.ui-primary-btn:focus-visible {
+	outline: 2px solid var(--ysa-figma-primary);
+	outline-offset: 2px;
+}

@@ -1,13 +1,43 @@
 ---
+import Header from '../components/common/Header.astro';
+import { heroData } from '../data/home';
 import HeroSection from '../components/home/HeroSection.astro';
+import TrustStripSection from '../components/home/TrustStripSection.astro';
 import LearnerNeedsSection from '../components/home/LearnerNeedsSection.astro';
+import ProgramsSection from '../components/home/ProgramsSection.astro';
+import MethodologySection from '../components/home/MethodologySection.astro';
+import PlatformSection from '../components/home/PlatformSection.astro';
+import ImpactSection from '../components/home/ImpactSection.astro';
+import TeachersSection from '../components/home/TeachersSection.astro';
+import WorldKidsSection from '../components/home/WorldKidsSection.astro';
+import FitCheckSection from '../components/home/FitCheckSection.astro';
+import FaqSection from '../components/home/FaqSection.astro';
+import CommunityCtaSection from '../components/home/CommunityCtaSection.astro';
 import Layout from '../layouts/Layout.astro';
+import { learnerSectionData } from '../data/home';
+import '../styles/components/home-sections.css';
 ---
 
 <Layout
 	title="Young Scholars Academy"
 	description="Premium online learning for gifted, twice-exceptional, and neurodivergent learners."
 >
-	<HeroSection />
-	<LearnerNeedsSection />
+	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<main class="site-main">
+		<HeroSection />
+		<TrustStripSection
+			title={learnerSectionData.organizationsTitle}
+			organizations={learnerSectionData.organizations}
+		/>
+		<LearnerNeedsSection />
+		<ProgramsSection />
+		<MethodologySection />
+		<PlatformSection />
+		<ImpactSection />
+		<TeachersSection />
+		<WorldKidsSection />
+		<FitCheckSection />
+		<FaqSection />
+		<CommunityCtaSection />
+	</main>
 </Layout>

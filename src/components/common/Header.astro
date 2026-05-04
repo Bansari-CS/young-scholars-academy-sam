@@ -1,5 +1,6 @@
 ---
 import type { NavItem } from '../../types/home';
+import PrimaryButton from '../ui/PrimaryButton.astro';
 import '../../styles/components/header.css';
 
 interface Props {
@@ -12,16 +13,20 @@ const { brand, navItems } = Astro.props;
 
 <header class="site-header">
 	<div class="header-container">
-		<div class="header-brand">
-			<div class="header-logo">YS</div>
-			<span>{brand}</span>
-		</div>
+		<a class="header-brand" href="/">
+			<span class="header-logo" aria-hidden="true">YS</span>
+			<span class="header-brand-name">{brand}</span>
+		</a>
 
-		<nav aria-label="Primary">
+		<nav class="header-nav" aria-label="Primary">
 			<ul class="header-nav-list">
 				{
 					navItems.map((item) => (
-						<li><a href={item.href}>{item.label}</a></li>
+						<li>
+							<a class="header-nav-link" href={item.href}>
+								{item.label}
+							</a>
+						</li>
 					))
 				}
 			</ul>
@@ -29,7 +34,7 @@ const { brand, navItems } = Astro.props;
 
 		<div class="header-actions">
 			<a href="#" class="header-signin">Sign In</a>
-			<a href="#" class="header-browse">Browse Courses</a>
+			<PrimaryButton href="#" label="Browse Courses" variant="sm" class="header-primary-cta" />
 		</div>
 	</div>
 </header>

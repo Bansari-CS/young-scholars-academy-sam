@@ -1,0 +1,27 @@
+---
+import { homePageSectionsData } from '../../data/homePageSections';
+
+const d = homePageSectionsData.teachers;
+---
+
+<section class="home-section home-section--surface teachers-section" aria-labelledby="teachers-heading">
+	<div class="home-section-inner">
+		<header class="section-head">
+			<p class="section-eyebrow">{d.eyebrow}</p>
+			<h2 class="section-title" id="teachers-heading">{d.title}</h2>
+			<p class="section-desc">{d.description}</p>
+		</header>
+		<div class="teachers-grid">
+			{
+				d.items.map((t) => (
+					<article class="teacher-card">
+						<div class="teacher-avatar" aria-hidden="true"></div>
+						<h3>{t.name}</h3>
+						<p class="teacher-role">{t.role}</p>
+						<p>{t.bio}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

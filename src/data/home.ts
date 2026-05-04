@@ -1,7 +1,7 @@
 import type { HeroData, LearnerSectionData } from '../types/home';
 
 export const heroData: HeroData = {
-	badgeText: 'Trusted by 2,000+ families',
+	badgeText: 'Trusted by 2,000+ Families',
 	titleLineOne: "Where Your Child's",
 	titleHighlight: 'Brilliance Belongs',
 	description:
@@ -24,7 +24,7 @@ export const heroData: HeroData = {
 	],
 	dashboard: {
 		studentName: "Alex's Dashboard",
-		course: 'Advanced Math - Grade 6',
+		course: 'Advanced Math • Grade 6',
 		streakLabel: '15 Day Streak',
 		progressTag: 'In Progress',
 		lessonTitle: 'Algebraic Expressions',
@@ -38,7 +38,7 @@ export const heroData: HeroData = {
 		nextSession: {
 			label: 'Next Session',
 			title: 'Live Class: Geometry Basics',
-			chipText: 'Starts in 2h',
+			chipText: 'Join',
 		},
 	},
 };

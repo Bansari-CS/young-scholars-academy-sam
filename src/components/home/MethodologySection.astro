@@ -1,0 +1,56 @@
+---
+import { homePageSectionsData } from '../../data/homePageSections';
+import PrimaryButton from '../ui/PrimaryButton.astro';
+import '../../styles/components/methodology-section.css';
+
+const d = homePageSectionsData.methodology;
+---
+
+<section class="home-section home-section--surface ysa-methodology" aria-labelledby="method-heading">
+	<div class="ysa-methodology__inner">
+		<div class="ysa-methodology__top">
+			<div class="ysa-methodology__intro">
+				<p class="ysa-methodology__badge">{d.eyebrow}</p>
+				<h2 class="ysa-methodology__title" id="method-heading">{d.title}</h2>
+				<p class="ysa-methodology__desc">{d.description}</p>
+				<PrimaryButton href={d.cta.href} label={d.cta.label} variant="lg" />
+			</div>
+			<div class="ysa-methodology__stats">
+				{
+					d.statTiles.map((tile) => (
+						<article class:list={['ysa-methodology__stat', `ysa-methodology__stat--${tile.variant}`]}>
+							<div class="ysa-methodology__stat-icon" aria-hidden="true">
+								<img src={tile.iconSrc} alt="" width="30" height="24" loading="lazy" />
+							</div>
+							<p class="ysa-methodology__stat-value">{tile.stat}</p>
+							<p class="ysa-methodology__stat-desc">{tile.description}</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+
+		<ul class="ysa-methodology__principles">
+			{
+				d.principles.map((p) => (
+					<li class="ysa-methodology__principle">
+						<span class="ysa-methodology__principle-bar" aria-hidden="true"></span>
+						<div class="ysa-methodology__principle-inner">
+							<div
+								class:list={[
+									'ysa-methodology__principle-icon',
+									`ysa-methodology__principle-icon--${p.iconTint}`,
+								]}
+								aria-hidden="true"
+							>
+								<img src={p.iconSrc} alt="" width="20" height="20" loading="lazy" />
+							</div>
+							<h3 class="ysa-methodology__principle-title">{p.title}</h3>
+							<p class="ysa-methodology__principle-desc">{p.description}</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

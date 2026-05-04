@@ -1,0 +1,25 @@
+---
+import { homePageSectionsData } from '../../data/homePageSections';
+
+const d = homePageSectionsData.faq;
+---
+
+<section class="home-section home-section--muted faq-section" aria-labelledby="faq-heading">
+	<div class="home-section-inner">
+		<header class="section-head">
+			<p class="section-eyebrow">{d.eyebrow}</p>
+			<h2 class="section-title" id="faq-heading">{d.title}</h2>
+			<p class="section-desc">{d.description}</p>
+		</header>
+		<div class="faq-list">
+			{
+				d.items.map((item) => (
+					<details class="faq-item">
+						<summary>{item.question}</summary>
+						<p class="faq-answer">{item.answer}</p>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</section>

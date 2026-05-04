@@ -1,0 +1,272 @@
+/* Why YSA / The YSA Methodology — Figma node 1:3432 */
+
+.ysa-methodology {
+	padding: clamp(3.5rem, 8vw, 6rem) 0;
+	background: #fff;
+}
+
+.ysa-methodology__inner {
+	max-width: var(--ysa-max);
+	margin: 0 auto;
+	padding: 0 clamp(1rem, 4.44vw, 4rem);
+	display: flex;
+	flex-direction: column;
+	gap: clamp(2.5rem, 5vw, 3rem);
+}
+
+.ysa-methodology__top {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: clamp(2rem, 5vw, 4rem);
+	align-items: center;
+}
+
+.ysa-methodology__intro {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1rem;
+}
+
+.ysa-methodology__badge {
+	margin: 0;
+	padding: 0.5rem 1rem;
+	border-radius: 999px;
+	background: #decbfe;
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	letter-spacing: 0.01875rem;
+	text-transform: uppercase;
+	color: #7c3aed;
+}
+
+.ysa-methodology__title {
+	margin: 0;
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: clamp(2rem, 4vw, 2.75rem);
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+	color: #111827;
+}
+
+.ysa-methodology__desc {
+	margin: 0;
+	padding: 0.5rem 0 1rem;
+	font-family: var(--ysa-font-body);
+	font-size: 1rem;
+	line-height: 1.625rem;
+	color: #475569;
+}
+
+.ysa-methodology__stats {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.5rem;
+}
+
+.ysa-methodology__stat {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	padding: 2.0625rem;
+	border-radius: 16px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.ysa-methodology__stat--violet {
+	border-color: #e0e9ff;
+	background: linear-gradient(143.75deg, #f0f4ff 0%, #f5f3ff 100%);
+}
+
+.ysa-methodology__stat--sky {
+	border-color: #cffafe;
+	background: linear-gradient(146.71deg, #ecfeff 0%, #eff6ff 100%);
+}
+
+.ysa-methodology__stat--amber {
+	border-color: #fef3c7;
+	background: linear-gradient(143.75deg, #fffbeb 0%, #fff7ed 100%);
+}
+
+.ysa-methodology__stat--emerald {
+	border-color: #d1fae5;
+	background: linear-gradient(143.62deg, #ecfdf5 0%, #f0fdfa 100%);
+}
+
+.ysa-methodology__stat-icon {
+	width: 56px;
+	height: 56px;
+	border-radius: 12px;
+	display: grid;
+	place-items: center;
+	flex-shrink: 0;
+}
+
+.ysa-methodology__stat--violet .ysa-methodology__stat-icon {
+	background: #7c3aed;
+}
+
+.ysa-methodology__stat--sky .ysa-methodology__stat-icon {
+	background: #0a9dfb;
+}
+
+.ysa-methodology__stat--amber .ysa-methodology__stat-icon {
+	background: #f2dd35;
+}
+
+.ysa-methodology__stat--emerald .ysa-methodology__stat-icon {
+	background: #048c3c;
+}
+
+.ysa-methodology__stat-icon img {
+	display: block;
+	width: 30px;
+	height: 24px;
+	object-fit: contain;
+}
+
+.ysa-methodology__stat--emerald .ysa-methodology__stat-icon img {
+	width: 24px;
+	height: 24px;
+}
+
+.ysa-methodology__stat-value {
+	margin: 0;
+	padding-top: 0.5rem;
+	font-family: var(--ysa-font-display);
+	font-weight: 600;
+	font-size: 1.0625rem;
+	line-height: 1.75rem;
+	color: #111827;
+}
+
+.ysa-methodology__stat-desc {
+	margin: 0;
+	font-family: var(--ysa-font-body);
+	font-size: 0.875rem;
+	line-height: 1.421875rem;
+	color: #475569;
+	white-space: pre-line;
+}
+
+.ysa-methodology__principles {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.ysa-methodology__principle {
+	position: relative;
+	padding-left: 1.5rem;
+}
+
+.ysa-methodology__principle-bar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0.02px;
+	width: 4px;
+	border-radius: 9999px;
+	background: linear-gradient(180deg, #0a9dfb 0%, #7c3aed 100%);
+}
+
+.ysa-methodology__principle-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.43rem;
+}
+
+.ysa-methodology__principle-icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 12px;
+	display: grid;
+	place-items: center;
+	flex-shrink: 0;
+}
+
+.ysa-methodology__principle-icon--indigo {
+	background: #e0e9ff;
+}
+
+.ysa-methodology__principle-icon--violet {
+	background: #ede9fe;
+}
+
+.ysa-methodology__principle-icon--cyan {
+	background: #cffafe;
+}
+
+.ysa-methodology__principle-icon--emerald {
+	background: #d1fae5;
+}
+
+.ysa-methodology__principle-icon--teal {
+	background: #ccfbf1;
+}
+
+.ysa-methodology__principle-icon--blue {
+	background: #dbeafe;
+}
+
+.ysa-methodology__principle-icon img {
+	display: block;
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
+}
+
+.ysa-methodology__principle-icon--cyan img {
+	width: 25px;
+}
+
+.ysa-methodology__principle-icon--teal img {
+	width: 25px;
+}
+
+.ysa-methodology__principle-title {
+	margin: 0;
+	padding-top: 0.57rem;
+	font-family: var(--ysa-font-display);
+	font-weight: 600;
+	font-size: 1.0625rem;
+	line-height: 1.75rem;
+	color: #111827;
+}
+
+.ysa-methodology__principle-desc {
+	margin: 0;
+	font-family: var(--ysa-font-body);
+	font-size: 0.875rem;
+	line-height: 1.421875rem;
+	color: #475569;
+}
+
+@media (max-width: 1024px) {
+	.ysa-methodology__top {
+		grid-template-columns: 1fr;
+	}
+
+	.ysa-methodology__principles {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 640px) {
+	.ysa-methodology__stats {
+		grid-template-columns: 1fr;
+	}
+
+	.ysa-methodology__principles {
+		grid-template-columns: 1fr;
+	}
+}
