@@ -1,6 +1,8 @@
 ---
 import { learnerSectionData } from '../../data/home';
 import '../../styles/components/learner-needs-section.css';
+import { processSectionData } from '../../data/processSection';
+
 ---
 
 <section class="learner-section">
@@ -45,4 +47,69 @@ import '../../styles/components/learner-needs-section.css';
 			}
 		</div>
 	</div>
+</section>
+
+<section class="process-section">
+  <div class="process-container">
+    
+    <header class="process-header">
+      <span class="process-badge">Simple Process</span>
+      <h2 class="process-main-title">Getting Started Is Easy</h2>
+      <p class="process-subtitle">
+        From your first consultation to your child's breakthrough moments — our process is simple, supportive, and built around results.
+      </p>
+    </header>
+
+    <div class="process-grid">
+      {processSectionData.steps.map((step, index) => (
+        <>
+          {/* CARD */}
+          <article class={`process-card process-card--${step.color}`}>
+            
+            <div class="process-card__number">{step.step}</div>
+            
+            <div class={`process-card__icon process-card__icon--${step.color}`}>
+              {step.icon}
+            </div>
+
+            <div class="process-card__body">
+              <span class={`process-card__label process-card__label--${step.color}`}>
+                STEP {index + 1}
+              </span>
+
+              <h3 class="process-card__title">{step.title}</h3>
+              <p class="process-card__desc">{step.desc}</p>
+              
+              <footer class="process-card__footer">
+                <span class={`process-card__dot process-card__dot--${step.color}`}></span>
+                {step.footer}
+              </footer>
+            </div>
+
+          </article>
+
+          {/* ARROW BETWEEN CARDS */}
+          {index < processSectionData.steps.length - 1 && (
+            <div class="process-arrow-connector">
+              <div class="process-arrow-circle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+              </div>
+            </div>
+          )}
+        </>
+      ))}
+    </div>
+
+    <div class="process-cta-wrapper">
+      <button class="process-btn">
+        📅 Schedule Your Free Call →
+      </button>
+      <p class="process-cta-note">
+        No commitment required · Takes less than 24 Hours
+      </p>
+    </div>
+
+  </div>
 </section>
