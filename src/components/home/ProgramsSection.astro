@@ -1,0 +1,312 @@
+---
+import { Image } from 'astro:assets';
+import { programsSectionData } from '../../data/programsSection';
+import type { ProgramCategoryId, ProgramListingCard } from '../../types/programsSection';
+import '../../styles/components/programs-section.css';
+
+import ageIcon from '../../assets/images/age.png';
+import campIcon from '../../assets/images/camp.png';
+import teacherFilterIcon from '../../assets/images/teacher.png';
+
+import coverScience from '../../assets/images/animated science experiment with colorful chemical reactions and beakers, educational GIF style.png';
+import coverCoding from '../../assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png';
+import coverMath from '../../assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png';
+import coverRobotics from '../../assets/images/animated robot building and moving parts assembling, engineering GIF for kids.png';
+import coverWriting from '../../assets/images/animated storytelling with magical book pages turning and characters appearing, creative writing GIF.png';
+import coverCritical from '../../assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png';
+
+import photoRoss from '../../assets/images/Teacher (1).png';
+import photoMartinez from '../../assets/images/Teacher (2).png';
+import photoChen from '../../assets/images/Teacher (3).png';
+import photoJohnson from '../../assets/images/Teacher (4).png';
+import photoThompson from '../../assets/images/Teacher (5).png';
+import photoLee from '../../assets/images/Teacher (6).png';
+
+const coverByKey: Record<ProgramCategoryId, typeof coverScience> = {
+	science: coverScience,
+	coding: coverCoding,
+	math: coverMath,
+	robotics: coverRobotics,
+	writing: coverWriting,
+	'critical-thinking': coverCritical,
+};
+
+const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], typeof photoRoss> = {
+	ross: photoRoss,
+	martinez: photoMartinez,
+	chen: photoChen,
+	johnson: photoJohnson,
+	thompson: photoThompson,
+	lee: photoLee,
+};
+
+const d = programsSectionData;
+const { filters } = d;
+const initialAge = filters.ageRange.options.find((o) => o.isActive)?.label ?? '';
+---
+
+<section class="programs-section" aria-labelledby="programs-heading">
+	<div class="programs-section__inner">
+		<header class="programs-section__head">
+			<p class="programs-section__badge">{d.eyebrow}</p>
+			<h2 class="programs-section__title" id="programs-heading">{d.title}</h2>
+			<p class="programs-section__sub">{d.description}</p>
+		</header>
+
+		<div class="programs-filter" data-programs-filter data-initial-age={initialAge}>
+			<div class="programs-filter__grid">
+				<div class="programs-filter__col">
+					<div class="programs-filter__col-head">
+						<Image src={ageIcon} alt="" width={22} height={22} class="programs-filter__icon-img" loading="eager" />
+						<span>{filters.ageRange.label}</span>
+					</div>
+					<div class="programs-filter__ages">
+						{
+							filters.ageRange.options.map((opt) => (
+								<button
+									type="button"
+									class:list={['programs-filter__age', opt.isActive && 'programs-filter__age--active']}
+									data-age-option={opt.label}
+								>
+									{opt.label}
+								</button>
+							))
+						}
+					</div>
+				</div>
+
+				<div class="programs-filter__col">
+					<div class="programs-filter__col-head">
+						<Image src={campIcon} alt="" width={22} height={22} class="programs-filter__icon-img" loading="eager" />
+						<span>{filters.campType.label}</span>
+					</div>
+					<label class="visually-hidden" for="programs-camp-type">Camp type</label>
+					<select
+						class="programs-filter__select"
+						id="programs-camp-type"
+						name="campType"
+						aria-label={filters.campType.label}
+						data-camp-select
+					>
+						{
+							filters.campType.options.map((o, i) => (
+								<option value={o.value} selected={i === 0}>
+									{i === 0 ? filters.campType.placeholder : o.label}
+								</option>
+							))
+						}
+					</select>
+				</div>
+
+				<div class="programs-filter__col">
+					<div class="programs-filter__col-head">
+						<Image
+							src={teacherFilterIcon}
+							alt=""
+							width={22}
+							height={22}
+							class="programs-filter__icon-img"
+							loading="eager"
+						/>
+						<span>{filters.teacher.label}</span>
+					</div>
+					<label class="visually-hidden" for="programs-teacher">Teacher</label>
+					<select
+						class="programs-filter__select"
+						id="programs-teacher"
+						name="teacher"
+						aria-label={filters.teacher.label}
+						data-teacher-select
+					>
+						{
+							filters.teacher.options.map((o, i) => (
+								<option value={o.value} selected={i === 0}>
+									{i === 0 ? filters.teacher.placeholder : o.label}
+								</option>
+							))
+						}
+					</select>
+				</div>
+			</div>
+
+			<div class="programs-filter__active-row">
+				<div class="programs-filter__active-group">
+					<span class="programs-filter__active-label">ACTIVE:</span>
+					<div class="programs-filter__chips" data-filter-chips></div>
+				</div>
+				<button type="button" class="programs-filter__clear" data-clear-all>
+					{filters.clearLabel}
+				</button>
+			</div>
+		</div>
+
+		<div class="programs-cards">
+			{
+				d.cards.map((card) => {
+					const cover = coverByKey[card.coverImageKey];
+					const teacherFace = teacherPhotoByKey[card.teacherPhotoKey];
+					return (
+						<a class="programs-card" href={card.href}>
+							<div class="programs-card__media">
+								<Image
+									src={cover}
+									alt={`${card.title} illustration`}
+									class="programs-card__cover"
+									width={640}
+									height={420}
+									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+									loading="lazy"
+									decoding="async"
+								/>
+								<span class="programs-card__age">{card.ageLabel}</span>
+							</div>
+							<div class="programs-card__body">
+								<div class="programs-card__meta">
+									<span
+										class:list={[
+											'programs-card__category-pill',
+											`programs-card__category-pill--${card.category.id}`,
+										]}
+									>
+										{card.category.label}
+									</span>
+									<span class="programs-card__meta-dot" aria-hidden="true">
+										•
+									</span>
+									<span class="programs-card__duration">{card.durationWeeks} weeks</span>
+								</div>
+								<h3 class="programs-card__title">{card.title}</h3>
+								<p class="programs-card__desc">{card.description}</p>
+								<div class="programs-card__footer">
+									<div class="programs-card__teacher">
+										<Image
+											src={teacherFace}
+											alt={card.teacher.name}
+											width={36}
+											height={36}
+											class="programs-card__avatar-img"
+											loading="lazy"
+										/>
+										<span class="programs-card__teacher-name">{card.teacher.name}</span>
+									</div>
+									<span class="programs-card__link">Learn More →</span>
+								</div>
+							</div>
+						</a>
+					);
+				})
+			}
+		</div>
+
+		<div class="programs-section__cta">
+			<a class="programs-section__cta-btn" href={d.viewAllCta.href}>
+				{d.viewAllCta.label}
+				<span aria-hidden="true">→</span>
+			</a>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	(function () {
+		function escapeHtml(text) {
+			var d = document.createElement('div');
+			d.textContent = text;
+			return d.innerHTML;
+		}
+
+		function setupFilter(root) {
+			var ageBtns = root.querySelectorAll('[data-age-option]');
+			var campSelect = root.querySelector('[data-camp-select]');
+			var teacherSelect = root.querySelector('[data-teacher-select]');
+			var chipsHost = root.querySelector('[data-filter-chips]');
+			var clearBtn = root.querySelector('[data-clear-all]');
+			if (!campSelect || !teacherSelect || !chipsHost || !clearBtn) return;
+
+			var initial = root.getAttribute('data-initial-age') || '';
+			var selectedAge = initial;
+
+			function campIsDefault() {
+				return !campSelect.value;
+			}
+			function teacherIsDefault() {
+				return !teacherSelect.value;
+			}
+
+			function syncAgeButtons() {
+				ageBtns.forEach(function (btn) {
+					var label = btn.getAttribute('data-age-option');
+					btn.classList.toggle('programs-filter__age--active', label === selectedAge);
+				});
+			}
+
+			function optionText(select) {
+				var opt = select.selectedOptions[0];
+				return opt ? opt.textContent.trim() : '';
+			}
+
+			function renderChips() {
+				chipsHost.innerHTML = '';
+				var chips = [];
+				if (selectedAge) chips.push({ kind: 'age', label: selectedAge });
+				if (!campIsDefault()) chips.push({ kind: 'camp', label: optionText(campSelect) });
+				if (!teacherIsDefault()) chips.push({ kind: 'teacher', label: optionText(teacherSelect) });
+
+				chips.forEach(function (c) {
+					var pill = document.createElement('span');
+					pill.className = 'programs-filter__chip-pill';
+					pill.innerHTML =
+						'<span class="programs-filter__chip-text">' +
+						escapeHtml(c.label) +
+						'</span><button type="button" class="programs-filter__chip-remove" data-remove="' +
+						c.kind +
+						'" aria-label="Remove ' +
+						c.kind +
+						' filter">×</button>';
+					chipsHost.appendChild(pill);
+				});
+			}
+
+			ageBtns.forEach(function (btn) {
+				btn.addEventListener('click', function () {
+					var label = btn.getAttribute('data-age-option');
+					if (!label) return;
+					selectedAge = label;
+					syncAgeButtons();
+					renderChips();
+				});
+			});
+
+			chipsHost.addEventListener('click', function (e) {
+				var t = e.target.closest('[data-remove]');
+				if (!t) return;
+				var kind = t.getAttribute('data-remove');
+				if (kind === 'age') selectedAge = '';
+				if (kind === 'camp') campSelect.selectedIndex = 0;
+				if (kind === 'teacher') teacherSelect.selectedIndex = 0;
+				syncAgeButtons();
+				renderChips();
+			});
+
+			campSelect.addEventListener('change', renderChips);
+			teacherSelect.addEventListener('change', renderChips);
+
+			clearBtn.addEventListener('click', function () {
+				selectedAge = '';
+				campSelect.selectedIndex = 0;
+				teacherSelect.selectedIndex = 0;
+				syncAgeButtons();
+				renderChips();
+			});
+
+			syncAgeButtons();
+			renderChips();
+		}
+
+		function boot() {
+			document.querySelectorAll('[data-programs-filter]').forEach(setupFilter);
+		}
+		if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+		else boot();
+	})();
+</script>

@@ -1,0 +1,18 @@
+---
+import { homePageSectionsData } from '../../data/homePageSections';
+
+const d = homePageSectionsData.communityCta;
+---
+
+<section class="home-section home-section--dark community-cta-section" aria-labelledby="cta-heading">
+	<div class="home-section-inner">
+		<div class="cta-inner">
+			<h2 class="section-title" id="cta-heading">{d.title}</h2>
+			<p class="section-desc">{d.description}</p>
+			<div class="cta-actions">
+				<a class="cta-primary" href={d.primaryCta.href}>{d.primaryCta.label}</a>
+				<a class="cta-secondary" href={d.secondaryCta.href}>{d.secondaryCta.label}</a>
+			</div>
+		</div>
+	</div>
+</section>

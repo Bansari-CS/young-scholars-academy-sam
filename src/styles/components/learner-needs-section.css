@@ -1,240 +1,163 @@
 .learner-section {
-	padding: 1.8rem 0 3.2rem;
-	background: #ffffff;
+	padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
+	background: var(--ysa-learner-bg);
 }
 
 .learner-container {
-	max-width: 1240px;
+	max-width: var(--ysa-max);
 	margin: 0 auto;
-	padding: 0 1.2rem;
-}
-
-.org-strip p {
-	margin: 0;
-	text-align: center;
-	font-size: 2rem;
-	color: #8290ac;
-	font-weight: 500;
-}
-
-.org-grid {
-	margin-top: 1.2rem;
-	display: grid;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
-	border: 1px solid #eaedf4;
-	border-radius: 0.9rem;
-	background: #fff;
-}
-
-.org-item {
-	padding: 0.95rem 0.85rem;
-	display: flex;
-	align-items: center;
-	gap: 0.6rem;
-}
-
-.org-item + .org-item {
-	border-left: 1px solid #edf0f7;
-}
-
-.org-icon {
-	width: 1.1rem;
-	height: 1.1rem;
-	border-radius: 0.3rem;
-	background: #98a4bc;
-	flex-shrink: 0;
-}
-
-.org-icon-tree {
-	clip-path: polygon(50% 0, 78% 37%, 62% 37%, 62% 100%, 38% 100%, 38% 37%, 22% 37%);
-}
-
-.org-icon-star {
-	clip-path: polygon(50% 0, 61% 36%, 99% 36%, 67% 57%, 79% 93%, 50% 72%, 21% 93%, 33% 57%, 1% 36%, 39% 36%);
-}
-
-.org-icon-twoe {
-	border-radius: 0.24rem;
-	background: #c3ccdc;
-	position: relative;
-}
-
-.org-icon-twoe::before {
-	content: '2e';
-	position: absolute;
-	inset: 0;
-	display: grid;
-	place-items: center;
-	font-size: 0.58rem;
-	font-weight: 700;
-	color: #677187;
-}
-
-.org-icon-heart {
-	background: radial-gradient(circle at 30% 35%, #a8b3c7 40%, #8895b0 42%);
-	transform: rotate(45deg);
-	border-radius: 0.2rem 0.2rem 0.55rem 0.2rem;
-}
-
-.org-icon-book {
-	border-radius: 0.15rem;
-	background: linear-gradient(90deg, #98a4bc 48%, #c0c9d9 48%);
-}
-
-.org-item strong {
-	display: block;
-	font-size: 0.89rem;
-	color: #8390aa;
-}
-
-.org-item span {
-	display: block;
-	margin-top: 0.15rem;
-	font-size: 0.72rem;
-	color: #adb6c7;
-	line-height: 1.25;
+	padding: 0 clamp(1rem, 3vw, 1.5rem);
 }
 
 .learner-heading {
-	margin-top: 3.6rem;
+	margin-top: 0;
+	padding-top: clamp(2rem, 5vw, 3rem);
 	text-align: center;
 }
 
-.learner-heading span {
+.learner-heading > span {
 	display: inline-block;
-	padding: 0.38rem 0.72rem;
+	padding: 0.4rem 0.85rem;
 	border-radius: 999px;
-	background: #e8ddff;
-	color: #7659c9;
-	font-size: 0.66rem;
+	background: #ede9fe;
+	color: #5b21b6;
+	font-size: 0.6875rem;
 	text-transform: uppercase;
 	font-weight: 700;
-	letter-spacing: 0.04em;
+	letter-spacing: 0.06em;
 }
 
 .learner-heading h2 {
-	margin: 1rem 0 0.8rem;
-	font-size: clamp(2rem, 4.2vw, 3.4rem);
-	color: #18203a;
+	margin: 1rem 0 0.85rem;
+	font-size: clamp(2rem, 4vw, 3.25rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--ysa-text);
 }
 
 .learner-heading p {
 	margin: 0 auto;
-	max-width: 78ch;
-	color: #6f768d;
-	font-size: 1.05rem;
-	line-height: 1.7;
+	max-width: 62ch;
+	color: var(--ysa-text-muted);
+	font-size: 1.0625rem;
+	line-height: 1.65;
 }
 
 .learner-cards {
-	margin-top: 2.5rem;
+	margin-top: clamp(2rem, 4vw, 2.75rem);
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 1.15rem;
+	gap: 1.5rem;
 }
 
 .learner-card {
-	background: #ffffff01;
-	border: 1px solid #eaedf4;
-	border-radius: 0.9rem;
-	padding: 1.35rem 1.25rem;
+	background: var(--ysa-surface);
+	border: 1px solid var(--ysa-border);
+	border-radius: var(--ysa-radius-xl);
+	padding: 1.5rem 1.35rem;
+	box-shadow: var(--ysa-shadow-card);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card-icon {
-	width: 2rem;
-	height: 2rem;
-	border-radius: 0.55rem;
+.learner-card:hover {
+	border-color: #cbd5e1;
+	box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
 }
 
-.card-icon-stress {
-	background: linear-gradient(130deg, #9f72ff, #7d56f2);
+.card-icon-slot {
+	width: 3rem;
+	height: 3rem;
+	border-radius: 0.75rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
 }
 
-.card-icon-group {
-	background: linear-gradient(130deg, #f2e79f, #ebd547);
+.card-icon-slot--stress {
+	background: linear-gradient(145deg, #f5f3ff, #ede9fe);
 }
 
-.card-icon-alone {
-	background: linear-gradient(130deg, #8fd1ff, #258bea);
+.card-icon-slot--group {
+	background: linear-gradient(145deg, #fefce8, #fef9c3);
+}
+
+.card-icon-slot--alone {
+	background: linear-gradient(145deg, #e0f2fe, #bae6fd);
+}
+
+.card-icon-svg {
+	display: block;
+	width: 1.45rem;
+	height: auto;
+	max-height: 1.45rem;
+}
+
+.card-icon-svg-wide {
+	width: 1.75rem;
+	max-height: 1.45rem;
 }
 
 .learner-card h3 {
-	margin: 1rem 0 0.7rem;
-	font-size: 1.55rem;
-	color: #1f2945;
+	margin: 1.15rem 0 0.65rem;
+	font-size: clamp(1.25rem, 2vw, 1.45rem);
+	font-weight: 700;
+	letter-spacing: -0.015em;
+	color: var(--ysa-text);
 }
 
 .learner-card p {
 	margin: 0;
-	color: #68708b;
-	font-size: 0.96rem;
+	color: var(--ysa-text-muted);
+	font-size: 0.98rem;
 	line-height: 1.6;
 }
 
 .card-divider {
-	margin-top: 1rem;
+	margin-top: 1.25rem;
 	height: 1px;
-	background: #eceff5;
+	background: var(--ysa-border-subtle);
 }
 
 .card-highlight {
-	margin-top: 1rem;
+	margin-top: 1.1rem;
 	display: flex;
 	align-items: flex-start;
-	gap: 0.55rem;
+	gap: 0.65rem;
 }
 
-.card-highlight .dot {
-	width: 0.65rem;
-	height: 0.65rem;
-	background: #18aa54;
-	border-radius: 50%;
-	margin-top: 0.25rem;
+.card-check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0.1rem;
 	flex-shrink: 0;
+	width: 1.05rem;
+	height: 1.05rem;
+}
+
+.card-check svg {
+	display: block;
+	width: 100%;
+	height: auto;
 }
 
 .card-highlight strong {
-	font-size: 0.86rem;
+	font-size: 0.875rem;
 	line-height: 1.45;
-	color: #1f2945;
+	color: var(--ysa-text);
 	font-weight: 500;
 }
 
 @media (max-width: 1024px) {
-	.org-grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.org-item:nth-child(odd) {
-		border-left: 0;
-	}
-
 	.learner-cards {
 		grid-template-columns: 1fr;
 	}
 }
 
 @media (max-width: 640px) {
-	.learner-container {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
-
-	.org-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.org-item + .org-item {
-		border-left: 0;
-		border-top: 1px solid #edf0f7;
-	}
-
-	.learner-heading {
-		margin-top: 2.4rem;
-	}
-
 	.learner-heading p {
-		font-size: 0.96rem;
+		font-size: 1rem;
 	}
 }
 

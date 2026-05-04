@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import { homePageSectionsData } from '../../data/homePageSections';
+import type { PlatformFeatureIcon } from '../../types/homePage';
+import '../../styles/components/platform-section.css';
+
+import platformTabLive from '../../assets/images/platform-tab-live.png';
+import platformTabAi from '../../assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png';
+import platformTabParent from '../../assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png';
+import platformTabGame from '../../assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png';
+
+const d = homePageSectionsData.platform;
+
+const previewByIcon: Record<PlatformFeatureIcon, { src: typeof platformTabLive; width: number; height: number }> = {
+	live: { src: platformTabLive, width: 942, height: 498 },
+	ai: { src: platformTabAi, width: 420, height: 192 },
+	parent: { src: platformTabParent, width: 420, height: 192 },
+	game: { src: platformTabGame, width: 420, height: 192 },
+};
+
+const iconClass = (icon: PlatformFeatureIcon) =>
+	`ysa-platform__icon-wrap ysa-platform__icon-wrap--${icon}`;
+---
+
+<section class="ysa-platform" aria-labelledby="platform-heading" data-platform-tabs>
+	<div class="home-section-inner">
+		<header class="ysa-platform__head">
+			<p class="ysa-platform__badge">{d.eyebrow}</p>
+			<h2 class="ysa-platform__title" id="platform-heading">{d.title}</h2>
+			<p class="ysa-platform__desc">{d.description}</p>
+		</header>
+
+		<div class="ysa-platform__body-grid">
+			<div class="ysa-platform__visual">
+				<div class="ysa-platform__visual-card">
+					<div class="ysa-platform__visual-slides">
+						{
+							d.features.map((feature, index) => {
+								const preview = previewByIcon[feature.icon];
+								const slideId = `platform-slide-${index}`;
+								return (
+									<div
+										class:list={['ysa-platform__visual-slide', { 'is-active': index === 0 }]}
+										id={slideId}
+										data-platform-slide
+										role="tabpanel"
+										aria-labelledby={`platform-tab-${index}`}
+										aria-hidden={index === 0 ? 'false' : 'true'}
+									>
+										<Image
+											src={preview.src}
+											alt={`${feature.title} — platform preview`}
+											class="ysa-platform__visual-img"
+											width={preview.width}
+											height={preview.height}
+											loading={index === 0 ? 'eager' : 'lazy'}
+											decoding="async"
+										/>
+									</div>
+								);
+							})
+						}
+					</div>
+				</div>
+			</div>
+
+			<div class="ysa-platform__features" role="tablist" aria-label="Platform highlights">
+				{
+					d.features.map((feature, index) => (
+						<button
+							type="button"
+							class:list={['ysa-platform__tab', { 'ysa-platform__tab--active': index === 0 }]}
+							id={`platform-tab-${index}`}
+							role="tab"
+							aria-selected={index === 0 ? 'true' : 'false'}
+							aria-controls={`platform-slide-${index}`}
+							data-platform-tab
+							tabindex={index === 0 ? 0 : -1}
+						>
+							<span class={iconClass(feature.icon)} aria-hidden="true">
+								{feature.icon === 'live' && (
+									<svg class="ysa-platform__icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+										<path
+											fill="currentColor"
+											d="M4 8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Zm15 1.5 3-2v7l-3-2V9.5Z"
+										/>
+									</svg>
+								)}
+								{feature.icon === 'ai' && (
+									<svg class="ysa-platform__icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+										<path
+											fill="currentColor"
+											d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18V5Z"
+										/>
+										<path
+											fill="currentColor"
+											d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18V5Z"
+										/>
+									</svg>
+								)}
+								{feature.icon === 'parent' && (
+									<svg class="ysa-platform__icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+										<path
+											fill="currentColor"
+											d="M12 3a9 9 0 1 0 9 9h-9V3Zm0 3v6h6a6 6 0 0 0-6-6Z"
+										/>
+									</svg>
+								)}
+								{feature.icon === 'game' && (
+									<svg class="ysa-platform__icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+										<path
+											fill="currentColor"
+											d="M8.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm7-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 11h2v2H6v-2Zm10 0h2v2h-2v-2ZM4 13c0-2.8 2.2-5 5-5h6c2.8 0 5 2.2 5 5v1c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2v-1Z"
+										/>
+									</svg>
+								)}
+							</span>
+							<span class="ysa-platform__tab-copy">
+								<span class="ysa-platform__feature-title">{feature.title}</span>
+								<span class="ysa-platform__feature-desc">{feature.description}</span>
+							</span>
+						</button>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	function setupPlatformTabs() {
+		document.querySelectorAll('[data-platform-tabs]').forEach((root) => {
+			const tabs = root.querySelectorAll('[data-platform-tab]');
+			const slides = root.querySelectorAll('[data-platform-slide]');
+			if (!tabs.length || !slides.length) return;
+
+			const activate = (index) => {
+				tabs.forEach((tab, i) => {
+					const on = i === index;
+					tab.setAttribute('aria-selected', on ? 'true' : 'false');
+					tab.classList.toggle('ysa-platform__tab--active', on);
+					tab.tabIndex = on ? 0 : -1;
+				});
+				slides.forEach((slide, i) => {
+					const on = i === index;
+					slide.classList.toggle('is-active', on);
+					slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+				});
+			};
+
+			tabs.forEach((tab, i) => {
+				tab.addEventListener('click', () => activate(i));
+			});
+
+			const tablist = root.querySelector('[role="tablist"]');
+			tablist?.addEventListener('keydown', (e) => {
+				const current = Array.from(tabs).findIndex((t) => t.getAttribute('aria-selected') === 'true');
+				let next = current;
+				if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+					next = Math.min(current + 1, tabs.length - 1);
+				} else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+					next = Math.max(current - 1, 0);
+				} else if (e.key === 'Home') {
+					next = 0;
+				} else if (e.key === 'End') {
+					next = tabs.length - 1;
+				} else {
+					return;
+				}
+				e.preventDefault();
+				activate(next);
+				tabs[next]?.focus();
+			});
+		});
+	}
+
+	setupPlatformTabs();
+</script>

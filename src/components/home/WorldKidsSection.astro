@@ -1,0 +1,28 @@
+---
+import { homePageSectionsData } from '../../data/homePageSections';
+
+const d = homePageSectionsData.world;
+---
+
+<section class="home-section home-section--muted world-section" aria-labelledby="world-heading">
+	<div class="home-section-inner">
+		<div class="world-layout">
+			<div class="world-map" role="img" aria-label="Global cohorts map placeholder">
+				Global cohort map
+			</div>
+			<div class="world-text">
+				<header class="section-head">
+					<p class="section-eyebrow">{d.eyebrow}</p>
+					<h2 class="section-title" id="world-heading">
+						<span class="world-title-line">{d.title}</span>
+						<span class="world-title-line">{d.titleLine2}</span>
+					</h2>
+					<p class="section-desc">{d.description}</p>
+				</header>
+				<div class="world-pills">
+					{d.regions.map((r) => <span>{r}</span>)}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
