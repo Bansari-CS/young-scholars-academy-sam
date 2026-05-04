@@ -691,3 +691,110 @@
     width: 100%;
   }
 }
+
+
+
+
+
+
+
+
+
+.hero-section {
+  /* Exact Gradient from Image */
+  background: linear-gradient(105deg, #7c3aed 0%, #3b82f6 50%, #0ea5e9 100%);
+  padding: 100px 20px;
+  text-align: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: white;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* 1. White Font for Title */
+.hero-title {
+  color: #ffffff !important; 
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  margin-bottom: 45px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 2. Buttons Style */
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+/* White Button */
+.btn-browse {
+  background: white;
+  color: #7c3aed; /* Purple text */
+  padding: 18px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Modified Book Free Call Box (Exact Image Style) */
+.btn-book {
+  background: #3D37A3;
+  color: white;
+  padding: 18px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Border like image */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+
+/* 3. Footer Features */
+.hero-features {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.f-dot {
+  opacity: 0.6;
+}
+
+.f-icon {
+  margin-right: 5px;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .hero-title { font-size: 32px; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-features { flex-direction: column; gap: 10px; }
+  .f-dot { display: none; }
+}
