@@ -1,0 +1,121 @@
+/**
+ * FAQ — Figma section 15:1307.
+ * Light gray section background with centered header + stacked accordions.
+ */
+
+.ysa-faq {
+	--yq-bg: #f8fafc;
+	--yq-title: #111827;
+	--yq-muted: #64748b;
+	--yq-badge-bg: #e1f3ff;
+	--yq-badge-text: #0a9dfb;
+	--yq-item-bg: #ffffff;
+	--yq-item-border: #dde5f0;
+
+	padding: clamp(4.5rem, 9vw, 6rem) 0;
+	background: var(--yq-bg);
+}
+
+.ysa-faq .home-section-inner {
+	max-width: var(--ysa-max, 90rem);
+	margin: 0 auto;
+	padding-left: clamp(1rem, 4.44vw, 4rem);
+	padding-right: clamp(1rem, 4.44vw, 4rem);
+}
+
+.ysa-faq__head {
+	max-width: 48rem;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.ysa-faq__badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 0 1rem;
+	padding: 0.5rem 1rem;
+	border-radius: 9999px;
+	background: var(--yq-badge-bg);
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: 0.6875rem;
+	line-height: 1rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--yq-badge-text);
+}
+
+.ysa-faq__title {
+	margin: 0;
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: clamp(2rem, 4vw, 3rem);
+	line-height: 1.16;
+	letter-spacing: -0.02em;
+	color: var(--yq-title);
+}
+
+.ysa-faq__desc {
+	margin: 1rem 0 0;
+	font-family: var(--ysa-font-body);
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--yq-muted);
+}
+
+.ysa-faq__list {
+	max-width: 48rem;
+	margin: 2.8rem auto 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.ysa-faq__item {
+	border-radius: 0.9rem;
+	border: 1px solid var(--yq-item-border);
+	background: var(--yq-item-bg);
+	overflow: hidden;
+}
+
+.ysa-faq__item summary {
+	padding: 1rem 1rem;
+	list-style: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	font-family: var(--ysa-font-body);
+	font-size: 1.05rem;
+	font-weight: 600;
+	line-height: 1.4;
+	color: #111827;
+}
+
+.ysa-faq__item summary::-webkit-details-marker {
+	display: none;
+}
+
+.ysa-faq__item summary::after {
+	content: '⌄';
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: #94a3b8;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.ysa-faq__item[open] summary::after {
+	content: '⌃';
+}
+
+.ysa-faq__answer {
+	margin: 0;
+	padding: 0 1rem 1rem;
+	font-family: var(--ysa-font-body);
+	font-size: 0.98rem;
+	line-height: 1.65;
+	color: #64748b;
+}

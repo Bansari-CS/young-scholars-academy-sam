@@ -691,3 +691,56 @@
     width: 100%;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Process grid overflow guard: prevents page-level horizontal scrolling       */
+/* -------------------------------------------------------------------------- */
+.process-section,
+.process-container,
+.process-grid {
+	max-width: 100%;
+}
+
+.process-section {
+	overflow-x: clip;
+}
+
+.process-grid {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	justify-content: center;
+	gap: 1rem;
+	padding: 0;
+}
+
+.process-card {
+	flex: 1 1 0;
+	min-width: 0;
+	max-width: 18.5rem;
+}
+
+.process-card__desc {
+	overflow-wrap: anywhere;
+}
+
+.process-arrow-connector {
+	flex: 0 0 auto;
+	margin: 0;
+}
+
+@media (max-width: 1200px) {
+	.process-grid {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.process-arrow-connector {
+		display: none;
+	}
+
+	.process-card {
+		flex: 1 1 16.5rem;
+		max-width: 21rem;
+	}
+}

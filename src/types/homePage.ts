@@ -19,15 +19,20 @@ export interface ImpactStat {
 	label: string;
 }
 
+/** Figma “Learn from the Best” — one card per teacher */
 export interface TeacherCard {
 	name: string;
-	role: string;
+	/** Degree / school line (accent color in Figma) */
+	credentials: string;
 	bio: string;
+	/** Maps to `Teacher (n).png` in `src/assets/images/` — replace with hi-res exports for sharp portraits */
+	photoIndex: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-export interface FitPoint {
+export interface FitColumn {
 	title: string;
-	description: string;
+	tone: 'good' | 'warning';
+	items: string[];
 }
 
 export interface FaqItem {
@@ -35,7 +40,7 @@ export interface FaqItem {
 	answer: string;
 }
 
-/** Figma platform section (e.g. node 15:1041) — feature tab icons */
+/** Figma platform section (node 15:1051 — file c3rnrQgPGh0oRsryiX14Ln) — feature tab icons */
 export type PlatformFeatureIcon = 'live' | 'ai' | 'parent' | 'game';
 
 export interface PlatformFeature {
@@ -70,6 +75,8 @@ export interface HomePageSectionsData {
 		eyebrow: string;
 		title: string;
 		description: string;
+		/** Shown on each card (e.g. Find Your Teacher →) */
+		cardCta: { label: string; href: string };
 		items: TeacherCard[];
 	};
 	world: {
@@ -77,13 +84,16 @@ export interface HomePageSectionsData {
 		title: string;
 		titleLine2: string;
 		description: string;
+		stats: { value: string; label: string }[];
 		regions: string[];
 	};
 	fit: {
 		eyebrow: string;
 		title: string;
 		description: string;
-		points: FitPoint[];
+		goodFit: FitColumn;
+		notIdeal: FitColumn;
+		note: string;
 	};
 	faq: {
 		eyebrow: string;

@@ -1,25 +1,57 @@
 ---
 import { homePageSectionsData } from '../../data/homePageSections';
+import '../../styles/components/fit-section.css';
 
 const d = homePageSectionsData.fit;
 ---
 
-<section class="home-section home-section--surface fit-section" aria-labelledby="fit-heading">
+<section class="ysa-fit" aria-labelledby="fit-heading">
 	<div class="home-section-inner">
-		<header class="section-head">
-			<p class="section-eyebrow">{d.eyebrow}</p>
-			<h2 class="section-title" id="fit-heading">{d.title}</h2>
-			<p class="section-desc">{d.description}</p>
+		<header class="ysa-fit__head">
+			<p class="ysa-fit__badge">{d.eyebrow}</p>
+			<h2 class="ysa-fit__title" id="fit-heading">{d.title}</h2>
+			<p class="ysa-fit__desc">{d.description}</p>
 		</header>
-		<div class="fit-grid">
-			{
-				d.points.map((p) => (
-					<div class="fit-card">
-						<h3>{p.title}</h3>
-						<p>{p.description}</p>
-					</div>
-				))
-			}
+
+		<div class="ysa-fit__grid">
+			<article class="ysa-fit__card ysa-fit__card--good">
+				<h3 class="ysa-fit__card-title">
+					<span class="ysa-fit__title-icon-wrap ysa-fit__title-icon-wrap--good" aria-hidden="true">
+						<span class="ysa-fit__title-icon ysa-fit__title-icon--good">✓</span>
+					</span>
+					{d.goodFit.title}
+				</h3>
+				<ul class="ysa-fit__list">
+					{
+						d.goodFit.items.map((item) => (
+							<li class="ysa-fit__item">
+								<span class="ysa-fit__bullet ysa-fit__bullet--good" aria-hidden="true">✓</span>
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+			</article>
+
+			<article class="ysa-fit__card ysa-fit__card--warning">
+				<h3 class="ysa-fit__card-title">
+					<span class="ysa-fit__title-icon-wrap ysa-fit__title-icon-wrap--warning" aria-hidden="true">
+						<span class="ysa-fit__title-icon ysa-fit__title-icon--warning">i</span>
+					</span>
+					{d.notIdeal.title}
+				</h3>
+				<ul class="ysa-fit__list">
+					{
+						d.notIdeal.items.map((item) => (
+							<li class="ysa-fit__item">
+								<span class="ysa-fit__bullet ysa-fit__bullet--warning" aria-hidden="true">−</span>
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+				<p class="ysa-fit__note">{d.note}</p>
+			</article>
 		</div>
 	</div>
 </section>

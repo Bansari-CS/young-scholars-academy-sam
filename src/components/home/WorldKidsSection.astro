@@ -1,26 +1,68 @@
 ---
+import { Image } from 'astro:assets';
 import { homePageSectionsData } from '../../data/homePageSections';
+import '../../styles/components/world-kids-section.css';
+
+import globe from '../../assets/images/world-globe.png';
+import face1 from '../../assets/images/Teacher (1).png';
+import face2 from '../../assets/images/Teacher (2).png';
+import face3 from '../../assets/images/Teacher (3).png';
+import face4 from '../../assets/images/Teacher (4).png';
+import face5 from '../../assets/images/Teacher (5).png';
+import face6 from '../../assets/images/Teacher (6).png';
 
 const d = homePageSectionsData.world;
+
+const faces = [face1, face2, face3, face4, face5, face6, face1, face2, face3];
 ---
 
-<section class="home-section home-section--muted world-section" aria-labelledby="world-heading">
+<section class="ysa-world" aria-labelledby="world-heading">
 	<div class="home-section-inner">
-		<div class="world-layout">
-			<div class="world-map" role="img" aria-label="Global cohorts map placeholder">
-				Global cohort map
+		<header class="ysa-world__head">
+			<p class="ysa-world__badge">{d.eyebrow}</p>
+			<h2 class="ysa-world__title" id="world-heading">
+				<span>{d.title}</span>
+				<span>{d.titleLine2}</span>
+			</h2>
+			<p class="ysa-world__desc">{d.description}</p>
+		</header>
+
+		<div class="ysa-world__stage">
+			<div class="ysa-world__stat ysa-world__stat--lt">
+				<p class="ysa-world__stat-value">{d.stats[0].value}</p>
+				<p class="ysa-world__stat-label">{d.stats[0].label}</p>
 			</div>
-			<div class="world-text">
-				<header class="section-head">
-					<p class="section-eyebrow">{d.eyebrow}</p>
-					<h2 class="section-title" id="world-heading">
-						<span class="world-title-line">{d.title}</span>
-						<span class="world-title-line">{d.titleLine2}</span>
-					</h2>
-					<p class="section-desc">{d.description}</p>
-				</header>
-				<div class="world-pills">
-					{d.regions.map((r) => <span>{r}</span>)}
+			<div class="ysa-world__stat ysa-world__stat--rt">
+				<p class="ysa-world__stat-value">{d.stats[1].value}</p>
+				<p class="ysa-world__stat-label">{d.stats[1].label}</p>
+			</div>
+			<div class="ysa-world__stat ysa-world__stat--lb">
+				<p class="ysa-world__stat-value">{d.stats[2].value}</p>
+				<p class="ysa-world__stat-label">{d.stats[2].label}</p>
+			</div>
+			<div class="ysa-world__stat ysa-world__stat--rb">
+				<p class="ysa-world__stat-value">{d.stats[3].value}</p>
+				<p class="ysa-world__stat-label">{d.stats[3].label}</p>
+			</div>
+
+			<div class="ysa-world__ring">
+				<div class="ysa-world__globe-wrap">
+					<Image
+						src={globe}
+						alt="Global network of YSA students around the world"
+						class="ysa-world__globe"
+						width={286}
+						height={286}
+						loading="lazy"
+						decoding="async"
+					/>
+					{
+						faces.map((src, i) => (
+							<div class:list={['ysa-world__face', `ysa-world__face--${i + 1}`]}>
+								<Image src={src} alt="" width={32} height={32} class="ysa-world__face-img" loading="lazy" decoding="async" />
+							</div>
+						))
+					}
 				</div>
 			</div>
 		</div>
