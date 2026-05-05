@@ -1,0 +1,46 @@
+---
+import type { NavItem } from '../../types/home';
+import PrimaryButton from '../ui/PrimaryButton.astro';
+
+interface Props {
+	brand: string;
+	navItems: NavItem[];
+}
+
+const { brand, navItems } = Astro.props;
+---
+
+<div class="bg-[#111827] text-white">
+	<div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-3 text-sm leading-5 text-white">
+		<p class="m-0">Summer 2026 enrollment is open. Spots are filling fast.</p>
+		<a class="font-semibold text-[#93c5fd] no-underline" href="#cta">Reserve Your Child's Spot -&gt;</a>
+	</div>
+</div>
+
+<header class="sticky top-0 z-50 w-full border-b border-[#f1f5f9] bg-[rgba(255,255,255,0.92)] backdrop-blur-[8px]">
+	<div class="mx-auto flex min-h-20 max-w-[90rem] items-center justify-between gap-6 px-[clamp(1rem,4.44vw,4rem)]">
+		<a class="flex items-center gap-3 text-inherit no-underline" href="/">
+			<span class="grid h-11 w-11 place-items-center rounded-xl bg-[linear-gradient(135deg,#5751e4_0%,#a855f7_100%)] font-[var(--ysa-font-display)] text-xl leading-none font-bold text-white" aria-hidden="true">YS</span>
+			<span class="whitespace-nowrap font-[var(--ysa-font-display)] text-xl font-bold text-[#1a1647]">{brand}</span>
+		</a>
+
+		<nav aria-label="Primary">
+			<ul class="m-0 flex list-none items-center gap-8 p-0">
+				{
+					navItems.map((item) => (
+						<li>
+							<a class="font-[var(--ysa-font-display)] text-sm leading-5 font-medium text-[#475569] no-underline" href={item.href}>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div class="flex items-center gap-4">
+			<a href="#" class="font-[var(--ysa-font-display)] text-sm leading-5 font-medium text-[#475569] no-underline">Sign In</a>
+			<PrimaryButton href="#programs" label="Browse Courses" variant="sm" />
+		</div>
+	</div>
+</header>

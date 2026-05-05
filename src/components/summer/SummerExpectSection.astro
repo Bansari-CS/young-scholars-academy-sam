@@ -1,0 +1,66 @@
+---
+const expectationCards = [
+	{
+		title: 'Class sizes (6-8)',
+		desc: 'Intimate groups ensure every child is seen and heard by our expert mentors.',
+		num: '01',
+		icon: '/images/summer/expect/icon-1.svg',
+		iconBg: 'expect-icon-primary',
+	},
+	{
+		title: 'Sessions (50 min)',
+		desc: 'The science-backed "Goldilocks" length for high-intensity cognitive engagement.',
+		num: '02',
+		icon: '/images/summer/expect/icon-2.svg',
+		iconBg: 'expect-icon-secondary',
+	},
+	{
+		title: 'Schedule (7AM-7PM)',
+		desc: 'Multiple time slots daily to accommodate families across all global timezones.',
+		num: '03',
+		icon: '/images/summer/expect/icon-3.svg',
+		iconBg: 'expect-icon-accent',
+	},
+	{
+		title: 'Cameras (Optional)',
+		desc: "We respect sensory needs. If they're more comfortable off-camera, that's okay.",
+		num: '04',
+		icon: '/images/summer/expect/icon-4.svg',
+		iconBg: 'expect-icon-success',
+	},
+	{
+		title: 'Topia Virtual Campus',
+		desc: 'Our custom RPG-style environment makes digital connection feel like a physical world.',
+		num: '05',
+		icon: '/images/summer/expect/icon-5.svg',
+		iconBg: 'expect-icon-primary',
+	},
+	{
+		title: 'WASC Accredited',
+		desc: 'Rigorous academic standards meeting the highest global educational criteria.',
+		num: '06',
+		icon: '/images/summer/expect/icon-6.svg',
+		iconBg: 'expect-icon-secondary',
+	},
+];
+---
+
+<section class="summer-section summer-expect-section">
+	<div class="summer-wrap">
+		<h2>This Is YSA Summer. Here's Exactly What to Expect.</h2>
+		<div class="summer-grid-3 summer-expect-grid">
+			{
+				expectationCards.map((card) => (
+					<article class="summer-card summer-expect-card">
+						<span class={`summer-expect-icon ${card.iconBg}`}>
+							<img src={card.icon} alt="" aria-hidden="true" />
+						</span>
+						<span class="summer-card-num">{card.num}</span>
+						<h3>{card.title}</h3>
+						<p>{card.desc}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

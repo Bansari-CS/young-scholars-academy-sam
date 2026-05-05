@@ -1,0 +1,102 @@
+.summer-top-banner {
+	background: #111827;
+	color: #ffffff;
+}
+
+.summer-top-banner-inner {
+	max-width: 90rem;
+	margin: 0 auto;
+	padding: 0.75rem 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+.summer-top-banner-inner p {
+	margin: 0;
+}
+
+.summer-top-banner-inner a {
+	color: #93c5fd;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.summer-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.92);
+	backdrop-filter: blur(8px);
+	border-bottom: 1px solid #f1f5f9;
+}
+
+.summer-header-container {
+	max-width: 90rem;
+	margin: 0 auto;
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	padding: 0 clamp(1rem, 4.44vw, 4rem);
+}
+
+.summer-header-brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	text-decoration: none;
+	color: inherit;
+}
+
+.summer-header-logo {
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 12px;
+	font-family: var(--ysa-font-display);
+	font-size: 1.25rem;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	background: linear-gradient(135deg, #5751e4 0%, #a855f7 100%);
+}
+
+.summer-header-brand-name {
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: 1.25rem;
+	color: #1a1647;
+	white-space: nowrap;
+}
+
+.summer-header-nav-list {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	margin: 0;
+	padding: 0;
+}
+
+.summer-header-nav-link,
+.summer-header-signin {
+	text-decoration: none;
+	font-family: var(--ysa-font-display);
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	color: #475569;
+}
+
+.summer-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}

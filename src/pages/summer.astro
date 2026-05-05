@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SummerHeader from '../components/summer/SummerHeader.astro';
+import SummerHeroSection from '../components/summer/SummerHeroSection.astro';
+import SummerStruggleSection from '../components/summer/SummerStruggleSection.astro';
+import SummerFullSections from '../components/summer/SummerFullSections.astro';
+import { heroData } from '../data/home';
+---
+
+<Layout
+	title="YSA Summer Camps 2026"
+	description="Summer camps for gifted, twice-exceptional, and neurodivergent learners."
+>
+	<SummerHeader brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<main>
+		<SummerHeroSection />
+		<SummerStruggleSection />
+		<SummerFullSections />
+	</main>
+</Layout>

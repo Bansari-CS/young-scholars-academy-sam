@@ -1,0 +1,130 @@
+---
+const campCards = [
+	{
+		tag: 'STEM & TECH',
+		tagClass: 'tag-stem',
+		name: 'Coding & Future AI',
+		description: 'Master Python basics and explore neural networks in a hands-on environment.',
+		ages: 'Ages 10-15',
+		level: 'Elite Level',
+		levelIcon: '/images/summer/camps/icon-level.svg',
+		price: '$499',
+		image: '/images/summer/camps/camp-coding.jpg',
+	},
+	{
+		tag: 'HUMANITIES',
+		tagClass: 'tag-humanities',
+		name: 'National Debate Prep',
+		description: 'Refine your public speaking and logical reasoning for competitive circuits.',
+		ages: 'Ages 12-18',
+		level: 'Advanced',
+		levelIcon: '/images/summer/camps/icon-level.svg',
+		price: '$549',
+		image: '/images/summer/camps/camp-debate.jpg',
+	},
+	{
+		tag: 'CREATIVE ARTS',
+		tagClass: 'tag-creative',
+		name: 'D&D Campaign Masters',
+		description: 'World-building, character design, and narrative flow for aspiring DMs.',
+		ages: 'Ages 8-18',
+		level: 'Weekly',
+		levelIcon: '/images/summer/camps/icon-weekly.svg',
+		price: '$399',
+		image: '/images/summer/camps/camp-dnd.jpg',
+	},
+	{
+		tag: 'PLAY & COMMUNITY',
+		tagClass: 'tag-play',
+		name: 'Minecraft Architecture',
+		description: 'Refine your public speaking and logical reasoning for competitive circuits.',
+		ages: 'Ages 8-18',
+		level: 'Weekly',
+		levelIcon: '/images/summer/camps/icon-weekly.svg',
+		price: '$399',
+		image: '/images/summer/camps/camp-minecraft.jpg',
+	},
+	{
+		tag: 'HUMANITIES',
+		tagClass: 'tag-humanities',
+		name: 'National Debate Prep',
+		description: 'Refine your public speaking and logical reasoning for competitive circuits.',
+		ages: 'Ages 12-18',
+		level: 'Advanced',
+		levelIcon: '/images/summer/camps/icon-level.svg',
+		price: '$549',
+		image: '/images/summer/camps/camp-debate.jpg',
+	},
+	{
+		tag: 'STEM & TECH',
+		tagClass: 'tag-stem',
+		name: 'Coding & Future AI',
+		description: 'Master Python basics and explore neural networks in a hands-on environment.',
+		ages: 'Ages 10-15',
+		level: 'Elite Level',
+		levelIcon: '/images/summer/camps/icon-level.svg',
+		price: '$499',
+		image: '/images/summer/camps/camp-coding.jpg',
+	},
+];
+---
+
+<section id="programs" class="summer-section summer-camps-section">
+	<div class="summer-wrap summer-camps-wrap">
+		<h2>321 Camps Across 38 Categories.</h2>
+		<p class="summer-sub">From Minecraft Architecture to National Debate Prep.</p>
+		<div class="summer-camps-filters">
+			<div class="summer-camps-search">
+				<img src="/images/summer/camps/icon-search.svg" alt="" aria-hidden="true" />
+				<span>Search for camps (e.g. 'Minecraft', 'Debate')...</span>
+			</div>
+			<div class="summer-camps-filter-chips">
+				<button>Age Range <img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" /></button>
+				<button>Category <img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" /></button>
+				<button>Level <img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" /></button>
+				<button>Date <img src="/images/summer/camps/icon-calendar.svg" alt="" aria-hidden="true" /></button>
+			</div>
+			<a href="#">Explore</a>
+		</div>
+		<div class="summer-grid-3 summer-camp-grid">
+			{
+				campCards.map((camp) => (
+					<article class="summer-program-card-figma">
+						<div class="summer-program-image-figma">
+							<img src={camp.image} alt={camp.name} />
+						</div>
+						<div class="summer-program-content">
+							<span class={camp.tagClass}>{camp.tag}</span>
+							<h3>{camp.name}</h3>
+							<p>{camp.description}</p>
+						</div>
+						<div class="summer-program-footer-figma">
+							<div class="summer-program-meta-item">
+								<img src="/images/summer/camps/icon-age.svg" alt="" aria-hidden="true" />
+								<small>{camp.ages}</small>
+							</div>
+							<div class="summer-program-meta-item">
+								<img src={camp.levelIcon} alt="" aria-hidden="true" />
+								<small>{camp.level}</small>
+							</div>
+							<strong>{camp.price}</strong>
+						</div>
+					</article>
+				))
+			}
+		</div>
+		<div class="summer-ai-strip">
+			<div>
+				<h3>Not sure where to start?</h3>
+				<p>Get personalized camp recommendations based on your child's interests.</p>
+			</div>
+			<a href="#">
+				<img src="/images/summer/camps/icon-ai.svg" alt="" aria-hidden="true" />
+				Ask Our AI
+			</a>
+		</div>
+		<div class="summer-browse-wrap">
+			<a href="#" class="summer-browse-btn">Browse All 300+ Topics</a>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,405 @@
+.summer-section {
+	padding: 5rem 1rem;
+	background: #fff;
+}
+.summer-soft { background: #f8fafc; }
+.summer-cream { background: #fffef7; }
+.summer-wrap { max-width: 75rem; margin: 0 auto; }
+.summer-wrap h2 { text-align: center; margin: 0 0 1rem; font-size: clamp(2rem, 3vw, 2.75rem); color: #111827; }
+.summer-sub { text-align: center; color: #475569; margin: 0 0 2rem; font-size: 1.125rem; }
+.summer-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.summer-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.summer-card { border: 1px solid #e2e8f0; border-radius: 1rem; padding: 2rem; background: #fff; position: relative; }
+.summer-card-num { position: absolute; top: 1rem; right: 1rem; font-size: 2.5rem; color: #f1f5f9; font-weight: 700; }
+.summer-card h3 { margin: 0 0 0.75rem; font-size: 1.35rem; color: #111827; }
+.summer-card p { margin: 0; color: #475569; line-height: 1.7; }
+.summer-card strong { display: inline-block; margin-top: 1rem; color: #111827; }
+
+.summer-expect-section {
+	background: #fff;
+}
+
+.summer-expect-grid {
+	row-gap: 1.5rem;
+}
+
+.summer-expect-card {
+	height: 240px;
+	padding: 2rem;
+	border-color: #e2e8f0;
+	overflow: hidden;
+}
+
+.summer-expect-icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 0.95rem;
+}
+
+.summer-expect-icon img {
+	width: 16px;
+	height: 16px;
+}
+
+.expect-icon-primary { background: #0a9dfb; }
+.expect-icon-secondary { background: #7c3aed; }
+.expect-icon-accent { background: #f2dd35; }
+.expect-icon-success { background: #048c3c; }
+
+.summer-expect-card .summer-card-num {
+	right: 16px;
+	top: 16px;
+	font-size: 56px;
+	line-height: 56px;
+	color: #f1f5f9;
+	font-weight: 700;
+}
+
+.summer-expect-card h3 {
+	font-size: 17px;
+	line-height: 28px;
+	font-weight: 600;
+	margin: 0.55rem 0 0.55rem;
+}
+
+.summer-expect-card p {
+	font-size: 16px;
+	line-height: 1.625;
+}
+
+.summer-guarantee { max-width: 53.5rem; margin: 0 auto; text-align: center; border: 1px solid #decbfe; border-radius: 1.25rem; padding: 3rem; background: #fff; }
+.summer-guarantee span { display: inline-block; padding: 0.45rem 1rem; border-radius: 999px; background: #f5f3ff; color: #7c3aed; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; }
+.summer-guarantee h2 { margin: 1rem 0; }
+.summer-guarantee p { color: #475569; line-height: 1.75; }
+.summer-guarantee a { display: inline-block; margin-top: 1rem; background: #0a9dfb; color: #fff; text-decoration: none; padding: 1rem 2rem; border-radius: 0.75rem; font-weight: 600; }
+
+.summer-promise-section { background: #fff; padding-left: 20rem; padding-right: 20rem; }
+.summer-promise-section .summer-guarantee {
+	border: 2px solid #7c3aed;
+	border-radius: 24px;
+	padding: 48px;
+	position: relative;
+}
+.summer-guarantee-pill {
+	position: absolute;
+	top: -24px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #7c3aed !important;
+	color: #fff !important;
+	font-size: 14px !important;
+	letter-spacing: 0.05em;
+	padding: 8px 24px !important;
+}
+.summer-promise-section .summer-guarantee h2 { font-size: 44px; font-weight: 600; margin-top: 23px; }
+.summer-promise-section .summer-guarantee p { font-size: 16px; line-height: 26px; max-width: 665px; margin: 0 auto; }
+.summer-guarantee-cta {
+	background: #7c3aed !important;
+	border-radius: 12px !important;
+	padding: 16px 40px !important;
+	font-family: var(--ysa-font-display);
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.summer-filters { display: grid; grid-template-columns: 1.8fr repeat(4, auto) auto; gap: 0.75rem; margin: 2rem 0; }
+.summer-filters input, .summer-filters button { border: 1px solid #e2e8f0; background: #fff; border-radius: 0.75rem; padding: 0.85rem 1rem; font: inherit; color: #64748b; }
+.summer-filters a { background: #0a9dfb; color: #fff; border-radius: 0.75rem; text-decoration: none; display: grid; place-items: center; padding: 0 1.2rem; font-weight: 600; }
+
+.summer-program-card { border: 1px solid #e2e8f0; border-radius: 1rem; overflow: hidden; background: #fff; }
+.summer-program-image { height: 12.5rem; background: linear-gradient(135deg, #dbeafe, #ede9fe); }
+.summer-program-content { padding: 1rem; }
+.summer-program-content span { display: inline-block; background: #eef2ff; color: #6366f1; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 999px; }
+.summer-program-content h3 { margin: 0.6rem 0; font-size: 1.2rem; }
+.summer-program-content p { margin: 0; color: #64748b; }
+.summer-program-footer { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-top: 1px solid #eef2f7; }
+.summer-program-footer strong { font-size: 1.2rem; }
+
+.summer-camps-section { background: #f8fafc; }
+.summer-camps-wrap { max-width: 1200px; padding: 0 64px; }
+.summer-camps-wrap > h2 { font-size: 44px; font-weight: 600; }
+.summer-camps-wrap .summer-sub { font-size: 16px; line-height: 26px; margin-bottom: 20px; }
+.summer-camps-filters {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 16px;
+	padding: 12px;
+	box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+	margin-bottom: 24px;
+}
+.summer-camps-search {
+	flex: 1;
+	background: #f9fafb;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 16px;
+	font-size: 14px;
+	color: #4b5563;
+}
+.summer-camps-search img { width: 16px; height: 16px; }
+.summer-camps-filter-chips {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	border-left: 1px solid #e5e7eb;
+	padding-left: 8px;
+}
+.summer-camps-filter-chips button {
+	border: 1px solid #e5e7eb;
+	background: #f9fafb;
+	border-radius: 8px;
+	padding: 8px 12px;
+	display: inline-flex;
+	gap: 8px;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: #4b5563;
+}
+.summer-camps-filter-chips img { width: 10px; height: 10px; }
+.summer-camps-filters > a {
+	background: #0a9dfb;
+	color: #fff;
+	text-decoration: none;
+	padding: 12px 32px;
+	border-radius: 12px;
+	font-weight: 500;
+}
+.summer-camp-grid { gap: 24px 20px; }
+.summer-program-card-figma {
+	background: #fff;
+	border: 1px solid #e2e8f0;
+	border-radius: 16px;
+	padding: 8px;
+}
+.summer-program-image-figma { height: 200px; border-radius: 12px; overflow: hidden; }
+.summer-program-image-figma img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.summer-program-card-figma .summer-program-content { padding: 16px; }
+.summer-program-content span { font-size: 10px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; border-radius: 4px; padding: 4px 8px; display: inline-block; }
+.summer-program-content .tag-stem { color: #048c3c; background: #dcfce7; }
+.summer-program-content .tag-humanities { color: #7c3aed; background: #decbfe; }
+.summer-program-content .tag-creative { color: #0a9dfb; background: #e1f3ff; }
+.summer-program-content .tag-play { color: #f2dd35; background: #fffad4; }
+.summer-program-card-figma .summer-program-content h3 { margin: 8px 0 0; font-size: 17px; line-height: 28px; }
+.summer-program-card-figma .summer-program-content p { font-size: 16px; line-height: 26px; margin-top: 0; }
+.summer-program-footer-figma {
+	border-top: 1px solid #e5e7eb;
+	padding: 16px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+.summer-program-meta-item { display: inline-flex; align-items: center; gap: 6px; }
+.summer-program-meta-item img { width: 12px; height: 12px; }
+.summer-program-meta-item small { font-size: 12px; color: #334155; font-weight: 500; }
+.summer-program-footer-figma strong { margin-left: auto; font-size: 18px; line-height: 28px; color: #0a9dfb; }
+.summer-ai-strip {
+	margin-top: 32px;
+	background: #e1f3ff;
+	border: 1px solid rgba(10,157,251,0.1);
+	border-radius: 24px;
+	padding: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	overflow: hidden;
+}
+.summer-ai-strip::after {
+	content: '';
+	position: absolute;
+	right: -40px;
+	bottom: -40px;
+	width: 160px;
+	height: 160px;
+	border-radius: 999px;
+	background: rgba(10,157,251,0.05);
+}
+.summer-ai-strip h3 { margin: 0; font-size: 24px; line-height: 36px; }
+.summer-ai-strip p { margin: 8px 0 0; font-size: 16px; color: #475569; }
+.summer-ai-strip a {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	padding: 14px 32px;
+	background: #fff;
+	border: 2px solid #0a9dfb;
+	border-radius: 12px;
+	color: #0a9dfb;
+	text-decoration: none;
+	font-weight: 700;
+	z-index: 1;
+}
+.summer-ai-strip a img { width: 16px; height: 16px; }
+.summer-browse-wrap { text-align: center; margin-top: 32px; }
+.summer-browse-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #0a9dfb;
+	border-radius: 12px;
+	padding: 16px 40px;
+	color: #0a9dfb;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.summer-bonus-section { background: #fff; padding: 96px 128px; }
+.summer-bonus-wrap { max-width: 1184px; }
+.summer-bonus-kicker { text-align:center; color:#0a9dfb; letter-spacing:2.8px; font-size:14px; font-weight:700; margin:0; }
+.summer-bonus-title { text-align:center; margin:16px 0 8px; font-size:44px; line-height:48px; font-weight:600; }
+.summer-bonus-sub { max-width:672px; margin:0 auto 64px; font-size:16px; line-height:26px; }
+.summer-bonus-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; }
+.summer-bonus-card { border:1px solid #f3f4f6; border-radius:32px; padding:32px; box-shadow:0 8px 15px rgba(0,0,0,0.04); background:#fff; min-height:328px; }
+.summer-bonus-card > span { width:56px; height:56px; border-radius:16px; background:#0a9dfb; display:grid; place-items:center; }
+.summer-bonus-card > span img {
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
+	display: block;
+}
+.summer-bonus-card .bonus-yellow { background:#f2dd35; }
+.summer-bonus-card .bonus-purple { background:#7c3aed; }
+.summer-bonus-card .bonus-green { background:#048c3c; }
+.summer-bonus-card h3 { margin:24px 0 8px; font-size:17px; line-height:28px; font-weight:600; }
+.summer-bonus-card p { font-size:14px; line-height:22.75px; color:#475569; min-height:46px; }
+.summer-bonus-card > div { border-top:1px solid #f3f4f6; margin-top:24px; padding-top:24px; display:flex; justify-content:space-between; align-items:center; }
+.summer-bonus-card small { color:#048c3c; font-size:14px; font-weight:700; }
+.summer-bonus-card strong { font-size:18px; }
+.summer-bonus-card-tall { min-height:340.75px; }
+.summer-security-card { grid-column: span 2; border-radius:32px; padding:30px; color:#fff; background:linear-gradient(90deg,#5751e4,#0a9dfb); position:relative; overflow:hidden; }
+.summer-security-card header { display:flex; justify-content:space-between; align-items:center; }
+.summer-security-card header span { width:56px; height:56px; border-radius:16px; background:rgba(255,255,255,0.2); display:grid; place-items:center; }
+.summer-security-card header span img {
+	width: 16px;
+	height: 20px;
+	object-fit: contain;
+	display: block;
+}
+.summer-security-card header em { background:rgba(255,255,255,0.2); padding:6px 16px; border-radius:999px; font-size:12px; font-weight:700; text-transform:uppercase; font-style:normal; }
+.summer-security-card h3 { margin:24px 0 12px; font-size:28px; line-height:36px; }
+.summer-security-card p { margin:0; font-size:16px; line-height:26px; max-width:720px; }
+.summer-security-card footer { margin-top:32px; display:flex; justify-content:space-between; align-items:center; }
+.summer-security-card footer span { display:inline-flex; gap:8px; align-items:center; color:rgba(255,255,255,.9); }
+.summer-security-card footer span img {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+	display: block;
+}
+.summer-security-card footer strong { font-style:italic; font-size:24px; }
+.summer-bonus-mentors { margin-top:64px; background:#f9fafb; border-radius:40px; padding:64px 48px 48px; }
+.summer-bonus-mentors-head { display:flex; justify-content:space-between; align-items:center; }
+.summer-bonus-mentors-head p { margin:0; color:#0a9dfb; font-size:14px; font-weight:700; letter-spacing:1.4px; }
+.summer-bonus-mentors-head h3 { margin:4px 0 0; font-size:28px; line-height:36px; font-weight:600; }
+.summer-mini-avatars { display:flex; align-items:center; }
+.summer-mini-avatars img, .summer-mini-avatars span { width:48px; height:48px; border:4px solid #fff; border-radius:999px; margin-left:-16px; }
+.summer-mini-avatars span { display:grid; place-items:center; background:#0a9dfb; color:#fff; font-weight:700; font-size:12px; }
+.summer-mentor-list { margin-top:32px; background:#fff; padding:32px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); text-align:center; }
+.summer-mentor-list img { width:96px; height:96px; border-radius:999px; object-fit:cover; }
+.summer-mentor-list h4 { margin:16px 0 0; font-size:17px; line-height:28px; }
+.summer-mentor-list p { margin:0; color:#475569; font-size:14px; line-height:22.75px; }
+.summer-bonus-total { margin-top:32px; border:2px solid #0a9dfb; border-radius:32px; background:#f0f9fe; padding:48px; display:flex; justify-content:space-between; align-items:center; }
+.summer-bonus-total small { color:#0a9dfb; font-weight:700; letter-spacing:1.4px; font-size:14px; }
+.summer-bonus-total p { margin:.3rem 0 0; font-size:17px; color:#111827; }
+.summer-bonus-total p strong { font-size:38px; }
+.summer-bonus-total span { background:#0a9dfb; color:#fff; padding:16px 32px; border-radius:16px; display:inline-flex; gap:8px; align-items:center; }
+.summer-bonus-total span img {
+	width: 68px;
+	height: 22px;
+	object-fit: contain;
+	display: block;
+	flex: 0 0 auto;
+}
+.summer-bonus-total > div:last-child { text-align:right; max-width:300px; }
+.summer-bonus-total > div:last-child p { margin-top:16px; color:#475569; font-size:14px; line-height:22.75px; }
+
+.summer-pricing-figma { background:#f8fafc; padding:80px 120px; }
+.summer-price-card { border:1px solid #e2e8f0; border-radius:16px; background:#fff; padding:40px; height:436px; }
+.summer-price-card h3 { margin:0; font-size:17px; color:#1e293b; }
+.summer-price-card .price { margin:.5rem 0 1rem !important; font-size:30px; line-height:36px; }
+.summer-price-card ul { list-style:none; padding:16px 0 32px; margin:0; display:grid; gap:16px; }
+.summer-price-card li { display:flex; gap:12px; align-items:center; font-size:14px; color:#475569; }
+.summer-price-card li img {
+	width: 12.25px;
+	height: 14px;
+	object-fit: contain;
+	display: block;
+	flex: 0 0 auto;
+}
+.summer-price-card a { display:grid; place-items:center; height:60px; background:#0a9dfb; color:#fff; border-radius:12px; text-decoration:none; font-weight:500; }
+.summer-price-card a.outline { background:#fff; color:#0a9dfb; border:2px solid #0a9dfb; }
+.summer-price-card.featured { border:2px solid #7c3aed; box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1); position:relative; }
+.summer-price-card.featured > span { position:absolute; top:-16px; left:50%; transform:translateX(-50%); background:#7c3aed; color:#fff; font-size:12px; font-weight:700; letter-spacing:1.2px; border-radius:999px; padding:4px 16px; }
+.summer-price-card.featured b { color:#048c3c; font-size:12.6px; }
+.summer-pricing-note { margin-top:24px; text-align:center; color:#64748b; font-size:14px; }
+.summer-pricing-note a { color:#0a9dfb; font-weight:700; }
+
+.summer-results-section { background:#1a0f3a; padding:80px 64px; }
+.summer-results-wrap { max-width:1311px; }
+.summer-results-kicker { margin:0 auto 16px; width:max-content; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.1); color:#fff; font-size:12px; font-weight:700; }
+.summer-results-wrap h2 { text-align:center; color:#fff; font-size:54px; margin:0; }
+.summer-results-wrap .summer-sub { color:#c7d5fe; margin:16px auto 64px; text-align:center; }
+.summer-results-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; align-items:start; }
+.result-quote-card, .result-video-card { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; overflow:hidden; }
+.result-quote-card { padding:24px; }
+.stars { color:#f2dd35; letter-spacing:1px; font-size:18px; }
+.result-quote-card p, .result-video-copy p { color:#f0f4ff; font-style:italic; font-size:16px; line-height:26px; margin:12px 0 16px; }
+.result-quote-card footer, .result-video-copy footer { display:flex; gap:12px; align-items:center; }
+.result-quote-card footer img, .result-video-copy footer img { width:40px; height:40px; border-radius:999px; border:2px solid rgba(255,255,255,.3); object-fit:cover; }
+.result-quote-card footer strong, .result-video-copy footer strong { display:block; color:#fff; font-size:14px; line-height:20px; }
+.result-quote-card footer span, .result-video-copy footer span { color:#c7d5fe; font-size:12px; line-height:16px; }
+.result-video-card { position:relative; }
+.result-video-card > img { width:100%; height:192px; object-fit:cover; display:block; }
+.result-video-card button { position:absolute; left:50%; top:96px; transform:translate(-50%,-50%); width:54px; height:54px; border:0; background:transparent; padding:0; }
+.result-video-card button img { width:54px; height:54px; display:block; }
+.result-video-copy { padding:24px; }
+
+.summer-fit-dark { background:#111827; padding:80px 64px; color:#fff; }
+.summer-fit-dark h2 { text-align:center; margin:0 0 64px; font-size:44px; }
+.summer-fit-card { border:1px solid #334155; border-radius:24px; background:#1e293b; padding:40px; }
+.summer-fit-card h3 { margin:0 0 24px; font-size:32px; }
+.summer-fit-card.good h3 { color:#048c3c; }
+.summer-fit-card.bad h3 { color:#ef4444; }
+.summer-fit-card ul { margin:0; padding-left:24px; display:grid; gap:24px; color:#cbd5e1; font-size:16px; line-height:24px; }
+
+.faq summary { display:flex; align-items:center; justify-content:space-between; }
+.faq summary img { width:16px; height:16px; }
+
+.summer-final-figma { background:#f0f9fe; padding:80px 184px; }
+.summer-final-box { border:2px solid #0a9dfb; background:#fff; border-radius:32px; box-shadow:0 25px 50px -12px rgba(0,0,0,.25); padding:80px; text-align:center; position:relative; overflow:hidden; }
+.summer-final-box h2 { margin:0; font-size:44px; line-height:48px; font-weight:700; color:#111827; }
+.summer-final-box p { max-width:700px; margin:24px auto 0; color:#475569; line-height:26px; font-size:16px; }
+.summer-final-actions { display:flex; justify-content:center; gap:24px; padding-top:24px; }
+.summer-final-btn { height:60px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; font-family:var(--ysa-font-display); font-size:16px; font-weight:500; line-height:24px; padding:0 40px; }
+.summer-final-btn-primary { width:305px; background:#0a9dfb; color:#fff; gap:12px; }
+.summer-final-btn-primary img { width:16px; height:16px; object-fit:contain; }
+.summer-final-btn-secondary { width:255px; border:2px solid #e2e8f0; background:#fff; color:#1e293b; }
+.summer-final-box small { display:block; margin-top:8px; color:#475569; font-size:16px; line-height:26px; }
+.summer-final-blur { position:absolute; width:192px; height:192px; border-radius:999px; filter:blur(32px); pointer-events:none; }
+.summer-final-blur-right { top:-48px; right:-48px; background:rgba(10,157,251,0.05); }
+.summer-final-blur-left { left:-48px; bottom:-48px; background:rgba(124,58,237,0.05); }
+
+.summer-total { margin-top: 2rem; border: 1px solid #decbfe; background: #faf5ff; padding: 1.2rem; border-radius: 0.75rem; text-align: center; color: #475569; }
+.price { font-size: 2rem; color: #111827; margin-bottom: 1rem !important; }
+.price small { font-size: 1rem; color: #64748b; }
+.summer-card a { display: inline-block; margin-top: 1rem; text-decoration: none; color: #0a9dfb; font-weight: 600; }
+.summer-featured { border-color: #0a9dfb; box-shadow: 0 20px 35px -22px rgba(10, 157, 251, 0.6); }
+
+.faq { max-width: 56rem; }
+.faq details { border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem 1.2rem; margin-top: 0.8rem; background: #fff; }
+.faq summary { cursor: pointer; font-weight: 600; color: #111827; }
+.faq p { margin: 0.6rem 0 0; color: #64748b; }
+
+.summer-cta { background: linear-gradient(180deg, #f8fafc, #eef2ff); text-align: center; }
+.summer-cta p { color: #475569; max-width: 44rem; margin: 0 auto 1rem; }
+.summer-cta small { color: #64748b; }
