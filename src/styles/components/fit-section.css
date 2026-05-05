@@ -115,6 +115,7 @@
 	width: 3.5rem;
 	height: 3.5rem;
 	flex-shrink: 0;
+	border-radius: 0.85rem;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -125,7 +126,7 @@
 }
 
 .ysa-fit__title-icon-wrap--warning {
-
+	background: #e5e7eb;
 }
 
 .ysa-fit__title-icon--good {

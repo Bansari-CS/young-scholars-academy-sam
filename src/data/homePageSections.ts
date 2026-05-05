@@ -1,6 +1,7 @@
 import type { HomePageSectionsData } from '../types/homePage';
 import { programsSectionData } from './programsSection';
 import { figmaMethodology } from './figmaAssets';
+
 export const homePageSectionsData: HomePageSectionsData = {
 	programs: programsSectionData,
 	methodology: {
@@ -37,12 +38,12 @@ export const homePageSectionsData: HomePageSectionsData = {
 		],
 		principles: [
 			{
-  title: "Depth Over Breadth",
-  description:
-    "We focus on deep learning—helping students truly master concepts instead of just covering topics on the surface.",
-  iconTint: "indigo",
-  iconSrc: "../assets/images/depth.png",
-},
+				title: 'Depth Over Breadth',
+				description:
+					'We go deep into subjects, encouraging mastery and genuine understanding rather than surface-level coverage.',
+				iconTint: 'indigo',
+				iconSrc: figmaMethodology.pMicroscope,
+			},
 			{
 				title: 'Neurodivergent-Friendly',
 				description:
