@@ -119,6 +119,80 @@ export const homePageSectionsData: HomePageSectionsData = {
 			{ value: '4.9/5', label: 'average parent satisfaction rating' },
 			{ value: '2.5x', label: 'faster skill progression vs traditional programs' },
 		],
+		columns: [
+			{
+				flow: 'up',
+				cards: [
+					{
+						type: 'quote',
+						rating: 5,
+						quote: '"Seeing my daughter try new things... she just keeps growing into a more confident human every class."',
+						author: { name: 'Rachel T.', meta: 'Parent, Elementary Student', avatarIndex: 1 },
+					},
+					{
+						type: 'quote',
+						rating: 5,
+						quote: '"My daughter went from hating math to asking for extra problem sets. YSA reignited her love of learning."',
+						author: { name: 'Jennifer M.', meta: 'Parent, Grade 5 Student', avatarIndex: 2 },
+					},
+					{
+						type: 'video',
+						rating: 5,
+						quote: '"The classes are engaging and finally challenging enough for our child."',
+						author: { name: 'Monica L.', meta: 'Parent, Grade 4 Student', avatarIndex: 3 },
+						thumbnailIndex: 4,
+					},
+				],
+			},
+			{
+				flow: 'down',
+				cards: [
+					{
+						type: 'video',
+						rating: 5,
+						quote: '"We are so happy we found this special community... our son has thrived."',
+						author: { name: 'Priya S.', meta: 'Parent, Grade 4 Student', avatarIndex: 5 },
+						thumbnailIndex: 1,
+					},
+					{
+						type: 'quote',
+						rating: 5,
+						quote: '"I have never seen teachers with more passion, energy, and support... They are truly the best!"',
+						author: { name: 'Trinity L.', meta: 'Parent of Two Students', avatarIndex: 6 },
+					},
+					{
+						type: 'quote',
+						rating: 5,
+						quote: '"Every week we see growth not just in academics, but confidence and communication too."',
+						author: { name: 'Sonia R.', meta: 'Parent, Grade 6 Student', avatarIndex: 4 },
+					},
+				],
+			},
+			{
+				flow: 'up',
+				cards: [
+					{
+						type: 'quote',
+						rating: 5,
+						quote: '"Seeing my daughter try new things... she just keeps growing into a more confident human every class."',
+						author: { name: 'Rachel T.', meta: 'Parent, Elementary Student', avatarIndex: 1 },
+					},
+					{
+						type: 'video',
+						rating: 5,
+						quote: '"The transformation has been incredible. My son now actively participates and loves learning."',
+						author: { name: 'David K.', meta: 'Parent, Grade 3 Student', avatarIndex: 3 },
+						thumbnailIndex: 2,
+					},
+					{
+						type: 'quote',
+						rating: 5,
+						quote: '"The individualized guidance helped our daughter find her spark again."',
+						author: { name: 'Alicia P.', meta: 'Parent, Grade 7 Student', avatarIndex: 2 },
+					},
+				],
+			},
+		],
 	},
 	teachers: {
 		eyebrow: 'EXPERT EDUCATORS',
