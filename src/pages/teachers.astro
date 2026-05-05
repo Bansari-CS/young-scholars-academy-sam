@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import TeachersHeroSection from '../components/teachers/TeachersHeroSection.astro';
+import TeachersMentorListSection from '../components/teachers/TeachersMentorListSection.astro';
+import TeachersParentLoveSection from '../components/teachers/TeachersParentLoveSection.astro';
+import TeachersParentQuoteSection from '../components/teachers/TeachersParentQuoteSection.astro';
+import TeachersAdminTeamSection from '../components/teachers/TeachersAdminTeamSection.astro';
+import TeachersMentorFitCtaSection from '../components/teachers/TeachersMentorFitCtaSection.astro';
+import { heroData } from '../data/home';
+---
+
+<Layout
+	title="Teacher Listing | Young Scholars Academy"
+	description="Meet expert mentors at Young Scholars Academy and explore their experience, specialties, and profiles."
+>
+	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<main>
+		<TeachersHeroSection />
+		<TeachersMentorListSection />
+		<TeachersParentLoveSection />
+		<TeachersParentQuoteSection />
+		<TeachersAdminTeamSection />
+		<TeachersMentorFitCtaSection />
+	</main>
+	<Footer />
+</Layout>

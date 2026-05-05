@@ -1,0 +1,55 @@
+---
+import { semesterSalesAssets } from './data';
+
+const faqs = [
+	{
+		q: `Will my child get "Zoom fatigue"?`,
+		a: 'Our 50-minute sessions are specifically designed to avoid this. We use a high-engagement model where students are active participants, not passive viewers. Plus, our Topia campus allows for movement and social exploration that feels like a game, not a meeting.',
+		open: true,
+	},
+	{
+		q: 'Do you require a formal diagnosis for 2e or Giftedness?',
+		a: '',
+		open: false,
+	},
+	{
+		q: 'Can I pay with ESA or Charter School funds?',
+		a: '',
+		open: false,
+	},
+	{
+		q: 'What is the refund policy?',
+		a: '',
+		open: false,
+	},
+];
+---
+
+<section class="bg-[#f8fafc] py-24" aria-labelledby="semester-faq-title">
+	<div class="mx-auto w-full max-w-[896px] px-5 md:px-16">
+		<header class="text-center">
+			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="semester-faq-title">Answers to Your Questions</h2>
+			<p class="pt-4 text-base leading-[26px] text-[#475569]">Everything you need to know before getting started</p>
+		</header>
+
+		<div class="mt-16 space-y-4">
+			{
+				faqs.map((item) => (
+					<div class="overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white">
+						<div class="flex items-center justify-between p-6">
+							<h3 class="text-[17px] font-semibold leading-7 text-[#111827]">{item.q}</h3>
+							<img class="h-4 w-4" src={semesterSalesAssets.faqChevronUrl} alt="" aria-hidden="true" />
+						</div>
+						{
+							item.open && (
+								<div class="px-6 pb-6">
+									<p class="text-base leading-[26px] text-[#475569]">{item.a}</p>
+								</div>
+							)
+						}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

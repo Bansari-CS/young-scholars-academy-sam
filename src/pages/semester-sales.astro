@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import { heroData } from '../data/home';
+import SemesterSalesHeroSection from '../components/semester-sales/SemesterSalesHeroSection.astro';
+import SemesterSalesChallengeSection from '../components/semester-sales/SemesterSalesChallengeSection.astro';
+import SemesterSalesAcademySection from '../components/semester-sales/SemesterSalesAcademySection.astro';
+import SemesterSalesDifferentThinkersSection from '../components/semester-sales/SemesterSalesDifferentThinkersSection.astro';
+import SemesterSalesHowSemesterWorksSection from '../components/semester-sales/SemesterSalesHowSemesterWorksSection.astro';
+import SemesterSalesSubjectsSection from '../components/semester-sales/SemesterSalesSubjectsSection.astro';
+import SemesterSalesVirtualWorksSection from '../components/semester-sales/SemesterSalesVirtualWorksSection.astro';
+import SemesterSalesFamiliesSayingSection from '../components/semester-sales/SemesterSalesFamiliesSayingSection.astro';
+import SemesterSalesPricingSection from '../components/semester-sales/SemesterSalesPricingSection.astro';
+import SemesterSalesFaqSection from '../components/semester-sales/SemesterSalesFaqSection.astro';
+import SemesterSalesFinalCtaSection from '../components/semester-sales/SemesterSalesFinalCtaSection.astro';
+---
+
+<Layout
+	title="Semester Sales | Young Scholars Academy"
+	description="Discover semester sales and find the right fit at Young Scholars Academy."
+>
+	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<main>
+		<SemesterSalesHeroSection />
+		<SemesterSalesChallengeSection />
+		<SemesterSalesAcademySection />
+		<SemesterSalesDifferentThinkersSection />
+		<SemesterSalesHowSemesterWorksSection />
+		<SemesterSalesSubjectsSection />
+		<SemesterSalesVirtualWorksSection />
+		<SemesterSalesFamiliesSayingSection />
+		<SemesterSalesPricingSection />
+		<SemesterSalesFaqSection />
+		<SemesterSalesFinalCtaSection />
+	</main>
+	<Footer />
+</Layout>

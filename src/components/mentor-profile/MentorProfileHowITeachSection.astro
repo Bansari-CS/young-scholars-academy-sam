@@ -1,0 +1,83 @@
+---
+import { mentorProfileAssets } from './data';
+
+const cards = [
+	{
+		title: 'Discussion-Based',
+		lines: [
+			'We learn through Socratic',
+			'dialogue, where every',
+			'question is an invitation to',
+			'explore deeper.',
+		],
+		iconUrl: mentorProfileAssets.teachIcon1Url,
+		iconBg: 'bg-[#f5f3ff]',
+	},
+	{
+		title: 'Interactive Discovery',
+		lines: [
+			"Students don't just watch;",
+			'they manipulate variables',
+			'and conduct virtual',
+			'experiments in real-time.',
+		],
+		iconUrl: mentorProfileAssets.teachIcon2Url,
+		iconBg: 'bg-[#eff6ff]',
+	},
+	{
+		title: 'Student-Led Pace',
+		lines: [
+			'We follow the spark of',
+			'student curiosity, allowing',
+			'the cohort to steer the',
+			'direction of our inquiry.',
+		],
+		iconUrl: mentorProfileAssets.teachIcon3Url,
+		iconBg: 'bg-[#ecfdf5]',
+	},
+	{
+		title: 'Personalized Approach',
+		lines: [
+			'Assignments are adjusted',
+			'to match each child’s',
+			'specific output style—',
+			'writing, drawing, or',
+			'presenting.',
+		],
+		iconUrl: mentorProfileAssets.teachIcon4Url,
+		iconBg: 'bg-[#fffacf]',
+	},
+];
+---
+
+<section class="bg-[#f8fafc] px-5 py-14 md:px-16 md:py-20" aria-labelledby="how-teach-title">
+	<div class="mx-auto flex w-full max-w-[1312px] flex-col gap-12 md:px-16">
+		<header class="text-center">
+			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="how-teach-title">How I Teach</h2>
+			<p class="mx-auto mt-4 max-w-[672px] text-base leading-[26px] text-[#475569]">
+				Creating an environment where high-potential minds can thrive through specific pedagogical pillars.
+			</p>
+		</header>
+
+		<ul class="grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 xl:grid-cols-4">
+			{
+				cards.map((card) => (
+					<li class="flex min-h-[344px] flex-col items-center rounded-[32px] border border-[#e2e8f0] bg-white px-8 py-10 text-center shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
+						<span class={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl ${card.iconBg}`}>
+							<img class="h-8 w-8" src={card.iconUrl} alt="" aria-hidden="true" />
+						</span>
+						<h3 class="text-[17px] font-semibold leading-[30px] text-[#111827]">{card.title}</h3>
+						<p class="mt-4 text-base leading-[26px] text-[#475569]">
+							{card.lines.map((line) => (
+								<>
+									{line}
+									<br />
+								</>
+							))}
+						</p>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
