@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import { heroData } from '../data/home';
+---
+
+<Layout title="Navigating Twice-Exceptional Learners | YSA" description="Article detail page for Young Scholars Academy blog.">
+	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+
+	<main class="bg-[#f8fafc] pt-12 text-[#111827]">
+		<div class="mx-auto w-full max-w-[1200px] px-6 pb-20">
+			<div class="mb-8 flex items-center gap-2 text-sm text-[rgba(71,85,105,0.6)]">
+				<a href="/" class="hover:text-[#0a9dfb]">Home</a>
+				<span>›</span>
+				<a href="/blog" class="hover:text-[#0a9dfb]">Insights</a>
+				<span>›</span>
+				<span class="font-medium text-[#475569]">Gifted & 2e Learners</span>
+			</div>
+
+			<div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_352px] lg:items-start">
+				<article class="min-w-0">
+					<div class="mb-6 inline-flex rounded-lg bg-[#e1f3ff] px-3 py-1 text-xs font-bold uppercase tracking-[0.6px] text-[#0a9dfb]">Gifted & 2e</div>
+					<h1 class="text-[34px] font-bold leading-tight md:text-[44px]">
+						Navigating the Complexities of
+						<span class="block">Twice-Exceptional (2e)</span>
+						<span class="block">Learners at Home</span>
+					</h1>
+
+					<div class="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[rgba(226,232,240,0.8)] py-6">
+						<div class="flex items-center gap-4">
+							<img src="https://www.figma.com/api/mcp/asset/27301e3c-efd2-4d9d-b530-806b6243a59b" alt="Dr Sarah Jenkins" class="h-12 w-12 rounded-full border-2 border-white shadow-md" />
+							<div>
+								<p class="text-sm font-bold">Dr. Sarah Jenkins</p>
+								<p class="text-xs text-[rgba(71,85,105,0.7)]">Child Psychologist & Educational Specialist</p>
+							</div>
+						</div>
+						<div class="flex items-center gap-6 text-sm text-[rgba(71,85,105,0.7)]">
+							<span>Oct 24, 2023</span>
+							<span>8 min read</span>
+						</div>
+					</div>
+
+					<img src="https://www.figma.com/api/mcp/asset/b694c606-6b40-4cc5-b7f9-cecef4be5fe2" alt="Student writing" class="mt-8 w-full rounded-3xl shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]" />
+
+					<div class="prose prose-lg mt-8 max-w-none prose-p:leading-[26px] prose-p:text-[#475569] prose-headings:font-bold prose-headings:text-[#111827]">
+						<p>
+							Being "twice-exceptional" (2e) is a term used to describe students who are both gifted and have a learning disability, such as ADHD, dyslexia, or autism. These children often feel like walking contradictions: they might be able to solve complex physics problems but struggle to organize their backpack or finish a simple worksheet.
+						</p>
+
+						<h2 class="!mt-10 !text-[30px] !leading-[36px]">Understanding the "Asynchronous" Development</h2>
+						<p>
+							The core challenge of the 2e experience is asynchronous development. This means the child's intellectual, emotional, and physical growth don't happen at the same rate. Imagine a 10-year-old with the mathematical reasoning of a college student, the handwriting of a first-grader, and the emotional regulation of a 7-year-old.
+						</p>
+					</div>
+
+					<blockquote class="my-8 rounded-r-2xl border-l-4 border-[#0a9dfb] bg-[#f8fafc] px-8 py-6 text-[18px] italic leading-[32px] text-[#111827]">
+						"The goal isn't just to fix the challenges, but to nourish the brilliance that makes these children unique."
+					</blockquote>
+
+					<h3 class="mt-10 text-2xl font-bold">Creating a Supportive Home Environment</h3>
+					<p class="mt-4 leading-[26px] text-[#475569]">
+						When you're raising a 2e child, your home needs to be a sanctuary of understanding. Here are three key strategies to implement starting today:
+					</p>
+
+					<ul class="mt-4 space-y-3 text-[#475569]">
+						<li><span class="font-bold">Focus on Strengths First:</span> It's easy to spend all our energy on "remediating" the weakness. Make sure at least 70% of their learning time is spent on their passions.</li>
+						<li><span class="font-bold">Use Scaffolding:</span> If they have a brilliant story but can't write it down, let them dictate it to you. The goal is expression, not penmanship.</li>
+						<li><span class="font-bold">Normalize the Struggle:</span> Talk openly about how their brain works. Understanding their own neurobiology is the first step toward self-advocacy.</li>
+					</ul>
+
+					<img src="https://www.figma.com/api/mcp/asset/89ddd815-62a1-4038-8885-c68a8c803c4e" alt="Parent and child smiling" class="mt-8 w-full rounded-2xl" />
+
+					<h2 class="mt-10 text-[30px] font-bold leading-[36px]">The Emotional Toll of High Potential</h2>
+					<p class="mt-4 leading-[26px] text-[#475569]">
+						Many 2e children suffer from intense perfectionism. Because they know they are capable of high-level thought, they feel deeply ashamed when their "output" doesn't match their internal standard. This often leads to task paralysis or shutting down.
+					</p>
+					<p class="mt-4 leading-[26px] text-[#475569]">
+						In the next section, we'll explore how to navigate the school system and advocate for an Individualized Education Program (IEP) that actually addresses both halves of the 2e coin.
+					</p>
+
+					<div class="mt-10 rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-8 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+						<div class="flex flex-col gap-6 sm:flex-row">
+							<img src="https://www.figma.com/api/mcp/asset/27301e3c-efd2-4d9d-b530-806b6243a59b" alt="Dr Sarah Jenkins" class="h-20 w-20 rounded-2xl object-cover" />
+							<div>
+								<h4 class="text-lg font-bold">About Dr. Sarah Jenkins</h4>
+								<p class="mt-2 text-[#475569]">
+									Dr. Jenkins is a clinical psychologist specializing in neurodiversity. With over 15 years of experience, she helps families navigate the complexities of raising twice-exceptional children and advocates for inclusive education policies.
+								</p>
+							</div>
+						</div>
+					</div>
+				</article>
+
+				<aside class="space-y-8 lg:sticky lg:top-24">
+					<div class="rounded-3xl bg-gradient-to-br from-[#0a9dfb] to-[#7c3aed] p-8 text-white shadow-[0px_8px_32px_-8px_rgba(0,132,255,0.25)]">
+						<h3 class="text-[17px] font-semibold leading-8">Free 2e Success Toolkit</h3>
+						<p class="mt-2 text-sm leading-[22px] text-[rgba(255,255,255,0.85)]">Download our comprehensive guide to supporting your gifted child's unique learning needs at home.</p>
+						<input placeholder="Email address" class="mt-5 w-full rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] px-4 py-3 text-sm placeholder:text-[rgba(255,255,255,0.65)]" />
+						<button class="mt-3 w-full rounded-xl bg-white py-3 text-sm font-semibold text-[#0a9dfb]">Get the Toolkit</button>
+					</div>
+
+					<div class="rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+						<h4 class="text-[17px] font-semibold">Trending Now</h4>
+						<div class="mt-6 space-y-6">
+							<a href="#" class="flex gap-4">
+								<img src="https://www.figma.com/api/mcp/asset/b9d15f2a-bb86-4ae6-b972-5b29d83b758c" alt="" class="h-20 w-20 rounded-xl object-cover" />
+								<div><p class="text-sm font-semibold leading-[20px]">Building lasting friendships for quirky kids</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">Social Skills</p></div>
+							</a>
+							<a href="#" class="flex gap-4">
+								<img src="https://www.figma.com/api/mcp/asset/bb224aef-ef75-46b1-b87e-908516c744f8" alt="" class="h-20 w-20 rounded-xl object-cover" />
+								<div><p class="text-sm font-semibold leading-[20px]">Harnessing hyperfocus as a superpower</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">ADHD</p></div>
+							</a>
+							<a href="#" class="flex gap-4">
+								<img src="https://www.figma.com/api/mcp/asset/82f5871a-ef58-42b1-bc13-f561a7e6f16f" alt="" class="h-20 w-20 rounded-xl object-cover" />
+								<div><p class="text-sm font-semibold leading-[20px]">The best homeschooling tools for 2024</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">Learning</p></div>
+							</a>
+						</div>
+					</div>
+
+					<div class="rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+						<h4 class="text-[17px] font-semibold">Categories</h4>
+						<div class="mt-4 flex flex-wrap gap-2">
+							{['Giftedness', 'Neurodiversity', 'Homeschooling', 'ADHD Tips', 'Parenting', 'Advocacy'].map((c) => (
+								<span class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-4 py-2 text-xs font-medium text-[#475569]">{c}</span>
+							))}
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+
+		<section class="mx-auto w-full max-w-[1200px] px-6 pb-16">
+			<div class="mb-8 flex items-center justify-between">
+				<h2 class="text-[30px] font-bold">More from Young Scholars</h2>
+				<a href="/blog" class="text-base font-bold text-[#0a9dfb]">Explore the Blog →</a>
+			</div>
+			<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+				{[
+					{
+						img: 'https://www.figma.com/api/mcp/asset/92569d59-f193-4257-b458-6953c29b33f7',
+						tag: 'Social Skills',
+						title: 'Teaching Empathy to Neurodivergent Kids',
+					},
+					{
+						img: 'https://www.figma.com/api/mcp/asset/b1f74f73-ab13-48ee-a385-47f661ba5af4',
+						tag: 'Productivity',
+						title: 'Executive Function Hacks for Daily Success',
+					},
+					{
+						img: 'https://www.figma.com/api/mcp/asset/25a587ba-1966-4946-9d7b-80422d66c8d0',
+						tag: 'Science & Nature',
+						title: 'Igniting Curiosity Through Nature Study',
+					},
+				].map((item) => (
+					<a href="/blog-detail" class="rounded-[20px] border border-[rgba(226,232,240,0.5)] bg-white shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+						<img src={item.img} alt={item.title} class="h-[208px] w-full rounded-t-[20px] object-cover" />
+						<div class="p-6">
+							<p class="text-[10px] font-semibold uppercase tracking-[1px] text-[#7c3aed]">{item.tag}</p>
+							<h3 class="mt-2 text-[17px] font-semibold leading-7">{item.title}</h3>
+							<p class="mt-4 text-sm font-medium text-[#7c3aed]">Read Article →</p>
+						</div>
+					</a>
+				))}
+			</div>
+		</section>
+
+		<section class="mx-auto mb-20 w-[calc(100%-2rem)] max-w-[1152px] rounded-[32px] border border-[rgba(226,232,240,0.5)] bg-white px-6 py-14 text-center shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)] md:px-12">
+			<h2 class="text-[34px] font-bold leading-tight md:text-[44px]">Ready to Find Your Child's Perfect Path?</h2>
+			<p class="mx-auto mt-4 max-w-[672px] text-base leading-[26px] text-[#475569]">Join 5,000+ families who use our research-backed insights to help their gifted and neurodivergent children reach their full potential.</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+				<a href="#" class="rounded-xl bg-[#0a9dfb] px-8 py-4 text-base font-semibold text-white shadow-[0px_8px_32px_-8px_rgba(0,132,255,0.25)]">Find My Child’s Best Fit</a>
+				<a href="#" class="rounded-xl border border-[#0a9dfb] bg-white px-8 py-4 text-base font-semibold text-[#0a9dfb]">Explore Programs</a>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
