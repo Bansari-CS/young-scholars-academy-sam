@@ -1,0 +1,57 @@
+---
+import { semesterSalesAssets } from './data';
+
+const subjects = [
+	{
+		title: 'AI & Machine Learning',
+		description: 'Building ethical AI solutions from scratch.',
+		image: semesterSalesAssets.subjectImageAiUrl,
+	},
+	{
+		title: 'Minecraft Engineering',
+		description: 'Applying physics and logic in virtual worlds.',
+		image: semesterSalesAssets.subjectImageMinecraftUrl,
+	},
+	{
+		title: 'Public Speaking & Debate',
+		description: 'Mastering the art of persuasion and logic.',
+		image: semesterSalesAssets.subjectImageDebateUrl,
+	},
+	{
+		title: 'World Building',
+		description: 'Advanced creative writing and lore creation.',
+		image: semesterSalesAssets.subjectImageWritingUrl,
+	},
+];
+---
+
+<section class="bg-[#f8fafc] py-20" aria-labelledby="subjects-title">
+	<div class="mx-auto w-full max-w-[1312px] px-5 md:px-16">
+		<header class="text-center">
+			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="subjects-title">Subjects Your Child Will Love</h2>
+			<p class="mx-auto mt-4 max-w-[720px] text-base leading-[26px] text-[#475569]">
+				Move beyond the standard curriculum with courses designed for the curious and the creative.
+			</p>
+		</header>
+
+		<ul class="mt-12 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 xl:grid-cols-4">
+			{
+				subjects.map((subject) => (
+					<li class="rounded-2xl border border-[#e2e8f0] bg-white p-6">
+						<div class="h-[140px] overflow-hidden rounded-xl">
+							<img class="h-full w-full object-cover" src={subject.image} alt={`${subject.title} course`} />
+						</div>
+						<h3 class="pt-4 text-[17px] font-semibold leading-6 text-[#111827]">{subject.title}</h3>
+						<p class="pt-2 text-base leading-[26px] text-[#475569]">{subject.description}</p>
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="mt-12 flex justify-center">
+			<a class="inline-flex h-[60px] items-center justify-center rounded-xl bg-[#0a9dfb] px-12 py-4 text-base font-medium text-white no-underline shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)]" href="#">
+				Browse 50+ More Courses
+			</a>
+		</div>
+	</div>
+</section>

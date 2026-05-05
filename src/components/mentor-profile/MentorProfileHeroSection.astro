@@ -1,0 +1,58 @@
+---
+import { mentorProfileAssets } from './data';
+---
+
+<section class="relative flex justify-center overflow-hidden bg-[linear-gradient(167.749deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)] px-5 py-12 md:px-8 md:py-16">
+	<div class="pointer-events-none absolute left-[-100px] top-[-100px] h-[600px] w-[600px] rounded-full bg-[rgba(10,157,251,0.15)] blur-[102px]" aria-hidden="true"></div>
+	<div class="pointer-events-none absolute bottom-0 right-[-100px] h-[500px] w-[500px] rounded-full bg-[rgba(168,85,247,0.15)] blur-[72px]" aria-hidden="true"></div>
+
+	<div class="relative z-10 flex w-full max-w-[1312px] flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-[104px]">
+		<div class="relative w-full max-w-[560px]">
+			<div class="h-[600px] w-full overflow-hidden rounded-[32px] border-8 border-white bg-white shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]">
+				<img class="h-full w-full object-cover" src={mentorProfileAssets.heroImageUrl} alt="Dr. Emily Ross profile" />
+			</div>
+
+			<div class="absolute -bottom-[29px] right-[-8px] flex items-center gap-4 rounded-3xl border border-[#e2e8f0] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] md:right-[-84px]">
+				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(4,140,60,0.1)]">
+					<img class="h-[30.53px] w-[30.53px]" src={mentorProfileAssets.topRatedIconUrl} alt="" aria-hidden="true" />
+				</div>
+				<div>
+					<p class="text-[17px] font-semibold leading-[22.5px] text-[#111827]">Top Rated Mentor</p>
+					<p class="text-sm leading-[21px] text-[#475569]">4.9/5 from 200+ reviews</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-full max-w-[648px] py-2 md:py-[60px]">
+			<div class="flex flex-wrap gap-3">
+				<span class="inline-flex items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 text-xs font-bold tracking-[0.3px] text-[#7c3aed] shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
+					<span class="h-2 w-2 rounded-full bg-[#048c3c]" aria-hidden="true"></span>
+					GIFTED SPECIALIST
+				</span>
+				<span class="inline-flex items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 text-xs font-bold tracking-[0.3px] text-[#0a9dfb] shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
+					<img class="h-[14px] w-[14px]" src={mentorProfileAssets.experienceIconUrl} alt="" aria-hidden="true" />
+					8+ YEARS EXPERIENCE
+				</span>
+			</div>
+
+			<h1 class="mt-6 text-[44px] font-bold leading-[1.05] text-[#111827]">Dr. Emily Ross</h1>
+			<p class="mt-2 text-[17px] font-semibold leading-9 text-[#7c3aed]">PhD Chemistry, MIT • Master Mentor</p>
+
+			<div class="mt-6 flex items-start gap-[10px]">
+				<img class="h-[33px] w-[33px] rounded-full border-2 border-[rgba(255,255,255,0.3)] object-cover" src={mentorProfileAssets.quoteAvatarUrl} alt="Dr. Emily Ross avatar" />
+				<p class="text-[18px] leading-[32.5px] text-[#475569]">
+					"I don't just teach science; I help brilliant minds find patterns in the chaos. Every neurodivergent child has a unique rhythm of learning, and my job is to dance to that beat."
+				</p>
+			</div>
+
+			<div class="mt-[18px] flex flex-col gap-4 sm:flex-row">
+				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-2xl bg-[#0a9dfb] px-10 py-5 text-[18px] font-bold leading-[27px] text-white no-underline shadow-[0_10px_15px_-3px_#bfdbfe,0_4px_6px_-4px_#bfdbfe] sm:w-[270px]" href="#">
+					View My Classes
+				</a>
+				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-2xl border-2 border-[#0a9dfb] bg-white px-10 py-5 text-[18px] font-bold leading-[27px] text-[#0a9dfb] no-underline sm:w-[274px]" href="#">
+					Enroll Now
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

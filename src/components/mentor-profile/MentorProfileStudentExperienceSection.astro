@@ -1,0 +1,55 @@
+---
+import { mentorProfileAssets } from './data';
+
+const pillars = [
+	{
+		title: 'High Engagement',
+		body: ['No more "boring" science. We use narrative', 'loops and gamified discovery to keep bright', 'minds hooked.'],
+		icon: mentorProfileAssets.studentExperienceIcon1Url,
+		iconBg: 'bg-[#7c3aed]',
+	},
+	{
+		title: 'Intellectual Safety',
+		body: ['A space where being "different" is the norm.', 'We celebrate quirks and intense hyper-', 'fixations.'],
+		icon: mentorProfileAssets.studentExperienceIcon2Url,
+		iconBg: 'bg-[#0a9dfb]',
+	},
+	{
+		title: 'True Belonging',
+		body: ['Connecting with intellectual peers who finally', '"speak the same language" of curiosity.'],
+		icon: mentorProfileAssets.studentExperienceIcon3Url,
+		iconBg: 'bg-[#048c3c]',
+	},
+];
+---
+
+<section class="relative overflow-hidden bg-[#111827] px-5 py-14 md:px-16 md:py-20" aria-labelledby="student-experience-title">
+	<img class="pointer-events-none absolute inset-0 h-full w-full object-cover" src={mentorProfileAssets.studentExperienceBgUrl} alt="" aria-hidden="true" />
+	<div class="relative mx-auto flex w-full max-w-[1312px] flex-col gap-16 md:px-16">
+		<header class="max-w-[672px]">
+			<h2 class="text-[44px] font-bold leading-[1.1] text-white" id="student-experience-title">What Students Experience</h2>
+			<p class="mt-6 text-base font-semibold leading-6 text-white">Beyond the curriculum, Dr. Ross focuses on the holistic growth of the 2e scholar.</p>
+		</header>
+
+		<ul class="grid list-none grid-cols-1 gap-12 p-0 md:grid-cols-2 lg:grid-cols-3">
+			{
+				pillars.map((pillar) => (
+					<li class="space-y-4">
+						<span class={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${pillar.iconBg}`}>
+							<img class="h-4 w-5" src={pillar.icon} alt="" aria-hidden="true" />
+						</span>
+						<h3 class="pt-2 text-[17px] font-semibold leading-8 text-white">{pillar.title}</h3>
+						<p class="text-base font-semibold leading-6 text-white">
+							{pillar.body.map((line) => (
+								<>
+									{line}
+									<br />
+								</>
+							))}
+						</p>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
