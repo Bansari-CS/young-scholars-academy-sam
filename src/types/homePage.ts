@@ -19,6 +19,34 @@ export interface ImpactStat {
 	label: string;
 }
 
+export interface ImpactTestimonialAuthor {
+	name: string;
+	meta: string;
+	avatarIndex: 1 | 2 | 3 | 4 | 5 | 6;
+}
+
+export interface ImpactQuoteCard {
+	type: 'quote';
+	rating: number;
+	quote: string;
+	author: ImpactTestimonialAuthor;
+}
+
+export interface ImpactVideoCard {
+	type: 'video';
+	rating: number;
+	quote: string;
+	author: ImpactTestimonialAuthor;
+	thumbnailIndex: 1 | 2 | 3 | 4 | 5 | 6;
+}
+
+export type ImpactCard = ImpactQuoteCard | ImpactVideoCard;
+
+export interface ImpactColumn {
+	flow: 'up' | 'down';
+	cards: ImpactCard[];
+}
+
 /** Figma “Learn from the Best” — one card per teacher */
 export interface TeacherCard {
 	name: string;
@@ -70,6 +98,7 @@ export interface HomePageSectionsData {
 		title: string;
 		description: string;
 		stats: ImpactStat[];
+		columns: ImpactColumn[];
 	};
 	teachers: {
 		eyebrow: string;

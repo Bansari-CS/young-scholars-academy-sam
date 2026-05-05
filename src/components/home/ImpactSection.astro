@@ -1,7 +1,24 @@
 ---
+import { Image } from 'astro:assets';
 import { homePageSectionsData } from '../../data/homePageSections';
+import type { ImpactCard, ImpactTestimonialAuthor } from '../../types/homePage';
+import image1 from '../../assets/images/image1.jpg';
+import image2 from '../../assets/images/image2.jpg';
+import youtubeIcon from '../../assets/images/Vector.svg';
 
 const d = homePageSectionsData.impact;
+
+const imageByIndex = {
+	1: image1,
+	2: image2,
+	3: image1,
+	4: image2,
+	5: image1,
+	6: image2,
+} as const;
+
+const getAuthorImage = (author: ImpactTestimonialAuthor) => imageByIndex[author.avatarIndex];
+const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex[card.thumbnailIndex] : undefined);
 ---
 
 <section class="home-section impact-section-root impact-section" aria-labelledby="impact-heading">
@@ -19,6 +36,60 @@ const d = homePageSectionsData.impact;
 						<span>{s.label}</span>
 					</div>
 				))
+			}
+		</div>
+
+		<div class="impact-columns" aria-label="Parent testimonials">
+			{
+				d.columns.map((column) => {
+					const repeatedCards = [...column.cards, ...column.cards];
+					return (
+						<div class={`impact-column impact-column--${column.flow}`}>
+							<div class="impact-column-track">
+								{
+									repeatedCards.map((card) => (
+										<article class={`impact-card impact-card--${card.type}`}>
+											{card.type === 'video' ? (
+												<div class="impact-card-media">
+													<Image
+														src={getThumbnail(card)!}
+														alt={`${card.author.name} video testimonial`}
+														loading="lazy"
+														decoding="async"
+														width={430}
+														height={220}
+													/>
+													<span class="impact-card-play" aria-hidden="true"><Image src={youtubeIcon} alt="Play video" /></span>
+												</div>
+											) : null}
+											<div class="impact-card-body">
+												<p class="impact-card-stars" aria-label={`${card.rating} out of 5 stars`}>
+													{'★'.repeat(card.rating)}
+												</p>
+												<p class="impact-card-quote">{card.quote}</p>
+												<div class="impact-card-author">
+													<Image
+														src={getAuthorImage(card.author)}
+														alt=""
+														aria-hidden="true"
+														loading="lazy"
+														decoding="async"
+														width={36}
+														height={36}
+													/>
+													<div>
+														<p class="impact-card-name">{card.author.name}</p>
+														<p class="impact-card-meta">{card.author.meta}</p>
+													</div>
+												</div>
+											</div>
+										</article>
+									))
+								}
+							</div>
+						</div>
+					);
+				})
 			}
 		</div>
 	</div>
