@@ -42,7 +42,7 @@
 	z-index: 1;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	align-items: center;
+	align-items: start;
 	gap: clamp(1.5rem, 4vw, 3rem);
 	min-height: 0;
 	padding-top: 80px;
@@ -88,15 +88,16 @@
 	font-family: var(--ysa-font-display);
 	font-weight: 700;
 	font-size: clamp(2.25rem, 6vw, 3.75rem);
-	line-height: 1;
+	line-height: 1.08;
 	letter-spacing: -0.09375rem;
 	color: var(--ysa-figma-brand);
+	padding-bottom: 0.08em;
 }
 
 .hero-title-line {
 	display: block;
 	margin-bottom: 0;
-	line-height: 1;
+	line-height: 1.08;
 }
 
 .hero-title-gradient {
@@ -106,7 +107,8 @@
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
-	line-height: 1;
+	line-height: 1.08;
+	padding-bottom: 0.08em;
 }
 
 .hero-lede {

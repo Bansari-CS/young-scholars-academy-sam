@@ -1,83 +1,129 @@
 ---
-import type { PartnerOrg } from '../../types/home';
-import { figmaTrustStrip } from '../../data/figmaAssets';
-import '../../styles/components/trust-strip-section.css';
+import type { PartnerOrg } from "../../types/home";
+import { figmaTrustStrip } from "../../data/figmaAssets";
+import "../../styles/components/trust-strip-section.css";
 
 interface Props {
-	title: string;
-	organizations: PartnerOrg[];
+  title: string;
+  organizations: PartnerOrg[];
 }
 
 const { title, organizations } = Astro.props;
 
 function iconMeta(org: PartnerOrg) {
-	switch (org.icon) {
-		case 'tree':
-			return { kind: 'img' as const, src: figmaTrustStrip.stanford, w: 40, h: 40 };
-		case 'star':
-			return { kind: 'img' as const, src: figmaTrustStrip.nagc, w: 36, h: 36 };
-		case 'twoe':
-			return { kind: 'twoe' as const };
-		case 'heart':
-			return { kind: 'img' as const, src: figmaTrustStrip.seng, w: 36, h: 36 };
-		case 'book':
-			return { kind: 'img' as const, src: figmaTrustStrip.hoagies, w: 36, h: 36 };
-	}
+  switch (org.icon) {
+    case "tree":
+      return {
+        kind: "img" as const,
+        src: figmaTrustStrip.stanford,
+        w: 40,
+        h: 40,
+      };
+    case "star":
+      return { kind: "nagc" as const };
+    case "twoe":
+      return { kind: "twoe" as const };
+    case "heart":
+      return { kind: "img" as const, src: figmaTrustStrip.seng, w: 36, h: 36 };
+    case "book":
+      return {
+        kind: "img" as const,
+        src: figmaTrustStrip.hoagies,
+        w: 36,
+        h: 36,
+      };
+  }
 }
 
 function nameClass(org: PartnerOrg) {
-	return org.icon === 'tree' ? 'trust-strip__name trust-strip__name--lg' : 'trust-strip__name trust-strip__name--md';
+  return org.icon === "tree"
+    ? "trust-strip__name trust-strip__name--lg"
+    : "trust-strip__name trust-strip__name--md";
 }
 
 function subtitleClass(org: PartnerOrg) {
-	if (org.icon === 'tree') return 'trust-strip__subtitle trust-strip__subtitle--caps';
-	if (org.icon === 'star') return 'trust-strip__subtitle trust-strip__subtitle--narrow';
-	return 'trust-strip__subtitle';
+  if (org.icon === "tree")
+    return "trust-strip__subtitle trust-strip__subtitle--caps";
+  if (org.icon === "star")
+    return "trust-strip__subtitle trust-strip__subtitle--narrow";
+  return "trust-strip__subtitle";
 }
 ---
 
 <section class="trust-strip" aria-labelledby="trust-strip-heading">
-	<div class="trust-strip__inner">
-		<h2 id="trust-strip-heading" class="trust-strip__heading">{title}</h2>
-		<div class="trust-strip__logos" role="list">
-			{
-				organizations.map((org) => {
-					const meta = iconMeta(org);
-					return (
-						<div class="trust-strip__item" role="listitem">
-							<div class="trust-strip__item-inner">
-								{meta.kind === 'twoe' ? (
-									<div class="trust-strip__icon trust-strip__icon--40 trust-strip__icon--twoe" aria-hidden="true">
-										<img
-											class="trust-strip__twoe-vector"
-											src={figmaTrustStrip.twoeVector}
-											alt=""
-											width="32"
-											height="32"
-											loading="lazy"
-										/>
-										<span class="trust-strip__twoe-label">2e</span>
-									</div>
-								) : (
-									<div
-										class:list={[
-											'trust-strip__icon',
-											meta.w === 40 ? 'trust-strip__icon--40' : 'trust-strip__icon--36',
-										]}
-										aria-hidden="true"
-									>
-										<img src={meta.src} alt="" width={meta.w} height={meta.h} loading="lazy" />
-									</div>
-								)}
-								<div class="trust-strip__text">
-									<p class={nameClass(org)}>{org.name}</p>
-									<p class={subtitleClass(org)}>{org.subtitle}</p>
-								</div>
-							</div>
-						</div>
-					);
-				})
-			}
-		</div>
-	</div>
+  <div class="trust-strip__inner">
+    <h2 id="trust-strip-heading" class="trust-strip__heading">{title}</h2>
+    <div class="trust-strip__logos" role="list">
+      {
+        organizations.map((org) => {
+          const meta = iconMeta(org);
+          return (
+            <div class="trust-strip__item" role="listitem">
+              <div class="trust-strip__item-inner">
+                {meta.kind === "twoe" ? (
+                  <div
+                    class="trust-strip__icon trust-strip__icon--40 trust-strip__icon--twoe"
+                    aria-hidden="true"
+                  >
+                    <img
+                      class="trust-strip__twoe-vector"
+                      src={figmaTrustStrip.twoeVector}
+                      alt=""
+                      width="32"
+                      height="32"
+                      loading="lazy"
+                    />
+                    <span class="trust-strip__twoe-label">2e</span>
+                  </div>
+                ) : meta.kind === "nagc" ? (
+                  <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 36 36"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18 3L21.5 13.5H33L23.5 20.5L27 31L18 24L9 31L12.5 20.5L3 13.5H14.5L18 3Z"
+                      fill="#94A3B8"
+                    />
+                    <path
+                      d="M18 23C20.7614 23 23 20.7614 23 18C23 15.2386 20.7614 13 18 13C15.2386 13 13 15.2386 13 18C13 20.7614 15.2386 23 18 23Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M18 21C19.6569 21 21 19.6569 21 18C21 16.3431 19.6569 15 18 15C16.3431 15 15 16.3431 15 18C15 19.6569 16.3431 21 18 21Z"
+                      fill="#CBD5E1"
+                    />
+                  </svg>
+                ) : (
+                  <div
+                    class:list={[
+                      "trust-strip__icon",
+                      meta.w === 40
+                        ? "trust-strip__icon--40"
+                        : "trust-strip__icon--36",
+                    ]}
+                    aria-hidden="true"
+                  >
+                    <img
+                      src={meta.src}
+                      alt=""
+                      width={meta.w}
+                      height={meta.h}
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class="trust-strip__text">
+                  <p class={nameClass(org)}>{org.name}</p>
+                  <p class={subtitleClass(org)}>{org.subtitle}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
 </section>
