@@ -1,27 +1,70 @@
 ---
+import { Image } from 'astro:assets';
 import { homePageSectionsData } from '../../data/homePageSections';
+import type { TeacherCard } from '../../types/homePage';
+import '../../styles/components/teachers-section.css';
+
+import photo1 from '../../assets/images/Teacher (1).png';
+import photo2 from '../../assets/images/Teacher (2).png';
+import photo3 from '../../assets/images/Teacher (3).png';
+import photo4 from '../../assets/images/Teacher (4).png';
+import photo5 from '../../assets/images/Teacher (5).png';
+import photo6 from '../../assets/images/Teacher (6).png';
 
 const d = homePageSectionsData.teachers;
+
+const photoByIndex: Record<TeacherCard['photoIndex'], typeof photo1> = {
+	1: photo1,
+	2: photo2,
+	3: photo3,
+	4: photo4,
+	5: photo5,
+	6: photo6,
+};
 ---
 
-<section class="home-section home-section--surface teachers-section" aria-labelledby="teachers-heading">
+<section class="ysa-teachers" aria-labelledby="teachers-heading">
 	<div class="home-section-inner">
-		<header class="section-head">
-			<p class="section-eyebrow">{d.eyebrow}</p>
-			<h2 class="section-title" id="teachers-heading">{d.title}</h2>
-			<p class="section-desc">{d.description}</p>
+		<header class="ysa-teachers__head">
+			<p class="ysa-teachers__badge">{d.eyebrow}</p>
+			<h2 class="ysa-teachers__title" id="teachers-heading">{d.title}</h2>
+			<p class="ysa-teachers__desc">{d.description}</p>
 		</header>
-		<div class="teachers-grid">
+
+		<ul class="ysa-teachers__grid">
 			{
-				d.items.map((t) => (
-					<article class="teacher-card">
-						<div class="teacher-avatar" aria-hidden="true"></div>
-						<h3>{t.name}</h3>
-						<p class="teacher-role">{t.role}</p>
-						<p>{t.bio}</p>
-					</article>
-				))
+				d.items.map((t) => {
+					const src = photoByIndex[t.photoIndex];
+					return (
+						<li class="ysa-teachers__item">
+							<article class="ysa-teachers__card">
+								<div class="ysa-teachers__media">
+									<Image
+										src={src}
+										alt={`${t.name} portrait`}
+										class="ysa-teachers__photo"
+										width={32}
+										height={32}
+										loading="lazy"
+										decoding="async"
+									/>
+								</div>
+								<div class="ysa-teachers__body">
+									<h3 class="ysa-teachers__name">{t.name}</h3>
+									<p class="ysa-teachers__credentials">{t.credentials}</p>
+									<p class="ysa-teachers__bio">{t.bio}</p>
+									<div class="ysa-teachers__cta-wrap">
+										<a class="ysa-teachers__cta" href={d.cardCta.href}>
+											<span>{d.cardCta.label}</span>
+											<span class="ysa-teachers__cta-arrow" aria-hidden="true">&rarr;</span>
+										</a>
+									</div>
+								</div>
+							</article>
+						</li>
+					);
+				})
 			}
-		</div>
+		</ul>
 	</div>
 </section>

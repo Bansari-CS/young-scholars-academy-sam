@@ -1,22 +1,23 @@
 ---
 import { homePageSectionsData } from '../../data/homePageSections';
+import '../../styles/components/faq-section.css';
 
 const d = homePageSectionsData.faq;
 ---
 
-<section class="home-section home-section--muted faq-section" aria-labelledby="faq-heading">
+<section class="ysa-faq" aria-labelledby="faq-heading">
 	<div class="home-section-inner">
-		<header class="section-head">
-			<p class="section-eyebrow">{d.eyebrow}</p>
-			<h2 class="section-title" id="faq-heading">{d.title}</h2>
-			<p class="section-desc">{d.description}</p>
+		<header class="ysa-faq__head">
+			<p class="ysa-faq__badge">{d.eyebrow}</p>
+			<h2 class="ysa-faq__title" id="faq-heading">{d.title}</h2>
+			<p class="ysa-faq__desc">{d.description}</p>
 		</header>
-		<div class="faq-list">
+		<div class="ysa-faq__list">
 			{
-				d.items.map((item) => (
-					<details class="faq-item">
+				d.items.map((item, index) => (
+					<details class="ysa-faq__item" open={index === 0}>
 						<summary>{item.question}</summary>
-						<p class="faq-answer">{item.answer}</p>
+						<p class="ysa-faq__answer">{item.answer}</p>
 					</details>
 				))
 			}

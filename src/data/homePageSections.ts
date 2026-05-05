@@ -125,77 +125,105 @@ export const homePageSectionsData: HomePageSectionsData = {
 		title: 'Learn from the Best',
 		description:
 			"Our teachers aren't just experts in their fields—they're passionate about gifted and neurodivergent education",
+		cardCta: { label: 'Find Your Teacher', href: '#' },
 		items: [
 			{
-				name: 'Dr. Maya Chen',
-				role: 'Mathematics',
-				bio: 'Former IMO coach; specializes in early acceleration without gaps.',
+				name: 'Dr. Emily Ross',
+				credentials: 'PhD Chemistry, MIT',
+				bio: '15 years teaching gifted learners. Specializes in hands-on science exploration.',
+				photoIndex: 1,
 			},
 			{
-				name: 'Jordan Ellis',
-				role: 'Writing & rhetoric',
-				bio: 'Journalist turned educator; focuses on voice, structure, and fearless drafting.',
+				name: 'Alex Martinez',
+				credentials: 'MS Computer Science, Stanford',
+				bio: 'Former Google engineer. Makes coding accessible and fun for young learners.',
+				photoIndex: 2,
 			},
 			{
-				name: 'Samira Okonkwo',
-				role: '2e & EF',
-				bio: 'School psychologist and classroom veteran; pairs rigor with compassionate pacing.',
+				name: 'Dr. Sarah Chen',
+				credentials: 'PhD Mathematics, Princeton',
+				bio: 'Competition math coach. Passionate about problem-solving strategies.',
+				photoIndex: 3,
+			},
+			{
+				name: 'Marcus Johnson',
+				credentials: 'MS Robotics, Carnegie Mellon',
+				bio: 'Robotics competition mentor. Brings engineering concepts to life.',
+				photoIndex: 4,
 			},
 		],
 	},
 	world: {
-		eyebrow: 'Community',
+		eyebrow: 'EXPERT EDUCATORS',
 		title: 'Our Kids Are All Around',
 		titleLine2: 'the World',
-		description: 'Live classes across time zones—your child meets true peers, not just the kids next door.',
+		description:
+			"From Tokyo to New York, our students are building the future. Join a global community of innovators, thinkers, and creators who are pushing the boundaries of what's possible.",
+		stats: [
+			{ value: '10,000+', label: 'Active Students' },
+			{ value: '50+', label: 'Countries' },
+			{ value: '24/7', label: 'Live Learning' },
+			{ value: '150+', label: 'Master Mentors' },
+		],
 		regions: ['North America', 'Europe', 'Middle East', 'Asia Pacific', 'Latin America'],
 	},
 	fit: {
-		eyebrow: 'Fit guide',
+		eyebrow: 'FIND YOUR FIT',
 		title: 'Is YSA Right for Your Child?',
-		description: 'If several of these sound familiar, you are likely in the right place.',
-		points: [
-			{
-				title: 'They crave depth, not busywork',
-				description: 'They finish quickly, then disengage—or invent their own harder problems.',
-			},
-			{
-				title: 'Asynchronous energy is real',
-				description: 'Long focus bursts, irregular sleep, or travel shouldn’t mean sacrificing quality.',
-			},
-			{
-				title: 'They need adults who “speak gifted”',
-				description: 'Intensity, perfectionism, and asynchronous development feel normal here.',
-			},
-			{
-				title: 'Friendship should be intellectual too',
-				description: 'They want peers who share obsessions, not small talk.',
-			},
-		],
+		description: "We're not for everyone-and that's okay. Here's who thrives with us.",
+		goodFit: {
+			title: 'Great Fit If Your Child:',
+			tone: 'good',
+			items: [
+				'Is gifted, twice-exceptional (2e), or neurodivergent',
+				'Finishes schoolwork quickly and craves deeper challenges',
+				'Feels isolated or "different" from peers',
+				'Has intense curiosity about specific subjects',
+				'Thrives with personalized attention and pacing',
+				'Needs a safe space to take intellectual risks',
+			],
+		},
+		notIdeal: {
+			title: 'May Not Be Ideal If:',
+			tone: 'warning',
+			items: [
+				'Your child prefers large group settings (we keep classes small)',
+				"You're looking for passive video lessons (we're live and interactive)",
+				'You need a full replacement for traditional school curriculum',
+				'Your child needs significant remedial support (we focus on acceleration)',
+			],
+		},
+		note: "Not sure if it's the right fit? Explore whether YSA is a great fit for your child-and see if it matches your family's needs.",
 	},
 	faq: {
-		eyebrow: 'FAQ',
+		eyebrow: 'COMMON QUESTIONS',
 		title: 'Answers to Your Questions',
-		description: 'Still unsure? These are the topics families ask about most on intro calls.',
+		description: 'Everything you need to know before getting started',
 		items: [
 			{
-				question: 'What ages and levels do you support?',
+				question: 'What makes YSA different from other online programs?',
 				answer:
-					'We primarily serve elementary through early high school, with placement based on readiness—not birthday alone.',
+					'We specialize exclusively in gifted, 2e, and neurodivergent learners. Our teachers have advanced degrees and specialized training in these populations. We keep classes small (4:1 ratio), go deep rather than broad, and create emotionally safe intellectual communities.',
 			},
 			{
-				question: 'How do you handle 2e accommodations?',
-				answer:
-					'Mentors co-design scaffolds with families: extended time, alternative outputs, sensory-friendly options, and more.',
+				question: 'How do I know which program is right for my child?',
+				answer: 'We use a fit call and short placement process to match readiness, pace, and interests before enrollment.',
 			},
 			{
-				question: 'Can we try a single course?',
-				answer: 'Yes. Many families start with one subject block before expanding to a fuller schedule.',
+				question: "What's the time commitment?",
+				answer: 'Most families start with 2-4 live sessions per week, with optional projects and enrichment work between classes.',
 			},
 			{
-				question: 'What is the time commitment?',
-				answer:
-					'Live blocks are compact; async work varies. Expect a clear weekly rhythm with flexibility built in.',
+				question: 'My child has ADHD/dyslexia/autism. Will they succeed here?',
+				answer: 'Yes. We are intentionally built for neurodivergent learners and adapt pacing, modality, and support to each child.',
+			},
+			{
+				question: 'What technology do we need?',
+				answer: 'A reliable internet connection, a laptop/desktop with camera and mic, and a quiet learning space are enough to start.',
+			},
+			{
+				question: "Can I get a refund if it's not a good fit?",
+				answer: 'We offer transparent policy options and support families in finding the right plan during onboarding.',
 			},
 		],
 	},

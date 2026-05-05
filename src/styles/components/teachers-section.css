@@ -1,0 +1,198 @@
+/**
+ * Learn from the Best ? Figma reference (file c3rnrQgPGh0oRsryiX14Ln).
+ * Four-up cards: square rounded photos, text block below, divider before CTA.
+ */
+
+.ysa-teachers {
+	--yt-bg: #ffffff;
+	--yt-heading: #1a1a1a;
+	--yt-muted: #666666;
+	--yt-accent: #7c3aed;
+	--yt-border: #e9eef5;
+	--yt-photo-bg: #f3f4f6;
+	--yt-photo-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 22px -10px rgba(15, 23, 42, 0.12);
+
+	padding: clamp(4.5rem, 9vw, 6rem) 0;
+	background: var(--yt-bg);
+	color: var(--yt-heading);
+}
+
+.ysa-teachers .home-section-inner {
+	max-width: var(--ysa-max, 90rem);
+	margin: 0 auto;
+	padding-left: clamp(1rem, 4.44vw, 4rem);
+	padding-right: clamp(1rem, 4.44vw, 4rem);
+}
+
+.ysa-teachers__head {
+	max-width: 52rem;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.ysa-teachers__badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 0 1rem;
+	padding: 0.5rem 1rem;
+	border-radius: 9999px;
+	background: #e9ddff;
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: 0.6875rem;
+	line-height: 1rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #7c3aed;
+}
+
+.ysa-teachers__title {
+	margin: 0;
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: clamp(2rem, 4vw, 2.5rem);
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	color: var(--yt-heading);
+}
+
+.ysa-teachers__desc {
+	margin: 1rem 0 0;
+	font-family: var(--ysa-font-body);
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.625;
+	color: var(--yt-muted);
+}
+
+.ysa-teachers__grid {
+	list-style: none;
+	margin: 3rem auto 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: clamp(1.25rem, 2.2vw, 1.5rem);
+	max-width: 82rem;
+}
+
+.ysa-teachers__item {
+	margin: 0;
+}
+
+.ysa-teachers__card {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background: transparent;
+}
+
+.ysa-teachers__media {
+	position: relative;
+	aspect-ratio: 1;
+	border-radius: 1rem;
+	border: 1px solid var(--yt-border);
+	background: var(--yt-photo-bg);
+	overflow: hidden;
+	box-shadow: var(--yt-photo-shadow);
+}
+
+.ysa-teachers__photo {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center top;
+	border-radius: inherit;
+}
+
+.ysa-teachers__body {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 0.125rem 0;
+	text-align: left;
+	gap: 0;
+}
+
+.ysa-teachers__name {
+	margin: 0;
+	font-family: var(--ysa-font-display);
+	font-weight: 700;
+	font-size: 1.125rem;
+	line-height: 1.3;
+	color: var(--yt-heading);
+}
+
+.ysa-teachers__credentials {
+	margin: 0.35rem 0 0;
+	font-family: var(--ysa-font-body);
+	font-weight: 600;
+	font-size: 0.875rem;
+	line-height: 1.4;
+	color: var(--yt-accent);
+}
+
+.ysa-teachers__bio {
+	margin: 0.75rem 0 0;
+	font-family: var(--ysa-font-body);
+	font-weight: 400;
+	font-size: 0.9375rem;
+	line-height: 1.55;
+	color: var(--yt-muted);
+	flex: 1;
+}
+
+.ysa-teachers__cta-wrap {
+	margin-top: 1rem;
+	padding-top: 0.95rem;
+	border-top: 1px solid var(--yt-border);
+}
+
+.ysa-teachers__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-family: var(--ysa-font-body);
+	font-weight: 600;
+	font-size: 0.9375rem;
+	line-height: 1.25;
+	color: var(--yt-accent);
+	text-decoration: none;
+	width: fit-content;
+	transition: color 0.15s ease, gap 0.15s ease;
+}
+
+.ysa-teachers__cta:hover {
+	color: #6d28d9;
+	gap: 0.5rem;
+}
+
+.ysa-teachers__cta:focus-visible {
+	outline: 2px solid var(--yt-accent);
+	outline-offset: 2px;
+	border-radius: 0.25rem;
+}
+
+.ysa-teachers__cta-arrow {
+	font-size: 1.05em;
+	line-height: 1;
+}
+
+@media (max-width: 1100px) {
+	.ysa-teachers__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 640px) {
+	.ysa-teachers {
+		padding: clamp(3.5rem, 10vw, 5.5rem) 0;
+	}
+
+	.ysa-teachers__grid {
+		grid-template-columns: 1fr;
+		margin-top: 2.5rem;
+		max-width: 22rem;
+	}
+}
