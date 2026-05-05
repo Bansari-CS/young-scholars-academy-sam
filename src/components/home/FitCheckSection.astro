@@ -1,5 +1,6 @@
 ---
 import { homePageSectionsData } from '../../data/homePageSections';
+import ideal from '../../assets/images/ideal.png';
 import '../../styles/components/fit-section.css';
 
 const d = homePageSectionsData.fit;
@@ -35,11 +36,16 @@ const d = homePageSectionsData.fit;
 
 			<article class="ysa-fit__card ysa-fit__card--warning">
 				<h3 class="ysa-fit__card-title">
-					<span class="ysa-fit__title-icon-wrap ysa-fit__title-icon-wrap--warning" aria-hidden="true">
-						<span class="ysa-fit__title-icon ysa-fit__title-icon--warning">i</span>
-					</span>
-					{d.notIdeal.title}
-				</h3>
+                    <span class="ysa-fit__title-icon-wrap ysa-fit__title-icon-wrap--warning" aria-hidden="true">
+                        <!-- FIX: Unnecessary div hata kar direct image tag use kiya gaya hai -->
+                        <img 
+                            src={ideal.src} 
+                            alt="Warning Icon" 
+                            class="ysa-fit__card-icon-img" 
+                        />
+                    </span>
+                    {d.notIdeal.title}
+                </h3>
 				<ul class="ysa-fit__list">
 					{
 						d.notIdeal.items.map((item) => (
