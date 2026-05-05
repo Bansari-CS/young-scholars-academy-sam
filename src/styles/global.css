@@ -1,19 +1,23 @@
+@import "tailwindcss";
+
 * {
 	box-sizing: border-box;
 }
 
 :root {
 	--ysa-max: 90rem;
+	--ysa-primary: #0A9DFB;
+	--ysa-secondary: #7C3AED;
 	/* Figma-style page canvas (cool gray behind sections) */
 	--ysa-canvas: #e8ecf3;
 	--ysa-page: #f8fafc;
 	--ysa-surface: #ffffff;
 	/* Hero band: pure white */
 	--ysa-hero-bg: linear-gradient(150.46deg, #f8fafc 0%, rgba(240, 244, 255, 0.3) 50%, #f8fafc 100%);
-	--ysa-figma-primary: #0a9dfb;
+	--ysa-figma-primary: var(--ysa-primary);
 	--ysa-figma-brand: #1a1647;
-	--ysa-font-display: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', system-ui, sans-serif;
-	--ysa-font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+	--ysa-font-display: 'Plus Jakarta Sans';
+	--ysa-font-body: 'Plus Jakarta Sans';
 	/* Learner / trust band: soft cool fill (Figma home “We understand” strip) */
 	--ysa-learner-bg: #FFF;
 	--ysa-surface-muted: #f1f5f9;
@@ -22,9 +26,9 @@
 	--ysa-text: #0f172a;
 	--ysa-text-muted: #64748b;
 	--ysa-text-soft: #94a3b8;
-	--ysa-accent: #0ea5e9;
+	--ysa-accent: var(--ysa-primary);
 	--ysa-accent-deep: #0284c7;
-	--ysa-violet: #7c3aed;
+	--ysa-violet: var(--ysa-secondary);
 	--ysa-radius-lg: 1rem;
 	--ysa-radius-xl: 1.25rem;
 	--ysa-shadow-card: 0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 16px rgba(15, 23, 42, 0.06);
@@ -42,7 +46,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-/* Home (Figma): Plus Jakarta Sans for headings; Inter for body — match file 1:3025 */
+/* Use Plus Jakarta Sans as the global type family. */
 h1,
 h2,
 h3,
