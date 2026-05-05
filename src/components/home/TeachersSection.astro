@@ -4,10 +4,10 @@ import { homePageSectionsData } from '../../data/homePageSections';
 import type { TeacherCard } from '../../types/homePage';
 import '../../styles/components/teachers-section.css';
 
-import photo1 from '../../assets/images/Teacher (1).png';
-import photo2 from '../../assets/images/Teacher (2).png';
-import photo3 from '../../assets/images/Teacher (3).png';
-import photo4 from '../../assets/images/Teacher (4).png';
+import photo1 from '../../assets/images/educator1.jpg';
+import photo2 from '../../assets/images/educator2.jpg';
+import photo3 from '../../assets/images/educator4.jpg';
+import photo4 from '../../assets/images/educator3.jpg';
 import photo5 from '../../assets/images/Teacher (5).png';
 import photo6 from '../../assets/images/Teacher (6).png';
 
@@ -43,8 +43,9 @@ const photoByIndex: Record<TeacherCard['photoIndex'], typeof photo1> = {
 										src={src}
 										alt={`${t.name} portrait`}
 										class="ysa-teachers__photo"
-										width={32}
-										height={32}
+										width={640}
+										height={640}
+										sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 25vw"
 										loading="lazy"
 										decoding="async"
 									/>

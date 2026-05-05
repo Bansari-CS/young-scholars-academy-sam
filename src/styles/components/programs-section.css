@@ -54,11 +54,12 @@
 .programs-section__title {
 	margin: 0;
 	font-family: var(--ysa-font-display);
-	font-size: clamp(2rem, 4vw, 2.75rem);
+	font-size: clamp(1.85rem, 3.3vw, 2.6rem);
 	font-weight: 700;
 	letter-spacing: -0.02em;
 	line-height: 1.12;
 	color: #111827;
+	white-space: nowrap;
 }
 
 .programs-section__sub {
@@ -201,7 +202,6 @@
 
 .programs-filter__chip-pill .programs-filter__chip-remove {
 	display: grid;
-	place-items: center;
 	width: 1.15rem;
 	height: 1.15rem;
 	padding: 0;
@@ -348,28 +348,28 @@
 }
 
 .programs-card__category-pill--science {
-	color: #6d28d9;
-	background: #ede9fe;
+	color: #2563EB;
+	background: #EFF6FF;
 }
 .programs-card__category-pill--coding {
-	color: #6d28d9;
-	background: #ede9fe;
+	color: #7C3AED;
+	background: #F5F3FF;
 }
 .programs-card__category-pill--math {
-	color: #15803d;
-	background: #dcfce7;
+	color: #059669;
+	background: #ECFDF5;
 }
 .programs-card__category-pill--robotics {
-	color: #c2410c;
-	background: #ffedd5;
+	color: #EA580C;
+	background: #FFF7ED;
 }
 .programs-card__category-pill--writing {
-	color: #be185d;
-	background: #fce7f3;
+	color: #DB2777;
+	background: #FDF2F8;
 }
 .programs-card__category-pill--critical-thinking {
-	color: #1d4ed8;
-	background: #dbeafe;
+	color: #4F46E5;
+	background: #EEF2FF;
 }
 
 .programs-card__meta-dot {
@@ -423,7 +423,6 @@
 	border-radius: 50%;
 	object-fit: cover;
 	display: block;
-	border: 2px solid #f1f5f9;
 	box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
 }
 
@@ -440,7 +439,7 @@
 	flex-shrink: 0;
 	font-size: 0.875rem;
 	font-weight: 500;
-	color: #5751e4;
+	color: #5751E4;
 }
 
 .programs-card:hover .programs-card__link {
@@ -495,6 +494,10 @@
 }
 
 @media (max-width: 640px) {
+	.programs-section__title {
+		white-space: normal;
+	}
+
 	.programs-cards {
 		grid-template-columns: 1fr;
 	}

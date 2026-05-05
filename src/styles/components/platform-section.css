@@ -63,9 +63,9 @@
 	max-width: 82rem;
 	width: 100%;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-	gap: clamp(2.5rem, 5vw, 4rem);
-	align-items: start;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: clamp(1.75rem, 3.8vw, 2.8rem);
+	align-items: stretch;
 }
 
 /* Source: visual then features (mobile: visual on top). Desktop: features left, visual right. */
@@ -79,36 +79,35 @@
 	grid-column: 1;
 	grid-row: 1;
 	min-width: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+	display: grid;
+	grid-template-rows: repeat(4, minmax(0, 1fr));
+	gap: 0.82rem;
+	height: 100%;
 }
 
 .ysa-platform__visual-card {
-	border-radius: 1rem;
+	border-radius: 1.2rem;
 	background: #fff;
-	padding: 0.75rem;
+	padding: 0.85rem;
+	border: 1px solid #d8deea;
 	box-shadow:
-		0 2px 6px rgba(15, 23, 42, 0.04),
-		0 24px 56px -16px rgba(138, 43, 226, 0.12),
-		8px 20px 40px -12px rgba(99, 102, 241, 0.14);
+		0 2px 6px rgba(15, 23, 42, 0.03),
+		0 20px 42px -24px rgba(87, 81, 228, 0.32);
+	height: 100%;
+	display: flex;
+}
+
+.ysa-platform__visual-card > .ysa-platform__visual-slides {
+	flex: 1 1 auto;
 }
 
 .ysa-platform__visual-slides {
 	position: relative;
 	width: 100%;
-	max-height: min(70vh, 36rem);
-	border-radius: 0.5rem;
-	background: #f8fafc;
+	aspect-ratio: 1 / 1;
+	border-radius: 0.82rem;
+	/* background: #eef2ff; */
 	overflow: hidden;
-}
-
-/* In-flow spacer so height resolves when slides are position:absolute */
-.ysa-platform__visual-slides::before {
-	content: '';
-	display: block;
-	width: 100%;
-	padding-bottom: 52.87%;
 }
 
 .ysa-platform__visual-slide {
@@ -117,7 +116,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.5rem;
+	/* padding: 0.5rem; */
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;
@@ -137,19 +136,19 @@
 	display: block;
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
-	border-radius: 0.375rem;
+	object-fit: cover;
+	/* border-radius: 0.375rem; */
 }
 
 .ysa-platform__tab {
 	appearance: none;
 	width: 100%;
 	margin: 0;
-	padding: 1rem 1.15rem;
+	padding: 0.82rem 1rem;
 	border-radius: 0.875rem;
-	border: 1px solid #eef2f6;
+	border: 1px solid #d9e2ee;
 	background: #fff;
-	box-shadow: 0 4px 14px -6px rgba(15, 23, 42, 0.08);
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03), 0 5px 12px -10px rgba(15, 23, 42, 0.2);
 	display: grid;
 	grid-template-columns: auto 1fr;
 	gap: 1rem;
@@ -175,10 +174,10 @@
 }
 
 .ysa-platform__tab--active {
-	border-color: #e8ecf1;
+	border-color: #d2dbe7;
 	box-shadow:
-		0 6px 18px -4px rgba(15, 23, 42, 0.08),
-		0 18px 42px -14px rgba(15, 23, 42, 0.14);
+		0 2px 6px rgba(15, 23, 42, 0.05),
+		0 12px 28px -20px rgba(87, 81, 228, 0.24);
 }
 
 .ysa-platform__tab-copy {
@@ -190,13 +189,14 @@
 
 .ysa-platform__icon-wrap {
 	flex-shrink: 0;
-	width: 3rem;
-	height: 3rem;
+	width: 3.05rem;
+	height: 3.05rem;
 	border-radius: 0.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: #fff;
+	margin-top: 0.06rem;
 }
 
 .ysa-platform__icon-wrap--live {
@@ -225,8 +225,8 @@
 	margin: 0;
 	font-family: var(--ysa-font-display);
 	font-weight: 700;
-	font-size: 1rem;
-	line-height: 1.35;
+	font-size: clamp(1.2rem, 1.9vw, 1.85rem);
+	line-height: 1.2;
 	color: #111827;
 }
 
@@ -235,8 +235,8 @@
 	margin: 0;
 	font-family: var(--ysa-font-body);
 	font-weight: 400;
-	font-size: 0.9375rem;
-	line-height: 1.55;
+	font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+	line-height: 1.5;
 	color: #64748b;
 }
 
@@ -255,10 +255,13 @@
 	.ysa-platform__features {
 		grid-column: 1;
 		grid-row: 2;
+		display: flex;
+		flex-direction: column;
+		height: auto;
 	}
 
 	.ysa-platform__visual-slides {
-		max-height: none;
+		aspect-ratio: 16 / 10.5;
 	}
 }
 
