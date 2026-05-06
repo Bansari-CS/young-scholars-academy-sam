@@ -1,0 +1,71 @@
+---
+import featuredImg from '../../assets/images/featuredImg.jpg';
+---
+
+<section class="mx-auto w-full max-w-[1200px] px-6 pb-24 pt-6">
+	<div class="mb-10 flex items-end justify-between">
+		<h2 class="text-[30px] font-bold leading-[1.15] tracking-[-0.02em] md:text-[44px]">Featured Insights</h2>
+		<a href="#" class="inline-flex items-center gap-1 text-base font-semibold text-[#0a9dfb]">
+			<span>View all</span>
+			<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<path d="M10.2807 6.5C10.5736 6.20711 10.5736 5.73223 10.2807 5.43934L6.53067 1.68934C6.23778 1.39645 5.7629 1.39645 5.47001 1.68934C5.17712 1.98223 5.17712 2.45711 5.47001 2.75L7.93934 5.21933H0.75C0.335786 5.21933 0 5.55511 0 5.96933C0 6.38354 0.335786 6.71933 0.75 6.71933H7.93734L5.47334 9.18933C5.18045 9.48222 5.18045 9.9571 5.47334 10.25C5.76623 10.5429 6.24111 10.5429 6.534 10.25L10.284 6.5H10.2807Z" fill="currentColor"/>
+			</svg>
+		</a>
+	</div>
+	<div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+		<article class="overflow-hidden rounded-3xl border border-[rgba(226,232,240,0.7)] bg-white shadow-sm md:col-span-2 md:grid md:h-[536px] md:grid-cols-2">
+			<img src={featuredImg.src} alt="Featured insight" class="h-[300px] w-full object-cover md:h-[536px]" />
+			<div class="flex flex-col justify-between p-6 md:p-10">
+				<div>
+					<div class="mb-4 flex items-center gap-4">
+						<span class="rounded-2xl bg-[#e1f3ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.55px] text-[#0a9dfb]">Gifted & 2e</span>
+						<span class="inline-flex items-center gap-2 text-sm text-[rgba(71,85,105,0.7)]">
+							<svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<path d="M12.6875 7.5C12.6875 9.00842 12.0883 10.4551 11.0217 11.5217C9.95506 12.5883 8.50842 13.1875 7 13.1875C5.49158 13.1875 4.04494 12.5883 2.97833 11.5217C1.91172 10.4551 1.3125 9.00842 1.3125 7.5C1.3125 5.99158 1.91172 4.54494 2.97833 3.47833C4.04494 2.41172 5.49158 1.8125 7 1.8125C8.50842 1.8125 9.95506 2.41172 11.0217 3.47833C12.0883 4.54494 12.6875 5.99158 12.6875 7.5ZM0 7.5C0 9.35652 0.737498 11.137 2.05025 12.4497C3.36301 13.7625 5.14348 14.5 7 14.5C8.85652 14.5 10.637 13.7625 11.9497 12.4497C13.2625 11.137 14 9.35652 14 7.5C14 5.64348 13.2625 3.86301 11.9497 2.55025C10.637 1.2375 8.85652 0.5 7 0.5C5.14348 0.5 3.36301 1.2375 2.05025 2.55025C0.737498 3.86301 0 5.64348 0 7.5ZM6.34375 3.78125V7.5C6.34375 7.71875 6.45312 7.92383 6.63633 8.04688L9.26133 9.79688C9.56211 9.99922 9.96953 9.91719 10.1719 9.61367C10.3742 9.31016 10.2922 8.90547 9.98867 8.70312L7.65625 7.15V3.78125C7.65625 3.41758 7.36367 3.125 7 3.125C6.63633 3.125 6.34375 3.41758 6.34375 3.78125Z" fill="#475569" fill-opacity="0.7"/>
+							</svg>
+							8 min read
+						</span>
+					</div>
+					<h3 class="text-[17px] font-semibold leading-7">Navigating the complexities of Twice-Exceptional (2e) learners at home.</h3>
+					<p class="mt-4 text-base leading-[26px] text-[#475569]">
+						Discover actionable strategies for supporting children who possess both exceptional cognitive abilities and significant learning challenges.
+					</p>
+				</div>
+				<a href="#" class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-[#7c3aed]">
+					<span>Read Article</span>
+					<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M10.2807 6.5C10.5736 6.20711 10.5736 5.73223 10.2807 5.43934L6.53067 1.68934C6.23778 1.39645 5.7629 1.39645 5.47001 1.68934C5.17712 1.98223 5.17712 2.45711 5.47001 2.75L7.93934 5.21933H0.75C0.335786 5.21933 0 5.55511 0 5.96933C0 6.38354 0.335786 6.71933 0.75 6.71933H7.93734L5.47334 9.18933C5.18045 9.48222 5.18045 9.9571 5.47334 10.25C5.76623 10.5429 6.24111 10.5429 6.534 10.25L10.284 6.5H10.2807Z" fill="currentColor"/>
+					</svg>
+				</a>
+			</div>
+		</article>
+		<div class="flex flex-col gap-6 md:h-[536px]">
+			<article class="flex h-full flex-col justify-between rounded-3xl border border-[rgba(226,232,240,0.7)] bg-white p-8 shadow-sm md:min-h-[256px]">
+				<div>
+					<span class="rounded-2xl bg-[#decbfe] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.55px] text-[#7c3aed]">Social Skills</span>
+					<h3 class="mt-4 text-[17px] font-semibold leading-7">Building lasting friendships for quirky kids.</h3>
+					<p class="mt-3 text-base leading-[26px] text-[#475569]">Practical advice for helping differently-wired children navigate social...</p>
+				</div>
+				<a href="#" class="pt-4 inline-flex items-center gap-1 text-sm font-medium text-[#7c3aed]">
+					<span>Read Article</span>
+					<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M10.2807 6.5C10.5736 6.20711 10.5736 5.73223 10.2807 5.43934L6.53067 1.68934C6.23778 1.39645 5.7629 1.39645 5.47001 1.68934C5.17712 1.98223 5.17712 2.45711 5.47001 2.75L7.93934 5.21933H0.75C0.335786 5.21933 0 5.55511 0 5.96933C0 6.38354 0.335786 6.71933 0.75 6.71933H7.93734L5.47334 9.18933C5.18045 9.48222 5.18045 9.9571 5.47334 10.25C5.76623 10.5429 6.24111 10.5429 6.534 10.25L10.284 6.5H10.2807Z" fill="currentColor"/>
+					</svg>
+				</a>
+			</article>
+			<article class="flex h-full flex-col justify-between rounded-3xl border border-[rgba(226,232,240,0.7)] bg-white p-8 shadow-sm md:min-h-[256px]">
+				<div>
+					<span class="rounded-2xl bg-[#dff8e9] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.55px] text-[#048c3c]">ADHD</span>
+					<h3 class="mt-4 text-[17px] font-semibold leading-7">Harnessing hyperfocus as a superpower.</h3>
+					<p class="mt-3 text-base leading-[26px] text-[#475569]">Reframing ADHD traits and learning how to channel intense interests into...</p>
+				</div>
+				<a href="#" class="pt-4 inline-flex items-center gap-1 text-sm font-medium text-[#7c3aed]">
+					<span>Read Article</span>
+					<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M10.2807 6.5C10.5736 6.20711 10.5736 5.73223 10.2807 5.43934L6.53067 1.68934C6.23778 1.39645 5.7629 1.39645 5.47001 1.68934C5.17712 1.98223 5.17712 2.45711 5.47001 2.75L7.93934 5.21933H0.75C0.335786 5.21933 0 5.55511 0 5.96933C0 6.38354 0.335786 6.71933 0.75 6.71933H7.93734L5.47334 9.18933C5.18045 9.48222 5.18045 9.9571 5.47334 10.25C5.76623 10.5429 6.24111 10.5429 6.534 10.25L10.284 6.5H10.2807Z" fill="currentColor"/>
+					</svg>
+				</a>
+			</article>
+		</div>
+	</div>
+</section>

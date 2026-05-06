@@ -1,0 +1,59 @@
+---
+const faqItems = [
+	{
+		question: 'How often is the blog updated?',
+		answer:
+			'We publish new expert-written articles every Tuesday and Thursday. Our weekend edition usually features success stories and resource roundups from our community members.',
+	},
+	{
+		question: 'Are the strategies research-based?',
+		answer:
+			'Yes. Our content is built on current evidence from educational psychology, child development, and neurodiversity-informed practice, then translated into practical parent-friendly action steps.',
+	},
+	{
+		question: 'Can I contribute an article?',
+		answer:
+			'Yes. We welcome parent stories and expert contributions. You can reach out through our contact form and our editorial team will share contribution guidelines.',
+	},
+	{
+		question: 'What makes Young Scholars different?',
+		answer:
+			'We focus on strengths-first support for gifted and neurodivergent learners, combining practical home strategies, emotional support, and a community that deeply understands 2e families.',
+	},
+];
+---
+
+<section class="mx-auto w-full max-w-[800px] px-6 pb-16 pt-24">
+	<h2 class="text-center text-[30px] font-bold leading-[1.15] tracking-[-0.02em] md:text-[44px]">Answers to Your Questions</h2>
+	<div class="mt-12 space-y-4">
+		{
+			faqItems.map((item, index) => (
+				<details class="blog-faq-item overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white" open={index === 0}>
+					<summary class="flex cursor-pointer list-none items-center justify-between p-6">
+						<h3 class="pr-4 text-[17px] font-semibold leading-7">{item.question}</h3>
+						<span class="blog-faq-icon inline-flex text-lg text-[#64748b]" aria-hidden="true">
+							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.29414 12.7063C7.68477 13.0969 8.31914 13.0969 8.70977 12.7063L14.7098 6.70627C15.1004 6.31565 15.1004 5.68127 14.7098 5.29065C14.3191 4.90002 13.6848 4.90002 13.2941 5.29065L8.00039 10.5844L2.70664 5.29377C2.31602 4.90315 1.68164 4.90315 1.29102 5.29377C0.900391 5.6844 0.900391 6.31877 1.29102 6.7094L7.29102 12.7094L7.29414 12.7063Z" fill="#475569" fill-opacity="0.4"></path>
+							</svg>
+						</span>
+					</summary>
+					<p class="px-6 pb-6 text-base leading-[26px] text-[#475569]">{item.answer}</p>
+				</details>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	.blog-faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.blog-faq-icon {
+		transition: transform 0.2s ease;
+	}
+
+	.blog-faq-item[open] .blog-faq-icon {
+		transform: rotate(180deg);
+	}
+</style>

@@ -98,17 +98,14 @@
 	display: none;
 }
 
-.ysa-faq__item summary::after {
-	content: '⌄';
-	font-size: 1.1rem;
-	font-weight: 600;
-	color: #94a3b8;
-	line-height: 1;
+.ysa-faq__icon {
+	display: inline-flex;
 	flex-shrink: 0;
+	transition: transform 0.2s ease;
 }
 
-.ysa-faq__item[open] summary::after {
-	content: '⌃';
+.ysa-faq__item[open] .ysa-faq__icon {
+	transform: rotate(180deg);
 }
 
 .ysa-faq__answer {

@@ -1,0 +1,38 @@
+---
+const relatedArticles = [
+	{
+		img: 'https://www.figma.com/api/mcp/asset/92569d59-f193-4257-b458-6953c29b33f7',
+		tag: 'Social Skills',
+		title: 'Teaching Empathy to Neurodivergent Kids',
+	},
+	{
+		img: 'https://www.figma.com/api/mcp/asset/b1f74f73-ab13-48ee-a385-47f661ba5af4',
+		tag: 'Productivity',
+		title: 'Executive Function Hacks for Daily Success',
+	},
+	{
+		img: 'https://www.figma.com/api/mcp/asset/25a587ba-1966-4946-9d7b-80422d66c8d0',
+		tag: 'Science & Nature',
+		title: 'Igniting Curiosity Through Nature Study',
+	},
+];
+---
+
+<section class="mx-auto w-full max-w-[1200px] px-6 pb-16">
+	<div class="mb-8 flex items-center justify-between">
+		<h2 class="text-[30px] font-bold">More from Young Scholars</h2>
+		<a href="/blog" class="text-base font-bold text-[#0a9dfb]">Explore the Blog →</a>
+	</div>
+	<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+		{relatedArticles.map((item) => (
+			<a href="/blog/navigating-twice-exceptional-learners" class="rounded-[20px] border border-[rgba(226,232,240,0.5)] bg-white shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+				<img src={item.img} alt={item.title} class="h-[208px] w-full rounded-t-[20px] object-cover" />
+				<div class="p-6">
+					<p class="text-[10px] font-semibold uppercase tracking-[1px] text-[#7c3aed]">{item.tag}</p>
+					<h3 class="mt-2 text-[17px] font-semibold leading-7">{item.title}</h3>
+					<p class="mt-4 text-sm font-medium text-[#7c3aed]">Read Article →</p>
+				</div>
+			</a>
+		))}
+	</div>
+</section>
