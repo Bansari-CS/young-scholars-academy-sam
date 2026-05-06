@@ -29,7 +29,7 @@ const testimonials = [
 <section class="bg-white px-5 py-14 md:px-16 md:py-20" aria-labelledby="parents-say-title">
 	<div class="mx-auto flex w-full max-w-[1180px] flex-col gap-12">
 		<header class="text-center">
-			<h2 class="text-[44px] font-bold leading-[66px] text-[#111827]" id="parents-say-title">What Our Parents Say...</h2>
+			<h2 class="text-[44px] font-bold leading-[66px] text-[#111827] mt-2" id="parents-say-title">What Our Parents Say...</h2>
 			<p class="mx-auto max-w-[702px] text-base leading-[26px] text-[#475569]">
 				Discover why hundreds of families trust Young Scholars Academy to nurture and inspire their gifted and neurodivergent learners.
 			</p>
@@ -38,12 +38,12 @@ const testimonials = [
 		<ul class="grid list-none grid-cols-1 gap-[30px] p-0 xl:grid-cols-3">
 			{
 				testimonials.map((item) => (
-					<li class={`relative h-full rounded-[32px] border p-10 ${item.highlight ? 'border-[#f1f5f9] bg-white shadow-[0_20px_60px_0_rgba(17,0,104,0.08)]' : 'border-[#f1f5f9] bg-[#f8fafc] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]'}`}>
+					<li class={`relative h-full rounded-[32px] border p-10 mt-4 ${item.highlight ? 'border-[#f1f5f9] bg-white shadow-[0_20px_60px_0_rgba(17,0,104,0.08)]' : 'border-[#f1f5f9] bg-[#f8fafc] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]'}`}>
 						<div class="mb-6 flex gap-1">
 							{[0, 1, 2, 3, 4].map(() => <img class="h-4 w-4" src={mentorProfileAssets.testimonialStarUrl} alt="" aria-hidden="true" />)}
 						</div>
 						<p class="min-h-[176px] text-[18px] leading-[29.25px] text-[#111827]">{item.quote}</p>
-						<div class="mt-6 flex items-center gap-4 border-t border-[#e2e8f0] pt-6">
+						<div class="mt-10 flex items-center gap-4 border-t border-[#e2e8f0] pt-6">
 							<img class="h-12 w-12 rounded-full border-2 border-white object-cover shadow-[0_1px_2px_rgba(0,0,0,0.05)]" src={item.avatar} alt={`${item.name} avatar`} />
 							<div>
 								<p class="text-base font-bold leading-6 text-[#111827]">{item.name}</p>
