@@ -29,8 +29,8 @@ const items = [
 ];
 ---
 
-<section class="bg-white px-5 py-14 md:px-16 md:py-20" aria-labelledby="beyond-classroom-title">
-	<div class="mx-auto flex w-full max-w-[1312px] flex-col gap-12">
+<section class="bg-white  py-14  md:py-20" aria-labelledby="beyond-classroom-title">
+	<div class="mx-auto flex w-full px-5 max-w-[1352px] flex-col gap-12">
 		<header>
 			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="beyond-classroom-title">Beyond the Classroom</h2>
 			<p class="pt-2 text-[20px] font-medium leading-[30px] text-[#475569]">Get to know the human behind the PhD.</p>
@@ -43,8 +43,8 @@ const items = [
 						<span class={`inline-flex h-16 w-16 items-center justify-center rounded-2xl ${item.iconBg}`}>
 							<img class="h-7 w-7" src={item.iconUrl} alt="" aria-hidden="true" />
 						</span>
-						<h3 class="pt-4 text-[17px] font-semibold leading-[30px] text-[#111827]">{item.title}</h3>
-						<p class="text-base leading-[26px] text-[#475569]">{item.description}</p>
+						<h3 class="pt-[24px] pb-[8px] text-[17px] font-semibold leading-[30px] text-[#111827]">{item.title}</h3>
+						<p class="text-base leading-[26px] text-[#475569] h-[94px]">{item.description}</p>
 					</li>
 				))
 			}
