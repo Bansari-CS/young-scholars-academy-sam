@@ -1,7 +1,6 @@
 ---
 import type { NavItem } from '../../types/home';
 import PrimaryButton from '../ui/PrimaryButton.astro';
-import '../../styles/components/header.css';
 
 interface Props {
 	brand: string;
@@ -11,19 +10,32 @@ interface Props {
 const { brand, navItems } = Astro.props;
 ---
 
-<header class="site-header">
-	<div class="header-container">
-		<a class="header-brand" href="/">
-			<span class="header-logo" aria-hidden="true">YS</span>
-			<span class="header-brand-name">{brand}</span>
+<header class="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/90 backdrop-blur-md">
+	<div
+		class="mx-auto box-border flex min-h-20 max-w-[90rem] items-center justify-between gap-6 px-4 sm:px-6 lg:px-10"
+	>
+		<a class="flex min-w-0 items-center gap-3 text-inherit no-underline" href="/">
+			<span
+				class="font-display relative grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#5751e4] to-[#a855f7] text-xl font-bold leading-none text-white shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)]"
+				aria-hidden="true">YS</span
+			>
+			<span
+				class="font-display text-[var(--ysa-figma-brand)] whitespace-nowrap text-xl leading-7 font-bold tracking-[-0.03125rem] max-sm:max-w-48 max-sm:text-[1.05rem] max-sm:whitespace-normal"
+				>{brand}</span
+			>
 		</a>
 
-		<nav class="header-nav" aria-label="Primary">
-			<ul class="header-nav-list">
+		<nav class="[@media(max-width:1100px)]:hidden" aria-label="Primary">
+			<ul
+				class="m-0 flex list-none flex-wrap items-center gap-x-8 gap-y-3 p-0 [@media(max-width:1100px)]:justify-start [@media(max-width:1100px)]:gap-x-5 max-sm:gap-x-4 max-sm:gap-y-3"
+			>
 				{
 					navItems.map((item) => (
 						<li>
-							<a class="header-nav-link" href={item.href}>
+							<a
+								class="font-display text-sm leading-5 font-medium text-slate-600 no-underline transition-colors hover:text-[var(--ysa-figma-brand)]"
+								href={item.href}
+							>
 								{item.label}
 							</a>
 						</li>
@@ -32,9 +44,60 @@ const { brand, navItems } = Astro.props;
 			</ul>
 		</nav>
 
-		<div class="header-actions">
-			<a href="#" class="header-signin">Sign In</a>
-			<PrimaryButton href="#" label="Browse Courses" variant="sm" class="header-primary-cta" />
+		<div class="flex shrink-0 items-center gap-4 [@media(max-width:1100px)]:hidden">
+			<a
+				href="#"
+				class="font-display text-[var(--ysa-figma-primary)] text-sm leading-5 font-medium no-underline hover:underline"
+				>Sign In</a
+			>
+			<PrimaryButton href="#" label="Browse Courses" variant="sm" class="shadow-none" />
 		</div>
+
+		<details class="relative hidden [@media(max-width:1100px)]:block">
+			<summary
+				class="list-none rounded-lg border border-slate-200 bg-white p-2 text-slate-700 shadow-sm marker:content-none"
+				aria-label="Toggle navigation menu"
+			>
+				<span class="sr-only">Open menu</span>
+				<span class="flex h-6 w-6 flex-col items-center justify-center gap-1" aria-hidden="true">
+					<span class="block h-0.5 w-5 rounded-full bg-current"></span>
+					<span class="block h-0.5 w-5 rounded-full bg-current"></span>
+					<span class="block h-0.5 w-5 rounded-full bg-current"></span>
+				</span>
+			</summary>
+			<div class="absolute right-0 top-full z-50 mt-2 w-56 rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
+				<ul class="m-0 list-none space-y-1 p-0">
+					{
+						navItems.map((item) => (
+							<li>
+								<a
+									class="font-display block rounded-md px-3 py-2 text-sm font-medium text-slate-700 no-underline transition-colors hover:bg-slate-50 hover:text-[var(--ysa-figma-brand)]"
+									href={item.href}
+								>
+									{item.label}
+								</a>
+							</li>
+						))
+					}
+					<li class="my-1 border-t border-slate-100"></li>
+					<li>
+						<a
+							href="#"
+							class="font-display block rounded-md px-3 py-2 text-sm font-medium text-[var(--ysa-figma-primary)] no-underline hover:bg-slate-50"
+						>
+							Sign In
+						</a>
+					</li>
+					<li>
+						<a
+							href="#"
+							class="font-display block rounded-md px-3 py-2 text-sm font-semibold text-white no-underline bg-[var(--ysa-figma-brand)] hover:opacity-90"
+						>
+							Browse Courses
+						</a>
+					</li>
+				</ul>
+			</div>
+		</details>
 	</div>
 </header>
