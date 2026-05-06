@@ -10,21 +10,30 @@ import TeachersAdminTeamSection from '../components/teachers/TeachersAdminTeamSe
 import TeachersParentTestimonialsSection from '../components/teachers/TeachersParentTestimonialsSection.astro';
 import TeachersMentorFitCtaSection from '../components/teachers/TeachersMentorFitCtaSection.astro';
 import { heroData } from '../data/home';
+import { getEntry } from 'astro:content';
+
+const teachersEntry = await getEntry('teachers', 'teachers');
+
+if (!teachersEntry) {
+	throw new Error('Missing teachers page content entry at src/content/teachers/teachers.md');
+}
+
+const teachersContent = teachersEntry.data;
 ---
 
 <Layout
-	title="Teacher Listing | Young Scholars Academy"
-	description="Meet expert mentors at Young Scholars Academy and explore their experience, specialties, and profiles."
+	title={teachersContent.seo.title}
+	description={teachersContent.seo.description}
 >
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main>
-		<TeachersHeroSection />
-		<TeachersParentLoveSection />
-		<TeachersParentQuoteSection />
-		<TeachersMentorListSection />
-		<TeachersAdminTeamSection />
-		<TeachersParentTestimonialsSection />
-		<TeachersMentorFitCtaSection />
+		<TeachersHeroSection content={teachersContent.hero} />
+		<TeachersParentLoveSection content={teachersContent.parentLove} />
+		<TeachersParentQuoteSection content={teachersContent.parentQuote} />
+		<TeachersMentorListSection content={teachersContent.mentors} />
+		<TeachersAdminTeamSection content={teachersContent.adminTeam} />
+		<TeachersParentTestimonialsSection content={teachersContent.parentTestimonials} />
+		<TeachersMentorFitCtaSection content={teachersContent.mentorFitCta} />
 	</main>
 	<Footer />
 </Layout>

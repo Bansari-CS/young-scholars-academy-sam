@@ -1,3 +1,15 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type HeroContent = CollectionEntry<'teachers'>['data']['hero'];
+
+interface Props {
+	content: HeroContent;
+}
+
+const { content } = Astro.props;
+---
+
 <section
 	class="relative overflow-hidden bg-[#f8fafc]"
 	aria-labelledby="teacher-listing-title"
@@ -10,7 +22,7 @@
 	<div class="pb-0">
 		<p class="mx-auto inline-flex items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 text-xs font-medium tracking-[0.3px] text-[#7c3aed] shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
 			<span class="h-2 w-2 rounded-full bg-[#048c3c]" aria-hidden="true"></span>
-			EXPERT EDUCATORS
+			{content.eyebrow}
 		</p>
 		</div>
 		<h1
@@ -18,13 +30,13 @@
   id="teacher-listing-title"
   style="font-family: 'Plus Jakarta Sans'; font-style: normal; line-height: normal; margin-top: 50px; line-height: 55px;"
 >
-  Meet the Mentors Who Truly Get Your Child
+  {content.title}
 </h1>
 		<p
   class="mx-auto mt-4 max-w-[672px] text-center text-[16px] font-normal text-[#475569] leading-[28px] sm:text-[17px] md:text-[18px] md:leading-[32.5px]"
   style="font-style: normal;"
 >
-  These aren’t traditional teachers. They’re mentors who understand how differently-wired minds work.
+  {content.description}
 </p>
 	</div>
 </section>
