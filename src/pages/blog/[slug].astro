@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const useLegacyExactDetailLayout = post.id === 'navigating-twice-exceptional-learners';
+const useLegacyExactDetailLayout = true;
 
 const { Content } = await render(post);
 
@@ -29,7 +29,7 @@ const relatedPosts = (await getCollection('blog'))
 
 <Layout title={`${post.data.title} | YSA`} description={post.data.description}>
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
-	<main class="bg-[#f8fafc] pt-12 text-[#111827]">
+	<main class="bg-[#f8fafc] pt-12 pb-[80px] text-[#111827]">
 		{
 			useLegacyExactDetailLayout ? (
 				<>
