@@ -1,19 +1,28 @@
 ---
-import { parentTestimonials, teacherPageAssets } from './data';
+import type { CollectionEntry } from 'astro:content';
+import { teacherPageAssets } from './data';
+
+type ParentTestimonialsContent = CollectionEntry<'teachers'>['data']['parentTestimonials'];
+
+interface Props {
+	content: ParentTestimonialsContent;
+}
+
+const { content } = Astro.props;
 ---
 
 <section class="bg-[#f8fafc] px-5 py-20 md:px-12" aria-labelledby="parent-testimonials-title">
 	<div class="mx-auto w-full max-w-[1180px] px-0">
 		<header class="text-center">
-			<h2 class="text-4xl font-bold leading-tight text-[#111827] md:text-[44px]" id="parent-testimonials-title">What Our Parents Say...</h2>
+			<h2 class="text-4xl font-bold leading-tight text-[#111827] md:text-[44px]" id="parent-testimonials-title">{content.title}</h2>
 			<p class="mx-auto mt-4 max-w-[702px] text-base leading-[26px] text-[#475569]">
-				Discover why hundreds of families trust Young Scholars Academy to nurture and inspire their gifted and neurodivergent learners.
+				{content.description}
 			</p>
 		</header>
 
 		<ul class="mt-12 grid list-none grid-cols-1 gap-[30px] p-0 lg:grid-cols-3">
 			{
-				parentTestimonials.map((testimonial) => (
+				content.items.map((testimonial) => (
 					<li>
 						<article
 							class:list={[

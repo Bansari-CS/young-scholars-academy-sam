@@ -1,5 +1,14 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { teacherPageAssets } from './data';
+
+type MentorFitCtaContent = CollectionEntry<'teachers'>['data']['mentorFitCta'];
+
+interface Props {
+	content: MentorFitCtaContent;
+}
+
+const { content } = Astro.props;
 ---
 
 <section class="relative overflow-hidden bg-[linear-gradient(162.497deg,#7c3aed_0%,#0a9dfb_100%)] px-5 py-20 md:px-12" aria-labelledby="mentor-fit-title">
@@ -7,17 +16,17 @@ import { teacherPageAssets } from './data';
 	<div class="pointer-events-none absolute bottom-[-384px] left-[-160px] h-[800px] w-[800px] rounded-full bg-[rgba(124,58,237,0.2)] blur-[60px]" aria-hidden="true"></div>
 
 	<div class="relative mx-auto w-full max-w-[896px] px-0 text-center md:px-16">
-		<h2 class="text-[40px] font-bold leading-tight text-white md:text-[44px]" id="mentor-fit-title">Not Sure Which Mentor Is Right?</h2>
+		<h2 class="text-[40px] font-bold leading-tight text-white md:text-[44px]" id="mentor-fit-title">{content.title}</h2>
 		<p class="mx-auto mt-[34px] max-w-[752px] text-base font-semibold leading-[27px] text-white">
-			Every child is unique. Let us help you find the mentor whose teaching style and personality perfectly match your child's interests and learning style.
+			{content.description}
 		</p>
 
 		<div class="pt-8">
 		<a
   class="mx-auto mt-[11px] inline-flex h-[60px] items-center justify-center rounded-2xl bg-[#0a9dfb] px-[52px] py-5 text-base font-semibold text-white no-underline shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)]"
-  href="#"
+  href={content.buttonHref}
 >
-  <span class="pr-[20px]">Find My Child’s Best Fit</span>
+  <span class="pr-[20px]">{content.buttonLabel}</span>
   <img
     class="h-4 w-4"
     src={teacherPageAssets.mentorFitArrowIconUrl}
@@ -27,6 +36,6 @@ import { teacherPageAssets } from './data';
 </a>
 		</div>
 
-		<p class="pt-3 text-sm leading-[47px] text-white">Free personalized matching · Takes 2 minutes</p>
+		<p class="pt-3 text-sm leading-[47px] text-white">{content.footnote}</p>
 	</div>
 </section>

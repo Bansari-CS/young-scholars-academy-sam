@@ -1,18 +1,27 @@
 ---
-import { adminTeam, teacherPageAssets } from './data';
+import type { CollectionEntry } from 'astro:content';
+import { teacherPageAssets } from './data';
+
+type AdminTeamContent = CollectionEntry<'teachers'>['data']['adminTeam'];
+
+interface Props {
+	content: AdminTeamContent;
+}
+
+const { content } = Astro.props;
 ---
 
 <section class="bg-[#f8fafc] px-5 pb-20 md:px-12" aria-labelledby="admin-team-title">
 	<header class="mx-auto w-full max-w-[1184px] px-0 pb-12 pt-20 text-center">
-		<h2 class="text-4xl font-bold leading-tight text-[#111827] md:text-[44px]" id="admin-team-title">Meet Your Admin Team</h2>
+		<h2 class="text-4xl font-bold leading-tight text-[#111827] md:text-[44px]" id="admin-team-title">{content.title}</h2>
 		<p class="mx-auto mt-4 max-w-[800px] text-base leading-[22px] text-[#475569]">
-			The visionary leaders and dedicated coordinators working behind the scenes to ensure every child has an exceptional learning experience.
+			{content.description}
 		</p>
 	</header>
 
 	<ul class="mx-auto grid w-full max-w-[1184px] list-none grid-cols-1 gap-[30px] p-0 xl:grid-cols-2">
 		{
-			adminTeam.map((member) => (
+			content.items.map((member) => (
 				<li>
 					<article class="flex h-full flex-col overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.05)]">
 						<div class="h-[370px] bg-[#f1f5f9]">
