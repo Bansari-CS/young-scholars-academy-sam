@@ -1,0 +1,178 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import articleImg1 from '../../assets/images/articalImg1.jpg';
+import articleImg2 from '../../assets/images/articalImg2.jpg';
+import articleImg3 from '../../assets/images/articalImg3.jpg';
+import articleImg4 from '../../assets/images/articalImg4.jpg';
+import articleImg5 from '../../assets/images/articalImg5.jpg';
+import articleImg6 from '../../assets/images/articalImg6.jpg';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+const categories = ['All Insights', ...new Set(posts.map((post) => post.data.category))];
+const articleImages = [articleImg1, articleImg2, articleImg3, articleImg4, articleImg5, articleImg6];
+
+const getCategoryColorClass = (category: string) => {
+	switch (category) {
+		case 'Homeschooling':
+		case 'Sensory Processing':
+			return 'text-[#7c3aed]';
+		case 'Mental Health':
+			return 'text-[#f2dd35]';
+		case 'Giftedness':
+			return 'text-[#048c3c]';
+		default:
+			return 'text-[#0a9dfb]';
+	}
+};
+---
+
+<section class="bg-white px-6 py-24 lg:px-[120px]">
+	<div class="mx-auto w-full max-w-[1200px]">
+		<h2 class="text-[30px] font-bold leading-[1.15] tracking-[-0.02em] md:text-[44px]">Latest Articles</h2>
+		<div class="mt-10 rounded-2xl border border-[rgba(226,232,240,0.5)] bg-white p-4 shadow-sm">
+			<div class="flex flex-col gap-4 lg:flex-row lg:items-center">
+				<div class="w-full max-w-[400px]">
+					<input
+						id="blog-search-input"
+						type="text"
+						placeholder="Search articles, topics..."
+						class="w-full rounded-[52px] border border-[#e2e8f0] bg-[#f8fafc] px-6 py-3 text-sm text-[#475569] placeholder:text-[#9ca3af] outline-none"
+					/>
+				</div>
+				<div id="blog-filter-pills" class="flex w-full items-center gap-2 overflow-x-auto pb-1">
+					{categories.map((category, index) => (
+						<button
+							type="button"
+							data-category={category}
+							aria-pressed={index === 0 ? 'true' : 'false'}
+							class:list={[
+								'blog-filter-pill whitespace-nowrap rounded-full border px-5 py-2.5 text-[15px] font-medium',
+								index === 0
+									? 'border-[#0a9dfb] bg-[#0a9dfb] text-white shadow-[0px_10px_15px_-3px_rgba(0,132,255,0.2),0px_4px_6px_-4px_rgba(0,132,255,0.2)]'
+									: 'border-[#e2e8f0] bg-[#f8fafc] text-[#475569]',
+							]}
+						>
+							{category}
+						</button>
+					))}
+				</div>
+			</div>
+		</div>
+
+		<div id="blog-articles-grid" class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+			{posts.map((post, index) => (
+				<a
+					href={`/blog/${post.id}`}
+					data-title={post.data.title.toLowerCase()}
+					data-description={post.data.description.toLowerCase()}
+					data-category={post.data.category}
+					class="blog-article-card group flex h-full flex-col gap-3 rounded-xl border border-transparent transition-colors duration-200 hover:border-[#dbeafe]"
+				>
+					<img src={(articleImages[index] ?? articleImg1).src} alt={post.data.title} class="h-[170px] w-full rounded-xl object-cover" />
+					<div class="flex flex-1 flex-col">
+						<p class:list={['text-[10px] font-semibold uppercase tracking-[1.1px]', getCategoryColorClass(post.data.category)]}>{post.data.category}</p>
+						<h3 class="mt-2 text-[17px] font-semibold leading-7 text-[#111827] group-hover:text-[#0a9dfb]">{post.data.title}</h3>
+						<p class="mt-2 text-sm leading-[22.75px] text-[#374151]">{post.data.description}</p>
+					</div>
+					<div class="mt-3 flex items-center justify-between border-t border-[#f1f5f9] pt-4">
+						<span class="text-xs text-[#6b7280]">{post.data.readTime}</span>
+						<span class="inline-flex items-center gap-1 text-sm font-medium text-[#7c3aed]">
+							<span>Read Article</span>
+							<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<path d="M10.2807 6.5C10.5736 6.20711 10.5736 5.73223 10.2807 5.43934L6.53067 1.68934C6.23778 1.39645 5.7629 1.39645 5.47001 1.68934C5.17712 1.98223 5.17712 2.45711 5.47001 2.75L7.93934 5.21933H0.75C0.335786 5.21933 0 5.55511 0 5.96933C0 6.38354 0.335786 6.71933 0.75 6.71933H7.93734L5.47334 9.18933C5.18045 9.48222 5.18045 9.9571 5.47334 10.25C5.76623 10.5429 6.24111 10.5429 6.534 10.25L10.284 6.5H10.2807Z" fill="currentColor"/>
+							</svg>
+						</span>
+					</div>
+				</a>
+			))}
+		</div>
+		<div id="blog-load-more-container" class="mt-12 flex justify-center">
+			<button
+				id="blog-load-more-btn"
+				type="button"
+				class="rounded-[10px] bg-gradient-to-r from-[#0A9DFB] to-[#38B6FF] px-8 py-4 text-base font-medium text-white shadow-[0_4px_20px_0_rgba(10,157,251,0.30)]"
+			>
+				Load More Articles
+			</button>
+		</div>
+	</div>
+</section>
+
+<script>
+	const searchInput = document.querySelector('#blog-search-input');
+	const pillsContainer = document.querySelector('#blog-filter-pills');
+	const cards = Array.from(document.querySelectorAll('.blog-article-card'));
+	const loadMoreButton = document.querySelector('#blog-load-more-btn');
+	const loadMoreContainer = document.querySelector('#blog-load-more-container');
+
+	let activeCategory = 'All Insights';
+	const INITIAL_VISIBLE_COUNT = 6;
+	const LOAD_MORE_STEP = 3;
+	let visibleCount = INITIAL_VISIBLE_COUNT;
+
+	const updatePillStyles = () => {
+		const pills = Array.from(document.querySelectorAll('.blog-filter-pill'));
+		pills.forEach((pill) => {
+			const isActive = pill.dataset.category === activeCategory;
+			pill.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+			pill.classList.toggle('border-[#0a9dfb]', isActive);
+			pill.classList.toggle('bg-[#0a9dfb]', isActive);
+			pill.classList.toggle('text-white', isActive);
+			pill.classList.toggle('shadow-[0px_10px_15px_-3px_rgba(0,132,255,0.2),0px_4px_6px_-4px_rgba(0,132,255,0.2)]', isActive);
+			pill.classList.toggle('border-[#e2e8f0]', !isActive);
+			pill.classList.toggle('bg-[#f8fafc]', !isActive);
+			pill.classList.toggle('text-[#475569]', !isActive);
+		});
+	};
+
+	const filterCards = () => {
+		const query = (searchInput?.value || '').toLowerCase().trim();
+		const filteredCards = cards.filter((card) => {
+			const category = card.dataset.category || '';
+			const title = card.dataset.title || '';
+			const description = card.dataset.description || '';
+			const categoryMatch = activeCategory === 'All Insights' || category === activeCategory;
+			const queryMatch = !query || title.includes(query) || description.includes(query) || category.toLowerCase().includes(query);
+			return categoryMatch && queryMatch;
+		});
+
+		cards.forEach((card) => {
+			card.style.display = 'none';
+		});
+
+		filteredCards.forEach((card, index) => {
+			card.style.display = index < visibleCount ? '' : 'none';
+		});
+
+		if (loadMoreContainer instanceof HTMLElement) {
+			loadMoreContainer.style.display = 'flex';
+		}
+	};
+
+	searchInput?.addEventListener('input', () => {
+		visibleCount = INITIAL_VISIBLE_COUNT;
+		filterCards();
+	});
+
+	pillsContainer?.addEventListener('click', (event) => {
+		const target = event.target;
+		if (!(target instanceof HTMLElement)) return;
+		const button = target.closest('.blog-filter-pill');
+		if (!(button instanceof HTMLButtonElement)) return;
+		activeCategory = button.dataset.category || 'All Insights';
+		visibleCount = INITIAL_VISIBLE_COUNT;
+		updatePillStyles();
+		filterCards();
+	});
+
+	loadMoreButton?.addEventListener('click', () => {
+		visibleCount += LOAD_MORE_STEP;
+		filterCards();
+	});
+
+	filterCards();
+</script>

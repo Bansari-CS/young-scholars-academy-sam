@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import BlogDetailContentSection from '../../components/blog-detail/BlogDetailContentSection.astro';
+import BlogDetailRelatedSection from '../../components/blog-detail/BlogDetailRelatedSection.astro';
+import BlogDetailFinalCtaSection from '../../components/blog-detail/BlogDetailFinalCtaSection.astro';
+import { getCollection, render } from 'astro:content';
+import { heroData } from '../../data/home';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const useLegacyExactDetailLayout = post.id === 'navigating-twice-exceptional-learners';
+
+const { Content } = await render(post);
+
+const relatedPosts = (await getCollection('blog'))
+	.filter((item) => item.id !== post.id)
+	.sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+	.slice(0, 3);
+---
+
+<Layout title={`${post.data.title} | YSA`} description={post.data.description}>
+	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<main class="bg-[#f8fafc] pt-12 text-[#111827]">
+		{
+			useLegacyExactDetailLayout ? (
+				<>
+					<BlogDetailContentSection />
+					<BlogDetailRelatedSection />
+					<BlogDetailFinalCtaSection />
+				</>
+			) : (
+				<>
+					<section class="mx-auto w-full max-w-[1200px] px-6 pb-16">
+						<div class="mb-8 flex items-center gap-2 text-sm text-[rgba(71,85,105,0.6)]">
+							<a href="/" class="hover:text-[#0a9dfb]">Home</a>
+							<span>›</span>
+							<a href="/blog" class="hover:text-[#0a9dfb]">Insights</a>
+							<span>›</span>
+							<span class="font-medium text-[#475569]">{post.data.category}</span>
+						</div>
+
+						<article class="mx-auto max-w-[820px]">
+							<div class="mb-6 inline-flex rounded-lg bg-[#e1f3ff] px-3 py-1 text-xs font-bold uppercase tracking-[0.6px] text-[#0a9dfb]">
+								{post.data.category}
+							</div>
+							<h1 class="text-[34px] font-bold leading-tight md:text-[44px]">{post.data.title}</h1>
+							<p class="mt-4 text-lg leading-8 text-[#475569]">{post.data.description}</p>
+							<div class="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[rgba(226,232,240,0.8)] py-6">
+								<div>
+									<p class="text-sm font-bold">{post.data.author}</p>
+									<p class="text-xs text-[rgba(71,85,105,0.7)]">{post.data.authorRole}</p>
+								</div>
+								<div class="flex items-center gap-6 text-sm text-[rgba(71,85,105,0.7)]">
+									<span>{post.data.publishedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+									<span>{post.data.readTime}</span>
+								</div>
+							</div>
+							<img src={post.data.coverImage} alt={post.data.title} class="mt-8 w-full rounded-3xl shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]" />
+							<div class="prose prose-lg mt-8 max-w-none prose-p:leading-[26px] prose-p:text-[#475569] prose-headings:font-bold prose-headings:text-[#111827]">
+								<Content />
+							</div>
+						</article>
+					</section>
+
+					<section class="mx-auto w-full max-w-[1200px] px-6 pb-16">
+						<div class="mb-8 flex items-center justify-between">
+							<h2 class="text-[30px] font-bold">More from Young Scholars</h2>
+							<a href="/blog" class="text-base font-bold text-[#0a9dfb]">Explore the Blog →</a>
+						</div>
+						<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+							{relatedPosts.map((item) => (
+								<a href={`/blog/${item.id}`} class="rounded-[20px] border border-[rgba(226,232,240,0.5)] bg-white shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+									<img src={item.data.coverImage} alt={item.data.title} class="h-[208px] w-full rounded-t-[20px] object-cover" />
+									<div class="p-6">
+										<p class="text-[10px] font-semibold uppercase tracking-[1px] text-[#7c3aed]">{item.data.category}</p>
+										<h3 class="mt-2 text-[17px] font-semibold leading-7">{item.data.title}</h3>
+										<p class="mt-4 text-sm font-medium text-[#7c3aed]">Read Article →</p>
+									</div>
+								</a>
+							))}
+						</div>
+					</section>
+
+					<BlogDetailFinalCtaSection />
+				</>
+			)
+		}
+	</main>
+	<Footer />
+</Layout>
