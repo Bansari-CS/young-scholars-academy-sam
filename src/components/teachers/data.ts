@@ -10,13 +10,15 @@ export type MentorCard = {
 };
 
 export const teacherPageAssets = {
-	searchIconUrl: 'https://www.figma.com/api/mcp/asset/fc8c7bf8-6fc3-4ade-a950-e067da75bde3',
-	starIconUrl: 'https://www.figma.com/api/mcp/asset/450b0d88-c24b-4005-aba2-5d64068dcdf0',
-	checkIconUrl: 'https://www.figma.com/api/mcp/asset/9bad4fb4-ab6b-4787-8df1-2905fcb96bc2',
-	arrowIconUrl: 'https://www.figma.com/api/mcp/asset/979f3fcd-d94f-4306-b995-05f83b57b874',
-	parentAvatarUrl: 'https://www.figma.com/api/mcp/asset/98f54c72-65dd-4ea8-8e15-362f2a15062e',
-	adminStarIconUrl: 'https://www.figma.com/api/mcp/asset/5942b6a5-f86a-4038-8774-e89c4ef8312e',
-	mentorFitArrowIconUrl: 'https://www.figma.com/api/mcp/asset/03f0aca1-eea7-42b9-9aed-3d52106216c8',
+	searchIconUrl: '/assets/teachers/search-icon.svg',
+	starIconUrl: '/assets/teachers/star-icon.svg',
+	checkIconUrl: '/assets/teachers/check-icon.svg',
+	arrowIconUrl: '/assets/teachers/arrow-icon.svg',
+	parentAvatarUrl: '/assets/teachers/parent-avatar.jpg',
+	adminStarIconUrl: '/assets/teachers/admin-star-icon.svg',
+	mentorFitArrowIconUrl: '/assets/teachers/mentor-fit-arrow-icon.svg',
+	parentTestimonialStarIconUrl: '/assets/teachers/parent-testimonial-star.svg',
+	quoteIconUrl: '/assets/teachers/quote-icon.svg',
 } as const;
 
 export const toneClasses = {
@@ -28,23 +30,23 @@ export const toneClasses = {
 
 export const parentLoveCards = [
 	{
-		iconUrl: 'https://www.figma.com/api/mcp/asset/004234ac-85b3-4eed-9851-1fac489f27fa',
+		iconUrl: '/assets/teachers/parent-love-icon-1.svg',
 		title: 'Hand-Selected Excellence',
 		description:
 			'Every mentor is carefully vetted, not just for expertise — but for empathy, creativity, and ability to connect.',
 	},
 	{
-		iconUrl: 'https://www.figma.com/api/mcp/asset/02f7f3c1-77ee-4f45-af42-7519426f65db',
+		iconUrl: '/assets/teachers/parent-love-icon-2.svg',
 		title: 'Parents’ #1 Reason for Returning',
 		description: 'Families consistently say our teachers are the biggest reason they continue with us.',
 	},
 	{
-		iconUrl: 'https://www.figma.com/api/mcp/asset/36e1805b-6fca-4564-a697-2cb402cdf131',
+		iconUrl: '/assets/teachers/parent-love-icon-3.svg',
 		title: 'Trained for Gifted & 2e Minds',
 		description: 'Our mentors are specifically trained to work with advanced and neurodivergent learners.',
 	},
 	{
-		iconUrl: 'https://www.figma.com/api/mcp/asset/149ac3a1-5736-4788-a3c4-a14561d6a7c8',
+		iconUrl: '/assets/teachers/parent-love-icon-4.svg',
 		title: 'Personal, Not Just Professional',
 		description:
 			'Many of our teachers were gifted students themselves — they truly understand your child.',
@@ -62,7 +64,7 @@ export const mentors: MentorCard[] = [
 			{ label: 'Mastery', tone: 'violet' },
 		],
 		facts: ['5+ years experience', 'Loved by 200+ students'],
-		imageUrl: 'https://www.figma.com/api/mcp/asset/4c469864-dc5b-4e45-b5f5-1dee72307efb',
+		imageUrl: '/assets/teachers/mentor-emily-1.jpg',
 	},
 	{
 		name: 'Alex Martinez',
@@ -74,7 +76,7 @@ export const mentors: MentorCard[] = [
 			{ label: 'Gaming', tone: 'green' },
 		],
 		facts: ['8+ years experience', 'Top-rated mentor'],
-		imageUrl: 'https://www.figma.com/api/mcp/asset/53708873-6131-4b79-b1ee-22b511167a1d',
+		imageUrl: '/assets/teachers/mentor-alex-1.jpg',
 	},
 	{
 		name: 'Dr. Sarah Chen',
@@ -87,7 +89,7 @@ export const mentors: MentorCard[] = [
 		],
 		facts: ['10+ years experience', 'Loved by 500+ students'],
 		featured: true,
-		imageUrl: 'https://www.figma.com/api/mcp/asset/d0e7914f-c4eb-4a01-b58d-677c8803774b',
+		imageUrl: '/assets/teachers/mentor-sarah-1.jpg',
 	},
 	{
 		name: 'Alex Martinez',
@@ -99,7 +101,7 @@ export const mentors: MentorCard[] = [
 			{ label: 'Gaming', tone: 'green' },
 		],
 		facts: ['8+ years experience', 'Top-rated mentor'],
-		imageUrl: 'https://www.figma.com/api/mcp/asset/07efef25-059f-4710-86f8-75196ab58cc5',
+		imageUrl: '/assets/teachers/mentor-alex-2.jpg',
 	},
 	{
 		name: 'Dr. Sarah Chen',
@@ -112,7 +114,7 @@ export const mentors: MentorCard[] = [
 		],
 		facts: ['10+ years experience', 'Loved by 500+ students'],
 		featured: true,
-		imageUrl: 'https://www.figma.com/api/mcp/asset/a2a17720-6c50-4a87-a37c-d59d4f353231',
+		imageUrl: '/assets/teachers/mentor-sarah-2.jpg',
 	},
 	{
 		name: 'Marcus Johnson',
@@ -124,7 +126,7 @@ export const mentors: MentorCard[] = [
 			{ label: 'Life Skills', tone: 'violet' },
 		],
 		facts: ['6+ years experience', 'Loved by 150+ students'],
-		imageUrl: 'https://www.figma.com/api/mcp/asset/2ca59341-ab3f-412a-a28b-f51955dd5f7f',
+		imageUrl: '/assets/teachers/mentor-marcus.jpg',
 	},
 ];
 
@@ -135,7 +137,7 @@ export const adminTeam = [
 		role: 'Community Director',
 		description:
 			'Ann is a homeschooling mom who worked for 11 years as an Instructional Aide for the Resource Specialist Program at Evans Elementary School in Garden Grove, CA. Her diverse background in education, team management and outside of the box thinking make her an integral part of Team YSA.',
-		imageUrl: 'https://www.figma.com/api/mcp/asset/a22bf4ea-ea9d-43fe-ab1d-a68631577187',
+		imageUrl: '/assets/teachers/admin-ann.png',
 	},
 	{
 		name: 'Mr. Sam',
@@ -143,6 +145,31 @@ export const adminTeam = [
 		role: 'Head of School',
 		description:
 			'Mr. Sam, MEd, is a growth-minded, two-time Fulbright Scholar, TEDx speaker, and Director of Young Scholars Academy! Mr. Sam is a neurodivergent educator who has ADHD. As an ADHD learner, he has committed his life to empower young people to learn to develop their superpowers and lead meaningful and fulfilling lives through strength-based education.',
-		imageUrl: 'https://www.figma.com/api/mcp/asset/0d16ebba-b6ae-4684-9218-5c780ddaf2ff',
+		imageUrl: '/assets/teachers/admin-sam.png',
+	},
+];
+
+export const parentTestimonials = [
+	{
+		quote:
+			"Finding YSA was a turning point for our son. For the first time, he’s in a space where his 'intensity' is seen as a superpower, not a problem. The mentors truly 'get' him.",
+		name: 'Jennifer M.',
+		role: 'Parent of a 9-year-old scholar',
+		imageUrl: '/assets/teachers/parent-testimonial-jennifer.jpg',
+	},
+	{
+		quote:
+			"The Chemistry program didn't just teach my daughter facts; it ignited a passion. Dr. Emily Ross has this incredible way of making complex topics feel like a thrilling mystery to solve.",
+		name: 'David K.',
+		role: 'Parent of an 11-year-old scholar',
+		imageUrl: '/assets/teachers/parent-testimonial-david.jpg',
+		featured: true,
+	},
+	{
+		quote:
+			"We've tried countless online courses, but nothing compares to the community here. The small class sizes mean my child isn't just a face on a screen-they're a valued member of a team.",
+		name: 'Michelle T.',
+		role: 'Parent of a 14-year-old scholar',
+		imageUrl: '/assets/teachers/parent-testimonial-michelle.jpg',
 	},
 ];

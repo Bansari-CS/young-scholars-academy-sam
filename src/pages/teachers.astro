@@ -7,6 +7,7 @@ import TeachersMentorListSection from '../components/teachers/TeachersMentorList
 import TeachersParentLoveSection from '../components/teachers/TeachersParentLoveSection.astro';
 import TeachersParentQuoteSection from '../components/teachers/TeachersParentQuoteSection.astro';
 import TeachersAdminTeamSection from '../components/teachers/TeachersAdminTeamSection.astro';
+import TeachersParentTestimonialsSection from '../components/teachers/TeachersParentTestimonialsSection.astro';
 import TeachersMentorFitCtaSection from '../components/teachers/TeachersMentorFitCtaSection.astro';
 import { heroData } from '../data/home';
 ---
@@ -18,10 +19,11 @@ import { heroData } from '../data/home';
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main>
 		<TeachersHeroSection />
-		<TeachersMentorListSection />
 		<TeachersParentLoveSection />
 		<TeachersParentQuoteSection />
+		<TeachersMentorListSection />
 		<TeachersAdminTeamSection />
+		<TeachersParentTestimonialsSection />
 		<TeachersMentorFitCtaSection />
 	</main>
 	<Footer />

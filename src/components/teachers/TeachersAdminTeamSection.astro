@@ -5,7 +5,7 @@ import { adminTeam, teacherPageAssets } from './data';
 <section class="bg-[#f8fafc] px-5 pb-20 md:px-12" aria-labelledby="admin-team-title">
 	<header class="mx-auto w-full max-w-[1184px] px-0 pb-12 pt-20 text-center">
 		<h2 class="text-4xl font-bold leading-tight text-[#111827] md:text-[44px]" id="admin-team-title">Meet Your Admin Team</h2>
-		<p class="mx-auto mt-4 max-w-[800px] text-base leading-[26px] text-[#475569]">
+		<p class="mx-auto mt-4 max-w-[800px] text-base leading-[22px] text-[#475569]">
 			The visionary leaders and dedicated coordinators working behind the scenes to ensure every child has an exceptional learning experience.
 		</p>
 	</header>
@@ -21,14 +21,24 @@ import { adminTeam, teacherPageAssets } from './data';
 
 						<div class="p-6">
 							<div class="flex items-start justify-between pb-2">
-								<h3 class="m-0 text-[30px] font-semibold leading-none text-[#111827]">{member.name}</h3>
+								<h3
+								class="m-0 text-[17px] font-semibold leading-[30px] text-[#111827]"
+								style="font-family: 'Plus Jakarta Sans'; font-style: normal;"
+								>
+								{member.name}
+								</h3>
 								<span class="inline-flex items-center gap-1 text-base text-[#111827]">
 									<img class="h-[15px] w-[15px]" src={teacherPageAssets.adminStarIconUrl} alt="" aria-hidden="true" />
 									{member.rating}
 								</span>
 							</div>
 
-							<p class="pb-3 text-sm font-semibold uppercase leading-5 tracking-normal text-[#0a9dfb]">{member.role}</p>
+							<p
+							class="pb-3 font-semibold leading-[20px] text-[#0A9DFB] capitalize"
+							style="font-family: 'Montserrat'; font-style: normal;"
+							>
+							{member.role}
+							</p>
 							<p class="pb-5 text-base leading-[38px] text-[#475569] md:leading-[26px]">{member.description}</p>
 
 							<div class="border-t border-[#f1f5f9] pt-4">
