@@ -24,16 +24,16 @@ const points = [
 ---
 
 <section class="bg-white py-20" aria-labelledby="semester-works-title">
-	<div class="mx-auto grid w-full max-w-[1312px] grid-cols-1 gap-12 px-5 md:px-16 xl:grid-cols-2 xl:gap-16">
+	<div class="mx-auto grid w-full max-w-[1440px] lg:grid-cols-1 lg:gap-12 gap-4 px-5 md:px-16 lg:grid-cols-2 lg:gap-16 mt-[6px] leading-[51px]">
 		<div>
-			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="semester-works-title">
+			<h2 class="xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-[#111827]" id="semester-works-title">
 				How Our Semester Courses Work
 			</h2>
 
 			<ul class="mt-8 list-none space-y-6 p-0">
 				{
 					points.map((point) => (
-						<li class="flex items-start gap-4">
+						<li class="flex items-start gap-4 pt-[9px]">
 							<span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f1f5f9]">
 								{point.iconType === 'number' ? (
 									<span class="text-base font-bold text-[#0a9dfb]">{point.number}</span>
@@ -42,8 +42,8 @@ const points = [
 								)}
 							</span>
 							<div>
-								<h3 class="text-[28px] font-semibold leading-7 text-[#111827]">{point.title}</h3>
-								<p class="pt-1 text-base leading-[26px] text-[#475569]">{point.text}</p>
+								<h3 class="text-[17px] font-semibold leading-7 text-[#111827]">{point.title}</h3>
+								<p class="pt-0 text-base leading-[26px] text-[#475569]">{point.text}</p>
 							</div>
 						</li>
 					))
@@ -57,7 +57,7 @@ const points = [
 			</div>
 		</div>
 
-		<div class="h-[500px] overflow-hidden rounded-3xl">
+		<div class="h-[500px] overflow-hidden rounded-3xl mt-[34px]">
 			<img class="h-full w-full object-cover" src={semesterSalesAssets.semesterWorkImageUrl} alt="Students in live semester class on screen" />
 		</div>
 	</div>

@@ -22,7 +22,7 @@ const items = [
 ---
 
 <section class="bg-white py-20" aria-labelledby="virtual-works-title">
-	<div class="mx-auto grid w-full max-w-[1312px] grid-cols-1 gap-12 px-5 md:px-16 xl:grid-cols-2 xl:gap-16">
+	<div class="mx-auto grid w-full max-w-[1312px] grid-cols-1 gap-12 px-5 md:px-16 lg:grid-cols-2 xl:gap-16 md:gap-8">
 		<div class="relative order-2 xl:order-1">
 			<div class="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-[rgba(242,221,53,0.2)] blur-[32px]" aria-hidden="true"></div>
 			<div class="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-[rgba(10,157,251,0.2)] blur-[32px]" aria-hidden="true"></div>
@@ -32,7 +32,7 @@ const items = [
 		</div>
 
 		<div class="order-1 xl:order-2">
-			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="virtual-works-title">
+			<h2 class="xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[53px] text-[#111827] pt-[30px]" id="virtual-works-title">
 				A Virtual Experience That Actually Works
 			</h2>
 
@@ -45,7 +45,7 @@ const items = [
 							</span>
 							<div>
 								<h3 class="text-[17px] font-semibold leading-6 text-[#111827]">{item.title}</h3>
-								<p class="text-base leading-[26px] text-[#475569]">{item.text}</p>
+								<p class="text-[15px] mt-0 leading-[26px] text-[#475569]">{item.text}</p>
 							</div>
 						</li>
 					))

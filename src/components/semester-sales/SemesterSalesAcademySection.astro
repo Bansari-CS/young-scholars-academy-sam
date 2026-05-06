@@ -18,13 +18,13 @@ const features = [
 ---
 
 <section class="bg-white py-20" aria-labelledby="academy-title">
-	<div class="mx-auto grid w-full max-w-[1312px] grid-cols-1 gap-12 px-5 md:px-16 xl:grid-cols-2 xl:gap-16">
+	<div class="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 md:px-16 lg:grid-cols-2 md:gap-16">
 		<div class="relative order-2 xl:order-1">
-			<div class="h-[500px] overflow-hidden rounded-3xl">
+			<div class="xl:h-[500px] h-full overflow-hidden rounded-3xl pt-[22px]">
 				<img class="h-full w-full object-cover" src={semesterSalesAssets.academyMainImageUrl} alt="Students in an interactive academy class" />
 			</div>
 
-			<div class="absolute bottom-[-32px] right-[-8px] max-w-[300px] rounded-2xl border border-[#f1f5f9] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] md:right-[-32px]">
+			<div class="absolute bottom-[-9px] right-[-8px] max-w-[300px] rounded-2xl border border-[#f1f5f9] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] md:right-[-32px]">
 				<div class="flex items-center gap-3">
 					<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0a9dfb]">
 						<img class="h-4 w-[18px]" src={semesterSalesAssets.academyAccreditedIconUrl} alt="" aria-hidden="true" />
@@ -41,14 +41,14 @@ const features = [
 			<span class="rounded-full bg-[rgba(10,157,251,0.1)] px-4 py-2 text-xs font-bold uppercase tracking-[0.6px] text-[#0a9dfb]">
 				The Academy
 			</span>
-			<h2 class="pt-6 text-[44px] font-bold leading-[1.1] text-[#111827]" id="academy-title">
+			<h2 class="pt-[46px] xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-[#111827]" id="academy-title">
 				What Is Young Scholars Academy?
 			</h2>
-			<p class="pt-6 text-base leading-[26px] text-[#475569]">
+			<p class="pt-[48px] text-base leading-[26px] text-[#475569] text-[16px] max-w-[571px]">
 				Not adapted from traditional school. Built from the ground up—for kids like yours. We provide a space where "differently-wired" is the norm, not the exception.
 			</p>
 
-			<ul class="mt-8 list-none space-y-4 p-0">
+			<ul class="mt-[45px] list-none space-y-4 p-0">
 				{
 					features.map((item) => (
 						<li class="flex items-center gap-4 rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-4">
