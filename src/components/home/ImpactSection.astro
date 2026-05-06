@@ -6,7 +6,14 @@ import image1 from '../../assets/images/image1.jpg';
 import image2 from '../../assets/images/image2.jpg';
 import youtubeIcon from '../../assets/images/Vector.svg';
 
+interface Props {
+	hideStatLabels?: string[];
+	hideStats?: boolean;
+}
+
+const { hideStatLabels = [], hideStats = false } = Astro.props;
 const d = homePageSectionsData.impact;
+const filteredStats = d.stats.filter((stat) => !hideStatLabels.includes(stat.label));
 
 const imageByIndex = {
 	1: image1,
@@ -28,16 +35,20 @@ const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex
 			<h2 class="section-title" id="impact-heading">{d.title}</h2>
 			<p class="section-desc">{d.description}</p>
 		</header>
-		<div class="impact-stats">
-			{
-				d.stats.map((s) => (
-					<div class="impact-stat">
-						<strong>{s.value}</strong>
-						<span>{s.label}</span>
-					</div>
-				))
-			}
-		</div>
+		{
+			!hideStats && (
+				<div class="impact-stats">
+					{
+						filteredStats.map((s) => (
+							<div class="impact-stat">
+								<strong>{s.value}</strong>
+								<span>{s.label}</span>
+							</div>
+						))
+					}
+				</div>
+			)
+		}
 
 		<div class="impact-columns" aria-label="Parent testimonials">
 			{
