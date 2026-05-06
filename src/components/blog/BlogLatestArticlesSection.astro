@@ -70,7 +70,7 @@ const getCategoryColorClass = (category: string) => {
 					data-title={post.data.title.toLowerCase()}
 					data-description={post.data.description.toLowerCase()}
 					data-category={post.data.category}
-					class="blog-article-card group flex h-full flex-col gap-3 rounded-xl border border-transparent transition-colors duration-200 hover:border-[#dbeafe]"
+					class="blog-article-card group flex h-full flex-col gap-3 rounded-xl"
 				>
 					<img src={(articleImages[index] ?? articleImg1).src} alt={post.data.title} class="h-[170px] w-full rounded-xl object-cover" />
 					<div class="flex flex-1 flex-col">

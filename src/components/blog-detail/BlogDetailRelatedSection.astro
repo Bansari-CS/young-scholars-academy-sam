@@ -1,36 +1,54 @@
 ---
+import articalImg4 from '../../assets/images/articalImg4.jpg';
+import articalImg5 from '../../assets/images/articalImg5.jpg';
+import articalImg6 from '../../assets/images/articalImg6.jpg';
+
 const relatedArticles = [
 	{
-		img: 'https://www.figma.com/api/mcp/asset/92569d59-f193-4257-b458-6953c29b33f7',
+		img: articalImg4.src,
 		tag: 'Social Skills',
+		tagColor: 'text-[#7C3AED]',
 		title: 'Teaching Empathy to Neurodivergent Kids',
 	},
 	{
-		img: 'https://www.figma.com/api/mcp/asset/b1f74f73-ab13-48ee-a385-47f661ba5af4',
+		img: articalImg5.src,
 		tag: 'Productivity',
+		tagColor: 'text-[#F2DD35]',
 		title: 'Executive Function Hacks for Daily Success',
 	},
 	{
-		img: 'https://www.figma.com/api/mcp/asset/25a587ba-1966-4946-9d7b-80422d66c8d0',
+		img: articalImg6.src,
 		tag: 'Science & Nature',
+		tagColor: 'text-[#0A9DFB]',
 		title: 'Igniting Curiosity Through Nature Study',
 	},
 ];
 ---
 
-<section class="mx-auto w-full max-w-[1200px] px-6 pb-16">
-	<div class="mb-8 flex items-center justify-between">
-		<h2 class="text-[30px] font-bold">More from Young Scholars</h2>
-		<a href="/blog" class="text-base font-bold text-[#0a9dfb]">Explore the Blog →</a>
+<section class="mx-auto w-full max-w-[1200px] px-6 pb-16 md:pb-20">
+	<div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+		<h2 class="text-[30px] font-bold leading-tight tracking-[-0.02em]">More from Young Scholars</h2>
+		<a href="/blog" class="inline-flex items-center gap-2 text-base font-bold leading-none text-[#0a9dfb]">
+			<span>Explore the Blog</span>
+			<svg class="h-4 w-4 shrink-0" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<path d="M5.1957 0.847656L5.79727 0.246094C6.0707 0 6.48086 0 6.72695 0.246094L12.059 5.55078C12.3051 5.82422 12.3051 6.23438 12.059 6.48047L6.72695 11.8125C6.48086 12.0586 6.0707 12.0586 5.79727 11.8125L5.1957 11.2109C4.94961 10.9375 4.94961 10.5273 5.1957 10.2539L8.5043 7.10938H0.656641C0.273828 7.10938 0.00039053 6.83594 0.00039053 6.45312V5.57812C0.00039053 5.22266 0.273828 4.92188 0.656641 4.92188H8.5043L5.1957 1.80469C4.94961 1.53125 4.92227 1.12109 5.1957 0.847656Z" fill="#0A9DFB"/>
+			</svg>
+		</a>
 	</div>
 	<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 		{relatedArticles.map((item) => (
 			<a href="/blog/navigating-twice-exceptional-learners" class="rounded-[20px] border border-[rgba(226,232,240,0.5)] bg-white shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
 				<img src={item.img} alt={item.title} class="h-[208px] w-full rounded-t-[20px] object-cover" />
 				<div class="p-6">
-					<p class="text-[10px] font-semibold uppercase tracking-[1px] text-[#7c3aed]">{item.tag}</p>
+					<p class:list={['text-[10px] font-semibold uppercase tracking-[1px]', item.tagColor]}>{item.tag}</p>
 					<h3 class="mt-2 text-[17px] font-semibold leading-7">{item.title}</h3>
-					<p class="mt-4 text-sm font-medium text-[#7c3aed]">Read Article →</p>
+					<p class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#7c3aed]">
+						<span>Read Article</span>
+						<svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M11.993 8.11807C12.3348 7.77627 12.3348 7.22119 11.993 6.8794L7.61797 2.50439C7.27617 2.1626 6.72109 2.1626 6.3793 2.50439C6.0375 2.84619 6.0375 3.40127 6.3793 3.74307L9.26406 6.6251H0.875C0.391016 6.6251 0 7.01611 0 7.5001C0 7.98408 0.391016 8.3751 0.875 8.3751H9.26133L6.38203 11.2571C6.04023 11.5989 6.04023 12.154 6.38203 12.4958C6.72383 12.8376 7.27891 12.8376 7.6207 12.4958L11.9957 8.1208L11.993 8.11807Z" fill="#7C3AED"/>
+						</svg>
+
+					</p>
 				</div>
 			</a>
 		))}
