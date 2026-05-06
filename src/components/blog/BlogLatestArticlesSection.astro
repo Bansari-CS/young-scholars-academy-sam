@@ -72,7 +72,11 @@ const getCategoryColorClass = (category: string) => {
 					data-category={post.data.category}
 					class="blog-article-card group flex h-full flex-col gap-3 rounded-xl"
 				>
-					<img src={(articleImages[index] ?? articleImg1).src} alt={post.data.title} class="h-[170px] w-full rounded-xl object-cover" />
+					<img
+						src={(articleImages[index] ?? articleImg1).src}
+						alt={post.data.title}
+						class="h-[180px] w-full rounded-xl object-cover md:h-[192px] lg:h-[208px]"
+					/>
 					<div class="flex flex-1 flex-col">
 						<p class:list={['text-[10px] font-semibold uppercase tracking-[1.1px]', getCategoryColorClass(post.data.category)]}>{post.data.category}</p>
 						<h3 class="mt-2 text-[17px] font-semibold leading-7 text-[#111827] group-hover:text-[#0a9dfb]">{post.data.title}</h3>
