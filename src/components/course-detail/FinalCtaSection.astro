@@ -1,0 +1,47 @@
+---
+import ctaStudentImage from '../../assets/course-detail/cta-student.png';
+
+interface Props {
+	title: string;
+	descriptionLine1: string;
+	descriptionLine2: string;
+	primaryButtonLabel: string;
+	secondaryButtonLabel: string;
+	imageAlt: string;
+}
+
+const { title, descriptionLine1, descriptionLine2, primaryButtonLabel, secondaryButtonLabel, imageAlt } = Astro.props;
+---
+
+<section class="bg-[#f8fafc] px-4 py-24">
+	<div class="mx-auto grid w-full max-w-[1184px] grid-cols-1 items-center gap-12 rounded-[48px] bg-[#111827] p-10 shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] lg:min-h-[528px] lg:grid-cols-[576px_400px] lg:justify-between lg:gap-12 lg:px-24 lg:py-16">
+		<div class="flex max-w-[576px] flex-col gap-6 self-center">
+			<h2 class="m-0 text-[36px] leading-10 font-bold text-white">{title}</h2>
+			<p class="max-w-[525.84px] text-[16px] leading-7 text-[#e0e9ff]">
+				{descriptionLine1}
+				<br />
+				{descriptionLine2}
+			</p>
+			<div class="flex flex-wrap gap-4">
+				<a
+					href="#"
+					class="inline-flex min-h-[68px] items-center justify-center rounded-2xl bg-gradient-to-r from-[#0084ff] to-[#7c3aed] px-10 text-[16px] leading-6 font-medium text-white no-underline"
+				>
+					{primaryButtonLabel}
+				</a>
+				<a
+					href="#"
+					class="inline-flex min-h-[68px] items-center justify-center rounded-2xl border border-white/20 bg-white/10 px-10 text-[16px] leading-6 font-medium text-white no-underline backdrop-blur-[6px]"
+				>
+					{secondaryButtonLabel}
+				</a>
+			</div>
+		</div>
+		<img
+			class="mx-auto block h-[400px] w-[400px] rounded-3xl object-cover lg:justify-self-end"
+			src={ctaStudentImage.src}
+			alt={imageAlt}
+			loading="lazy"
+		/>
+	</div>
+</section>

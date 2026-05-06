@@ -1,3 +1,6 @@
+import relatedDesignImage from '../assets/course-detail/related-design.png';
+import relatedScienceImage from '../assets/course-detail/related-science.png';
+
 export interface CourseNavItem {
 	label: string;
 	href: string;
@@ -57,12 +60,17 @@ export const courseDetailData = {
 		] as HeroStat[],
 		price: '$299',
 		priceNote: 'Full course access',
+		ratingText: 'Rated 4.9/5 by 120+ parents',
 		instructor: 'Dr. Alex Watson',
+		taughtByLabel: 'Taught by',
+		primaryCtaLabel: 'Enroll Now',
+		secondaryCtaLabel: 'View Schedule',
 	},
 	tabs: ['Overview', 'Learning Outcomes', 'Schedule', 'Teacher', 'Reviews'],
 	sidebar: {
 		price: '$299',
 		cohort: 'Next cohort starts Nov 12',
+		includesTitle: 'Course Includes:',
 		includes: [
 			{ text: '16 hours live instruction' },
 			{ text: 'Physical robotics kit shipped' },
@@ -74,17 +82,21 @@ export const courseDetailData = {
 				tag: 'Design',
 				title: 'Game Design for Kids',
 				meta: '$199 • 6 Weeks',
-				image: 'https://www.figma.com/api/mcp/asset/4ea2ca89-46f5-4e4f-be33-9f2dbc3d190a',
+				image: relatedDesignImage.src,
 			},
 			{
 				tag: 'Science',
 				title: 'Junior Chemist Labs',
 				meta: '$249 • 4 Weeks',
-				image: 'https://www.figma.com/api/mcp/asset/6f6fc97f-9d55-4056-8b2c-bc3691cc2f29',
+				image: relatedScienceImage.src,
 			},
 		] as RelatedCourse[],
+		primaryCtaLabel: 'Enroll Now',
+		guaranteeText: '14-day money-back guarantee',
+		relatedTitle: 'Related Courses',
 	},
 	content: {
+		overviewTitle: 'Course Overview',
 		overview:
 			'Welcome to the exciting world of robotics! This course is designed to take students from absolute beginners to confident creators. We focus on practical, hands-on projects that make abstract coding concepts tangible and fun.',
 		overview2:
@@ -105,6 +117,20 @@ export const courseDetailData = {
 			{ text: 'Critical thinking and algorithmic problem-solving.' },
 			{ text: 'Confidence to explore advanced engineering topics.' },
 		] as GainItem[],
+		gainsTitle: 'What Your Child Will Gain',
+		videoTitle: 'See the Class in Action',
+		videoCaptionTitle: 'Watch a 2-minute demo',
+		videoCaptionText: 'Experience our interactive teaching style',
+		scheduleTitle: 'Class Schedule',
+		scheduleHeaderSession: 'Session',
+		scheduleHeaderTopic: 'Topic',
+		scheduleHeaderDate: 'Date',
+		downloadCurriculumLabel: 'Download Full Curriculum (PDF)',
+		instructorTitle: 'Meet Your Instructor',
+		instructorName: 'Dr. Alex Watson',
+		instructorRole: 'Robotics Engineer & Educator',
+		instructorPortfolioLabel: 'View Portfolio',
+		instructorOtherCoursesLabel: 'Other Courses (4)',
 		sessions: [
 			{
 				session: 'Session 01',
@@ -126,8 +152,12 @@ export const courseDetailData = {
 			'With over 15 years of experience in aerospace robotics and a PhD in Educational Technology, Dr. Watson specializes in making complex engineering concepts accessible to young minds. He has taught over 5,000 students globally.',
 	},
 	reviews: {
+		title: 'Parent Reviews',
 		rating: '4.9/5.0',
 		total: '(124 reviews)',
+		starsText: '★★★★★',
+		writeReviewLabel: 'Write a Review',
+		galleryTitle: 'Inside the Classroom',
 		items: [
 			{
 				name: 'Sarah Miller',
@@ -140,5 +170,20 @@ export const courseDetailData = {
 				text: 'The kit arrived quickly and was high quality. The online sessions feel like they are in a real classroom.',
 			},
 		] as ReviewItem[],
+	},
+	about: {
+		badgeLetter: 'Y',
+		title: 'About Young Scholars Academy',
+		description:
+			'We believe that the best way to learn is by doing. Founded by educators and engineers, YSA provides a safe, interactive, and high-energy environment for kids to explore their passions in STEM and Beyond.',
+		linkLabel: 'Learn more about our mission →',
+	},
+	finalCta: {
+		title: 'Ready to build the future?',
+		descriptionLine1: 'Join 5,000+ young innovators. Enrollment for the Winter 2024',
+		descriptionLine2: 'cohort is now open. Limited seats per class to ensure quality.',
+		primaryButtonLabel: 'Enroll Now - $299',
+		secondaryButtonLabel: 'Contact Us',
+		imageAlt: 'Student holding a robot',
 	},
 };

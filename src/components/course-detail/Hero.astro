@@ -1,5 +1,8 @@
 ---
 import type { HeroStat } from '../../data/courseDetail';
+import heroMainImage from '../../assets/course-detail/hero-main.png';
+import heroTeacherImage from '../../assets/course-detail/hero-teacher.png';
+import arrowRightIcon from '../../assets/course-detail/icon-arrow-right.svg';
 import PrimaryButton from '../ui/PrimaryButton.astro';
 
 interface Props {
@@ -12,9 +15,25 @@ interface Props {
 	priceNote: string;
 	ratingText: string;
 	instructor: string;
+	taughtByLabel: string;
+	primaryCtaLabel: string;
+	secondaryCtaLabel: string;
 }
 
-const { badges, titleLead, titleAccent, description, stats, price, priceNote, ratingText, instructor } = Astro.props;
+const {
+	badges,
+	titleLead,
+	titleAccent,
+	description,
+	stats,
+	price,
+	priceNote,
+	ratingText,
+	instructor,
+	taughtByLabel,
+	primaryCtaLabel,
+	secondaryCtaLabel,
+} = Astro.props;
 ---
 
 <section class="course-hero">
@@ -63,15 +82,15 @@ const { badges, titleLead, titleAccent, description, stats, price, priceNote, ra
 				<div class="flex w-[353px] items-center justify-between">
 					<PrimaryButton
 						href="#"
-						label="Enroll Now"
+						label={primaryCtaLabel}
 						variant="lg"
-						trailingIconSrc="https://www.figma.com/api/mcp/asset/697accfc-f1d0-4cc5-87cf-763e65ba23a1"
+						trailingIconSrc={arrowRightIcon.src}
 					/>
 					<a
 						href="#"
 						class="inline-flex min-h-14 items-center justify-center rounded-xl border border-slate-200 px-8 py-4 text-base font-medium text-slate-600"
 					>
-						View Schedule
+						{secondaryCtaLabel}
 					</a>
 				</div>
 			</div>
@@ -82,20 +101,20 @@ const { badges, titleLead, titleAccent, description, stats, price, priceNote, ra
 			<div class="relative overflow-hidden rounded-[40px] border-[8px] border-white shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]">
 			<img
 				class="block h-[516px] w-full rounded-[32px] object-cover"
-				src="https://www.figma.com/api/mcp/asset/258fd01e-a415-4785-a772-db4e00d4c5aa"
+				src={heroMainImage.src}
 				alt="Kids building a robot together"
 				loading="lazy"
 			/>
 			<div class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 backdrop-blur-[4px]">
 				<img
 					class="h-12 w-12 rounded-full object-cover"
-					src="https://www.figma.com/api/mcp/asset/4a7d0bb8-0cf0-4541-9b4a-55b063274a33"
+					src={heroTeacherImage.src}
 					alt=""
 					aria-hidden="true"
 					loading="lazy"
 				/>
 				<div>
-					<span class="block text-[11px] leading-tight text-slate-500">Taught by</span>
+					<span class="block text-[11px] leading-tight text-slate-500">{taughtByLabel}</span>
 					<strong class="block text-[13px] leading-tight text-slate-900">{instructor}</strong>
 				</div>
 			</div>

@@ -1,5 +1,11 @@
 ---
 import type { CurriculumSession, GainItem } from '../../data/courseDetail';
+import heroTeacherImage from '../../assets/course-detail/hero-teacher.png';
+import checkIcon from '../../assets/course-detail/icon-check.svg';
+import pythonIcon from '../../assets/course-detail/icon-python.svg';
+import hardwareIcon from '../../assets/course-detail/icon-hardware.svg';
+import videoCoverImage from '../../assets/course-detail/video-cover.png';
+import playIcon from '../../assets/course-detail/icon-play.svg';
 
 interface Pillar {
 	title: string;
@@ -7,20 +13,57 @@ interface Pillar {
 }
 
 interface Props {
+	overviewTitle: string;
 	overview: string;
 	overview2: string;
 	pillars: Pillar[];
 	gains: GainItem[];
+	gainsTitle: string;
+	videoTitle: string;
+	videoCaptionTitle: string;
+	videoCaptionText: string;
+	scheduleTitle: string;
+	scheduleHeaderSession: string;
+	scheduleHeaderTopic: string;
+	scheduleHeaderDate: string;
+	downloadCurriculumLabel: string;
+	instructorTitle: string;
+	instructorName: string;
+	instructorRole: string;
+	instructorPortfolioLabel: string;
+	instructorOtherCoursesLabel: string;
 	sessions: CurriculumSession[];
 	instructorBio: string;
 }
 
-const { overview, overview2, pillars, gains, sessions, instructorBio } = Astro.props;
+const {
+	overviewTitle,
+	overview,
+	overview2,
+	pillars,
+	gains,
+	gainsTitle,
+	videoTitle,
+	videoCaptionTitle,
+	videoCaptionText,
+	scheduleTitle,
+	scheduleHeaderSession,
+	scheduleHeaderTopic,
+	scheduleHeaderDate,
+	downloadCurriculumLabel,
+	instructorTitle,
+	instructorName,
+	instructorRole,
+	instructorPortfolioLabel,
+	instructorOtherCoursesLabel,
+	sessions,
+	instructorBio,
+} = Astro.props;
 ---
 
 <section class="course-content flex flex-col gap-24">
 	<div class="flex flex-col gap-6">
-	<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">Course Overview</h2>
+	<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">{overviewTitle}</h2>
 	<p class="text-[16px] leading-7 text-slate-600">{overview}</p>
 	<p class="mt-4 text-[16px] leading-7 text-slate-600">{overview2}</p>
 
@@ -40,8 +83,8 @@ const { overview, overview2, pillars, gains, sessions, instructorBio } = Astro.p
 								class={index === 0 ? 'h-4 w-5' : 'h-4 w-4'}
 								src={
 									index === 0
-										? 'https://www.figma.com/api/mcp/asset/2d5a06d1-ffd8-4c64-a9bf-6cd066056dd5'
-										: 'https://www.figma.com/api/mcp/asset/d31927c6-a7c2-4160-9f63-99a5f64f36d8'
+										? pythonIcon.src
+										: hardwareIcon.src
 								}
 								alt=""
 							/>
@@ -58,14 +101,14 @@ const { overview, overview2, pillars, gains, sessions, instructorBio } = Astro.p
 	</div>
 
 	<div class="flex flex-col gap-6">
-	<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">What Your Child Will Gain</h2>
-	<ul class="grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 md:grid-cols-2">
+	<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">{gainsTitle}</h2>
+	<ul class="grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 md:grid-flow-col md:grid-rows-2 md:grid-cols-2">
 		{
 			gains.map((gain) => (
 					<li class="relative pl-7 text-[16px] leading-6 text-slate-600">
 						<img
 							class="absolute top-[0.42rem] left-0 h-4 w-4"
-							src="https://www.figma.com/api/mcp/asset/82d1098b-35fa-42db-beb7-4372f15e62d4"
+							src={checkIcon.src}
 							alt=""
 							aria-hidden="true"
 						/>
@@ -77,11 +120,11 @@ const { overview, overview2, pillars, gains, sessions, instructorBio } = Astro.p
 	</div>
 
 	<section class="flex flex-col gap-6">
-		<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">See the Class in Action</h2>
+		<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">{videoTitle}</h2>
 		<div class="relative h-[400px] overflow-hidden rounded-3xl">
 			<img
 				class="block h-full w-full object-cover"
-				src="https://www.figma.com/api/mcp/asset/cf1637ad-0d39-4f3b-aa29-6081aac594d9"
+				src={videoCoverImage.src}
 				alt="Students during robotics class session"
 				loading="lazy"
 			/>
@@ -92,34 +135,34 @@ const { overview, overview2, pillars, gains, sessions, instructorBio } = Astro.p
 			>
 				<img
 					class="h-6 w-[18px]"
-					src="https://www.figma.com/api/mcp/asset/9233ab96-9fe4-446d-ad98-9ee50872060b"
+					src={playIcon.src}
 					alt=""
 					aria-hidden="true"
 				/>
 			</button>
 			<div class="absolute bottom-6 left-6 flex flex-col">
 				<strong class="font-[var(--ysa-font-body)] text-[18px] leading-7 font-semibold text-white">
-					Watch a 2-minute demo
+					{videoCaptionTitle}
 				</strong>
-				<span class="text-[14px] leading-5 text-white/80">Experience our interactive teaching style</span>
+				<span class="text-[14px] leading-5 text-white/80">{videoCaptionText}</span>
 			</div>
 		</div>
 	</section>
 
 	<section class="flex flex-col gap-6">
-		<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">Class Schedule</h2>
+		<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">{scheduleTitle}</h2>
 		<div class="overflow-hidden rounded-3xl border border-slate-100 bg-white">
 			<table class="w-full border-collapse">
 				<thead>
 					<tr class="bg-slate-50">
 						<th class="border-b border-slate-100 px-6 py-4 text-left text-[12px] leading-4 font-semibold tracking-[0.05em] text-slate-800 uppercase">
-							Session
+							{scheduleHeaderSession}
 						</th>
 						<th class="border-b border-slate-100 px-6 py-4 text-left text-[12px] leading-4 font-semibold tracking-[0.05em] text-slate-800 uppercase">
-							Topic
+							{scheduleHeaderTopic}
 						</th>
 						<th class="border-b border-slate-100 px-6 py-4 text-right text-[12px] leading-4 font-semibold tracking-[0.05em] text-slate-800 uppercase">
-							Date
+							{scheduleHeaderDate}
 						</th>
 					</tr>
 				</thead>
@@ -136,28 +179,28 @@ const { overview, overview2, pillars, gains, sessions, instructorBio } = Astro.p
 				</tbody>
 			</table>
 			<a class="block bg-[#dbeafe] py-4 text-center text-[14px] leading-5 font-semibold text-sky-600 no-underline" href="#">
-				Download Full Curriculum (PDF)
+				{downloadCurriculumLabel}
 			</a>
 		</div>
 	</section>
 
 	<section class="flex flex-col gap-6">
-		<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">Meet Your Instructor</h2>
+		<h2 class="text-[24px] leading-8 font-bold tracking-[-0.02em] text-slate-900">{instructorTitle}</h2>
 		<article class="flex items-start gap-8 rounded-[32px] bg-[rgba(239,246,255,0.3)] p-8">
 			<img
 				class="h-32 w-32 flex-shrink-0 rounded-2xl object-cover shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]"
-				src="https://www.figma.com/api/mcp/asset/4a7d0bb8-0cf0-4541-9b4a-55b063274a33"
-				alt="Dr. Alex Watson"
+				src={heroTeacherImage.src}
+				alt={instructorName}
 				loading="lazy"
 			/>
 			<div class="min-w-0 flex-1">
-				<h3 class="m-0 text-[17px] font-semibold text-sky-500">Dr. Alex Watson</h3>
-				<strong class="mt-1 block text-[16px] leading-6 font-medium text-slate-900">Robotics Engineer & Educator</strong>
+				<h3 class="m-0 text-[17px] font-semibold text-sky-500">{instructorName}</h3>
+				<strong class="mt-1 block text-[16px] leading-6 font-medium text-slate-900">{instructorRole}</strong>
 				<p class="mt-4 text-[16px] leading-[26px] text-slate-600">{instructorBio}</p>
 				<div class="mt-4 flex items-center gap-4">
-					<a class="text-[14px] leading-5 font-semibold text-sky-600 no-underline" href="#">View Portfolio</a>
+					<a class="text-[14px] leading-5 font-semibold text-sky-600 no-underline" href="#">{instructorPortfolioLabel}</a>
 					<span class="text-[16px] leading-6 text-slate-300" aria-hidden="true">•</span>
-					<a class="text-[14px] leading-5 font-semibold text-sky-600 no-underline" href="#">Other Courses (4)</a>
+					<a class="text-[14px] leading-5 font-semibold text-sky-600 no-underline" href="#">{instructorOtherCoursesLabel}</a>
 				</div>
 			</div>
 		</article>
