@@ -16,7 +16,7 @@ const { content } = Astro.props as Props;
 					<span>{content.goodTitle}</span>
 				</h3>
 				<ul>
-					{content.goodItems.map((item) => <li class="max-w-[440px]">{item}</li>)}
+					{content.goodItems.map((item) => <li class="max-w-[440px] list-disc ml-5">{item}</li>)}
 				</ul>
 			</article>
 			<article class="summer-fit-card bad p-5 lg:p-10">
@@ -25,7 +25,7 @@ const { content } = Astro.props as Props;
 					<span>{content.badTitle}</span>
 				</h3>
 				<ul>
-					{content.badItems.map((item) => <li class="max-w-[440px]">{item}</li>)}
+					{content.badItems.map((item) => <li class="max-w-[440px] list-disc ml-5">{item}</li>)}
 				</ul>
 			</article>
 		</div>
