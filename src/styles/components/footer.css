@@ -166,12 +166,17 @@
 	}
 }
 
+@media (max-width: 768px) {
+.ysa-footer__brand-name {
+		font-size: 1.25rem
+	}
+}
+
+
 @media (max-width: 640px) {
 	.ysa-footer__top {
 		grid-template-columns: 1fr;
 	}
 
-	.ysa-footer__brand-name {
-		font-size: 1.25rem
-	}
+	
 }

@@ -1,6 +1,7 @@
 ---
 import type { NavItem } from '../../types/home';
 import PrimaryButton from '../ui/PrimaryButton.astro';
+import logo from '../../assets/common/logo.png';
 
 interface Props {
 	brand: string;
@@ -8,36 +9,62 @@ interface Props {
 }
 
 const { brand, navItems } = Astro.props;
+
+const programsSubmenu = [
+	{ label: 'Summer Sales', href: '/semester-sales' },
+	{ label: 'Semester Classes', href: '/summer' },
+];
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/90 backdrop-blur-md relative">
 	<div
-		class="mx-auto box-border flex min-h-20 max-w-[90rem] items-center justify-between gap-6 px-4 sm:px-6 lg:px-10"
+		class="mx-auto box-border flex min-h-20 max-w-[90rem] items-center justify-between gap-6 px-4 sm:px-6 lg:px-10 py-[12px]"
 	>
 		<a class="flex min-w-0 items-center gap-3 text-inherit no-underline" href="/">
-			<span
-				class="font-display relative grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#5751e4] to-[#a855f7] text-xl font-bold leading-none text-white shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)]"
-				aria-hidden="true">YS</span
-			>
-			<span
-				class="font-display text-[var(--ysa-figma-brand)] whitespace-nowrap text-xl leading-7 font-bold tracking-[-0.03125rem] max-sm:max-w-48 max-sm:text-[1.05rem] max-sm:whitespace-normal"
-				>{brand}</span
-			>
+			<img src={logo.src} alt="logo" />
 		</a>
 
-		<nav class="[@media(max-width:1100px)]:hidden" aria-label="Primary">
+	<nav class="[@media(max-width:1100px)]:hidden" aria-label="Primary">
 			<ul
 				class="m-0 flex list-none flex-wrap items-center gap-x-8 gap-y-3 p-0 [@media(max-width:1100px)]:justify-start [@media(max-width:1100px)]:gap-x-5 max-sm:gap-x-4 max-sm:gap-y-3"
 			>
 				{
 					navItems.map((item) => (
-						<li>
-							<a
-								class="font-display text-sm leading-5 font-medium text-slate-600 no-underline transition-colors hover:text-[var(--ysa-figma-brand)]"
-								href={item.href}
-							>
-								{item.label}
-							</a>
+						<li class={item.label === 'Programs' ? 'relative' : undefined}>
+							{item.label === 'Programs' ? (
+								<details class="group relative open:[&>summary>svg]:-rotate-180">
+									<summary
+										class="flex cursor-pointer items-center gap-2 font-display text-sm leading-5 font-medium text-slate-600 no-underline transition-colors hover:text-[var(--ysa-figma-brand)]"
+										aria-haspopup="menu"
+									>
+										<span>{item.label}</span>
+											<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-slate-700 transition-transform duration-200">
+												<path d="M5.4703 9.52949C5.76327 9.82246 6.23905 9.82246 6.53202 9.52949L11.032 5.02949C11.325 4.73652 11.325 4.26074 11.032 3.96777C10.7391 3.6748 10.2633 3.6748 9.9703 3.96777L5.99999 7.93809L2.02968 3.97012C1.73671 3.67715 1.26093 3.67715 0.967957 3.97012C0.674988 4.26309 0.674988 4.73887 0.967957 5.03184L5.46796 9.53184L5.4703 9.52949Z" fill="currentColor" />
+										</svg>
+									</summary>
+									<ul class="absolute left-0 top-full z-50 mt-3 w-[220px] rounded-3xl border border-slate-200 bg-white p-2 shadow-lg opacity-0 invisible transition-all duration-200 group-open:opacity-100 group-open:visible">
+										{
+											programsSubmenu.map((submenuItem) => (
+												<li>
+													<a
+														class="block rounded-xl px-3 py-2 text-sm font-medium text-slate-700 no-underline transition-colors hover:bg-slate-50 hover:text-[var(--ysa-figma-brand)]"
+														href={submenuItem.href}
+													>
+														{submenuItem.label}
+													</a>
+												</li>
+											))
+										}
+									</ul>
+								</details>
+							) : (
+								<a
+									class="font-display text-sm leading-5 font-medium text-slate-600 no-underline transition-colors hover:text-[var(--ysa-figma-brand)]"
+									href={item.href}
+								>
+									{item.label}
+								</a>
+							)}
 						</li>
 					))
 				}
@@ -52,6 +79,7 @@ const { brand, navItems } = Astro.props;
 			>
 			<PrimaryButton href="/summer" label="Browse Courses" variant="sm" class="shadow-none" />
 		</div>
+	
 
 		<details class="group hidden [@media(max-width:1100px)]:block">
 			<summary
@@ -71,17 +99,44 @@ const { brand, navItems } = Astro.props;
 					></span>
 				</span>
 			</summary>
-			<div class="absolute left-0 right-0 top-full z-50 mt-2 w-full border border-slate-200 bg-white p-3 shadow-lg">
+			<div class="absolute left-0 right-0 top-full z-50 mt-1 w-full border border-slate-200 bg-white p-3 shadow-lg">
 				<ul class="m-0 list-none space-y-1 p-0">
 					{
 						navItems.map((item) => (
 							<li>
-								<a
-									class="font-display block rounded-md px-3 py-2 text-sm font-medium text-slate-700 no-underline transition-colors hover:bg-slate-50 hover:text-[var(--ysa-figma-brand)]"
-									href={item.href}
-								>
-									{item.label}
-								</a>
+								{item.label === 'Programs' ? (
+									<details class="group rounded-2xl border border-slate-100 bg-white open:[&>summary>svg]:rotate-180">
+										<summary
+											class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-[var(--ysa-figma-brand)]"
+										>
+											<span>{item.label}</span>
+											<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-slate-700 transition-transform duration-200">
+												<path d="M5.4703 9.52949C5.76327 9.82246 6.23905 9.82246 6.53202 9.52949L11.032 5.02949C11.325 4.73652 11.325 4.26074 11.032 3.96777C10.7391 3.6748 10.2633 3.6748 9.9703 3.96777L5.99999 7.93809L2.02968 3.97012C1.73671 3.67715 1.26093 3.67715 0.967957 3.97012C0.674988 4.26309 0.674988 4.73887 0.967957 5.03184L5.46796 9.53184L5.4703 9.52949Z" fill="currentColor" />
+											</svg>
+										</summary>
+										<ul class="mt-1 space-y-1 px-3 pb-2 pt-1">
+											{
+												programsSubmenu.map((submenuItem) => (
+													<li>
+														<a
+															class="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 no-underline transition-colors hover:bg-slate-50 hover:text-[var(--ysa-figma-brand)]"
+															href={submenuItem.href}
+														>
+															{submenuItem.label}
+														</a>
+													</li>
+												))
+											}
+										</ul>
+									</details>
+								) : (
+									<a
+										class="font-display block rounded-md px-3 py-2 text-sm font-medium text-slate-700 no-underline transition-colors hover:bg-slate-50 hover:text-[var(--ysa-figma-brand)]"
+										href={item.href}
+									>
+										{item.label}
+									</a>
+								)}
 							</li>
 						))
 					}
@@ -96,13 +151,8 @@ const { brand, navItems } = Astro.props;
 					</li>
 					<li class="flex justify-center">
 						<a
-<<<<<<< Updated upstream
 							href="/semester-sales"
 							class="font-display block rounded-md px-3 py-2 text-sm font-semibold text-white no-underline bg-[var(--ysa-figma-brand)] hover:opacity-90"
-=======
-							href="#"
-							class="font-display inline-flex w-fit rounded-md px-4 py-2 text-sm font-semibold text-white no-underline bg-[var(--ysa-figma-brand)] hover:opacity-90"
->>>>>>> Stashed changes
 						>
 							Browse Courses
 						</a>
