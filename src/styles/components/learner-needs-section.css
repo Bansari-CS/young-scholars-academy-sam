@@ -218,7 +218,7 @@
 	border: 1px solid #e5e7eb;
 	border-radius: 0.9rem;
 	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 10px 24px -22px rgba(15, 23, 42, 0.25);
-	padding: 1.15rem 1rem 1.05rem 1.2rem;
+	padding: 28px;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -283,7 +283,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 0.7rem;
+	margin-bottom: 20px;
 	color: #fff;
 	font-size: 1.2rem;
 }
@@ -308,9 +308,9 @@
 	display: inline-flex;
 	align-self: flex-start;
 	width: auto;
-	font-size: 0.625rem;
-	font-weight: 700;
-	padding: 0.28rem 0.6rem;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 12px;
 	border-radius: 999px;
 	letter-spacing: 0.03em;
 }
@@ -336,11 +336,11 @@
 }
 
 .process-card__title {
-	margin: 0.55rem 0 0.5rem;
-	font-size: 1.85rem;
-	font-weight: 700;
+	margin: 12px 0 7px;
+	font-size: 17px;
+	font-weight: 600;
 	line-height: 1.2;
-	color: #0f172a;
+	color: #111827;
 }
 
 .process-card__body {
@@ -351,15 +351,15 @@
 
 .process-card__desc {
 	margin: 0;
-	font-size: 0.86rem;
-	line-height: 1.6;
-	color: #64748b;
-	min-height: 7.5rem;
+	font-size: 14px;
+	line-height: 22.75px;
+	color: #374151;
+	margin-bottom: 20px;
 }
 
 .process-card__footer {
 	margin-top: auto;
-	padding-top: 0.8rem;
+	padding-top: 16px;
 	border-top: 1px solid #f1f5f9;
 	display: flex;
 	align-items: center;
@@ -417,7 +417,7 @@
 .process-btn {
 	background: linear-gradient(90deg, #0A9DFB 0%, #38B6FF 100%);
 	color: #fff;
-	padding: 0.88rem 1.4rem;
+	padding: 16px 32px;
 	border-radius: 0.7rem;
 	font-size: 1rem;
 	font-weight: 600;
@@ -427,7 +427,7 @@
 	transition: background 0.2s ease, box-shadow 0.2s ease;
 	display: inline-flex;
 	align-items: center;
-	gap: 0.5rem;
+	gap: 12px;
 }
 
 .process-btn:hover {
@@ -446,9 +446,9 @@
 }
 
 .process-cta-note {
-	font-size: 0.875rem;
-	color: #94a3b8;
-	margin-top: 0.75rem;
+	font-size: 12px;
+	color: #6B7280;
+	margin-top: 1rem;
 }
 
 @media (max-width: 1200px) {

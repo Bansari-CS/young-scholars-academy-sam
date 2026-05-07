@@ -62,7 +62,7 @@ const isNewsletterLayout = layout === 'newsletter';
 
 <section
 	class:list={[
-		fullWidth ? 'px-0 py-16 md:py-20' : 'px-4 py-16 md:px-8 md:py-20',
+		fullWidth ? 'px-0 py-0 md:py-0' : 'px-4 py-16 md:px-8 md:py-20',
 		isSemesterPreset && !fullWidth && 'py-8 md:px-6 md:py-10',
 	]}
 >
@@ -111,7 +111,7 @@ const isNewsletterLayout = layout === 'newsletter';
 				{title}
 			</h2>
 			<p class:list={[
-				'mx-auto mt-4 max-w-[640px] text-base leading-7 md:text-[17px]',
+				'mx-auto mt-6 max-w-[640px] text-base leading-7 md:text-[17px]',
 				isSemesterPreset && 'mt-5 max-w-[620px] text-[15px] leading-[1.5] md:text-[16px]',
 				isOutlined || isSoft ? 'text-[#64748b]' : 'text-[#e0e9ff]',
 			]}>
@@ -134,7 +134,7 @@ const isNewsletterLayout = layout === 'newsletter';
 						</button>
 					</div>
 				) : (
-					<div class:list={['mt-8 flex flex-wrap items-center justify-center gap-4', isSemesterPreset && 'mt-9 gap-3']}>
+					<div class:list={['mt-10 flex flex-wrap items-center justify-center gap-4', isSemesterPreset && 'mt-9 gap-3']}>
 						<a
 							class:list={[
 								'inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]',
@@ -151,7 +151,7 @@ const isNewsletterLayout = layout === 'newsletter';
 											? 'bg-[#0a9dfb] text-white'
 											: primaryStyle === 'gradient'
 												? 'bg-gradient-to-r from-[#0a9dfb] to-[#7c3aed] text-white'
-											: 'bg-white text-[#0a9dfb]',
+											: 'bg-white text-[#7C3AED]',
 							]}
 							href={primaryCta.href}
 						>
@@ -191,7 +191,7 @@ const isNewsletterLayout = layout === 'newsletter';
 												? 'rounded-2xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] px-10 py-5 text-base font-medium text-white'
 											: secondaryStyle === 'lightSolid'
 												? 'bg-white text-[#0a9dfb] shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]'
-											: 'border border-[rgba(255,255,255,0.25)] bg-[rgba(255,255,255,0.12)] text-white backdrop-blur-sm',
+											: 'border border-[rgba(255,255,255,0.30)] bg-[rgba(61, 55, 163, 0.50)] text-white backdrop-blur-sm',
 									]}
 									href={secondaryCta.href}
 								>
@@ -207,7 +207,7 @@ const isNewsletterLayout = layout === 'newsletter';
 			{
 				trustPoints.length > 0 && (
 					<div class:list={[
-						'mt-6 flex flex-wrap items-center justify-center gap-3 text-xs',
+						'mt-6 flex flex-wrap items-center justify-center gap-3 text-s',
 						isOutlined ? 'text-[#94a3b8]' : 'text-[#e0e9ff]',
 					]}>
 						{

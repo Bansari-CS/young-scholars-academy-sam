@@ -13,8 +13,8 @@
 	--yw-card-border: #e9eef5;
 	--yw-card-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 10px 30px -16px rgba(15, 23, 42, 0.2);
 
-	padding: clamp(4.5rem, 9vw, 6rem) 0;
-	background: var(--yw-bg);
+	padding: 0;
+	background: #FFF;
 }
 
 .ysa-world .home-section-inner {
@@ -40,11 +40,12 @@
 	background: var(--yw-badge-bg);
 	font-family: var(--ysa-font-display);
 	font-weight: 700;
-	font-size: 0.6875rem;
+	font-size: 0.75rem;
 	line-height: 1rem;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
 	color: var(--yw-badge-text);
+	width: 211px
 }
 
 .ysa-world__title {
@@ -62,8 +63,8 @@
 }
 
 .ysa-world__desc {
-	max-width: 38rem;
-	margin: 1rem auto 0;
+	max-width: 39.125rem;
+	margin: 1.5rem auto 4rem;
 	font-family: var(--ysa-font-body);
 	font-size: 1rem;
 	line-height: 1.65;
@@ -73,7 +74,8 @@
 .ysa-world__stage {
 	position: relative;
 	margin: 3.5rem auto 0;
-	max-width: 54rem;
+	padding: 4rem 0;
+	max-width: 77rem;
 	min-height: 21rem;
 }
 
@@ -125,34 +127,42 @@
 	top: 18%;
 	left: -5%;
 }
+
 .ysa-world__face--2 {
 	top: 8%;
 	left: 18%;
 }
+
 .ysa-world__face--3 {
 	top: 2%;
 	left: 45%;
 }
+
 .ysa-world__face--4 {
 	top: 6%;
 	right: 7%;
 }
+
 .ysa-world__face--5 {
 	top: 28%;
 	right: -4%;
 }
+
 .ysa-world__face--6 {
 	top: 56%;
 	right: 6%;
 }
+
 .ysa-world__face--7 {
 	top: 64%;
 	left: 8%;
 }
+
 .ysa-world__face--8 {
 	top: 52%;
 	left: -4%;
 }
+
 .ysa-world__face--9 {
 	top: 42%;
 	left: 53%;
@@ -160,7 +170,7 @@
 
 .ysa-world__stat {
 	position: absolute;
-	width: clamp(7.8rem, 18vw, 9.2rem);
+	width: clamp(7.8rem, 18vw, 16rem);
 	min-height: 4.9rem;
 	border-radius: 0.95rem;
 	border: 1px solid var(--yw-card-border);
@@ -170,14 +180,14 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 0.75rem;
+	padding: 2rem;
 }
 
 .ysa-world__stat-value {
 	margin: 0;
 	font-family: var(--ysa-font-display);
 	font-weight: 700;
-	font-size: clamp(1.3rem, 2.5vw, 2rem);
+	font-size: clamp(1.3rem, 2.5vw, 2.625rem);
 	line-height: 1.1;
 	letter-spacing: -0.02em;
 	color: var(--yw-accent);
@@ -186,26 +196,44 @@
 .ysa-world__stat-label {
 	margin: 0.45rem 0 0;
 	font-family: var(--ysa-font-body);
-	font-size: 0.875rem;
+	font-size: 1.063rem;
 	font-weight: 600;
-	color: #334155;
+	color: #111827;
 }
 
 .ysa-world__stat--lt {
 	left: 1%;
 	top: 20%;
 }
+
 .ysa-world__stat--lb {
 	left: 4%;
-	bottom: 13%;
+	bottom: 26%;
 }
+
 .ysa-world__stat--rt {
 	right: 1%;
 	top: 20%;
 }
+
 .ysa-world__stat--rb {
 	right: 4%;
-	bottom: 13%;
+	bottom: 26%;
+}
+
+@media (max-width: 1100px) {
+	.ysa-world__stat--lb {
+		left: 0%
+	}
+
+	.ysa-world__stat--rb {
+		right: 0%;
+	}
+
+	.ysa-teachers__card {
+		width: 100%;
+		max-width: 100%;
+	}
 }
 
 @media (max-width: 900px) {
@@ -235,6 +263,7 @@
 	.ysa-world__ring {
 		order: 1;
 	}
+
 	.ysa-world__stat--lt,
 	.ysa-world__stat--rt,
 	.ysa-world__stat--lb,

@@ -17,32 +17,32 @@ import { processSectionData } from '../../data/processSection';
 
 ---
 
-<section class="learner-section bg-white py-[clamp(2.25rem,5vw,3.5rem)] pb-[clamp(3.25rem,7vw,5rem)]">
+<section class="learner-section bg-[#f8fafc] py-[clamp(2.25rem,5vw,6rem)] pb-0">
 	<div class="learner-container mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
 		
-		<div class="learner-heading m-0 pt-[clamp(1.25rem,3vw,2rem)] text-center">
+		<div class="learner-heading m-0  text-center">
 			
-			<span class="inline-flex items-center justify-center rounded-[999px] bg-[#EDE9FE] px-[0.9rem] py-[0.42rem] text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-[#7C3AED]">
+			<span class="inline-flex items-center justify-center rounded-[999px] bg-[#EDE9FE] px-[1rem] py-[0.5rem] text-[12px] font-bold uppercase tracking-[0.06em] text-[#7C3AED]">
 				{learnerSectionData.badgeText}
 			</span>
 
-			<h2 class="m-[1rem_0_0.85rem] text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0F172A]">
+			<h2 class="m-[1rem_0_1.5rem] text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0F172A]">
 				{learnerSectionData.title}
 			</h2>
 
-			<p class="mx-auto my-0 max-w-[64ch] text-[clamp(1rem,1.9vw,1.0625rem)] leading-[1.65] text-[#64748B] max-sm:text-[0.98rem]">
+			<p class="mx-auto my-0 max-w-[672px] text-[clamp(1rem,1.9vw,1rem)] leading-[1.65] text-[#64748B] max-sm:text-[0.98rem]">
 				{learnerSectionData.description}
 			</p>
 		</div>
 
-		<div class="learner-cards mt-[clamp(2rem,4vw,2.75rem)] grid grid-cols-3 gap-5 max-lg:grid-cols-1">
+		<div class="learner-cards mt-[clamp(2rem,4vw,4rem)] grid grid-cols-3 gap-8 max-lg:grid-cols-1">
 			{
 				learnerSectionData.cards.map((card) => (
-					<article class="learner-card rounded-[1.25rem] border border-[#E2E8F0] bg-white px-[1.35rem] py-6 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_26px_-20px_rgba(15,23,42,0.2)] transition-[border-color,box-shadow] duration-200 ease-in hover:border-[#CBD5E1] hover:shadow-[0_12px_34px_-26px_rgba(15,23,42,0.28)]">
+					<article class="learner-card rounded-[1.25rem] border border-[#E2E8F0] bg-white px-[2.063rem] py-[2.063rem] shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_26px_-20px_rgba(15,23,42,0.2)] transition-[border-color,box-shadow] duration-200 ease-in hover:border-[#CBD5E1] hover:shadow-[0_12px_34px_-26px_rgba(15,23,42,0.28)]">
 						
 						<div
 							class:list={[
-								"card-icon-slot flex h-12 w-12 shrink-0 items-center justify-center rounded-[0.75rem]",
+								"card-icon-slot flex h-14 w-14 shrink-0 items-center justify-center rounded-[0.75rem]",
 								card.icon === "stress"
 									? "bg-[linear-gradient(145deg,#F5F3FF,#EDE9FE)]"
 									: card.icon === "group"
@@ -66,17 +66,17 @@ import { processSectionData } from '../../data/processSection';
 							)}
 						</div>
 
-						<h3 class="m-[1.1rem_0_0.65rem] text-[clamp(1.25rem,2.2vw,1.5rem)] font-bold leading-[1.3] tracking-[-0.015em] text-[#0F172A]">
+						<h3 class="m-[1.5rem_0_0.75rem] text-[clamp(1rem,2.2vw,1.063rem)] font-semibold leading-[1.3] tracking-[-0.015em] text-[#0F172A]">
 							{card.title}
 						</h3>
 
-						<p class="m-0 text-[0.98rem] leading-[1.6] text-[#64748B]">
+						<p class="m-0 text-[1rem] leading-[26px] text-[#475569]">
 							{card.description}
 						</p>
 
-						<div class="card-divider mt-5 h-px bg-[#EEF2F7]"></div>
+						<div class="card-divider mt-6 h-px bg-[#EEF2F7]"></div>
 
-						<div class="card-highlight mt-[1.1rem] flex items-start gap-[0.65rem]">
+						<div class="card-highlight mt-6 flex items-start gap-[0.65rem]">
 							
 							<span class="card-check mt-[0.1rem] flex h-[1.05rem] w-[1.05rem] shrink-0 items-center justify-center" aria-hidden="true">
 								<svg class="block h-auto w-full" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,16 +95,16 @@ import { processSectionData } from '../../data/processSection';
 	</div>
 </section>
 
-<section class="process-section">
-  <div class="process-container">
+<section class=" py-[clamp(72px,8.5vw,96px)] bg-[#f8fafc] pb-[80px]">
+  <div class="max-w-[var(--ysa-max)] mx-auto px-[clamp(16px,4.44vw,64px)]">
     
-    <header class="process-header">
-      <span class="process-badge">{processSectionData.badge}</span>
-      <h2 class="process-main-title">{processSectionData.title}</h2>
-      <p class="process-subtitle" set:html={processSectionData.description}></p>
+    <header class="text-center mb-[clamp(32px,4vw,56px)]">
+      <span class="inline-flex items-center justify-center bg-[#E1F3FF] text-[var(--ysa-primary)] px-[16px] py-[8px] rounded-[999px] text-[12px] font-[700] uppercase tracking-[0.06em]">{processSectionData.badge}</span>
+      <h2 class="mt-[20px] mb-[16px] text-[clamp(32px,4vw,44px)] leading-[1.15] tracking-[-0.02em] text-[#0f172a] font-[700]">{processSectionData.title}</h2>
+      <p class="mx-auto max-w-[549px] text-[#475569] text-[16px] leading-[26px]" set:html={processSectionData.description}></p>
     </header>
 
-    <div class="process-grid">
+    <div class="flex items-stretch justify-center gap-[24px] flex-wrap md:flex-nowrap max-w-[1376px]">
       {processSectionData.steps.map((step, index) => (
         <>
           {/* CARD */}

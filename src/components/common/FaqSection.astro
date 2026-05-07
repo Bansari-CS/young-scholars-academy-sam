@@ -19,7 +19,7 @@ const {
 	title,
 	description,
 	items,
-	sectionClass = 'bg-[#f8fafc] px-6 py-20',
+	sectionClass = 'bg-[#f8fafc] px-6 py-24',
 	containerClass = 'mx-auto w-full max-w-[896px]',
 } = Astro.props;
 ---
@@ -29,21 +29,21 @@ const {
 		<header class="text-center">
 			{
 				eyebrow && (
-					<p class="mx-auto mb-3 w-fit rounded-full bg-[#e0e9ff] px-3 py-1 text-[10px] font-semibold tracking-[0.08em] text-[#0a9dfb] uppercase">
+					<p class="mx-auto mb-6 w-fit rounded-full bg-[#e0e9ff] px-4 py-1 text-[12px] font-semibold tracking-[0.08em] text-[#0a9dfb] uppercase">
 						{eyebrow}
 					</p>
 				)
 			}
 			<h2 class="text-[32px] leading-[1.15] font-bold text-[#111827] md:text-[44px]">{title}</h2>
-			{description && <p class="mt-3 text-sm leading-6 text-[#64748b]">{description}</p>}
+			{description && <p class="mt-6 text-sm leading-6 text-[#64748b]">{description}</p>}
 		</header>
 
-		<div class="mt-10 space-y-4">
+		<div class="mt-16 space-y-4">
 			{
 				items.map((item, index) => (
 					<details class="faq-item overflow-hidden rounded-xl border border-[#e2e8f0] bg-white p-0" open={item.open ?? index === 0}>
-						<summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-							<h3 class="text-[13px] leading-5 font-semibold text-[#111827]">{item.question}</h3>
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-6">
+							<h3 class="text-[17px] leading-5 font-semibold text-[#111827]">{item.question}</h3>
 							<span class="faq-chevron inline-flex h-4 w-4 flex-shrink-0 items-center justify-center text-[#94a3b8]" aria-hidden="true">
 								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M4.6665 6.66663L7.99984 9.99996L11.3332 6.66663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -52,8 +52,8 @@ const {
 						</summary>
 						{
 							item.answer && (
-								<div class="px-5 pb-4">
-									<p class="text-[12px] leading-[20px] text-[#64748b]">{item.answer}</p>
+								<div class="px-6 pb-6">
+									<p class="text-[16px] leading-[20px] text-[#64748b]">{item.answer}</p>
 								</div>
 							)
 						}
