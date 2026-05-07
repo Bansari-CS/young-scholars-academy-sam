@@ -1,6 +1,6 @@
 ---
 import GradientCtaSection from '../common/GradientCtaSection.astro';
-import arrowRightIcon from '../../assets/course-detail/icon-arrow-right.svg';
+const arrowRightIcon = '/assets/course-detail/icon-arrow-right.svg';
 ---
 
 <div class="mb-24 mt-6">
@@ -9,7 +9,7 @@ import arrowRightIcon from '../../assets/course-detail/icon-arrow-right.svg';
 		title="You Don’t Have to Figure This Out Alone"
 		description="Join our vibrant community of parents, educators, and experts dedicated to helping every child find their path."
 		primaryCta={{ label: 'Find My Child’s Best Fit', href: '#' }}
-		primaryTrailingIcon={arrowRightIcon.src}
+		primaryTrailingIcon={arrowRightIcon}
 		secondaryCta={{ label: 'Explore Programs', href: '#' }}
 		showPrimaryArrow={true}
 	/>
