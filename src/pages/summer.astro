@@ -6,17 +6,26 @@ import SummerHeroSection from '../components/summer/SummerHeroSection.astro';
 import SummerStruggleSection from '../components/summer/SummerStruggleSection.astro';
 import SummerFullSections from '../components/summer/SummerFullSections.astro';
 import { heroData } from '../data/home';
+import { getEntry } from 'astro:content';
+
+const summerEntry = await getEntry('summer', 'summer');
+
+if (!summerEntry) {
+	throw new Error('Missing summer page content entry at src/content/summer/summer.md');
+}
+
+const summerContent = summerEntry.data;
 ---
 
 <Layout
-	title="YSA Summer Camps 2026"
-	description="Summer camps for gifted, twice-exceptional, and neurodivergent learners."
+	title={summerContent.seo.title}
+	description={summerContent.seo.description}
 >
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main>
-		<SummerHeroSection />
-		<SummerStruggleSection />
-		<SummerFullSections />
+		<SummerHeroSection content={summerContent.hero} />
+		<SummerStruggleSection content={summerContent.struggle} />
+		<SummerFullSections content={summerContent} />
 	</main>
 	<Footer />
 </Layout>
