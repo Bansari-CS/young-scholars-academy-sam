@@ -23,10 +23,6 @@ if (!blogDetailEntry) {
 	throw new Error('Missing blog detail content entry in src/content/blog-detail/');
 }
 
-if (Astro.params.slug !== blogDetailEntry.data.slug) {
-	return Astro.redirect(`/blog/${blogDetailEntry.data.slug}`);
-}
-
 const { Content } = await render(blogDetailEntry);
 ---
 

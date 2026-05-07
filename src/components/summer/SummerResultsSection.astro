@@ -1,5 +1,9 @@
 ---
 import RealGrowthSection from '../common/RealGrowthSection.astro';
+import { getEntry } from 'astro:content';
+
+const homeEntry = await getEntry('home', 'home');
+const impactContent = homeEntry?.data?.impact;
 ---
 
-<RealGrowthSection hideStats />
+{impactContent ? <RealGrowthSection hideStats content={impactContent} /> : null}
