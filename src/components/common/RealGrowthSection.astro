@@ -1,0 +1,13 @@
+---
+import ImpactSection from '../home/ImpactSection.astro';
+import '../../styles/components/home-sections.css';
+
+interface Props {
+	hideStats?: boolean;
+	hideStatLabels?: string[];
+}
+
+const { hideStats = false, hideStatLabels = [] } = Astro.props;
+---
+
+<ImpactSection hideStats={hideStats} hideStatLabels={hideStatLabels} />

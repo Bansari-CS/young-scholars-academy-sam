@@ -1,33 +1,20 @@
 ---
 import { homePageSectionsData } from '../../data/homePageSections';
-import '../../styles/components/faq-section.css';
+import FaqSection from '../common/FaqSection.astro';
 
 const d = homePageSectionsData.faq;
+const faqItems = d.items.map((item, index) => ({
+	question: item.question,
+	answer: item.answer,
+	open: index === 0,
+}));
 ---
 
-<section class="ysa-faq" aria-labelledby="faq-heading">
-	<div class="home-section-inner">
-		<header class="ysa-faq__head">
-			<p class="ysa-faq__badge">{d.eyebrow}</p>
-			<h2 class="ysa-faq__title" id="faq-heading">{d.title}</h2>
-			<p class="ysa-faq__desc">{d.description}</p>
-		</header>
-		<div class="ysa-faq__list">
-			{
-				d.items.map((item, index) => (
-					<details class="ysa-faq__item" open={index === 0}>
-						<summary>
-							<span>{item.question}</span>
-							<span class="ysa-faq__icon" aria-hidden="true">
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M7.29414 12.7063C7.68477 13.0969 8.31914 13.0969 8.70977 12.7063L14.7098 6.70627C15.1004 6.31565 15.1004 5.68127 14.7098 5.29065C14.3191 4.90002 13.6848 4.90002 13.2941 5.29065L8.00039 10.5844L2.70664 5.29377C2.31602 4.90315 1.68164 4.90315 1.29102 5.29377C0.900391 5.6844 0.900391 6.31877 1.29102 6.7094L7.29102 12.7094L7.29414 12.7063Z" fill="#475569" fill-opacity="0.4"></path>
-								</svg>
-							</span>
-						</summary>
-						<p class="ysa-faq__answer">{item.answer}</p>
-					</details>
-				))
-			}
-		</div>
-	</div>
-</section>
+<FaqSection
+	eyebrow={d.eyebrow}
+	title={d.title}
+	description={d.description}
+	items={faqItems}
+	sectionClass="bg-[#f8fafc] px-6 py-20"
+	containerClass="mx-auto w-full max-w-[896px]"
+/>

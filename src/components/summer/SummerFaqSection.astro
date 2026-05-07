@@ -1,33 +1,17 @@
-<section class="summer-section py-20 px-5 bg-[#F8FAFC]">
-	<div class="summer-wrap faq">
-		<h2 class="text-[28px] font-bold sm:text-[36px] lg:text-[44px]">Answers to Your Questions</h2>
-		<p class="summer-sub mb-16">Everything you need to know before getting started</p>
-		<details open>
-			<summary>
-				Will my child get "Zoom fatigue"? <img src="/images/summer/faq/chevron-up.svg" alt="" />
-			</summary>
-			<p>
-				<strong class="text-[#111827]">No - our sessions are designed to keep students engaged, not exhausted.</strong><br />Each
-				50-minute class uses a high-engagement model where students actively participate instead of passively
-				watching. In addition, our Topia virtual campus allows movement and social interaction, making the
-				experience feel more like a game than a traditional online class.
-			</p>
-		</details>
-		<details>
-			<summary>
-				Do you require a formal diagnosis for 2e or giftedness?
-				<img src="/images/summer/faq/chevron-down.svg" alt="" />
-			</summary>
-		</details>
-		<details>
-			<summary>
-				Can I pay with ESA or Charter School funds? <img src="/images/summer/faq/chevron-down.svg" alt="" />
-			</summary>
-		</details>
-		<details>
-			<summary>
-				What is the refund policy? <img src="/images/summer/faq/chevron-down.svg" alt="" />
-			</summary>
-		</details>
-	</div>
-</section>
+---
+import FaqSection from '../common/FaqSection.astro';
+
+const faqItems = [
+	{
+		question: 'Will my child get "Zoom fatigue"?',
+		answer:
+			'No - our sessions are designed to keep students engaged, not exhausted. Each 50-minute class uses a high-engagement model where students actively participate instead of passively watching. In addition, our Topia virtual campus allows movement and social interaction, making the experience feel more like a game than a traditional online class.',
+		open: true,
+	},
+	{ question: 'Do you require a formal diagnosis for 2e or giftedness?' },
+	{ question: 'Can I pay with ESA or Charter School funds?' },
+	{ question: 'What is the refund policy?' },
+];
+---
+
+<FaqSection title="Answers to Your Questions" description="Everything you need to know before getting started" items={faqItems} sectionClass="summer-section py-20 px-5 bg-[#F8FAFC]" containerClass="summer-wrap faq" />
