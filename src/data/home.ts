@@ -8,7 +8,7 @@ export const heroData: HeroData = {
 		'Premium online learning designed for gifted, twice-exceptional, and neurodivergent learners. Small classes. Expert mentors. Real results.',
 	primaryCta: {
 		label: 'Browse Courses',
-		href: '#',
+		href: '/summer',
 	},
 	secondaryCta: {
 		label: 'Book a Call',
@@ -19,8 +19,8 @@ export const heroData: HeroData = {
 		{ label: 'Programs', href: '#' },
 		{ label: 'How It Works', href: '#' },
 		{ label: 'Why YSA', href: '#' },
-		{ label: 'Results', href: '#' },
-		{ label: 'Our Teachers', href: '#' },
+		{ label: 'Blog', href: '/blog' },
+		{ label: 'Our Teachers', href: '/teachers' },
 	],
 	dashboard: {
 		studentName: "Alex's Dashboard",

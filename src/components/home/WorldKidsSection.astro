@@ -1,19 +1,20 @@
 ---
-import { Image } from 'astro:assets';
 import { homePageSectionsData } from '../../data/homePageSections';
 import '../../styles/components/world-kids-section.css';
 
-import globe from '../../assets/images/world-globe.png';
-import face1 from '../../assets/images/Teacher (1).png';
-import face2 from '../../assets/images/Teacher (2).png';
-import face3 from '../../assets/images/Teacher (3).png';
-import face4 from '../../assets/images/Teacher (4).png';
-import face5 from '../../assets/images/Teacher (5).png';
-import face6 from '../../assets/images/Teacher (6).png';
-
 const d = homePageSectionsData.world;
 
-const faces = [face1, face2, face3, face4, face5, face6, face1, face2, face3];
+const faces = [
+	'/assets/images/Teacher (1).png',
+	'/assets/images/Teacher (2).png',
+	'/assets/images/Teacher (3).png',
+	'/assets/images/Teacher (4).png',
+	'/assets/images/Teacher (5).png',
+	'/assets/images/Teacher (6).png',
+	'/assets/images/Teacher (1).png',
+	'/assets/images/Teacher (2).png',
+	'/assets/images/Teacher (3).png',
+];
 ---
 
 <section class="ysa-world" aria-labelledby="world-heading">
@@ -47,19 +48,16 @@ const faces = [face1, face2, face3, face4, face5, face6, face1, face2, face3];
 
 			<div class="ysa-world__ring">
 				<div class="ysa-world__globe-wrap">
-					<Image
-						src={globe}
+					<img
+						src="/assets/images/world-globe.png"
 						alt="Global network of YSA students around the world"
 						class="ysa-world__globe"
-						width={286}
-						height={286}
 						loading="lazy"
-						decoding="async"
 					/>
 					{
 						faces.map((src, i) => (
 							<div class:list={['ysa-world__face', `ysa-world__face--${i + 1}`]}>
-								<Image src={src} alt="" width={32} height={32} class="ysa-world__face-img" loading="lazy" decoding="async" />
+								<img src={src} alt="" class="ysa-world__face-img" loading="lazy" />
 							</div>
 						))
 					}

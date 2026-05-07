@@ -1,11 +1,4 @@
 ---
-import type { ReviewItem } from '../../data/courseDetail';
-import reviewSarah from '../../assets/course-detail/review-sarah.png';
-import reviewDavid from '../../assets/course-detail/review-david.png';
-import gallery1 from '../../assets/course-detail/gallery-1.png';
-import gallery2 from '../../assets/course-detail/gallery-2.png';
-import gallery3 from '../../assets/course-detail/gallery-3.png';
-
 interface Props {
 	title: string;
 	rating: string;
@@ -13,7 +6,7 @@ interface Props {
 	starsText: string;
 	writeReviewLabel: string;
 	galleryTitle: string;
-	items: ReviewItem[];
+	items: { name: string; role: string; text: string }[];
 }
 
 const { title, rating, total, starsText, writeReviewLabel, galleryTitle, items } = Astro.props;
@@ -46,8 +39,8 @@ const { title, rating, total, starsText, writeReviewLabel, galleryTitle, items }
 							class="h-10 w-10 flex-shrink-0 rounded-full object-cover"
 							src={
 								item.name === 'Sarah Miller'
-								? reviewSarah.src
-								: reviewDavid.src
+								? '/assets/course-detail/review-sarah.png'
+								: '/assets/course-detail/review-david.png'
 							}
 							alt={item.name}
 							loading="lazy"
@@ -68,19 +61,19 @@ const { title, rating, total, starsText, writeReviewLabel, galleryTitle, items }
 		<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
 			<img
 				class="block h-48 w-full rounded-2xl object-cover"
-				src={gallery1.src}
+				src="/assets/course-detail/gallery-1.png"
 				alt="Robot project on desk"
 				loading="lazy"
 			/>
 			<img
 				class="block h-48 w-full rounded-2xl object-cover"
-				src={gallery2.src}
+				src="/assets/course-detail/gallery-2.png"
 				alt="Coding workstation for students"
 				loading="lazy"
 			/>
 			<img
 				class="block h-48 w-full rounded-2xl object-cover"
-				src={gallery3.src}
+				src="/assets/course-detail/gallery-3.png"
 				alt="Children collaborating in a STEM class"
 				loading="lazy"
 			/>

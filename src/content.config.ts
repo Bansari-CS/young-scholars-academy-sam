@@ -376,9 +376,15 @@ const blogPageCollection = defineCollection({
 	schema: z.record(z.string(), z.any()),
 });
 
+const courseDetailCollection = defineCollection({
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/course-detail' }),
+	schema: z.record(z.string(), z.any()),
+});
+
 export const collections = {
 	blog: blogCollection,
 	'blog-page': blogPageCollection,
+	'course-detail': courseDetailCollection,
 	teachers: teachersCollection,
 	'semester-sales': semesterSalesCollection,
 	'mentor-profile': mentorProfileCollection,

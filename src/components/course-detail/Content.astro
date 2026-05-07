@@ -1,12 +1,4 @@
 ---
-import type { CurriculumSession, GainItem } from '../../data/courseDetail';
-import heroTeacherImage from '../../assets/course-detail/hero-teacher.png';
-import checkIcon from '../../assets/course-detail/icon-check.svg';
-import pythonIcon from '../../assets/course-detail/icon-python.svg';
-import hardwareIcon from '../../assets/course-detail/icon-hardware.svg';
-import videoCoverImage from '../../assets/course-detail/video-cover.png';
-import playIcon from '../../assets/course-detail/icon-play.svg';
-
 interface Pillar {
 	title: string;
 	description: string;
@@ -17,7 +9,7 @@ interface Props {
 	overview: string;
 	overview2: string;
 	pillars: Pillar[];
-	gains: GainItem[];
+	gains: { text: string }[];
 	gainsTitle: string;
 	videoTitle: string;
 	videoCaptionTitle: string;
@@ -32,7 +24,7 @@ interface Props {
 	instructorRole: string;
 	instructorPortfolioLabel: string;
 	instructorOtherCoursesLabel: string;
-	sessions: CurriculumSession[];
+	sessions: { session: string; topic: string; date: string }[];
 	instructorBio: string;
 }
 
@@ -83,8 +75,8 @@ const {
 								class={index === 0 ? 'h-4 w-5' : 'h-4 w-4'}
 								src={
 									index === 0
-										? pythonIcon.src
-										: hardwareIcon.src
+										? '/assets/course-detail/icon-python.svg'
+										: '/assets/course-detail/icon-hardware.svg'
 								}
 								alt=""
 							/>
@@ -108,7 +100,7 @@ const {
 					<li class="relative pl-7 text-[16px] leading-6 text-slate-600">
 						<img
 							class="absolute top-[0.42rem] left-0 h-4 w-4"
-							src={checkIcon.src}
+							src="/assets/course-detail/icon-check.svg"
 							alt=""
 							aria-hidden="true"
 						/>
@@ -124,7 +116,7 @@ const {
 		<div class="relative h-[400px] overflow-hidden rounded-3xl">
 			<img
 				class="block h-full w-full object-cover"
-				src={videoCoverImage.src}
+				src="/assets/course-detail/video-cover.png"
 				alt="Students during robotics class session"
 				loading="lazy"
 			/>
@@ -135,7 +127,7 @@ const {
 			>
 				<img
 					class="h-6 w-[18px]"
-					src={playIcon.src}
+					src="/assets/course-detail/icon-play.svg"
 					alt=""
 					aria-hidden="true"
 				/>
@@ -189,7 +181,7 @@ const {
 		<article class="flex items-start gap-8 rounded-[32px] bg-[rgba(239,246,255,0.3)] p-8">
 			<img
 				class="h-32 w-32 flex-shrink-0 rounded-2xl object-cover shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]"
-				src={heroTeacherImage.src}
+				src="/assets/course-detail/hero-teacher.png"
 				alt={instructorName}
 				loading="lazy"
 			/>

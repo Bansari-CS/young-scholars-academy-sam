@@ -18,7 +18,7 @@ export interface ProgramListingCard {
 	category: { id: ProgramCategoryId; label: string };
 	durationWeeks: number;
 	teacher: { name: string };
-	/** Matches `src/assets/images/Teacher (n).png` via component map */
+	/** Matches `/assets/images/Teacher (n).png` via component map */
 	teacherPhotoKey: 'ross' | 'martinez' | 'chen' | 'johnson' | 'thompson' | 'lee';
 	/** Matches hero image import in `ProgramsSection.astro` */
 	coverImageKey: ProgramCategoryId;
