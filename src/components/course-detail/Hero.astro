@@ -32,7 +32,7 @@ const {
 
 <section class="course-hero">
 	<div class="mx-auto flex w-full max-w-[1216px] flex-col items-start gap-[96px] px-4 pt-16 pb-29 lg:flex-row lg:items-center lg:px-4">
-		<div class="flex w-full md:max-w-[560px] max-w-full flex-col gap-8">
+		<div class="flex w-full lg:max-w-[560px] max-w-full flex-col gap-8">
 			<div class="flex w-full items-start gap-2">
 				{
 					badges.map((badge, index) => (
@@ -48,13 +48,13 @@ const {
 				}
 			</div>
 
-			<h1 class="font-[var(--ysa-font-display)] text-[44px] leading-[52px] font-bold tracking-normal text-slate-900">
+			<h1 class="font-[var(--ysa-font-display)] xl:text-[44px] text-[32px] font-bold xl:leading-[55px] md:leading-[45px] leading-[52px] font-bold tracking-normal text-slate-900">
 				{titleLead}
-				<br />
+				<br class="lg:block hidden" />
 				<span class="bg-gradient-to-r from-sky-500 to-indigo-500 bg-clip-text text-transparent">{titleAccent}</span>
 			</h1>
 
-			<p class="w-full max-w-[512px] text-[18px] leading-[32px] text-slate-600">{description}</p>
+			<p class="w-full lg:max-w-[512px] max-w-full text-[18px] leading-[32px] text-slate-600">{description}</p>
 
 			<div class="grid h-[162px] w-full grid-cols-2 gap-x-12 gap-y-6 border-y border-slate-100 py-4">
 				{
@@ -67,12 +67,12 @@ const {
 				}
 			</div>
 
-			<div class="flex w-full items-center justify-between">
+			<div class="flex w-full items-center justify-between flex-wrap gap-y-4">
 				<div>
 					<strong class="block font-[var(--ysa-font-display)] text-[30px] leading-9 font-semibold text-slate-900">{price}</strong>
 					<span class="block text-sm leading-5 text-slate-500">{priceNote}</span>
 				</div>
-				<div class="flex w-[353px] items-center justify-between">
+				<div class="flex w-[353px] items-center justify-between flex-wrap gap-y-4">
 					<PrimaryButton
 						href="#"
 						label={primaryCtaLabel}
@@ -89,7 +89,7 @@ const {
 			</div>
 		</div>
 
-		<aside class="relative h-[532px] w-full md:max-w-[560px] max-w-full">
+		<aside class="relative h-[532px] w-full lg:max-w-[560px] max-w-full">
 			<div class="absolute inset-[16px_-16px_-16px_16px] rounded-[40px] bg-[#e0f2fe]"></div>
 			<div class="relative overflow-hidden rounded-[40px] border-[8px] border-white shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]">
 			<img

@@ -143,7 +143,7 @@ const {
 
 	<section id="schedule" class="scroll-mt-32 flex flex-col gap-6 pt-2">
 		<h2 class="text-[25px] leading-8 font-bold tracking-[-0.02em] text-slate-900">{scheduleTitle}</h2>
-		<div class="overflow-hidden rounded-3xl border border-slate-100 bg-white">
+		<div class="overflow-x-auto rounded-3xl border border-slate-100 bg-white">
 			<table class="w-full border-collapse">
 				<thead>
 					<tr class="bg-slate-50">
@@ -162,9 +162,9 @@ const {
 					{
 						sessions.map((session) => (
 							<tr>
-								<td class="border-b border-[#c8ccd0] px-6 py-4 text-[17px] leading-6 font-semibold text-slate-800">{session.session}</td>
-								<td class="border-b border-[#c8ccd0] px-6 py-4 text-[16px] text-slate-600">{session.topic}</td>
-								<td class="border-b border-[#c8ccd0] px-6 py-4 text-right text-[16px] text-slate-600">{session.date}</td>
+								<td class="border-b border-[#c8ccd0] xl:px-6 xl:py-4 xl:text-[17px] px-3 py-2 text-[14px] xl:leading-6 leading-5 font-semibold text-slate-800">{session.session}</td>
+								<td class="border-b border-[#c8ccd0] xl:px-6 xl:py-4 xl:text-[17px] px-3 py-2 text-[14px] xl:leading-6 leading-5 text-slate-600">{session.topic}</td>
+								<td class="border-b border-[#c8ccd0] xl:px-6 xl:py-4 xl:text-[17px] px-3 py-2 text-[14px] xl:leading-6 leading-5 text-slate-600">{session.date}</td>
 							</tr>
 						))
 					}
@@ -178,9 +178,9 @@ const {
 
 	<section id="teacher" class="scroll-mt-32 flex flex-col gap-6">
 		<h2 class="text-[25px] leading-8 font-bold tracking-[-0.02em] text-slate-900">{instructorTitle}</h2>
-		<article class="flex items-start gap-8 rounded-[32px] bg-[rgba(239,246,255,0.3)] p-8">
+		<article class="flex items-start md:gap-8 gap-4 rounded-[32px] bg-[rgba(239,246,255,0.3)] p-8 flex-col sm:flex-row">
 			<img
-				class="h-32 w-32 flex-shrink-0 rounded-2xl object-cover shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]"
+				class="md:h-32 md:w-32 h-15 w-15 flex-shrink-0 rounded-2xl object-cover shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]"
 				src="/assets/course-detail/hero-teacher.png"
 				alt={instructorName}
 				loading="lazy"

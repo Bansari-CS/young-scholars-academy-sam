@@ -22,7 +22,7 @@ const courseDetailContent = courseDetailEntry.data;
 <Layout title={courseDetailContent.seo.title} description={courseDetailContent.seo.description}>
 	<Header brand="Young Scholars Academy" navItems={courseDetailContent.navItems} />
 
-	<main class="site-main bg-[#f8fafc]">
+	<main class="site-main bg-[#f8fafc] overflow-x-hidden">
 		<Hero {...courseDetailContent.hero} />
 		<TabsBar tabs={courseDetailContent.tabs} />
 		<MainContentSection content={courseDetailContent.content} sidebar={courseDetailContent.sidebar} />
