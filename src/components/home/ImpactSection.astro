@@ -1,14 +1,26 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import type { ImpactCard, ImpactTestimonialAuthor } from '../../types/homePage';
 
 interface Props {
 	hideStatLabels?: string[];
 	hideStats?: boolean;
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		columnsAriaLabel?: string;
+		videoAltSuffix?: string;
+		playVideoAlt?: string;
+		starsAriaSuffix?: string;
+		stats: Array<{ value: string; label: string }>;
+		columns: Array<{
+			flow: 'up' | 'down';
+			cards: ImpactCard[];
+		}>;
+	};
 }
 
-const { hideStatLabels = [], hideStats = false } = Astro.props;
-const d = homePageSectionsData.impact;
+const { hideStatLabels = [], hideStats = false, content: d } = Astro.props;
 const filteredStats = d.stats.filter((stat) => !hideStatLabels.includes(stat.label));
 
 const imageByIndex = {
@@ -46,7 +58,7 @@ const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex
 			)
 		}
 
-		<div class="impact-columns" aria-label="Parent testimonials">
+		<div class="impact-columns" aria-label={d.columnsAriaLabel ?? 'Parent testimonials'}>
 			{
 				d.columns.map((column) => {
 					const repeatedCards = [...column.cards, ...column.cards];
@@ -60,14 +72,14 @@ const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex
 												<div class="impact-card-media">
 													<img
 														src={getThumbnail(card)!}
-														alt={`${card.author.name} video testimonial`}
+														alt={`${card.author.name} ${d.videoAltSuffix ?? 'video testimonial'}`}
 														loading="lazy"
 													/>
-													<span class="impact-card-play" aria-hidden="true"><img src="/assets/images/Vector.svg" alt="Play video" /></span>
+													<span class="impact-card-play" aria-hidden="true"><img src="/assets/images/Vector.svg" alt={d.playVideoAlt ?? 'Play video'} /></span>
 												</div>
 											) : null}
 											<div class="impact-card-body">
-												<p class="impact-card-stars" aria-label={`${card.rating} out of 5 stars`}>
+												<p class="impact-card-stars" aria-label={`${card.rating} ${d.starsAriaSuffix ?? 'out of 5 stars'}`}>
 													{'★'.repeat(card.rating)}
 												</p>
 												<p class="impact-card-quote">{card.quote}</p>

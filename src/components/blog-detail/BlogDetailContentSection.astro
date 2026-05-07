@@ -1,36 +1,75 @@
 ---
+interface Props {
+	content: {
+		breadcrumbHomeLabel: string;
+		breadcrumbInsightsLabel: string;
+		breadcrumbCategory: string;
+		categoryLabel: string;
+		title: string;
+		authorName: string;
+		authorRole: string;
+		publishedDate: string;
+		readTime: string;
+		heroImage: string;
+		heroImageAlt: string;
+		authorAvatar: string;
+		aboutAuthor: {
+			title: string;
+			description: string;
+			image: string;
+			imageAlt: string;
+		};
+		sidebar: {
+			toolkit: {
+				title: string;
+				description: string;
+				inputPlaceholder: string;
+				buttonLabel: string;
+			};
+			trending: {
+				title: string;
+				items: Array<{ title: string; category: string; image: string; href: string }>;
+			};
+			categories: {
+				title: string;
+				items: string[];
+			};
+		};
+	};
+	Content: any;
+}
+
+const { content, Content } = Astro.props;
+const article = content.article ?? content;
+const sidebar = content.sidebar ?? article.sidebar;
 ---
 
 <section class="mx-auto w-full max-w-[1200px] px-6 pb-20 md:pb-24">
 	<div class="mb-8 flex items-center gap-2 text-sm text-[rgba(71,85,105,0.6)]">
-		<a href="/" class="hover:text-[#0a9dfb]">Home</a>
+		<a href="/" class="hover:text-[#0a9dfb]">{article.breadcrumbHomeLabel}</a>
 		<span><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5.07812 4.62891L1.28906 8.4375C1.09375 8.61328 0.800781 8.61328 0.625 8.4375L0.175781 7.98828C0 7.8125 0 7.51953 0.175781 7.32422L3.18359 4.29688L0.175781 1.28906C0 1.09375 0 0.800781 0.175781 0.625L0.625 0.175781C0.800781 0 1.09375 0 1.28906 0.175781L5.07812 3.98438C5.25391 4.16016 5.25391 4.45312 5.07812 4.62891Z" fill="#475569" fill-opacity="0.6"/>
 </svg>
 </span>
-		<a href="/blog" class="hover:text-[#0a9dfb]">Insights</a>
+		<a href="/blog" class="hover:text-[#0a9dfb]">{article.breadcrumbInsightsLabel}</a>
 		<span><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5.07812 4.62891L1.28906 8.4375C1.09375 8.61328 0.800781 8.61328 0.625 8.4375L0.175781 7.98828C0 7.8125 0 7.51953 0.175781 7.32422L3.18359 4.29688L0.175781 1.28906C0 1.09375 0 0.800781 0.175781 0.625L0.625 0.175781C0.800781 0 1.09375 0 1.28906 0.175781L5.07812 3.98438C5.25391 4.16016 5.25391 4.45312 5.07812 4.62891Z" fill="#475569" fill-opacity="0.6"/>
 </svg>
 </span>
-		<span class="font-medium text-[#475569]">Gifted & 2e Learners</span>
+		<span class="font-medium text-[#475569]">{article.breadcrumbCategory}</span>
 	</div>
 
 	<div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,792px)_352px] lg:justify-between lg:gap-12 lg:items-start">
 		<article class="min-w-0">
-			<div class="mb-6 inline-flex rounded-lg bg-[#e1f3ff] px-3 py-1 text-xs font-bold uppercase tracking-[0.6px] text-[#0a9dfb]">Gifted & 2e</div>
-			<h1 class="text-[34px] font-bold leading-tight tracking-[-0.02em] md:text-[44px]">
-				Navigating the Complexities of
-				<span class="block">Twice-Exceptional (2e)</span>
-				<span class="block">Learners at Home</span>
-			</h1>
+			<div class="mb-6 inline-flex rounded-lg bg-[#e1f3ff] px-3 py-1 text-xs font-bold uppercase tracking-[0.6px] text-[#0a9dfb]">{article.categoryLabel}</div>
+			<h1 class="text-[34px] font-bold leading-tight tracking-[-0.02em] md:text-[44px]">{article.title}</h1>
 
 			<div class="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[rgba(226,232,240,0.8)] py-6">
 				<div class="flex items-center gap-4">
-					<img src="/assets/images/Teacher (5).png" alt="Dr Sarah Jenkins" class="h-12 w-12 rounded-full border-2 border-white object-cover shadow-md" />
+					<img src={article.authorAvatar} alt={article.authorName} class="h-12 w-12 rounded-full border-2 border-white object-cover shadow-md" />
 					<div>
-						<p class="text-sm font-bold">Dr. Sarah Jenkins</p>
-						<p class="text-xs text-[rgba(71,85,105,0.7)]">Child Psychologist & Educational Specialist</p>
+						<p class="text-sm font-bold">{article.authorName}</p>
+						<p class="text-xs text-[rgba(71,85,105,0.7)]">{article.authorRole}</p>
 					</div>
 				</div>
 				<div class="flex items-center gap-4 text-sm text-[rgba(71,85,105,0.7)] sm:gap-6">
@@ -38,86 +77,30 @@
 						<svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 							<path d="M10.9375 1.75C11.6484 1.75 12.25 2.35156 12.25 3.0625V12.6875C12.25 13.4258 11.6484 14 10.9375 14H1.3125C0.574219 14 0 13.4258 0 12.6875V3.0625C0 2.35156 0.574219 1.75 1.3125 1.75H2.625V0.328125C2.625 0.164062 2.76172 0 2.95312 0H4.04688C4.21094 0 4.375 0.164062 4.375 0.328125V1.75H7.875V0.328125C7.875 0.164062 8.01172 0 8.20312 0H9.29688C9.46094 0 9.625 0.164062 9.625 0.328125V1.75H10.9375ZM10.7734 12.6875C10.8555 12.6875 10.9375 12.6328 10.9375 12.5234V4.375H1.3125V12.5234C1.3125 12.6328 1.36719 12.6875 1.47656 12.6875H10.7734Z" fill="#475569" fill-opacity="0.7"/>
 						</svg>
-						Oct 24, 2023
+						{article.publishedDate}
 					</span>
 					<span class="inline-flex items-center gap-2">
 						<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 							<path d="M6.78125 0C10.5273 0 13.5625 3.03516 13.5625 6.78125C13.5625 10.5273 10.5273 13.5625 6.78125 13.5625C3.03516 13.5625 0 10.5273 0 6.78125C0 3.03516 3.03516 0 6.78125 0ZM6.78125 12.25C9.78906 12.25 12.25 9.81641 12.25 6.78125C12.25 3.77344 9.78906 1.3125 6.78125 1.3125C3.74609 1.3125 1.3125 3.77344 1.3125 6.78125C1.3125 9.81641 3.74609 12.25 6.78125 12.25ZM8.44922 9.40625L6.125 7.71094C6.04297 7.65625 6.01562 7.54688 6.01562 7.46484V2.95312C6.01562 2.78906 6.15234 2.625 6.34375 2.625H7.21875C7.38281 2.625 7.54688 2.78906 7.54688 2.95312V6.83594L9.35156 8.17578C9.51562 8.28516 9.54297 8.47656 9.43359 8.64062L8.91406 9.32422C8.80469 9.48828 8.61328 9.51562 8.44922 9.40625Z" fill="#475569" fill-opacity="0.7"/>
 						</svg>
-						8 min read
+						{article.readTime}
 					</span>
 				</div>
 			</div>
 
-			<img src="/assets/images/articalImg1.jpg" alt="Student writing" class="mt-8 w-full rounded-3xl shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]" />
+			<img src={article.heroImage} alt={article.heroImageAlt} class="mt-8 w-full rounded-3xl shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]" />
 
-			<div class="prose prose-lg mt-8 max-w-none prose-p:leading-[26px] prose-p:text-[#475569] prose-headings:font-bold prose-headings:text-[#111827]">
-				<p>
-					Being "twice-exceptional" (2e) is a term used to describe students who are both gifted and have a learning disability, such as ADHD, dyslexia, or autism. These children often feel like walking contradictions: they might be able to solve complex physics problems but struggle to organize their backpack or finish a simple worksheet.
-				</p>
-
-				<h2 class="!mt-10 !text-[30px] !leading-[36px] font-bold mb-[20px]">Understanding the "Asynchronous" Development</h2>
-				<p>
-					The core challenge of the 2e experience is asynchronous development. This means the child's intellectual, emotional, and physical growth don't happen at the same rate. Imagine a 10-year-old with the mathematical reasoning of a college student, the handwriting of a first-grader, and the emotional regulation of a 7-year-old.
-				</p>
+			<div class="blog-markdown mt-8 max-w-none">
+				<Content />
 			</div>
-
-			<blockquote class="my-8 rounded-r-2xl border-l-4 border-[#0a9dfb] bg-[#f8fafc] px-6 py-6 text-[18px] italic leading-[32px] text-[#111827] md:px-8 font-medium">
-				"The goal isn't just to fix the challenges, but to nourish the brilliance that makes these children unique."
-			</blockquote>
-
-			<h3 class="mt-10 text-2xl font-bold leading-8">Creating a Supportive Home Environment</h3>
-			<p class="mt-4 leading-[26px] text-[#475569]">
-				When you're raising a 2e child, your home needs to be a sanctuary of understanding. Here are three key strategies to implement starting today:
-			</p>
-
-			<ul class="mt-4 space-y-3 text-[#475569]">
-				<li class="flex gap-3">
-					<span class="mt-1 inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[#048c3c]">
-						<svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.8125 10.3086L0.273438 5.76953C0 5.49609 0 5.03125 0.273438 4.75781L1.25781 3.77344C1.53125 3.5 1.96875 3.5 2.24219 3.77344L5.33203 6.83594L11.8945 0.273438C12.168 0 12.6055 0 12.8789 0.273438L13.8633 1.25781C14.1367 1.53125 14.1367 1.99609 13.8633 2.26953L5.82422 10.3086C5.55078 10.582 5.08594 10.582 4.8125 10.3086Z" fill="#0A9DFB"/>
-</svg>
-
-					</span>
-					<span><span class="font-bold">Focus on Strengths First:</span> It's easy to spend all our energy on "remediating" the weakness. Make sure at least 70% of their learning time is spent on their passions.</span>
-				</li>
-				<li class="flex gap-3">
-					<span class="mt-1 inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[#048c3c]">
-						<svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.8125 10.3086L0.273438 5.76953C0 5.49609 0 5.03125 0.273438 4.75781L1.25781 3.77344C1.53125 3.5 1.96875 3.5 2.24219 3.77344L5.33203 6.83594L11.8945 0.273438C12.168 0 12.6055 0 12.8789 0.273438L13.8633 1.25781C14.1367 1.53125 14.1367 1.99609 13.8633 2.26953L5.82422 10.3086C5.55078 10.582 5.08594 10.582 4.8125 10.3086Z" fill="#0A9DFB"/>
-</svg>
-
-					</span>
-					<span><span class="font-bold">Use Scaffolding:</span> If they have a brilliant story but can't write it down, let them dictate it to you. The goal is expression, not penmanship.</span>
-				</li>
-				<li class="flex gap-3">
-					<span class="mt-1 inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[#048c3c]">
-						<svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.8125 10.3086L0.273438 5.76953C0 5.49609 0 5.03125 0.273438 4.75781L1.25781 3.77344C1.53125 3.5 1.96875 3.5 2.24219 3.77344L5.33203 6.83594L11.8945 0.273438C12.168 0 12.6055 0 12.8789 0.273438L13.8633 1.25781C14.1367 1.53125 14.1367 1.99609 13.8633 2.26953L5.82422 10.3086C5.55078 10.582 5.08594 10.582 4.8125 10.3086Z" fill="#0A9DFB"/>
-</svg>
-
-					</span>
-					<span><span class="font-bold">Normalize the Struggle:</span> Talk openly about how their brain works. Understanding their own neurobiology is the first step toward self-advocacy.</span>
-				</li>
-			</ul>
-
-			<img src="/assets/images/articalDetails.jpg" alt="Parent and child smiling" class="mt-8 w-full rounded-2xl" />
-
-			<h2 class="mt-10 text-[30px] font-bold leading-[36px]">The Emotional Toll of High Potential</h2>
-			<p class="mt-4 leading-[26px] text-[#475569]">
-				Many 2e children suffer from intense perfectionism. Because they know they are capable of high-level thought, they feel deeply ashamed when their "output" doesn't match their internal standard. This often leads to task paralysis or shutting down.
-			</p>
-			<p class="mt-4 leading-[26px] text-[#475569]">
-				In the next section, we'll explore how to navigate the school system and advocate for an Individualized Education Program (IEP) that actually addresses both halves of the 2e coin.
-			</p>
 
 			<div class="mt-10 rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)] md:p-8">
 				<div class="flex flex-col gap-6 sm:flex-row">
-					<img src="/assets/images/AuthorBio.jpg" alt="Dr Sarah Jenkins" class="h-20 w-20 rounded-2xl object-cover" />
+					<img src={article.aboutAuthor.image} alt={article.aboutAuthor.imageAlt} class="h-20 w-20 rounded-2xl object-cover" />
 					<div>
-						<h4 class="text-lg font-bold">About Dr. Sarah Jenkins</h4>
+						<h4 class="text-lg font-bold">{article.aboutAuthor.title}</h4>
 						<p class="mt-2 text-[#475569]">
-							Dr. Jenkins is a clinical psychologist specializing in neurodiversity. With over 15 years of experience, she helps families navigate the complexities of raising twice-exceptional children and advocates for inclusive education policies.
+							{article.aboutAuthor.description}
 						</p>
 						<div class="mt-4 flex items-center gap-4">
 							<a href="#" aria-label="LinkedIn">
@@ -139,37 +122,31 @@
 
 		<aside class="space-y-8 lg:sticky lg:top-24">
 			<div class="rounded-3xl bg-gradient-to-br from-[#0a9dfb] to-[#7c3aed] p-6 text-white shadow-[0px_8px_32px_-8px_rgba(0,132,255,0.25)] md:p-8">
-				<h3 class="text-[17px] font-semibold leading-8">Free 2e Success Toolkit</h3>
-				<p class="mt-2 text-sm leading-[22px] text-[rgba(255,255,255,0.85)]">Download our comprehensive guide to supporting your gifted child's unique learning needs at home.</p>
-				<input placeholder="Email address" class="mt-5 w-full rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] px-4 py-3 text-sm placeholder:text-[rgba(255,255,255,0.65)]" />
-				<button class="mt-3 w-full rounded-xl bg-white py-3 text-sm font-semibold text-[#0a9dfb]">Get the Toolkit</button>
+				<h3 class="text-[17px] font-semibold leading-8">{sidebar.toolkit.title}</h3>
+				<p class="mt-2 text-sm leading-[22px] text-[rgba(255,255,255,0.85)]">{sidebar.toolkit.description}</p>
+				<input placeholder={sidebar.toolkit.inputPlaceholder} class="mt-5 w-full rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] px-4 py-3 text-sm placeholder:text-[rgba(255,255,255,0.65)]" />
+				<button class="mt-3 w-full rounded-xl bg-white py-3 text-sm font-semibold text-[#0a9dfb]">{sidebar.toolkit.buttonLabel}</button>
 			</div>
 
 			<div class="rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
 				<h4 class="inline-flex items-center gap-2 text-[17px] font-semibold">
 					<svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3555 1.82812C13.9219 4.18359 15.75 8.05078 15.75 9.91406C15.75 14.3789 12.1992 18 7.875 18C3.51562 18 0 14.3789 0 9.91406C0 7.38281 2.42578 3.23438 5.90625 0C7.24219 1.26562 8.4375 2.60156 9.38672 3.9375C9.94922 3.19922 10.6172 2.49609 11.3555 1.82812ZM10.6875 13.7812C12.4102 12.5859 12.7969 10.2305 11.8477 8.40234C11.7422 8.19141 11.6016 7.94531 11.4609 7.69922L9.38672 10.0547C9.38672 10.0547 6.15234 5.90625 5.90625 5.625C4.21875 7.69922 3.375 8.89453 3.375 10.2305C3.375 12.9727 5.41406 14.625 7.94531 14.625C8.96484 14.625 9.91406 14.3438 10.6875 13.7812Z" fill="#F59E0B"/></svg>
-					<span>Trending Now</span>
+					<span>{sidebar.trending.title}</span>
 				</h4>
 				<div class="mt-6 space-y-6">
-					<a href="#" class="flex gap-4">
-						<img src="/assets/images/articalImg2.jpg" alt="" class="h-20 w-20 rounded-xl object-cover" />
-						<div><p class="text-sm font-semibold leading-[20px]">Building lasting friendships for quirky kids</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">Social Skills</p></div>
-					</a>
-					<a href="#" class="flex gap-4">
-						<img src="/assets/images/articalImg3.jpg" alt="" class="h-20 w-20 rounded-xl object-cover" />
-						<div><p class="text-sm font-semibold leading-[20px]">Harnessing hyperfocus as a superpower</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">ADHD</p></div>
-					</a>
-					<a href="#" class="flex gap-4">
-						<img src="/assets/images/articalImg4.jpg" alt="" class="h-20 w-20 rounded-xl object-cover" />
-						<div><p class="text-sm font-semibold leading-[20px]">The best homeschooling tools for 2024</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">Learning</p></div>
-					</a>
+					{sidebar.trending.items.map((item) => (
+						<a href={item.href} class="flex gap-4">
+							<img src={item.image} alt={item.title} class="h-20 w-20 rounded-xl object-cover" />
+							<div><p class="text-sm font-semibold leading-[20px]">{item.title}</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">{item.category}</p></div>
+						</a>
+					))}
 				</div>
 			</div>
 
 			<div class="rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
-				<h4 class="text-[17px] font-semibold">Categories</h4>
+				<h4 class="text-[17px] font-semibold">{sidebar.categories.title}</h4>
 				<div class="mt-4 flex flex-wrap gap-2">
-					{['Giftedness', 'Neurodiversity', 'Homeschooling', 'ADHD Tips', 'Parenting', 'Advocacy'].map((c) => (
+					{sidebar.categories.items.map((c) => (
 						<span class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-4 py-2 text-xs font-medium text-[#475569]">{c}</span>
 					))}
 				</div>
@@ -177,3 +154,66 @@
 		</aside>
 	</div>
 </section>
+
+<style>
+	.blog-markdown :global(p) {
+		margin-top: 1rem;
+		color: #475569;
+		line-height: 1.625rem;
+	}
+
+	.blog-markdown :global(h2) {
+		margin-top: 2.5rem;
+		margin-bottom: 1.25rem;
+		font-size: 1.875rem;
+		line-height: 2.25rem;
+		font-weight: 700;
+		color: #111827;
+	}
+
+	.blog-markdown :global(blockquote) {
+		margin: 2rem 0;
+		border-left: 4px solid #0a9dfb;
+		background: #f8fafc;
+		padding: 1.5rem;
+		border-radius: 0 1rem 1rem 0;
+		font-size: 1.125rem;
+		line-height: 2rem;
+		font-style: italic;
+		font-weight: 500;
+		color: #111827;
+	}
+
+	.blog-markdown :global(ul) {
+		margin-top: 1rem;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.blog-markdown :global(li) {
+		position: relative;
+		padding-left: 2rem;
+		color: #475569;
+		line-height: 1.625rem;
+	}
+
+	.blog-markdown :global(li)::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		top: 0.125rem;
+		color: #0a9dfb;
+		font-weight: 700;
+	}
+
+	.blog-markdown :global(strong) {
+		color: #111827;
+		font-weight: 700;
+	}
+
+	.blog-markdown :global(img) {
+		margin-top: 2rem;
+		width: 100%;
+		border-radius: 1rem;
+	}
+</style>

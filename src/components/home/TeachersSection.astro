@@ -1,9 +1,18 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import type { TeacherCard } from '../../types/homePage';
 import '../../styles/components/teachers-section.css';
 
-const d = homePageSectionsData.teachers;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		cardCta: { label: string; href: string };
+		items: TeacherCard[];
+	};
+}
+
+const { content: d } = Astro.props;
 
 const photoByIndex: Record<TeacherCard['photoIndex'], string> = {
 	1: '/assets/images/educator1.jpg',

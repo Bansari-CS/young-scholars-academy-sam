@@ -1,5 +1,4 @@
 ---
-import { programsSectionData } from '../../data/programsSection';
 import type { ProgramCategoryId, ProgramListingCard } from '../../types/programsSection';
 import '../../styles/components/programs-section.css';
 const coverByKey: Record<ProgramCategoryId, string> = {
@@ -20,7 +19,28 @@ const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], string> =
 	lee: '/assets/images/Teacher (6).png',
 };
 
-const d = programsSectionData;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		filters: {
+			ageRange: { label: string; options: Array<{ label: string; isActive?: boolean }> };
+			campType: { label: string; placeholder: string; options: Array<{ value: string; label: string }> };
+			teacher: { label: string; placeholder: string; options: Array<{ value: string; label: string }> };
+			activeLabel?: string;
+			campTypeSrLabel?: string;
+			teacherSrLabel?: string;
+			removeFilterAriaPrefix?: string;
+			clearLabel: string;
+		};
+		learnMoreLabel?: string;
+		cards: ProgramListingCard[];
+		viewAllCta: { label: string; href: string };
+	};
+}
+
+const { content: d } = Astro.props;
 const { filters } = d;
 const initialAge = filters.ageRange.options.find((o) => o.isActive)?.label ?? '';
 const toSlug = (value: string) =>
@@ -39,7 +59,12 @@ const toSlug = (value: string) =>
 			<p class="programs-section__sub">{d.description}</p>
 		</header>
 
-		<div class="programs-filter" data-programs-filter data-initial-age={initialAge}>
+		<div
+			class="programs-filter"
+			data-programs-filter
+			data-initial-age={initialAge}
+			data-remove-prefix={filters.removeFilterAriaPrefix ?? 'Remove'}
+		>
 			<div class="programs-filter__grid">
 				<div class="programs-filter__col">
 					<div class="programs-filter__col-head">
@@ -71,7 +96,7 @@ const toSlug = (value: string) =>
 </svg>
 						<span>{filters.campType.label}</span>
 					</div>
-					<label class="visually-hidden" for="programs-camp-type">Camp type</label>
+					<label class="visually-hidden" for="programs-camp-type">{filters.campTypeSrLabel ?? 'Camp type'}</label>
 					<select
 						class="programs-filter__select"
 						id="programs-camp-type"
@@ -97,7 +122,7 @@ const toSlug = (value: string) =>
 
 						<span>{filters.teacher.label}</span>
 					</div>
-					<label class="visually-hidden" for="programs-teacher">Teacher</label>
+					<label class="visually-hidden" for="programs-teacher">{filters.teacherSrLabel ?? 'Teacher'}</label>
 					<select
 						class="programs-filter__select"
 						id="programs-teacher"
@@ -118,7 +143,7 @@ const toSlug = (value: string) =>
 
 			<div class="programs-filter__active-row">
 				<div class="programs-filter__active-group">
-					<span class="programs-filter__active-label">ACTIVE:</span>
+					<span class="programs-filter__active-label">{filters.activeLabel ?? 'ACTIVE:'}</span>
 					<div class="programs-filter__chips" data-filter-chips></div>
 				</div>
 				<button type="button" class="programs-filter__clear" data-clear-all>
@@ -171,7 +196,7 @@ const toSlug = (value: string) =>
 										/>
 										<span class="programs-card__teacher-name">{card.teacher.name}</span>
 									</div>
-									<span class="programs-card__link">Learn More →</span>
+									<span class="programs-card__link">{d.learnMoreLabel ?? 'Learn More'} →</span>
 								</div>
 							</div>
 						</a>
@@ -206,6 +231,7 @@ const toSlug = (value: string) =>
 			if (!campSelect || !teacherSelect || !chipsHost || !clearBtn) return;
 
 			var initial = root.getAttribute('data-initial-age') || '';
+			var removePrefix = root.getAttribute('data-remove-prefix') || 'Remove';
 			var selectedAge = initial;
 
 			function campIsDefault() {
@@ -242,7 +268,8 @@ const toSlug = (value: string) =>
 						escapeHtml(c.label) +
 						'</span><button type="button" class="programs-filter__chip-remove" data-remove="' +
 						c.kind +
-						'" aria-label="Remove ' +
+						'" aria-label="' +
+						escapeHtml(removePrefix + ' ') +
 						c.kind +
 						' filter">×</button>';
 					chipsHost.appendChild(pill);

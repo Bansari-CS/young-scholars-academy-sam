@@ -15,10 +15,63 @@ featuredInsights:
   title: Featured Insights
   viewAllLabel: View all
   viewAllHref: "#"
+  mainCard:
+    image: /assets/images/featuredImg.jpg
+    imageAlt: Featured insight
+    tag: Gifted & 2e
+    readTime: 8 min read
+    title: Navigating the complexities of Twice-Exceptional (2e) learners at home.
+    description: Discover actionable strategies for supporting children who possess both exceptional cognitive abilities and significant learning challenges.
+    ctaLabel: Read Article
+    ctaHref: /blog/navigating-twice-exceptional-learners
+  sideCards:
+    - tag: Social Skills
+      title: Building lasting friendships for quirky kids.
+      description: Practical advice for helping differently-wired children navigate social...
+      ctaLabel: Read Article
+      ctaHref: /blog/building-friendships-for-quirky-kids
+      tagClass: bg-[#decbfe] text-[#7c3aed]
+    - tag: ADHD
+      title: Harnessing hyperfocus as a superpower.
+      description: Reframing ADHD traits and learning how to channel intense interests into...
+      ctaLabel: Read Article
+      ctaHref: /blog/harnessing-hyperfocus-as-superpower
+      tagClass: bg-[#dff8e9] text-[#048c3c]
 latestArticles:
   title: Latest Articles
   searchPlaceholder: Search articles, topics...
   loadMoreLabel: Load More Articles
+  items:
+    - slug: decoding-executive-function-challenges
+      title: Decoding Executive Function Challenges
+      description: Why bright children struggle with planning, organization, and task initiation.
+      category: Learning Differences
+      readTime: 12 min read
+    - slug: flexibility-of-interest-led-learning
+      title: The Flexibility of Interest-Led Learning
+      description: Build curriculum around curiosity while still meeting core learning outcomes.
+      category: Homeschooling
+      readTime: 10 min read
+    - slug: managing-meltdowns-vs-tantrums
+      title: Managing Meltdowns vs. Tantrums
+      description: Distinguish overload from behavior and respond with regulation-first support.
+      category: Mental Health
+      readTime: 15 min read
+    - slug: building-friendships-for-quirky-kids
+      title: The Power of Parallel Play in Teens
+      description: Why just being in the same room as peers matters more than you think.
+      category: Social-Emotional
+      readTime: 7 min read
+    - slug: harnessing-hyperfocus-as-superpower
+      title: Creating a Low-Arousal LearningSpace
+      description: Simple modifications to your home that can transform focus and reduce anxiety.
+      category: Sensory Processing
+      readTime: 9 min read
+    - slug: navigating-twice-exceptional-learners
+      title: Asynchronous Development 101
+      description: Why gifted kids can be 12 in math but 5 in emotional regulation.
+      category: Giftedness
+      readTime: 11 min read
 topics:
   title: Explore by Topic
   items:

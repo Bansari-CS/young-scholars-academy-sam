@@ -1,8 +1,18 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import '../../styles/components/world-kids-section.css';
 
-const d = homePageSectionsData.world;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		titleLine2: string;
+		description: string;
+		stats: Array<{ value: string; label: string }>;
+		globeAlt?: string;
+	};
+}
+
+const { content: d } = Astro.props;
 
 const faces = [
 	'/assets/images/Teacher (1).png',
@@ -50,7 +60,7 @@ const faces = [
 				<div class="ysa-world__globe-wrap">
 					<img
 						src="/assets/images/world-globe.png"
-						alt="Global network of YSA students around the world"
+						alt={d.globeAlt ?? 'Global network of YSA students around the world'}
 						class="ysa-world__globe"
 						loading="lazy"
 					/>

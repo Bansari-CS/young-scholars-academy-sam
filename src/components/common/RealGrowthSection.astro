@@ -5,9 +5,10 @@ import '../../styles/components/home-sections.css';
 interface Props {
 	hideStats?: boolean;
 	hideStatLabels?: string[];
+	content: Record<string, unknown>;
 }
 
-const { hideStats = false, hideStatLabels = [] } = Astro.props;
+const { hideStats = false, hideStatLabels = [], content } = Astro.props;
 ---
 
-<ImpactSection hideStats={hideStats} hideStatLabels={hideStatLabels} />
+<ImpactSection hideStats={hideStats} hideStatLabels={hideStatLabels} content={content} />
