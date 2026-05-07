@@ -1,35 +1,63 @@
+import academyAccreditedIcon from '../../assets/semester-sales/academy-accredited-icon.svg';
+import academyDiscussionIcon from '../../assets/semester-sales/academy-discussion-icon.svg';
+import academyGroupIcon from '../../assets/semester-sales/academy-group-icon.svg';
+import academyMainImage from '../../assets/semester-sales/academy-main-image.png';
+import academyMentorIcon from '../../assets/semester-sales/academy-mentor-icon.svg';
+import challengeBulletIcon from '../../assets/semester-sales/challenge-bullet-icon.svg';
+import differentlyIconClass from '../../assets/semester-sales/differently-icon-class.svg';
+import differentlyIconEngage from '../../assets/semester-sales/differently-icon-engage.svg';
+import differentlyIconMentor from '../../assets/semester-sales/differently-icon-mentor.svg';
+import familyAvatar1 from '../../assets/semester-sales/family-avatar-1.png';
+import familyAvatar2 from '../../assets/semester-sales/family-avatar-2.png';
+import familyAvatar3 from '../../assets/semester-sales/family-avatar-3.png';
+import familyStar from '../../assets/semester-sales/family-star.svg';
+import faqChevron from '../../assets/semester-sales/faq-chevron.svg';
+import finalCtaPattern from '../../assets/semester-sales/final-cta-pattern.png';
+import heroPrimaryArrow from '../../assets/semester-sales/hero-primary-arrow.svg';
+import heroSparkIcon from '../../assets/semester-sales/hero-spark-icon.svg';
+import heroStreakIcon from '../../assets/semester-sales/hero-streak-icon.svg';
+import heroStudentAvatar from '../../assets/semester-sales/hero-student-avatar.png';
+import pricingCheckBlue from '../../assets/semester-sales/pricing-check-blue.svg';
+import pricingCheckPurple from '../../assets/semester-sales/pricing-check-purple.svg';
+import semesterWorkClockIcon from '../../assets/semester-sales/semester-work-clock-icon.svg';
+import semesterWorkGroupIcon from '../../assets/semester-sales/semester-work-group-icon.svg';
+import semesterWorkImage from '../../assets/semester-sales/semester-work-image.png';
+import subjectImageAi from '../../assets/semester-sales/subject-image-ai.png';
+import subjectImageDebate from '../../assets/semester-sales/subject-image-debate.png';
+import subjectImageMinecraft from '../../assets/semester-sales/subject-image-minecraft.png';
+import subjectImageWriting from '../../assets/semester-sales/subject-image-writing.png';
+import virtualWorksCheckIcon from '../../assets/semester-sales/virtual-works-check-icon.svg';
+import virtualWorksImage from '../../assets/semester-sales/virtual-works-image.png';
+
 export const semesterSalesAssets = {
-	heroStudentAvatarUrl: 'https://www.figma.com/api/mcp/asset/9d482594-9e04-4b99-a0c7-7ed230165469',
-	heroPrimaryArrowUrl: 'https://www.figma.com/api/mcp/asset/a078ae19-f7d0-4ccb-8c09-5d744653a07f',
-	heroStreakIconUrl: 'https://www.figma.com/api/mcp/asset/156a81c7-046c-4aee-8c3d-4bf33270385a',
-	heroSparkIconUrl: 'https://www.figma.com/api/mcp/asset/fec47d0d-98d5-4b69-a0d8-5025ee29a48e',
-	challengeBulletIconUrl: 'https://www.figma.com/api/mcp/asset/b47503c4-e50e-4148-898e-780073aac5a4',
-	academyMainImageUrl:
-		'https://www.figma.com/api/mcp/asset/43415342-9b81-49fd-9711-8763bb1a98a3',
-	academyGroupIconUrl: 'https://www.figma.com/api/mcp/asset/409aa63d-e30e-4961-bd4c-9955e3e0fbfd',
-	academyDiscussionIconUrl:
-		'https://www.figma.com/api/mcp/asset/bb8e401b-3206-4981-934a-f733de5d4b3e',
-	academyMentorIconUrl: 'https://www.figma.com/api/mcp/asset/b7ffbaa1-d921-44a2-93e1-52f0097dc149',
-	academyAccreditedIconUrl:
-		'https://www.figma.com/api/mcp/asset/12d1e441-afb2-46c5-9693-39c0356ea34c',
-	differentlyIconMentorUrl: 'https://www.figma.com/api/mcp/asset/55d4b21f-22e8-45ec-8b02-5ce0629f77d6',
-	differentlyIconClassUrl: 'https://www.figma.com/api/mcp/asset/a9b98369-36a0-4bfa-a9aa-384276f27b96',
-	differentlyIconEngageUrl: 'https://www.figma.com/api/mcp/asset/d8065c48-0860-44c0-99f5-77b034c1fb3a',
-	semesterWorkImageUrl: 'https://www.figma.com/api/mcp/asset/e6a6dd7c-4aa8-4f12-bfb4-6f9e03b52997',
-	semesterWorkClockIconUrl: 'https://www.figma.com/api/mcp/asset/10b38bc4-613a-41c2-9d51-23f694183de3',
-	semesterWorkGroupIconUrl: 'https://www.figma.com/api/mcp/asset/f0333f50-fe9d-494a-b8c6-274a6aee50fe',
-	subjectImageAiUrl: 'https://www.figma.com/api/mcp/asset/36f47249-4ada-4755-b206-95d2a1833822',
-	subjectImageDebateUrl: 'https://www.figma.com/api/mcp/asset/6a490090-de77-4e25-8fc4-6d5d68598f71',
-	subjectImageMinecraftUrl: 'https://www.figma.com/api/mcp/asset/98ef53e0-0944-4380-bc25-255892e4c8b1',
-	subjectImageWritingUrl: 'https://www.figma.com/api/mcp/asset/20f16c2d-9c96-4a0d-8200-80ae021fb39d',
-	virtualWorksImageUrl: 'https://www.figma.com/api/mcp/asset/9f90964a-dcdd-403d-bd65-53b344fb2ed4',
-	virtualWorksCheckIconUrl: 'https://www.figma.com/api/mcp/asset/28bbc76a-5b8e-41d5-8ada-096ecbba5215',
-	familyAvatar1Url: 'https://www.figma.com/api/mcp/asset/b01ce740-1f03-4b2d-a841-902b5946fb66',
-	familyAvatar2Url: 'https://www.figma.com/api/mcp/asset/e57a7cf2-8500-4581-addf-e01868c1ade2',
-	familyAvatar3Url: 'https://www.figma.com/api/mcp/asset/e10a0c45-70a3-446b-93b9-f4ce3e88a14a',
-	familyStarUrl: 'https://www.figma.com/api/mcp/asset/357fe925-e753-4a1a-bfb1-0ffdb85f488d',
-	pricingCheckBlueUrl: 'https://www.figma.com/api/mcp/asset/5ca07a30-29be-41c1-80a2-17881901fc76',
-	pricingCheckPurpleUrl: 'https://www.figma.com/api/mcp/asset/1d886c01-9902-41df-9de4-cd02f17fd138',
-	faqChevronUrl: 'https://www.figma.com/api/mcp/asset/d123e9c4-6d35-4b2a-858b-e5e2b81e3e21',
-	finalCtaPatternUrl: 'https://www.figma.com/api/mcp/asset/b5ef23f1-8933-45bb-9e5e-8074ca03b2c7',
+	heroStudentAvatarUrl: heroStudentAvatar.src,
+	heroPrimaryArrowUrl: heroPrimaryArrow.src,
+	heroStreakIconUrl: heroStreakIcon.src,
+	heroSparkIconUrl: heroSparkIcon.src,
+	challengeBulletIconUrl: challengeBulletIcon.src,
+	academyMainImageUrl: academyMainImage.src,
+	academyGroupIconUrl: academyGroupIcon.src,
+	academyDiscussionIconUrl: academyDiscussionIcon.src,
+	academyMentorIconUrl: academyMentorIcon.src,
+	academyAccreditedIconUrl: academyAccreditedIcon.src,
+	differentlyIconMentorUrl: differentlyIconMentor.src,
+	differentlyIconClassUrl: differentlyIconClass.src,
+	differentlyIconEngageUrl: differentlyIconEngage.src,
+	semesterWorkImageUrl: semesterWorkImage.src,
+	semesterWorkClockIconUrl: semesterWorkClockIcon.src,
+	semesterWorkGroupIconUrl: semesterWorkGroupIcon.src,
+	subjectImageAiUrl: subjectImageAi.src,
+	subjectImageDebateUrl: subjectImageDebate.src,
+	subjectImageMinecraftUrl: subjectImageMinecraft.src,
+	subjectImageWritingUrl: subjectImageWriting.src,
+	virtualWorksImageUrl: virtualWorksImage.src,
+	virtualWorksCheckIconUrl: virtualWorksCheckIcon.src,
+	familyAvatar1Url: familyAvatar1.src,
+	familyAvatar2Url: familyAvatar2.src,
+	familyAvatar3Url: familyAvatar3.src,
+	familyStarUrl: familyStar.src,
+	pricingCheckBlueUrl: pricingCheckBlue.src,
+	pricingCheckPurpleUrl: pricingCheckPurple.src,
+	faqChevronUrl: faqChevron.src,
+	finalCtaPatternUrl: finalCtaPattern.src,
 } as const;

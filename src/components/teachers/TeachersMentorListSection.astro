@@ -22,14 +22,14 @@ const { content } = Astro.props;
 	<div class="mx-auto mt-12 flex w-full max-w-[1184px] flex-col gap-4 rounded-2xl border border-[rgba(226,232,240,0.5)] bg-white p-4 shadow-[0px_1px_1px_rgba(0,0,0,0.05)] lg:flex-row lg:items-center" role="search">
 		<label class="relative flex flex-1 items-center rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-4 pb-[14px] pl-12 pt-[13px]" for="mentor-search">
 			<img class="absolute left-4 h-4 w-4" src={teacherPageAssets.searchIconUrl} alt="" aria-hidden="true" />
-			<input class="w-full border-none bg-transparent text-sm leading-5 text-[#0f172a] outline-none placeholder:text-[#9ca3af]" id="mentor-search" type="search" name="mentorSearch" placeholder="Search articles, topics..." />
+			<input class="w-full border-none bg-transparent text-sm leading-5 text-[#0f172a] outline-none placeholder:text-[#9ca3af]" id="mentor-search" type="search" name="mentorSearch" placeholder={content.searchPlaceholder} />
 		</label>
 		<div class="flex flex-wrap gap-2" aria-label="Categories">
-			<button class="rounded-full border border-[#0a9dfb] bg-[#0a9dfb] px-6 py-2.5 text-sm font-medium leading-5 text-white" type="button">All</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">STEM</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">Creative</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">Gaming</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">Writing</button>
+			<button class="rounded-full border border-[#0a9dfb] bg-[#0a9dfb] px-6 py-2.5 text-sm font-medium leading-5 text-white" type="button">{content.filterLabels.all}</button>
+			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.stem}</button>
+			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.creative}</button>
+			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.gaming}</button>
+			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.writing}</button>
 		</div>
 	</div>
 
@@ -86,7 +86,7 @@ const { content } = Astro.props;
 							</ul>
 
 							<a class="mt-6 inline-flex items-center gap-2 text-sm font-bold leading-[25px] text-[#7c3aed] no-underline" href="#">
-								<span>View Profile</span>
+								<span>{content.viewProfileLabel}</span>
 								<img class="h-[14px] w-[12.25px]" src={teacherPageAssets.arrowIconUrl} alt="" aria-hidden="true" />
 							</a>
 						</div>

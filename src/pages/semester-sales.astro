@@ -14,25 +14,36 @@ import SemesterSalesFamiliesSayingSection from '../components/semester-sales/Sem
 import SemesterSalesPricingSection from '../components/semester-sales/SemesterSalesPricingSection.astro';
 import SemesterSalesFaqSection from '../components/semester-sales/SemesterSalesFaqSection.astro';
 import SemesterSalesFinalCtaSection from '../components/semester-sales/SemesterSalesFinalCtaSection.astro';
+import { getEntry } from 'astro:content';
+
+const semesterSalesEntry = await getEntry('semester-sales', 'semester-sales');
+
+if (!semesterSalesEntry) {
+	throw new Error(
+		'Missing semester sales page content entry at src/content/semester-sales/semester-sales.md',
+	);
+}
+
+const semesterSalesContent = semesterSalesEntry.data;
 ---
 
 <Layout
-	title="Semester Sales | Young Scholars Academy"
-	description="Discover semester sales and find the right fit at Young Scholars Academy."
+	title={semesterSalesContent.seo.title}
+	description={semesterSalesContent.seo.description}
 >
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main>
-		<SemesterSalesHeroSection />
-		<SemesterSalesChallengeSection />
-		<SemesterSalesAcademySection />
-		<SemesterSalesDifferentThinkersSection />
-		<SemesterSalesHowSemesterWorksSection />
-		<SemesterSalesSubjectsSection />
-		<SemesterSalesVirtualWorksSection />
-		<SemesterSalesFamiliesSayingSection />
-		<SemesterSalesPricingSection />
-		<SemesterSalesFaqSection />
-		<SemesterSalesFinalCtaSection />
+		<SemesterSalesHeroSection content={semesterSalesContent.hero} />
+		<SemesterSalesChallengeSection content={semesterSalesContent.challenge} />
+		<SemesterSalesAcademySection content={semesterSalesContent.academy} />
+		<SemesterSalesDifferentThinkersSection content={semesterSalesContent.differentThinkers} />
+		<SemesterSalesHowSemesterWorksSection content={semesterSalesContent.howSemesterWorks} />
+		<SemesterSalesSubjectsSection content={semesterSalesContent.subjects} />
+		<SemesterSalesVirtualWorksSection content={semesterSalesContent.virtualWorks} />
+		<SemesterSalesFamiliesSayingSection content={semesterSalesContent.familiesSaying} />
+		<SemesterSalesPricingSection content={semesterSalesContent.pricing} />
+		<SemesterSalesFaqSection content={semesterSalesContent.faq} />
+		<SemesterSalesFinalCtaSection content={semesterSalesContent.finalCta} />
 	</main>
 	<Footer />
 </Layout>

@@ -1149,6 +1149,18 @@
 
 }
 
+.summer-fit-heading {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.summer-fit-heading img {
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+}
+
 .summer-fit-card.good h3 {
 	color: #048c3c;
 }
@@ -1165,6 +1177,14 @@
 	color: #cbd5e1;
 	font-size: 16px;
 	line-height: 24px;
+}
+
+.summer-fit-card.good li::marker {
+	color: #048c3c;
+}
+
+.summer-fit-card.bad li::marker {
+	color: #ef4444;
 }
 
 .faq summary {

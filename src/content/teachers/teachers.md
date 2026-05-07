@@ -31,6 +31,14 @@ parentQuote:
 mentors:
   title: Meet Our Mentors
   description: Learn from world-class experts dedicated to your growth and success.
+  searchPlaceholder: Search mentors, topics, or specialties...
+  filterLabels:
+    all: All
+    stem: STEM
+    creative: Creative
+    gaming: Gaming
+    writing: Writing
+  viewProfileLabel: View Profile
   items:
     - name: Dr. Emily Ross
       rating: "4.9"
@@ -127,6 +135,7 @@ mentors:
 adminTeam:
   title: Meet Your Admin Team
   description: The visionary leaders and dedicated coordinators working behind the scenes to ensure every child has an exceptional learning experience.
+  viewProfileLabel: View Profile
   items:
     - name: Ann Rickard
       rating: "5.0"

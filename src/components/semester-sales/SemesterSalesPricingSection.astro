@@ -1,54 +1,73 @@
 ---
 import { semesterSalesAssets } from './data';
+
+interface Props {
+	content: {
+		title: string;
+		subtitle: string;
+		plans: {
+			name: string;
+			badge?: string;
+			price: string;
+			unit: string;
+			description?: string;
+			savingText?: string;
+			features: string[];
+			ctaLabel: string;
+			ctaHref: string;
+		}[];
+		fundsText: string;
+		fundsCtaLabel: string;
+		fundsCtaHref: string;
+	};
+}
+
+const { content } = Astro.props as Props;
+const [singlePlan, bundlePlan, siblingPlan] = content.plans;
 ---
 
 <section class="bg-[#f8fafc] py-20" aria-labelledby="pricing-title">
 	<div class="mx-auto w-full max-w-[1200px] px-5 md:px-16">
 		<header class="text-center mt-[6px]">
-			<h2 class="xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-semibold leading-[1.1] text-[#111827]" id="pricing-title">Simple, Flexible Pricing</h2>
-			<p class="pt-4 text-base leading-[26px] text-[#475569]">Enroll with confidence. No hidden fees, just growth.</p>
+			<h2 class="xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-semibold leading-[1.1] text-[#111827]" id="pricing-title">{content.title}</h2>
+			<p class="pt-4 text-base leading-[26px] text-[#475569]">{content.subtitle}</p>
 		</header>
 
 		<div class="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
 			<article class="rounded-2xl border border-[#e2e8f0] bg-white p-10 mt-[12px]">
-				<h3 class="text-[17px] font-bold leading-7 text-[#1e293b]">Single Camp</h3>
-				<p class="pt-2 text-[30px] font-bold leading-9 text-[#111827]">$195<span class="pl-1 text-base font-normal text-[#64748b]">/ camp</span></p>
+				<h3 class="text-[17px] font-bold leading-7 text-[#1e293b]">{singlePlan.name}</h3>
+				<p class="pt-2 text-[30px] font-bold leading-9 text-[#111827]">{singlePlan.price}<span class="pl-1 text-base font-normal text-[#64748b]">{singlePlan.unit}</span></p>
 				<ul class="list-none space-y-4 py-8 pt-[20px]">
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14px] w-[12.25px]" src={semesterSalesAssets.pricingCheckBlueUrl} alt="" aria-hidden="true" />5-Day Immersive</li>
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14px] w-[12.25px]" src={semesterSalesAssets.pricingCheckBlueUrl} alt="" aria-hidden="true" />All Live Sessions</li>
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14px] w-[12.25px]" src={semesterSalesAssets.pricingCheckBlueUrl} alt="" aria-hidden="true" />Topia Campus Access</li>
+					{singlePlan.features.map((feature) => <li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14px] w-[12.25px]" src={semesterSalesAssets.pricingCheckBlueUrl} alt="" aria-hidden="true" />{feature}</li>)}
 				</ul>
-				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-xl bg-[#0a9dfb] text-base font-medium text-white no-underline" href="#">Select Individual</a>
+				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-xl bg-[#0a9dfb] text-base font-medium text-white no-underline" href={singlePlan.ctaHref}>{singlePlan.ctaLabel}</a>
 			</article>
 
 			<article class="relative rounded-2xl border-2 border-[#7c3aed] bg-white p-10 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]">
-				<span class="absolute -top-[16.7px] left-1/2 -translate-x-1/2 rounded-full bg-[#7c3aed] px-4 py-1 text-[12.6px] font-bold tracking-[1.26px] text-white">BEST VALUE</span>
-				<h3 class="text-[17px] font-bold leading-7 text-[#1e293b]">Multi-Camp Bundle</h3>
-				<p class="pt-2 text-[31.5px] font-bold leading-[37.8px] text-[#111827]">$165<span class="pl-1 text-base font-normal text-[#64748b]">/ camp</span></p>
-				<p class="pt-1 text-[12.6px] font-bold text-[#048c3c]">Save 15% on 3+ camps</p>
+				<span class="absolute -top-[16.7px] left-1/2 -translate-x-1/2 rounded-full bg-[#7c3aed] px-4 py-1 text-[12.6px] font-bold tracking-[1.26px] text-white">{bundlePlan.badge}</span>
+				<h3 class="text-[17px] font-bold leading-7 text-[#1e293b]">{bundlePlan.name}</h3>
+				<p class="pt-2 text-[31.5px] font-bold leading-[37.8px] text-[#111827]">{bundlePlan.price}<span class="pl-1 text-base font-normal text-[#64748b]">{bundlePlan.unit}</span></p>
+				<p class="pt-1 text-[12.6px] font-bold text-[#048c3c]">{bundlePlan.savingText}</p>
 				<ul class="list-none space-y-4 py-8 pb-[46px]">
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14.7px] w-[12.86px]" src={semesterSalesAssets.pricingCheckPurpleUrl} alt="" aria-hidden="true" />Everything in Single</li>
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14.7px] w-[12.86px]" src={semesterSalesAssets.pricingCheckPurpleUrl} alt="" aria-hidden="true" />Preferred Scheduling</li>
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14.7px] w-[12.86px]" src={semesterSalesAssets.pricingCheckPurpleUrl} alt="" aria-hidden="true" />Bonus Mentorship Session</li>
+					{bundlePlan.features.map((feature) => <li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14.7px] w-[12.86px]" src={semesterSalesAssets.pricingCheckPurpleUrl} alt="" aria-hidden="true" />{feature}</li>)}
 				</ul>
-				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-xl bg-[#7c3aed] text-base font-medium text-white no-underline" href="#">Build My Bundle</a>
+				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-xl bg-[#7c3aed] text-base font-medium text-white no-underline" href={bundlePlan.ctaHref}>{bundlePlan.ctaLabel}</a>
 			</article>
 
 			<article class="rounded-2xl border border-[#e2e8f0] bg-white p-10 mt-[12px]">
-				<h3 class="text-[17px] font-bold leading-7 text-[#1e293b]">Sibling Discount</h3>
-				<p class="pt-2 text-[30px] font-bold leading-9 text-[#111827]">10% OFF<span class="pl-1 text-base font-normal text-[#64748b]">total</span></p>
-				<p class="pt-4 text-sm leading-5 text-[#475569] mt-[7px]">Stackable with bundles. Perfect for families with multiple neurodivergent learners.</p>
+				<h3 class="text-[17px] font-bold leading-7 text-[#1e293b]">{siblingPlan.name}</h3>
+				<p class="pt-2 text-[30px] font-bold leading-9 text-[#111827]">{siblingPlan.price}<span class="pl-1 text-base font-normal text-[#64748b]">{siblingPlan.unit}</span></p>
+				<p class="pt-4 text-sm leading-5 text-[#475569] mt-[7px]">{siblingPlan.description}</p>
 				<ul class="list-none space-y-4 py-8 pt-[40px]">
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14px] w-[12.25px]" src={semesterSalesAssets.pricingCheckBlueUrl} alt="" aria-hidden="true" />Valid for all siblings</li>
-					<li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14px] w-[12.25px]" src={semesterSalesAssets.pricingCheckBlueUrl} alt="" aria-hidden="true" />Joint Portal Access</li>
+					{siblingPlan.features.map((feature) => <li class="flex items-center gap-3 text-sm text-[#475569]"><img class="h-[14px] w-[12.25px]" src={semesterSalesAssets.pricingCheckBlueUrl} alt="" aria-hidden="true" />{feature}</li>)}
 				</ul>
-				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-xl border-2 border-[#0a9dfb] text-base font-medium text-[#0a9dfb] no-underline mt-[10px]" href="#">Claim Discount</a>
+				<a class="inline-flex h-[60px] w-full items-center justify-center rounded-xl border-2 border-[#0a9dfb] text-base font-medium text-[#0a9dfb] no-underline mt-[10px]" href={siblingPlan.ctaHref}>{siblingPlan.ctaLabel}</a>
 			</article>
 		</div>
 
 		<p class="pt-[71px] text-center text-sm text-[#64748b] text-[14px] pt-[17px]">
-			We accept ESA and Charter School funds.
-			<a href="#" class="font-bold text-[#0a9dfb] underline"> Learn how to pay with funds</a>
+			{content.fundsText}
+			<a href={content.fundsCtaHref} class="font-bold text-[#0a9dfb] underline"> {content.fundsCtaLabel}</a>
 		</p>
 	</div>
 </section>

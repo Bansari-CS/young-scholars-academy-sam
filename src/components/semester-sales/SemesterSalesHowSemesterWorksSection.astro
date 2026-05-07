@@ -1,25 +1,19 @@
 ---
 import { semesterSalesAssets } from './data';
 
-const points = [
-	{
-		iconType: 'number',
-		number: '11',
-		title: '11-Week Format',
-		text: 'A full semester of deep-dive learning that allows for genuine mastery and curiosity-led exploration.',
-	},
-	{
-		iconType: 'image',
-		icon: semesterSalesAssets.semesterWorkClockIconUrl,
-		title: '50-Minute Sessions',
-		text: 'Optimized for engagement—long enough for depth, but designed to keep brilliant minds focused.',
-	},
-	{
-		iconType: 'image',
-		icon: semesterSalesAssets.semesterWorkGroupIconUrl,
-		title: 'Consistent Cohorts',
-		text: 'Same group, same mentor. This builds the consistency and emotional safety required for real growth.',
-	},
+interface Props {
+	content: {
+		title: string;
+		points: { title: string; text: string }[];
+		highlight: string;
+	};
+}
+
+const { content } = Astro.props as Props;
+const pointVisuals = [
+	{ iconType: 'number', number: '11' },
+	{ iconType: 'image', icon: semesterSalesAssets.semesterWorkClockIconUrl },
+	{ iconType: 'image', icon: semesterSalesAssets.semesterWorkGroupIconUrl },
 ];
 ---
 
@@ -27,18 +21,18 @@ const points = [
 	<div class="mx-auto grid w-full max-w-[1440px] lg:grid-cols-1 lg:gap-12 gap-4 px-5 md:px-16 lg:grid-cols-2 lg:gap-16 mt-[6px] leading-[51px]">
 		<div>
 			<h2 class="xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-[#111827]" id="semester-works-title">
-				How Our Semester Courses Work
+				{content?.title}
 			</h2>
 
 			<ul class="mt-8 list-none space-y-6 p-0">
 				{
-					points.map((point) => (
+					content.points.map((point, index) => (
 						<li class="flex items-start gap-4 pt-[9px]">
 							<span class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f1f5f9]">
-								{point.iconType === 'number' ? (
-									<span class="text-base font-bold text-[#0a9dfb]">{point.number}</span>
+								{pointVisuals[index]?.iconType === 'number' ? (
+									<span class="text-base font-bold text-[#0a9dfb]">{pointVisuals[index]?.number}</span>
 								) : (
-									<img class="h-4 w-5" src={point.icon} alt="" aria-hidden="true" />
+									<img class="h-4 w-5" src={pointVisuals[index]?.icon ?? semesterSalesAssets.semesterWorkClockIconUrl} alt="" aria-hidden="true" />
 								)}
 							</span>
 							<div>
@@ -52,7 +46,7 @@ const points = [
 
 			<div class="mt-8 rounded-r-xl border-l-4 border-[#0a9dfb] bg-[rgba(10,157,251,0.05)] p-6">
 				<p class="text-[18px] font-bold leading-7 text-[#0a9dfb]">
-					This is where learning becomes something your child actually looks forward to every week.
+					{content.highlight}
 				</p>
 			</div>
 		</div>

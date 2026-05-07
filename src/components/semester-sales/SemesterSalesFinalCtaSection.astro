@@ -1,5 +1,18 @@
 ---
 import { semesterSalesAssets } from './data';
+
+interface Props {
+	content: {
+		title: string;
+		description: string;
+		primaryCtaLabel: string;
+		primaryCtaHref: string;
+		secondaryCtaLabel: string;
+		secondaryCtaHref: string;
+	};
+}
+
+const { content } = Astro.props as Props;
 ---
 
 <section class="bg-[#f8fafc] px-5 py-[80px] md:px-16 ">
@@ -12,25 +25,24 @@ import { semesterSalesAssets } from './data';
 
 		<div class="relative">
 			<h2 class="mx-auto max-w-[955px] text-center xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-white">
-				Your Child Deserves a Place That Gets Them
+				{content.title}
 			</h2>
 			<p class="mx-auto max-w-[585px] pt-[37px] text-center text-base leading-6 text-white/90">
-				The right environment can change everything-for your child's confidence, their learning, and your entire family's
-				well-being.
+				{content.description}
 			</p>
 
 			<div class="flex flex-col items-center justify-center gap-6 pt-12 sm:flex-row">
 				<a
-					href="#"
+					href={content.primaryCtaHref}
 					class="inline-flex h-[60px] min-w-[288px] items-center justify-center rounded-xl bg-white px-10 text-base font-semibold text-[#0a9dfb] no-underline shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]"
 				>
-					Explore Semester Courses
+					{content.primaryCtaLabel}
 				</a>
 				<a
-					href="#"
+					href={content.secondaryCtaHref}
 					class="inline-flex h-[60px] min-w-[276px] items-center justify-center rounded-xl border border-[rgba(255,255,255,0.3)] bg-[rgba(255,255,255,0.2)] px-10 text-base font-semibold text-white no-underline backdrop-blur-[6px]"
 				>
-					Book a Free Consultation
+					{content.secondaryCtaLabel}
 				</a>
 			</div>
 		</div>

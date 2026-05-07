@@ -1,17 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type AboutContent = CollectionEntry<'mentor-profile'>['data']['about'];
+
+interface Props {
+	content: AboutContent;
+}
+
+const { content } = Astro.props as Props;
+---
+
 <section class="bg-white px-5 py-14 md:px-16 md:py-20" aria-labelledby="mentor-about-title">
 	<div class="mx-auto flex w-full max-w-[1312px] flex-col gap-8 lg:flex-row lg:justify-between">
 		<div class="w-full max-w-[410.66px] max-h[70px]">
-			<h2 class="text-[44px] max-h[70px] font-bold leading-[1.1] text-[#111827]" id="mentor-about-title">About Dr. Ross</h2>
+			<h2 class="text-[44px] max-h[70px] font-bold leading-[1.1] text-[#111827]" id="mentor-about-title">{content.title}</h2>
 			<div class="mt-4 h-[6px] w-20 rounded-full bg-[#7c3aed]"></div>
 		</div>
 
 		<div class="w-full max-w-[821.34px] space-y-8">
-			<p class="text-base leading-[26px] text-[#475569]">
-				Dr. Emily Ross joined Young Scholars Academy with a mission to bridge the gap between high-level academic rigor and the emotional safety that 2e learners require. With a PhD in Chemistry from MIT and a background in neuroeducational research, she specializes in making complex scientific concepts accessible through narrative and hands-on discovery.
-			</p>
-			<p class="text-base leading-[26px] text-[#475569]">
-				Having grown up as a "twice-exceptional" learner herself, Emily understands the frustration of being bored in a traditional classroom while simultaneously feeling overwhelmed by social expectations. Her classes are designed to be "deep dives" where curiosity is the only limit, and mistakes are celebrated as essential data points in the scientific process.
-			</p>
+			{content.paragraphs.map((paragraph) => <p class="text-base leading-[26px] text-[#475569]">{paragraph}</p>)}
 		</div>
 	</div>
 </section>

@@ -1,5 +1,14 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { mentorProfileAssets } from './data';
+
+type HeroContent = CollectionEntry<'mentor-profile'>['data']['hero'];
+
+interface Props {
+	content: HeroContent;
+}
+
+const { content } = Astro.props as Props;
 ---
 
 <section class="relative flex justify-center overflow-hidden bg-[linear-gradient(167.749deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)] px-5 pb-[80px] md:px-8 md:pt-[108px]">
@@ -9,7 +18,7 @@ import { mentorProfileAssets } from './data';
 	<div class="relative z-10 flex w-full max-w-[1312px] flex-col items-start gap-10 lg:flex-row lg:items-start lg:gap-[104px]">
 		<div class="relative w-full max-w-[560px]">
 			<div class="h-[600px] w-full overflow-hidden rounded-[32px] border-8 border-white bg-white shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]">
-				<img class="h-full w-full object-cover" src={mentorProfileAssets.heroImageUrl} alt="Dr. Emily Ross profile" />
+				<img class="h-full w-full object-cover" src={mentorProfileAssets.heroImageUrl} alt={content.imageAlt} />
 			</div>
 
 			<div class="absolute -bottom-[29px] right-[-8px] flex items-center gap-4 rounded-3xl border border-[#e2e8f0] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] md:right-[-84px]">
@@ -17,8 +26,8 @@ import { mentorProfileAssets } from './data';
 					<img class="h-[30.53px] w-[30.53px]" src={mentorProfileAssets.topRatedIconUrl} alt="" aria-hidden="true" />
 				</div>
 				<div>
-					<p class="text-[17px] font-semibold leading-[22.5px] text-[#111827]">Top Rated Mentor</p>
-					<p class="text-sm leading-[21px] text-[#475569]">4.9/5 from 200+ reviews</p>
+					<p class="text-[17px] font-semibold leading-[22.5px] text-[#111827]">{content.topRatedTitle}</p>
+					<p class="text-sm leading-[21px] text-[#475569]">{content.topRatedSubtitle}</p>
 				</div>
 			</div>
 		</div>
@@ -27,30 +36,30 @@ import { mentorProfileAssets } from './data';
 			<div class="flex flex-wrap gap-3">
 				<span class="inline-flex h-[34px] items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 text-xs font-bold tracking-[0.3px] text-[#7c3aed] shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
 					<span class="h-2 w-2 rounded-full bg-[#048c3c]" aria-hidden="true"></span>
-					GIFTED SPECIALIST
+					{content.badgeLabel}
 				</span>
 				<span class="inline-flex h-[34px]  items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 text-xs font-bold tracking-[0.3px] text-[#0a9dfb] shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
 					<img class="h-[14px] w-[14px]" src={mentorProfileAssets.experienceIconUrl} alt="" aria-hidden="true" />
-					8+ YEARS EXPERIENCE
+					{content.experienceLabel}
 				</span>
 			</div>
 
-			<h1 class="mt-6 text-[44px] w-[648px] h-[55px] font-bold leading-[1.05] text-[#111827]">Dr. Emily Ross</h1>
-			<p class="mt-[10px] text-[17px] font-semibold leading-9 text-[#7c3aed]">PhD Chemistry, MIT • Master Mentor</p>
+			<h1 class="mt-6 text-[44px] w-[648px] h-[55px] font-bold leading-[1.05] text-[#111827]">{content.name}</h1>
+			<p class="mt-[10px] text-[17px] font-semibold leading-9 text-[#7c3aed]">{content.credentials}</p>
 
 			<div class="mt-6 flex items-start gap-[10px]">
-				<img class="h-[33px] w-[33px] rounded-full border-2 border-[rgba(255,255,255,0.3)] object-cover" src={mentorProfileAssets.quoteAvatarUrl} alt="Dr. Emily Ross avatar" />
+				<img class="h-[33px] w-[33px] rounded-full border-2 border-[rgba(255,255,255,0.3)] object-cover" src={mentorProfileAssets.quoteAvatarUrl} alt={content.quoteAvatarAlt} />
 				<p class="text-[18px] leading-[32.5px] text-[#475569]">
-					"I don't just teach science; I help brilliant minds find patterns in the chaos. Every neurodivergent child has a unique rhythm of learning, and my job is to dance to that beat."
+					{content.quote}
 				</p>
 			</div>
 
 			<div class="mt-[42px] flex flex-col gap-4 sm:flex-row">
-				<a class="inline-flex h-[67px] w-full items-center justify-center rounded-2xl bg-[#0a9dfb] px-10 py-5 text-[18px] font-bold leading-[27px] text-white no-underline shadow-[0_10px_15px_-3px_#bfdbfe,0_4px_6px_-4px_#bfdbfe] sm:w-[270px]" href="#">
-					View My Classes
+				<a class="inline-flex h-[67px] w-full items-center justify-center rounded-2xl bg-[#0a9dfb] px-10 py-5 text-[18px] font-bold leading-[27px] text-white no-underline shadow-[0_10px_15px_-3px_#bfdbfe,0_4px_6px_-4px_#bfdbfe] sm:w-[270px]" href={content.primaryCtaHref}>
+					{content.primaryCtaLabel}
 				</a>
-				<a class="inline-flex h-[67px] w-full items-center justify-center rounded-2xl border-2 border-[#0a9dfb] bg-white px-10 py-5 text-[18px] font-bold leading-[27px] text-[#0a9dfb] no-underline sm:w-[274px]" href="#">
-					Enroll Now
+				<a class="inline-flex h-[67px] w-full items-center justify-center rounded-2xl border-2 border-[#0a9dfb] bg-white px-10 py-5 text-[18px] font-bold leading-[27px] text-[#0a9dfb] no-underline sm:w-[274px]" href={content.secondaryCtaHref}>
+					{content.secondaryCtaLabel}
 				</a>
 			</div>
 		</div>
