@@ -1,20 +1,19 @@
 ---
-import type { CourseIncludeItem, RelatedCourse } from '../../data/courseDetail';
-import checkIcon from '../../assets/course-detail/icon-check-simple.svg';
 import PrimaryButton from '../ui/PrimaryButton.astro';
 
 interface Props {
 	price: string;
 	cohort: string;
 	includesTitle: string;
-	includes: CourseIncludeItem[];
-	related: RelatedCourse[];
+	includes: { text: string }[];
+	related: { image: string; tag: string; title: string; meta: string }[];
 	primaryCtaLabel: string;
 	guaranteeText: string;
 	relatedTitle: string;
 }
 
 const { price, cohort, includes, includesTitle, related, primaryCtaLabel, guaranteeText, relatedTitle } = Astro.props;
+
 ---
 <aside>
 	<div class="rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
@@ -28,7 +27,7 @@ const { price, cohort, includes, includesTitle, related, primaryCtaLabel, guaran
 						<li class="flex items-center gap-3 text-[14px] leading-5 text-[#475569]">
 							<img
 								class="h-[14px] w-[14px] flex-shrink-0"
-								src={checkIcon.src}
+								src="/assets/course-detail/icon-check-simple.svg"
 								alt=""
 								aria-hidden="true"
 								loading="lazy"

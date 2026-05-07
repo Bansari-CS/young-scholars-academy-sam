@@ -53,7 +53,7 @@ export interface TeacherCard {
 	/** Degree / school line (accent color in Figma) */
 	credentials: string;
 	bio: string;
-	/** Maps to `Teacher (n).png` in `src/assets/images/` — replace with hi-res exports for sharp portraits */
+	/** Maps to `Teacher (n).png` in `/assets/images/` — replace with hi-res exports for sharp portraits */
 	photoIndex: 1 | 2 | 3 | 4 | 5 | 6;
 }
 

@@ -1,10 +1,4 @@
 ---
-import type {
-	CourseIncludeItem,
-	CurriculumSession,
-	GainItem,
-	RelatedCourse,
-} from '../../data/courseDetail';
 import Content from './Content.astro';
 import Sidebar from './Sidebar.astro';
 
@@ -19,7 +13,7 @@ interface Props {
 		overview: string;
 		overview2: string;
 		pillars: Pillar[];
-		gains: GainItem[];
+		gains: { text: string }[];
 		gainsTitle: string;
 		videoTitle: string;
 		videoCaptionTitle: string;
@@ -34,15 +28,15 @@ interface Props {
 		instructorRole: string;
 		instructorPortfolioLabel: string;
 		instructorOtherCoursesLabel: string;
-		sessions: CurriculumSession[];
+		sessions: { session: string; topic: string; date: string }[];
 		instructorBio: string;
 	};
 	sidebar: {
 		price: string;
 		cohort: string;
 		includesTitle: string;
-		includes: CourseIncludeItem[];
-		related: RelatedCourse[];
+		includes: { text: string }[];
+		related: { image: string; tag: string; title: string; meta: string }[];
 		primaryCtaLabel: string;
 		guaranteeText: string;
 		relatedTitle: string;

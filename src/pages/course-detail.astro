@@ -8,19 +8,27 @@ import MainContentSection from '../components/course-detail/MainContentSection.a
 import ReviewsSection from '../components/course-detail/ReviewsSection.astro';
 import AboutSection from '../components/course-detail/AboutSection.astro';
 import FinalCtaSection from '../components/course-detail/FinalCtaSection.astro';
-import { courseDetailData } from '../data/courseDetail';
+import { getEntry } from 'astro:content';
+
+const courseDetailEntry = await getEntry('course-detail', 'course-detail');
+
+if (!courseDetailEntry) {
+	throw new Error('Missing course detail content entry at src/content/course-detail/course-detail.md');
+}
+
+const courseDetailContent = courseDetailEntry.data;
 ---
 
-<Layout title="Course Detail | Young Scholars Academy" description="Course details for robotics and coding program.">
-	<Header brand="Young Scholars Academy" navItems={courseDetailData.navItems} />
+<Layout title={courseDetailContent.seo.title} description={courseDetailContent.seo.description}>
+	<Header brand="Young Scholars Academy" navItems={courseDetailContent.navItems} />
 
 	<main class="site-main bg-[#f8fafc] overflow-x-hidden">
-		<Hero {...courseDetailData.hero} />
-		<TabsBar tabs={courseDetailData.tabs} />
-		<MainContentSection content={courseDetailData.content} sidebar={courseDetailData.sidebar} />
-		<ReviewsSection reviews={courseDetailData.reviews} />
-		<AboutSection {...courseDetailData.about} />
-		<FinalCtaSection {...courseDetailData.finalCta} />
+		<Hero {...courseDetailContent.hero} />
+		<TabsBar tabs={courseDetailContent.tabs} />
+		<MainContentSection content={courseDetailContent.content} sidebar={courseDetailContent.sidebar} />
+		<ReviewsSection reviews={courseDetailContent.reviews} />
+		<AboutSection {...courseDetailContent.about} />
+		<FinalCtaSection {...courseDetailContent.finalCta} />
 	</main>
 
 	<Footer />

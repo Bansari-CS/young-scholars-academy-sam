@@ -1,0 +1,66 @@
+---
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/course-detail/Hero.astro';
+import TabsBar from '../../components/course-detail/TabsBar.astro';
+import MainContentSection from '../../components/course-detail/MainContentSection.astro';
+import ReviewsSection from '../../components/course-detail/ReviewsSection.astro';
+import AboutSection from '../../components/course-detail/AboutSection.astro';
+import FinalCtaSection from '../../components/course-detail/FinalCtaSection.astro';
+import { getEntry } from 'astro:content';
+import { programsSectionData } from '../../data/programsSection';
+
+export async function getStaticPaths() {
+	const courseTemplateEntry = await getEntry('course-detail', 'course-detail');
+	if (!courseTemplateEntry) return [];
+
+	const baseContent = courseTemplateEntry.data;
+	const uniqueCourseSlugs = new Map<string, string>();
+
+	for (const card of programsSectionData.cards) {
+		const slug = card.title
+			.toLowerCase()
+			.trim()
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-+|-+$/g, '');
+		if (!uniqueCourseSlugs.has(slug)) {
+			uniqueCourseSlugs.set(slug, card.title);
+		}
+	}
+
+	return Array.from(uniqueCourseSlugs.entries()).map(([slug, courseName]) => ({
+		params: { slug },
+		props: {
+			courseContent: {
+				...baseContent,
+				seo: {
+					...baseContent.seo,
+					title: `${courseName} | Young Scholars Academy`,
+				},
+				hero: {
+					...baseContent.hero,
+					titleAccent: courseName,
+				},
+			},
+		},
+	}));
+}
+
+const { courseContent } = Astro.props;
+---
+
+<Layout title={courseContent.seo.title} description={courseContent.seo.description}>
+	<Header brand="Young Scholars Academy" navItems={courseContent.navItems} />
+
+	<main class="site-main bg-[#f8fafc]">
+		<Hero {...courseContent.hero} />
+		<TabsBar tabs={courseContent.tabs} />
+		<MainContentSection content={courseContent.content} sidebar={courseContent.sidebar} />
+		<ReviewsSection reviews={courseContent.reviews} />
+		<AboutSection {...courseContent.about} />
+		<FinalCtaSection {...courseContent.finalCta} />
+	</main>
+
+	<Footer />
+</Layout>

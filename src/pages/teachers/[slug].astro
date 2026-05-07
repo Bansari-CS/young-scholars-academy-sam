@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import MentorProfileHeroSection from '../../components/mentor-profile/MentorProfileHeroSection.astro';
+import MentorProfileAboutSection from '../../components/mentor-profile/MentorProfileAboutSection.astro';
+import MentorProfileBeyondClassroomSection from '../../components/mentor-profile/MentorProfileBeyondClassroomSection.astro';
+import MentorProfileHowITeachSection from '../../components/mentor-profile/MentorProfileHowITeachSection.astro';
+import MentorProfileInsideClassroomSection from '../../components/mentor-profile/MentorProfileInsideClassroomSection.astro';
+import MentorProfileClassesSection from '../../components/mentor-profile/MentorProfileClassesSection.astro';
+import MentorProfileStudentExperienceSection from '../../components/mentor-profile/MentorProfileStudentExperienceSection.astro';
+import MentorProfileTestimonialsSection from '../../components/mentor-profile/MentorProfileTestimonialsSection.astro';
+import MentorProfileFindClassCtaSection from '../../components/mentor-profile/MentorProfileFindClassCtaSection.astro';
+import { heroData } from '../../data/home';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const teachersEntry = await getEntry('teachers', 'teachers');
+	const mentorProfileEntry = await getCollection('mentor-profile');
+	const mentorTemplateContent = mentorProfileEntry[0]?.data;
+
+	if (!teachersEntry || !mentorTemplateContent) {
+		return [];
+	}
+
+	const uniqueMentors = new Map<string, { name: string }>();
+	for (const mentor of teachersEntry.data.mentors.items) {
+		const slug = mentor.name
+			.toLowerCase()
+			.trim()
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-+|-+$/g, '');
+		if (!uniqueMentors.has(slug)) {
+			uniqueMentors.set(slug, { name: mentor.name });
+		}
+	}
+
+	return Array.from(uniqueMentors.entries()).map(([slug, mentor]) => ({
+		params: { slug },
+		props: { mentorContent: mentorTemplateContent, mentorName: mentor.name },
+	}));
+}
+
+const { mentorContent, mentorName } = Astro.props;
+---
+
+<Layout title={`${mentorName} | Young Scholars Academy`} description={mentorContent.seo.description}>
+	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<main>
+		<MentorProfileHeroSection content={mentorContent.hero} />
+		<MentorProfileAboutSection content={mentorContent.about} />
+		<MentorProfileBeyondClassroomSection content={mentorContent.beyondClassroom} />
+		<MentorProfileHowITeachSection content={mentorContent.howITeach} />
+		<MentorProfileInsideClassroomSection content={mentorContent.insideClassroom} />
+		<MentorProfileClassesSection content={mentorContent.classes} />
+		<MentorProfileStudentExperienceSection content={mentorContent.studentExperience} />
+		<MentorProfileTestimonialsSection content={mentorContent.testimonials} />
+		<MentorProfileFindClassCtaSection content={mentorContent.findClassCta} />
+	</main>
+	<Footer />
+</Layout>

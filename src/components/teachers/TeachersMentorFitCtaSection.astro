@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import GradientCtaSection from '../common/GradientCtaSection.astro';
-import arrowRightIcon from '../../assets/course-detail/icon-arrow-right.svg';
+const arrowRightIcon = '/assets/course-detail/icon-arrow-right.svg';
 
 type MentorFitCtaContent = CollectionEntry<'teachers'>['data']['mentorFitCta'];
 
@@ -16,7 +16,7 @@ const { content } = Astro.props;
 	title={content.title}
 	description={content.description}
 	primaryCta={{ label: content.buttonLabel, href: content.buttonHref }}
-	primaryTrailingIcon={arrowRightIcon.src}
+	primaryTrailingIcon={arrowRightIcon}
 	footnote={content.footnote}
 	primaryStyle="brand"
 	fullWidth={true}
