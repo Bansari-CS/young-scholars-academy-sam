@@ -7,7 +7,7 @@ const { content } = Astro.props as Props;
 ---
 
 <section class="bg-[linear-gradient(169deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)] px-4 py-20 relative summer-hero">
-	<div class="mx-auto grid max-w-[67rem] grid-cols-1 lg:grid-cols-[1fr_535px] items-center gap-[48px]">
+	<div class="mx-auto grid max-w-[1120px] grid-cols-1 lg:grid-cols-[1fr_576px] items-center gap-[48px]">
 		<div>
 			<span class="inline-flex items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 text-xs font-medium uppercase text-[#7c3aed]">
 				<span class="h-2 w-2 rounded-full bg-[#048c3c]"></span>
@@ -22,7 +22,7 @@ const { content } = Astro.props as Props;
 				{content.descriptionLines[1]}<br />
 				{content.descriptionLines[2]}
 			</p>
-			<div class="my-6 flex gap-4 pb-6">
+			<div class="my-6 flex gap-4 pb-6 mt-[28px]">
 				<a class="rounded-xl bg-[#0a9dfb] px-8 py-4 font-[var(--ysa-font-display)] font-medium text-white no-underline" href={content.primaryCtaHref}>{content.primaryCtaLabel}</a>
 				<a class="rounded-xl border border-[#e2e8f0] bg-white px-8 py-4 font-[var(--ysa-font-display)] font-medium text-[#475569] no-underline" href={content.secondaryCtaHref}>{content.secondaryCtaLabel}</a>
 			</div>
@@ -38,7 +38,7 @@ const { content } = Astro.props as Props;
 			</ul>
 		</div>
 
-		<div class="rounded-3xl border border-[#e2e8f0] bg-white p-5 lg:p-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] z-[1]  ">
+		<div class="rounded-3xl border border-[#e2e8f0] bg-white lg:py-5 lg:px-6 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] z-[1] xl:max-w-[537px]">
 			<div class="flex items-center justify-between gap-4">
 				<div class="flex items-center gap-3 flex-wrap lg:flex-nowrap">
 					<img class="h-12 w-12 rounded-full object-cover" src="/images/summer/avatar.png" alt={content.classImageAlt} />

@@ -14,9 +14,9 @@ const { title, descriptionLine1, descriptionLine2, primaryButtonLabel, secondary
 ---
 
 <section class="bg-[#f8fafc] px-4 py-24 pt-[80px]">
-	<div class="mx-auto grid w-full max-w-[1184px] grid-cols-1 items-center gap-0 rounded-[48px] bg-[#111827] p-10 shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] lg:min-h-[528px] lg:grid-cols-[576px_400px] lg:justify-between lg:gap-0 lg:px-24 lg:py-16">
-		<div class="flex max-w-[576px] flex-col gap-6 self-center">
-			<h2 class="m-0 text-[36px] leading-10 font-bold text-white">{title}</h2>
+	<div class="mx-auto grid w-full max-w-[1184px] grid-cols-1 items-center gap-0 rounded-[48px] bg-[#111827] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] lg:min-h-[528px] lg:grid-cols-[576px_400px] justify-between lg:gap-0 xl:px-24 xl:py-16 px-10 py-5" >
+		<div class="flex xl:max-w-[576px] max-w-full flex-col xl:gap-6 gap-3 self-center xl:mb-0 mb-5">
+			<h2 class="m-0 xl:text-[36px] text-[25px] leading-10 font-bold text-white">{title}</h2>
 			<p class="max-w-[525.84px] text-[16px] leading-7 text-[#e0e9ff]">
 				{descriptionLine1}
 				<br />
@@ -38,7 +38,7 @@ const { title, descriptionLine1, descriptionLine2, primaryButtonLabel, secondary
 			</div>
 		</div>
 		<img
-			class="mx-auto block h-[400px] w-[400px] rounded-3xl object-cover lg:justify-self-end"
+			class="mx-auto block h-[400px] xl:max-w-[400px] w-full rounded-3xl object-cover lg:justify-self-end"
 			src={ctaStudentImage.src}
 			alt={imageAlt}
 			loading="lazy"

@@ -14,7 +14,7 @@ import { courseDetailData } from '../data/courseDetail';
 <Layout title="Course Detail | Young Scholars Academy" description="Course details for robotics and coding program.">
 	<Header brand="Young Scholars Academy" navItems={courseDetailData.navItems} />
 
-	<main class="site-main bg-[#f8fafc]">
+	<main class="site-main bg-[#f8fafc] overflow-x-hidden">
 		<Hero {...courseDetailData.hero} />
 		<TabsBar tabs={courseDetailData.tabs} />
 		<MainContentSection content={courseDetailData.content} sidebar={courseDetailData.sidebar} />

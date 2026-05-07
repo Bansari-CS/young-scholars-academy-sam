@@ -32,6 +32,7 @@
 .summer-wrap h2 {
 	text-align: center;
 	color: #111827;
+	font-size: 45px;
 }
 
 .summer-sub {
@@ -313,7 +314,7 @@
 }
 
 .summer-camps-wrap {
-	max-width: 1200px;
+	max-width: 1220px;
 
 }
 
@@ -394,7 +395,7 @@
 }
 
 .summer-camp-grid {
-	gap: 24px 20px;
+	gap: 15px 20px;
 }
 
 .summer-program-card-figma {
@@ -465,7 +466,7 @@
 
 .summer-program-footer-figma {
 	border-top: 1px solid #e5e7eb;
-	padding: 16px;
+	padding: 6px;
 	display: flex;
 	align-items: center;
 	gap: 16px;
@@ -552,7 +553,7 @@
 
 .summer-browse-wrap {
 	text-align: center;
-	margin-top: 48px;
+	margin-top: 45px;
 }
 
 .summer-browse-btn {
@@ -894,6 +895,8 @@
 
 .summer-pricing-figma {
 	background: #f8fafc;
+	padding-top: 67px;
+	padding-bottom: 90px;
 }
 
 .summer-price-card {
@@ -918,7 +921,7 @@
 
 .summer-price-card ul {
 	list-style: none;
-	padding: 16px 0 64px;
+	padding: 16px 0 40px;
 	margin: 0;
 	display: grid;
 	gap: 16px;
@@ -1386,7 +1389,7 @@
 	margin: auto;
 	row-gap: 0;
 	/* justify-content: center; */
-	padding: 40px 0;
+	padding: 20px 0;
 }
 
 /* ---- Vertical dashed centre line ---- */
@@ -1442,7 +1445,7 @@
 .summer-expect-card:nth-child(4) {
 	grid-column: 3;
 	grid-row: 2;
-	margin-top: 160px;
+	margin-top: 83px;
 }
 
 /* Card 05 — left col, row 3 */
