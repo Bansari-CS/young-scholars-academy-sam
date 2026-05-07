@@ -1,9 +1,19 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import PrimaryButton from '../ui/PrimaryButton.astro';
 import '../../styles/components/methodology-section.css';
 
-const d = homePageSectionsData.methodology;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		cta: { label: string; href: string };
+		statTiles: Array<{ stat: string; description: string; variant: string; iconSrc: string }>;
+		principles: Array<{ title: string; description: string; iconTint: string; iconSrc: string }>;
+	};
+}
+
+const { content: d } = Astro.props;
 ---
 
 <section class="home-section home-section--surface ysa-methodology" aria-labelledby="method-heading">

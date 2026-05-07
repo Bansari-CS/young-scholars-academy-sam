@@ -1,32 +1,20 @@
 ---
 import FaqSection from '../common/FaqSection.astro';
 
-const faqItems = [
-	{
-		question: 'How often is the blog updated?',
-		answer:
-			'We publish new expert-written articles every Tuesday and Thursday. Our weekend edition usually features success stories and resource roundups from our community members.',
-	},
-	{
-		question: 'Are the strategies research-based?',
-		answer:
-			'Yes. Our content is built on current evidence from educational psychology, child development, and neurodiversity-informed practice, then translated into practical parent-friendly action steps.',
-	},
-	{
-		question: 'Can I contribute an article?',
-		answer:
-			'Yes. We welcome parent stories and expert contributions. You can reach out through our contact form and our editorial team will share contribution guidelines.',
-	},
-	{
-		question: 'What makes Young Scholars different?',
-		answer:
-			'We focus on strengths-first support for gifted and neurodivergent learners, combining practical home strategies, emotional support, and a community that deeply understands 2e families.',
-	},
-];
+interface Props {
+	content: {
+		title: string;
+		items: Array<{ question: string; answer: string }>;
+	};
+}
+
+const { content } = Astro.props;
+
+const faqItems = content.items;
 ---
 
 <FaqSection
-	title="Answers to Your Questions"
+	title={content.title}
 	items={faqItems.map((item, index) => ({ question: item.question, answer: item.answer, open: index === 0 }))}
 	sectionClass="mx-auto w-full max-w-[800px] px-6 pb-16 pt-24"
 	containerClass="w-full"

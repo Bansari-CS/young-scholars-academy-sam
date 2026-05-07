@@ -16,7 +16,7 @@ const statIcons = {
 } as const;
 ---
 
-<aside class="dashboard-card" aria-label="Product preview">
+<aside class="dashboard-card" aria-label={dashboard.cardAriaLabel ?? 'Product preview'}>
 	<div class="dashboard-card__shell">
 		<div class="dashboard-header">
 			<div class="dashboard-user">
@@ -45,7 +45,7 @@ const statIcons = {
 			<p class="lesson-card__desc">{dashboard.lessonDescription}</p>
 
 			<div class="lesson-progress-head">
-				<span class="lesson-progress-label">Lesson Progress</span>
+				<span class="lesson-progress-label">{dashboard.lessonProgressLabel}</span>
 				<span class="lesson-progress-value">{dashboard.progressPercent}%</span>
 			</div>
 			<div

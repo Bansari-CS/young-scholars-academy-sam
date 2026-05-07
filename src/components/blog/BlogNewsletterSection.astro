@@ -1,13 +1,26 @@
 ---
 import GradientCtaSection from '../common/GradientCtaSection.astro';
+
+interface Props {
+	content: {
+		title: string;
+		description: string;
+		buttonLabel: string;
+		buttonHref: string;
+		inputPlaceholder: string;
+		footnote: string;
+	};
+}
+
+const { content } = Astro.props;
 ---
 
 <GradientCtaSection
-	title="Not Ready Yet? Start Here."
-	description="Join 5,000+ parents receiving weekly insights, strategies, and curated resources delivered straight to your inbox."
-	primaryCta={{ label: 'Join Now', href: '#' }}
+	title={content.title}
+	description={content.description}
+	primaryCta={{ label: content.buttonLabel, href: content.buttonHref }}
 	layout="newsletter"
-	newsletterPlaceholder="Your email address"
-	newsletterButtonLabel="Join Now"
-	newsletterPrivacyText="We value your privacy. Unsubscribe at any time."
+	newsletterPlaceholder={content.inputPlaceholder}
+	newsletterButtonLabel={content.buttonLabel}
+	newsletterPrivacyText={content.footnote}
 />

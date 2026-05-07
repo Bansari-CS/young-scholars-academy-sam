@@ -1,39 +1,28 @@
 ---
-const relatedArticles = [
-	{
-		img: '/assets/images/articalImg4.jpg',
-		tag: 'Social Skills',
-		tagColor: 'text-[#7C3AED]',
-		title: 'Teaching Empathy to Neurodivergent Kids',
-	},
-	{
-		img: '/assets/images/articalImg5.jpg',
-		tag: 'Productivity',
-		tagColor: 'text-[#F2DD35]',
-		title: 'Executive Function Hacks for Daily Success',
-	},
-	{
-		img: '/assets/images/articalImg6.jpg',
-		tag: 'Science & Nature',
-		tagColor: 'text-[#0A9DFB]',
-		title: 'Igniting Curiosity Through Nature Study',
-	},
-];
+interface Props {
+	content: {
+		title: string;
+		exploreLabel: string;
+		exploreHref: string;
+		items: Array<{ img: string; tag: string; tagColor: string; title: string; href: string }>;
+	};
+}
+const { content } = Astro.props;
 ---
 
 <section class="mx-auto w-full max-w-[1200px] px-6 pb-16 md:pb-20">
 	<div class="mb-8 flex flex-wrap items-center justify-between gap-4">
-		<h2 class="text-[30px] font-bold leading-tight tracking-[-0.02em]">More from Young Scholars</h2>
-		<a href="/blog" class="inline-flex items-center gap-2 text-base font-bold leading-none text-[#0a9dfb]">
-			<span>Explore the Blog</span>
+		<h2 class="text-[30px] font-bold leading-tight tracking-[-0.02em]">{content.title}</h2>
+		<a href={content.exploreHref} class="inline-flex items-center gap-2 text-base font-bold leading-none text-[#0a9dfb]">
+			<span>{content.exploreLabel}</span>
 			<svg class="h-4 w-4 shrink-0" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 				<path d="M5.1957 0.847656L5.79727 0.246094C6.0707 0 6.48086 0 6.72695 0.246094L12.059 5.55078C12.3051 5.82422 12.3051 6.23438 12.059 6.48047L6.72695 11.8125C6.48086 12.0586 6.0707 12.0586 5.79727 11.8125L5.1957 11.2109C4.94961 10.9375 4.94961 10.5273 5.1957 10.2539L8.5043 7.10938H0.656641C0.273828 7.10938 0.00039053 6.83594 0.00039053 6.45312V5.57812C0.00039053 5.22266 0.273828 4.92188 0.656641 4.92188H8.5043L5.1957 1.80469C4.94961 1.53125 4.92227 1.12109 5.1957 0.847656Z" fill="#0A9DFB"/>
 			</svg>
 		</a>
 	</div>
 	<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-		{relatedArticles.map((item) => (
-			<a href="/blog/navigating-twice-exceptional-learners" class="rounded-[20px] border border-[rgba(226,232,240,0.5)] bg-white shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+		{content.items.map((item) => (
+			<a href={item.href} class="rounded-[20px] border border-[rgba(226,232,240,0.5)] bg-white shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
 				<img src={item.img} alt={item.title} class="h-[208px] w-full rounded-t-[20px] object-cover" />
 				<div class="p-6">
 					<p class:list={['text-[10px] font-semibold uppercase tracking-[1px]', item.tagColor]}>{item.tag}</p>

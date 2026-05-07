@@ -1,16 +1,29 @@
 ---
 import GradientCtaSection from '../common/GradientCtaSection.astro';
 const arrowRightIcon = '/assets/course-detail/icon-arrow-right.svg';
+
+interface Props {
+	content: {
+		title: string;
+		description: string;
+		primaryCtaLabel: string;
+		primaryCtaHref: string;
+		secondaryCtaLabel: string;
+		secondaryCtaHref: string;
+	};
+}
+
+const { content } = Astro.props;
 ---
 
 <div class="mb-24 mt-6">
 	<GradientCtaSection
 		variant="dark"
-		title="You Don’t Have to Figure This Out Alone"
-		description="Join our vibrant community of parents, educators, and experts dedicated to helping every child find their path."
-		primaryCta={{ label: 'Find My Child’s Best Fit', href: '#' }}
+		title={content.title}
+		description={content.description}
+		primaryCta={{ label: content.primaryCtaLabel, href: content.primaryCtaHref }}
 		primaryTrailingIcon={arrowRightIcon}
-		secondaryCta={{ label: 'Explore Programs', href: '#' }}
+		secondaryCta={{ label: content.secondaryCtaLabel, href: content.secondaryCtaHref }}
 		showPrimaryArrow={true}
 	/>
 </div>

@@ -1,15 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
-);
+const [blogDetailEntry] = await getCollection('blog-detail');
 
-const fallbackPost = posts[0];
-
-if (!fallbackPost) {
-	throw new Error('No blog posts found in content collection.');
+if (!blogDetailEntry) {
+	throw new Error('Missing blog detail content entry in src/content/blog-detail/');
 }
 
-return Astro.redirect(`/blog/${fallbackPost.id}`);
+return Astro.redirect(`/blog/${blogDetailEntry.data.slug}`);
 ---

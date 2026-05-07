@@ -1,8 +1,16 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import FaqSection from '../common/FaqSection.astro';
 
-const d = homePageSectionsData.faq;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		items: Array<{ question: string; answer: string }>;
+	};
+}
+
+const { content: d } = Astro.props;
 const faqItems = d.items.map((item, index) => ({
 	question: item.question,
 	answer: item.answer,

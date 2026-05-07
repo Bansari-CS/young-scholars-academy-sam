@@ -1,9 +1,18 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import type { PlatformFeatureIcon } from '../../types/homePage';
 import '../../styles/components/platform-section.css';
 
-const d = homePageSectionsData.platform;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		tablistAriaLabel?: string;
+		features: Array<{ icon: PlatformFeatureIcon; title: string; description: string }>;
+	};
+}
+
+const { content: d } = Astro.props;
 
 const previewByIcon: Record<PlatformFeatureIcon, { src: string }> = {
 	live: { src: '/assets/images/platformtab2.jpg' },
@@ -55,7 +64,7 @@ const iconClass = (icon: PlatformFeatureIcon) =>
 				</div>
 			</div>
 
-			<div class="ysa-platform__features" role="tablist" aria-label="Platform highlights">
+			<div class="ysa-platform__features" role="tablist" aria-label={d.tablistAriaLabel ?? 'Platform highlights'}>
 				{
 					d.features.map((feature, index) => (
 						<button

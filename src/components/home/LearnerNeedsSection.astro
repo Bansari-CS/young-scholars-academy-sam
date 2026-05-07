@@ -1,5 +1,4 @@
 ---
-import { learnerSectionData } from '../../data/home';
 import '../../styles/components/learner-needs-section.css';
 
 const cardSadPathD =
@@ -13,7 +12,35 @@ const cardCheckPathD =
 
 const cardAlonePathD =
 	'M26.9906 11.9766C26.9906 12.8203 26.2875 13.4812 25.4906 13.4812H23.9906L24.0234 20.9906C24.0328 22.6547 22.6875 24.0047 21.0234 24.0047H15.3L13.5 21L17.2875 17.8453C17.6531 17.5406 17.6437 16.9734 17.2687 16.6781L11.7469 12.3375C11.0625 11.7984 10.1625 12.6656 10.6781 13.3687L13.5 17.25L9.49219 20.5875C9.20625 20.8219 9.14062 21.2344 9.32812 21.5484L10.8 24H6.00469C4.35 24 3.00469 22.6547 3.00469 21V13.4812H1.5C0.65625 13.4812 0 12.825 0 11.9766C0 11.5547 0.140625 11.1797 0.46875 10.8516L12.4875 0.375C12.8156 0.046875 13.1906 0 13.5188 0C13.8469 0 14.2219 0.09375 14.5031 0.328125L19.5 4.72031V3C19.5 2.17031 20.1703 1.5 21 1.5H22.5C23.3297 1.5 24 2.17031 24 3V8.67188L26.475 10.8469C26.85 11.175 27.0375 11.55 26.9906 11.9719V11.9766Z';
-import { processSectionData } from '../../data/processSection';
+interface Props {
+	content: {
+		badgeText: string;
+		title: string;
+		description: string;
+		cards: Array<{
+			title: string;
+			description: string;
+			highlight: string;
+			icon: string;
+		}>;
+	};
+	processContent: {
+		badge: string;
+		title: string;
+		description: string;
+		steps: Array<{
+			step: string;
+			title: string;
+			desc: string;
+			footer: string;
+			color: string;
+		}>;
+		buttonText: string;
+		note: string;
+	};
+}
+
+const { content, processContent } = Astro.props;
 
 ---
 
@@ -23,21 +50,21 @@ import { processSectionData } from '../../data/processSection';
 		<div class="learner-heading m-0  text-center">
 			
 			<span class="inline-flex items-center justify-center rounded-[999px] bg-[#EDE9FE] px-[1rem] py-[0.5rem] text-[12px] font-bold uppercase tracking-[0.06em] text-[#7C3AED]">
-				{learnerSectionData.badgeText}
+				{content.badgeText}
 			</span>
 
 			<h2 class="m-[1rem_0_1.5rem] text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0F172A]">
-				{learnerSectionData.title}
+				{content.title}
 			</h2>
 
 			<p class="mx-auto my-0 max-w-[672px] text-[clamp(1rem,1.9vw,1rem)] leading-[1.65] text-[#64748B] max-sm:text-[0.98rem]">
-				{learnerSectionData.description}
+				{content.description}
 			</p>
 		</div>
 
 		<div class="learner-cards mt-[clamp(2rem,4vw,4rem)] grid grid-cols-3 gap-8 max-lg:grid-cols-1">
 			{
-				learnerSectionData.cards.map((card) => (
+				content.cards.map((card) => (
 					<article class="learner-card rounded-[1.25rem] border border-[#E2E8F0] bg-white px-[2.063rem] py-[2.063rem] shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_26px_-20px_rgba(15,23,42,0.2)] transition-[border-color,box-shadow] duration-200 ease-in hover:border-[#CBD5E1] hover:shadow-[0_12px_34px_-26px_rgba(15,23,42,0.28)]">
 						
 						<div
@@ -99,13 +126,13 @@ import { processSectionData } from '../../data/processSection';
   <div class="max-w-[var(--ysa-max)] mx-auto px-[clamp(16px,4.44vw,64px)]">
     
     <header class="text-center mb-[clamp(32px,4vw,56px)]">
-      <span class="inline-flex items-center justify-center bg-[#E1F3FF] text-[var(--ysa-primary)] px-[16px] py-[8px] rounded-[999px] text-[12px] font-[700] uppercase tracking-[0.06em]">{processSectionData.badge}</span>
-      <h2 class="mt-[20px] mb-[16px] text-[clamp(32px,4vw,44px)] leading-[1.15] tracking-[-0.02em] text-[#0f172a] font-[700]">{processSectionData.title}</h2>
-      <p class="mx-auto max-w-[549px] text-[#475569] text-[16px] leading-[26px]" set:html={processSectionData.description}></p>
+      <span class="inline-flex items-center justify-center bg-[#E1F3FF] text-[var(--ysa-primary)] px-[16px] py-[8px] rounded-[999px] text-[12px] font-[700] uppercase tracking-[0.06em]">{processContent.badge}</span>
+      <h2 class="mt-[20px] mb-[16px] text-[clamp(32px,4vw,44px)] leading-[1.15] tracking-[-0.02em] text-[#0f172a] font-[700]">{processContent.title}</h2>
+      <p class="mx-auto max-w-[549px] text-[#475569] text-[16px] leading-[26px]" set:html={processContent.description}></p>
     </header>
 
     <div class="flex items-stretch justify-center gap-[24px] flex-wrap md:flex-nowrap max-w-[1376px]">
-      {processSectionData.steps.map((step, index) => (
+      {processContent.steps.map((step, index) => (
         <>
           {/* CARD */}
           <article class={`process-card process-card--${step.color}`}>
@@ -153,7 +180,7 @@ import { processSectionData } from '../../data/processSection';
           </article>
 
           {/* ARROW BETWEEN CARDS */}
-          {index < processSectionData.steps.length - 1 && (
+          {index < processContent.steps.length - 1 && (
             <div class="process-arrow-connector">
               <div class="process-arrow-circle">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -175,10 +202,10 @@ import { processSectionData } from '../../data/processSection';
 
 
         </span>
-        <span>{processSectionData.buttonText}</span>
+        <span>{processContent.buttonText}</span>
       </button>
       <p class="process-cta-note">
-        {processSectionData.note}
+        {processContent.note}
       </p>
     </div>
 

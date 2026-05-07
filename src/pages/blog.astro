@@ -10,31 +10,32 @@ import BlogTestimonialsSection from '../components/blog/BlogTestimonialsSection.
 import BlogNewsletterSection from '../components/blog/BlogNewsletterSection.astro';
 import BlogFaqSection from '../components/blog/BlogFaqSection.astro';
 import BlogFinalCtaSection from '../components/blog/BlogFinalCtaSection.astro';
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import { heroData } from '../data/home';
 
-const blogPosts = (await getCollection('blog')).sort((a, b) => {
-	if (typeof a.data.order === 'number' && typeof b.data.order === 'number') {
-		return a.data.order - b.data.order;
-	}
-	return b.data.publishedAt.getTime() - a.data.publishedAt.getTime();
-});
+const blogPageEntry = await getEntry('blog-page', 'blog-page');
+
+if (!blogPageEntry) {
+	throw new Error('Missing blog page content entry at src/content/blog-page/blog-page.md');
+}
+
+const blogPageContent = blogPageEntry.data;
 ---
 
-<Layout title="Blog | Young Scholars Academy" description="Insights for raising bright, differently-wired kids.">
+<Layout title={blogPageContent.seo.title} description={blogPageContent.seo.description}>
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main class="bg-[#f1f5f9] text-[#111827]">
-		<BlogHeroSection />
-		<BlogFeaturedInsightsSection />
-		<BlogLatestArticlesSection posts={blogPosts} />
-		<BlogTopicsSection />
-		<BlogTestimonialsSection />
+		<BlogHeroSection content={blogPageContent.hero} />
+		<BlogFeaturedInsightsSection content={blogPageContent.featuredInsights} />
+		<BlogLatestArticlesSection content={blogPageContent.latestArticles} />
+		<BlogTopicsSection content={blogPageContent.topics} />
+		<BlogTestimonialsSection content={blogPageContent.testimonials} />
 
-		<BlogNewsletterSection />
+		<BlogNewsletterSection content={blogPageContent.newsletter} />
 
-		<BlogFaqSection />
+		<BlogFaqSection content={blogPageContent.faq} />
 
-		<BlogFinalCtaSection />
+		<BlogFinalCtaSection content={blogPageContent.finalCta} />
 	</main>
 	<Footer />
 </Layout>

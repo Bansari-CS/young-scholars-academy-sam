@@ -1,22 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const blogCollection = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		category: z.string(),
-		readTime: z.string(),
-		publishedAt: z.date(),
-		author: z.string(),
-		authorRole: z.string(),
-		coverImage: z.string(),
-		order: z.number().optional(),
-		featured: z.boolean().default(false),
-	}),
-});
-
 const teachersCollection = defineCollection({
 	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/teachers' }),
 	schema: z.object({
@@ -376,15 +360,26 @@ const blogPageCollection = defineCollection({
 	schema: z.record(z.string(), z.any()),
 });
 
+const blogDetailCollection = defineCollection({
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog-detail' }),
+	schema: z.record(z.string(), z.any()),
+});
+
 const courseDetailCollection = defineCollection({
 	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/course-detail' }),
 	schema: z.record(z.string(), z.any()),
 });
 
+const homeCollection = defineCollection({
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/home' }),
+	schema: z.record(z.string(), z.any()),
+});
+
 export const collections = {
-	blog: blogCollection,
 	'blog-page': blogPageCollection,
+	'blog-detail': blogDetailCollection,
 	'course-detail': courseDetailCollection,
+	home: homeCollection,
 	teachers: teachersCollection,
 	'semester-sales': semesterSalesCollection,
 	'mentor-profile': mentorProfileCollection,

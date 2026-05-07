@@ -1,9 +1,19 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import GradientCtaSection from '../common/GradientCtaSection.astro';
 import arrowRightIcon from '../../assets/common/icon-arrow-right-violet.svg';
 
-const d = homePageSectionsData.communityCta;
+interface Props {
+	content: {
+		title: string;
+		description: string;
+		primaryCta: { label: string; href: string };
+		secondaryCta: { label: string; href: string };
+		secondaryLeadingIcon?: string;
+		trustPoints: Array<{ icon: string; label: string }>;
+	};
+}
+
+const { content: d } = Astro.props;
 ---
 
 <GradientCtaSection
@@ -12,11 +22,7 @@ const d = homePageSectionsData.communityCta;
 	primaryCta={d.primaryCta}
 	primaryTrailingIcon={arrowRightIcon.src}
 	secondaryCta={d.secondaryCta}
-	secondaryLeadingIcon="🗓"
+	secondaryLeadingIcon={d.secondaryLeadingIcon ?? '🗓'}
 	fullWidth={true}
-	trustPoints={[
-		{ icon: '☺', label: '100% Satisfaction Guarantee' },
-		{ icon: '💳', label: 'No Credit Card Required' },
-		{ icon: '◔', label: 'Start Within 48 Hours' },
-	]}
+	trustPoints={d.trustPoints}
 />

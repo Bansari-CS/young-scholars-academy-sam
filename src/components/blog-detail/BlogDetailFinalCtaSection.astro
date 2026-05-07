@@ -1,15 +1,27 @@
 ---
 import GradientCtaSection from '../common/GradientCtaSection.astro';
 const arrowRightIcon = '/assets/course-detail/icon-arrow-right.svg';
+
+interface Props {
+	content: {
+		title: string;
+		description: string;
+		primaryCtaLabel: string;
+		primaryCtaHref: string;
+		secondaryCtaLabel: string;
+		secondaryCtaHref: string;
+	};
+}
+const { content } = Astro.props;
 ---
 
 <GradientCtaSection
 	variant="soft"
-	title="Ready to Find Your Child's Perfect Path?"
-	description="Join 5,000+ families who use our research-backed insights to help their gifted and neurodivergent children reach their full potential."
-	primaryCta={{ label: 'Find My Child’s Best Fit', href: '#' }}
+	title={content.title}
+	description={content.description}
+	primaryCta={{ label: content.primaryCtaLabel, href: content.primaryCtaHref }}
 	primaryTrailingIcon={arrowRightIcon}
-	secondaryCta={{ label: 'Explore Programs', href: '#' }}
+	secondaryCta={{ label: content.secondaryCtaLabel, href: content.secondaryCtaHref }}
 	primaryStyle="brand"
 	showPrimaryArrow={true}
 />

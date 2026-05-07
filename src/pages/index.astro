@@ -15,31 +15,40 @@ import FaqSection from '../components/home/FaqSection.astro';
 import CommunityCtaSection from '../components/home/CommunityCtaSection.astro';
 import Footer from '../components/common/Footer.astro';
 import Layout from '../layouts/Layout.astro';
-import { learnerSectionData } from '../data/home';
+import { getEntry } from 'astro:content';
 import '../styles/components/home-sections.css';
+import { heroData } from '../data/home';
+
+const homeEntry = await getEntry('home', 'home');
+
+if (!homeEntry) {
+	throw new Error('Missing home page content entry at src/content/home/home.md');
+}
+
+const homeContent = homeEntry.data;
 ---
 
 <Layout
-	title="Young Scholars Academy"
-	description="Premium online learning for gifted, twice-exceptional, and neurodivergent learners."
+	title={homeContent.seo.title}
+	description={homeContent.seo.description}
 >
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main class="site-main">
-		<HeroSection />
+		<HeroSection content={homeContent.hero} />
 		<TrustStripSection
-			title={learnerSectionData.organizationsTitle}
-			organizations={learnerSectionData.organizations}
+			title={homeContent.trustStrip.title}
+			organizations={homeContent.trustStrip.organizations}
 		/>
-		<LearnerNeedsSection />
-		<ProgramsSection />
-		<MethodologySection />
-		<PlatformSection />
-		<RealGrowthSection />
-		<TeachersSection />
-		<WorldKidsSection />
-		<FitCheckSection />
-		<FaqSection />
-		<CommunityCtaSection />
+		<LearnerNeedsSection content={homeContent.learnerNeeds} processContent={homeContent.process} />
+		<ProgramsSection content={homeContent.programs} />
+		<MethodologySection content={homeContent.methodology} />
+		<PlatformSection content={homeContent.platform} />
+		<RealGrowthSection content={homeContent.impact} />
+		<TeachersSection content={homeContent.teachers} />
+		<WorldKidsSection content={homeContent.world} />
+		<FitCheckSection content={homeContent.fit} />
+		<FaqSection content={homeContent.faq} />
+		<CommunityCtaSection content={homeContent.communityCta} />
 	</main>
 	<Footer />
 </Layout>

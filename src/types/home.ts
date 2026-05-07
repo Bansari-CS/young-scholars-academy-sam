@@ -33,7 +33,9 @@ export interface HeroDashboardData {
 	studentName: string;
 	course: string;
 	streakLabel: string;
+	cardAriaLabel?: string;
 	progressTag: string;
+	lessonProgressLabel: string;
 	lessonTitle: string;
 	lessonDescription: string;
 	progressPercent: number;

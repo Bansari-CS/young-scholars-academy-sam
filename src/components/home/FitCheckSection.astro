@@ -1,8 +1,18 @@
 ---
-import { homePageSectionsData } from '../../data/homePageSections';
 import '../../styles/components/fit-section.css';
 
-const d = homePageSectionsData.fit;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		goodFit: { title: string; items: string[] };
+		notIdeal: { title: string; items: string[] };
+		note: string;
+	};
+}
+
+const { content: d } = Astro.props;
 ---
 
 <section class="ysa-fit" aria-labelledby="fit-heading">
