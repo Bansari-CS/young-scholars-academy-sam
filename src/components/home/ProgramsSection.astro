@@ -1,48 +1,34 @@
 ---
-import { Image } from 'astro:assets';
 import { programsSectionData } from '../../data/programsSection';
 import type { ProgramCategoryId, ProgramListingCard } from '../../types/programsSection';
 import '../../styles/components/programs-section.css';
-
-import ageIcon from '../../assets/images/age.png';
-import campIcon from '../../assets/images/camp.png';
-import teacherFilterIcon from '../../assets/images/teacher.png';
-
-import coverScience from '../../assets/images/animated science experiment with colorful chemical reactions and beakers, educational GIF style.png';
-import coverCoding from '../../assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png';
-import coverMath from '../../assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png';
-import coverRobotics from '../../assets/images/animated robot building and moving parts assembling, engineering GIF for kids.png';
-import coverWriting from '../../assets/images/animated storytelling with magical book pages turning and characters appearing, creative writing GIF.png';
-import coverCritical from '../../assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png';
-
-import photoRoss from '../../assets/images/Teacher (1).png';
-import photoMartinez from '../../assets/images/Teacher (2).png';
-import photoChen from '../../assets/images/Teacher (3).png';
-import photoJohnson from '../../assets/images/Teacher (4).png';
-import photoThompson from '../../assets/images/Teacher (5).png';
-import photoLee from '../../assets/images/Teacher (6).png';
-
-const coverByKey: Record<ProgramCategoryId, typeof coverScience> = {
-	science: coverScience,
-	coding: coverCoding,
-	math: coverMath,
-	robotics: coverRobotics,
-	writing: coverWriting,
-	'critical-thinking': coverCritical,
+const coverByKey: Record<ProgramCategoryId, string> = {
+	science: '/assets/images/animated science experiment with colorful chemical reactions and beakers, educational GIF style.png',
+	coding: '/assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png',
+	math: '/assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png',
+	robotics: '/assets/images/animated robot building and moving parts assembling, engineering GIF for kids.png',
+	writing: '/assets/images/animated storytelling with magical book pages turning and characters appearing, creative writing GIF.png',
+	'critical-thinking': '/assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png',
 };
 
-const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], typeof photoRoss> = {
-	ross: photoRoss,
-	martinez: photoMartinez,
-	chen: photoChen,
-	johnson: photoJohnson,
-	thompson: photoThompson,
-	lee: photoLee,
+const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], string> = {
+	ross: '/assets/images/Teacher (1).png',
+	martinez: '/assets/images/Teacher (2).png',
+	chen: '/assets/images/Teacher (3).png',
+	johnson: '/assets/images/Teacher (4).png',
+	thompson: '/assets/images/Teacher (5).png',
+	lee: '/assets/images/Teacher (6).png',
 };
 
 const d = programsSectionData;
 const { filters } = d;
 const initialAge = filters.ageRange.options.find((o) => o.isActive)?.label ?? '';
+const toSlug = (value: string) =>
+	value
+		.toLowerCase()
+		.trim()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '');
 ---
 
 <section class="programs-section" aria-labelledby="programs-heading">
@@ -146,18 +132,15 @@ const initialAge = filters.ageRange.options.find((o) => o.isActive)?.label ?? ''
 				d.cards.map((card) => {
 					const cover = coverByKey[card.coverImageKey];
 					const teacherFace = teacherPhotoByKey[card.teacherPhotoKey];
+					const cardHref = `/courses/${toSlug(card.title)}`;
 					return (
-						<a class="programs-card" href={card.href}>
+						<a class="programs-card" href={cardHref}>
 							<div class="programs-card__media">
-								<Image
+								<img
 									src={cover}
 									alt={`${card.title} illustration`}
 									class="programs-card__cover"
-									width={640}
-									height={420}
-									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 									loading="lazy"
-									decoding="async"
 								/>
 								<span class="programs-card__age">{card.ageLabel}</span>
 							</div>
@@ -180,11 +163,9 @@ const initialAge = filters.ageRange.options.find((o) => o.isActive)?.label ?? ''
 								<p class="programs-card__desc">{card.description}</p>
 								<div class="programs-card__footer">
 									<div class="programs-card__teacher">
-										<Image
+										<img
 											src={teacherFace}
 											alt={card.teacher.name}
-											width={36}
-											height={36}
 											class="programs-card__avatar-img"
 											loading="lazy"
 										/>

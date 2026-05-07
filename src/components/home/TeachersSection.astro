@@ -1,25 +1,17 @@
 ---
-import { Image } from 'astro:assets';
 import { homePageSectionsData } from '../../data/homePageSections';
 import type { TeacherCard } from '../../types/homePage';
 import '../../styles/components/teachers-section.css';
 
-import photo1 from '../../assets/images/educator1.jpg';
-import photo2 from '../../assets/images/educator2.jpg';
-import photo3 from '../../assets/images/educator4.jpg';
-import photo4 from '../../assets/images/educator3.jpg';
-import photo5 from '../../assets/images/Teacher (5).png';
-import photo6 from '../../assets/images/Teacher (6).png';
-
 const d = homePageSectionsData.teachers;
 
-const photoByIndex: Record<TeacherCard['photoIndex'], typeof photo1> = {
-	1: photo1,
-	2: photo2,
-	3: photo3,
-	4: photo4,
-	5: photo5,
-	6: photo6,
+const photoByIndex: Record<TeacherCard['photoIndex'], string> = {
+	1: '/assets/images/educator1.jpg',
+	2: '/assets/images/educator2.jpg',
+	3: '/assets/images/educator4.jpg',
+	4: '/assets/images/educator3.jpg',
+	5: '/assets/images/Teacher (5).png',
+	6: '/assets/images/Teacher (6).png',
 };
 ---
 
@@ -39,15 +31,11 @@ const photoByIndex: Record<TeacherCard['photoIndex'], typeof photo1> = {
 						<li class="ysa-teachers__item">
 							<article class="ysa-teachers__card">
 								<div class="ysa-teachers__media">
-									<Image
+									<img
 										src={src}
 										alt={`${t.name} portrait`}
 										class="ysa-teachers__photo"
-										width={640}
-										height={640}
-										sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 25vw"
 										loading="lazy"
-										decoding="async"
 									/>
 								</div>
 								<div class="ysa-teachers__body">

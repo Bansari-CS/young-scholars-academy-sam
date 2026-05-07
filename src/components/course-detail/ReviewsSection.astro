@@ -1,5 +1,4 @@
 ---
-import type { ReviewItem } from '../../data/courseDetail';
 import Reviews from './Reviews.astro';
 
 interface Props {
@@ -10,7 +9,7 @@ interface Props {
 		starsText: string;
 		writeReviewLabel: string;
 		galleryTitle: string;
-		items: ReviewItem[];
+		items: { name: string; role: string; text: string }[];
 	};
 }
 

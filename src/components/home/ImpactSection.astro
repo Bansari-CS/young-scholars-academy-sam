@@ -1,10 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import { homePageSectionsData } from '../../data/homePageSections';
 import type { ImpactCard, ImpactTestimonialAuthor } from '../../types/homePage';
-import image1 from '../../assets/images/image1.jpg';
-import image2 from '../../assets/images/image2.jpg';
-import youtubeIcon from '../../assets/images/Vector.svg';
 
 interface Props {
 	hideStatLabels?: string[];
@@ -16,12 +12,12 @@ const d = homePageSectionsData.impact;
 const filteredStats = d.stats.filter((stat) => !hideStatLabels.includes(stat.label));
 
 const imageByIndex = {
-	1: image1,
-	2: image2,
-	3: image1,
-	4: image2,
-	5: image1,
-	6: image2,
+	1: '/assets/images/image1.jpg',
+	2: '/assets/images/image2.jpg',
+	3: '/assets/images/image1.jpg',
+	4: '/assets/images/image2.jpg',
+	5: '/assets/images/image1.jpg',
+	6: '/assets/images/image2.jpg',
 } as const;
 
 const getAuthorImage = (author: ImpactTestimonialAuthor) => imageByIndex[author.avatarIndex];
@@ -62,15 +58,12 @@ const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex
 										<article class={`impact-card impact-card--${card.type}`}>
 											{card.type === 'video' ? (
 												<div class="impact-card-media">
-													<Image
+													<img
 														src={getThumbnail(card)!}
 														alt={`${card.author.name} video testimonial`}
 														loading="lazy"
-														decoding="async"
-														width={430}
-														height={220}
 													/>
-													<span class="impact-card-play" aria-hidden="true"><Image src={youtubeIcon} alt="Play video" /></span>
+													<span class="impact-card-play" aria-hidden="true"><img src="/assets/images/Vector.svg" alt="Play video" /></span>
 												</div>
 											) : null}
 											<div class="impact-card-body">
@@ -79,14 +72,11 @@ const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex
 												</p>
 												<p class="impact-card-quote">{card.quote}</p>
 												<div class="impact-card-author">
-													<Image
+													<img
 														src={getAuthorImage(card.author)}
 														alt=""
 														aria-hidden="true"
 														loading="lazy"
-														decoding="async"
-														width={36}
-														height={36}
 													/>
 													<div>
 														<p class="impact-card-name">{card.author.name}</p>

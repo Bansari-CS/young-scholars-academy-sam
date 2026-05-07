@@ -1,21 +1,15 @@
 ---
-import { Image } from 'astro:assets';
 import { homePageSectionsData } from '../../data/homePageSections';
 import type { PlatformFeatureIcon } from '../../types/homePage';
 import '../../styles/components/platform-section.css';
 
-import platformTabLive from '../../assets/images/platformtab2.jpg';
-import platformTabAi from '../../assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png';
-import platformTabParent from '../../assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png';
-import platformTabGame from '../../assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png';
-
 const d = homePageSectionsData.platform;
 
-const previewByIcon: Record<PlatformFeatureIcon, { src: typeof platformTabLive; width: number; height: number }> = {
-	live: { src: platformTabLive, width: 942, height: 498 },
-	ai: { src: platformTabAi, width: 420, height: 192 },
-	parent: { src: platformTabParent, width: 420, height: 192 },
-	game: { src: platformTabGame, width: 420, height: 192 },
+const previewByIcon: Record<PlatformFeatureIcon, { src: string }> = {
+	live: { src: '/assets/images/platformtab2.jpg' },
+	ai: { src: '/assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png' },
+	parent: { src: '/assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png' },
+	game: { src: '/assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png' },
 };
 
 const iconClass = (icon: PlatformFeatureIcon) =>
@@ -47,12 +41,11 @@ const iconClass = (icon: PlatformFeatureIcon) =>
 										aria-labelledby={`platform-tab-${index}`}
 										aria-hidden={index === 0 ? 'false' : 'true'}
 									>
-										<Image
+										<img
 											src={preview.src}
 											alt={`${feature.title} — platform preview`}
 											class="ysa-platform__visual-img"
 											loading={index === 0 ? 'eager' : 'lazy'}
-											decoding="async"
 										/>
 									</div>
 								);

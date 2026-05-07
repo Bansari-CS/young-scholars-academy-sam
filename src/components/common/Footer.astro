@@ -44,7 +44,7 @@ const company = ['About', 'Careers', 'Contact', 'Privacy Policy'];
 			<nav class="ysa-footer__nav-col" aria-label="Resources">
 				<h3>Resources</h3>
 				<ul>
-					{resources.map((item) => <li><a href="#">{item}</a></li>)}
+					{resources.map((item) => <li><a href={item === 'Blog' ? '/blog' : '#'}>{item}</a></li>)}
 				</ul>
 			</nav>
 
