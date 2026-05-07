@@ -8,17 +8,23 @@ const { tabs } = Astro.props;
 ---
 
 <nav class="border-y border-slate-100 bg-white" aria-label="Course sections">
-	<div class="mx-auto flex min-h-12 max-w-[1202px] items-center justify-between gap-4 px-2">
+	<div class="mx-auto flex min-h-12 max-w-[1216px] items-center justify-between gap-4 px-4">
 		<ul class="m-0 flex list-none items-center gap-5 p-0">
 			{
 				tabs.map((tab, index) => (
 					<li
 						class:list={[
-							'border-b-2 border-transparent py-3 text-md font-semibold text-slate-500',
+							'border-b-2 border-transparent py-3 text-sm font-semibold text-slate-500',
 							index === 0 && 'border-b-sky-500 text-sky-500',
 						]}
 					>
-						{tab}
+						<button
+							type="button"
+							class="tab-button cursor-pointer bg-transparent no-underline"
+							data-tab-index={index}
+						>
+							{tab}
+						</button>
 					</li>
 				))
 			}
@@ -31,10 +37,36 @@ const { tabs } = Astro.props;
 				src={shareIcon.src}
 				alt=""
 				aria-hidden="true"
-				class="h-3 w-3"
+				class="h-4 w-4"
 				loading="lazy"
 			/>
 			<span>Share</span>
 		</a>
 	</div>
 </nav>
+
+<script>
+	const buttons = Array.from(
+		document.querySelectorAll<HTMLButtonElement>('.tab-button[data-tab-index]')
+	);
+	const items = buttons
+		.map((btn) => btn.closest('li'))
+		.filter(Boolean) as HTMLLIElement[];
+
+	const setActive = (activeIndex: number) => {
+		items.forEach((item, index) => {
+			const isActive = index === activeIndex;
+			item.classList.toggle('border-b-sky-500', isActive);
+			item.classList.toggle('text-sky-500', isActive);
+			item.classList.toggle('border-transparent', !isActive);
+			item.classList.toggle('text-slate-500', !isActive);
+		});
+	};
+
+	buttons.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const idx = Number(btn.dataset.tabIndex ?? '0');
+			setActive(idx);
+		});
+	});
+</script>
