@@ -1,37 +1,33 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { mentorProfileAssets } from './data';
 
-const testimonials = [
-	{
-		quote: `"Finding YSA was a turning point for our son. For the first time, he’s in a space where his 'intensity' is seen as a superpower, not a problem. The mentors truly 'get' him."`,
-		name: 'Jennifer M.',
-		meta: 'Parent of a 9-year-old scholar',
-		avatar: mentorProfileAssets.testimonialAvatar1Url,
-		highlight: false,
-	},
-	{
-		quote: `"The Chemistry program didn't just teach my daughter facts; it ignited a passion. Dr. Emily Ross has this incredible way of making complex topics feel like a thrilling mystery to solve."`,
-		name: 'David K.',
-		meta: 'Parent of an 11-year-old scholar',
-		avatar: mentorProfileAssets.testimonialAvatar2Url,
-		highlight: true,
-	},
-	{
-		quote: `"We've tried countless online courses, but nothing compares to the community here. The small class sizes mean my child isn't just a face on a screen—they're a valued member of a team."`,
-		name: 'Michelle T.',
-		meta: 'Parent of a 14-year-old scholar',
-		avatar: mentorProfileAssets.testimonialAvatar3Url,
-		highlight: false,
-	},
+type TestimonialsContent = CollectionEntry<'mentor-profile'>['data']['testimonials'];
+
+interface Props {
+	content: TestimonialsContent;
+}
+
+const { content } = Astro.props as Props;
+
+const avatarUrls = [
+	mentorProfileAssets.testimonialAvatar1Url,
+	mentorProfileAssets.testimonialAvatar2Url,
+	mentorProfileAssets.testimonialAvatar3Url,
 ];
+
+const testimonials = content.items.map((item, index) => ({
+	...item,
+	avatar: avatarUrls[index] ?? avatarUrls[0],
+}));
 ---
 
 <section class="bg-white px-5 py-14 md:px-16 md:py-20" aria-labelledby="parents-say-title">
 	<div class="mx-auto flex w-full max-w-[1180px] flex-col gap-12">
 		<header class="text-center">
-			<h2 class="text-[44px] font-bold leading-[66px] text-[#111827] mt-2" id="parents-say-title">What Our Parents Say...</h2>
+			<h2 class="text-[44px] font-bold leading-[66px] text-[#111827] mt-2" id="parents-say-title">{content.title}</h2>
 			<p class="mx-auto max-w-[702px] text-base leading-[26px] text-[#475569]">
-				Discover why hundreds of families trust Young Scholars Academy to nurture and inspire their gifted and neurodivergent learners.
+				{content.description}
 			</p>
 		</header>
 

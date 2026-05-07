@@ -1,19 +1,22 @@
 ---
 import { semesterSalesAssets } from './data';
 
-const features = [
-	{
-		icon: semesterSalesAssets.academyGroupIconUrl,
-		text: 'Small-group classes (6–8 students max)',
-	},
-	{
-		icon: semesterSalesAssets.academyDiscussionIconUrl,
-		text: 'Socratic, discussion-based learning',
-	},
-	{
-		icon: semesterSalesAssets.academyMentorIconUrl,
-		text: 'Mentors who specialize in 2e and gifted education',
-	},
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		features: string[];
+		badgeTitle: string;
+		badgeDescription: string;
+	};
+}
+
+const { content } = Astro.props as Props;
+const featureIcons = [
+	semesterSalesAssets.academyGroupIconUrl,
+	semesterSalesAssets.academyDiscussionIconUrl,
+	semesterSalesAssets.academyMentorIconUrl,
 ];
 ---
 
@@ -29,31 +32,31 @@ const features = [
 					<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0a9dfb]">
 						<img class="h-4 w-[18px]" src={semesterSalesAssets.academyAccreditedIconUrl} alt="" aria-hidden="true" />
 					</span>
-					<p class="text-base font-bold leading-6 text-[#1e293b]">Accredited</p>
+					<p class="text-base font-bold leading-6 text-[#1e293b]">{content.badgeTitle}</p>
 				</div>
 				<p class="pt-2 text-sm leading-5 text-[#64748b]">
-					WASC Accredited virtual learning community built specifically for gifted minds.
+					{content.badgeDescription}
 				</p>
 			</div>
 		</div>
 
 		<div class="order-1 xl:order-2">
 			<span class="rounded-full bg-[rgba(10,157,251,0.1)] px-4 py-2 text-xs font-bold uppercase tracking-[0.6px] text-[#0a9dfb]">
-				The Academy
+				{content.eyebrow}
 			</span>
 			<h2 class="pt-[46px] xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-[#111827]" id="academy-title">
-				What Is Young Scholars Academy?
+				{content.title}
 			</h2>
 			<p class="pt-[48px] text-base leading-[26px] text-[#475569] text-[16px] max-w-[571px]">
-				Not adapted from traditional school. Built from the ground up—for kids like yours. We provide a space where "differently-wired" is the norm, not the exception.
+				{content.description}
 			</p>
 
 			<ul class="mt-[45px] list-none space-y-4 p-0">
 				{
-					features.map((item) => (
+					content.features.map((item, index) => (
 						<li class="flex items-center gap-4 rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-4">
-							<img class="h-6 w-6" src={item.icon} alt="" aria-hidden="true" />
-							<span class="text-[17px] font-semibold leading-6 text-[#1e293b]">{item.text}</span>
+							<img class="h-6 w-6" src={featureIcons[index] ?? featureIcons[0]} alt="" aria-hidden="true" />
+							<span class="text-[17px] font-semibold leading-6 text-[#1e293b]">{item}</span>
 						</li>
 					))
 				}

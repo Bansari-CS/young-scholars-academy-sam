@@ -1,39 +1,36 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { mentorProfileAssets } from './data';
 
-const items = [
-	{
-		title: 'Global Explorer',
-		description: 'Dr. Ross has traveled to over 30 countries, always bringing back a local science story.',
-		iconUrl: mentorProfileAssets.beyondIcon1Url,
-		iconBg: 'bg-[#eff6ff]',
-	},
-	{
-		title: 'Vintage Collector',
-		description: 'She has a growing collection of over 50 vintage science beakers from the early 20th century.',
-		iconUrl: mentorProfileAssets.beyondIcon2Url,
-		iconBg: 'bg-[#f5f3ff]',
-	},
-	{
-		title: 'Antarctic Researcher',
-		description: 'She once spent an entire summer in Antarctica studying ice core samples in sub-zero temperatures.',
-		iconUrl: mentorProfileAssets.beyondIcon3Url,
-		iconBg: 'bg-[#ecfdf5]',
-	},
-	{
-		title: 'Chemistry Baker',
-		description: 'In her free time, she bakes elaborate, scientifically accurate cakes (Periodic Table cupcakes!).',
-		iconUrl: mentorProfileAssets.beyondIcon4Url,
-		iconBg: 'bg-[#fffacf]',
-	},
+type BeyondContent = CollectionEntry<'mentor-profile'>['data']['beyondClassroom'];
+
+interface Props {
+	content: BeyondContent;
+}
+
+const { content } = Astro.props as Props;
+
+const iconUrls = [
+	mentorProfileAssets.beyondIcon1Url,
+	mentorProfileAssets.beyondIcon2Url,
+	mentorProfileAssets.beyondIcon3Url,
+	mentorProfileAssets.beyondIcon4Url,
 ];
+
+const iconBackgrounds = ['bg-[#eff6ff]', 'bg-[#f5f3ff]', 'bg-[#ecfdf5]', 'bg-[#fffacf]'];
+
+const items = content.items.map((item, index) => ({
+	...item,
+	iconUrl: iconUrls[index] ?? iconUrls[0],
+	iconBg: iconBackgrounds[index] ?? iconBackgrounds[0],
+}));
 ---
 
 <section class="bg-white  py-14  md:py-20" aria-labelledby="beyond-classroom-title">
 	<div class="mx-auto flex w-full px-5 max-w-[1352px] flex-col gap-12">
 		<header>
-			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="beyond-classroom-title">Beyond the Classroom</h2>
-			<p class="pt-5 text-[20px] font-medium leading-[30px] text-[#475569]">Get to know the human behind the PhD.</p>
+			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827]" id="beyond-classroom-title">{content.title}</h2>
+			<p class="pt-5 text-[20px] font-medium leading-[30px] text-[#475569]">{content.description}</p>
 		</header>
 
 		<ul class="grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 xl:grid-cols-4 xl:gap-[30px]">

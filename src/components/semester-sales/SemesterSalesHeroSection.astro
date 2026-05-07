@@ -1,5 +1,37 @@
 ---
 import { semesterSalesAssets } from './data';
+
+interface Props {
+	content: {
+		badge: string;
+		title: string;
+		description: string;
+		primaryCtaLabel: string;
+		primaryCtaHref: string;
+		secondaryCtaLabel: string;
+		secondaryCtaHref: string;
+		stats: { value: string; label: string }[];
+		portal: {
+			title: string;
+			subtitle: string;
+			streakLabel: string;
+			nextClassLabel: string;
+			nextClassTitle: string;
+			nextClassDescription: string;
+			progressLabel: string;
+			progressValue: string;
+			progressPercent: number;
+			metricOneLabel: string;
+			metricOneValue: string;
+			metricOneNote: string;
+			metricTwoLabel: string;
+			metricTwoValue: string;
+			metricTwoNote: string;
+		};
+	};
+}
+
+const { content } = Astro.props as Props;
 ---
 
 <section class="relative overflow-hidden bg-[linear-gradient(16.306deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)] px-5 py-14 md:px-16 md:py-20">
@@ -9,41 +41,41 @@ import { semesterSalesAssets } from './data';
 		<div class="w-full xl:max-w-[624px] md:max-w-full">
 			<p class="inline-flex items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 text-xs font-medium tracking-[0.3px] text-[#7c3aed] shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
 				<span class="h-2 w-2 rounded-full bg-[#048c3c]" aria-hidden="true"></span>
-				Enrolling Now for Semester Classes
+				{content.badge}
 			</p>
 
 			<h1 class="pt-6 xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] text-[#111827]">
-				A Better Learning Experience for Kids Who Don’t Fit the Mold
+				{content.title}
 			</h1>
 
 			<p class="xl:pt-6 pt-2 xl:text-[18px] text-[16px] xl:leading-[32.5px] leading-[25px] text-[#475569]">
-				Live, small-group online classes for gifted, 2e, and neurodivergent learners (ages 5–18). If your child feels bored or misunderstood, this is where they finally feel seen.
+				{content.description}
 			</p>
 
 			<div class="flex flex-col gap-4 xl:pt-8 pt-2 sm:flex-row">
-				<a class="inline-flex h-[60px] items-center gap-2 rounded-xl bg-[#0a9dfb] px-8 py-4 xl:text-base text-[14px] font-medium text-white no-underline shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)] justify-center" href="#">
-					<span>Explore Courses</span>
+				<a class="inline-flex h-[60px] items-center gap-2 rounded-xl bg-[#0a9dfb] px-8 py-4 xl:text-base text-[14px] font-medium text-white no-underline shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)] justify-center" href={content.primaryCtaHref}>
+					<span>{content.primaryCtaLabel}</span>
 					<img class="h-[10px] w-3" src={semesterSalesAssets.heroPrimaryArrowUrl} alt="" aria-hidden="true" />
 				</a>
-				<a class="inline-flex h-[60px] items-center rounded-xl border border-[#0a9dfb] bg-white px-8 py-4 xl:text-base text-[14px] font-medium text-[#0a9dfb] no-underline shadow-[0_1px_1px_rgba(0,0,0,0.05)] justify-center" href="#">
-					Find My Child’s Best Fit
+				<a class="inline-flex h-[60px] items-center rounded-xl border border-[#0a9dfb] bg-white px-8 py-4 xl:text-base text-[14px] font-medium text-[#0a9dfb] no-underline shadow-[0_1px_1px_rgba(0,0,0,0.05)] justify-center" href={content.secondaryCtaHref}>
+					{content.secondaryCtaLabel}
 				</a>
 			</div>
 
 			<div class="mt-8 flex items-center gap-8 border-t border-[#f1f5f9] xl:pt-[56px] pt-[20px]">
 				<div>
-					<p class="text-sm font-semibold leading-7 text-[#111827]">1,200+</p>
-					<p class="text-sm text-[rgba(71,85,105,0.6)]">Families Served</p>
+					<p class="text-sm font-semibold leading-7 text-[#111827]">{content.stats[0]?.value}</p>
+					<p class="text-sm text-[rgba(71,85,105,0.6)]">{content.stats[0]?.label}</p>
 				</div>
 				<div class="h-10 w-px bg-[#e2e8f0]"></div>
 				<div>
-					<p class="text-sm font-semibold leading-7 text-[#111827]">WASC</p>
-					<p class="text-sm text-[rgba(71,85,105,0.6)]">Accredited</p>
+					<p class="text-sm font-semibold leading-7 text-[#111827]">{content.stats[1]?.value}</p>
+					<p class="text-sm text-[rgba(71,85,105,0.6)]">{content.stats[1]?.label}</p>
 				</div>
 				<div class="h-10 w-px bg-[#e2e8f0]"></div>
 				<div>
-					<p class="text-sm font-semibold leading-7 text-[#111827]">93%</p>
-					<p class="text-sm text-[rgba(71,85,105,0.6)]">Re-enrollment</p>
+					<p class="text-sm font-semibold leading-7 text-[#111827]">{content.stats[2]?.value}</p>
+					<p class="text-sm text-[rgba(71,85,105,0.6)]">{content.stats[2]?.label}</p>
 				</div>
 			</div>
 		</div>
@@ -53,42 +85,42 @@ import { semesterSalesAssets } from './data';
 				<div class="flex items-center gap-[10px]">
 					<img class="h-12 w-12 rounded-full border-2 border-white object-cover shadow-[0_1px_2px_rgba(0,0,0,0.05)]" src={semesterSalesAssets.heroStudentAvatarUrl} alt="Student profile avatar" />
 					<div>
-						<p class="text-base font-bold leading-6 text-[#1e293b]">Student Portal</p>
-						<p class="text-xs leading-4 text-[#64748b]">Upcoming: Creative Writing • 2:00 PM</p>
+						<p class="text-base font-bold leading-6 text-[#1e293b]">{content.portal.title}</p>
+						<p class="text-xs leading-4 text-[#64748b]">{content.portal.subtitle}</p>
 					</div>
 				</div>
 				<div class="inline-flex items-center gap-2 rounded-lg border border-[#048c3c] bg-[#e3ffee] px-3 py-1">
 					<img class="h-[11px] w-[10px]" src={semesterSalesAssets.heroStreakIconUrl} alt="" aria-hidden="true" />
-					<span class="text-xs font-bold text-[#048c3c]">15 Day Streak</span>
+					<span class="text-xs font-bold text-[#048c3c]">{content.portal.streakLabel}</span>
 				</div>
 			</div>
 
 			<div class="mt-6 rounded-2xl bg-[linear-gradient(9.966deg,#5751e4_0%,#4a42c9_100%)] px-6 pb-6 pt-[22px]">
-				<span class="rounded bg-[rgba(255,255,255,0.2)] px-2 py-[1.5px] text-[10px] font-bold text-white">NEXT CLASS</span>
-				<h3 class="pt-0 text-[24px] font-medium leading-8 text-white leading-[45px]">Minecraft Engineering</h3>
-				<p class="pt-1 text-base leading-6 text-[rgba(255,255,255,0.8)]">Building complex circuits with Redstone</p>
+				<span class="rounded bg-[rgba(255,255,255,0.2)] px-2 py-[1.5px] text-[10px] font-bold text-white">{content.portal.nextClassLabel}</span>
+				<h3 class="pt-0 text-[24px] font-medium leading-8 text-white leading-[45px]">{content.portal.nextClassTitle}</h3>
+				<p class="pt-1 text-base leading-6 text-[rgba(255,255,255,0.8)]">{content.portal.nextClassDescription}</p>
 				<div class="flex items-end justify-between pb-1 pt-7">
-					<p class="text-sm text-[rgba(255,255,255,0.7)]">Class Progress</p>
-					<p class="text-base font-bold text-white">85%</p>
+					<p class="text-sm text-[rgba(255,255,255,0.7)]">{content.portal.progressLabel}</p>
+					<p class="text-base font-bold text-white">{content.portal.progressValue}</p>
 				</div>
 				<div class="h-2 rounded-full bg-[rgba(0,0,0,0.2)]">
-					<div class="h-2 w-[85%] rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+					<div class="h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]" style={`width: ${content.portal.progressPercent}%`}></div>
 				</div>
 			</div>
 
 			<div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
 				<div class="rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-4 pl-[12px]">
-					<p class="text-sm text-[rgba(71,85,105,0.6)] mb-[7px]">New Skills</p>
-					<p class="text-[26px] font-semibold leading-8 text-[#1e293b]">12</p>
+					<p class="text-sm text-[rgba(71,85,105,0.6)] mb-[7px]">{content.portal.metricOneLabel}</p>
+					<p class="text-[26px] font-semibold leading-8 text-[#1e293b]">{content.portal.metricOneValue}</p>
 					<div class="flex items-center gap-1 pt-1">
 						<img class="h-3 w-[9px]" src={semesterSalesAssets.heroSparkIconUrl} alt="" aria-hidden="true" />
-						<p class="text-xs font-bold text-[#048c3c]">+4 this week</p>
+						<p class="text-xs font-bold text-[#048c3c]">{content.portal.metricOneNote}</p>
 					</div>
 				</div>
 				<div class="rounded-xl border border-[#f1f5f9] bg-[#f8fafc] p-4 pl-[12px]">
-					<p class="text-sm text-[rgba(71,85,105,0.6)] mb-[7px]">Mentor Feedback</p>
-					<p class="text-[26px] font-semibold leading-8 text-[#1e293b]">Exceeds</p>
-					<p class="text-sm text-[rgba(71,85,105,0.6)]">Expectations</p>
+					<p class="text-sm text-[rgba(71,85,105,0.6)] mb-[7px]">{content.portal.metricTwoLabel}</p>
+					<p class="text-[26px] font-semibold leading-8 text-[#1e293b]">{content.portal.metricTwoValue}</p>
+					<p class="text-sm text-[rgba(71,85,105,0.6)]">{content.portal.metricTwoNote}</p>
 				</div>
 			</div>
 		</aside>

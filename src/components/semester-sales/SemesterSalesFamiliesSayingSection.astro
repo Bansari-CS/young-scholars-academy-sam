@@ -1,25 +1,18 @@
 ---
 import { semesterSalesAssets } from './data';
 
-const reviews = [
-	{
-		quote: `"My daughter finally found a place where her intense interests were celebrated, not shushed. The Debate camp was life-changing."`,
-		name: 'Jessica K.',
-		role: 'Gifted Parent',
-		avatar: semesterSalesAssets.familyAvatar1Url,
-	},
-	{
-		quote: `"YSA is the only program that understands asynchrony. My 8-year-old was able to take a high-level history camp because of the supportive environment."`,
-		name: 'David R.',
-		role: 'Homeschool Dad',
-		avatar: semesterSalesAssets.familyAvatar2Url,
-	},
-	{
-		quote: `"The mentors are incredible. They didn't just teach coding; they taught confidence. Best investment we've made in his education."`,
-		name: 'Maria L.',
-		role: '2e Specialist',
-		avatar: semesterSalesAssets.familyAvatar3Url,
-	},
+interface Props {
+	content: {
+		title: string;
+		reviews: { quote: string; name: string; role: string; avatarAlt: string }[];
+	};
+}
+
+const { content } = Astro.props as Props;
+const avatars = [
+	semesterSalesAssets.familyAvatar1Url,
+	semesterSalesAssets.familyAvatar2Url,
+	semesterSalesAssets.familyAvatar3Url,
 ];
 ---
 
@@ -28,18 +21,18 @@ const reviews = [
 	<div class="pointer-events-none absolute bottom-0 left-0 h-96 w-96 bg-[#7c3aed] opacity-20 blur-[50px]" aria-hidden="true"></div>
 
 	<div class="relative mx-auto w-full max-w-[1440px] px-5 md:px-16">
-		<h2 class="pb-16 text-center xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-white" id="families-saying-title">What Families Are Saying</h2>
+		<h2 class="pb-16 text-center xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-white" id="families-saying-title">{content.title}</h2>
 
 		<ul class="grid list-none grid-cols-1 gap-8 p-0 lg:grid-cols-3 mt-[16px]">
 			{
-				reviews.map((review) => (
+				content.reviews.map((review, index) => (
 					<li class="h-[288px] rounded-2xl border border-[#0a9dfb] bg-[rgba(255,255,255,0.15)] p-8 backdrop-blur-[4px]">
 						<div class="flex gap-1">
 							{[0, 1, 2, 3, 4].map(() => <img class="h-4 w-[18px]" src={semesterSalesAssets.familyStarUrl} alt="" aria-hidden="true" />)}
 						</div>
 						<p class="pt-4 text-base leading-[26px] text-white">{review.quote}</p>
 						<div class="flex items-center gap-3 pt-6">
-							<img class="h-10 w-10 rounded-full object-cover" src={review.avatar} alt={`${review.name} avatar`} />
+							<img class="h-10 w-10 rounded-full object-cover" src={avatars[index] ?? avatars[0]} alt={review.avatarAlt} />
 							<div>
 								<p class="text-sm font-bold leading-5 text-white">{review.name}</p>
 								<p class="text-xs leading-4 text-white">{review.role}</p>

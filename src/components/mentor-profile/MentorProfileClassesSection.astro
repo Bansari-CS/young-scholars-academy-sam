@@ -1,16 +1,25 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { mentorProfileAssets } from './data';
+
+type ClassesContent = CollectionEntry<'mentor-profile'>['data']['classes'];
+
+interface Props {
+	content: ClassesContent;
+}
+
+const { content } = Astro.props as Props;
 ---
 
 <section class="relative z-10 bg-white px-5 py-14 md:px-16 md:py-20" aria-labelledby="classes-title">
 	<div class="mx-auto flex w-full max-w-[1312px] flex-col gap-12">
 		<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
 			<div>
-				<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827] mt-5" id="classes-title">Classes Taught by Emily</h2>
-				<p class="mt-4 text-base leading-[26px] text-[#475569]">Engaging, high-level courses for curious minds.</p>
+				<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827] mt-5" id="classes-title">{content.title}</h2>
+				<p class="mt-4 text-base leading-[26px] text-[#475569]">{content.description}</p>
 			</div>
-			<a class="inline-flex items-center gap-2 text-sm font-bold leading-[21px] text-[#7c3aed] no-underline" href="#">
-				<span>View All Classes</span>
+			<a class="inline-flex items-center gap-2 text-sm font-bold leading-[21px] text-[#7c3aed] no-underline" href={content.viewAllHref}>
+				<span>{content.viewAllLabel}</span>
 				<img class="h-[14px] w-[12.25px]" src={mentorProfileAssets.classesViewAllArrowUrl} alt="" aria-hidden="true" />
 			</a>
 		</div>
@@ -19,22 +28,20 @@ import { mentorProfileAssets } from './data';
 			<article class="md:h-[612px] overflow-hidden rounded-[32px] border border-[#e2e8f0] bg-white">
 				<div class="relative h-[300px]">
 					<img class="h-full w-full object-cover" src={mentorProfileAssets.classesMainImageUrl} alt="Alchemy to Atoms class cover" />
-					<span class="absolute left-6 top-6 rounded-full bg-[rgba(255,255,255,0.9)] px-4 py-[6px] text-xs font-bold uppercase tracking-[0.6px] text-[#7c3aed] backdrop-blur-[4px]">
-						Ages 10-14
-					</span>
+					<span class="absolute left-6 top-6 rounded-full bg-[rgba(255,255,255,0.9)] px-4 py-[6px] text-xs font-bold uppercase tracking-[0.6px] text-[#7c3aed] backdrop-blur-[4px]">{content.featuredAgeLabel}</span>
 				</div>
 				<div class="md:h-[312px] h-full p-10">
-					<h3 class="text-[17px] font-semibold leading-[30px] text-[#111827]">Alchemy to Atoms</h3>
+					<h3 class="text-[17px] font-semibold leading-[30px] text-[#111827]">{content.featuredTitle}</h3>
 					<p class="mt-4 text-base leading-[26px] text-[#475569]">
-						A deep dive into the history of chemistry, from ancient mysteries to modern molecular science. Perfect for kids who love to ask "why?" about the physical world.
+						{content.featuredDescription}
 					</p>
 					<div class="mt-6 flex items-center justify-between border-t border-[#e2e8f0] pt-8">
 						<div>
-							<p class="text-xs font-medium uppercase tracking-[1px] text-[#94a3b8]">Starts</p>
-							<p class="text-[17px] font-semibold leading-[27px] text-[#111827]">Oct 12th</p>
+							<p class="text-xs font-medium uppercase tracking-[1px] text-[#94a3b8]">{content.featuredStartsLabel}</p>
+							<p class="text-[17px] font-semibold leading-[27px] text-[#111827]">{content.featuredStartsValue}</p>
 						</div>
-						<a class="inline-flex items-center justify-center rounded-xl bg-[#0a9dfb] px-8 py-[14px] text-base font-semibold leading-6 text-white no-underline" href="#">
-							Enroll Now
+						<a class="inline-flex items-center justify-center rounded-xl bg-[#0a9dfb] px-8 py-[14px] text-base font-semibold leading-6 text-white no-underline" href={content.featuredEnrollHref}>
+							{content.featuredEnrollLabel}
 						</a>
 					</div>
 				</div>
@@ -44,10 +51,10 @@ import { mentorProfileAssets } from './data';
 				<span class="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
 					<img class="h-[30px] w-[26.25px]" src={mentorProfileAssets.classesPlusIconUrl} alt="" aria-hidden="true" />
 				</span>
-				<h3 class="text-[17px] font-semibold leading-[36px] text-[#111827]">New Course Coming Soon</h3>
-				<p class="mt-2 text-base leading-6 text-[#64748b]">Dr. Ross is currently developing "Neurobiology of Genius".</p>
-				<a class="mt-8 inline-flex items-center gap-2 text-sm font-bold leading-[21px] text-[#7c3aed] no-underline" href="#">
-					<span>Get Notified</span>
+				<h3 class="text-[17px] font-semibold leading-[36px] text-[#111827]">{content.upcomingTitle}</h3>
+				<p class="mt-2 text-base leading-6 text-[#64748b]">{content.upcomingDescription}</p>
+				<a class="mt-8 inline-flex items-center gap-2 text-sm font-bold leading-[21px] text-[#7c3aed] no-underline" href={content.upcomingCtaHref}>
+					<span>{content.upcomingCtaLabel}</span>
 					<img class="h-4 w-[14px]" src={mentorProfileAssets.classesNotifyArrowUrl} alt="" aria-hidden="true" />
 				</a>
 			</article>

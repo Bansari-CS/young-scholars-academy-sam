@@ -1,61 +1,37 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { mentorProfileAssets } from './data';
 
-const cards = [
-	{
-		title: 'Discussion-Based',
-		lines: [
-			'We learn through Socratic',
-			'dialogue, where every',
-			'question is an invitation to',
-			'explore deeper.',
-		],
-		iconUrl: mentorProfileAssets.teachIcon1Url,
-		iconBg: 'bg-[#f5f3ff]',
-	},
-	{
-		title: 'Interactive Discovery',
-		lines: [
-			"Students don't just watch;",
-			'they manipulate variables',
-			'and conduct virtual',
-			'experiments in real-time.',
-		],
-		iconUrl: mentorProfileAssets.teachIcon2Url,
-		iconBg: 'bg-[#eff6ff]',
-	},
-	{
-		title: 'Student-Led Pace',
-		lines: [
-			'We follow the spark of',
-			'student curiosity, allowing',
-			'the cohort to steer the',
-			'direction of our inquiry.',
-		],
-		iconUrl: mentorProfileAssets.teachIcon3Url,
-		iconBg: 'bg-[#ecfdf5]',
-	},
-	{
-		title: 'Personalized Approach',
-		lines: [
-			'Assignments are adjusted',
-			'to match each child’s',
-			'specific output style—',
-			'writing, drawing, or',
-			'presenting.',
-		],
-		iconUrl: mentorProfileAssets.teachIcon4Url,
-		iconBg: 'bg-[#fffacf]',
-	},
+type HowITeachContent = CollectionEntry<'mentor-profile'>['data']['howITeach'];
+
+interface Props {
+	content: HowITeachContent;
+}
+
+const { content } = Astro.props as Props;
+
+const iconUrls = [
+	mentorProfileAssets.teachIcon1Url,
+	mentorProfileAssets.teachIcon2Url,
+	mentorProfileAssets.teachIcon3Url,
+	mentorProfileAssets.teachIcon4Url,
 ];
+
+const iconBackgrounds = ['bg-[#f5f3ff]', 'bg-[#eff6ff]', 'bg-[#ecfdf5]', 'bg-[#fffacf]'];
+
+const cards = content.cards.map((card, index) => ({
+	...card,
+	iconUrl: iconUrls[index] ?? iconUrls[0],
+	iconBg: iconBackgrounds[index] ?? iconBackgrounds[0],
+}));
 ---
 
 <section class="bg-[#f8fafc] px-5 py-14 md:px-16 md:py-20" aria-labelledby="how-teach-title">
 	<div class="mx-auto flex w-full max-w-[1312px] flex-col gap-12 md:px-16">
 		<header class="text-center">
-			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827] mt-4" id="how-teach-title">How I Teach</h2>
+			<h2 class="text-[44px] font-bold leading-[1.1] text-[#111827] mt-4" id="how-teach-title">{content.title}</h2>
 			<p class="mx-auto mt-4 max-w-[532px] text-base leading-[26px] text-[#475569]">
-				Creating an environment where high-potential minds can thrive through specific pedagogical pillars.
+				{content.description}
 			</p>
 		</header>
 

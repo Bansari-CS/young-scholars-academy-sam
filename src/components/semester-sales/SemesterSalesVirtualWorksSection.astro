@@ -1,24 +1,14 @@
 ---
 import { semesterSalesAssets } from './data';
 
-const items = [
-	{
-		title: 'Live Interaction',
-		text: 'Not passive video watching. Real-time dialogue and problem-solving.',
-	},
-	{
-		title: 'Cameras Optional',
-		text: 'We respect sensory needs. Participate via voice or chat if preferred.',
-	},
-	{
-		title: 'Flexible Scheduling',
-		text: 'Classes available morning, afternoon, and evening to fit your life.',
-	},
-	{
-		title: 'Global Peer Community',
-		text: 'Connect with like-minded students from 40+ states and 13 countries.',
-	},
-];
+interface Props {
+	content: {
+		title: string;
+		items: { title: string; text: string }[];
+	};
+}
+
+const { content } = Astro.props as Props;
 ---
 
 <section class="bg-white py-20" aria-labelledby="virtual-works-title">
@@ -33,12 +23,12 @@ const items = [
 
 		<div class="order-1 xl:order-2">
 			<h2 class="xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[53px] text-[#111827] pt-[30px]" id="virtual-works-title">
-				A Virtual Experience That Actually Works
+				{content.title}
 			</h2>
 
 			<ul class="mt-6 list-none space-y-4 p-0">
 				{
-					items.map((item) => (
+					content.items.map((item) => (
 						<li class="flex items-start gap-3">
 							<span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[rgba(4,140,60,0.1)]">
 								<img class="h-3 w-[10.5px]" src={semesterSalesAssets.virtualWorksCheckIconUrl} alt="" aria-hidden="true" />

@@ -1,32 +1,63 @@
+import heroImage from '../../assets/mentor-profile/hero-image.png';
+import quoteAvatar from '../../assets/mentor-profile/quote-avatar.png';
+import topRatedIcon from '../../assets/mentor-profile/top-rated-icon.svg';
+import experienceIcon from '../../assets/mentor-profile/experience-icon.svg';
+import ctaArrowIcon from '../../assets/mentor-profile/cta-arrow-icon.svg';
+import beyondIcon1 from '../../assets/mentor-profile/beyond-icon-1.svg';
+import beyondIcon2 from '../../assets/mentor-profile/beyond-icon-2.svg';
+import beyondIcon3 from '../../assets/mentor-profile/beyond-icon-3.svg';
+import beyondIcon4 from '../../assets/mentor-profile/beyond-icon-4.svg';
+import teachIcon1 from '../../assets/mentor-profile/teach-icon-1.svg';
+import teachIcon2 from '../../assets/mentor-profile/teach-icon-2.svg';
+import teachIcon3 from '../../assets/mentor-profile/teach-icon-3.svg';
+import teachIcon4 from '../../assets/mentor-profile/teach-icon-4.svg';
+import classroomMainImage from '../../assets/mentor-profile/classroom-main-image.png';
+import classroomProjectImage from '../../assets/mentor-profile/classroom-project-image.png';
+import classroomLiveImage from '../../assets/mentor-profile/classroom-live-image.png';
+import classroomPlayIcon from '../../assets/mentor-profile/classroom-play-icon.svg';
+import classesMainImage from '../../assets/mentor-profile/classes-main-image.png';
+import classesViewAllArrow from '../../assets/mentor-profile/classes-view-all-arrow.svg';
+import classesPlusIcon from '../../assets/mentor-profile/classes-plus-icon.svg';
+import classesNotifyArrow from '../../assets/mentor-profile/classes-notify-arrow.svg';
+import studentExperienceBg from '../../assets/mentor-profile/student-experience-bg.svg';
+import studentExperienceIcon1 from '../../assets/mentor-profile/student-experience-icon-1.svg';
+import studentExperienceIcon2 from '../../assets/mentor-profile/student-experience-icon-2.svg';
+import studentExperienceIcon3 from '../../assets/mentor-profile/student-experience-icon-3.svg';
+import testimonialAvatar1 from '../../assets/mentor-profile/testimonial-avatar-1.png';
+import testimonialAvatar2 from '../../assets/mentor-profile/testimonial-avatar-2.png';
+import testimonialAvatar3 from '../../assets/mentor-profile/testimonial-avatar-3.png';
+import testimonialStar from '../../assets/mentor-profile/testimonial-star.svg';
+import testimonialQuoteMark from '../../assets/mentor-profile/testimonial-quote-mark.svg';
+
 export const mentorProfileAssets = {
-	heroImageUrl: 'https://www.figma.com/api/mcp/asset/2fbdfda2-424c-4549-8585-fa834be456e3',
-	quoteAvatarUrl: 'https://www.figma.com/api/mcp/asset/66db36ef-835f-4406-a742-a4f685faaf66',
-	topRatedIconUrl: 'https://www.figma.com/api/mcp/asset/80a3efba-32c3-4452-8c54-aa72d3a9d032',
-	experienceIconUrl: 'https://www.figma.com/api/mcp/asset/c6fcdc4c-b5f1-48cf-a23e-278d21121cfc',
-	ctaArrowIconUrl: 'https://www.figma.com/api/mcp/asset/03f0aca1-eea7-42b9-9aed-3d52106216c8',
-	beyondIcon1Url: 'https://www.figma.com/api/mcp/asset/a355774e-2de3-445b-8bbd-37f5ca9d6d82',
-	beyondIcon2Url: 'https://www.figma.com/api/mcp/asset/ae4a6a95-3c29-4daa-a8f7-a665722f80d9',
-	beyondIcon3Url: 'https://www.figma.com/api/mcp/asset/a0476c2f-f2f2-4759-9077-f0c90a06b586',
-	beyondIcon4Url: 'https://www.figma.com/api/mcp/asset/f37300f0-7b15-425f-8dbd-0c89b86046f4',
-	teachIcon1Url: 'https://www.figma.com/api/mcp/asset/27047950-4aad-4b4b-956d-2fd38a43c321',
-	teachIcon2Url: 'https://www.figma.com/api/mcp/asset/4e3d2f03-5e4e-4ad6-b959-1e1853cd7176',
-	teachIcon3Url: 'https://www.figma.com/api/mcp/asset/494aebd5-e630-44f8-b5db-8128abebbd1c',
-	teachIcon4Url: 'https://www.figma.com/api/mcp/asset/a0f0e37f-def1-4126-9e30-12c9a6daece7',
-	classroomMainImageUrl: 'https://www.figma.com/api/mcp/asset/5c8cc143-3f52-4c29-bf36-da89adf1140c',
-	classroomProjectImageUrl: 'https://www.figma.com/api/mcp/asset/732c1683-6fa1-412e-8dab-7919163ed6cf',
-	classroomLiveImageUrl: 'https://www.figma.com/api/mcp/asset/b75e88fb-baf4-4e9e-b817-ad0843ba88bc',
-	classroomPlayIconUrl: 'https://www.figma.com/api/mcp/asset/c4c4cd75-0018-4f07-99aa-1d62cfa49b60',
-	classesMainImageUrl: 'https://www.figma.com/api/mcp/asset/fb556526-e9a3-4479-844c-17a0da64f008',
-	classesViewAllArrowUrl: 'https://www.figma.com/api/mcp/asset/e0330dd5-04b6-4ed1-88de-cec6d90d70af',
-	classesPlusIconUrl: 'https://www.figma.com/api/mcp/asset/9fca7aa9-799b-4c35-b80e-868526047d66',
-	classesNotifyArrowUrl: 'https://www.figma.com/api/mcp/asset/80c3fd5e-bf79-4421-9528-de2f06e9c6c6',
-	studentExperienceBgUrl: 'https://www.figma.com/api/mcp/asset/fa996c41-d374-4dcc-96dd-0897db97dfda',
-	studentExperienceIcon1Url: 'https://www.figma.com/api/mcp/asset/daf6e96f-eb88-424a-b162-0024e67c039e',
-	studentExperienceIcon2Url: 'https://www.figma.com/api/mcp/asset/f1bfcc07-3bd9-427c-a886-bc5bddf3461f',
-	studentExperienceIcon3Url: 'https://www.figma.com/api/mcp/asset/bfac6eea-d500-4857-b546-2b3191e8a68c',
-	testimonialAvatar1Url: 'https://www.figma.com/api/mcp/asset/6d1781a5-e02f-4db7-9ea9-d615398fa887',
-	testimonialAvatar2Url: 'https://www.figma.com/api/mcp/asset/b263bc15-6496-48d0-a98a-8c0c3ffd56be',
-	testimonialAvatar3Url: 'https://www.figma.com/api/mcp/asset/e1314562-22dc-47dc-a8de-59c09f81d680',
-	testimonialStarUrl: 'https://www.figma.com/api/mcp/asset/501cb7d6-e926-4f30-819e-d9ec1f5c5ad1',
-	testimonialQuoteMarkUrl: 'https://www.figma.com/api/mcp/asset/5106e3ff-6a81-42d3-a351-6dba9e31b59a',
+	heroImageUrl: heroImage.src,
+	quoteAvatarUrl: quoteAvatar.src,
+	topRatedIconUrl: topRatedIcon.src,
+	experienceIconUrl: experienceIcon.src,
+	ctaArrowIconUrl: ctaArrowIcon.src,
+	beyondIcon1Url: beyondIcon1.src,
+	beyondIcon2Url: beyondIcon2.src,
+	beyondIcon3Url: beyondIcon3.src,
+	beyondIcon4Url: beyondIcon4.src,
+	teachIcon1Url: teachIcon1.src,
+	teachIcon2Url: teachIcon2.src,
+	teachIcon3Url: teachIcon3.src,
+	teachIcon4Url: teachIcon4.src,
+	classroomMainImageUrl: classroomMainImage.src,
+	classroomProjectImageUrl: classroomProjectImage.src,
+	classroomLiveImageUrl: classroomLiveImage.src,
+	classroomPlayIconUrl: classroomPlayIcon.src,
+	classesMainImageUrl: classesMainImage.src,
+	classesViewAllArrowUrl: classesViewAllArrow.src,
+	classesPlusIconUrl: classesPlusIcon.src,
+	classesNotifyArrowUrl: classesNotifyArrow.src,
+	studentExperienceBgUrl: studentExperienceBg.src,
+	studentExperienceIcon1Url: studentExperienceIcon1.src,
+	studentExperienceIcon2Url: studentExperienceIcon2.src,
+	studentExperienceIcon3Url: studentExperienceIcon3.src,
+	testimonialAvatar1Url: testimonialAvatar1.src,
+	testimonialAvatar2Url: testimonialAvatar2.src,
+	testimonialAvatar3Url: testimonialAvatar3.src,
+	testimonialStarUrl: testimonialStar.src,
+	testimonialQuoteMarkUrl: testimonialQuoteMark.src,
 } as const;

@@ -12,23 +12,32 @@ import MentorProfileStudentExperienceSection from '../components/mentor-profile/
 import MentorProfileTestimonialsSection from '../components/mentor-profile/MentorProfileTestimonialsSection.astro';
 import MentorProfileFindClassCtaSection from '../components/mentor-profile/MentorProfileFindClassCtaSection.astro';
 import { heroData } from '../data/home';
+import { getEntry } from 'astro:content';
+
+const mentorProfileEntry = await getEntry('mentor-profile', 'mentor-profile');
+
+if (!mentorProfileEntry) {
+	throw new Error('Missing mentor profile content entry at src/content/mentor-profile/mentor-profile.md');
+}
+
+const mentorProfileContent = mentorProfileEntry.data;
 ---
 
 <Layout
-	title="Mentor Profile | Young Scholars Academy"
-	description="Discover Dr. Emily Ross, a gifted specialist mentor at Young Scholars Academy."
+	title={mentorProfileContent.seo.title}
+	description={mentorProfileContent.seo.description}
 >
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main>
-		<MentorProfileHeroSection />
-		<MentorProfileAboutSection />
-		<MentorProfileBeyondClassroomSection />
-		<MentorProfileHowITeachSection />
-		<MentorProfileInsideClassroomSection />
-		<MentorProfileClassesSection />
-		<MentorProfileStudentExperienceSection />
-		<MentorProfileTestimonialsSection />
-		<MentorProfileFindClassCtaSection />
+		<MentorProfileHeroSection content={mentorProfileContent.hero} />
+		<MentorProfileAboutSection content={mentorProfileContent.about} />
+		<MentorProfileBeyondClassroomSection content={mentorProfileContent.beyondClassroom} />
+		<MentorProfileHowITeachSection content={mentorProfileContent.howITeach} />
+		<MentorProfileInsideClassroomSection content={mentorProfileContent.insideClassroom} />
+		<MentorProfileClassesSection content={mentorProfileContent.classes} />
+		<MentorProfileStudentExperienceSection content={mentorProfileContent.studentExperience} />
+		<MentorProfileTestimonialsSection content={mentorProfileContent.testimonials} />
+		<MentorProfileFindClassCtaSection content={mentorProfileContent.findClassCta} />
 	</main>
 	<Footer />
 </Layout>
