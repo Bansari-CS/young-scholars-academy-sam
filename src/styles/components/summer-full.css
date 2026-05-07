@@ -157,7 +157,7 @@
 	text-align: center;
 	border: 1px solid #decbfe;
 	border-radius: 1.25rem;
-	padding: 3rem;
+	/* padding: 3rem; */
 	background: #fff;
 }
 
@@ -196,7 +196,7 @@
 .summer-promise-section .summer-guarantee {
 	border: 2px solid #7c3aed;
 	border-radius: 24px;
-	padding: 48px;
+
 	position: relative;
 }
 
@@ -837,7 +837,7 @@
 }
 
 .summer-bonus-total {
-	margin-top: 32px;
+	margin-top: 64px;
 	border: 2px solid #0a9dfb;
 	border-radius: 32px;
 	background: #f0f9fe;
@@ -870,6 +870,7 @@
 	display: inline-flex;
 	gap: 8px;
 	align-items: center;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 8px 10px -6px rgba(0, 0, 0, 0.10);
 }
 
 .summer-bonus-total span img {
@@ -910,14 +911,14 @@
 }
 
 .summer-price-card .price {
-	margin: .5rem 0 1rem !important;
+	margin: .5rem 0 0.5rem !important;
 	font-size: 30px;
 	line-height: 36px;
 }
 
 .summer-price-card ul {
 	list-style: none;
-	padding: 16px 0 32px;
+	padding: 16px 0 64px;
 	margin: 0;
 	display: grid;
 	gap: 16px;
@@ -1329,7 +1330,7 @@
 }
 
 .faq p {
-	margin: 24px 0 64px;
+	margin: 24px 0 0px;
 	color: #64748b;
 }
 

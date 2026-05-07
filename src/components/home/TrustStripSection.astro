@@ -50,30 +50,51 @@ function subtitleClass(org: PartnerOrg) {
 }
 ---
 
-<section class="trust-strip" aria-labelledby="trust-strip-heading">
-  <div class="trust-strip__inner">
-    <h2 id="trust-strip-heading" class="trust-strip__heading">{title}</h2>
-    <div class="trust-strip__logos" role="list">
+<section
+  class="w-full border-t border-[#F1F5F9] border-b-0 bg-white py-[clamp(2.5rem,5vw,3rem)]"
+  aria-labelledby="trust-strip-heading"
+>
+  <div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+    
+    <h2
+      id="trust-strip-heading"
+      class="m-0 text-center font-[var(--ysa-font-display)] text-[clamp(1.125rem,2.5vw,1.5rem)] font-medium leading-[1.35] tracking-[0] text-[#94A3B8] normal-case max-sm:tracking-[0.03em]"
+    >
+      {title}
+    </h2>
+
+    <div
+      class="mt-5 grid w-full grid-cols-5 items-center gap-0 bg-[length:1px_48px,1px_48px,1px_48px,1px_48px] bg-no-repeat [background-image:linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0)] [background-position:calc(100%/5)_50%,calc((100%/5)*2)_50%,calc((100%/5)*3)_50%,calc((100%/5)*4)_50%] max-lg:flex max-lg:flex-nowrap max-lg:justify-start max-lg:gap-0 max-lg:overflow-x-auto max-lg:bg-none max-lg:pb-1 max-lg:[scroll-snap-type:x_proximity] [-webkit-overflow-scrolling:touch]"
+      role="list"
+    >
       {
         organizations.map((org) => {
           const meta = iconMeta(org);
+
           return (
-            <div class="trust-strip__item" role="listitem">
-              <div class="trust-strip__item-inner">
+            <div
+              class="relative flex min-w-0 w-full items-center justify-start px-1 py-2 pb-[0.8125rem] max-lg:min-w-[11rem] max-lg:flex-[0_0_auto] max-lg:[scroll-snap-align:start]"
+              role="listitem"
+            >
+              <div class="flex max-w-full items-center gap-3 px-5">
+                
                 {meta.kind === "twoe" ? (
                   <div
-                    class="trust-strip__icon trust-strip__icon--40 trust-strip__icon--twoe"
+                    class="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[8px]"
                     aria-hidden="true"
                   >
                     <img
-                      class="trust-strip__twoe-vector"
+                      class="absolute h-[80%] w-[80%] object-contain"
                       src={figmaTrustStrip.twoeVector}
                       alt=""
                       width="32"
                       height="32"
                       loading="lazy"
                     />
-                    <span class="trust-strip__twoe-label">2e</span>
+
+                    <span class="pointer-events-none absolute inset-0 grid place-items-center font-[var(--ysa-font-body)] text-[1.25rem] font-bold leading-none text-[#94A3B8]">
+                      2e
+                    </span>
                   </div>
                 ) : meta.kind === "nagc" ? (
                   <svg
@@ -99,14 +120,15 @@ function subtitleClass(org: PartnerOrg) {
                 ) : (
                   <div
                     class:list={[
-                      "trust-strip__icon",
+                      "shrink-0 flex items-center justify-center",
                       meta.w === 40
-                        ? "trust-strip__icon--40"
-                        : "trust-strip__icon--36",
+                        ? "h-10 w-10"
+                        : "h-9 w-9",
                     ]}
                     aria-hidden="true"
                   >
                     <img
+                      class="block h-auto w-full"
                       src={meta.src}
                       alt=""
                       width={meta.w}
@@ -115,9 +137,28 @@ function subtitleClass(org: PartnerOrg) {
                     />
                   </div>
                 )}
-                <div class="trust-strip__text">
-                  <p class={nameClass(org)}>{org.name}</p>
-                  <p class={subtitleClass(org)}>{org.subtitle}</p>
+
+                <div class="flex max-w-[125px] flex-col gap-0.5">
+                  
+                  <p
+                    class:list={[
+                      "m-0 font-[var(--ysa-font-body)] font-bold leading-[1.1] tracking-[-0.02em] text-[#94A3B8] mb-[0.188rem]",
+                      org.name.length > 10
+                        ? "text-[1rem]"
+                        : "text-[1.125rem]",
+                    ]}
+                  >
+                    {org.name}
+                  </p>
+
+                  <p
+                    class:list={[
+                      "m-0 overflow-hidden text-ellipsis font-[var(--ysa-font-body)] text-[0.75rem] font-light leading-[1.2] text-[#CBD5E1] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] [display:-webkit-box]",
+                      subtitleClass(org),
+                    ]}
+                  >
+                    {org.subtitle}
+                  </p>
                 </div>
               </div>
             </div>
