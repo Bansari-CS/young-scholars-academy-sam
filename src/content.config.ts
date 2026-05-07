@@ -366,9 +366,21 @@ const mentorProfileCollection = defineCollection({
 	}),
 });
 
+const summerCollection = defineCollection({
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/summer' }),
+	schema: z.record(z.string(), z.any()),
+});
+
+const blogPageCollection = defineCollection({
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog-page' }),
+	schema: z.record(z.string(), z.any()),
+});
+
 export const collections = {
 	blog: blogCollection,
+	'blog-page': blogPageCollection,
 	teachers: teachersCollection,
 	'semester-sales': semesterSalesCollection,
 	'mentor-profile': mentorProfileCollection,
+	summer: summerCollection,
 };

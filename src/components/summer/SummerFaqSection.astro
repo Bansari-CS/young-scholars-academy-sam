@@ -1,33 +1,24 @@
+---
+interface Props {
+	content: any;
+}
+
+const { content } = Astro.props as Props;
+---
+
 <section class="summer-section py-20 px-5 bg-[#F8FAFC]">
 	<div class="summer-wrap faq">
-		<h2 class="text-[28px] font-bold sm:text-[36px] lg:text-[44px]">Answers to Your Questions</h2>
-		<p class="summer-sub mb-16">Everything you need to know before getting started</p>
-		<details open>
-			<summary>
-				Will my child get "Zoom fatigue"? <img src="/images/summer/faq/chevron-up.svg" alt="" />
-			</summary>
-			<p>
-				<strong class="text-[#111827]">No - our sessions are designed to keep students engaged, not exhausted.</strong><br />Each
-				50-minute class uses a high-engagement model where students actively participate instead of passively
-				watching. In addition, our Topia virtual campus allows movement and social interaction, making the
-				experience feel more like a game than a traditional online class.
-			</p>
-		</details>
-		<details>
-			<summary>
-				Do you require a formal diagnosis for 2e or giftedness?
-				<img src="/images/summer/faq/chevron-down.svg" alt="" />
-			</summary>
-		</details>
-		<details>
-			<summary>
-				Can I pay with ESA or Charter School funds? <img src="/images/summer/faq/chevron-down.svg" alt="" />
-			</summary>
-		</details>
-		<details>
-			<summary>
-				What is the refund policy? <img src="/images/summer/faq/chevron-down.svg" alt="" />
-			</summary>
-		</details>
+		<h2 class="text-[28px] font-bold sm:text-[36px] lg:text-[44px]">{content.title}</h2>
+		<p class="summer-sub mb-16">{content.subtitle}</p>
+		{
+			content.items.map((item) => (
+				<details open={item.open}>
+					<summary>
+						{item.q} <img src={item.open ? '/images/summer/faq/chevron-up.svg' : '/images/summer/faq/chevron-down.svg'} alt="" />
+					</summary>
+					{item.a && <p>{item.a}</p>}
+				</details>
+			))
+		}
 	</div>
 </section>

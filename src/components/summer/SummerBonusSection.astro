@@ -1,79 +1,65 @@
+---
+interface Props {
+	content: any;
+}
+
+const { content } = Astro.props as Props;
+---
+
 <section class="summer-bonus-section py-12 md:py-16 xl:py-24 px-5 md:px-10 lg:px-20 xl:px-32">
 	<div class="summer-wrap summer-bonus-wrap">
-		<p class="summer-bonus-kicker">BONUS BUNDLE</p>
-		<h2 class="summer-bonus-title text-[28px] sm:text-[36px] lg:text-[44px]">Everything Included With Your Enrollment</h2>
-		<p class="summer-sub summer-bonus-sub">
-			A complete set of resources and experiences designed to accelerate progress, included at no extra cost.
-		</p>
+		<p class="summer-bonus-kicker">{content.kicker}</p>
+		<h2 class="summer-bonus-title text-[28px] sm:text-[36px] lg:text-[44px]">{content.title}</h2>
+		<p class="summer-sub summer-bonus-sub">{content.description}</p>
 		<div class="summer-bonus-grid  grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:gap-8">
-			<article class="summer-bonus-card">
-				<span><img src="/images/summer/bonus/icon-vault.svg" alt="" /></span>
-				<h3>Expert Vault - 8 Recordings</h3>
-				<p class="pb-6">Access our library of past masterclasses featuring world-renowned specialists.</p>
-				<div><small>VALUE</small><strong>$1,032</strong></div>
-			</article>
-			<article class="summer-bonus-card">
-				<span class="bonus-yellow"><img src="/images/summer/bonus/icon-campus.svg" alt="" /></span>
-				<h3>Virtual Village Campus</h3>
-				<p class="pb-6">Access our library of past masterclasses featuring world-renowned specialists.</p>
-				<div><small>VALUE</small><strong>$1,032</strong></div>
-			</article>
-			<article class="summer-bonus-card">
-				<span class="bonus-purple"><img src="/images/summer/bonus/icon-community.svg" alt="" /></span>
-				<h3>Parent Village Community</h3>
-				<p>Weekly webinars and a dedicated support forum for parents of neurodivergent kids.</p>
-				<div><small>VALUE</small><strong>$297</strong></div>
-			</article>
-			<article class="summer-bonus-card summer-bonus-card-tall">
-				<span class="bonus-green"><img src="/images/summer/bonus/icon-ambassador.svg" alt="" /></span>
-				<h3>Ambassador Program</h3>
-				<p class="pb-6">Earn rewards and community credits for sharing the academy with other families.</p>
-				<div><small>PER FAMILY</small><strong>$199</strong></div>
-			</article>
+			{
+				content.cards.map((card) => (
+					<article class={`summer-bonus-card ${card.tall ? 'summer-bonus-card-tall' : ''}`.trim()}>
+						<span class={card.iconClass ?? ''}><img src={card.icon} alt="" /></span>
+						<h3>{card.title}</h3>
+						<p class="pb-6">{card.description}</p>
+						<div><small>{card.valueLabel}</small><strong>{card.value}</strong></div>
+					</article>
+				))
+			}
 			<article class="summer-security-card col-span-1 md:col-span-2 p-5 lg:p-[30px]">
 				<header>
-					<span><img src="/images/summer/bonus/icon-security.svg" alt="" /></span><em>Enrollment Security</em>
+					<span><img src={content.security.icon} alt="" /></span><em>{content.security.label}</em>
 				</header>
-				<h3>'First Day Fit' Swap Guarantee</h3>
-				<p>
-					Not the right fit for your child's learning style? Swap to any other class at any time during the first
-					week for absolutely free.
-				</p>
+				<h3>{content.security.title}</h3>
+				<p>{content.security.description}</p>
 				<footer>
-					<span><img src="/images/summer/bonus/icon-risk.svg" alt="" />Risk-Free Enrollment</span><strong class="text-[18px] lg:text-[24px]"
-						>PRICELESS</strong
-					>
+					<span><img src={content.security.riskIcon} alt="" />{content.security.riskLabel}</span><strong class="text-[18px] lg:text-[24px]">{content.security.value}</strong>
 				</footer>
 			</article>
 		</div>
 		<div class="summer-bonus-mentors p-5 lg:px-12 lg:pt-16 lg:pb-12">
 			<div class="summer-bonus-mentors-head flex-wrap md:flex-nowrap">
 				<div>
-					<p>INCLUDED EXPERT SESSIONS</p>
-					<h3 class="text-[20px] md:text-[24px] lg:text-[28px]">Learn From The Best</h3>
+					<p>{content.mentors.kicker}</p>
+					<h3 class="text-[20px] md:text-[24px] lg:text-[28px]">{content.mentors.title}</h3>
 				</div>
 				<div class="summer-mini-avatars">
-					<img src="/images/summer/bonus/avatar-a.jpg" alt="" />
-					<img src="/images/summer/bonus/avatar-b.jpg" alt="" />
-					<img src="/images/summer/bonus/avatar-c.jpg" alt="" />
-					<span>+8</span>
+					{content.mentors.avatars.map((avatar) => <img src={avatar} alt="" />)}
+					<span>{content.mentors.avatarsCountLabel}</span>
 				</div>
 			</div>
 			<div class="summer-mentor-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-				<article class="flex flex-col items-center justify-center"><img src="/images/summer/bonus/mentor-1.jpg" alt="" /><h4 class="font-bold">Dr. Sarah Jenkins</h4><p>Executive Function</p></article>
-				<article class="flex flex-col items-center justify-center"><img src="/images/summer/bonus/mentor-2.jpg" alt="" /><h4 class="font-bold">Mark Thompson</h4><p>Creative Writing</p></article>
-				<article class="flex flex-col items-center justify-center"><img src="/images/summer/bonus/mentor-3.jpg" alt="" /><h4 class="font-bold">Alex Chen</h4><p>Game Design & Logic</p></article>
-				<article class="flex flex-col items-center justify-center"><img src="/images/summer/bonus/mentor-4.jpg" alt="" /><h4 class="font-bold">Dr. Elena Rodriguez</h4><p>Social Dynamics</p></article>
+				{
+					content.mentors.items.map((mentor) => (
+						<article class="flex flex-col items-center justify-center"><img src={mentor.image} alt="" /><h4 class="font-bold">{mentor.name}</h4><p>{mentor.specialty}</p></article>
+					))
+				}
 			</div>
 		</div>
 		<div class="summer-bonus-total p-5 md:p-8 lg:p-12 flex-wrap md:flex-nowrap justify-center lg:justify-between gap-5">
 			<div>
-				<small>TOTAL VALUE INCLUDED</small>
-				<p class="font-semibold"><strong class="text-[24px] md:text-[30px] lg:text-[38px] ">$2,500+</strong> Bonus Resources</p>
+				<small>{content.total.label}</small>
+				<p class="font-semibold"><strong class="text-[24px] md:text-[30px] lg:text-[38px] ">{content.total.value}</strong> {content.total.suffix}</p>
 			</div>
 			<div class="text-center lg:text-right">
-				<span class="px-[15px] py-[15px] lg:px-8 lg:py-4"><img src="/images/summer/bonus/free.svg" alt="" /> with enrollment</span>
-				<p>Unlock all rewards immediately after completing your student registration today.</p>
+				<span class="px-[15px] py-[15px] lg:px-8 lg:py-4"><img src={content.total.chipIcon} alt="" /> {content.total.chipLabel}</span>
+				<p>{content.total.description}</p>
 			</div>
 		</div>
 	</div>
