@@ -19,7 +19,6 @@
 	--programs-active-age: #7c3aed;
 	--programs-chip-bg: #DBEAFE;
 	--programs-chip-text: #0A9DFB;
-	padding: clamp(3rem, 7vw, 5.25rem) 0 clamp(3.5rem, 8vw, 5.5rem);
 	background: var(--programs-bg);
 }
 
@@ -40,12 +39,12 @@
 
 .programs-section__badge {
 	display: inline-block;
-	margin: 0 0 0.85rem;
+	margin: 0 0 1rem;
 	padding: 0.45rem 1rem;
 	border-radius: 999px;
 	background: var(--programs-badge-bg);
 	color: var(--programs-badge-text);
-	font-size: 0.6875rem;
+	font-size: 12px;
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
@@ -54,7 +53,7 @@
 .programs-section__title {
 	margin: 0;
 	font-family: var(--ysa-font-display);
-	font-size: clamp(1.85rem, 3.3vw, 2.6rem);
+	font-size: clamp(1.85rem, 3.3vw, 44px);
 	font-weight: 700;
 	letter-spacing: -0.02em;
 	line-height: 1.12;
@@ -63,7 +62,7 @@
 }
 
 .programs-section__sub {
-	margin: 0.85rem 0 0;
+	margin: 1.5rem 0 0;
 	font-size: 1rem;
 	line-height: 1.625rem;
 	color: #475569;
@@ -117,13 +116,13 @@
 }
 
 .programs-filter__age {
-	padding: 0.5rem 0.85rem;
+	padding: 0.5rem 1rem;
 	border-radius: 999px;
-	font-size: 0.8125rem;
+	font-size: 13px;
 	font-weight: 600;
-	color: #334155;
+	color: #4B5563;
 	background: #ffffff;
-	border: 1px solid #cbd5e1;
+	border: 1px solid #E5E7EB;
 	cursor: pointer;
 	font-family: inherit;
 	line-height: 1.25;
@@ -147,7 +146,7 @@
 
 .programs-filter__active-row {
 	margin-top: 1.5rem;
-	padding-top: 1.2rem;
+	padding-top: 1.5rem;
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
@@ -165,10 +164,10 @@
 }
 
 .programs-filter__active-label {
-	font-size: 0.6875rem;
+	font-size: 12px;
 	font-weight: 700;
 	letter-spacing: 0.07em;
-	color: #94a3b8;
+	color: #9CA3AF;
 	flex-shrink: 0;
 }
 
@@ -222,7 +221,7 @@
 
 .programs-filter__select {
 	width: 100%;
-	padding: 0.65rem 0.85rem;
+	padding: 0.75rem 1rem;
 	border-radius: 0.65rem;
 	border: 1px solid #cbd5e1;
 	background: #ffffff;
@@ -308,9 +307,9 @@
 	top: 0.75rem;
 	left: 0.75rem;
 	z-index: 2;
-	padding: 0.32rem 0.55rem;
+	padding: 0.32rem 0.75rem;
 	border-radius: 0.45rem;
-	font-size: 0.68rem;
+	font-size: 0.75rem;
 	font-weight: 700;
 	color: #0f172a;
 	background: rgba(255, 255, 255, 0.88);
@@ -320,7 +319,7 @@
 }
 
 .programs-card__body {
-	padding: 1rem 1.15rem 1.15rem;
+	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
 	flex: 1;
@@ -330,15 +329,15 @@
 	display: flex;
 	align-items: center;
 	gap: 0.35rem;
-	margin-bottom: 0.45rem;
-	font-size: 0.68rem;
+	margin-bottom: 1rem;
+	font-size: 0.75rem;
 	font-weight: 600;
 	color: #64748b;
 }
 
 .programs-card__category-pill {
 	display: inline-block;
-	padding: 0.28rem 0.55rem;
+	padding: 0.25rem 0.625rem;
 	border-radius: 0.4rem;
 	font-size: 0.62rem;
 	font-weight: 800;
@@ -351,22 +350,27 @@
 	color: #2563EB;
 	background: #EFF6FF;
 }
+
 .programs-card__category-pill--coding {
 	color: #7C3AED;
 	background: #F5F3FF;
 }
+
 .programs-card__category-pill--math {
 	color: #059669;
 	background: #ECFDF5;
 }
+
 .programs-card__category-pill--robotics {
 	color: #EA580C;
 	background: #FFF7ED;
 }
+
 .programs-card__category-pill--writing {
 	color: #DB2777;
 	background: #FDF2F8;
 }
+
 .programs-card__category-pill--critical-thinking {
 	color: #4F46E5;
 	background: #EEF2FF;
@@ -405,7 +409,7 @@
 	justify-content: space-between;
 	gap: 0.75rem;
 	margin-top: 1rem;
-	padding-top: 0.85rem;
+	padding-top: 1rem;
 	border-top: 1px solid #f1f5f9;
 }
 
@@ -418,8 +422,8 @@
 
 .programs-card__avatar-img {
 	flex-shrink: 0;
-	width: 2.25rem;
-	height: 2.25rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	object-fit: cover;
 	display: block;
@@ -427,7 +431,7 @@
 }
 
 .programs-card__teacher-name {
-	font-size: 0.8125rem;
+	font-size: 0.75rem;
 	font-weight: 600;
 	color: #334155;
 	white-space: nowrap;

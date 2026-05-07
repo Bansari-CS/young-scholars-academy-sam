@@ -24,7 +24,7 @@ const getAuthorImage = (author: ImpactTestimonialAuthor) => imageByIndex[author.
 const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex[card.thumbnailIndex] : undefined);
 ---
 
-<section class="home-section impact-section-root impact-section" aria-labelledby="impact-heading">
+<section class="home-section impact-section-root impact-section !pb-[121px]" aria-labelledby="impact-heading">
 	<div class="home-section-inner">
 		<header class="section-head">
 			<p class="section-eyebrow">{d.eyebrow}</p>

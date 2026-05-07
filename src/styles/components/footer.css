@@ -170,4 +170,8 @@
 	.ysa-footer__top {
 		grid-template-columns: 1fr;
 	}
+
+	.ysa-footer__brand-name {
+		font-size: 1.25rem
+	}
 }

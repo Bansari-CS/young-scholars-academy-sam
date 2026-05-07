@@ -47,8 +47,8 @@
 }
 
 .ysa-platform__desc {
-	margin: 1rem 0 0;
-	max-width: 47rem;
+	margin: 1.5rem 0 0;
+	max-width: 43.813rem;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: var(--ysa-font-body);
@@ -64,7 +64,7 @@
 	width: 100%;
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-	gap: clamp(1.75rem, 3.8vw, 2.8rem);
+	gap: clamp(1.75rem, 3.8vw, 3rem);
 	align-items: stretch;
 }
 
@@ -81,7 +81,7 @@
 	min-width: 0;
 	display: grid;
 	grid-template-rows: repeat(4, minmax(0, 1fr));
-	gap: 0.82rem;
+	gap: 1.5rem;
 	height: 100%;
 }
 
@@ -90,14 +90,13 @@
 	background: #fff;
 	padding: 0.85rem;
 	border: 1px solid #d8deea;
-	box-shadow:
-		0 2px 6px rgba(15, 23, 42, 0.03),
-		0 20px 42px -24px rgba(87, 81, 228, 0.32);
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
 	height: 100%;
 	display: flex;
 }
 
-.ysa-platform__visual-card > .ysa-platform__visual-slides {
+.ysa-platform__visual-card>.ysa-platform__visual-slides {
 	flex: 1 1 auto;
 }
 
@@ -144,7 +143,7 @@
 	appearance: none;
 	width: 100%;
 	margin: 0;
-	padding: 0.82rem 1rem;
+	padding: 1.75rem;
 	border-radius: 0.875rem;
 	border: 1px solid #d9e2ee;
 	background: #fff;
@@ -189,8 +188,8 @@
 
 .ysa-platform__icon-wrap {
 	flex-shrink: 0;
-	width: 3.05rem;
-	height: 3.05rem;
+	width: 3rem;
+	height: 3rem;
 	border-radius: 0.5rem;
 	display: flex;
 	align-items: center;
@@ -225,7 +224,7 @@
 	margin: 0;
 	font-family: var(--ysa-font-display);
 	font-weight: 700;
-	font-size: clamp(1.2rem, 1.9vw, 1.85rem);
+	font-size: clamp(1.2rem, 1.9vw, 1.063rem);
 	line-height: 1.2;
 	color: #111827;
 }
@@ -235,7 +234,7 @@
 	margin: 0;
 	font-family: var(--ysa-font-body);
 	font-weight: 400;
-	font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+	font-size: clamp(0.95rem, 1.3vw, 0.875rem);
 	line-height: 1.5;
 	color: #64748b;
 }
