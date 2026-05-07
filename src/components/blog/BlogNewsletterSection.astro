@@ -1,11 +1,13 @@
-<section class="mx-auto mt-20 w-[calc(100%-2rem)] max-w-[1104px] rounded-[24px] bg-gradient-to-br from-[#7c3aed] to-[#0a9dfb] px-6 py-12 md:py-16 lg:px-20">
-	<div class="text-center">
-		<h2 class="text-[30px] font-bold leading-[1.15] tracking-[-0.02em] text-white md:text-[44px]">Not Ready Yet? Start Here.</h2>
-		<p class="mx-auto mt-4 max-w-[600px] text-base leading-7 text-[#e0e9ff] opacity-90">Join 5,000+ parents receiving weekly insights, strategies, and curated resources delivered straight to your inbox.</p>
-		<div class="mx-auto mt-6 flex w-full max-w-[500px] items-center rounded-2xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] p-2">
-			<input type="email" placeholder="Your email address" class="w-full bg-transparent px-4 py-4 text-sm font-medium text-[rgba(255,255,255,0.8)] placeholder:text-[rgba(255,255,255,0.8)] outline-none" />
-			<button class="whitespace-nowrap rounded-xl bg-white px-8 py-4 text-base font-medium text-[#0a9dfb]">Join Now</button>
-		</div>
-		<p class="mt-4 text-base text-[#e0e9ff] opacity-60">We value your privacy. Unsubscribe at any time.</p>
-	</div>
-</section>
+---
+import GradientCtaSection from '../common/GradientCtaSection.astro';
+---
+
+<GradientCtaSection
+	title="Not Ready Yet? Start Here."
+	description="Join 5,000+ parents receiving weekly insights, strategies, and curated resources delivered straight to your inbox."
+	primaryCta={{ label: 'Join Now', href: '#' }}
+	layout="newsletter"
+	newsletterPlaceholder="Your email address"
+	newsletterButtonLabel="Join Now"
+	newsletterPrivacyText="We value your privacy. Unsubscribe at any time."
+/>

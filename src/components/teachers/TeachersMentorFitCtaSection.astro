@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { teacherPageAssets } from './data';
+import GradientCtaSection from '../common/GradientCtaSection.astro';
+import arrowRightIcon from '../../assets/course-detail/icon-arrow-right.svg';
 
 type MentorFitCtaContent = CollectionEntry<'teachers'>['data']['mentorFitCta'];
 
@@ -11,31 +12,12 @@ interface Props {
 const { content } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-[linear-gradient(162.497deg,#7c3aed_0%,#0a9dfb_100%)] px-5 py-20 md:px-12" aria-labelledby="mentor-fit-title">
-	<div class="pointer-events-none absolute right-[-160px] top-[-384px] h-[800px] w-[800px] rounded-full bg-[rgba(10,157,251,0.2)] blur-[60px]" aria-hidden="true"></div>
-	<div class="pointer-events-none absolute bottom-[-384px] left-[-160px] h-[800px] w-[800px] rounded-full bg-[rgba(124,58,237,0.2)] blur-[60px]" aria-hidden="true"></div>
-
-	<div class="relative mx-auto w-full max-w-[896px] px-0 text-center md:px-16">
-		<h2 class="text-[40px] font-bold leading-tight text-white md:text-[44px]" id="mentor-fit-title">{content.title}</h2>
-		<p class="mx-auto mt-[34px] max-w-[752px] text-base font-semibold leading-[27px] text-white">
-			{content.description}
-		</p>
-
-		<div class="pt-8">
-		<a
-  class="mx-auto mt-[11px] inline-flex h-[60px] items-center justify-center rounded-2xl bg-[#0a9dfb] px-[52px] py-5 text-base font-semibold text-white no-underline shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)]"
-  href={content.buttonHref}
->
-  <span class="pr-[20px]">{content.buttonLabel}</span>
-  <img
-    class="h-4 w-4"
-    src={teacherPageAssets.mentorFitArrowIconUrl}
-    alt=""
-    aria-hidden="true"
-  />
-</a>
-		</div>
-
-		<p class="pt-3 text-sm leading-[47px] text-white">{content.footnote}</p>
-	</div>
-</section>
+<GradientCtaSection
+	title={content.title}
+	description={content.description}
+	primaryCta={{ label: content.buttonLabel, href: content.buttonHref }}
+	primaryTrailingIcon={arrowRightIcon.src}
+	footnote={content.footnote}
+	primaryStyle="brand"
+	fullWidth={true}
+/>

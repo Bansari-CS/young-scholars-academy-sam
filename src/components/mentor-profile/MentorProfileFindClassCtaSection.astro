@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import GradientCtaSection from '../common/GradientCtaSection.astro';
 
 type FindClassCtaContent = CollectionEntry<'mentor-profile'>['data']['findClassCta'];
 
@@ -11,25 +12,14 @@ const { content } = Astro.props as Props;
 ---
 
 <section class="bg-white px-5 pb-20 md:px-16" aria-label="Find class CTA">
-	<div class="mx-auto w-full max-w-[1312px] overflow-hidden rounded-[40px] bg-[linear-gradient(161.696deg,#7c3aed_0%,#0a9dfb_100%)] px-5 py-16 md:px-[336px] md:py-20">
-		<div class="relative">
-			<div class="pointer-events-none absolute left-[-80px] top-[-80px] h-64 w-64 rounded-full bg-[rgba(255,255,255,0.1)] blur-[32px]" aria-hidden="true"></div>
-			<div class="pointer-events-none absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-[rgba(96,165,250,0.2)] blur-[32px]" aria-hidden="true"></div>
-
-			<div class="relative flex flex-col items-center gap-6 text-center">
-				<h2 class="text-[44px] font-bold leading-[1.1] text-white">{content.title}</h2>
-				<p class="max-w-[672px] text-base font-semibold leading-6 text-white">
-					{content.description}
-				</p>
-				<div class="flex flex-col gap-4 pt-6 sm:flex-row">
-					<a class="inline-flex items-center justify-center rounded-[20px] bg-[#0a9dfb] px-10 py-5 text-base font-semibold leading-7 text-white no-underline shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]" href={content.primaryCtaHref}>
-						{content.primaryCtaLabel}
-					</a>
-					<a class="inline-flex items-center justify-center rounded-[20px] bg-white px-10 py-5 text-base font-semibold leading-7 text-[#0a9dfb] no-underline shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]" href={content.secondaryCtaHref}>
-						{content.secondaryCtaLabel}
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<GradientCtaSection
+		title={content.title}
+		description={content.description}
+		primaryCta={{ label: content.primaryCtaLabel, href: content.primaryCtaHref }}
+		secondaryCta={{ label: content.secondaryCtaLabel, href: content.secondaryCtaHref }}
+		primaryStyle="brand"
+		secondaryStyle="lightSolid"
+		showPrimaryArrow={false}
+		maxWidth="wide"
+	/>
 </section>

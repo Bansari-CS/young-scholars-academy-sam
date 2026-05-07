@@ -1,23 +1,15 @@
 ---
-interface Props {
-	content: any;
-}
-
-const { content } = Astro.props as Props;
+import GradientCtaSection from '../common/GradientCtaSection.astro';
 ---
 
-<section id="cta" class="summer-final-figma px-5 py-12 md:px-10 md:py-16 2xl:px-[184px] 2xl:py-20">
-	<div class="summer-final-box p-5 md:p-10 xl:p-20">
-		<h2 class="text-[28px] sm:text-[36px] lg:text-[44px]">{content.title}</h2>
-		<p>{content.description}</p>
-		<div class="summer-final-actions flex-wrap lg:flex-nowrap">
-			<a class="summer-final-btn summer-final-btn-primary" href={content.primaryCtaHref}>
-				{content.primaryCtaLabel} <img src="/images/summer/final/arrow-right.svg" alt="" />
-			</a>
-			<a class="summer-final-btn summer-final-btn-secondary" href={content.secondaryCtaHref}>{content.secondaryCtaLabel}</a>
-		</div>
-		<small>{content.footnote}</small>
-		<div class="summer-final-blur summer-final-blur-right"></div>
-		<div class="summer-final-blur summer-final-blur-left"></div>
-	</div>
-</section>
+<div id="cta" class="bg-[#f0f9ff]">
+	<GradientCtaSection
+		variant="outlined"
+		title="Their People Are Waiting."
+		description="Give your child a summer that doesn't just pass the time, but builds their identity and connects them with a global community of like-minded peers."
+		primaryCta={{ label: 'Find the Perfect Camp', href: '#programs' }}
+		secondaryCta={{ label: 'View All 321 Camps', href: '#programs' }}
+		primaryTrailingIcon="/images/summer/final/arrow-right.svg"
+		footnote="Limited spots available per class. Enrollment closes June 1st."
+	/>
+</div>
