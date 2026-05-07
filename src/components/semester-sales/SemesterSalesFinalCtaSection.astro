@@ -1,5 +1,5 @@
 ---
-import { semesterSalesAssets } from './data';
+import GradientCtaSection from '../common/GradientCtaSection.astro';
 
 interface Props {
 	content: {
@@ -15,36 +15,13 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 
-<section class="bg-[#f8fafc] px-5 py-[80px] md:px-16 ">
-	<div class="relative mx-auto max-w-[1312px] overflow-hidden rounded-[32px] bg-gradient-to-r from-[#5751e4] to-[#0a9dfb] px-6 py-20 md:px-20">
-		<div
-			class="pointer-events-none absolute inset-0 bg-[length:67px_100px] bg-left-top opacity-10"
-			style={`background-image: url('${semesterSalesAssets.finalCtaPatternUrl}')`}
-			aria-hidden="true"
-		></div>
-
-		<div class="relative">
-			<h2 class="mx-auto max-w-[955px] text-center xl:text-[44px] md:text-[32px] text-[25px] font-bold xl:leading-[55px] md:leading-[45px] font-bold leading-[1.1] text-white">
-				{content.title}
-			</h2>
-			<p class="mx-auto max-w-[585px] pt-[37px] text-center text-base leading-6 text-white/90">
-				{content.description}
-			</p>
-
-			<div class="flex flex-col items-center justify-center gap-6 pt-12 sm:flex-row">
-				<a
-					href={content.primaryCtaHref}
-					class="inline-flex h-[60px] min-w-[288px] items-center justify-center rounded-xl bg-white px-10 text-base font-semibold text-[#0a9dfb] no-underline shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]"
-				>
-					{content.primaryCtaLabel}
-				</a>
-				<a
-					href={content.secondaryCtaHref}
-					class="inline-flex h-[60px] min-w-[276px] items-center justify-center rounded-xl border border-[rgba(255,255,255,0.3)] bg-[rgba(255,255,255,0.2)] px-10 text-base font-semibold text-white no-underline backdrop-blur-[6px]"
-				>
-					{content.secondaryCtaLabel}
-				</a>
-			</div>
-		</div>
-	</div>
+<section class="bg-[#f3f4f6]">
+	<GradientCtaSection
+		preset="semester"
+		title={content.title}
+		description={content.description}
+		primaryCta={{ label: content.primaryCtaLabel, href: content.primaryCtaHref }}
+		secondaryCta={{ label: content.secondaryCtaLabel, href: content.secondaryCtaHref }}
+		showPrimaryArrow={false}
+	/>
 </section>

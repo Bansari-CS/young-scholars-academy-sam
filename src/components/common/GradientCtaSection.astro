@@ -1,0 +1,236 @@
+---
+interface CtaButton {
+	label: string;
+	href: string;
+}
+
+interface TrustPoint {
+	label: string;
+	icon?: string;
+}
+
+interface Props {
+	title: string;
+	description: string;
+	primaryCta: CtaButton;
+	secondaryCta?: CtaButton;
+	footnote?: string;
+	trustPoints?: Array<string | TrustPoint>;
+	fullWidth?: boolean;
+	variant?: 'gradient' | 'outlined' | 'dark' | 'soft';
+	primaryTrailingIcon?: string;
+	showPrimaryArrow?: boolean;
+	preset?: 'default' | 'semester';
+	layout?: 'buttons' | 'newsletter';
+	newsletterPlaceholder?: string;
+	newsletterButtonLabel?: string;
+	newsletterPrivacyText?: string;
+	primaryStyle?: 'default' | 'brand' | 'gradient';
+	secondaryStyle?: 'default' | 'lightSolid';
+	maxWidth?: 'default' | 'wide';
+	secondaryLeadingIcon?: string;
+}
+
+const {
+	title,
+	description,
+	primaryCta,
+	secondaryCta,
+	footnote,
+	trustPoints = [],
+	fullWidth = false,
+	variant = 'gradient',
+	primaryTrailingIcon,
+	showPrimaryArrow = true,
+	preset = 'default',
+	layout = 'buttons',
+	newsletterPlaceholder = 'Your email address',
+	newsletterButtonLabel = 'Join Now',
+	newsletterPrivacyText,
+	primaryStyle = 'default',
+	secondaryStyle = 'default',
+	maxWidth = 'default',
+	secondaryLeadingIcon,
+} = Astro.props;
+
+const isOutlined = variant === 'outlined';
+const isDark = variant === 'dark';
+const isSoft = variant === 'soft';
+const isSemesterPreset = preset === 'semester';
+const isNewsletterLayout = layout === 'newsletter';
+---
+
+<section
+	class:list={[
+		fullWidth ? 'px-0 py-16 md:py-20' : 'px-4 py-16 md:px-8 md:py-20',
+		isSemesterPreset && !fullWidth && 'py-8 md:px-6 md:py-10',
+	]}
+>
+	<div class:list={[
+		'relative mx-auto w-full overflow-hidden px-6 py-14 text-center md:px-12 md:py-20',
+		isSemesterPreset && 'max-w-[1320px] px-6 py-12 md:px-12 md:py-14',
+		isOutlined
+			? 'border-2 border-[#0a9dfb] bg-[#f8fafc] text-[#111827] shadow-[0px_20px_40px_-12px_rgba(15,23,42,0.25)]'
+			: isSoft
+				? 'border border-[rgba(226,232,240,0.8)] bg-white text-[#111827] shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]'
+			: isDark
+				? 'bg-[#111827] text-white'
+				: 'bg-gradient-to-r from-[#7c3aed] via-[#4d67ef] to-[#0a9dfb] text-white',
+		fullWidth
+			? 'max-w-none rounded-none'
+			: isSemesterPreset
+				? 'max-w-[1320px] rounded-[24px]'
+				: maxWidth === 'wide'
+					? 'max-w-[1312px] rounded-[32px]'
+					: 'max-w-[1152px] rounded-[32px]',
+	]}>
+		{
+			isDark && (
+				<div
+					class="pointer-events-none absolute inset-0"
+					style="background-image: radial-gradient(63.3% 63.06% at 50% 50%, rgba(0,132,255,0.1) 0%, rgba(0,132,255,0) 100%), linear-gradient(90deg, #081738 0%, #111827 100%);"
+					aria-hidden="true"
+				></div>
+			)
+		}
+		{
+			!isOutlined && !isDark && (
+				<>
+					<div class="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-[rgba(34,211,238,0.5)] blur-[32px] opacity-20"></div>
+					<div class="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-[rgba(255,255,255,0.5)] blur-[32px] opacity-20"></div>
+				</>
+			)
+		}
+
+		<div class:list={['relative mx-auto max-w-[740px]', isSemesterPreset && 'max-w-[760px]']}>
+			<h2 class:list={[
+				'font-[var(--ysa-font-display)] text-[34px] font-bold leading-tight md:text-[44px]',
+				isSemesterPreset && 'text-[32px] leading-[1.2] md:text-[50px]',
+				isOutlined || isSoft ? 'text-[#111827]' : 'text-white',
+			]}>
+				{title}
+			</h2>
+			<p class:list={[
+				'mx-auto mt-4 max-w-[640px] text-base leading-7 md:text-[17px]',
+				isSemesterPreset && 'mt-5 max-w-[620px] text-[15px] leading-[1.5] md:text-[16px]',
+				isOutlined || isSoft ? 'text-[#64748b]' : 'text-[#e0e9ff]',
+			]}>
+				{description}
+			</p>
+
+			{
+				isNewsletterLayout ? (
+					<div class="mx-auto mt-7 flex w-full max-w-[500px] items-center rounded-2xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] p-2">
+						<input
+							type="email"
+							placeholder={newsletterPlaceholder}
+							class="w-full bg-transparent px-4 py-4 text-sm font-medium text-[rgba(255,255,255,0.8)] placeholder:text-[rgba(255,255,255,0.8)] outline-none"
+						/>
+						<button
+							type="button"
+							class="whitespace-nowrap rounded-xl bg-white px-8 py-4 text-base font-medium text-[#0a9dfb]"
+						>
+							{newsletterButtonLabel}
+						</button>
+					</div>
+				) : (
+					<div class:list={['mt-8 flex flex-wrap items-center justify-center gap-4', isSemesterPreset && 'mt-9 gap-3']}>
+						<a
+							class:list={[
+								'inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]',
+								isSemesterPreset && 'min-h-[56px] min-w-[250px] justify-center px-8 text-[18px] font-medium',
+								isOutlined
+									? 'bg-[#0a9dfb] text-white'
+									: isSoft
+										? primaryStyle === 'gradient'
+											? 'bg-gradient-to-r from-[#0a9dfb] to-[#7c3aed] text-white'
+											: 'bg-[#0a9dfb] text-white'
+									: isDark
+										? 'rounded-2xl bg-gradient-to-r from-[#0084ff] to-[#7c3aed] px-10 py-5 text-base font-medium text-white shadow-[0px_25px_50px_-12px_rgba(0,132,255,0.3)]'
+										: primaryStyle === 'brand'
+											? 'bg-[#0a9dfb] text-white'
+											: primaryStyle === 'gradient'
+												? 'bg-gradient-to-r from-[#0a9dfb] to-[#7c3aed] text-white'
+											: 'bg-white text-[#0a9dfb]',
+							]}
+							href={primaryCta.href}
+						>
+							{primaryCta.label}
+							{
+								primaryTrailingIcon ? (
+									<img src={primaryTrailingIcon} alt="" aria-hidden="true" class="h-4 w-4" />
+								) : showPrimaryArrow ? (
+									<svg
+										width="13"
+										height="13"
+										viewBox="0 0 13 13"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+										aria-hidden="true"
+										class="h-4 w-4"
+									>
+										<path
+											d="M5.1957 0.847656L5.79727 0.246094C6.0707 0 6.48086 0 6.72695 0.246094L12.059 5.55078C12.3051 5.82422 12.3051 6.23438 12.059 6.48047L6.72695 11.8125C6.48086 12.0586 6.0707 12.0586 5.79727 11.8125L5.1957 11.2109C4.94961 10.9375 4.94961 10.5273 5.1957 10.2539L8.5043 7.10938H0.656641C0.273828 7.10938 0.00039053 6.83594 0.00039053 6.45312V5.57812C0.00039053 5.22266 0.273828 4.92188 0.656641 4.92188H8.5043L5.1957 1.80469C4.94961 1.53125 4.92227 1.12109 5.1957 0.847656Z"
+											fill="currentColor"
+										/>
+									</svg>
+								) : null
+							}
+						</a>
+						{
+							secondaryCta && (
+								<a
+									class:list={[
+										'inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold',
+										isSemesterPreset && 'min-h-[56px] min-w-[250px] justify-center px-8 text-[18px] font-medium',
+										isOutlined
+											? 'border border-[#e2e8f0] bg-[#f8fafc] text-[#475569]'
+											: isSoft
+												? 'border border-[#0a9dfb] bg-white text-[#0a9dfb]'
+											: isDark
+												? 'rounded-2xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] px-10 py-5 text-base font-medium text-white'
+											: secondaryStyle === 'lightSolid'
+												? 'bg-white text-[#0a9dfb] shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]'
+											: 'border border-[rgba(255,255,255,0.25)] bg-[rgba(255,255,255,0.12)] text-white backdrop-blur-sm',
+									]}
+									href={secondaryCta.href}
+								>
+									{secondaryLeadingIcon && <span aria-hidden="true">{secondaryLeadingIcon}</span>}
+									{secondaryCta.label}
+								</a>
+							)
+						}
+					</div>
+				)
+			}
+
+			{
+				trustPoints.length > 0 && (
+					<div class:list={[
+						'mt-6 flex flex-wrap items-center justify-center gap-3 text-xs',
+						isOutlined ? 'text-[#94a3b8]' : 'text-[#e0e9ff]',
+					]}>
+						{
+							trustPoints.map((point, index) => (
+								<span class="inline-flex items-center gap-1.5">
+									<span class:list={['text-[11px]', isOutlined ? 'text-[#f2dd35]' : 'text-[#f2dd35]']} aria-hidden="true">
+										{typeof point === 'string' ? '●' : (point.icon ?? '●')}
+									</span>
+									<span>{typeof point === 'string' ? point : point.label}</span>
+									{index < trustPoints.length - 1 && <span class:list={['ml-1', isOutlined ? 'text-[#cbd5e1]' : 'text-[#c7d5fe]/80']} aria-hidden="true">•</span>}
+								</span>
+							))
+						}
+					</div>
+				)
+			}
+
+			{footnote && <p class:list={['mt-3 text-sm', isOutlined ? 'text-[#64748b]' : 'text-[#e0e9ff]']}>{footnote}</p>}
+			{
+				newsletterPrivacyText && (
+					<p class="mt-4 text-base text-[#e0e9ff] opacity-60">{newsletterPrivacyText}</p>
+				)
+			}
+		</div>
+	</div>
+</section>

@@ -1,17 +1,16 @@
-<section
-	class="mx-auto mb-24 mt-6 w-[calc(100%-2rem)] max-w-[1152px] rounded-[24px] bg-[#111827] bg-[radial-gradient(63.3%_63.06%_at_50%_50%,rgba(0,132,255,0.1)_0%,rgba(0,132,255,0)_100%),linear-gradient(90deg,#081738_0%,#111827_100%)] px-6 py-16 md:py-20 lg:px-24"
->
-	<div class="text-center">
-		<h2 class="text-[38px] font-extrabold leading-tight tracking-[-0.02em] text-white md:text-[52px] md:leading-[65px]">You Don’t Have to Figure This Out Alone</h2>
-		<p class="mx-auto mt-6 max-w-[600px] text-base leading-7 text-[#e0e9ff]">Join our vibrant community of parents, educators, and experts dedicated to helping every child find their path.</p>
-		<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-			<a href="#" class="inline-flex items-center gap-1 rounded-2xl bg-gradient-to-r from-[#0084ff] to-[#7c3aed] px-10 py-5 text-base font-medium text-white shadow-[0px_25px_50px_-12px_rgba(0,132,255,0.3)]">
-				<span>Find My Child’s Best Fit</span>
-				<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-					<path d="M10.2807 6.5C10.5736 6.20711 10.5736 5.73223 10.2807 5.43934L6.53067 1.68934C6.23778 1.39645 5.7629 1.39645 5.47001 1.68934C5.17712 1.98223 5.17712 2.45711 5.47001 2.75L7.93934 5.21933H0.75C0.335786 5.21933 0 5.55511 0 5.96933C0 6.38354 0.335786 6.71933 0.75 6.71933H7.93734L5.47334 9.18933C5.18045 9.48222 5.18045 9.9571 5.47334 10.25C5.76623 10.5429 6.24111 10.5429 6.534 10.25L10.284 6.5H10.2807Z" fill="currentColor"/>
-				</svg>
-			</a>
-			<a href="#" class="rounded-2xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] px-10 py-5 text-base font-medium text-white">Explore Programs</a>
-		</div>
-	</div>
-</section>
+---
+import GradientCtaSection from '../common/GradientCtaSection.astro';
+import arrowRightIcon from '../../assets/course-detail/icon-arrow-right.svg';
+---
+
+<div class="mb-24 mt-6">
+	<GradientCtaSection
+		variant="dark"
+		title="You Don’t Have to Figure This Out Alone"
+		description="Join our vibrant community of parents, educators, and experts dedicated to helping every child find their path."
+		primaryCta={{ label: 'Find My Child’s Best Fit', href: '#' }}
+		primaryTrailingIcon={arrowRightIcon.src}
+		secondaryCta={{ label: 'Explore Programs', href: '#' }}
+		showPrimaryArrow={true}
+	/>
+</div>
