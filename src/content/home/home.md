@@ -235,44 +235,44 @@ methodology:
     - stat: '4:1'
       description: "Student-teacher ratio for\npersonalized attention"
       variant: violet
-      iconSrc: https://www.figma.com/api/mcp/asset/638a4ede-de48-42a6-8bed-9b3112ef84e1
+      statIcon: people
     - stat: 100%
       description: PhD or Master's level instructors
       variant: sky
-      iconSrc: https://www.figma.com/api/mcp/asset/96fd20ce-10f7-41dd-a62a-53401cf5de34
+      statIcon: cap
     - stat: 2.5x
       description: Faster skill progression vs. traditional methods
       variant: amber
-      iconSrc: https://www.figma.com/api/mcp/asset/3a62998f-3467-448c-82c2-0129224d4ad9
+      statIcon: chart
     - stat: 98%
       description: Parent satisfaction rate
       variant: emerald
-      iconSrc: https://www.figma.com/api/mcp/asset/019d79c2-cc3b-45b5-92f6-139d27333fb7
+      statIcon: heart
   principles:
     - title: Depth Over Breadth
       description: We go deep into subjects, encouraging mastery and genuine understanding rather than surface-level coverage.
       iconTint: indigo
-      iconSrc: https://www.figma.com/api/mcp/asset/f8b68ac7-3380-4eb4-a834-e8dfb529c83b
+      principleIcon: depth
     - title: Neurodivergent-Friendly
       description: Our educators are trained in 2e and neurodivergent learning styles, celebrating different ways of thinking.
       iconTint: violet
-      iconSrc: https://www.figma.com/api/mcp/asset/30074b64-4273-42bc-a10c-466c15269673
+      principleIcon: neuro
     - title: Socratic Discussion
       description: Students learn through dialogue and inquiry, not passive listening—developing critical thinking naturally.
       iconTint: cyan
-      iconSrc: https://www.figma.com/api/mcp/asset/85257484-ccf7-4b6d-abee-91caab4ddde7
+      principleIcon: socratic
     - title: Asynchronous Pacing
       description: Your child moves at their own speed—accelerating when ready, taking time when needed.
       iconTint: emerald
-      iconSrc: https://www.figma.com/api/mcp/asset/e35ef3a2-5686-43cc-8562-38beb2c3d474
+      principleIcon: async
     - title: Peer Community
       description: Small cohorts foster lasting friendships with true intellectual and emotional peers.
       iconTint: teal
-      iconSrc: https://www.figma.com/api/mcp/asset/97b7ac08-14cc-4c56-8667-13cbee25f007
+      principleIcon: peer
     - title: Emotionally Safe
       description: We create spaces where mistakes are learning opportunities and every voice is valued.
       iconTint: blue
-      iconSrc: https://www.figma.com/api/mcp/asset/4041082d-c567-4767-8de5-91c298a9083f
+      principleIcon: safe
 platform:
   eyebrow: EXPERIENCE YSA
   title: A Learning Platform Built for Brilliance

@@ -1,17 +1,27 @@
 import type { ProgramsSectionData } from './programsSection';
 
+export type MethodologyStatIconKey = 'people' | 'cap' | 'chart' | 'heart';
+
 export interface MethodologyStatTile {
 	stat: string;
 	description: string;
 	variant: 'violet' | 'sky' | 'amber' | 'emerald';
-	iconSrc: string;
+	statIcon: MethodologyStatIconKey;
 }
+
+export type MethodologyPrincipleIconKey =
+	| 'depth'
+	| 'neuro'
+	| 'socratic'
+	| 'async'
+	| 'peer'
+	| 'safe';
 
 export interface MethodologyPrinciple {
 	title: string;
 	description: string;
 	iconTint: 'indigo' | 'violet' | 'cyan' | 'emerald' | 'teal' | 'blue';
-	iconSrc: string;
+	principleIcon: MethodologyPrincipleIconKey;
 }
 
 export interface ImpactStat {

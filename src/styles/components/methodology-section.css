@@ -123,14 +123,16 @@
 	background: #048c3c;
 }
 
-.ysa-methodology__stat-icon img {
+.ysa-methodology__stat-icon img,
+.ysa-methodology__stat-icon svg {
 	display: block;
 	width: 30px;
 	height: 24px;
 	object-fit: contain;
 }
 
-.ysa-methodology__stat--emerald .ysa-methodology__stat-icon img {
+.ysa-methodology__stat--emerald .ysa-methodology__stat-icon img,
+.ysa-methodology__stat--emerald .ysa-methodology__stat-icon svg {
 	width: 24px;
 	height: 24px;
 }
@@ -218,18 +220,21 @@
 	background: #dbeafe;
 }
 
-.ysa-methodology__principle-icon img {
+.ysa-methodology__principle-icon img,
+.ysa-methodology__principle-icon svg {
 	display: block;
 	width: 20px;
 	height: 20px;
 	object-fit: contain;
 }
 
-.ysa-methodology__principle-icon--cyan img {
+.ysa-methodology__principle-icon--cyan img,
+.ysa-methodology__principle-icon--cyan svg {
 	width: 25px;
 }
 
-.ysa-methodology__principle-icon--teal img {
+.ysa-methodology__principle-icon--teal img,
+.ysa-methodology__principle-icon--teal svg {
 	width: 25px;
 }
 

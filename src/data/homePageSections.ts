@@ -1,6 +1,5 @@
 import type { HomePageSectionsData } from '../types/homePage';
 import { programsSectionData } from './programsSection';
-import { figmaMethodology } from './figmaAssets';
 
 export const homePageSectionsData: HomePageSectionsData = {
 	programs: programsSectionData,
@@ -15,25 +14,25 @@ export const homePageSectionsData: HomePageSectionsData = {
 				stat: '4:1',
 				description: 'Student-teacher ratio for\npersonalized attention',
 				variant: 'violet',
-				iconSrc: figmaMethodology.statPeople,
+				statIcon: 'people',
 			},
 			{
 				stat: '100%',
 				description: "PhD or Master's level instructors",
 				variant: 'sky',
-				iconSrc: figmaMethodology.statCap,
+				statIcon: 'cap',
 			},
 			{
 				stat: '2.5x',
 				description: 'Faster skill progression vs. traditional methods',
 				variant: 'amber',
-				iconSrc: figmaMethodology.statChart,
+				statIcon: 'chart',
 			},
 			{
 				stat: '98%',
 				description: 'Parent satisfaction rate',
 				variant: 'emerald',
-				iconSrc: figmaMethodology.statHeart,
+				statIcon: 'heart',
 			},
 		],
 		principles: [
@@ -42,39 +41,39 @@ export const homePageSectionsData: HomePageSectionsData = {
 				description:
 					'We go deep into subjects, encouraging mastery and genuine understanding rather than surface-level coverage.',
 				iconTint: 'indigo',
-				iconSrc: figmaMethodology.pMicroscope,
+				principleIcon: 'depth',
 			},
 			{
 				title: 'Neurodivergent-Friendly',
 				description:
 					'Our educators are trained in 2e and neurodivergent learning styles, celebrating different ways of thinking.',
 				iconTint: 'violet',
-				iconSrc: figmaMethodology.pPuzzle,
+				principleIcon: 'neuro',
 			},
 			{
 				title: 'Socratic Discussion',
 				description:
 					'Students learn through dialogue and inquiry, not passive listening—developing critical thinking naturally.',
 				iconTint: 'cyan',
-				iconSrc: figmaMethodology.pChat,
+				principleIcon: 'socratic',
 			},
 			{
 				title: 'Asynchronous Pacing',
 				description: 'Your child moves at their own speed—accelerating when ready, taking time when needed.',
 				iconTint: 'emerald',
-				iconSrc: figmaMethodology.pStar,
+				principleIcon: 'async',
 			},
 			{
 				title: 'Peer Community',
 				description: 'Small cohorts foster lasting friendships with true intellectual and emotional peers.',
 				iconTint: 'teal',
-				iconSrc: figmaMethodology.pHandshake,
+				principleIcon: 'peer',
 			},
 			{
 				title: 'Emotionally Safe',
 				description: 'We create spaces where mistakes are learning opportunities and every voice is valued.',
 				iconTint: 'blue',
-				iconSrc: figmaMethodology.pShield,
+				principleIcon: 'safe',
 			},
 		],
 	},
