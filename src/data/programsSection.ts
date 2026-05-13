@@ -8,21 +8,14 @@ export const programsSectionData: ProgramsSectionData = {
 	filters: {
 		ageRange: {
 			label: 'Age Range',
-			options: [
-				{ label: 'Ages 6-8', isActive: true },
-				{ label: 'Ages 9-11' },
-				{ label: 'Ages 12-14' },
-				{ label: 'Ages 15+' },
-			],
+			options: [{ label: 'Ages 6-8' }, { label: 'Ages 9-11' }, { label: 'Ages 12-14' }, { label: 'Ages 15+' }],
 		},
 		campType: {
-			label: 'Camp Type',
-			placeholder: 'Select Type (Virtual, Hybrid…)',
+			label: 'Format',
+			placeholder: 'All programs',
 			options: [
-				{ value: '', label: 'All Types' },
+				{ value: '', label: 'All programs' },
 				{ value: 'virtual', label: 'Virtual' },
-				{ value: 'in-person', label: 'In-Person' },
-				{ value: 'hybrid', label: 'Hybrid' },
 			],
 		},
 		teacher: {
@@ -58,7 +51,7 @@ export const programsSectionData: ProgramsSectionData = {
 			title: 'Creative Coding Adventures',
 			description:
 				'Build games and animations with Scratch while learning computational thinking',
-			ageLabel: 'Ages 6-8',
+			ageLabel: 'Ages 9-11',
 			category: { id: 'coding', label: 'Coding' },
 			durationWeeks: 10,
 			teacher: { name: 'Alex Martinez' },
@@ -70,7 +63,7 @@ export const programsSectionData: ProgramsSectionData = {
 			title: 'Math Explorers',
 			description:
 				'Advanced problem-solving and pattern recognition for budding mathematicians',
-			ageLabel: 'Ages 6-8',
+			ageLabel: 'Ages 12-14',
 			category: { id: 'math', label: 'Math' },
 			durationWeeks: 12,
 			teacher: { name: 'Dr. Sarah Chen' },
@@ -94,7 +87,7 @@ export const programsSectionData: ProgramsSectionData = {
 			title: 'Storytelling Masters',
 			description:
 				'Develop creative writing skills through narrative building and character design',
-			ageLabel: 'Ages 6-8',
+			ageLabel: 'Ages 15+',
 			category: { id: 'writing', label: 'Writing' },
 			durationWeeks: 10,
 			teacher: { name: 'Lisa Thompson' },
@@ -106,7 +99,7 @@ export const programsSectionData: ProgramsSectionData = {
 			title: 'Logic & Puzzles',
 			description:
 				'Sharpen reasoning skills with strategic games and brain teasers',
-			ageLabel: 'Ages 6-8',
+			ageLabel: 'Ages 9-11',
 			category: { id: 'critical-thinking', label: 'Critical Thinking' },
 			durationWeeks: 6,
 			teacher: { name: 'Dr. James Lee' },
