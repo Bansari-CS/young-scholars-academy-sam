@@ -4,29 +4,158 @@ interface Props {
 }
 
 const { content } = Astro.props as Props;
+
+function parseAges(ages: string | undefined): { min: number; max: number } | null {
+	if (!ages) return null;
+	const m = ages.match(/(\d+)\s*[\-–−]\s*(\d+)/u);
+	if (!m) return null;
+	const min = parseInt(m[1], 10);
+	const max = parseInt(m[2], 10);
+	return Number.isFinite(min) && Number.isFinite(max) ? { min, max } : null;
+}
+
+const dateSlotRanges = (content.dateSlotRanges ?? {}) as Record<string, { start: string; end: string }>;
+
+const cards = (content.cards ?? []).map((camp: any) => {
+	const slot = camp.dateSlot as string | undefined;
+	const range = slot && dateSlotRanges[slot] ? dateSlotRanges[slot] : null;
+	return {
+		...camp,
+		ageRange: parseAges(camp.ages),
+		dateStart: range?.start ?? '',
+		dateEnd: range?.end ?? '',
+	};
+});
+
+const categories = [...new Set(cards.map((c: any) => c.tag).filter(Boolean))].sort() as string[];
+const levels = [...new Set(cards.map((c: any) => c.level).filter(Boolean))].sort() as string[];
+
+const guided = content.guided as
+	| { title: string; options: { label: string; categories: string[] }[] }
+	| undefined;
+
+const ageOptions = [
+	{ value: 'all', label: 'All ages' },
+	{ value: '8-12', label: 'Ages 8-12' },
+	{ value: '10-15', label: 'Ages 10-15' },
+	{ value: '12-18', label: 'Ages 12-18' },
+];
+
+const searchBlob = (camp: any) => `${camp.name} ${camp.description} ${camp.tag}`.toLowerCase();
+
+/** Single safe attribute for client-side age filtering (avoids dataset / multi-attr edge cases). */
+function campAgeRangeAttr(ageRange: { min: number; max: number } | null | undefined): string {
+	if (!ageRange || !Number.isFinite(ageRange.min) || !Number.isFinite(ageRange.max)) return '';
+	return `${ageRange.min}-${ageRange.max}`;
+}
+
+const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 ---
 
-<section id="programs" class="summer-section summer-camps-section py-20 px-4 md:px-10 lg:px-16 pt-0">
+<section id="programs" class="summer-section summer-camps-section py-20 px-4 md:px-10 lg:px-16 pt-0" data-summer-camps-root>
 	<div class="summer-wrap summer-camps-wrap px-5 sm:px-8 lg:px-16">
 		<h2 class="text-[25px] sm:text-[36px] lg:text-[44px]">{content.title}</h2>
 		<p class="summer-sub mb-12 mt-[10px]">{content.subtitle}</p>
+
+		{
+			guided?.title ? (
+				<div class="summer-camps-guided mb-8">
+					<p class="summer-camps-guided-title">{guided.title}</p>
+				</div>
+			) : null
+		}
+
 		<div class="summer-camps-filters mb-12 flex-wrap md:flex-nowrap">
-			<div class="summer-camps-search">
+			<label class="summer-camps-search">
 				<img src="/images/summer/camps/icon-search.svg" alt="" aria-hidden="true" />
-				<span>{content.searchPlaceholder}</span>
-			</div>
+				<input
+					type="search"
+					class="summer-camps-search-input"
+					placeholder={content.searchPlaceholder}
+					autocomplete="off"
+					data-camp-search
+					aria-label={content.searchPlaceholder}
+				/>
+			</label>
 			<div class="summer-camps-filter-chips flex-wrap md:flex-nowrap">
-				<button>{content.filterLabels[0]} <img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" /></button>
-				<button>{content.filterLabels[1]} <img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" /></button>
-				<button>{content.filterLabels[2]} <img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" /></button>
-				<button>{content.filterLabels[3]} <img src="/images/summer/camps/icon-calendar.svg" alt="" aria-hidden="true" /></button>
+				<div class="summer-camps-filter-tier summer-camps-filter-tier--primary flex-wrap md:flex-nowrap">
+					<div class="summer-camps-select-wrap summer-camps-select-wrap--camp-type">
+						<label class="sr-only" for="camp-filter-category">{content.filterLabels[0]}</label>
+						<select
+							id="camp-filter-category"
+							class="summer-camps-filter-select"
+							data-camp-filter="category"
+							aria-label={content.filterLabels[0]}
+						>
+							<option value="all">All camp types</option>
+							{categories.map((cat) => <option value={cat}>{cat}</option>)}
+						</select>
+						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
+					</div>
+					<div class="summer-camps-select-wrap summer-camps-select-wrap--age">
+						<label class="sr-only" for="camp-filter-age">{content.filterLabels[1]}</label>
+						<select id="camp-filter-age" class="summer-camps-filter-select" data-camp-filter="age" aria-label={content.filterLabels[1]}>
+							{
+								ageOptions.map((o) => (
+									<option value={o.value}>{o.label}</option>
+								))
+							}
+						</select>
+						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
+					</div>
+				</div>
+				<div class="summer-camps-filter-tier summer-camps-filter-tier--secondary flex-wrap md:flex-nowrap">
+					<div class="summer-camps-select-wrap">
+						<label class="sr-only" for="camp-filter-level">{content.filterLabels[2]}</label>
+						<select id="camp-filter-level" class="summer-camps-filter-select" data-camp-filter="level" aria-label={content.filterLabels[2]}>
+							<option value="all">All levels</option>
+							{levels.map((lvl) => <option value={lvl}>{lvl}</option>)}
+						</select>
+						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
+					</div>
+					<div class="summer-camps-date-field">
+						<label class="sr-only" for="camp-filter-date">{content.filterLabels[3]}</label>
+						<input
+							type="date"
+							id="camp-filter-date"
+							class="summer-camps-date-input"
+							data-camp-filter="date"
+							min="2026-06-01"
+							max="2026-08-14"
+							aria-label={content.filterLabels[3]}
+						/>
+						<button
+							type="button"
+							class="summer-camps-date-picker-btn"
+							data-camp-date-picker
+							aria-label={`Open calendar for ${content.filterLabels[3]}`}
+						>
+							<img src="/images/summer/camps/icon-calendar.svg" alt="" aria-hidden="true" />
+						</button>
+					</div>
+				</div>
 			</div>
-			<a href="#">{content.exploreLabel}</a>
+			<button type="button" class="summer-camps-explore-btn" data-camp-explore>
+				{content.exploreLabel}
+			</button>
 		</div>
-		<div class="summer-grid-3 summer-camp-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+		<p class="summer-camps-filter-status sr-only" data-camp-status aria-live="polite" />
+
+		<div id="summer-camp-results" class="summer-grid-3 summer-camp-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" data-camp-grid>
 			{
-				content.cards.map((camp) => (
-					<article class="summer-program-card-figma">
+				cards.map((camp) => (
+					<article
+						class="summer-program-card-figma"
+						data-camp-card
+						data-category={camp.tag}
+						data-level={camp.level}
+						data-date-slot={camp.dateSlot ?? ''}
+						data-date-start={camp.dateStart ?? ''}
+						data-date-end={camp.dateEnd ?? ''}
+						data-age-range={campAgeRangeAttr(camp.ageRange)}
+						data-search={searchBlob(camp)}
+					>
 						<div class="summer-program-image-figma">
 							<img src={camp.image} alt={camp.name} />
 						</div>
@@ -50,6 +179,11 @@ const { content } = Astro.props as Props;
 				))
 			}
 		</div>
+
+		<p class="summer-camps-empty mt-8 hidden text-center text-[#64748b]" data-camp-empty>
+			No camps match your filters. Try clearing search, setting camp type and age to All, or clearing the date.
+		</p>
+
 		<div class="summer-ai-strip p-5 md:p-8 lg:p-10 flex-wrap md:flex-nowrap">
 			<div>
 				<h3 class="font-bold">{content.aiTitle}</h3>
@@ -64,4 +198,184 @@ const { content } = Astro.props as Props;
 			<a href={content.browseHref} class="summer-browse-btn">{content.browseLabel}</a>
 		</div>
 	</div>
+
+	<script type="application/json" id="summer-camps-config" set:html={campsConfig} />
+
+	<script>
+		function readConfig() {
+			const el = document.getElementById('summer-camps-config');
+			try {
+				return JSON.parse(el?.textContent || '{}');
+			} catch {
+				return { guidedOptions: [] };
+			}
+		}
+
+		function agesOverlap(cMin: number, cMax: number, fMin: number, fMax: number) {
+			return cMin <= fMax && cMax >= fMin;
+		}
+
+		function initSummerCamps() {
+			const root = document.querySelector('[data-summer-camps-root]');
+			if (!root) return;
+
+			const { guidedOptions } = readConfig() as { guidedOptions: { label: string; categories: string[] }[] };
+			const searchEl = root.querySelector('[data-camp-search]') as HTMLInputElement | null;
+			const ageEl = root.querySelector('[data-camp-filter="age"]') as HTMLSelectElement | null;
+			const categoryEl = root.querySelector('[data-camp-filter="category"]') as HTMLSelectElement | null;
+			const levelEl = root.querySelector('[data-camp-filter="level"]') as HTMLSelectElement | null;
+			const dateEl = root.querySelector('[data-camp-filter="date"]') as HTMLInputElement | null;
+			const datePickerBtn = root.querySelector('[data-camp-date-picker]') as HTMLButtonElement | null;
+			const cards = [...root.querySelectorAll('[data-camp-card]')] as HTMLElement[];
+			const emptyEl = root.querySelector('[data-camp-empty]') as HTMLElement | null;
+			const statusEl = root.querySelector('[data-camp-status]') as HTMLElement | null;
+			const exploreBtn = root.querySelector('[data-camp-explore]') as HTMLButtonElement | null;
+			const grid = root.querySelector('[data-camp-grid]') as HTMLElement | null;
+
+			let guidedCategories: string[] | null = null;
+
+			function parseAgeFilter(val: string): { min: number; max: number } | null {
+				const v = (val || '').trim().toLowerCase();
+				if (!v || v === 'all') return null;
+				const m = /^(\d+)\s*-\s*(\d+)$/.exec(v);
+				if (!m) return null;
+				const min = parseInt(m[1], 10);
+				const max = parseInt(m[2], 10);
+				if (!Number.isFinite(min) || !Number.isFinite(max) || min > max) return null;
+				return { min, max };
+			}
+
+			function filterSentinel(raw: string | undefined): string {
+				const v = (raw ?? '').trim();
+				if (!v || v.toLowerCase() === 'all') return '';
+				return v;
+			}
+
+			function dateInRange(pick: string, start: string, end: string) {
+				if (!pick || !start || !end) return false;
+				return pick >= start && pick <= end;
+			}
+
+			function applyFilters() {
+				const q = (searchEl?.value || '').trim().toLowerCase();
+				const ageFilter = parseAgeFilter(ageEl?.value || '');
+				const catVal = filterSentinel(categoryEl?.value);
+				const levelVal = filterSentinel(levelEl?.value);
+				const datePick = (dateEl?.value || '').trim();
+
+				let visible = 0;
+
+				function readCampAgeRange(card: HTMLElement): { min: number; max: number } | null {
+					const raw = card.getAttribute('data-age-range')?.trim() || '';
+					if (!raw) return null;
+					const m = /^(\d+)-(\d+)$/.exec(raw);
+					if (!m) return null;
+					const min = parseInt(m[1], 10);
+					const max = parseInt(m[2], 10);
+					if (!Number.isFinite(min) || !Number.isFinite(max) || min > max) return null;
+					return { min, max };
+				}
+
+				for (const card of cards) {
+					const blob = (card.getAttribute('data-search') || '').toLowerCase();
+					const category = card.getAttribute('data-category') || '';
+					const level = card.getAttribute('data-level') || '';
+					const dateStart = card.getAttribute('data-date-start') || '';
+					const dateEnd = card.getAttribute('data-date-end') || '';
+					const campAge = readCampAgeRange(card);
+
+					let ok = true;
+
+					if (q && !blob.includes(q)) ok = false;
+
+					if (ok && guidedCategories && guidedCategories.length) {
+						if (!guidedCategories.includes(category)) ok = false;
+					} else if (ok && catVal && category !== catVal) ok = false;
+
+					if (ok && levelVal && level !== levelVal) ok = false;
+
+					if (ok && datePick) {
+						if (!dateInRange(datePick, dateStart, dateEnd)) ok = false;
+					}
+
+					if (ok && ageFilter) {
+						if (campAge) {
+							if (!agesOverlap(campAge.min, campAge.max, ageFilter.min, ageFilter.max)) ok = false;
+						}
+					}
+
+					card.classList.toggle('summer-camp-card--filtered-out', !ok);
+					if (ok) visible++;
+				}
+
+				if (emptyEl) emptyEl.classList.toggle('hidden', visible !== 0);
+				if (statusEl) {
+					statusEl.textContent =
+						visible === cards.length
+							? `Showing all ${visible} camps`
+							: `Showing ${visible} of ${cards.length} camps`;
+				}
+			}
+
+			function clearGuided() {
+				guidedCategories = null;
+			}
+
+			searchEl?.addEventListener('input', () => {
+				applyFilters();
+			});
+
+			for (const sel of [ageEl, categoryEl, levelEl]) {
+				const run = () => {
+					if (sel === categoryEl) clearGuided();
+					applyFilters();
+				};
+				sel?.addEventListener('change', run);
+				sel?.addEventListener('input', run);
+			}
+
+			dateEl?.addEventListener('change', () => applyFilters());
+			dateEl?.addEventListener('input', () => applyFilters());
+
+			datePickerBtn?.addEventListener('click', () => {
+				const inp = dateEl;
+				if (!inp) return;
+				const dt = inp as HTMLInputElement & { showPicker?: () => void };
+				if (typeof dt.showPicker === 'function') {
+					try {
+						dt.showPicker();
+					} catch {
+						inp.focus();
+					}
+				} else {
+					inp.focus();
+				}
+			});
+
+			root.querySelectorAll('[data-guided-index]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					const idx = parseInt((btn as HTMLElement).dataset.guidedIndex || '-1', 10);
+					const opt = guidedOptions[idx];
+					if (!opt?.categories?.length) return;
+
+					guidedCategories = [...opt.categories];
+					if (categoryEl) categoryEl.value = 'all';
+					applyFilters();
+					grid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				});
+			});
+
+			exploreBtn?.addEventListener('click', () => {
+				grid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			});
+
+			applyFilters();
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initSummerCamps);
+		} else {
+			initSummerCamps();
+		}
+	</script>
 </section>
