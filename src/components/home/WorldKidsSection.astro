@@ -95,27 +95,197 @@ const markerPoints = [
 </section>
 
 <script>
+	function smoothStep(edge0, edge1, x) {
+		const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)));
+		return t * t * (3 - 2 * t);
+	}
+
+	function clamp255(v) {
+		if (v < 0) return 0;
+		if (v > 255) return 255;
+		return v | 0;
+	}
+
+	function loadCrossOriginImage(src) {
+		return new Promise((resolve, reject) => {
+			const img = new Image();
+			img.crossOrigin = 'anonymous';
+			img.onload = () => resolve(img);
+			img.onerror = () => reject(new Error('globe texture'));
+			img.src = src;
+		});
+	}
+
+	/**
+	 * Procedural “digital twin” map: earth-dark = crisp land/ocean mask, earth-night = hubs.
+	 * Not a satellite photo — cyan mesh / nodes on deep navy oceans (Figma palette).
+	 */
+	async function createDigitalGlobeMapDataUrl(darkUrl, nightUrl) {
+		const cacheKey = 'ysa-digital-globe-png-v5';
+		try {
+			for (const stale of [
+				'ysa-digital-globe-jpeg-v1',
+				'ysa-digital-globe-jpeg-v2',
+				'ysa-digital-globe-jpeg-v3',
+				'ysa-digital-globe-png-v4',
+			]) {
+				sessionStorage.removeItem(stale);
+			}
+		} catch {
+			/* ignore */
+		}
+		try {
+			const hit = sessionStorage.getItem(cacheKey);
+			if (hit && hit.length > 80000) return hit;
+		} catch {
+			/* ignore */
+		}
+		const [imgDark, imgNight] = await Promise.all([
+			loadCrossOriginImage(darkUrl),
+			loadCrossOriginImage(nightUrl),
+		]);
+		const W = 1024;
+		const H = 512;
+		const canvas = document.createElement('canvas');
+		canvas.width = W;
+		canvas.height = H;
+		const ctx = canvas.getContext('2d', { willReadFrequently: true });
+		if (!ctx) throw new Error('no canvas');
+		ctx.drawImage(imgDark, 0, 0, W, H);
+		const darkIm = ctx.getImageData(0, 0, W, H);
+		ctx.drawImage(imgNight, 0, 0, W, H);
+		const nightIm = ctx.getImageData(0, 0, W, H);
+		const dd = darkIm.data;
+		const nd = nightIm.data;
+		const out = ctx.createImageData(W, H);
+		const o = out.data;
+		for (let y = 0; y < H; y++) {
+			for (let x = 0; x < W; x++) {
+				const i = (y * W + x) * 4;
+				const dr = dd[i];
+				const dg = dd[i + 1];
+				const db = dd[i + 2];
+				const lumDark = (0.299 * dr + 0.587 * dg + 0.114 * db) / 255;
+				const nr = nd[i];
+				const ng = nd[i + 1];
+				const nb = nd[i + 2];
+				const lumNight = (0.299 * nr + 0.587 * ng + 0.114 * nb) / 255;
+				const landW = 1 - smoothStep(0.07, 0.12, lumDark);
+				/* Smooth land base — no noise tiling (reads as “chex” on a sphere) */
+				let lr = 6;
+				let lg = 38;
+				let lb = 116;
+				if (lumNight > 0.1) {
+					const k = Math.min(1, (lumNight - 0.1) / 0.5);
+					const tr = 195 + 60 * k;
+					const tg = 250;
+					const tb = 255;
+					lr += (tr - lr) * k;
+					lg += (tg - lg) * k;
+					lb += (tb - lb) * k;
+				}
+				const or = lumDark * 44;
+				const og = 10 + lumDark * 34;
+				const ob = 40 + lumDark * 98;
+				const coast = smoothStep(0.072, 0.096, lumDark) * (1 - smoothStep(0.096, 0.14, lumDark));
+				let R = or * (1 - landW) + lr * landW;
+				let G = og * (1 - landW) + lg * landW;
+				let B = ob * (1 - landW) + lb * landW;
+				R += coast * 88;
+				G += coast * 205;
+				B += coast * 238;
+				o[i] = clamp255(R);
+				o[i + 1] = clamp255(G);
+				o[i + 2] = clamp255(B);
+				o[i + 3] = 255;
+			}
+		}
+		ctx.putImageData(out, 0, 0);
+		/* PNG avoids JPEG 8×8 macro-blocks that look like a checker on curved surfaces */
+		const url = canvas.toDataURL('image/png');
+		try {
+			sessionStorage.setItem(cacheKey, url);
+		} catch {
+			/* quota / private mode — skip cache */
+		}
+		return url;
+	}
+
+	function buildDigitalNetworkPoints(count) {
+		const regions = [
+			{ lat: [-55, 72], lng: [-130, -30] },
+			{ lat: [-38, 38], lng: [-25, 55] },
+			{ lat: [-12, 55], lng: [70, 180] },
+			{ lat: [-12, 55], lng: [-180, -95] },
+			{ lat: [-48, -8], lng: [110, 155] },
+			{ lat: [25, 72], lng: [-180, -130] },
+			{ lat: [-35, 35], lng: [95, 140] },
+		];
+		/* Small highlights on land — texture carries continent shapes; dots = network layer */
+		const colors = ['#ffffff', '#e8fdff', '#4df0f0', '#18e0eb', '#b8f6ff'];
+		const rand = (a, b) => a + Math.random() * (b - a);
+		const pts = [];
+		for (let i = 0; i < count; i++) {
+			const landBias = Math.random() < 0.92;
+			let lat;
+			let lng;
+			if (landBias) {
+				const r = regions[Math.floor(Math.random() * regions.length)];
+				lat = rand(r.lat[0], r.lat[1]);
+				lng = rand(r.lng[0], r.lng[1]);
+			} else {
+				lat = rand(-80, 80);
+				lng = rand(-180, 180);
+			}
+			pts.push({
+				lat,
+				lng,
+				size: 0.0016 + Math.random() * 0.005,
+				r: 0.022 + Math.random() * 0.045,
+				color: colors[Math.floor(Math.random() * colors.length)],
+			});
+		}
+		return pts;
+	}
+
 	const globeRoot = document.querySelector('[data-world-globe]');
 	if (globeRoot) {
 		const points = JSON.parse(globeRoot.getAttribute('data-points') ?? '[]');
-		Promise.all([import('globe.gl'), import('three')]).then(([{ default: Globe }, THREE]) => {
+		Promise.all([import('globe.gl'), import('three')]).then(async ([{ default: Globe }, THREE]) => {
 			const globe = Globe({
 				animateIn: false,
 				waitForGlobeReady: true
 			})(globeRoot);
 
-			const earthMapUrl = '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg';
-			const earthBumpUrl = '//unpkg.com/three-globe/example/img/earth-topology.png';
+			const earthDark = 'https://unpkg.com/three-globe/example/img/earth-dark.jpg';
+			const earthNight = 'https://unpkg.com/three-globe/example/img/earth-night.jpg';
+
+			let globeMapUrl = earthDark;
+			try {
+				globeMapUrl = await createDigitalGlobeMapDataUrl(earthDark, earthNight);
+			} catch {
+				globeMapUrl = earthDark;
+			}
+
+			const networkDots = buildDigitalNetworkPoints(2000);
 
 			globe
 				.backgroundColor('rgba(0,0,0,0)')
 				.width(globeRoot.clientWidth)
 				.height(globeRoot.clientHeight)
-				.globeImageUrl(earthMapUrl)
-				.bumpImageUrl(earthBumpUrl)
+				.globeImageUrl(globeMapUrl)
+				.showGraticules(false)
 				.showAtmosphere(true)
-				.atmosphereColor('#18e0eb')
-				.atmosphereAltitude(0.14)
+				.atmosphereColor('#4df0f0')
+				.atmosphereAltitude(0.2)
+				.pointsData(networkDots)
+				.pointLat('lat')
+				.pointLng('lng')
+				.pointAltitude('size')
+				.pointColor('color')
+				.pointRadius('r')
+				.pointResolution(14)
+				.pointsMerge(false)
 				.htmlElementsData(points)
 				.htmlLat((d) => d.lat)
 				.htmlLng((d) => d.lng)
@@ -145,6 +315,34 @@ const markerPoints = [
 					return root;
 				});
 
+			const networkArcs = [];
+			const maxArcs = 200;
+			let tries = 0;
+			while (networkArcs.length < maxArcs && tries < 12000) {
+				tries++;
+				const a = networkDots[Math.floor(Math.random() * networkDots.length)];
+				const b = networkDots[Math.floor(Math.random() * networkDots.length)];
+				const dLat = Math.abs(a.lat - b.lat);
+				const dLng = Math.abs(a.lng - b.lng);
+				const span = dLat + dLng;
+				if (dLat < 40 && dLng < 100 && span > 6 && span < 58) {
+					networkArcs.push({
+						startLat: a.lat,
+						startLng: a.lng,
+						endLat: b.lat,
+						endLng: b.lng,
+					});
+				}
+			}
+			globe
+				.arcsData(networkArcs)
+				.arcColor(() => 'rgba(77,240,240,0.38)')
+				.arcStroke(0.14)
+				.arcAltitude(0.085)
+				.arcDashLength(0.2)
+				.arcDashGap(0.16)
+				.arcDashAnimateTime(11000);
+
 			const controls = globe.controls();
 			controls.enableZoom = false;
 			controls.enablePan = false;
@@ -156,41 +354,47 @@ const markerPoints = [
 
 			globe.pointOfView({ lat: 12, lng: 12, altitude: 1.2 }, 0);
 
+			/* Glossy digital sphere — map already carries cyan mesh; keep tint neutral */
 			const mat = globe.globeMaterial();
 			if (mat) {
-				mat.color = new THREE.Color('#6ab0f0');
-				mat.emissive = new THREE.Color('#0278cb');
+				mat.color = new THREE.Color(0xffffff);
+				mat.emissive = new THREE.Color(0x041028);
 				mat.emissiveIntensity = 0.07;
 				if ('bumpScale' in mat && typeof mat.bumpScale === 'number') {
-					mat.bumpScale = 5;
+					mat.bumpScale = 0;
 				}
 				if ('shininess' in mat && typeof mat.shininess === 'number') {
-					mat.shininess = 20;
+					mat.shininess = 68;
 				}
 				if ('metalness' in mat && typeof mat.metalness === 'number') {
-					mat.metalness = 0.08;
+					mat.metalness = 0.12;
 				}
 				if ('roughness' in mat && typeof mat.roughness === 'number') {
-					mat.roughness = 0.52;
+					mat.roughness = 0.32;
 				}
 			}
 			for (const light of globe.lights()) {
 				if (light.type === 'AmbientLight') {
-					light.color = new THREE.Color('#2c65a8');
-					light.intensity = 0.34;
+					light.color = new THREE.Color('#2a5088');
+					light.intensity = 0.62;
 				}
 				if (light.type === 'DirectionalLight') {
-					light.color = new THREE.Color('#e8fbff');
-					light.intensity = 0.95;
-					light.position.set(1.35, 0.85, 0.75);
+					light.color = new THREE.Color('#f2fbff');
+					light.intensity = 1.05;
+					light.position.set(1.25, 0.9, 0.65);
 				}
 			}
-			/* Even lighting on night side of sphere (sky / ground from sampled Figma blues) */
 			const scene = globe.scene();
-			if (!scene.getObjectByName('ysa-world-globe-hemi')) {
-				const hemi = new THREE.HemisphereLight(0x18e0eb, 0x000d46, 0.32);
-				hemi.name = 'ysa-world-globe-hemi';
+			const hemiName = 'ysa-world-globe-hemi';
+			let hemi = scene.getObjectByName(hemiName);
+			if (!hemi) {
+				hemi = new THREE.HemisphereLight(0x7eedf5, 0x000814, 0.32);
+				hemi.name = hemiName;
 				scene.add(hemi);
+			} else if (hemi.isHemisphereLight) {
+				hemi.color.set(0x7eedf5);
+				hemi.groundColor.set(0x000814);
+				hemi.intensity = 0.32;
 			}
 
 			const onPointerDown = () => {
