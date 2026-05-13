@@ -253,7 +253,7 @@ methodology:
       description: We go deep into subjects, encouraging mastery and genuine understanding rather than surface-level coverage.
       iconTint: indigo
       principleIcon: depth
-    - title: Neurodivergent-Friendly
+    - title: Neurodivergent-Affirming
       description: Our educators are trained in 2e and neurodivergent learning styles, celebrating different ways of thinking.
       iconTint: violet
       principleIcon: neuro
@@ -261,8 +261,8 @@ methodology:
       description: Students learn through dialogue and inquiry, not passive listening—developing critical thinking naturally.
       iconTint: cyan
       principleIcon: socratic
-    - title: Asynchronous Pacing
-      description: Your child moves at their own speed—accelerating when ready, taking time when needed.
+    - title: Expert Mentorship
+      description: Your child learns from inspiring mentors who guide with understanding—encouraging growth, confidence, and curiosity every step of the way.
       iconTint: emerald
       principleIcon: async
     - title: Peer Community

@@ -25,6 +25,25 @@ const faces = [
 	'/assets/images/Teacher (2).png',
 	'/assets/images/Teacher (3).png',
 ];
+
+const markerPoints = [
+	{ lat: 49.2827, lng: -123.1207, face: faces[0], size: 48 },
+	{ lat: 37.7749, lng: -122.4194, face: faces[1], size: 40 },
+	{ lat: 40.7128, lng: -74.006, face: faces[2], size: 48 },
+	{ lat: -23.5505, lng: -46.6333, face: faces[3], size: 40 },
+	{ lat: -34.6037, lng: -58.3816, face: faces[4], size: 32 },
+	{ lat: 51.5072, lng: -0.1276, face: faces[5], size: 40 },
+	{ lat: 48.8566, lng: 2.3522, face: faces[6], size: 48 },
+	{ lat: 30.0444, lng: 31.2357, face: faces[7], size: 32 },
+	{ lat: -1.2864, lng: 36.8172, face: faces[8], size: 40 },
+	{ lat: 19.076, lng: 72.8777, face: faces[0], size: 32 },
+	{ lat: 28.6139, lng: 77.209, face: faces[1], size: 40 },
+	{ lat: 1.3521, lng: 103.8198, face: faces[2], size: 32 },
+	{ lat: 35.6762, lng: 139.6503, face: faces[3], size: 48 },
+	{ lat: 37.5665, lng: 126.978, face: faces[4], size: 56 },
+	{ lat: -33.8688, lng: 151.2093, face: faces[5], size: 48 },
+	{ lat: -6.2088, lng: 106.8456, face: faces[6], size: 32 },
+];
 ---
 
 <section class="ysa-world" aria-labelledby="world-heading">
@@ -58,21 +77,84 @@ const faces = [
 
 			<div class="ysa-world__ring">
 				<div class="ysa-world__globe-wrap">
-					<img
-						src="/assets/images/world-globe.png"
-						alt={d.globeAlt ?? 'Global network of YSA students around the world'}
+					<div
 						class="ysa-world__globe"
-						loading="lazy"
-					/>
-					{
-						faces.map((src, i) => (
-							<div class:list={['ysa-world__face', `ysa-world__face--${i + 1}`]}>
-								<img src={src} alt="" class="ysa-world__face-img" loading="lazy" />
-							</div>
-						))
-					}
+						data-world-globe
+						data-globe-alt={d.globeAlt ?? 'Global network of YSA students around the world'}
+						data-points={JSON.stringify(markerPoints)}
+						role="img"
+						aria-label={d.globeAlt ?? 'Global network of YSA students around the world'}
+					></div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+<script>
+	const globeRoot = document.querySelector('[data-world-globe]');
+	if (globeRoot) {
+		const points = JSON.parse(globeRoot.getAttribute('data-points') ?? '[]');
+		import('globe.gl').then(({ default: Globe }) => {
+			const globe = Globe({
+				animateIn: false,
+				waitForGlobeReady: true
+			})(globeRoot);
+
+			globe
+				.backgroundColor('rgba(0,0,0,0)')
+				.width(globeRoot.clientWidth)
+				.height(globeRoot.clientHeight)
+				.globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+				.bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+				.showAtmosphere(true)
+				.atmosphereColor('#28d8ff')
+				.atmosphereAltitude(0.14)
+				.htmlElementsData(points)
+				.htmlLat((d) => d.lat)
+				.htmlLng((d) => d.lng)
+				.htmlElement((d) => {
+					const marker = document.createElement('div');
+					marker.className = 'ysa-world__face ysa-world__face--globe';
+					const markerSize = Number(d.size) || 40;
+					marker.style.width = `${markerSize}px`;
+					marker.style.height = `${markerSize}px`;
+					const img = document.createElement('img');
+					img.src = d.face;
+					img.alt = '';
+					img.className = 'ysa-world__face-img';
+					img.loading = 'lazy';
+					marker.append(img);
+					return marker;
+				});
+
+			const controls = globe.controls();
+			controls.enableZoom = false;
+			controls.enablePan = false;
+			controls.enableRotate = true;
+			controls.autoRotate = false;
+			controls.rotateSpeed = 0.7;
+			controls.enableDamping = true;
+			controls.dampingFactor = 0.08;
+
+			globe.pointOfView({ lat: 8, lng: 18, altitude: 1.22 }, 0);
+
+			const onPointerDown = () => {
+				globeRoot.classList.add('is-dragging');
+			};
+			const onPointerUp = () => {
+				globeRoot.classList.remove('is-dragging');
+			};
+
+			globeRoot.addEventListener('pointerdown', onPointerDown);
+			window.addEventListener('pointerup', onPointerUp);
+
+			const onResize = () => {
+				globe.width(globeRoot.clientWidth);
+				globe.height(globeRoot.clientHeight);
+			};
+
+			window.addEventListener('resize', onResize);
+		});
+	}
+</script>

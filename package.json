@@ -12,7 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.2.1"
+    "astro": "^6.2.1",
+    "globe.gl": "^2.45.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
