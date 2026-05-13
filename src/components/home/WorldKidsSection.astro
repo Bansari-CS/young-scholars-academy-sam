@@ -26,23 +26,26 @@ const faces = [
 	'/assets/images/Teacher (3).png',
 ];
 
+/** Figma 1037:3902 — mixed sizes; squircle = 32px rounded-[16px] student pins */
 const markerPoints = [
-	{ lat: 49.2827, lng: -123.1207, face: faces[0], size: 48 },
-	{ lat: 37.7749, lng: -122.4194, face: faces[1], size: 40 },
-	{ lat: 40.7128, lng: -74.006, face: faces[2], size: 48 },
-	{ lat: -23.5505, lng: -46.6333, face: faces[3], size: 40 },
-	{ lat: -34.6037, lng: -58.3816, face: faces[4], size: 32 },
-	{ lat: 51.5072, lng: -0.1276, face: faces[5], size: 40 },
-	{ lat: 48.8566, lng: 2.3522, face: faces[6], size: 48 },
-	{ lat: 30.0444, lng: 31.2357, face: faces[7], size: 32 },
-	{ lat: -1.2864, lng: 36.8172, face: faces[8], size: 40 },
-	{ lat: 19.076, lng: 72.8777, face: faces[0], size: 32 },
-	{ lat: 28.6139, lng: 77.209, face: faces[1], size: 40 },
-	{ lat: 1.3521, lng: 103.8198, face: faces[2], size: 32 },
-	{ lat: 35.6762, lng: 139.6503, face: faces[3], size: 48 },
-	{ lat: 37.5665, lng: 126.978, face: faces[4], size: 56 },
-	{ lat: -33.8688, lng: 151.2093, face: faces[5], size: 48 },
-	{ lat: -6.2088, lng: 106.8456, face: faces[6], size: 32 },
+	{ lat: 49.2827, lng: -123.1207, face: faces[0], size: 48, shape: 'circle' },
+	{ lat: 37.7749, lng: -122.4194, face: faces[1], size: 40, shape: 'circle' },
+	{ lat: 40.7128, lng: -74.006, face: faces[2], size: 48, shape: 'circle' },
+	{ lat: -23.5505, lng: -46.6333, face: faces[3], size: 40, shape: 'circle' },
+	{ lat: -34.6037, lng: -58.3816, face: faces[4], size: 32, shape: 'squircle' },
+	{ lat: 51.5072, lng: -0.1276, face: faces[5], size: 40, shape: 'circle' },
+	{ lat: 48.8566, lng: 2.3522, face: faces[6], size: 48, shape: 'circle' },
+	{ lat: 30.0444, lng: 31.2357, face: faces[7], size: 32, shape: 'squircle' },
+	{ lat: -1.2864, lng: 36.8172, face: faces[8], size: 40, shape: 'circle' },
+	{ lat: 19.076, lng: 72.8777, face: faces[0], size: 32, shape: 'squircle' },
+	{ lat: 28.6139, lng: 77.209, face: faces[1], size: 40, shape: 'circle' },
+	{ lat: 1.3521, lng: 103.8198, face: faces[2], size: 32, shape: 'squircle' },
+	{ lat: 35.6762, lng: 139.6503, face: faces[3], size: 48, shape: 'circle' },
+	{ lat: 37.5665, lng: 126.978, face: faces[4], size: 56, shape: 'circle' },
+	{ lat: -33.8688, lng: 151.2093, face: faces[5], size: 48, shape: 'circle' },
+	{ lat: -6.2088, lng: 106.8456, face: faces[6], size: 32, shape: 'squircle' },
+	{ lat: 55.7558, lng: 37.6173, face: faces[2], size: 40, shape: 'circle' },
+	{ lat: 25.2048, lng: 55.2708, face: faces[3], size: 32, shape: 'squircle' },
 ];
 ---
 
@@ -95,37 +98,51 @@ const markerPoints = [
 	const globeRoot = document.querySelector('[data-world-globe]');
 	if (globeRoot) {
 		const points = JSON.parse(globeRoot.getAttribute('data-points') ?? '[]');
-		import('globe.gl').then(({ default: Globe }) => {
+		Promise.all([import('globe.gl'), import('three')]).then(([{ default: Globe }, THREE]) => {
 			const globe = Globe({
 				animateIn: false,
 				waitForGlobeReady: true
 			})(globeRoot);
 
+			const earthMapUrl = '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg';
+			const earthBumpUrl = '//unpkg.com/three-globe/example/img/earth-topology.png';
+
 			globe
 				.backgroundColor('rgba(0,0,0,0)')
 				.width(globeRoot.clientWidth)
 				.height(globeRoot.clientHeight)
-				.globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
-				.bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+				.globeImageUrl(earthMapUrl)
+				.bumpImageUrl(earthBumpUrl)
 				.showAtmosphere(true)
-				.atmosphereColor('#28d8ff')
+				.atmosphereColor('#18e0eb')
 				.atmosphereAltitude(0.14)
 				.htmlElementsData(points)
 				.htmlLat((d) => d.lat)
 				.htmlLng((d) => d.lng)
+				.htmlAltitude(() => 0.012)
 				.htmlElement((d) => {
-					const marker = document.createElement('div');
-					marker.className = 'ysa-world__face ysa-world__face--globe';
+					const root = document.createElement('div');
+					const shape = d.shape === 'squircle' ? 'squircle' : 'circle';
+					root.className = `ysa-world__marker ysa-world__marker--${shape}`;
 					const markerSize = Number(d.size) || 40;
-					marker.style.width = `${markerSize}px`;
-					marker.style.height = `${markerSize}px`;
+					root.style.width = `${markerSize}px`;
+					root.style.height = `${markerSize}px`;
+
+					const glow = document.createElement('span');
+					glow.className = 'ysa-world__marker-glow';
+					glow.setAttribute('aria-hidden', 'true');
+
+					const inner = document.createElement('div');
+					inner.className = 'ysa-world__marker-inner';
+
 					const img = document.createElement('img');
 					img.src = d.face;
 					img.alt = '';
-					img.className = 'ysa-world__face-img';
+					img.className = 'ysa-world__marker-img';
 					img.loading = 'lazy';
-					marker.append(img);
-					return marker;
+					inner.append(img);
+					root.append(glow, inner);
+					return root;
 				});
 
 			const controls = globe.controls();
@@ -137,7 +154,44 @@ const markerPoints = [
 			controls.enableDamping = true;
 			controls.dampingFactor = 0.08;
 
-			globe.pointOfView({ lat: 8, lng: 18, altitude: 1.22 }, 0);
+			globe.pointOfView({ lat: 12, lng: 12, altitude: 1.2 }, 0);
+
+			const mat = globe.globeMaterial();
+			if (mat) {
+				mat.color = new THREE.Color('#6ab0f0');
+				mat.emissive = new THREE.Color('#0278cb');
+				mat.emissiveIntensity = 0.07;
+				if ('bumpScale' in mat && typeof mat.bumpScale === 'number') {
+					mat.bumpScale = 5;
+				}
+				if ('shininess' in mat && typeof mat.shininess === 'number') {
+					mat.shininess = 20;
+				}
+				if ('metalness' in mat && typeof mat.metalness === 'number') {
+					mat.metalness = 0.08;
+				}
+				if ('roughness' in mat && typeof mat.roughness === 'number') {
+					mat.roughness = 0.52;
+				}
+			}
+			for (const light of globe.lights()) {
+				if (light.type === 'AmbientLight') {
+					light.color = new THREE.Color('#2c65a8');
+					light.intensity = 0.34;
+				}
+				if (light.type === 'DirectionalLight') {
+					light.color = new THREE.Color('#e8fbff');
+					light.intensity = 0.95;
+					light.position.set(1.35, 0.85, 0.75);
+				}
+			}
+			/* Even lighting on night side of sphere (sky / ground from sampled Figma blues) */
+			const scene = globe.scene();
+			if (!scene.getObjectByName('ysa-world-globe-hemi')) {
+				const hemi = new THREE.HemisphereLight(0x18e0eb, 0x000d46, 0.32);
+				hemi.name = 'ysa-world-globe-hemi';
+				scene.add(hemi);
+			}
 
 			const onPointerDown = () => {
 				globeRoot.classList.add('is-dragging');
