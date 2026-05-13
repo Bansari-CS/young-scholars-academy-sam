@@ -14,11 +14,18 @@ interface Props {
 
 const { content: d } = Astro.props;
 
+/** Static previews — paths under public/assets/images */
 const previewByIcon: Record<PlatformFeatureIcon, { src: string }> = {
-	live: { src: '/assets/images/platformtab2.jpg' },
-	ai: { src: '/assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png' },
-	parent: { src: '/assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png' },
-	game: { src: '/assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png' },
+	live: { src: '/assets/images/platform-tab-live.png' },
+	ai: {
+		src: '/assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png',
+	},
+	parent: {
+		src: '/assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png',
+	},
+	game: {
+		src: '/assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png',
+	},
 };
 
 const iconClass = (icon: PlatformFeatureIcon) =>
@@ -103,10 +110,12 @@ const iconClass = (icon: PlatformFeatureIcon) =>
 									</svg>
 								)}
 								{feature.icon === 'game' && (
-									<svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.5 2.5C3.35938 2.5 0 5.85938 0 10C0 14.1406 3.35938 17.5 7.5 17.5H17.5C21.6406 17.5 25 14.1406 25 10C25 5.85938 21.6406 2.5 17.5 2.5H7.5ZM19.375 6.5625C20.2374 6.5625 20.9375 7.26263 20.9375 8.125C20.9375 8.98737 20.2374 9.6875 19.375 9.6875C18.5126 9.6875 17.8125 8.98737 17.8125 8.125C17.8125 7.26263 18.5126 6.5625 19.375 6.5625ZM15.3125 11.875C15.3125 11.0126 16.0126 10.3125 16.875 10.3125C17.7374 10.3125 18.4375 11.0126 18.4375 11.875C18.4375 12.7374 17.7374 13.4375 16.875 13.4375C16.0126 13.4375 15.3125 12.7374 15.3125 11.875ZM6.5625 7.8125C6.5625 7.29297 6.98047 6.875 7.5 6.875Cnan nan 8.4375 7.29297 8.4375 7.8125V9.0625H9.6875C10.207 9.0625 10.625 9.48047 10.625 10Cnan nan 10.207 10.9375 9.6875 10.9375H8.4375V12.1875C8.4375 12.707 8.01953 13.125 7.5 13.125Cnan nan 6.5625 12.707 6.5625 12.1875V10.9375H5.3125C4.79297 10.9375 4.375 10.5195 4.375 10Cnan nan 4.79297 9.0625 5.3125 9.0625H6.5625V7.8125Z" fill="white"/>
-</svg>
-
+									<svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+										<path
+											d="M7.5 2.5C3.35938 2.5 0 5.85938 0 10C0 14.1406 3.35938 17.5 7.5 17.5H17.5C21.6406 17.5 25 14.1406 25 10C25 5.85938 21.6406 2.5 17.5 2.5H7.5ZM19.375 6.5625C20.2374 6.5625 20.9375 7.26263 20.9375 8.125C20.9375 8.98737 20.2374 9.6875 19.375 9.6875C18.5126 9.6875 17.8125 8.98737 17.8125 8.125C17.8125 7.26263 18.5126 6.5625 19.375 6.5625ZM15.3125 11.875C15.3125 11.0126 16.0126 10.3125 16.875 10.3125C17.7374 10.3125 18.4375 11.0126 18.4375 11.875C18.4375 12.7374 17.7374 13.4375 16.875 13.4375C16.0126 13.4375 15.3125 12.7374 15.3125 11.875ZM6.5625 7.8125C6.5625 7.29297 6.98047 6.875 7.5 6.875C8.01953 6.875 8.4375 7.29297 8.4375 7.8125V9.0625H9.6875C10.207 9.0625 10.625 9.48047 10.625 10C10.625 10.5195 10.207 10.9375 9.6875 10.9375H8.4375V12.1875C8.4375 12.707 8.01953 13.125 7.5 13.125C6.98047 13.125 6.5625 12.707 6.5625 12.1875V10.9375H5.3125C4.79297 10.9375 4.375 10.5195 4.375 10C4.375 9.48047 4.79297 9.0625 5.3125 9.0625H6.5625V7.8125Z"
+											fill="white"
+										/>
+									</svg>
 								)}
 							</span>
 							<span class="ysa-platform__tab-copy">

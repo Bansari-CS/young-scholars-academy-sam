@@ -1,7 +1,12 @@
 import type { HeroData, LearnerSectionData } from '../types/home';
 
 export const heroData: HeroData = {
-	badgeText: 'Trusted by 2,000+ Families',
+	trustBadges: [
+		'WASC Accredited',
+		'1,200+ Families Served',
+		'93% Re-Enroll',
+		'40+ States, 13 Countries',
+	],
 	titleLineOne: "Where Your Child's",
 	titleHighlight: 'Brilliance Belongs',
 	description:
@@ -11,8 +16,8 @@ export const heroData: HeroData = {
 		href: '/summer',
 	},
 	secondaryCta: {
-		label: 'Book a Call',
-		href: '#',
+		label: 'Browse All Courses',
+		href: '/#programs-heading',
 	},
 	ratingText: '4.9/5 from parent reviews',
 	navItems: [

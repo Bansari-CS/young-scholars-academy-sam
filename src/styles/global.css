@@ -32,6 +32,8 @@
 	--ysa-radius-lg: 1rem;
 	--ysa-radius-xl: 1.25rem;
 	--ysa-shadow-card: 0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 16px rgba(15, 23, 42, 0.06);
+	/* Overridden when top announcement bar styles load; keeps header `top` valid if bar is removed */
+	--ysa-announcement-sticky-offset: 0px;
 }
 
 html,

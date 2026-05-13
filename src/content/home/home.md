@@ -1,16 +1,23 @@
 ---
 seo:
-  title: Young Scholars Academy
-  description: Premium online learning for gifted, twice-exceptional, and neurodivergent learners.
+  title: Young Scholars Academy | Where Gifted & 2e Kids Find Their People
+  description: 150+ live online courses for gifted or 2e kids ages 5-18. WASC accredited. Classes of 6-8. Mentors who get it.
 hero:
-  badgeText: Trusted by 2,000+ Families
-  titleLineOne: Where Your Child's
-  titleHighlight: Brilliance Belongs
-  description: Premium online learning designed for gifted, twice-exceptional, and neurodivergent learners. Small classes. Expert mentors. Real results.
+  trustBadges:
+    - WASC Accredited
+    - 1,200+ Families Served
+    - 93% Re-Enroll
+    - 40+ States, 13 Countries
+  titleLineOne: Somewhere Right Now, a Kid Just Like Yours Is Laughing in a Class They Chose,
+  titleHighlight: With Friends Who Finally Get Them.
+  description: That's not a fantasy. That's a Tuesday at Young Scholars Academy. 150+ live online courses for gifted or 2e kids ages 5 to 18. Classes of 6 to 8. Mentors who were these kids. A virtual campus where they actually want to hang out.
   ratingAriaLabel: 5 star rating
   primaryCta:
-    label: Browse Courses
+    label: Explore Summer Camps
     href: /summer
+  secondaryCta:
+    label: Browse All Courses
+    href: /#programs-heading
   ratingText: 4.9/5 from parent reviews
   dashboard:
     studentName: Alex's Dashboard
@@ -60,15 +67,15 @@ learnerNeeds:
   title: We Understand Your Learner
   description: Parents come to us when traditional schools can't keep up with their child's curiosity, when boredom turns to frustration, or when they need a community that truly gets it.
   cards:
-    - title: '"School Is Too Easy"'
+    - title: '"THE MENTORS"'
       description: Your child finishes work in minutes, then zones out. They're not challenged, not engaged, not growing.
       highlight: We meet them where they are and accelerate from there
       icon: stress
-    - title: '"No One Gets My Child"'
+    - title: '"THE SIZE"'
       description: Gifted, 2e, neurodivergent - your learner doesn't fit the mold. They need teachers who understand.
       highlight: Our educators specialize in diverse learners and celebrate differences
       icon: group
-    - title: '"Isolated & Lonely"'
+    - title: '"HE CAMPUS"'
       description: Your child feels different, alone. They crave intellectual peers who share their passions.
       highlight: Small cohorts create lasting friendships with true peers
       icon: alone
@@ -78,22 +85,22 @@ process:
   description: "From your first consultation to your child's breakthrough moments — our <br /> process is simple, supportive, and built around results."
   steps:
     - step: '01'
-      title: Book a Call
-      desc: Schedule a free consultation to discuss your child's needs, goals, and learning preferences with our team.
-      footer: Free · 30 minutes
+      title: Enrichment
+      desc: Select your child’s level, goals, and learning preferences to begin a personalized journey in seconds.
+      footer: Instant setup • No call required
       color: blue
     - step: '02'
-      title: Assessment
+      title: Homeschool Community
       desc: We'll carefully evaluate your child's current academic level, learning style, and areas that need focused attention.
       footer: Comprehensive · Personalized
       color: purple
     - step: '03'
-      title: Personalized Plan
+      title: Social Connection
       desc: We create a custom curriculum tailored to your child's unique goals, pace, and the specific outcomes you want to achieve.
       footer: Custom · Goal-driven
       color: yellow
     - step: '04'
-      title: Start Learning
+      title: Acceredited Learning
       desc: Begin the journey with expert tutors and engaging, interactive content designed to inspire and accelerate your child's growth.
       footer: Expert tutors · Engaging content
       color: green
