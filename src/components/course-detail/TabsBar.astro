@@ -1,9 +1,11 @@
 ---
 interface Props {
 	tabs: string[];
+	/** Shown in share dialogs (e.g. X intent text). Defaults to `document.title` on the client. */
+	shareTitle?: string;
 }
 
-const { tabs } = Astro.props;
+const { tabs, shareTitle } = Astro.props;
 ---
 
 <nav class="border-y border-slate-100 bg-white" aria-label="Course sections">
@@ -28,19 +30,85 @@ const { tabs } = Astro.props;
 				))
 			}
 		</ul>
-		<a
-			href="#"
-			class="inline-flex items-center gap-1.5 rounded-lg border border-violet-100 bg-violet-50/40 px-2.5 py-1 text-xs font-semibold text-violet-500 no-underline"
+		<div
+			class="course-share relative z-20"
+			data-course-share
+			data-share-title={shareTitle ?? ''}
 		>
-			<img
-				src="/assets/course-detail/icon-share.svg"
-				alt=""
-				aria-hidden="true"
-				class="h-4 w-4"
-				loading="lazy"
-			/>
-			<span>Share</span>
-		</a>
+			<button
+				type="button"
+				class="inline-flex items-center gap-1.5 rounded-lg border border-violet-100 bg-violet-50/40 px-2.5 py-1 text-xs font-semibold text-violet-600 shadow-sm transition hover:border-violet-200 hover:bg-violet-50 cursor-pointer"
+				data-share-toggle
+				aria-haspopup="menu"
+				aria-expanded="false"
+				aria-controls="course-share-menu"
+			>
+				<img
+					src="/assets/course-detail/icon-share.svg"
+					alt=""
+					aria-hidden="true"
+					class="h-4 w-4"
+					loading="lazy"
+				/>
+				<span>Share</span>
+			</button>
+			<div
+				id="course-share-menu"
+				class="course-share-menu pointer-events-none invisible absolute right-0 top-[calc(100%+6px)] flex translate-y-1 scale-95 flex-row items-center gap-1 rounded-xl border border-slate-200/90 bg-white p-1.5 opacity-0 shadow-[0_12px_40px_-12px_rgba(15,23,42,0.25)] transition-[opacity,transform,visibility] duration-150 ease-out"
+				role="menu"
+				hidden
+				data-share-menu
+			>
+				<a
+					role="menuitem"
+					class="flex h-10 w-10 items-center justify-center rounded-lg text-[#0A66C2] no-underline transition hover:bg-[#0A66C2]/10"
+					href="#"
+					target="_blank"
+					rel="noopener noreferrer"
+					data-share-network="linkedin"
+					aria-label="Share on LinkedIn"
+					tabindex="-1"
+				>
+					<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+						<path
+							d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+						></path>
+					</svg>
+				</a>
+				<a
+					role="menuitem"
+					class="flex h-10 w-10 items-center justify-center rounded-lg text-[#1877F2] no-underline transition hover:bg-[#1877F2]/10"
+					href="#"
+					target="_blank"
+					rel="noopener noreferrer"
+					data-share-network="facebook"
+					aria-label="Share on Facebook"
+					tabindex="-1"
+				>
+					<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+						<path
+							d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+						></path>
+					</svg>
+				</a>
+				<a
+					role="menuitem"
+					class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-900 no-underline transition hover:bg-slate-100"
+					href="#"
+					target="_blank"
+					rel="noopener noreferrer"
+					data-share-network="x"
+					aria-label="Share on X"
+					tabindex="-1"
+				>
+					<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+						<path
+							d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+						></path>
+					</svg>
+				</a>
+			</div>
+		</div>
 	</div>
 </nav>
 
@@ -66,6 +134,72 @@ const { tabs } = Astro.props;
 		btn.addEventListener('click', () => {
 			const idx = Number(btn.dataset.tabIndex ?? '0');
 			setActive(idx);
+		});
+	});
+
+	const roots = document.querySelectorAll<HTMLElement>('[data-course-share]');
+	roots.forEach((root) => {
+		const toggle = root.querySelector<HTMLButtonElement>('[data-share-toggle]');
+		const menu = root.querySelector<HTMLElement>('[data-share-menu]');
+		const links = root.querySelectorAll<HTMLAnchorElement>('[data-share-network]');
+		if (!toggle || !menu) return;
+
+		const titleFromDom = root.dataset.shareTitle?.trim() || '';
+
+		const syncUrls = () => {
+			const pageUrl = encodeURIComponent(window.location.href);
+			const text = encodeURIComponent(titleFromDom || document.title);
+			const urls: Record<string, string> = {
+				linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`,
+				facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
+				x: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${text}`,
+			};
+			links.forEach((a) => {
+				const key = a.dataset.shareNetwork;
+				if (key && urls[key]) a.href = urls[key];
+			});
+		};
+
+		const open = () => {
+			syncUrls();
+			menu.hidden = false;
+			menu.classList.remove('pointer-events-none', 'invisible', 'opacity-0', 'scale-95', 'translate-y-1');
+			menu.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+			toggle.setAttribute('aria-expanded', 'true');
+			links.forEach((a) => a.setAttribute('tabindex', '0'));
+			menu.querySelector<HTMLAnchorElement>('[data-share-network]')?.focus();
+		};
+
+		const close = () => {
+			menu.classList.add('pointer-events-none');
+			menu.classList.add('invisible', 'opacity-0', 'scale-95', 'translate-y-1');
+			menu.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+			toggle.setAttribute('aria-expanded', 'false');
+			links.forEach((a) => a.setAttribute('tabindex', '-1'));
+			window.setTimeout(() => {
+				if (toggle.getAttribute('aria-expanded') === 'false') menu.hidden = true;
+			}, 160);
+		};
+
+		syncUrls();
+
+		const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+		toggle.addEventListener('click', (e) => {
+			e.stopPropagation();
+			if (isOpen()) close();
+			else open();
+		});
+
+		document.addEventListener('click', (e) => {
+			if (isOpen() && !root.contains(e.target as Node)) close();
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && isOpen()) {
+				close();
+				toggle.focus();
+			}
 		});
 	});
 </script>

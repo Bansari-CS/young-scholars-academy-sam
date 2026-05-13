@@ -48,6 +48,7 @@ export async function getStaticPaths() {
 }
 
 const { courseContent } = Astro.props;
+const shareTitle = `${courseContent.hero.titleLead} ${courseContent.hero.titleAccent}`.trim();
 ---
 
 <Layout title={courseContent.seo.title} description={courseContent.seo.description}>
@@ -55,7 +56,7 @@ const { courseContent } = Astro.props;
 
 	<main class="site-main bg-[#f8fafc]">
 		<Hero {...courseContent.hero} />
-		<TabsBar tabs={courseContent.tabs} />
+		<TabsBar tabs={courseContent.tabs} shareTitle={shareTitle} />
 		<MainContentSection content={courseContent.content} sidebar={courseContent.sidebar} />
 		<ReviewsSection reviews={courseContent.reviews} />
 		<AboutSection {...courseContent.about} />
