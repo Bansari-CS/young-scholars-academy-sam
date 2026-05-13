@@ -38,6 +38,7 @@ interface Props {
 		learnMoreLabel?: string;
 		cards: ProgramListingCard[];
 		viewAllCta: { label: string; href: string };
+		emptyFilterMessage?: string;
 	};
 }
 
@@ -153,14 +154,22 @@ const toSlug = (value: string) =>
 			</div>
 		</div>
 
-		<div class="programs-cards">
+		<div class="programs-cards-shell">
+			<div class="programs-cards">
 			{
 				d.cards.map((card) => {
 					const cover = coverByKey[card.coverImageKey];
 					const teacherFace = teacherPhotoByKey[card.teacherPhotoKey];
 					const cardHref = `/courses/${toSlug(card.title)}`;
 					return (
-						<a class="programs-card" href={cardHref}>
+						<a
+							class="programs-card"
+							href={cardHref}
+							data-program-card
+							data-age={card.ageLabel}
+							data-teacher={card.teacherPhotoKey}
+							data-delivery="virtual"
+						>
 							<div class="programs-card__media">
 								<video
 									class="programs-card__cover"
@@ -208,6 +217,10 @@ const toSlug = (value: string) =>
 					);
 				})
 			}
+			</div>
+			<p class="programs-cards__empty" data-programs-empty hidden>
+				{d.emptyFilterMessage ?? 'No programs match these filters.'}
+			</p>
 		</div>
 
 		<div class="programs-section__cta">
@@ -228,11 +241,14 @@ const toSlug = (value: string) =>
 		}
 
 		function setupFilter(root) {
+			var sectionInner = root.closest('.programs-section__inner');
 			var ageBtns = root.querySelectorAll('[data-age-option]');
 			var campSelect = root.querySelector('[data-camp-select]');
 			var teacherSelect = root.querySelector('[data-teacher-select]');
 			var chipsHost = root.querySelector('[data-filter-chips]');
 			var clearBtn = root.querySelector('[data-clear-all]');
+			var cards = sectionInner ? sectionInner.querySelectorAll('[data-program-card]') : [];
+			var emptyEl = sectionInner ? sectionInner.querySelector('[data-programs-empty]') : null;
 			if (!campSelect || !teacherSelect || !chipsHost || !clearBtn) return;
 
 			var initial = root.getAttribute('data-initial-age') || '';
@@ -274,11 +290,27 @@ const toSlug = (value: string) =>
 						'</span><button type="button" class="programs-filter__chip-remove" data-remove="' +
 						c.kind +
 						'" aria-label="' +
-						escapeHtml(removePrefix + ' ') +
-						c.kind +
-						' filter">×</button>';
+						escapeHtml(removePrefix + ' ' + c.label + ' filter') +
+						'">×</button>';
 					chipsHost.appendChild(pill);
 				});
+			}
+
+			function applyFilters() {
+				var campVal = campSelect.value;
+				var teacherVal = teacherSelect.value;
+				var visible = 0;
+				cards.forEach(function (card) {
+					var ageOk = !selectedAge || card.getAttribute('data-age') === selectedAge;
+					var teacherOk = !teacherVal || card.getAttribute('data-teacher') === teacherVal;
+					var delivery = card.getAttribute('data-delivery') || 'virtual';
+					var campOk = !campVal || delivery === campVal;
+					var show = ageOk && teacherOk && campOk;
+					card.hidden = !show;
+					if (show) visible++;
+				});
+				if (emptyEl) emptyEl.hidden = visible > 0;
+				renderChips();
 			}
 
 			ageBtns.forEach(function (btn) {
@@ -287,7 +319,7 @@ const toSlug = (value: string) =>
 					if (!label) return;
 					selectedAge = label;
 					syncAgeButtons();
-					renderChips();
+					applyFilters();
 				});
 			});
 
@@ -299,22 +331,22 @@ const toSlug = (value: string) =>
 				if (kind === 'camp') campSelect.selectedIndex = 0;
 				if (kind === 'teacher') teacherSelect.selectedIndex = 0;
 				syncAgeButtons();
-				renderChips();
+				applyFilters();
 			});
 
-			campSelect.addEventListener('change', renderChips);
-			teacherSelect.addEventListener('change', renderChips);
+			campSelect.addEventListener('change', applyFilters);
+			teacherSelect.addEventListener('change', applyFilters);
 
 			clearBtn.addEventListener('click', function () {
 				selectedAge = '';
 				campSelect.selectedIndex = 0;
 				teacherSelect.selectedIndex = 0;
 				syncAgeButtons();
-				renderChips();
+				applyFilters();
 			});
 
 			syncAgeButtons();
-			renderChips();
+			applyFilters();
 		}
 
 		function boot() {

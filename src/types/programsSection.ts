@@ -47,4 +47,6 @@ export interface ProgramsSectionData {
 	};
 	cards: ProgramListingCard[];
 	viewAllCta: { label: string; href: string };
+	learnMoreLabel?: string;
+	emptyFilterMessage?: string;
 }

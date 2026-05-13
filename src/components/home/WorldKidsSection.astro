@@ -14,6 +14,18 @@ interface Props {
 
 const { content: d } = Astro.props;
 
+/** Parse CMS stat strings for count-up (e.g. 10,000+ → target + suffix); literals e.g. 24/7 unchanged */
+function statDisplayMeta(value: string): { kind: 'literal'; text: string } | { kind: 'count'; target: number; suffix: string } {
+	const t = value.trim();
+	if (/^\d+\/\d+$/.test(t)) return { kind: 'literal', text: t };
+	const normalized = t.replace(/,/g, '');
+	const m = normalized.match(/^(\d+)(\+)?$/);
+	if (m) return { kind: 'count', target: Number(m[1]), suffix: m[2] ?? '' };
+	return { kind: 'literal', text: t };
+}
+
+const statSlots = ['lt', 'rt', 'lb', 'rb'] as const;
+
 const faces = [
 	'/assets/images/Teacher (1).png',
 	'/assets/images/Teacher (2).png',
@@ -61,22 +73,31 @@ const markerPoints = [
 		</header>
 
 		<div class="ysa-world__stage">
-			<div class="ysa-world__stat ysa-world__stat--lt">
-				<p class="ysa-world__stat-value">{d.stats[0].value}</p>
-				<p class="ysa-world__stat-label">{d.stats[0].label}</p>
-			</div>
-			<div class="ysa-world__stat ysa-world__stat--rt">
-				<p class="ysa-world__stat-value">{d.stats[1].value}</p>
-				<p class="ysa-world__stat-label">{d.stats[1].label}</p>
-			</div>
-			<div class="ysa-world__stat ysa-world__stat--lb">
-				<p class="ysa-world__stat-value">{d.stats[2].value}</p>
-				<p class="ysa-world__stat-label">{d.stats[2].label}</p>
-			</div>
-			<div class="ysa-world__stat ysa-world__stat--rb">
-				<p class="ysa-world__stat-value">{d.stats[3].value}</p>
-				<p class="ysa-world__stat-label">{d.stats[3].label}</p>
-			</div>
+			{
+				d.stats.map((stat, index) => {
+					const meta = statDisplayMeta(stat.value);
+					const pos = statSlots[index] ?? 'lt';
+					return (
+						<div class:list={['ysa-world__stat', `ysa-world__stat--${pos}`]}>
+							<p class="ysa-world__stat-value">
+								{meta.kind === 'literal' ? (
+									<span class="ysa-world__stat-value-num">{meta.text}</span>
+								) : (
+									<span
+										class="ysa-world__stat-value-num"
+										data-stat-count
+										data-stat-target={meta.target}
+										data-stat-suffix={meta.suffix}
+									>
+										0
+									</span>
+								)}
+							</p>
+							<p class="ysa-world__stat-label">{stat.label}</p>
+						</div>
+					);
+				})
+			}
 
 			<div class="ysa-world__ring">
 				<div class="ysa-world__globe-wrap">
@@ -415,4 +436,66 @@ const markerPoints = [
 			window.addEventListener('resize', onResize);
 		});
 	}
+
+	function setupWorldStatCounters() {
+		const section = document.querySelector('.ysa-world');
+		if (!section) return;
+		const els = section.querySelectorAll('[data-stat-count]');
+		if (!els.length) return;
+
+		const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		function formatCount(n) {
+			return Math.round(n).toLocaleString('en-US');
+		}
+
+		function runCountUp() {
+			els.forEach((el) => {
+				const target = Number(el.getAttribute('data-stat-target'));
+				const suffix = el.getAttribute('data-stat-suffix') || '';
+				if (!Number.isFinite(target) || target < 0) return;
+
+				if (reduceMotion) {
+					el.textContent = formatCount(target) + suffix;
+					el.closest('.ysa-world__stat')?.classList.add('ysa-world__stat--counted');
+					return;
+				}
+
+				const start = performance.now();
+				const duration = 2200;
+				function tick(now) {
+					const t = Math.min(1, (now - start) / duration);
+					const eased = 1 - Math.pow(1 - t, 3);
+					const v = Math.round(eased * target);
+					el.textContent = formatCount(v) + suffix;
+					if (t < 1) {
+						requestAnimationFrame(tick);
+					} else {
+						el.closest('.ysa-world__stat')?.classList.add('ysa-world__stat--counted');
+					}
+				}
+				requestAnimationFrame(tick);
+			});
+		}
+
+		if (reduceMotion) {
+			runCountUp();
+			return;
+		}
+
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						runCountUp();
+						io.disconnect();
+					}
+				});
+			},
+			{ threshold: 0.2, rootMargin: '0px 0px -8% 0px' }
+		);
+		io.observe(section);
+	}
+
+	setupWorldStatCounters();
 </script>

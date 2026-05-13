@@ -284,6 +284,34 @@
 	line-height: 1.1;
 	letter-spacing: -0.02em;
 	color: var(--yw-accent);
+	font-variant-numeric: tabular-nums;
+}
+
+.ysa-world__stat-value-num {
+	display: inline-block;
+	min-width: 3ch;
+}
+
+.ysa-world__stat--counted .ysa-world__stat-value-num {
+	animation: ysa-world-stat-pop 0.55s ease-out;
+}
+
+@keyframes ysa-world-stat-pop {
+	0% {
+		transform: scale(1);
+	}
+	40% {
+		transform: scale(1.06);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ysa-world__stat--counted .ysa-world__stat-value-num {
+		animation: none;
+	}
 }
 
 .ysa-world__stat-label {
