@@ -7,11 +7,12 @@ import PrimaryButton from '../ui/PrimaryButton.astro';
 
 interface Props {
 	content: {
-		badgeText: string;
+		trustBadges: string[];
 		titleLineOne: string;
 		titleHighlight: string;
 		description: string;
 		primaryCta: { label: string; href: string };
+		secondaryCta: { label: string; href: string };
 		ratingText: string;
 		ratingAriaLabel?: string;
 		dashboard: HeroDashboardData;
@@ -33,13 +34,19 @@ const { content } = Astro.props;
 		>
 			<!-- Content -->
 			<div class="flex max-w-[39.5rem] flex-col items-start gap-6">
-				<!-- Badge -->
-				<p
-					class="inline-flex items-center gap-2 rounded-full border border-[#E0E9FF] bg-white px-[17px] py-[9px] text-xs font-medium tracking-[0.01875rem] text-[#7C3AED] shadow-[0_1px_1px_rgba(0,0,0,0.05)]"
-				>
-					<span class="h-2 w-2 shrink-0 rounded-full bg-[#048C3C]"></span>
-					<span>{content.badgeText}</span>
-				</p>
+				<!-- Trust badges (Figma 1175:1842) -->
+				<ul class="hero-trust-badges" aria-label="Trust and reach highlights">
+					{
+						content.trustBadges.map((label) => (
+							<li>
+								<p class="hero-badge m-0">
+									<span class="hero-badge-dot" aria-hidden="true"></span>
+									<span>{label}</span>
+								</p>
+							</li>
+						))
+					}
+				</ul>
 
 				<!-- Title -->
 				<h1
@@ -63,11 +70,17 @@ const { content } = Astro.props;
 					{content.description}
 				</p>
 
-				<!-- CTA -->
-				<div class="flex flex-wrap items-start gap-4 pb-4 pt-2">
+				<!-- CTAs (Figma 31:2682) -->
+				<div class="hero-cta-row">
 					<PrimaryButton
 						href={content.primaryCta.href}
 						label={content.primaryCta.label}
+						variant="lg"
+						showTrailingArrow
+					/>
+					<PrimaryButton
+						href={content.secondaryCta.href}
+						label={content.secondaryCta.label}
 						variant="lg"
 						showTrailingArrow
 					/>

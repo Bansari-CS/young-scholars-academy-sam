@@ -57,6 +57,31 @@
 	max-width: 42rem;
 }
 
+.hero-trust-badges {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.hero-trust-badges > li {
+	margin: 0;
+	padding: 0;
+}
+
+/* Figma 31:2682 — primary + secondary CTAs */
+.hero-cta-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 1rem;
+	padding-top: 0.5rem;
+	padding-bottom: 1rem;
+}
+
 .hero-badge {
 	display: inline-flex;
 	align-items: center;
@@ -73,6 +98,7 @@
 	line-height: 1rem;
 	letter-spacing: 0.01875rem;
 	color: #7c3aed;
+	white-space: nowrap;
 }
 
 .hero-badge-dot {

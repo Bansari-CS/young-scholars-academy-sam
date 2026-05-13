@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { getEntry } from 'astro:content';
+import TopAnnouncementBar from '../components/common/TopAnnouncementBar.astro';
 
 interface Props {
 	title?: string;
@@ -10,6 +12,12 @@ const {
 	title = 'Young Scholars Academy',
 	description = 'Premium online learning for gifted learners.',
 } = Astro.props;
+
+const topAnnouncementEntry = await getEntry('top-announcement', 'top-announcement');
+if (!topAnnouncementEntry) {
+	throw new Error('Missing top announcement content at src/content/top-announcement/top-announcement.md');
+}
+const announcement = topAnnouncementEntry.data;
 ---
 
 <!doctype html>
@@ -20,7 +28,7 @@ const {
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
 		<link rel="icon" type="image/png" href="/favicon.png" />
@@ -31,6 +39,11 @@ const {
 		<title>{title}</title>
 	</head>
 	<body>
+		<TopAnnouncementBar
+			message={announcement.message}
+			ctaLabel={announcement.ctaLabel}
+			ctaHref={announcement.ctaHref}
+		/>
 		<slot />
 	</body>
 </html>

@@ -375,7 +375,17 @@ const homeCollection = defineCollection({
 	schema: z.record(z.string(), z.any()),
 });
 
+const topAnnouncementCollection = defineCollection({
+	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/top-announcement' }),
+	schema: z.object({
+		message: z.string(),
+		ctaLabel: z.string(),
+		ctaHref: z.string(),
+	}),
+});
+
 export const collections = {
+	'top-announcement': topAnnouncementCollection,
 	'blog-page': blogPageCollection,
 	'blog-detail': blogDetailCollection,
 	'course-detail': courseDetailCollection,

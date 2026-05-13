@@ -44,7 +44,7 @@ export interface HeroDashboardData {
 }
 
 export interface HeroData {
-	badgeText: string;
+	trustBadges: string[];
 	titleLineOne: string;
 	titleHighlight: string;
 	description: string;

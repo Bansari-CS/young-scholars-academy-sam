@@ -1,13 +1,14 @@
 ---
 import type { ProgramCategoryId, ProgramListingCard } from '../../types/programsSection';
 import '../../styles/components/programs-section.css';
+/** Program card media only — looping previews in `public/assets/images/*.mp4` */
 const coverByKey: Record<ProgramCategoryId, string> = {
-	science: '/assets/images/animated science experiment with colorful chemical reactions and beakers, educational GIF style.png',
-	coding: '/assets/images/animated coding blocks and colorful programming interface for kids, playful GIF animation.png',
-	math: '/assets/images/animated math equations and geometric shapes floating and transforming, educational GIF.png',
-	robotics: '/assets/images/animated robot building and moving parts assembling, engineering GIF for kids.png',
-	writing: '/assets/images/animated storytelling with magical book pages turning and characters appearing, creative writing GIF.png',
-	'critical-thinking': '/assets/images/animated puzzle pieces connecting and brain neurons lighting up, critical thinking GIF.png',
+	science: '/assets/images/science.mp4',
+	coding: '/assets/images/coding.mp4',
+	math: '/assets/images/match.mp4',
+	robotics: '/assets/images/robotics.mp4',
+	writing: '/assets/images/writing.mp4',
+	'critical-thinking': '/assets/images/criticalThinking.mp4',
 };
 
 const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], string> = {
@@ -161,11 +162,15 @@ const toSlug = (value: string) =>
 					return (
 						<a class="programs-card" href={cardHref}>
 							<div class="programs-card__media">
-								<img
-									src={cover}
-									alt={`${card.title} illustration`}
+								<video
 									class="programs-card__cover"
-									loading="lazy"
+									src={cover}
+									muted
+									playsinline
+									loop
+									autoplay
+									preload="metadata"
+									aria-label={`${card.title} preview video`}
 								/>
 								<span class="programs-card__age">{card.ageLabel}</span>
 							</div>
