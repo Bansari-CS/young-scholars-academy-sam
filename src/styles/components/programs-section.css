@@ -261,6 +261,25 @@
 }
 
 /* Card grid */
+.programs-cards-shell {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.programs-cards__empty {
+	display: none;
+	margin: 0;
+	text-align: center;
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: #64748b;
+}
+
+.programs-cards__empty:not([hidden]) {
+	display: block;
+}
+
 .programs-cards {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -115,23 +115,18 @@ programs:
       label: Age Range
       options:
         - label: Ages 6-8
-          isActive: true
         - label: Ages 9-11
         - label: Ages 12-14
         - label: Ages 15+
     campType:
-      label: Camp Type
-      campTypeSrLabel: Camp type
-      placeholder: Select Type (Virtual, Hybrid…)
+      label: Format
+      campTypeSrLabel: Program format
+      placeholder: All programs
       options:
         - value: ''
-          label: All Types
+          label: All programs
         - value: virtual
           label: Virtual
-        - value: in-person
-          label: In-Person
-        - value: hybrid
-          label: Hybrid
     teacher:
       label: Teacher
       teacherSrLabel: Teacher
@@ -154,6 +149,7 @@ programs:
     activeLabel: 'ACTIVE:'
     removeFilterAriaPrefix: Remove
     clearLabel: Clear all filters
+  emptyFilterMessage: No programs match these filters. Try another age or instructor.
   cards:
     - href: '#'
       title: Young Scientists Lab
@@ -170,7 +166,7 @@ programs:
     - href: '#'
       title: Creative Coding Adventures
       description: Build games and animations with Scratch while learning computational thinking
-      ageLabel: Ages 6-8
+      ageLabel: Ages 9-11
       category:
         id: coding
         label: Coding
@@ -182,7 +178,7 @@ programs:
     - href: '#'
       title: Math Explorers
       description: Advanced problem-solving and pattern recognition for budding mathematicians
-      ageLabel: Ages 6-8
+      ageLabel: Ages 12-14
       category:
         id: math
         label: Math
@@ -206,7 +202,7 @@ programs:
     - href: '#'
       title: Storytelling Masters
       description: Develop creative writing skills through narrative building and character design
-      ageLabel: Ages 6-8
+      ageLabel: Ages 15+
       category:
         id: writing
         label: Writing
@@ -218,7 +214,7 @@ programs:
     - href: '#'
       title: Logic & Puzzles
       description: Sharpen reasoning skills with strategic games and brain teasers
-      ageLabel: Ages 6-8
+      ageLabel: Ages 9-11
       category:
         id: critical-thinking
         label: Critical Thinking
