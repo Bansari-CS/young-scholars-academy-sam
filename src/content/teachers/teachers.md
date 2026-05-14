@@ -14,7 +14,7 @@ parentLove:
       title: Hand-Selected Excellence
       description: Every mentor is carefully vetted, not just for expertise — but for empathy, creativity, and ability to connect.
     - iconUrl: /assets/teachers/parent-love-icon-2.svg
-      title: Parents’ #1 Reason for Returning
+      title: Parents
       description: Families consistently say our teachers are the biggest reason they continue with us.
     - iconUrl: /assets/teachers/parent-love-icon-3.svg
       title: Trained for Gifted & 2e Minds
@@ -29,7 +29,7 @@ parentQuote:
   highlightText: they were those kids.
   authorLine: — Sarah L., Parent of an 11-year-old scholar
 mentors:
-  title: Meet Our Mentors
+  title: "The #1 Reason Parents Return"
   description: Learn from world-class experts dedicated to your growth and success.
   searchPlaceholder: Search mentors, topics, or specialties...
   filterLabels:

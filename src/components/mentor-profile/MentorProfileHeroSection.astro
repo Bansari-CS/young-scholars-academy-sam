@@ -6,9 +6,11 @@ type HeroContent = CollectionEntry<'mentor-profile'>['data']['hero'];
 
 interface Props {
 	content: HeroContent;
+	/** Passed to Web Share API / clipboard (e.g. mentor name + site). */
+	shareTitle: string;
 }
 
-const { content } = Astro.props as Props;
+const { content, shareTitle } = Astro.props as Props;
 ---
 
 <section class="relative flex justify-center overflow-hidden bg-[linear-gradient(167.749deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)] px-5 pb-[80px] md:px-8 md:pt-[108px] pt-[80px]">
@@ -58,10 +60,78 @@ const { content } = Astro.props as Props;
 				<a class="inline-flex h-[67px] w-full items-center justify-center rounded-2xl bg-[#0a9dfb] px-10 py-5 text-[18px] font-bold leading-[27px] text-white no-underline shadow-[0_10px_15px_-3px_#bfdbfe,0_4px_6px_-4px_#bfdbfe] sm:w-[270px]" href={content.primaryCtaHref}>
 					{content.primaryCtaLabel}
 				</a>
-				<a class="inline-flex h-[67px] w-full items-center justify-center rounded-2xl border-2 border-[#0a9dfb] bg-white px-10 py-5 text-[18px] font-bold leading-[27px] text-[#0a9dfb] no-underline sm:w-[274px]" href={content.secondaryCtaHref}>
-					{content.secondaryCtaLabel}
-				</a>
+				<div class="w-full sm:w-[274px]" data-course-share data-share-title={shareTitle}>
+					<button
+						type="button"
+						class="flex h-[67px] w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border border-violet-100 bg-violet-50/40 px-8 py-4 text-base font-semibold text-violet-600 shadow-sm transition hover:border-violet-200 hover:bg-violet-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400"
+						data-share-toggle
+						aria-label="Share this mentor profile"
+					>
+						<img
+							src="/assets/course-detail/icon-share.svg"
+							alt=""
+							aria-hidden="true"
+							class="h-5 w-5 shrink-0"
+							loading="lazy"
+						/>
+						<span>Share</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+<script lang="ts">
+	const roots = document.querySelectorAll<HTMLElement>('[data-course-share]');
+	roots.forEach((root) => {
+		const toggle = root.querySelector<HTMLButtonElement>('[data-share-toggle]');
+		if (!toggle) return;
+
+		const titleFromDom = root.dataset.shareTitle?.trim() || '';
+
+		async function copyUrlToClipboard(url: string): Promise<boolean> {
+			if (navigator.clipboard?.writeText) {
+				try {
+					await navigator.clipboard.writeText(url);
+					return true;
+				} catch {
+					/* continue */
+				}
+			}
+			try {
+				const ta = document.createElement('textarea');
+				ta.value = url;
+				ta.setAttribute('readonly', '');
+				ta.style.position = 'fixed';
+				ta.style.left = '-9999px';
+				document.body.appendChild(ta);
+				ta.select();
+				const ok = document.execCommand('copy');
+				document.body.removeChild(ta);
+				return ok;
+			} catch {
+				return false;
+			}
+		}
+
+		toggle.addEventListener('click', async (e) => {
+			e.stopPropagation();
+			const url = window.location.href;
+			const title = titleFromDom || document.title;
+			const payload: ShareData = { title, text: title, url };
+
+			if (typeof navigator.share === 'function') {
+				try {
+					await navigator.share(payload);
+					return;
+				} catch (err) {
+					const name = err instanceof Error ? err.name : '';
+					if (name === 'AbortError') return;
+				}
+			}
+
+			await copyUrlToClipboard(url);
+		});
+	});
+</script>

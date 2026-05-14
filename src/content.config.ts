@@ -171,18 +171,20 @@ const semesterSalesCollection = defineCollection({
 			),
 			highlight: z.string(),
 		}),
-		subjects: z.object({
-			title: z.string(),
-			description: z.string(),
-			items: z.array(
-				z.object({
-					title: z.string(),
-					description: z.string(),
-				}),
-			),
-			ctaLabel: z.string(),
-			ctaHref: z.string(),
-		}),
+		subjects: z
+			.object({
+				title: z.string(),
+				description: z.string(),
+				items: z.array(
+					z.object({
+						title: z.string(),
+						description: z.string(),
+					}),
+				),
+				ctaLabel: z.string(),
+				ctaHref: z.string(),
+			})
+			.optional(),
 		virtualWorks: z.object({
 			title: z.string(),
 			items: z.array(
@@ -299,6 +301,19 @@ const mentorProfileCollection = defineCollection({
 			projectTitle: z.string(),
 			liveBadge: z.string(),
 			liveTitle: z.string(),
+		}),
+		classroomVideoGallery: z.object({
+			title: z.string(),
+			description: z.string(),
+			items: z
+				.array(
+					z.object({
+						videoSrc: z.string(),
+						label: z.string(),
+					}),
+				)
+				.min(8)
+				.max(8),
 		}),
 		classes: z.object({
 			title: z.string(),

@@ -1,0 +1,302 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type GalleryContent = CollectionEntry<'mentor-profile'>['data']['classroomVideoGallery'];
+
+interface Props {
+	content: GalleryContent;
+}
+
+const { content } = Astro.props as Props;
+---
+
+<style is:global>
+	.mentor-video-modal-shell {
+		position: fixed;
+		inset: 0;
+		z-index: 200;
+		display: none;
+		align-items: stretch;
+		justify-content: stretch;
+		padding: 0;
+		box-sizing: border-box;
+		background: #000;
+	}
+	.mentor-video-modal-shell.is-open {
+		display: flex;
+		flex-direction: column;
+	}
+	.mentor-video-modal-panel {
+		position: relative;
+		z-index: 10;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		min-height: 100vh;
+		min-height: 100dvh;
+		max-width: none;
+		margin: 0;
+		background: #000;
+		border-radius: 0;
+		box-shadow: none;
+		pointer-events: none;
+	}
+	.mentor-video-modal-top {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 20;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: 0.75rem max(1rem, env(safe-area-inset-right)) 0.75rem max(1rem, env(safe-area-inset-left));
+		padding-top: max(0.75rem, env(safe-area-inset-top));
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent);
+		pointer-events: none;
+	}
+	.mentor-video-modal-top > * {
+		pointer-events: auto;
+	}
+	.mentor-video-modal-close {
+		display: inline-flex;
+		height: 2.75rem;
+		width: 2.75rem;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		border-radius: 9999px;
+		background: rgba(255, 255, 255, 0.15);
+		color: #fff;
+		line-height: 0;
+		cursor: pointer;
+		transition: background 0.15s ease;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	.mentor-video-modal-close:hover {
+		background: rgba(255, 255, 255, 0.28);
+	}
+	.mentor-video-modal-close:focus-visible {
+		outline: 2px solid #0a9dfb;
+		outline-offset: 2px;
+	}
+	.mentor-video-modal-close svg {
+		display: block;
+		width: 1.125rem;
+		height: 1.125rem;
+		flex-shrink: 0;
+	}
+	.mentor-video-modal-title-bar {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 20;
+		padding: 1rem 1rem 1.25rem;
+		padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+		pointer-events: none;
+	}
+	.mentor-video-modal-title-bar p {
+		margin: 0;
+		text-align: center;
+		font-size: 0.875rem;
+		font-weight: 600;
+		line-height: 1.35;
+		color: #fff;
+	}
+	.mentor-video-modal-video-wrap {
+		position: relative;
+		flex: 1;
+		min-height: 0;
+		width: 100%;
+		background: #000;
+		pointer-events: auto;
+	}
+	.mentor-video-modal-shell video[data-mentor-video-modal-player] {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		background: #000;
+	}
+</style>
+
+<section
+	class="bg-white px-5 py-20 md:px-16"
+	aria-labelledby="mentor-classroom-videos-title"
+	data-mentor-video-gallery
+>
+	<div class="mx-auto w-full max-w-[1312px]">
+		<header class="mb-10 max-w-[720px]">
+			<h2 class="mt-1 text-[32px] font-bold leading-[1.1] text-[#111827] xl:text-[44px]" id="mentor-classroom-videos-title">
+				{content.title}
+			</h2>
+			<p class="mt-2 text-[18px] leading-[27px] text-[#475569]">{content.description}</p>
+		</header>
+
+		<div class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:gap-5">
+			{
+				content.items.map((item) => (
+					<div
+						class="mentor-video-tile group relative aspect-video overflow-hidden rounded-2xl bg-slate-900 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.08)] ring-1 ring-slate-200/80"
+						data-mentor-video-tile
+					>
+						<video
+							class="pointer-events-none h-full w-full object-cover"
+							src={item.videoSrc}
+							preload="metadata"
+							muted
+							playsinline
+							tabindex={-1}
+							aria-hidden="true"
+						/>
+						<button
+							type="button"
+							class="mentor-video-overlay absolute inset-0 z-10 flex cursor-pointer items-center justify-center border-0 bg-[rgba(15,23,42,0.3)] p-0 transition-colors hover:bg-[rgba(15,23,42,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0a9dfb]"
+							data-mentor-video-open
+							data-video-src={item.videoSrc}
+							data-video-label={item.label}
+							aria-label={`Play video: ${item.label}`}
+							aria-haspopup="dialog"
+						>
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/95 shadow-md transition-transform group-hover:scale-105 sm:h-10 sm:w-10">
+								<img
+									class="ml-px h-3.5 w-3.5 sm:h-4 sm:w-4"
+									src="/assets/course-detail/icon-play.svg"
+									alt=""
+									aria-hidden="true"
+									loading="lazy"
+								/>
+							</span>
+						</button>
+						<p
+							class="pointer-events-none absolute bottom-0 left-0 right-0 z-[5] bg-gradient-to-t from-black/75 to-transparent px-3 pb-2.5 pt-8 text-left text-[11px] font-semibold leading-snug text-white sm:text-xs"
+						>
+							{item.label}
+						</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<!-- Video modal: visibility toggled via .is-open (not Tailwind hidden/flex) so JS always wins -->
+	<div
+		class="mentor-video-modal-shell"
+		data-mentor-video-modal
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="mentor-video-modal-title"
+		aria-hidden="true"
+	>
+		<button
+			type="button"
+			class="absolute inset-0 z-[1] border-0 bg-black p-0"
+			data-mentor-video-modal-backdrop
+			aria-label="Close video"
+		/>
+		<div class="mentor-video-modal-panel" data-mentor-video-modal-panel>
+			<div class="mentor-video-modal-top">
+				<button
+					type="button"
+					class="mentor-video-modal-close"
+					data-mentor-video-modal-close
+					aria-label="Close"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M8 8l8 8M16 8l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+					</svg>
+				</button>
+			</div>
+			<div class="mentor-video-modal-video-wrap">
+				<video controls playsinline data-mentor-video-modal-player />
+			</div>
+			<div class="mentor-video-modal-title-bar">
+				<p id="mentor-video-modal-title" data-mentor-video-modal-title></p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	(function () {
+		function onReady(fn) {
+			if (document.readyState !== 'loading') fn();
+			else document.addEventListener('DOMContentLoaded', fn);
+		}
+
+		onReady(function () {
+			var section = document.querySelector('[data-mentor-video-gallery]');
+			if (!section) return;
+
+			var modal = section.querySelector('[data-mentor-video-modal]');
+			var backdrop = section.querySelector('[data-mentor-video-modal-backdrop]');
+			var panel = section.querySelector('[data-mentor-video-modal-panel]');
+			var closeBtn = section.querySelector('[data-mentor-video-modal-close]');
+			var player = section.querySelector('[data-mentor-video-modal-player]');
+			var titleEl = section.querySelector('[data-mentor-video-modal-title]');
+
+			if (!modal || !player || !closeBtn || !backdrop) return;
+
+			/* Modal on body avoids clipping/stacking issues from transformed ancestors */
+			if (modal.parentNode !== document.body) {
+				document.body.appendChild(modal);
+			}
+
+			function closeModal() {
+				player.pause();
+				player.removeAttribute('src');
+				player.load();
+				modal.classList.remove('is-open');
+				modal.setAttribute('aria-hidden', 'true');
+				document.body.style.overflow = '';
+				if (titleEl) titleEl.textContent = '';
+			}
+
+			function openModal(src, label) {
+				if (!src) return;
+				if (titleEl) titleEl.textContent = label || '';
+				player.src = src;
+				modal.classList.add('is-open');
+				modal.setAttribute('aria-hidden', 'false');
+				document.body.style.overflow = 'hidden';
+				closeBtn.focus();
+				requestAnimationFrame(function () {
+					player.play().catch(function () {});
+				});
+			}
+
+			section.addEventListener('click', function (e) {
+				var t = e.target;
+				if (!t || !t.closest) return;
+				var btn = t.closest('[data-mentor-video-open]');
+				if (!btn || !section.contains(btn)) return;
+				e.preventDefault();
+				var src = btn.getAttribute('data-video-src') || '';
+				var label = btn.getAttribute('data-video-label') || '';
+				openModal(src.trim(), label.trim());
+			});
+
+			closeBtn.addEventListener('click', function (e) {
+				e.stopPropagation();
+				closeModal();
+			});
+
+			backdrop.addEventListener('click', closeModal);
+
+			if (panel) {
+				panel.addEventListener('click', function (e) {
+					e.stopPropagation();
+				});
+			}
+
+			window.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+			});
+		});
+	})();
+</script>

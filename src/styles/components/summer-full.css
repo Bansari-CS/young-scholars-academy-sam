@@ -319,13 +319,20 @@
 }
 
 .summer-camps-wrap>h2 {
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .summer-camps-wrap .summer-sub {
 	font-size: 16px;
 	line-height: 26px;
+	color: #475569;
+	margin-bottom: 4rem;
+}
 
+@media (min-width: 768px) {
+	.summer-camps-wrap .summer-sub {
+		margin-bottom: 4.5rem;
+	}
 }
 
 .summer-camps-guided-title {
@@ -333,12 +340,15 @@
 	font-weight: 600;
 	color: #0f172a;
 	margin-bottom: 14px;
+	text-align: center;
+	width: 100%;
 }
 
 .summer-camps-guided-options {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 12px;
+	justify-content: center;
 }
 
 .summer-camps-guided-btn {

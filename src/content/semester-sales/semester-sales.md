@@ -72,20 +72,6 @@ howSemesterWorks:
     - title: Consistent Cohorts
       text: Same group, same mentor. This builds the consistency and emotional safety required for real growth.
   highlight: This is where learning becomes something your child actually looks forward to every week.
-subjects:
-  title: Subjects Your Child Will Love
-  description: Move beyond the standard curriculum with courses designed for the curious and the creative.
-  items:
-    - title: AI & Machine Learning
-      description: Building ethical AI solutions from scratch.
-    - title: Minecraft Engineering
-      description: Applying physics and logic in virtual worlds.
-    - title: Public Speaking & Debate
-      description: Mastering the art of persuasion and logic.
-    - title: World Building
-      description: Advanced creative writing and lore creation.
-  ctaLabel: Browse 50+ More Courses
-  ctaHref: '#'
 virtualWorks:
   title: A Virtual Experience That Actually Works
   items:

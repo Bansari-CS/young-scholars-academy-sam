@@ -8,7 +8,8 @@ import SemesterSalesChallengeSection from '../components/semester-sales/Semester
 import SemesterSalesAcademySection from '../components/semester-sales/SemesterSalesAcademySection.astro';
 import SemesterSalesDifferentThinkersSection from '../components/semester-sales/SemesterSalesDifferentThinkersSection.astro';
 import SemesterSalesHowSemesterWorksSection from '../components/semester-sales/SemesterSalesHowSemesterWorksSection.astro';
-import SemesterSalesSubjectsSection from '../components/semester-sales/SemesterSalesSubjectsSection.astro';
+import '../styles/components/summer-full.css';
+import SummerCampsSection from '../components/summer/SummerCampsSection.astro';
 import SemesterSalesVirtualWorksSection from '../components/semester-sales/SemesterSalesVirtualWorksSection.astro';
 import SemesterSalesFamiliesSayingSection from '../components/semester-sales/SemesterSalesFamiliesSayingSection.astro';
 import SemesterSalesPricingSection from '../components/semester-sales/SemesterSalesPricingSection.astro';
@@ -17,14 +18,19 @@ import SemesterSalesFinalCtaSection from '../components/semester-sales/SemesterS
 import { getEntry } from 'astro:content';
 
 const semesterSalesEntry = await getEntry('semester-sales', 'semester-sales');
+const summerEntry = await getEntry('summer', 'summer');
 
 if (!semesterSalesEntry) {
 	throw new Error(
 		'Missing semester sales page content entry at src/content/semester-sales/semester-sales.md',
 	);
 }
+if (!summerEntry) {
+	throw new Error('Missing summer content entry required for the camps section on semester-sales.');
+}
 
 const semesterSalesContent = semesterSalesEntry.data;
+const summerCampsContent = summerEntry.data.camps;
 ---
 
 <Layout
@@ -38,7 +44,7 @@ const semesterSalesContent = semesterSalesEntry.data;
 		<SemesterSalesAcademySection content={semesterSalesContent.academy} />
 		<SemesterSalesDifferentThinkersSection content={semesterSalesContent.differentThinkers} />
 		<SemesterSalesHowSemesterWorksSection content={semesterSalesContent.howSemesterWorks} />
-		<SemesterSalesSubjectsSection content={semesterSalesContent.subjects} />
+		<SummerCampsSection content={summerCampsContent} />
 		<SemesterSalesVirtualWorksSection content={semesterSalesContent.virtualWorks} />
 		<SemesterSalesFamiliesSayingSection content={semesterSalesContent.familiesSaying} />
 		<SemesterSalesPricingSection content={semesterSalesContent.pricing} />

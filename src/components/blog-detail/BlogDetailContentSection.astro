@@ -59,7 +59,7 @@ const sidebar = content.sidebar ?? article.sidebar;
 		<span class="font-medium text-[#475569]">{article.breadcrumbCategory}</span>
 	</div>
 
-	<div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,792px)_352px] lg:justify-between lg:gap-12 lg:items-start">
+	<div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,792px)_302px] lg:justify-between lg:gap-12 lg:items-start">
 		<article class="min-w-0">
 			<div class="mb-6 inline-flex rounded-lg bg-[#e1f3ff] px-3 py-1 text-xs font-bold uppercase tracking-[0.6px] text-[#0a9dfb]">{article.categoryLabel}</div>
 			<h1 class="text-[34px] font-bold leading-tight tracking-[-0.02em] md:text-[44px]">{article.title}</h1>
@@ -88,10 +88,25 @@ const sidebar = content.sidebar ?? article.sidebar;
 				</div>
 			</div>
 
-			<img src={article.heroImage} alt={article.heroImageAlt} class="mt-8 w-full rounded-3xl shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]" />
+			<img
+				src={article.heroImage}
+				alt={article.heroImageAlt}
+				class="mt-8 w-full rounded-3xl shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]"
+			/>
 
-			<div class="blog-markdown mt-8 max-w-none">
-				<Content />
+			<div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(100px,150px)_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[170px_minmax(0,1fr)] lg:items-start">
+				<nav
+					id="article-outline"
+					class="article-outline hidden rounded-2xl border border-[rgba(226,232,240,0.9)] bg-white p-3 shadow-[0px_4px_12px_-4px_rgba(0,0,0,0.04)] lg:sticky lg:top-28 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto xl:p-4"
+					aria-label="Table of Contents"
+				>
+					<p class="text-[10px] font-bold uppercase tracking-[0.1em] text-[#64748b]">Table of Contents</p>
+					<ul id="article-outline-list" class="article-outline-list mt-3 p-0"></ul>
+				</nav>
+
+				<div class="blog-markdown min-w-0 max-w-none">
+					<Content />
+				</div>
 			</div>
 
 			<div class="mt-10 rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)] md:p-8">
@@ -120,40 +135,80 @@ const sidebar = content.sidebar ?? article.sidebar;
 			</div>
 		</article>
 
-		<aside class="space-y-8 lg:sticky lg:top-24">
-			<div class="rounded-3xl bg-gradient-to-br from-[#0a9dfb] to-[#7c3aed] p-6 text-white shadow-[0px_8px_32px_-8px_rgba(0,132,255,0.25)] md:p-8">
-				<h3 class="text-[17px] font-semibold leading-8">{sidebar.toolkit.title}</h3>
-				<p class="mt-2 text-sm leading-[22px] text-[rgba(255,255,255,0.85)]">{sidebar.toolkit.description}</p>
-				<input placeholder={sidebar.toolkit.inputPlaceholder} class="mt-5 w-full rounded-xl border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.1)] px-4 py-3 text-sm placeholder:text-[rgba(255,255,255,0.65)]" />
-				<button class="mt-3 w-full rounded-xl bg-white py-3 text-sm font-semibold text-[#0a9dfb]">{sidebar.toolkit.buttonLabel}</button>
+		<aside class="blog-detail-aside space-y-6 text-[12px] leading-[1.5] text-[#475569] lg:sticky lg:top-24">
+			<div class="rounded-2xl bg-gradient-to-br from-[#0a9dfb] to-[#7c3aed] p-5 text-white shadow-[0px_8px_32px_-8px_rgba(0,132,255,0.25)] md:p-6">
+				<h3 class="text-[12px] font-bold uppercase tracking-[0.08em] text-white/95">{sidebar.toolkit.title}</h3>
+				<p class="mt-2 text-[12px] leading-[1.55] text-[rgba(255,255,255,0.88)]">{sidebar.toolkit.description}</p>
+				<input
+					placeholder={sidebar.toolkit.inputPlaceholder}
+					class="mt-4 w-full rounded-lg border border-[rgba(255,255,255,0.25)] bg-[rgba(255,255,255,0.12)] px-3 py-2.5 text-[12px] text-white placeholder:text-[rgba(255,255,255,0.6)]"
+				/>
+				<button class="mt-2.5 w-full rounded-lg bg-white py-2.5 text-[12px] font-semibold text-[#0a9dfb]">{sidebar.toolkit.buttonLabel}</button>
 			</div>
 
-			<div class="rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
-				<h4 class="inline-flex items-center gap-2 text-[17px] font-semibold">
-					<svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3555 1.82812C13.9219 4.18359 15.75 8.05078 15.75 9.91406C15.75 14.3789 12.1992 18 7.875 18C3.51562 18 0 14.3789 0 9.91406C0 7.38281 2.42578 3.23438 5.90625 0C7.24219 1.26562 8.4375 2.60156 9.38672 3.9375C9.94922 3.19922 10.6172 2.49609 11.3555 1.82812ZM10.6875 13.7812C12.4102 12.5859 12.7969 10.2305 11.8477 8.40234C11.7422 8.19141 11.6016 7.94531 11.4609 7.69922L9.38672 10.0547C9.38672 10.0547 6.15234 5.90625 5.90625 5.625C4.21875 7.69922 3.375 8.89453 3.375 10.2305C3.375 12.9727 5.41406 14.625 7.94531 14.625C8.96484 14.625 9.91406 14.3438 10.6875 13.7812Z" fill="#F59E0B"/></svg>
-					<span>{sidebar.trending.title}</span>
+			<div class="rounded-2xl border border-[rgba(226,232,240,0.5)] bg-white p-5 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+				<h4 class="flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.06em] text-[#64748b]">
+					<svg class="h-3.5 w-3.5 shrink-0 text-amber-500" width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.3555 1.82812C13.9219 4.18359 15.75 8.05078 15.75 9.91406C15.75 14.3789 12.1992 18 7.875 18C3.51562 18 0 14.3789 0 9.91406C0 7.38281 2.42578 3.23438 5.90625 0C7.24219 1.26562 8.4375 2.60156 9.38672 3.9375C9.94922 3.19922 10.6172 2.49609 11.3555 1.82812ZM10.6875 13.7812C12.4102 12.5859 12.7969 10.2305 11.8477 8.40234C11.7422 8.19141 11.6016 7.94531 11.4609 7.69922L9.38672 10.0547C9.38672 10.0547 6.15234 5.90625 5.90625 5.625C4.21875 7.69922 3.375 8.89453 3.375 10.2305C3.375 12.9727 5.41406 14.625 7.94531 14.625C8.96484 14.625 9.91406 14.3438 10.6875 13.7812Z" fill="currentColor"/></svg>
+					<span class="text-[#0f172a]">{sidebar.trending.title}</span>
 				</h4>
-				<div class="mt-6 space-y-6">
-					{sidebar.trending.items.map((item) => (
-						<a href={item.href} class="flex gap-4">
-							<img src={item.image} alt={item.title} class="h-20 w-20 rounded-xl object-cover" />
-							<div><p class="text-sm font-semibold leading-[20px]">{item.title}</p><p class="mt-1 text-xs uppercase text-[rgba(71,85,105,0.6)]">{item.category}</p></div>
-						</a>
-					))}
-				</div>
+				<ul class="blog-detail-aside-trending-list m-0 mt-4 list-none space-y-4 p-0">
+					{
+						sidebar.trending.items.map((item) => (
+							<li class="blog-detail-trending-item">
+								<span class="blog-detail-aside-bullet-char" aria-hidden="true">&#8226;</span>
+								<a href={item.href} class="blog-detail-trend-link flex min-w-0 gap-3 no-underline">
+									<img src={item.image} alt={item.title} class="h-14 w-14 shrink-0 rounded-lg object-cover" />
+									<div class="min-w-0 pt-0.5">
+										<p class="blog-detail-trend-title text-[12px] font-semibold leading-snug text-[#0f172a]">{item.title}</p>
+										<p class="mt-0.5 text-[11px] font-medium uppercase tracking-wide text-[#64748b]">{item.category}</p>
+									</div>
+								</a>
+							</li>
+						))
+					}
+				</ul>
 			</div>
 
-			<div class="rounded-3xl border border-[rgba(226,232,240,0.5)] bg-white p-6 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
-				<h4 class="text-[17px] font-semibold">{sidebar.categories.title}</h4>
-				<div class="mt-4 flex flex-wrap gap-2">
+			<div class="rounded-2xl border border-[rgba(226,232,240,0.5)] bg-white p-5 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
+				<h4 class="text-[12px] font-bold uppercase tracking-[0.06em] text-[#64748b]">{sidebar.categories.title}</h4>
+				<ul class="blog-detail-aside-categories-list">
 					{sidebar.categories.items.map((c) => (
-						<span class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-4 py-2 text-xs font-medium text-[#475569]">{c}</span>
+						<li class="text-[12px] font-medium leading-snug text-[#475569]">{c}</li>
 					))}
-				</div>
+				</ul>
 			</div>
 		</aside>
 	</div>
 </section>
+
+<script is:inline>
+	(function initArticleOutline() {
+		const md = document.querySelector('article .blog-markdown');
+		const shell = document.getElementById('article-outline');
+		const list = document.getElementById('article-outline-list');
+		if (!md || !shell || !list) return;
+
+		const headings = Array.from(md.querySelectorAll('h2'));
+		if (headings.length < 2) return;
+
+		const frag = document.createDocumentFragment();
+		for (const h of headings) {
+			const id = h.id;
+			if (!id) continue;
+			const text = (h.textContent || '').trim() || 'Section';
+			const li = document.createElement('li');
+			const a = document.createElement('a');
+			a.href = '#' + id;
+			a.textContent = text;
+			a.className = 'article-outline-link';
+			li.appendChild(a);
+			frag.appendChild(li);
+		}
+		if (!frag.childNodes.length) return;
+		list.appendChild(frag);
+		shell.classList.remove('hidden');
+	})();
+</script>
 
 <style>
 	.blog-markdown :global(p) {
@@ -163,12 +218,131 @@ const sidebar = content.sidebar ?? article.sidebar;
 	}
 
 	.blog-markdown :global(h2) {
+		scroll-margin-top: 10.5rem;
 		margin-top: 2.5rem;
 		margin-bottom: 1.25rem;
 		font-size: 1.875rem;
 		line-height: 2.25rem;
 		font-weight: 700;
 		color: #111827;
+	}
+
+	@media (min-width: 1024px) {
+		.blog-markdown :global(h2) {
+			scroll-margin-top: 12rem;
+		}
+	}
+
+	.article-outline-list {
+		list-style-type: disc;
+		list-style-position: outside;
+		margin: 0;
+		padding-left: 1.125rem;
+	}
+
+	.article-outline-list > li {
+		padding-left: 0.375rem;
+		margin-bottom: 0.375rem;
+	}
+
+	.article-outline-list > li:last-child {
+		margin-bottom: 0;
+	}
+
+	.article-outline-list > li::marker {
+		color: #0a9dfb;
+		font-size: 1em;
+	}
+
+	.article-outline-list > li:hover {
+		background: rgba(248, 250, 252, 0.95);
+		border-radius: 0.375rem;
+	}
+
+	.article-outline-link {
+		display: block;
+		padding: 0.35rem 0.25rem 0.35rem 0;
+		font-size: 0.75rem;
+		line-height: 1.45;
+		font-weight: 600;
+		color: #475569;
+		text-decoration: none;
+		border-radius: 0.25rem;
+		transition: color 0.15s ease, background-color 0.15s ease;
+	}
+
+	.article-outline-link:hover,
+	.article-outline-link:focus-visible {
+		color: #0a9dfb;
+		background: rgba(10, 157, 251, 0.06);
+		outline: none;
+	}
+
+	@media (min-width: 1280px) {
+		.article-outline-link {
+			font-size: 0.8125rem;
+			line-height: 1.5;
+		}
+	}
+
+	.blog-detail-trending-item {
+		display: grid;
+		grid-template-columns: 0.875rem minmax(0, 1fr);
+		column-gap: 0.5rem;
+		align-items: start;
+		padding: 0.25rem 0.375rem 0.25rem 0;
+		margin-left: -0.125rem;
+		border-radius: 0.75rem;
+		transition: background-color 0.15s ease;
+	}
+
+	.blog-detail-trending-item:hover {
+		background-color: #f8fafc;
+	}
+
+	.blog-detail-aside-bullet-char {
+		display: flex;
+		width: 0.875rem;
+		flex-shrink: 0;
+		justify-content: center;
+		padding-top: 0.5rem;
+		font-size: 1.0625rem;
+		line-height: 1;
+		font-weight: 800;
+		color: #0a9dfb;
+	}
+
+	.blog-detail-trend-link:hover .blog-detail-trend-title {
+		color: #0a9dfb;
+	}
+
+	.blog-detail-trend-link {
+		transition: opacity 0.15s ease;
+	}
+
+	.blog-detail-trend-link:hover {
+		opacity: 0.95;
+	}
+
+	.blog-detail-aside-categories-list {
+		margin: 0.75rem 0 0;
+		padding: 0 0 0 1.125rem;
+		list-style-type: disc;
+		list-style-position: outside;
+	}
+
+	.blog-detail-aside-categories-list > li {
+		padding-left: 0.375rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.blog-detail-aside-categories-list > li:last-child {
+		margin-bottom: 0;
+	}
+
+	.blog-detail-aside-categories-list > li::marker {
+		color: #0a9dfb;
+		font-size: 1em;
 	}
 
 	.blog-markdown :global(blockquote) {

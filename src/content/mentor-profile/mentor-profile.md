@@ -70,6 +70,26 @@ insideClassroom:
   projectTitle: "\"Complex Molecule Visualization\" - Leo, Age 12"
   liveBadge: LIVE MOMENT
   liveTitle: The "Aha!" moment during titration lab
+classroomVideoGallery:
+  title: Videos gallery
+  description: Short moments from class and what students say about learning with this mentor.
+  items:
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Personal clip — science in motion
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Student testimonial — "I finally get coding"
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Personal clip — math patterns
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Student testimonial — robotics lab
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Personal clip — storytelling
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Student testimonial — puzzles & logic
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Personal clip — favorite experiment
+    - videoSrc: /assets/images/videoGallery.mp4
+      label: Student testimonial — project showcase
 classes:
   title: Classes Taught by Emily
   description: Engaging, high-level courses for curious minds.

@@ -53,13 +53,15 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 ---
 
 <section id="programs" class="summer-section summer-camps-section py-20 px-4 md:px-10 lg:px-16 pt-0" data-summer-camps-root>
-	<div class="summer-wrap summer-camps-wrap px-5 sm:px-8 lg:px-16">
-		<h2 class="text-[25px] sm:text-[36px] lg:text-[44px]">{content.title}</h2>
-		<p class="summer-sub mb-12 mt-[10px]">{content.subtitle}</p>
+	<div class="summer-wrap summer-camps-wrap px-5 sm:px-8 lg:px-16 pt-12">
+		<h2 class="mx-auto max-w-[1092px] text-center text-[25px] font-bold leading-[1.15] text-[#111827] sm:text-[36px] lg:text-[44px] lg:leading-[1.1]">
+			{content.title}
+		</h2>
+		<p class="summer-sub mx-auto mt-4 max-w-[696px] text-center sm:mt-5">{content.subtitle}</p>
 
 		{
 			guided?.title ? (
-				<div class="summer-camps-guided mb-8">
+				<div class="summer-camps-guided mb-8 mt-0 w-full text-center">
 					<p class="summer-camps-guided-title">{guided.title}</p>
 				</div>
 			) : null

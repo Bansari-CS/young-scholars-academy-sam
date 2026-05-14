@@ -7,6 +7,7 @@ import MentorProfileAboutSection from '../components/mentor-profile/MentorProfil
 import MentorProfileBeyondClassroomSection from '../components/mentor-profile/MentorProfileBeyondClassroomSection.astro';
 import MentorProfileHowITeachSection from '../components/mentor-profile/MentorProfileHowITeachSection.astro';
 import MentorProfileInsideClassroomSection from '../components/mentor-profile/MentorProfileInsideClassroomSection.astro';
+import MentorProfileClassroomVideoGallerySection from '../components/mentor-profile/MentorProfileClassroomVideoGallerySection.astro';
 import MentorProfileClassesSection from '../components/mentor-profile/MentorProfileClassesSection.astro';
 import MentorProfileStudentExperienceSection from '../components/mentor-profile/MentorProfileStudentExperienceSection.astro';
 import MentorProfileTestimonialsSection from '../components/mentor-profile/MentorProfileTestimonialsSection.astro';
@@ -29,11 +30,15 @@ const mentorProfileContent = mentorProfileEntry.data;
 >
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main>
-		<MentorProfileHeroSection content={mentorProfileContent.hero} />
+		<MentorProfileHeroSection
+			content={mentorProfileContent.hero}
+			shareTitle={`${mentorProfileContent.hero.name} | Young Scholars Academy`}
+		/>
 		<MentorProfileAboutSection content={mentorProfileContent.about} />
 		<MentorProfileBeyondClassroomSection content={mentorProfileContent.beyondClassroom} />
 		<MentorProfileHowITeachSection content={mentorProfileContent.howITeach} />
 		<MentorProfileInsideClassroomSection content={mentorProfileContent.insideClassroom} />
+		<MentorProfileClassroomVideoGallerySection content={mentorProfileContent.classroomVideoGallery} />
 		<MentorProfileClassesSection content={mentorProfileContent.classes} />
 		<MentorProfileStudentExperienceSection content={mentorProfileContent.studentExperience} />
 		<MentorProfileTestimonialsSection content={mentorProfileContent.testimonials} />
