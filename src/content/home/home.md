@@ -449,26 +449,28 @@ faq:
   title: Answers to Your Questions
   description: Everything you need to know before getting started
   items:
-    - question: What makes YSA different from other online programs?
-      answer: We specialize exclusively in gifted, 2e, and neurodivergent learners. Our teachers have advanced degrees and specialized training in these populations. We keep classes small (4:1 ratio), go deep rather than broad, and create emotionally safe intellectual communities.
-    - question: How do I know which program is right for my child?
+    - question: What is Young Scholars Academy?
+      answer: |
+        No — our sessions are designed to keep students engaged, not exhausted.
+        Each 50-minute class uses a high-engagement model where students actively participate instead of passively watching. In addition, our Topia virtual campus allows movement and social interaction, making the experience feel more like a game than a traditional online class.
+    - question: What is the best online school for gifted kids?
       answer: We use a fit call and short placement process to match readiness, pace, and interests before enrollment.
-    - question: What's the time commitment?
+    - question: What does “2e” mean?
       answer: Most families start with 2-4 live sessions per week, with optional projects and enrichment work between classes.
-    - question: My child has ADHD/dyslexia/autism. Will they succeed here?
+    - question: Who is YSA for?
       answer: Yes. We are intentionally built for neurodivergent learners and adapt pacing, modality, and support to each child.
-    - question: What technology do we need?
+    - question: How big are classes?
       answer: A reliable internet connection, a laptop/desktop with camera and mic, and a quiet learning space are enough to start.
-    - question: Can I get a refund if it's not a good fit?
+    - question: Is YSA accredited?
       answer: We offer transparent policy options and support families in finding the right plan during onboarding.
 communityCta:
-  title: Your Child's Brilliance Deserves a Community That Gets It
-  description: Talk with our team about placement, scholarships, and the right first course—no pressure, just clarity.
+  title: Their People Are Here.
+  description: Right now, a kid who thinks like your kid is in a class they chose, with a mentor who was once just like them, surrounded by friends who don't think they're weird... they think they're interesting. Your child is one click from finding out what that feels like.
   primaryCta:
-    label: Book a call
+    label: Explore Summer Camps 2026
     href: '#'
   secondaryCta:
-    label: Browse programs
+    label: Browse Year-Round Courses
     href: '#'
   secondaryLeadingIcon: 🗓
   trustPoints:

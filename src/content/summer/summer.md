@@ -1,28 +1,25 @@
 ---
 seo:
-  title: YSA Summer Camps 2026
-  description: Summer camps for gifted, twice-exceptional, and neurodivergent learners.
+  title: YSA Summer Camps 2026 | Online Camps for Gifted & 2e Kids
+  description: 80+ live online summer camps for gifted or 2e kids ages 5-18. One week, 50 min/day. Small groups. Mentors who get it. From $149/week.
 hero:
   badge: Summer 2026 Enrollment Open
-  titlePrefix: "The Summer Your Child Finally "
-  titleHighlight: Finds Their People.
-  descriptionLines:
-    - 321 virtual camps for gifted, 2e, and neurodivergent kids.
-    - Join a global community where "quirky" is the superpower.
-    - June 1 - August 14, 2026.
-  primaryCtaLabel: Find Their Camp ->
+  titlePrefix: "This Summer, They Don't Have to Choose Between Being "
+  titleHighlight: Themselves and Having Friends.
+  description: Most camps ask your kid to mask who they are just to fit in. This one was built by someone who never fit in either. 80+ live online camps. 300+ sessions. 50 minutes a day for 5 days. Small groups of kids who finally get each other... led by mentors who were once just like them. June 1 – August 10 · Ages 5 to 18 · Camps from $149 · Satisfaction Guarantee
+  primaryCtaLabel: Find Their Camp
   primaryCtaHref: "#programs"
   secondaryCtaLabel: How It Works
   secondaryCtaHref: "#how-it-works"
   stats:
-    - value: 321+
+    - value: 80+
       label: Camps
-    - value: 10 Weeks
-      label: June-August
-    - value: 50 Min
+    - value: "5"
+      label: Days
+    - value: "50"
+      label: minutes
+    - value: 300+
       label: Sessions
-    - value: Ages 5-18
-      label: All Levels
   dashboardTitle: Summer Camp Dashboard
   dashboardSubtitle: Dungeons & Dragons Strategy - Session 3
   liveLabel: LIVE NOW
@@ -33,26 +30,8 @@ hero:
   classmateCountValue: 6 Peers Online
 struggle:
   title: Every Summer, the Same Impossible Search.
-  cards:
-    - icon: /images/summer/struggle/icon-burned.svg
-      iconBg: bg-[#fef2f2]
-      title: Burned before
-      description: You've tried general camps, but they weren't a fit. Your child felt misunderstood.
-    - icon: /images/summer/struggle/icon-refusal.svg
-      iconBg: bg-[#fffbeb]
-      title: Refusal after Day 1
-      description: The dread of dropping them off, only for them to beg not to go back for Day 2.
-    - icon: /images/summer/struggle/icon-understands.svg
-      iconBg: bg-[#eff6ff]
-      title: Nobody understands
-      description: It's hard to find mentors who truly get the 2e/gifted mind and its intensity.
-    - icon: /images/summer/struggle/icon-failure.svg
-      iconBg: bg-[#ecfdf5]
-      title: Can't afford failure
-      description: Another bad summer experience can set back their confidence for the whole year.
-  quoteAvatarAlt: Parent avatar
-  quote: '"We used to dread summer. Every camp was a battle of wills. YSA was the first time my son woke up early, excited to log in and see his ''people''."'
-  quoteAttribution: "- Sarah M., Mother of a 10-year-old 2e student"
+  narrative: >-
+    They'll sleep until noon. They'll game alone in their room until dinner. You'll try to get them out of the house. They won't want to go. You'll sign them up for something local. They'll go once. Maybe twice. Then they'll tell you they hate it, and you'll know exactly why... You know this because it's happened before. It doesn't have to happen again.
 expect:
   title: "This Is YSA Summer. Here's Exactly What to Expect."
   cards:
@@ -306,7 +285,9 @@ faq:
   subtitle: Everything you need to know before getting started
   items:
     - q: Will my child get "Zoom fatigue"?
-      a: "No - our sessions are designed to keep students engaged, not exhausted. Each 50-minute class uses a high-engagement model where students actively participate instead of passively watching. In addition, our Topia virtual campus allows movement and social interaction, making the experience feel more like a game than a traditional online class."
+      a: |
+        No - our sessions are designed to keep students engaged, not exhausted.
+        Each 50-minute class uses a high-engagement model where students actively participate instead of passively watching. In addition, our Topia virtual campus allows movement and social interaction, making the experience feel more like a game than a traditional online class.
       open: true
     - q: Do you require a formal diagnosis for 2e or giftedness?
       a: ""

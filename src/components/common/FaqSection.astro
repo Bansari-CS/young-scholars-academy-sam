@@ -22,6 +22,19 @@ const {
 	sectionClass = 'bg-[#f8fafc] px-6 py-24',
 	containerClass = 'mx-auto w-full max-w-[896px]',
 } = Astro.props;
+
+function splitFaqAnswer(answer: string): { lead: string | null; body: string } {
+	const normalized = answer.replace(/\u2028/g, '\n').replace(/\u2029/g, '\n').trim();
+	const nl = normalized.indexOf('\n');
+	if (nl !== -1) {
+		const lead = normalized.slice(0, nl).trim();
+		const body = normalized.slice(nl + 1).trim();
+		if (lead && body) return { lead, body };
+	}
+	const glued = normalized.match(/^(.+?not exhausted\.)\s+(Each.+)$/is);
+	if (glued) return { lead: glued[1].trim(), body: glued[2].trim() };
+	return { lead: null, body: normalized };
+}
 ---
 
 <section class={sectionClass}>
@@ -51,11 +64,22 @@ const {
 							</span>
 						</summary>
 						{
-							item.answer && (
-								<div class="px-6 pb-6">
-									<p class="text-[16px] leading-[20px] text-[#64748b]">{item.answer}</p>
-								</div>
-							)
+							item.answer && (() => {
+								const { lead, body } = splitFaqAnswer(item.answer);
+								return (
+									<div class="px-6 pb-6">
+										<p class="m-0 text-[16px] leading-[26px] text-[#475569]">
+											{lead ? (
+												<>
+													<span class="font-semibold text-[#111827]">{lead}</span>
+													<br aria-hidden="true" />
+												</>
+											) : null}
+											{body}
+										</p>
+									</div>
+								);
+							})()
 						}
 					</details>
 				))

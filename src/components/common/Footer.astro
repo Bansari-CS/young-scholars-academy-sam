@@ -4,6 +4,7 @@ import '../../styles/components/footer.css';
 const programs = ['Science', 'Math', 'Coding', 'Robotics'];
 const resources = ['Blog', 'Parent Guides', 'Success Stories', 'FAQ'];
 const company = ['About', 'Careers', 'Contact', 'Privacy Policy'];
+const year = new Date().getFullYear();
 ---
 
 <footer class="ysa-footer">
@@ -81,7 +82,7 @@ const company = ['About', 'Careers', 'Contact', 'Privacy Policy'];
 		</div>
 
 		<div class="ysa-footer__bottom">
-			<p>© 2026 Young Scholars Academy. All rights reserved.</p>
+			<p>© {year} Young Scholars Academy. All rights reserved.</p>
 		</div>
 	</div>
 </footer>
