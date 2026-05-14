@@ -11,14 +11,14 @@ const { brand, navItems } = Astro.props;
 ---
 
 <div class="bg-[#111827] text-white">
-	<div class="mx-auto flex max-w-[90rem] items-center justify-center gap-4 px-4 py-3 text-sm leading-5 text-white">
+	<div class="mx-auto box-border flex max-w-[90rem] items-center justify-center gap-4 px-4 py-3 text-sm leading-5 text-white sm:px-6 lg:px-10">
 		<p class="m-0">Summer 2026 enrollment is open. Spots are filling fast.</p>
 		<a class="font-semibold text-[#93c5fd] no-underline" href="#cta">Reserve Your Child's Spot -&gt;</a>
 	</div>
 </div>
 
 <header class="sticky top-[var(--ysa-announcement-sticky-offset)] z-50 w-full border-b border-[#f1f5f9] bg-[rgba(255,255,255,0.92)] backdrop-blur-[8px]">
-	<div class="mx-auto flex min-h-20 max-w-[90rem] items-center justify-between gap-6 px-[clamp(1rem,4.44vw,4rem)]">
+	<div class="mx-auto box-border flex min-h-20 max-w-[90rem] items-center justify-between gap-6 px-4 py-[12px] sm:px-6 lg:px-10">
 		<a class="flex items-center gap-3 text-inherit no-underline" href="/">
 			<span class="grid h-11 w-11 place-items-center rounded-xl bg-[linear-gradient(135deg,#5751e4_0%,#a855f7_100%)] font-[var(--ysa-font-display)] text-xl leading-none font-bold text-white" aria-hidden="true">YS</span>
 			<span class="whitespace-nowrap font-[var(--ysa-font-display)] text-xl font-bold text-[#1a1647]">{brand}</span>

@@ -25,8 +25,27 @@
 }
 
 .summer-wrap {
-	max-width: 75rem;
-	margin: 0 auto;
+	max-width: 90rem;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	box-sizing: border-box;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+	.summer-wrap {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.summer-wrap {
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
+	}
 }
 
 .summer-wrap h2 {
@@ -313,10 +332,7 @@
 	background: #f8fafc;
 }
 
-.summer-camps-wrap {
-	max-width: 1220px;
-
-}
+/* .summer-camps-wrap: width + horizontal padding from .summer-wrap (matches Header) */
 
 .summer-camps-wrap>h2 {
 	font-weight: 700;
@@ -847,9 +863,7 @@
 
 }
 
-.summer-bonus-wrap {
-	max-width: 1184px;
-}
+/* .summer-bonus-wrap: width + horizontal padding from .summer-wrap */
 
 .summer-bonus-kicker {
 	text-align: center;
@@ -1279,9 +1293,7 @@
 	background: #1a0f3a;
 }
 
-.summer-results-wrap {
-	max-width: 1311px;
-}
+/* .summer-results-wrap: width + horizontal padding from .summer-wrap */
 
 .summer-results-kicker {
 	margin: 0 auto 16px;
@@ -1951,11 +1963,13 @@
 
 @media (max-width: 900px) {
 	.summer-expect-section {
-		padding: 60px 40px;
+		padding-top: 60px;
+		padding-bottom: 60px;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.summer-expect-section .summer-wrap {
-		padding: 0 20px;
 		gap: 40px;
 	}
 
@@ -1992,11 +2006,13 @@
 
 @media (max-width: 600px) {
 	.summer-expect-section {
-		padding: 48px 20px;
+		padding-top: 48px;
+		padding-bottom: 48px;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.summer-expect-section .summer-wrap {
-		padding: 0;
 		gap: 32px;
 	}
 

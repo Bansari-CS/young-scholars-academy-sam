@@ -6,8 +6,8 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 
-<section class="summer-fit-dark px-5 py-12 md:px-10 md:py-16 xl:px-16 xl:py-20">
-	<div class="max-w-[1311px] m-auto">
+<section class="summer-fit-dark py-12 md:py-16 xl:py-20">
+	<div class="mx-auto box-border w-full max-w-[90rem] px-4 sm:px-6 lg:px-10">
 		<h2 class="!text-white text-[28px] sm:text-[36px] lg:text-[44px]">{content.title}</h2>
 		<div class="grid grid-cols-1 gap-[30px] md:grid-cols-2">
 			<article class="summer-fit-card good p-5 lg:p-10">
