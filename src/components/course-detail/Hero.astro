@@ -90,15 +90,20 @@ const {
 		</div>
 
 		<aside class="relative h-[532px] w-full lg:max-w-[560px] max-w-full">
-			<div class="absolute inset-[16px_-16px_-16px_16px] rounded-[40px] bg-[#e0f2fe]"></div>
+			<div class="absolute inset-[16px_-16px_-16px_16px] rounded-[40px]"></div>
 			<div class="relative overflow-hidden rounded-[40px] border-[8px] border-white shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]">
-			<img
-				class="block h-[516px] w-full rounded-[32px] object-cover"
-				src="/assets/course-detail/hero-main.png"
-				alt="Kids building a robot together"
-				loading="lazy"
-			/>
-			<div class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 backdrop-blur-[4px]">
+				<div class="relative aspect-video w-full min-h-[220px] bg-slate-900 lg:min-h-[516px]">
+					<iframe
+						class="absolute inset-0 h-full w-full border-0"
+						src="https://www.youtube.com/embed/NpEaa2P7qZI?si=aKDUpgdln8tkIYHV"
+						title="YouTube video player"
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen
+					/>
+				</div>
+			<!-- <div class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 backdrop-blur-[4px]">
 				<img
 					class="h-12 w-12 rounded-full object-cover"
 					src="/assets/course-detail/hero-teacher.png"
@@ -110,7 +115,7 @@ const {
 					<span class="block text-[11px] leading-tight text-slate-500">{taughtByLabel}</span>
 					<strong class="block text-[13px] leading-tight text-slate-900">{instructor}</strong>
 				</div>
-			</div>
+			</div> -->
 			</div>
 		</aside>
 	</div>

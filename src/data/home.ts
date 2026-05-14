@@ -22,7 +22,7 @@ export const heroData: HeroData = {
 	ratingText: '4.9/5 from parent reviews',
 	navItems: [
 		{ label: 'Programs', href: '#' },
-		{ label: 'How It Works', href: '#' },
+		{ label: 'How It Works', href: '/summer#how-it-works' },
 		{ label: 'Why YSA', href: '#' },
 		{ label: 'Blog', href: '/blog' },
 		{ label: 'Our Teachers', href: '/teachers' },

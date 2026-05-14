@@ -36,8 +36,8 @@ const guided = content.guided as
 
 const ageOptions = [
 	{ value: 'all', label: 'All ages' },
-	{ value: '8-12', label: 'Ages 8-12' },
-	{ value: '10-15', label: 'Ages 10-15' },
+	{ value: '5-7', label: 'Ages 5-7' },
+	{ value: '8-11', label: 'Ages 8-11' },
 	{ value: '12-18', label: 'Ages 12-18' },
 ];
 
@@ -87,8 +87,10 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 							data-camp-filter="category"
 							aria-label={content.filterLabels[0]}
 						>
-							<option value="all">All camp types</option>
-							{categories.map((cat) => <option value={cat}>{cat}</option>)}
+							<option value="all" selected>All camp types</option>
+							{categories.map((cat) => (
+								<option value={cat}>{cat}</option>
+							))}
 						</select>
 						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
 					</div>
@@ -96,8 +98,10 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 						<label class="sr-only" for="camp-filter-age">{content.filterLabels[1]}</label>
 						<select id="camp-filter-age" class="summer-camps-filter-select" data-camp-filter="age" aria-label={content.filterLabels[1]}>
 							{
-								ageOptions.map((o) => (
-									<option value={o.value}>{o.label}</option>
+								ageOptions.map((o, i) => (
+									<option value={o.value} selected={i === 0}>
+										{o.label}
+									</option>
 								))
 							}
 						</select>
@@ -108,8 +112,10 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 					<div class="summer-camps-select-wrap">
 						<label class="sr-only" for="camp-filter-level">{content.filterLabels[2]}</label>
 						<select id="camp-filter-level" class="summer-camps-filter-select" data-camp-filter="level" aria-label={content.filterLabels[2]}>
-							<option value="all">All levels</option>
-							{levels.map((lvl) => <option value={lvl}>{lvl}</option>)}
+							<option value="all" selected>All levels</option>
+							{levels.map((lvl) => (
+								<option value={lvl}>{lvl}</option>
+							))}
 						</select>
 						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
 					</div>
@@ -218,6 +224,9 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 		function initSummerCamps() {
 			const root = document.querySelector('[data-summer-camps-root]');
 			if (!root) return;
+			const rootEl = root as HTMLElement;
+			if (rootEl.dataset.summerCampsInited === '1') return;
+			rootEl.dataset.summerCampsInited = '1';
 
 			const { guidedOptions } = readConfig() as { guidedOptions: { label: string; categories: string[] }[] };
 			const searchEl = root.querySelector('[data-camp-search]') as HTMLInputElement | null;
@@ -276,10 +285,13 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 					return { min, max };
 				}
 
+				const catValKey = catVal.trim().toLowerCase();
+				const levelValKey = levelVal.trim().toLowerCase();
+
 				for (const card of cards) {
 					const blob = (card.getAttribute('data-search') || '').toLowerCase();
-					const category = card.getAttribute('data-category') || '';
-					const level = card.getAttribute('data-level') || '';
+					const category = (card.getAttribute('data-category') || '').trim();
+					const level = (card.getAttribute('data-level') || '').trim();
 					const dateStart = card.getAttribute('data-date-start') || '';
 					const dateEnd = card.getAttribute('data-date-end') || '';
 					const campAge = readCampAgeRange(card);
@@ -288,11 +300,14 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 
 					if (q && !blob.includes(q)) ok = false;
 
-					if (ok && guidedCategories && guidedCategories.length) {
-						if (!guidedCategories.includes(category)) ok = false;
-					} else if (ok && catVal && category !== catVal) ok = false;
+					const catKey = category.toLowerCase();
 
-					if (ok && levelVal && level !== levelVal) ok = false;
+					if (ok && guidedCategories && guidedCategories.length) {
+						const inGuided = guidedCategories.some((c) => c.trim().toLowerCase() === catKey);
+						if (!inGuided) ok = false;
+					} else if (ok && catVal && catKey !== catValKey) ok = false;
+
+					if (ok && levelValKey && level.toLowerCase() !== levelValKey) ok = false;
 
 					if (ok && datePick) {
 						if (!dateInRange(datePick, dateStart, dateEnd)) ok = false;
@@ -301,6 +316,8 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 					if (ok && ageFilter) {
 						if (campAge) {
 							if (!agesOverlap(campAge.min, campAge.max, ageFilter.min, ageFilter.max)) ok = false;
+						} else {
+							ok = false;
 						}
 					}
 
@@ -322,6 +339,7 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 			}
 
 			searchEl?.addEventListener('input', () => {
+				if ((searchEl.value || '').trim()) clearGuided();
 				applyFilters();
 			});
 

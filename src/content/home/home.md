@@ -415,17 +415,17 @@ world:
   description: From Tokyo to New York, our students are building the future. Join a global community of innovators, thinkers, and creators who are pushing the boundaries of what's possible.
   globeAlt: Global network of YSA students around the world
   stats:
-    - value: 10,000+
-      label: Active Students
-    - value: 50+
+    - value: 1K+
+      label: Families
+    - value: 17+
       label: Countries
     - value: 24/7
       label: Live Learning
-    - value: 150+
-      label: Master Mentors
+    - value: 47+
+      label: US states + D.C.
 fit:
   eyebrow: FIND YOUR FIT
-  title: Is YSA Right for Your Child?
+  title: Is YSA right fit for your child?
   description: We're not for everyone-and that's okay. Here's who thrives with us.
   goodFit:
     title: 'Great Fit If Your Child:'
@@ -449,20 +449,21 @@ faq:
   title: Answers to Your Questions
   description: Everything you need to know before getting started
   items:
-    - question: What is Young Scholars Academy?
-      answer: |
-        No — our sessions are designed to keep students engaged, not exhausted.
-        Each 50-minute class uses a high-engagement model where students actively participate instead of passively watching. In addition, our Topia virtual campus allows movement and social interaction, making the experience feel more like a game than a traditional online class.
-    - question: What is the best online school for gifted kids?
-      answer: We use a fit call and short placement process to match readiness, pace, and interests before enrollment.
-    - question: What does “2e” mean?
-      answer: Most families start with 2-4 live sessions per week, with optional projects and enrichment work between classes.
     - question: Who is YSA for?
-      answer: Yes. We are intentionally built for neurodivergent learners and adapt pacing, modality, and support to each child.
-    - question: How big are classes?
-      answer: A reliable internet connection, a laptop/desktop with camera and mic, and a quiet learning space are enough to start.
+      answer: |
+        Gifted or 2e learners ages 5 to 18. That includes kids with ADHD, autism, giftedness, anxiety, dyslexia, PDA, and profiles that don't fit neatly into any one label. What they share: they're bright, they're different, and they haven't found their people yet.
+    - question: How big are the classes?
+      answer: 6 to 8. Always. No exceptions.
+    - question: Is this Zoom?
+      answer: Classes happen on Zoom, but that's just the start. Between sessions, students enter a virtual campus where they walk between buildings as avatars, hang out with friends, and build a real social life. Cameras always optional.
+    - question: What does a week look like?
+      answer: That depends on you. Some families take one enrichment class. Others use us as their primary learning community. Sessions are live, 50 minutes. The campus opens daily, 7 AM to 7 PM Pacific.
     - question: Is YSA accredited?
-      answer: We offer transparent policy options and support families in finding the right plan during onboarding.
+      answer: Yes. WASC accredited. We provide transcripts and documentation for homeschool portfolios.
+    - question: How much does it cost?
+      answer: Courses start from $500/semester. Summer camps priced separately. Payment plans and ESA/charter funding accepted.
+    - question: What if it doesn't work for my kid?
+      answer: 30-Day Promise. Better-fit course, full credit, or payments stopped. No questions.
 communityCta:
   title: Their People Are Here.
   description: Right now, a kid who thinks like your kid is in a class they chose, with a mentor who was once just like them, surrounded by friends who don't think they're weird... they think they're interesting. Your child is one click from finding out what that feels like.

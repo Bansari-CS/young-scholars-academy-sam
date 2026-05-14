@@ -6,7 +6,10 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 
-<section class="summer-section summer-expect-section px-5 py-12 md:px-10 md:py-16 xl:px-[120px] xl:py-20 pb-[4px]">
+<section
+	id="how-it-works"
+	class="summer-section summer-expect-section scroll-mt-28 px-5 py-12 md:px-10 md:py-16 xl:px-[120px] xl:py-20 pb-[4px]"
+>
 	<div class="max-w-[1092px] m-auto">
 		<h2 class="mx-auto mb-16 text-center font-bold leading-normal text-[#111827] text-[28px] md:text-[36px] lg:text-[44px] max-w-[1072px]">{content.title}</h2>
 		<div class="summer-grid-3 summer-expect-grid">
