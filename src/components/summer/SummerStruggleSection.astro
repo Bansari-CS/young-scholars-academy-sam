@@ -1,35 +1,34 @@
 ---
-interface Props {
-	content: any;
+/** Matches Figma node 117:3774 — centered title + single bordered narrative card (no grid / avatar). */
+interface StruggleContent {
+	title: string;
+	narrative: string;
 }
 
-const { content } = Astro.props as Props;
+interface Props {
+	content: StruggleContent;
+}
+
+const { content } = Astro.props;
 ---
 
 <section class="bg-[#f8fafc]  px-4 md:px-10 lg:px-16 py-20">
-	<div class="mx-auto max-w-[1246px] px-4 md:px-10 lg:px-16">
-		<h2 class="m-0 text-center text-[25px] sm:text-[36px] lg:text-[46px] leading-[40px] font-bold text-[#111827]">{content.title}</h2>
-
-		<div class="mt-16 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[repeat(4,250px)] justify-between gap-6">
-			{
-				content.cards.map((card) => (
-					<article class="h-[314px] rounded-2xl border border-[#f1f5f9] bg-white p-8 shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
-						<div class={`mb-6 grid h-14 w-14 place-items-center rounded-[0.85rem] ${card.iconBg}`}>
-							<img class="max-h-[24px] max-w-[28px]" src={card.icon} alt="" aria-hidden="true" />
-						</div>
-						<h3 class="mb-[0.938rem] text-[17px] leading-7 font-semibold text-[#111827]">{card.title}</h3>
-						<p class="m-0 text-base leading-[26px] text-[#475569]">{card.description}</p>
-					</article>
-				))
-			}
+	<div class="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-16 px-4 md:px-8 lg:px-16">
+		<div class="flex w-full flex-col items-center gap-4">
+			<h2
+				class="m-0 text-center font-[var(--ysa-font-display)] text-[32px] font-bold leading-normal tracking-normal text-[#111827] md:text-[40px] lg:text-[44px]"
+			>
+				{content.title}
+			</h2>
 		</div>
-
-		<blockquote class="mx-auto mt-[71px] grid max-w-[851px] grid-cols-1 sm:grid-cols-[64px_1fr] items-start gap-8 rounded-2xl border border-[#0a9dfb] bg-[#eff6ff] p-4 lg:p-10">
-			<img class="h-16 w-16 rounded-full object-cover" src="/images/summer/struggle/avatar-sarah.jpg" alt={content.quoteAvatarAlt} />
-			<div class="flex flex-col gap-4 mt-[14px] gap-[27px]">
-				<p class="m-0 md:text-[17px] text-[14px] leading-7 italic text-[#1a1647] font-medium">{content.quote}</p>
-				<footer class="text-sm leading-6 font-medium text-[#475569]">{content.quoteAttribution}</footer>
-			</div>
-		</blockquote>
+		<div
+			class="w-full max-w-[800px] rounded-2xl border border-solid border-[#0a9dfb] bg-[#eff6ff] p-8 md:p-10 lg:p-[40px]"
+		>
+			<p
+				class="m-0 text-center font-[var(--ysa-font-display)] text-[17px] font-medium italic leading-[28px] text-[#1a1647]"
+			>
+				{content.narrative.trim()}
+			</p>
+		</div>
 	</div>
 </section>
