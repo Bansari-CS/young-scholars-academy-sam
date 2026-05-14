@@ -156,7 +156,7 @@ camps:
       dateSlot: june-mid
   aiTitle: "Ask Scheduley AI: Your Personal Scheduling Assistant"
   aiDescription: Get personalized camp recommendations based on your child's interests.
-  aiCtaLabel: Ask Our AI
+  aiCtaLabel: Ask Scheduley AI
   aiCtaHref: "#"
   browseLabel: Browse All 300+ Topics
   browseHref: "#"
