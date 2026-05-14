@@ -10,9 +10,20 @@ interface Props {
 	primaryCtaLabel: string;
 	guaranteeText: string;
 	relatedTitle: string;
+	shareTitle?: string;
 }
 
-const { price, cohort, includes, includesTitle, related, primaryCtaLabel, guaranteeText, relatedTitle } = Astro.props;
+const {
+	price,
+	cohort,
+	includes,
+	includesTitle,
+	related,
+	primaryCtaLabel,
+	guaranteeText,
+	relatedTitle,
+	shareTitle,
+} = Astro.props;
 
 ---
 <aside>
@@ -39,6 +50,23 @@ const { price, cohort, includes, includesTitle, related, primaryCtaLabel, guaran
 			</ul>
 		</div>
 		<PrimaryButton href="#" label={primaryCtaLabel} variant="lg" class="mt-6 w-full" />
+		<div class="mt-4 w-full" data-course-share data-share-title={shareTitle ?? ''}>
+			<button
+				type="button"
+				class="flex w-full min-h-[56px] cursor-pointer items-center justify-center gap-2 rounded-xl border border-violet-100 bg-violet-50/40 px-8 py-4 text-base font-semibold text-violet-600 shadow-sm transition hover:border-violet-200 hover:bg-violet-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400"
+				data-share-toggle
+				aria-label="Share this course"
+			>
+				<img
+					src="/assets/course-detail/icon-share.svg"
+					alt=""
+					aria-hidden="true"
+					class="h-4 w-4 shrink-0"
+					loading="lazy"
+				/>
+				<span>Share</span>
+			</button>
+		</div>
 		<p class="mt-6 text-center text-[12px] leading-[18px] text-[#94a3b8]">{guaranteeText}</p>
 	</div>
 

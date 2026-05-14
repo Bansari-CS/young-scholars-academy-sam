@@ -6,31 +6,34 @@ interface Props {
 }
 
 const { tabs, shareTitle } = Astro.props;
+
+/** Hash targets must match section `id`s on the course detail page (e.g. `#learning-outcomes`). */
+function tabLabelToHash(label: string) {
+	return `#${label.trim().toLowerCase().replace(/\s+/g, '-')}`;
+}
 ---
 
 <nav class="border-y border-slate-100 bg-white" aria-label="Course sections">
 	<div class="mx-auto flex min-h-12 max-w-[1216px] items-center justify-between gap-4 px-4">
-		<ul class="m-0 flex list-none items-center gap-5 p-0">
+		<ul class="m-0 flex list-none items-center gap-5 overflow-x-auto p-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 			{
 				tabs.map((tab, index) => (
-					<li
-						class:list={[
-							'border-b-2 border-transparent py-3 text-sm font-semibold text-slate-500',
-							index === 0 && 'border-b-sky-500 text-sky-500',
-						]}
-					>
-						<button
-							type="button"
-							class="tab-button cursor-pointer bg-transparent no-underline"
-							data-tab-index={index}
+					<li class="flex-shrink-0 py-3">
+						<a
+							href={tabLabelToHash(tab)}
+							class:list={[
+								'course-tab-jump block border-b-2 border-transparent pb-3 text-sm font-semibold no-underline transition-colors',
+								index === 0 ? 'border-b-sky-500 text-sky-500' : 'text-slate-500 hover:text-slate-700',
+							]}
+							data-course-tab
 						>
 							{tab}
-						</button>
+						</a>
 					</li>
 				))
 			}
 		</ul>
-		<div
+		<!-- <div
 			class="course-share relative z-20"
 			data-course-share
 			data-share-title={shareTitle ?? ''}
@@ -50,34 +53,39 @@ const { tabs, shareTitle } = Astro.props;
 				/>
 				<span>Share</span>
 			</button>
-		</div>
+		</div> -->
 	</div>
 </nav>
 
 <script>
-	const buttons = Array.from(
-		document.querySelectorAll<HTMLButtonElement>('.tab-button[data-tab-index]')
-	);
-	const items = buttons
-		.map((btn) => btn.closest('li'))
-		.filter(Boolean) as HTMLLIElement[];
+	const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[data-course-tab]'));
 
 	const setActive = (activeIndex: number) => {
-		items.forEach((item, index) => {
+		links.forEach((a, index) => {
 			const isActive = index === activeIndex;
-			item.classList.toggle('border-b-sky-500', isActive);
-			item.classList.toggle('text-sky-500', isActive);
-			item.classList.toggle('border-transparent', !isActive);
-			item.classList.toggle('text-slate-500', !isActive);
+			a.classList.toggle('border-b-sky-500', isActive);
+			a.classList.toggle('text-sky-500', isActive);
+			a.classList.toggle('border-transparent', !isActive);
+			a.classList.toggle('text-slate-500', !isActive);
+			a.classList.toggle('hover:text-slate-700', !isActive);
+			if (isActive) a.setAttribute('aria-current', 'true');
+			else a.removeAttribute('aria-current');
 		});
 	};
 
-	buttons.forEach((btn) => {
-		btn.addEventListener('click', () => {
-			const idx = Number(btn.dataset.tabIndex ?? '0');
-			setActive(idx);
-		});
-	});
+	const indexForHash = (hash: string) => {
+		if (!hash) return 0;
+		const target = `#${decodeURIComponent(hash.replace(/^#/, ''))}`;
+		const idx = links.findIndex((a) => a.getAttribute('href') === target);
+		return idx >= 0 ? idx : 0;
+	};
+
+	const syncActiveFromHash = () => {
+		setActive(indexForHash(window.location.hash));
+	};
+
+	syncActiveFromHash();
+	window.addEventListener('hashchange', syncActiveFromHash);
 
 	const roots = document.querySelectorAll<HTMLElement>('[data-course-share]');
 	roots.forEach((root) => {

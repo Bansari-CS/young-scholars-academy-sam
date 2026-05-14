@@ -10,6 +10,7 @@ import AboutSection from '../components/course-detail/AboutSection.astro';
 import FinalCtaSection from '../components/course-detail/FinalCtaSection.astro';
 import { getEntry } from 'astro:content';
 import { heroData } from '../data/home';
+import SummerFaqSection from '../components/summer/SummerFaqSection.astro';
 
 const courseDetailEntry = await getEntry('course-detail', 'course-detail');
 
@@ -27,9 +28,14 @@ const shareTitle = `${courseDetailContent.hero.titleLead} ${courseDetailContent.
 	<main class="site-main bg-[#f8fafc] overflow-x-hidden">
 		<Hero {...courseDetailContent.hero} />
 		<TabsBar tabs={courseDetailContent.tabs} shareTitle={shareTitle} />
-		<MainContentSection content={courseDetailContent.content} sidebar={courseDetailContent.sidebar} />
+		<MainContentSection
+			content={courseDetailContent.content}
+			sidebar={courseDetailContent.sidebar}
+			shareTitle={shareTitle}
+		/>
 		<ReviewsSection reviews={courseDetailContent.reviews} />
 		<AboutSection {...courseDetailContent.about} />
+		<SummerFaqSection/>
 		<FinalCtaSection {...courseDetailContent.finalCta} />
 	</main>
 

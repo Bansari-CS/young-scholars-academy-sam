@@ -39,7 +39,7 @@ hero:
 tabs:
   - Overview
   - Learning Outcomes
-  - Schedule
+  # - Schedule
   - Teacher
   - Reviews
 sidebar:
@@ -123,7 +123,7 @@ about:
   linkLabel: Learn more about our mission →
 finalCta:
   title: Ready to build the future?
-  descriptionLine1: Join 5,000+ young innovators. Enrollment for the Winter 2024
+  descriptionLine1: Join 400+ families. Enrollment for the Winter 2026
   descriptionLine2: cohort is now open. Limited seats per class to ensure quality.
   primaryButtonLabel: Enroll Now - $299
   secondaryButtonLabel: Contact Us
