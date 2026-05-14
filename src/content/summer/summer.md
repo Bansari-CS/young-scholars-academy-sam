@@ -95,13 +95,25 @@ promise:
 camps:
   title: 321 Camps Across 38 Categories.
   subtitle: From Minecraft Architecture to National Debate Prep.
+  guided:
+    title: Which is the best way for us to help you?
   searchPlaceholder: Search for camps (e.g. 'Minecraft', 'Debate')...
   filterLabels:
-    - Age Range
-    - Category
+    - Camp type
+    - Age range
     - Level
     - Date
   exploreLabel: Explore
+  dateSlotRanges:
+    june-early:
+      start: "2026-06-03"
+      end: "2026-06-07"
+    june-mid:
+      start: "2026-06-10"
+      end: "2026-06-14"
+    july-a:
+      start: "2026-07-08"
+      end: "2026-07-12"
   cards:
     - tag: STEM & TECH
       tagClass: tag-stem
@@ -112,6 +124,7 @@ camps:
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$499"
       image: /images/summer/camps/camp-coding.jpg
+      dateSlot: june-early
     - tag: HUMANITIES
       tagClass: tag-humanities
       name: National Debate Prep
@@ -121,6 +134,7 @@ camps:
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$549"
       image: /images/summer/camps/camp-debate.jpg
+      dateSlot: june-mid
     - tag: CREATIVE ARTS
       tagClass: tag-creative
       name: D&D Campaign Masters
@@ -130,6 +144,7 @@ camps:
       levelIcon: /images/summer/camps/icon-weekly.svg
       price: "$399"
       image: /images/summer/camps/camp-dnd.jpg
+      dateSlot: june-early
     - tag: PLAY & COMMUNITY
       tagClass: tag-play
       name: Minecraft Architecture
@@ -139,6 +154,7 @@ camps:
       levelIcon: /images/summer/camps/icon-weekly.svg
       price: "$399"
       image: /images/summer/camps/camp-minecraft.jpg
+      dateSlot: july-a
     - tag: HUMANITIES
       tagClass: tag-humanities
       name: National Debate Prep
@@ -148,6 +164,7 @@ camps:
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$549"
       image: /images/summer/camps/camp-debate.jpg
+      dateSlot: july-a
     - tag: STEM & TECH
       tagClass: tag-stem
       name: Coding & Future AI
@@ -157,6 +174,7 @@ camps:
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$499"
       image: /images/summer/camps/camp-coding.jpg
+      dateSlot: june-mid
   aiTitle: Not sure where to start?
   aiDescription: Get personalized camp recommendations based on your child's interests.
   aiCtaLabel: Ask Our AI

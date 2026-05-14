@@ -328,6 +328,46 @@
 
 }
 
+.summer-camps-guided-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #0f172a;
+	margin-bottom: 14px;
+}
+
+.summer-camps-guided-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.summer-camps-guided-btn {
+	border: 1px solid #e2e8f0;
+	background: #fff;
+	border-radius: 12px;
+	padding: 12px 18px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #334155;
+	cursor: pointer;
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease,
+		color 0.15s ease;
+}
+
+.summer-camps-guided-btn:hover {
+	border-color: #0a9dfb;
+	color: #0369a1;
+	box-shadow: 0 4px 12px rgba(10, 157, 251, 0.15);
+}
+
+.summer-camps-guided-btn:focus-visible {
+	outline: 2px solid #0a9dfb;
+	outline-offset: 2px;
+}
+
 .summer-camps-filters {
 	display: flex;
 	gap: 16px;
@@ -344,58 +384,281 @@
 
 .summer-camps-search {
 	flex: 1;
+	min-width: 200px;
 	background: #f9fafb;
 	border-radius: 12px;
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	padding: 14px 16px;
+	padding: 10px 16px;
 	font-size: 14px;
 	color: #4b5563;
+	cursor: text;
+}
+
+.summer-camps-search-input {
+	flex: 1;
+	min-width: 0;
+	border: 0;
+	background: transparent;
+	font-size: 14px;
+	color: #111827;
+	outline: none;
+}
+
+.summer-camps-search-input::placeholder {
+	color: #6b7280;
 }
 
 .summer-camps-search img {
 	width: 16px;
 	height: 16px;
+	flex-shrink: 0;
+}
+
+.summer-camps-select-wrap {
+	position: relative;
+	display: inline-flex;
+	align-items: stretch;
+	min-width: 0;
+}
+
+.summer-camps-select-wrap:focus-within {
+	z-index: 1;
+}
+
+.summer-camps-select-wrap:focus-within .summer-camps-filter-select {
+	border-color: #0a9dfb;
+	box-shadow:
+		0 0 0 3px rgba(10, 157, 251, 0.22),
+		inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.summer-camps-filter-select {
+	appearance: none;
+	-webkit-appearance: none;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 10px 38px 10px 14px;
+	min-height: 44px;
+	min-width: 7.5rem;
+	max-width: 220px;
+	width: 100%;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.2;
+	color: #1e293b;
+	cursor: pointer;
+	background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease,
+		background 0.15s ease;
+}
+
+.summer-camps-select-wrap--age .summer-camps-filter-select {
+	min-width: 8.25rem;
+}
+
+.summer-camps-filter-select:hover {
+	border-color: #cbd5e1;
+	background: #fff;
+}
+
+.summer-camps-filter-select:focus {
+	outline: none;
+}
+
+.summer-camps-filter-select:focus-visible {
+	outline: none;
+	border-color: #0a9dfb;
+	box-shadow:
+		0 0 0 3px rgba(10, 157, 251, 0.22),
+		inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.summer-camps-select-chevron {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 10px;
+	height: 10px;
+	pointer-events: none;
+	opacity: 0.55;
+}
+
+.summer-camps-date-field {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	min-height: 44px;
+	min-width: 10.5rem;
+	max-width: 240px;
+	flex: 0 1 auto;
+	padding: 4px 6px 4px 12px;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease;
+}
+
+.summer-camps-date-field:focus-within {
+	border-color: #0a9dfb;
+	box-shadow:
+		0 0 0 3px rgba(10, 157, 251, 0.22),
+		inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.summer-camps-date-input {
+	flex: 1;
+	min-width: 0;
+	position: relative;
+	border: 0;
+	background: transparent;
+	font-size: 14px;
+	font-weight: 600;
+	color: #1e293b;
+	font-family: inherit;
+	cursor: pointer;
+}
+
+.summer-camps-date-input::-moz-calendar-picker-indicator {
+	opacity: 0;
+}
+
+.summer-camps-date-input:focus {
+	outline: none;
+}
+
+.summer-camps-date-input::-webkit-calendar-picker-indicator {
+	opacity: 0;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.summer-camps-date-picker-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 40px;
+	height: 36px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 8px;
+	background: rgba(10, 157, 251, 0.1);
+	color: #0369a1;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		transform 0.1s ease;
+}
+
+.summer-camps-date-picker-btn:hover {
+	background: rgba(10, 157, 251, 0.18);
+}
+
+.summer-camps-date-picker-btn:active {
+	transform: scale(0.97);
+}
+
+.summer-camps-date-picker-btn:focus-visible {
+	outline: 2px solid #0a9dfb;
+	outline-offset: 2px;
+}
+
+.summer-camps-date-picker-btn img {
+	width: 16px;
+	height: 16px;
+	display: block;
 }
 
 .summer-camps-filter-chips {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 12px;
 	align-items: center;
 	border-left: 1px solid #e5e7eb;
 	padding-left: 8px;
 }
 
-.summer-camps-filter-chips button {
-	border: 1px solid #e5e7eb;
-	background: #f9fafb;
-	border-radius: 8px;
-	padding: 8px 12px;
-	display: inline-flex;
-	gap: 8px;
+.summer-camps-filter-tier {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
 	align-items: center;
-	font-size: 13px;
-	font-weight: 600;
-	color: #4b5563;
 }
 
-.summer-camps-filter-chips img {
-	width: 10px;
-	height: 10px;
+.summer-camps-filter-tier--secondary {
+	padding-left: 12px;
+	margin-left: 4px;
+	border-left: 1px solid #e5e7eb;
 }
 
-.summer-camps-filters>a {
+@media (max-width: 900px) {
+	.summer-camps-filter-chips {
+		flex-basis: 100%;
+		border-left: 0;
+		padding-left: 0;
+		padding-top: 12px;
+		margin-top: 8px;
+		border-top: 1px solid #e5e7eb;
+	}
+
+	.summer-camps-filter-tier--secondary {
+		border-left: 0;
+		padding-left: 0;
+		margin-left: 0;
+		flex-basis: 100%;
+		padding-top: 10px;
+		margin-top: 4px;
+		border-top: 1px solid #e5e7eb;
+	}
+}
+
+.summer-camps-select-wrap--camp-type .summer-camps-filter-select {
+	min-width: 10.5rem;
+	max-width: 240px;
+}
+
+.summer-camps-filters>a,
+.summer-camps-explore-btn {
 	background: #0a9dfb;
 	color: #fff;
 	text-decoration: none;
 	padding: 12px 32px;
 	border-radius: 12px;
 	font-weight: 500;
+	border: none;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+.summer-camps-explore-btn:hover {
+	filter: brightness(1.05);
+}
+
+.summer-camps-explore-btn:focus-visible {
+	outline: 2px solid #0369a1;
+	outline-offset: 2px;
 }
 
 .summer-camp-grid {
 	gap: 15px 20px;
+}
+
+.summer-program-card-figma.summer-camp-card--filtered-out {
+	display: none !important;
 }
 
 .summer-program-card-figma {
