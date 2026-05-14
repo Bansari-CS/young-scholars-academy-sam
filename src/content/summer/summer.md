@@ -72,7 +72,7 @@ promise:
   ctaLabel: Show Me These Camps
   ctaHref: "#programs"
 camps:
-  title: 321 Camps Across 38 Categories.
+  title: 80 Camps Across 38 Categories.
   subtitle: From Minecraft Architecture to National Debate Prep.
   guided:
     title: Which is the best way for us to help you?
@@ -154,7 +154,7 @@ camps:
       price: "$499"
       image: /images/summer/camps/camp-coding.jpg
       dateSlot: june-mid
-  aiTitle: Not sure where to start?
+  aiTitle: "Ask Scheduley AI: Your Personal Scheduling Assistant"
   aiDescription: Get personalized camp recommendations based on your child's interests.
   aiCtaLabel: Ask Our AI
   aiCtaHref: "#"
@@ -303,7 +303,7 @@ finalCta:
   description: Give your child a summer that doesn't just pass the time, but builds their identity and connects them with a global community of like-minded peers.
   primaryCtaLabel: Find the Perfect Camp
   primaryCtaHref: "#programs"
-  secondaryCtaLabel: View All 321 Camps
+  secondaryCtaLabel: View All 80 Camps
   secondaryCtaHref: "#programs"
   footnote: Limited spots available per class. Enrollment closes June 1st.
 ---
