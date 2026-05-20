@@ -11,6 +11,8 @@ import FinalCtaSection from '../components/course-detail/FinalCtaSection.astro';
 import { getEntry } from 'astro:content';
 import { heroData } from '../data/home';
 import SummerFaqSection from '../components/summer/SummerFaqSection.astro';
+import SummerResultsSection from '../components/summer/SummerResultsSection.astro';
+import '../styles/components/summer-full.css';
 
 const courseDetailEntry = await getEntry('course-detail', 'course-detail');
 
@@ -34,6 +36,11 @@ const shareTitle = `${courseDetailContent.hero.titleLead} ${courseDetailContent.
 			shareTitle={shareTitle}
 		/>
 		<ReviewsSection reviews={courseDetailContent.reviews} />
+		{
+			courseDetailContent.testimonials && (
+				<SummerResultsSection content={courseDetailContent.testimonials} />
+			)
+		}
 		<AboutSection {...courseDetailContent.about} />
 		<SummerFaqSection/>
 		<FinalCtaSection {...courseDetailContent.finalCta} />

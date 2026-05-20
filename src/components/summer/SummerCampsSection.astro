@@ -198,28 +198,129 @@ const scheduleyEmbedSrc =
 			No camps match your filters. Try clearing search, setting camp type and age to All, or clearing the date.
 		</p>
 
-		<div class="summer-ai-section">
-			<div class="summer-ai-intro">
+		<div class="summer-ai-strip p-5 md:p-8 lg:p-10 flex-wrap md:flex-nowrap">
+			<div>
 				<h3 class="font-bold">{content.aiTitle}</h3>
 				<p>{content.aiDescription}</p>
 			</div>
-			<div class="summer-ai-embed">
-				<iframe
-					src={scheduleyEmbedSrc}
-					height="800"
-					width="100%"
-					frameborder="0"
-					title={content.aiEmbedTitle ?? 'Summer Camp Guide'}
-					allow="microphone; clipboard-write; screen-wake-lock"
-				/>
-			</div>
+			<button
+				type="button"
+				class="summer-ai-cta"
+				data-scheduley-open
+				data-scheduley-embed-src={scheduleyEmbedSrc}
+				aria-haspopup="dialog"
+			>
+				<img src="/images/summer/camps/icon-ai.svg" alt="" aria-hidden="true" />
+				{content.aiCtaLabel ?? 'Ask Scheduley AI'}
+			</button>
 		</div>
 		<div class="summer-browse-wrap">
 			<a href={content.browseHref} class="summer-browse-btn">{content.browseLabel}</a>
 		</div>
 	</div>
 
+	<div
+		id="summer-scheduley-modal"
+		class="summer-scheduley-modal summer-scheduley-modal--closed"
+		aria-hidden="true"
+	>
+		<button
+			type="button"
+			class="summer-scheduley-modal__backdrop"
+			data-scheduley-modal-close
+			aria-label="Close Scheduley AI"
+		/>
+		<div
+			class="summer-scheduley-modal__panel"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="summer-scheduley-modal-title"
+		>
+			<div class="summer-scheduley-modal__head">
+				<p id="summer-scheduley-modal-title" class="summer-scheduley-modal__title">
+					{content.aiEmbedTitle ?? content.aiCtaLabel ?? 'Scheduley AI'}
+				</p>
+				<button
+					type="button"
+					class="summer-scheduley-modal__close"
+					data-scheduley-modal-close
+					aria-label="Close Scheduley AI"
+				>
+					<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+						<path d="M18 6 6 18M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+			<iframe
+				class="summer-scheduley-modal__iframe"
+				data-scheduley-iframe
+				title={content.aiEmbedTitle ?? 'Summer Camp Guide'}
+				allow="microphone; clipboard-write; screen-wake-lock"
+			/>
+		</div>
+	</div>
+
 	<script type="application/json" id="summer-camps-config" set:html={campsConfig} />
+
+	<script is:inline>
+		(function () {
+			const modal = document.getElementById('summer-scheduley-modal');
+			const iframe = modal && modal.querySelector('[data-scheduley-iframe]');
+
+			function closeScheduleyModal() {
+				if (!modal || !iframe) return;
+				modal.classList.add('summer-scheduley-modal--closed');
+				modal.setAttribute('aria-hidden', 'true');
+				document.body.classList.remove('overflow-hidden');
+				iframe.removeAttribute('src');
+			}
+
+			function openScheduleyModal(embedSrc) {
+				if (!modal || !iframe || !embedSrc) return;
+				modal.classList.remove('summer-scheduley-modal--closed');
+				modal.setAttribute('aria-hidden', 'false');
+				document.body.classList.add('overflow-hidden');
+				iframe.src = embedSrc;
+			}
+
+			function bindScheduleyModal() {
+				document.querySelectorAll('[data-scheduley-open]').forEach(function (btn) {
+					if (btn.dataset.scheduleyBound === '1') return;
+					btn.dataset.scheduleyBound = '1';
+					btn.addEventListener('click', function () {
+						const embedSrc = btn.getAttribute('data-scheduley-embed-src');
+						if (embedSrc) openScheduleyModal(embedSrc);
+					});
+				});
+
+				modal?.querySelectorAll('[data-scheduley-modal-close]').forEach(function (btn) {
+					btn.addEventListener('click', closeScheduleyModal);
+				});
+
+				document.addEventListener('keydown', function (event) {
+					if (
+						event.key === 'Escape' &&
+						modal &&
+						!modal.classList.contains('summer-scheduley-modal--closed')
+					) {
+						closeScheduleyModal();
+					}
+				});
+			}
+
+			if (modal) {
+				modal.classList.add('summer-scheduley-modal--closed');
+			}
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', bindScheduleyModal);
+			} else {
+				bindScheduleyModal();
+			}
+
+			document.addEventListener('astro:page-load', bindScheduleyModal);
+		})();
+	</script>
 
 	<script>
 		function readConfig() {

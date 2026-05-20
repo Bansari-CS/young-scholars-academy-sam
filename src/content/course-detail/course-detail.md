@@ -102,6 +102,21 @@ content:
       topic: Sensors and Data Inputs
       date: Nov 26, 4:00 PM
   instructorBio: With over 15 years of experience in aerospace robotics and a PhD in Educational Technology, Dr. Watson specializes in making complex engineering concepts accessible to young minds. He has taught over 5,000 students globally.
+testimonials:
+  eyebrow: PROVEN RESULTS
+  title: Real Growth. Measurable Impact.
+  description: Families don't just see happier kids—they see tangible academic and emotional progress
+  items:
+    - name: YSA Mom
+      meta: Parent of a 2e student
+      driveFileId: 1kdXFd6_ycvbReETQmXUiM6GMOFEhdol6
+      posterSrc: /assets/course-detail/testimonial-ysa-moms.png
+      quote: "If anyone's on the fence, absolutely jump on this opportunity. My twice-exceptional son really struggles with online learning—but that happens with Young Scholars Academy. Mr. Sam was the most influential, encouraging teacher my son had. I cannot say enough wonderful things about YSA."
+    - name: Melissa & Zoe
+      meta: Mother and daughter, YSA families
+      driveFileId: 1e7BFlvhqRRWJfcdsQErbAmvJjkB8rK2l
+      posterSrc: /images/summer/testimonial/melissa-zoe.png
+      quote: "At the end of open house, Zoe looked at me and said, \"I have to sign up for those classes because these people get me.\" It's been amazing to connect with other neurodivergent lifelong learners—and both kids have had incredible experiences in fall, spring, and summer classes."
 reviews:
   title: Parent Reviews
   rating: 4.9/5.0

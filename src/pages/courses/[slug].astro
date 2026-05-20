@@ -7,6 +7,8 @@ import TabsBar from '../../components/course-detail/TabsBar.astro';
 import MainContentSection from '../../components/course-detail/MainContentSection.astro';
 import ReviewsSection from '../../components/course-detail/ReviewsSection.astro';
 import AboutSection from '../../components/course-detail/AboutSection.astro';
+import SummerResultsSection from '../../components/summer/SummerResultsSection.astro';
+import '../../styles/components/summer-full.css';
 import FinalCtaSection from '../../components/course-detail/FinalCtaSection.astro';
 import { getEntry } from 'astro:content';
 import { programsSectionData } from '../../data/programsSection';
@@ -59,6 +61,7 @@ const shareTitle = `${courseContent.hero.titleLead} ${courseContent.hero.titleAc
 		<TabsBar tabs={courseContent.tabs} shareTitle={shareTitle} />
 		<MainContentSection content={courseContent.content} sidebar={courseContent.sidebar} shareTitle={shareTitle} />
 		<ReviewsSection reviews={courseContent.reviews} />
+		{courseContent.testimonials && <SummerResultsSection content={courseContent.testimonials} />}
 		<AboutSection {...courseContent.about} />
 		<FinalCtaSection {...courseContent.finalCta} />
 	</main>

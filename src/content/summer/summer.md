@@ -105,7 +105,7 @@ camps:
       level: Elite Level
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$499"
-      image: /images/summer/camps/camp-coding.jpg
+      image: /assets/images/summer-camp/stem-tech.jpg
       dateSlot: june-early
     - tag: HUMANITIES
       tagClass: tag-humanities
@@ -115,7 +115,7 @@ camps:
       level: Advanced
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$549"
-      image: /images/summer/camps/camp-debate.jpg
+      image: /assets/images/summer-camp/humanities.png
       dateSlot: june-mid
     - tag: CREATIVE ARTS
       tagClass: tag-creative
@@ -125,7 +125,7 @@ camps:
       level: Weekly
       levelIcon: /images/summer/camps/icon-weekly.svg
       price: "$399"
-      image: /images/summer/camps/camp-dnd.jpg
+      image: /assets/images/summer-camp/creative-arts.png
       dateSlot: june-early
     - tag: PLAY & COMMUNITY
       tagClass: tag-play
@@ -135,7 +135,7 @@ camps:
       level: Weekly
       levelIcon: /images/summer/camps/icon-weekly.svg
       price: "$399"
-      image: /images/summer/camps/camp-minecraft.jpg
+      image: /assets/images/summer-camp/play-community.jpg
       dateSlot: july-a
     - tag: HUMANITIES
       tagClass: tag-humanities
@@ -145,7 +145,7 @@ camps:
       level: Advanced
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$549"
-      image: /images/summer/camps/camp-debate.jpg
+      image: /assets/images/summer-camp/humanities.png
       dateSlot: july-a
     - tag: STEM & TECH
       tagClass: tag-stem
@@ -155,10 +155,11 @@ camps:
       level: Elite Level
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$499"
-      image: /images/summer/camps/camp-coding.jpg
+      image: /assets/images/summer-camp/stem-tech.jpg
       dateSlot: june-mid
   aiTitle: "Ask Scheduley AI: Your Personal Scheduling Assistant"
   aiDescription: Get personalized camp recommendations based on your child's interests.
+  aiCtaLabel: Ask Scheduley AI
   aiEmbedSrc: "https://summer-camp-guide-v1.on.chipp.ai"
   aiEmbedTitle: Summer Camp Guide
   browseLabel: Browse All 300+ Topics
