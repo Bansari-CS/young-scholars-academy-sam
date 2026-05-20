@@ -7,6 +7,7 @@ import BlogDetailRelatedSection from '../../components/blog-detail/BlogDetailRel
 import BlogDetailFinalCtaSection from '../../components/blog-detail/BlogDetailFinalCtaSection.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import { heroData } from '../../data/home';
+import { extractOutlineFromMarkdown } from '../../utils/blogOutline';
 
 export async function getStaticPaths() {
 	const [blogDetailEntry] = await getCollection('blog-detail');
@@ -24,12 +25,13 @@ if (!blogDetailEntry) {
 }
 
 const { Content } = await render(blogDetailEntry);
+const outlineItems = extractOutlineFromMarkdown(blogDetailEntry.body ?? '');
 ---
 
 <Layout title={blogDetailEntry.data.seo.title} description={blogDetailEntry.data.seo.description}>
 	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
 	<main class="bg-[#f8fafc] pt-12 pb-[80px] text-[#111827]">
-		<BlogDetailContentSection content={blogDetailEntry.data} Content={Content} />
+		<BlogDetailContentSection content={blogDetailEntry.data} Content={Content} outlineItems={outlineItems} />
 		<BlogDetailRelatedSection content={blogDetailEntry.data.relatedSection} />
 		<BlogDetailFinalCtaSection content={blogDetailEntry.data.finalCta} />
 	</main>

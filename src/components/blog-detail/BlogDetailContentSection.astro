@@ -1,4 +1,9 @@
 ---
+interface OutlineItem {
+	id: string;
+	title: string;
+}
+
 interface Props {
 	content: {
 		breadcrumbHomeLabel: string;
@@ -37,9 +42,11 @@ interface Props {
 		};
 	};
 	Content: any;
+	outlineItems?: OutlineItem[];
 }
 
-const { content, Content } = Astro.props;
+const { content, Content, outlineItems = [] } = Astro.props;
+const showOutline = outlineItems.length >= 2;
 const article = content.article ?? content;
 const sidebar = content.sidebar ?? article.sidebar;
 ---
@@ -95,14 +102,32 @@ const sidebar = content.sidebar ?? article.sidebar;
 			/>
 
 			<div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(100px,150px)_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[170px_minmax(0,1fr)] lg:items-start">
-				<nav
-					id="article-outline"
-					class="article-outline hidden rounded-2xl border border-[rgba(226,232,240,0.9)] bg-white p-3 shadow-[0px_4px_12px_-4px_rgba(0,0,0,0.04)] lg:sticky lg:top-28 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto xl:p-4"
-					aria-label="Table of Contents"
-				>
-					<p class="text-[10px] font-bold uppercase tracking-[0.1em] text-[#64748b]">Table of Contents</p>
-					<ul id="article-outline-list" class="article-outline-list mt-3 p-0"></ul>
-				</nav>
+				{
+					showOutline && (
+						<nav
+							id="article-outline"
+							class="hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-[0px_4px_12px_-4px_rgba(0,0,0,0.04)] lg:sticky lg:top-28 lg:block lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto xl:p-4"
+							aria-label="Table of Contents"
+						>
+							<p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Table of Contents</p>
+							<ul id="article-outline-list" class="mt-3 list-none space-y-0.5 p-0">
+								{outlineItems.map((item) => (
+									<li
+										data-outline-id={item.id}
+										class="border-l-2 border-transparent pl-3 transition-[border-color] duration-200 hover:border-[#0a9dfb]/35 data-[active]:border-[#0a9dfb]"
+									>
+										<a
+											href={`#${item.id}`}
+											class="block py-1.5 text-xs font-medium leading-snug text-slate-400 no-underline transition-colors duration-200 hover:text-[#0a9dfb] focus-visible:text-[#0a9dfb] focus-visible:outline-none data-[active]:font-semibold data-[active]:text-[#0a9dfb] xl:text-[13px] xl:leading-6"
+										>
+											{item.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						</nav>
+					)
+				}
 
 				<div class="blog-markdown min-w-0 max-w-none">
 					<Content />
@@ -185,28 +210,108 @@ const sidebar = content.sidebar ?? article.sidebar;
 	(function initArticleOutline() {
 		const md = document.querySelector('article .blog-markdown');
 		const shell = document.getElementById('article-outline');
-		const list = document.getElementById('article-outline-list');
-		if (!md || !shell || !list) return;
+		if (!md || !shell) return;
 
-		const headings = Array.from(md.querySelectorAll('h2'));
-		if (headings.length < 2) return;
+		const slugify = (value) =>
+			value
+				.toLowerCase()
+				.trim()
+				.replace(/[^\w\s-]/g, '')
+				.replace(/\s+/g, '-');
 
-		const frag = document.createDocumentFragment();
-		for (const h of headings) {
-			const id = h.id;
-			if (!id) continue;
-			const text = (h.textContent || '').trim() || 'Section';
-			const li = document.createElement('li');
-			const a = document.createElement('a');
-			a.href = '#' + id;
-			a.textContent = text;
-			a.className = 'article-outline-link';
-			li.appendChild(a);
-			frag.appendChild(li);
+		const items = Array.from(shell.querySelectorAll('[data-outline-id]'))
+			.map((li) => {
+				const id = li.getAttribute('data-outline-id');
+				if (!id) return null;
+
+				let heading = document.getElementById(id);
+				if (!heading) {
+					const h2s = Array.from(md.querySelectorAll('h2'));
+					heading =
+						h2s.find((h) => {
+							const text = (h.textContent || '').trim();
+							return slugify(text) === id || h.id === id;
+						}) ?? null;
+					if (heading && !heading.id) heading.id = id;
+				}
+
+				const link = li.querySelector('a');
+				if (link) {
+					link.addEventListener('click', (event) => {
+						event.preventDefault();
+						if (heading) {
+							heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+							history.replaceState(null, '', '#' + id);
+						}
+						setActive(id);
+					});
+				}
+
+				return heading && link ? { id, heading, item: li, link } : null;
+			})
+			.filter(Boolean);
+
+		if (!items.length) return;
+
+		const scrollOffset = 140;
+
+		function setActive(activeId) {
+			for (const { id, item, link } of items) {
+				const isActive = activeId !== null && id === activeId;
+				if (isActive) {
+					item.setAttribute('data-active', '');
+					link.setAttribute('data-active', '');
+					link.setAttribute('aria-current', 'location');
+				} else {
+					item.removeAttribute('data-active');
+					link.removeAttribute('data-active');
+					link.removeAttribute('aria-current');
+				}
+			}
 		}
-		if (!frag.childNodes.length) return;
-		list.appendChild(frag);
-		shell.classList.remove('hidden');
+
+		function updateActiveFromScroll() {
+			const scrollPos = window.scrollY + scrollOffset;
+			const firstTop =
+				items[0].heading.getBoundingClientRect().top + window.scrollY;
+
+			if (scrollPos < firstTop - 24) {
+				setActive(null);
+				return;
+			}
+
+			let activeId = items[0].id;
+
+			for (const { id, heading } of items) {
+				const top = heading.getBoundingClientRect().top + window.scrollY;
+				if (top <= scrollPos) activeId = id;
+			}
+
+			const docBottom = window.scrollY + window.innerHeight;
+			const pageBottom = document.documentElement.scrollHeight;
+			if (docBottom >= pageBottom - 4) {
+				activeId = items[items.length - 1].id;
+			}
+
+			setActive(activeId);
+		}
+
+		let scrollTicking = false;
+		window.addEventListener(
+			'scroll',
+			() => {
+				if (scrollTicking) return;
+				scrollTicking = true;
+				window.requestAnimationFrame(() => {
+					updateActiveFromScroll();
+					scrollTicking = false;
+				});
+			},
+			{ passive: true },
+		);
+
+		window.addEventListener('resize', updateActiveFromScroll);
+		updateActiveFromScroll();
 	})();
 </script>
 
@@ -230,58 +335,6 @@ const sidebar = content.sidebar ?? article.sidebar;
 	@media (min-width: 1024px) {
 		.blog-markdown :global(h2) {
 			scroll-margin-top: 12rem;
-		}
-	}
-
-	.article-outline-list {
-		list-style-type: disc;
-		list-style-position: outside;
-		margin: 0;
-		padding-left: 1.125rem;
-	}
-
-	.article-outline-list > li {
-		padding-left: 0.375rem;
-		margin-bottom: 0.375rem;
-	}
-
-	.article-outline-list > li:last-child {
-		margin-bottom: 0;
-	}
-
-	.article-outline-list > li::marker {
-		color: #0a9dfb;
-		font-size: 1em;
-	}
-
-	.article-outline-list > li:hover {
-		background: rgba(248, 250, 252, 0.95);
-		border-radius: 0.375rem;
-	}
-
-	.article-outline-link {
-		display: block;
-		padding: 0.35rem 0.25rem 0.35rem 0;
-		font-size: 0.75rem;
-		line-height: 1.45;
-		font-weight: 600;
-		color: #475569;
-		text-decoration: none;
-		border-radius: 0.25rem;
-		transition: color 0.15s ease, background-color 0.15s ease;
-	}
-
-	.article-outline-link:hover,
-	.article-outline-link:focus-visible {
-		color: #0a9dfb;
-		background: rgba(10, 157, 251, 0.06);
-		outline: none;
-	}
-
-	@media (min-width: 1280px) {
-		.article-outline-link {
-			font-size: 0.8125rem;
-			line-height: 1.5;
 		}
 	}
 
