@@ -1,9 +1,108 @@
 ---
-import RealGrowthSection from '../common/RealGrowthSection.astro';
-import { getEntry } from 'astro:content';
+interface TestimonialItem {
+	name: string;
+	meta: string;
+	video: string;
+}
 
-const homeEntry = await getEntry('home', 'home');
-const impactContent = homeEntry?.data?.impact;
+interface Props {
+	content: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		items: TestimonialItem[];
+	};
+}
+
+const { content } = Astro.props;
+const playIcon = '/images/summer/results/play.svg';
 ---
 
-{impactContent ? <RealGrowthSection hideStats content={impactContent} /> : null}
+<section class="summer-results-section summer-section py-16 md:py-20 xl:py-24" aria-labelledby="summer-results-heading">
+	<div class="summer-wrap summer-results-wrap">
+		<p class="summer-results-kicker">{content.eyebrow}</p>
+		<h2 id="summer-results-heading" class="text-[28px] font-bold sm:text-[36px] lg:text-[44px]">{content.title}</h2>
+		<p class="summer-sub">{content.description}</p>
+
+		<div
+			class="summer-results-grid summer-results-grid--videos"
+			aria-label="Summer camp family testimonials"
+			style={`--summer-results-cols: ${Math.min(content.items.length, 2)}`}
+		>
+			{
+				content.items.map((item) => (
+					<article class="result-video-card" data-summer-video-card>
+						<div class="result-video-media">
+							<video
+								src={item.video}
+								preload="metadata"
+								playsinline
+								muted
+								aria-label={`${item.name} testimonial video`}
+							/>
+							<button
+								type="button"
+								class="result-video-play"
+								data-summer-video-play
+								aria-label={`Play ${item.name} testimonial`}
+							>
+								<img src={playIcon} alt="" width="54" height="54" />
+							</button>
+						</div>
+						<div class="result-video-copy">
+							<footer>
+								<div>
+									<strong>{item.name}</strong>
+									<span>{item.meta}</span>
+								</div>
+							</footer>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<script>
+	function initSummerTestimonialVideos() {
+		document.querySelectorAll('[data-summer-video-card]').forEach((card) => {
+			const root = card as HTMLElement;
+			if (root.dataset.summerVideoInited === '1') return;
+			root.dataset.summerVideoInited = '1';
+
+			const video = root.querySelector('video');
+			const playBtn = root.querySelector('[data-summer-video-play]') as HTMLButtonElement | null;
+			if (!video || !playBtn) return;
+
+			const stopPlaying = () => {
+				root.classList.remove('is-playing');
+				video.removeAttribute('controls');
+				video.muted = true;
+			};
+
+			playBtn.addEventListener('click', async () => {
+				root.classList.add('is-playing');
+				video.muted = false;
+				video.setAttribute('controls', '');
+				try {
+					await video.play();
+				} catch {
+					stopPlaying();
+				}
+			});
+
+			video.addEventListener('ended', () => {
+				video.pause();
+				video.currentTime = 0;
+				stopPlaying();
+			});
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initSummerTestimonialVideos);
+	} else {
+		initSummerTestimonialVideos();
+	}
+</script>

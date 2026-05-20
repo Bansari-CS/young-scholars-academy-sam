@@ -50,6 +50,12 @@ function campAgeRangeAttr(ageRange: { min: number; max: number } | null | undefi
 }
 
 const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
+
+const SCHEDULEY_EMBED_SRC = 'https://summer-camp-guide-v1.on.chipp.ai';
+const scheduleyEmbedSrc =
+	typeof content.aiEmbedSrc === 'string' && content.aiEmbedSrc.trim()
+		? content.aiEmbedSrc.trim()
+		: SCHEDULEY_EMBED_SRC;
 ---
 
 <section id="programs" class="summer-section summer-camps-section py-20 pt-0" data-summer-camps-root>
@@ -192,15 +198,21 @@ const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 			No camps match your filters. Try clearing search, setting camp type and age to All, or clearing the date.
 		</p>
 
-		<div class="summer-ai-strip p-5 md:p-8 lg:p-10 flex-wrap md:flex-nowrap">
-			<div>
+		<div class="summer-ai-section">
+			<div class="summer-ai-intro">
 				<h3 class="font-bold">{content.aiTitle}</h3>
 				<p>{content.aiDescription}</p>
 			</div>
-			<a href={content.aiCtaHref}>
-				<img src="/images/summer/camps/icon-ai.svg" alt="" aria-hidden="true" />
-				{content.aiCtaLabel}
-			</a>
+			<div class="summer-ai-embed">
+				<iframe
+					src={scheduleyEmbedSrc}
+					height="800"
+					width="100%"
+					frameborder="0"
+					title={content.aiEmbedTitle ?? 'Summer Camp Guide'}
+					allow="microphone; clipboard-write; screen-wake-lock"
+				/>
+			</div>
 		</div>
 		<div class="summer-browse-wrap">
 			<a href={content.browseHref} class="summer-browse-btn">{content.browseLabel}</a>

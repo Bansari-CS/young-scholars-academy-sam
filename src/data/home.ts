@@ -3,9 +3,9 @@ import type { HeroData, LearnerSectionData } from '../types/home';
 export const heroData: HeroData = {
 	trustBadges: [
 		'WASC Accredited',
-		'1,200+ Families Served',
+		'1.2K+ Families Served',
 		'93% Re-Enroll',
-		'40+ States, 13 Countries',
+		'17 Countries · 47 US States + D.C.',
 	],
 	titleLineOne: "Where Your Child's",
 	titleHighlight: 'Brilliance Belongs',

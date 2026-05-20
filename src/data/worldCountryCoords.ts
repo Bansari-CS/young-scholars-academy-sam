@@ -1,0 +1,20 @@
+/** Representative coordinates for globe markers (capitals / geographic centers). */
+export const WORLD_COUNTRY_COORDS: Record<string, { lat: number; lng: number }> = {
+	'United States': { lat: 39.8, lng: -98.6 },
+	Canada: { lat: 54.5, lng: -105.0 },
+	'New Zealand': { lat: -41.29, lng: 174.78 },
+	Australia: { lat: -25.27, lng: 133.78 },
+	Switzerland: { lat: 46.82, lng: 8.23 },
+	Peru: { lat: -9.19, lng: -75.02 },
+	Chile: { lat: -33.45, lng: -70.67 },
+	Brazil: { lat: -15.79, lng: -47.88 },
+	Korea: { lat: 37.57, lng: 126.98 },
+	Italy: { lat: 41.9, lng: 12.5 },
+	Ireland: { lat: 53.35, lng: -6.26 },
+	Singapore: { lat: 1.35, lng: 103.82 },
+	Uganda: { lat: 0.35, lng: 32.58 },
+	'United Kingdom': { lat: 51.51, lng: -0.13 },
+	Germany: { lat: 52.52, lng: 13.41 },
+	Norway: { lat: 59.91, lng: 10.75 },
+	'Trinidad & Tobago': { lat: 10.69, lng: -61.22 },
+};
