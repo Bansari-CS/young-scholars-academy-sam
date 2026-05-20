@@ -1,0 +1,67 @@
+---
+interface Props {
+	targetDate: string;
+	label?: string;
+	countdownId?: string;
+}
+
+const {
+	targetDate,
+	label = 'Enrollment closes May 22',
+	countdownId = 'hero-countdown',
+} = Astro.props;
+---
+
+<div id={countdownId} class="summer-hero-countdown" aria-live="polite">
+	<p class="summer-hero-countdown__label">{label}</p>
+	<div class="summer-hero-countdown__grid" role="timer">
+		<div class="summer-hero-countdown__unit">
+			<span class="summer-hero-countdown__value" data-countdown-days>00</span>
+			<span class="summer-hero-countdown__name">Days</span>
+		</div>
+		<div class="summer-hero-countdown__unit">
+			<span class="summer-hero-countdown__value" data-countdown-hours>00</span>
+			<span class="summer-hero-countdown__name">Hours</span>
+		</div>
+		<div class="summer-hero-countdown__unit">
+			<span class="summer-hero-countdown__value" data-countdown-minutes>00</span>
+			<span class="summer-hero-countdown__name">Minutes</span>
+		</div>
+		<div class="summer-hero-countdown__unit">
+			<span class="summer-hero-countdown__value" data-countdown-seconds>00</span>
+			<span class="summer-hero-countdown__name">Seconds</span>
+		</div>
+	</div>
+</div>
+
+<script define:vars={{ targetDate, countdownId }}>
+	const root = document.getElementById(countdownId);
+	if (!root) {
+		// noop
+	} else {
+		const targetMs = new Date(targetDate).getTime();
+		const daysEl = root.querySelector('[data-countdown-days]');
+		const hoursEl = root.querySelector('[data-countdown-hours]');
+		const minutesEl = root.querySelector('[data-countdown-minutes]');
+		const secondsEl = root.querySelector('[data-countdown-seconds]');
+
+		const pad = (n) => String(n).padStart(2, '0');
+
+		const tick = () => {
+			const diff = Math.max(0, targetMs - Date.now());
+			const totalSeconds = Math.floor(diff / 1000);
+			const days = Math.floor(totalSeconds / 86400);
+			const hours = Math.floor((totalSeconds % 86400) / 3600);
+			const minutes = Math.floor((totalSeconds % 3600) / 60);
+			const seconds = totalSeconds % 60;
+
+			if (daysEl) daysEl.textContent = pad(days);
+			if (hoursEl) hoursEl.textContent = pad(hours);
+			if (minutesEl) minutesEl.textContent = pad(minutes);
+			if (secondsEl) secondsEl.textContent = pad(seconds);
+		};
+
+		tick();
+		window.setInterval(tick, 1000);
+	}
+</script>

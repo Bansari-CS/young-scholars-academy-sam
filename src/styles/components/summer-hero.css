@@ -214,3 +214,64 @@
 	font-weight: 600;
 	color: #1e293b;
 }
+
+.summer-hero-countdown {
+	margin: 0 0 1.5rem;
+	max-width: 28rem;
+}
+
+.summer-hero-countdown__label {
+	margin: 0 0 0.75rem;
+	font-family: var(--ysa-font-display), ui-sans-serif, system-ui, sans-serif;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: #64748b;
+	text-transform: uppercase;
+}
+
+.summer-hero-countdown__grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.625rem;
+}
+
+.summer-hero-countdown__unit {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.25rem;
+	padding: 0.75rem 0.5rem;
+	border: 1px solid #e2e8f0;
+	border-radius: 0.75rem;
+	background: #fff;
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.summer-hero-countdown__value {
+	font-family: var(--ysa-font-display), ui-sans-serif, system-ui, sans-serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1;
+	color: #111827;
+	font-variant-numeric: tabular-nums;
+}
+
+.summer-hero-countdown__name {
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #94a3b8;
+}
+
+@media (max-width: 480px) {
+	.summer-hero-countdown__value {
+		font-size: 1.25rem;
+	}
+
+	.summer-hero-countdown__grid {
+		gap: 0.5rem;
+	}
+}

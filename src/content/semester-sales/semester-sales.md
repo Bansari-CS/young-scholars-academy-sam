@@ -10,6 +10,9 @@ hero:
   primaryCtaHref: '#'
   secondaryCtaLabel: Find My Child’s Best Fit
   secondaryCtaHref: '#'
+  countdown:
+    targetDate: "2026-06-01T23:59:59"
+    label: Enrollment closes June 01
   stats:
     - value: 1,200+
       label: Families Served

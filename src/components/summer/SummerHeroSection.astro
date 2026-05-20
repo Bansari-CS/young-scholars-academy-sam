@@ -1,4 +1,7 @@
 ---
+import SummerCountdown from './SummerCountdown.astro';
+import '../../styles/components/summer-hero.css';
+
 interface Props {
 	content: any;
 }
@@ -26,7 +29,7 @@ const { content } = Astro.props as Props;
 							: ''}
 				</p>
 			</div>
-			<div class="my-6 flex gap-4 pb-6 mt-[28px]">
+			<div class="my-6 flex flex-wrap gap-4 mt-[28px]">
 				<a
 					class="inline-flex items-center gap-2 rounded-xl bg-[#0a9dfb] px-8 py-4 font-[var(--ysa-font-display)] font-medium text-white no-underline"
 					href={content.primaryCtaHref}
@@ -44,7 +47,16 @@ const { content } = Astro.props as Props;
 				</a>
 				<a class="rounded-xl border border-[#e2e8f0] bg-white px-8 py-4 font-[var(--ysa-font-display)] font-medium text-[#475569] no-underline" href={content.secondaryCtaHref}>{content.secondaryCtaLabel}</a>
 			</div>
-			<ul class="m-0  mr-auto flex flex-wrap md:flex-nowrap max-w-[497px] flex list-none grid-cols-4 gap-8 border-t border-[#e2e8f0] pt-6 md:pt-8">
+			{
+				content.countdown?.targetDate && (
+					<SummerCountdown
+						countdownId="summer-hero-countdown"
+						targetDate={content.countdown.targetDate}
+						label={content.countdown.label}
+					/>
+				)
+			}
+			<ul class="m-0 mr-auto flex flex-wrap md:flex-nowrap max-w-[497px] flex list-none grid-cols-4 gap-8 border-t border-[#e2e8f0] pt-6 md:pt-8">
 				{
 					content.stats.map((stat, index) => (
 						<li class={`flex flex-col w-fit ${index < content.stats.length - 1 ? 'border-r border-[#E2E8F0] pr-8' : ''}`.trim()}>

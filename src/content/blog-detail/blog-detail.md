@@ -1,27 +1,27 @@
 ---
 slug: navigating-twice-exceptional-learners
 seo:
-  title: Asynchronous Development 101 | YSA
-  description: Why gifted kids can be 12 in math but 5 in emotional regulation.
+  title: "Raising a Neurodivergent Child When the Parenting Script Doesn't Fit | YSA"
+  description: "Honest advice for parents of twice-exceptional and neurodivergent kids—from Irena Smith, author and mother of three neurodivergent children."
 article:
   breadcrumbHomeLabel: Home
   breadcrumbInsightsLabel: Insights
-  breadcrumbCategory: Gifted & 2e Learners
-  categoryLabel: Gifted & 2e
-  title: Navigating the Complexities of Twice-Exceptional (2e) Learners at Home
-  description: Why gifted kids can be 12 in math but 5 in emotional regulation.
-  authorName: Dr. Sarah Jenkins
-  authorRole: Child Psychologist & Educational Specialist
+  breadcrumbCategory: Parenting & Neurodiversity
+  categoryLabel: Parenting & Neurodiversity
+  title: "Raising a Neurodivergent Child When the Parenting Script Doesn't Fit"
+  description: "If you have ever hidden behind the cereal aisle to avoid a conversation with another parent, you already know the feeling this post is about."
+  authorName: Young Scholars Academy
+  authorRole: Insights Team
   publishedDate: Oct 24, 2023
-  readTime: 8 min read
+  readTime: 10 min read
   heroImage: /assets/images/articalImg1.jpg
-  heroImageAlt: Student writing
+  heroImageAlt: Parent and child
   authorAvatar: /assets/images/Teacher (5).png
   aboutAuthor:
-    title: About Dr. Sarah Jenkins
-    description: Dr. Jenkins is a clinical psychologist specializing in neurodiversity. With over 15 years of experience, she helps families navigate the complexities of raising twice-exceptional children and advocates for inclusive education policies.
+    title: About Irena Smith
+    description: "Irena Smith is the award-winning author of The Golden Ticket: A Life in College Admissions Essays and the forthcoming Troika: Three Generations, Three Days, and a Very American Road Trip. She holds a PhD in comparative literature, spent years working in Stanford's Office of Undergraduate Admission, and ran a private college counseling practice in Palo Alto for 18 years. She is also the mother of three neurodivergent children, which she will tell you was the most instructive experience of all. You can find her at irenasmith.com or on Substack, where she writes The Curmudgeon's Guide to College Admissions and Personal Statements."
     image: /assets/images/AuthorBio.jpg
-    imageAlt: Dr Sarah Jenkins
+    imageAlt: Irena Smith
 sidebar:
   toolkit:
     title: Free 2e Success Toolkit
@@ -81,28 +81,55 @@ finalCta:
   secondaryCtaHref: '#'
 ---
 
-## What "Twice-Exceptional" Means
+If you have ever hidden behind the cereal aisle to avoid a conversation with another parent, you already know the feeling this post is about.
 
-Being "twice-exceptional" (2e) is a term used to describe students who are both gifted and have a learning disability, such as ADHD, dyslexia, or autism. These children often feel like walking contradictions: they might be able to solve complex physics problems but struggle to organize their backpack or finish a simple worksheet.
+Parenting a twice-exceptional or neurodivergent child can be lonely in ways that are hard to explain. The advice doesn't quite fit. The milestones don't line up. And everywhere you look, other families seem to be following a script that nobody handed you. You're not doing it wrong. You're just on a different path. And that path, it turns out, is more common than you think.
 
-## Understanding the "Asynchronous" Development
+We recently had the privilege of sitting down with Irena Smith, author, former Stanford admissions officer, private college counselor of 18 years, and mother of three neurodivergent children, for an honest, unscripted conversation about exactly this. Here are some of the most useful things that came out of it.
 
-The core challenge of the 2e experience is asynchronous development. This means the child's intellectual, emotional, and physical growth don't happen at the same rate. Imagine a 10-year-old with the mathematical reasoning of a college student, the handwriting of a first-grader, and the emotional regulation of a 7-year-old.
+## You Are Doing Better Than You Think
 
-> "The goal isn't just to fix the challenges, but to nourish the brilliance that makes these children unique."
+The voice in your head that says you're messing this up is not a reliable narrator. That voice is almost universal among parents of neurodivergent kids. And it is almost never right.
 
-## Creating a Supportive Home Environment
+One of the most practical things you can do is notice when you are trying to fix rather than just be present. When your child is dysregulated, venting, or acting out, the instinct to jump in with a solution is strong. But more often than not, what they need first is to feel heard. Before you problem-solve, try asking: what do you need right now? The answer might surprise you. Sometimes it's a snack. Sometimes it's a hug. Sometimes it's just for you to sit quietly in the room with them. Knowing which one it is saves everyone a lot of escalation.
 
-When you're raising a 2e child, your home needs to be a sanctuary of understanding. Here are three key strategies to implement starting today:
+## When Family Offers Unhelpful Advice
 
-- **Focus on Strengths First:** It's easy to spend all our energy on remediating the weakness. Make sure at least 70% of their learning time is spent on their passions.
-- **Use Scaffolding:** If they have a brilliant story but can't write it down, let them dictate it to you. The goal is expression, not penmanship.
-- **Normalize the Struggle:** Talk openly about how their brain works. Understanding their own neurobiology is the first step toward self-advocacy.
+Most parents of 2e kids have been on the receiving end of a "why don't you just." It usually comes from people who love you, which somehow makes it harder to deal with.
 
-![Parent and child smiling](/assets/images/articalDetails.jpg)
+A few responses that can help:
 
-## The Emotional Toll of High Potential
+- **"Thank you for sharing that."** It sounds simple, but it acknowledges them without opening a debate.
+- **"What are you hoping that would do?"** Asking someone to clarify their goal can gently surface whether their advice actually applies to your situation.
+- And if all else fails, the four words comedian Alex Edelman swears by: **"Can you believe it?"** Nod, say it, move on.
 
-Many 2e children suffer from intense perfectionism. Because they know they are capable of high-level thought, they feel deeply ashamed when their output doesn't match their internal standard. This often leads to task paralysis or shutting down.
+None of these require you to explain, defend, or justify your parenting choices. You don't owe anyone that.
 
-In the next section, we'll explore how to navigate the school system and advocate for an Individualized Education Program (IEP) that actually addresses both halves of the 2e coin.
+## Let Go of the 18-Year-Old Finish Line
+
+One of the most relieving things you can hear, if you have a 2e child who is not following a traditional timeline, is that around 30% of young people over the age of 22 are currently living at home. The idea that your child should be fully launched, self-sufficient, and thriving by 18 is not just outdated, it was probably never realistic for kids with spiky, uneven profiles to begin with.
+
+Some 2e kids are intellectually ready for the next step long before they are socially or emotionally ready. Others take years to find their footing and then move quickly once they do. Both are normal. Giving your child permission to move at their own pace, and giving yourself permission to stop measuring against everyone else's timeline, is not lowering the bar. It is reading the situation clearly.
+
+## On College, If You Are Starting to Think About It
+
+If college is on your radar, the single most important thing you can do is let your child lead the process. If they are not interested or not ready, pushing tends to backfire. A student who is intellectually capable but emotionally not there yet will struggle, no matter how good the school is.
+
+Some options worth knowing about:
+
+- **Gap year programs** like Verto Education offer structured, credit-bearing experiences for students who need more time before committing to a traditional four-year path.
+- **Community college** is an underrated on-ramp. It is low-stakes, affordable, and gives students the chance to find out whether college is actually right for them before making a big commitment.
+- **Interest-based learning**, even if it looks unconventional, can be a genuine strength in the college process. Depth in one area often stands out more than a well-rounded but generic application.
+- **Contact the Office for Students with Disabilities** at any school your child is considering. If they have a diagnosis or an IEP, ask directly what accommodations and supports are available. Schools vary widely.
+
+## Find Your People
+
+Perhaps the most practical thing you can do for yourself as a parent of a neurodivergent child is find at least one other person who gets it. Not someone who offers advice. Someone who just knows.
+
+That kind of connection does not fix the hard things. But it makes them feel less like yours alone to carry. Parent support groups, online communities, and spaces where families like yours gather can be genuinely life-changing, not because they solve anything, but because they remind you that you are not as alone as it sometimes feels.
+
+That sense of community is something we work hard to build at Young Scholars Academy. If you are looking for a village, we would love to have you.
+
+## About Young Scholars Academy
+
+Young Scholars Academy is a virtual village for gifted, twice-exceptional, and differently-wired kids ages 5 to 18. We offer strength-based enrichment courses, a vibrant peer community, and regular expert talks designed to support both students and the families who love them. Our goal is simple: every child deserves a place where they feel seen, challenged, and celebrated for exactly who they are. Learn more at [youngscholarsacademy.com](https://youngscholarsacademy.com).
