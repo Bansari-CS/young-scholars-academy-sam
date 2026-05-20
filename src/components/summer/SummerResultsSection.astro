@@ -1,8 +1,16 @@
 ---
+import {
+	googleDriveDownloadUrl,
+	googleDrivePreviewUrl,
+	googleDriveThumbnailUrl,
+} from '../../utils/googleDrive';
+
 interface TestimonialItem {
 	name: string;
 	meta: string;
-	video: string;
+	driveFileId: string;
+	posterSrc: string;
+	quote: string;
 }
 
 interface Props {
@@ -15,45 +23,73 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const playIcon = '/images/summer/results/play.svg';
+const playIcon = '/assets/images/Vector.svg';
+
+function getPoster(item: TestimonialItem) {
+	return item.posterSrc || googleDriveThumbnailUrl(item.driveFileId);
+}
 ---
 
-<section class="summer-results-section summer-section py-16 md:py-20 xl:py-24" aria-labelledby="summer-results-heading">
+<section
+	class="summer-results-section summer-section py-16 md:py-20 xl:py-24"
+	aria-labelledby="summer-results-heading"
+>
 	<div class="summer-wrap summer-results-wrap">
 		<p class="summer-results-kicker">{content.eyebrow}</p>
-		<h2 id="summer-results-heading" class="text-[28px] font-bold sm:text-[36px] lg:text-[44px]">{content.title}</h2>
+		<h2
+			id="summer-results-heading"
+			class="m-0 text-[28px] font-bold sm:text-[36px] lg:text-[44px]"
+		>
+			{content.title}
+		</h2>
 		<p class="summer-sub">{content.description}</p>
 
 		<div
-			class="summer-results-grid summer-results-grid--videos"
+			class="mx-auto grid max-w-[960px] grid-cols-1 gap-6 md:grid-cols-2 md:gap-8"
 			aria-label="Summer camp family testimonials"
-			style={`--summer-results-cols: ${Math.min(content.items.length, 2)}`}
 		>
 			{
 				content.items.map((item) => (
-					<article class="result-video-card" data-summer-video-card>
-						<div class="result-video-media">
-							<video
-								src={item.video}
-								preload="metadata"
-								playsinline
-								muted
-								aria-label={`${item.name} testimonial video`}
+					<article class="overflow-hidden rounded-2xl border border-white/20 bg-white/10">
+						<div
+							class="group relative cursor-pointer bg-slate-900"
+							data-summer-video-trigger
+							data-drive-download={googleDriveDownloadUrl(item.driveFileId)}
+							data-drive-preview={googleDrivePreviewUrl(item.driveFileId)}
+							data-video-title={`${item.name} testimonial`}
+						>
+							<img
+								src={getPoster(item)}
+								alt={`${item.name} testimonial`}
+								width={640}
+								height={360}
+								loading="lazy"
+								class="block h-48 w-full object-cover"
 							/>
 							<button
 								type="button"
-								class="result-video-play"
+								class="absolute left-1/2 top-1/2 z-[1] flex h-6 w-[2.15rem] -translate-x-1/2 -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 transition-transform duration-200 group-hover:scale-105"
 								data-summer-video-play
 								aria-label={`Play ${item.name} testimonial`}
 							>
-								<img src={playIcon} alt="" width="54" height="54" />
+								<img src={playIcon} alt="" class="h-full w-full object-contain" />
 							</button>
 						</div>
-						<div class="result-video-copy">
-							<footer>
+						<div class="p-6">
+							<p class="m-0 text-base italic leading-[26px] text-[#f0f4ff]">"{item.quote}"</p>
+							<footer class="mt-4 flex items-center gap-3">
+								<img
+									src={getPoster(item)}
+									alt=""
+									width={40}
+									height={40}
+									loading="lazy"
+									aria-hidden="true"
+									class="h-10 w-10 shrink-0 rounded-full border-2 border-white/30 object-cover"
+								/>
 								<div>
-									<strong>{item.name}</strong>
-									<span>{item.meta}</span>
+									<strong class="block text-sm leading-5 text-white">{item.name}</strong>
+									<span class="mt-0.5 block text-xs leading-4 text-[#c7d5fe]">{item.meta}</span>
 								</div>
 							</footer>
 						</div>
@@ -62,47 +98,131 @@ const playIcon = '/images/summer/results/play.svg';
 			}
 		</div>
 	</div>
+
+	<div
+		id="summer-video-modal"
+		class="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 transition-opacity duration-200 [&:not(.summer-video-modal--closed)]:pointer-events-auto [&:not(.summer-video-modal--closed)]:opacity-100"
+		aria-hidden="true"
+	>
+		<button
+			type="button"
+			class="absolute inset-0 border-0 bg-black/75 p-0"
+			data-summer-modal-close
+			aria-label="Close video"
+		/>
+		<div
+			class="relative z-[1] w-full max-w-4xl overflow-hidden rounded-2xl bg-slate-950 shadow-2xl"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="summer-video-modal-title"
+		>
+			<p id="summer-video-modal-title" class="sr-only" />
+			<button
+				type="button"
+				class="absolute right-3 top-3 z-[2] flex h-10 w-10 items-center justify-center rounded-full border-0 bg-black/60 text-2xl leading-none text-white"
+				data-summer-modal-close
+				aria-label="Close video"
+			>
+				×
+			</button>
+			<video class="block max-h-[80vh] w-full bg-black" controls playsinline preload="metadata" />
+			<iframe
+				class="hidden aspect-video w-full bg-black"
+				title="Testimonial video"
+				allow="autoplay; fullscreen"
+				allowfullscreen
+			/>
+		</div>
+	</div>
 </section>
 
-<script>
-	function initSummerTestimonialVideos() {
-		document.querySelectorAll('[data-summer-video-card]').forEach((card) => {
-			const root = card as HTMLElement;
-			if (root.dataset.summerVideoInited === '1') return;
-			root.dataset.summerVideoInited = '1';
+<script is:inline>
+	(function () {
+		const modal = document.getElementById('summer-video-modal');
+		const modalTitle = document.getElementById('summer-video-modal-title');
+		const video = modal && modal.querySelector('video');
+		const iframe = modal && modal.querySelector('iframe');
 
-			const video = root.querySelector('video');
-			const playBtn = root.querySelector('[data-summer-video-play]') as HTMLButtonElement | null;
-			if (!video || !playBtn) return;
+		function closeModal() {
+			if (!modal || !video || !iframe) return;
+			modal.classList.add('summer-video-modal--closed');
+			modal.setAttribute('aria-hidden', 'true');
+			document.body.classList.remove('overflow-hidden');
+			video.pause();
+			video.removeAttribute('src');
+			video.classList.remove('hidden');
+			iframe.classList.add('hidden');
+			iframe.removeAttribute('src');
+		}
 
-			const stopPlaying = () => {
-				root.classList.remove('is-playing');
-				video.removeAttribute('controls');
-				video.muted = true;
+		function openModal(trigger) {
+			if (!modal || !video || !iframe || !modalTitle) return;
+			const downloadUrl = trigger.getAttribute('data-drive-download');
+			const previewUrl = trigger.getAttribute('data-drive-preview');
+			const title = trigger.getAttribute('data-video-title') || 'Testimonial video';
+			if (!downloadUrl || !previewUrl) return;
+
+			modalTitle.textContent = title;
+			modal.classList.remove('summer-video-modal--closed');
+			modal.setAttribute('aria-hidden', 'false');
+			document.body.classList.add('overflow-hidden');
+
+			iframe.classList.add('hidden');
+			iframe.removeAttribute('src');
+			video.classList.remove('hidden');
+			video.src = downloadUrl;
+			video.load();
+			video.play().catch(function () {});
+
+			video.onerror = function () {
+				video.pause();
+				video.removeAttribute('src');
+				video.classList.add('hidden');
+				iframe.classList.remove('hidden');
+				iframe.src = previewUrl;
 			};
+		}
 
-			playBtn.addEventListener('click', async () => {
-				root.classList.add('is-playing');
-				video.muted = false;
-				video.setAttribute('controls', '');
-				try {
-					await video.play();
-				} catch {
-					stopPlaying();
+		function bindTriggers() {
+			document.querySelectorAll('[data-summer-video-trigger]').forEach(function (trigger) {
+				if (trigger.dataset.summerVideoBound === '1') return;
+				trigger.dataset.summerVideoBound = '1';
+
+				var play = function (event) {
+					event.preventDefault();
+					event.stopPropagation();
+					openModal(trigger);
+				};
+
+				trigger.querySelector('[data-summer-video-play]')?.addEventListener('click', play);
+				trigger.addEventListener('click', function (event) {
+					if (event.target === trigger || event.target.closest('img')) {
+						play(event);
+					}
+				});
+			});
+
+			modal?.querySelectorAll('[data-summer-modal-close]').forEach(function (btn) {
+				btn.addEventListener('click', closeModal);
+			});
+
+			document.addEventListener('keydown', function (event) {
+				if (event.key === 'Escape' && modal && !modal.classList.contains('summer-video-modal--closed')) {
+					closeModal();
 				}
 			});
+		}
 
-			video.addEventListener('ended', () => {
-				video.pause();
-				video.currentTime = 0;
-				stopPlaying();
-			});
-		});
-	}
+		if (modal) {
+			modal.classList.add('summer-video-modal--closed');
+		}
 
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initSummerTestimonialVideos);
-	} else {
-		initSummerTestimonialVideos();
-	}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', bindTriggers);
+		} else {
+			bindTriggers();
+		}
+
+		document.addEventListener('astro:page-load', bindTriggers);
+	})();
 </script>
