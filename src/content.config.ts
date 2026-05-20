@@ -113,6 +113,12 @@ const semesterSalesCollection = defineCollection({
 			primaryCtaHref: z.string(),
 			secondaryCtaLabel: z.string(),
 			secondaryCtaHref: z.string(),
+			countdown: z
+				.object({
+					targetDate: z.string(),
+					label: z.string().optional(),
+				})
+				.optional(),
 			stats: z.array(
 				z.object({
 					value: z.string(),

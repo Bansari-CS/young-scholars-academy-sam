@@ -11,6 +11,9 @@ hero:
   primaryCtaHref: "#programs"
   secondaryCtaLabel: How It Works
   secondaryCtaHref: "#how-it-works"
+  countdown:
+    targetDate: "2026-05-22T23:59:59"
+    label: Enrollment closes May 22
   stats:
     - value: 80+
       label: Camps
