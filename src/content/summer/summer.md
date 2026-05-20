@@ -211,10 +211,14 @@ results:
   items:
     - name: Melissa & Zoe
       meta: Mother and daughter, YSA families
-      video: /images/summer/testimonial/Melissa-Zoe.mp4
+      driveFileId: 1e7BFlvhqRRWJfcdsQErbAmvJjkB8rK2l
+      posterSrc: /images/summer/testimonial/melissa-zoe.png
+      quote: "At the end of open house, Zoe looked at me and said, \"I have to sign up for those classes because these people get me.\" It's been amazing to connect with other neurodivergent lifelong learners—and both kids have had incredible experiences in fall, spring, and summer classes."
     - name: Luca
       meta: YSA Student
-      video: /images/summer/testimonial/Luca-YSA-Student.mp4
+      driveFileId: 1KtB4G2o4w8EGvQxLl04W6U1ia8SUFVw2
+      posterSrc: /images/summer/testimonial/luca.png
+      quote: "Before YSA there weren't really enriching classes—YSA brought stuff that challenged my mind. I got to think in new and unexpected ways. The teachers are super fun, welcoming, and cool, and you'll definitely make lasting friendships here."
 bonus:
   kicker: BONUS BUNDLE
   title: Everything Included With Your Enrollment
