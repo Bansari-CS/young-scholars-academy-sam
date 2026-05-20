@@ -1,6 +1,7 @@
 ---
 import '../../styles/components/world-kids-section.css';
-import { WORLD_COUNTRY_COORDS } from '../../data/worldCountryCoords';
+import { WORLD_COUNTRY_COORDS } from '../../content/home/worldCountryCoords';
+import { WORLD_COUNTRY_FLAG_ISO } from '../../content/home/worldCountryFlags';
 
 interface Props {
 	content: {
@@ -46,19 +47,53 @@ function statDisplayMeta(
 
 const statSlots = ['lt', 'rt', 'lb', 'rb'] as const;
 
-/** Globe pins from CMS country list — one marker per country */
+const faces = [
+	'/assets/images/Teacher (1).png',
+	'/assets/images/Teacher (2).png',
+	'/assets/images/Teacher (3).png',
+	'/assets/images/Teacher (4).png',
+	'/assets/images/Teacher (5).png',
+	'/assets/images/Teacher (6).png',
+	'/assets/images/Teacher (1).png',
+	'/assets/images/Teacher (2).png',
+	'/assets/images/Teacher (3).png',
+];
+
+/** Same size/shape rhythm as original globe pins (Figma), applied to each CMS country in order */
+const markerStyleByIndex = [
+	{ size: 48, shape: 'circle' as const },
+	{ size: 40, shape: 'circle' as const },
+	{ size: 48, shape: 'circle' as const },
+	{ size: 40, shape: 'circle' as const },
+	{ size: 32, shape: 'squircle' as const },
+	{ size: 40, shape: 'circle' as const },
+	{ size: 48, shape: 'circle' as const },
+	{ size: 32, shape: 'squircle' as const },
+	{ size: 40, shape: 'circle' as const },
+	{ size: 32, shape: 'squircle' as const },
+	{ size: 40, shape: 'circle' as const },
+	{ size: 32, shape: 'squircle' as const },
+	{ size: 48, shape: 'circle' as const },
+	{ size: 56, shape: 'circle' as const },
+	{ size: 48, shape: 'circle' as const },
+	{ size: 32, shape: 'squircle' as const },
+	{ size: 40, shape: 'circle' as const },
+];
+
+/** Globe pins: country lat/lng from CMS order + profile photos (original asset look) */
 const markerPoints =
 	d.countries
-		?.map((country) => {
+		?.map((country, index) => {
 			const coords = WORLD_COUNTRY_COORDS[country.name];
 			if (!coords) return null;
+			const style = markerStyleByIndex[index] ?? { size: 40, shape: 'circle' as const };
 			return {
 				lat: coords.lat,
 				lng: coords.lng,
-				flag: country.flag,
+				face: faces[index % faces.length],
 				name: country.name,
-				size: 40,
-				shape: 'circle' as const,
+				size: style.size,
+				shape: style.shape,
 			};
 		})
 		.filter((point): point is NonNullable<typeof point> => point !== null) ?? [];
@@ -119,17 +154,40 @@ const markerPoints =
 
 		{
 			d.countries?.length ? (
-				<div class="ysa-world__countries">
-					{d.countriesHeading ? <p class="ysa-world__countries-heading">{d.countriesHeading}</p> : null}
-					<ul class="ysa-world__countries-list" aria-label={d.countriesHeading ?? 'Countries served'}>
-						{d.countries.map((country) => (
-							<li class="ysa-world__country">
-								<span class="ysa-world__country-flag" aria-hidden="true">
-									{country.flag}
-								</span>
-								<span class="ysa-world__country-name">{country.name}</span>
-							</li>
-						))}
+				<div class="mx-auto max-w-[52rem] pb-16 text-center">
+					{
+						d.countriesHeading ? (
+							<h3 class="m-0 mb-6 text-[clamp(2rem,4.1vw,2.8rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
+								{d.countriesHeading}
+							</h3>
+						) : null
+					}
+					<ul
+						class="m-0 grid list-none grid-cols-1 gap-x-5 gap-y-2.5 p-0 text-left sm:grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(11rem,1fr))]"
+						aria-label={d.countriesHeading ?? 'Countries served'}
+					>
+						{d.countries.map((country) => {
+							const iso = WORLD_COUNTRY_FLAG_ISO[country.name];
+							return (
+								<li class="flex items-center gap-2.5">
+									{iso ? (
+										<img
+											src={`https://flagcdn.com/w40/${iso}.png`}
+											srcset={`https://flagcdn.com/w80/${iso}.png 2x`}
+											alt=""
+											width={40}
+											height={27}
+											class="h-5 w-7 shrink-0 rounded-sm object-cover shadow-sm ring-1 ring-slate-200/80"
+											loading="lazy"
+											decoding="async"
+										/>
+									) : null}
+									<span class="text-left text-[0.9375rem] font-medium leading-[1.35] text-slate-700">
+										{country.name}
+									</span>
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			) : null
@@ -336,14 +394,7 @@ const markerPoints =
 				.htmlElement((d) => {
 					const root = document.createElement('div');
 					const shape = d.shape === 'squircle' ? 'squircle' : 'circle';
-					const isCountry = Boolean(d.flag);
-					root.className = [
-						'ysa-world__marker',
-						`ysa-world__marker--${shape}`,
-						isCountry ? 'ysa-world__marker--country' : '',
-					]
-						.filter(Boolean)
-						.join(' ');
+					root.className = `ysa-world__marker ysa-world__marker--${shape}`;
 					const markerSize = Number(d.size) || 40;
 					root.style.width = `${markerSize}px`;
 					root.style.height = `${markerSize}px`;
@@ -359,13 +410,7 @@ const markerPoints =
 					const inner = document.createElement('div');
 					inner.className = 'ysa-world__marker-inner';
 
-					if (d.flag) {
-						const flag = document.createElement('span');
-						flag.className = 'ysa-world__marker-flag';
-						flag.textContent = d.flag;
-						flag.setAttribute('aria-hidden', 'true');
-						inner.append(flag);
-					} else if (d.face) {
+					if (d.face) {
 						const img = document.createElement('img');
 						img.src = d.face;
 						img.alt = '';

@@ -169,6 +169,10 @@
 	animation: impact-scroll-down 26s linear infinite;
 }
 
+.impact-column-track.is-paused {
+	animation-play-state: paused;
+}
+
 .impact-card {
 	border-radius: 0.75rem;
 	border: 1px solid rgba(255, 255, 255, 0.08);
@@ -241,12 +245,17 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	z-index: 2;
 	width: 2.15rem;
 	height: 1.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transform: translate(-50%, -50%);
+	border: none;
+	padding: 0;
+	background: transparent;
+	cursor: pointer;
 }
 
 .impact-card-play img {
@@ -255,6 +264,84 @@
 	object-fit: contain;
 }
 
+.impact-video-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.25rem;
+}
+
+.impact-video-modal--closed {
+	display: none;
+	pointer-events: none;
+}
+
+body.impact-video-modal-open {
+	overflow: hidden;
+}
+
+.impact-video-modal-backdrop {
+	position: absolute;
+	inset: 0;
+	border: none;
+	padding: 0;
+	background: rgba(8, 4, 22, 0.82);
+	cursor: pointer;
+}
+
+.impact-video-modal-panel {
+	position: relative;
+	z-index: 1;
+	width: min(56rem, 100%);
+	border-radius: 0.75rem;
+	overflow: hidden;
+	background: #1a1038;
+	box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+}
+
+.impact-video-modal-title {
+	margin: 0;
+	padding: 0.65rem 3rem 0.65rem 1rem;
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: rgba(250, 245, 255, 0.92);
+}
+
+.impact-video-modal-close {
+	position: absolute;
+	top: 0.35rem;
+	right: 0.45rem;
+	z-index: 2;
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+	font-size: 1.35rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.impact-video-modal-video,
+.impact-video-modal-iframe {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background: #000;
+}
+
+.impact-video-modal-video--hidden {
+	display: none;
+}
+
+.impact-video-modal-iframe {
+	min-height: 18rem;
+	border: 0;
+}
 
 @keyframes impact-scroll-up {
 	0% {

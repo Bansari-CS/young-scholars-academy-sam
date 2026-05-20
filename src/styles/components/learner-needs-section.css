@@ -484,3 +484,127 @@
 		padding-top: 3rem;
 	}
 }
+
+.home-process-expect-header {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.home-process-expect-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: #e1f3ff;
+	color: var(--ysa-primary);
+	padding: 8px 16px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+
+.home-process-expect-section .home-process-expect-wrap > h2 {
+	margin-top: 0;
+}
+
+.home-process-expect-description {
+	margin-bottom: 4rem !important;
+}
+
+.home-process-expect-grid {
+	grid-template-rows: repeat(2, auto) !important;
+}
+
+.home-process-expect-grid .summer-expect-card {
+	height: auto;
+	min-height: 240px;
+}
+
+.home-process-expect-grid .summer-expect-card:nth-child(1) {
+	grid-column: 1;
+	grid-row: 1;
+	margin-top: 0;
+}
+
+.home-process-expect-grid .summer-expect-card:nth-child(2) {
+	grid-column: 3;
+	grid-row: 1;
+	margin-top: 160px;
+}
+
+.home-process-expect-grid .summer-expect-card:nth-child(3) {
+	grid-column: 1;
+	grid-row: 2;
+}
+
+.home-process-expect-grid .summer-expect-card:nth-child(4) {
+	grid-column: 3;
+	grid-row: 2;
+	margin-top: 83px;
+}
+
+.home-process-expect-icon svg {
+	display: block;
+	flex-shrink: 0;
+}
+
+.home-process-expect-icon img {
+	display: none;
+}
+
+.home-process-step-label {
+	position: relative;
+	z-index: 1;
+	margin-top: 0;
+	margin-bottom: 0.55rem;
+}
+
+.home-process-expect-grid .summer-expect-card h3 {
+	margin-top: 0;
+}
+
+.home-process-card-desc {
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 26px;
+	color: #475569;
+	margin: 0;
+	padding: 0;
+	margin-top: 7px;
+	position: relative;
+	z-index: 1;
+	max-width: 392px;
+}
+
+.home-process-expect-grid .home-process-card-footer {
+	margin-top: auto;
+	padding-top: 16px;
+	border-top: 1px solid #f1f5f9;
+	position: relative;
+	z-index: 1;
+	max-width: 392px;
+	font-size: 0.68rem;
+	color: #94a3b8;
+}
+
+.home-process-expect-section .process-cta-wrapper {
+	margin-top: clamp(2rem, 4.5vw, 3rem);
+}
+
+@media (max-width: 900px) {
+	.home-process-expect-grid .summer-expect-card:nth-child(1),
+	.home-process-expect-grid .summer-expect-card:nth-child(2),
+	.home-process-expect-grid .summer-expect-card:nth-child(3),
+	.home-process-expect-grid .summer-expect-card:nth-child(4) {
+		grid-column: 1 !important;
+		grid-row: auto !important;
+		margin-top: 0 !important;
+	}
+
+	.home-process-expect-description {
+		margin-bottom: 2.5rem !important;
+	}
+}
