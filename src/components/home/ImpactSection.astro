@@ -1,5 +1,10 @@
 ---
-import type { ImpactCard, ImpactTestimonialAuthor } from '../../types/homePage';
+import type { ImpactCard, ImpactTestimonialAuthor, ImpactVideoCard } from '../../types/homePage';
+import {
+	googleDriveDownloadUrl,
+	googleDrivePreviewUrl,
+	googleDriveThumbnailUrl,
+} from '../../utils/googleDrive';
 
 interface Props {
 	hideStatLabels?: string[];
@@ -32,8 +37,19 @@ const imageByIndex = {
 	6: '/assets/images/image2.jpg',
 } as const;
 
-const getAuthorImage = (author: ImpactTestimonialAuthor) => imageByIndex[author.avatarIndex];
-const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex[card.thumbnailIndex] : undefined);
+const getAuthorImage = (author: ImpactTestimonialAuthor) =>
+	author.photoSrc ?? imageByIndex[author.avatarIndex];
+
+function isVideoCard(card: ImpactCard): card is ImpactVideoCard {
+	return card.type === 'video';
+}
+
+function getThumbnail(card: ImpactVideoCard) {
+	if (card.posterSrc) return card.posterSrc;
+	if (card.author.photoSrc) return card.author.photoSrc;
+	if (card.driveFileId) return googleDriveThumbnailUrl(card.driveFileId);
+	return imageByIndex[card.thumbnailIndex ?? 1];
+}
 ---
 
 <section class="home-section impact-section-root impact-section !pb-[121px]" aria-labelledby="impact-heading">
@@ -68,14 +84,28 @@ const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex
 								{
 									repeatedCards.map((card) => (
 										<article class={`impact-card impact-card--${card.type}`}>
-											{card.type === 'video' ? (
-												<div class="impact-card-media">
+											{isVideoCard(card) && card.driveFileId ? (
+												<div
+													class="impact-card-media"
+													data-impact-video-trigger
+													data-drive-download={googleDriveDownloadUrl(card.driveFileId)}
+													data-drive-preview={googleDrivePreviewUrl(card.driveFileId)}
+													data-video-title={`${card.author.name} testimonial`}
+												>
 													<img
-														src={getThumbnail(card)!}
+														src={getThumbnail(card)}
 														alt={`${card.author.name} ${d.videoAltSuffix ?? 'video testimonial'}`}
 														loading="lazy"
+														class="impact-card-poster"
 													/>
-													<span class="impact-card-play" aria-hidden="true"><img src="/assets/images/Vector.svg" alt={d.playVideoAlt ?? 'Play video'} /></span>
+													<button
+														type="button"
+														class="impact-card-play"
+														data-impact-video-play
+														aria-label={`${d.playVideoAlt ?? 'Play video'} — ${card.author.name}`}
+													>
+														<img src="/assets/images/Vector.svg" alt="" />
+													</button>
 												</div>
 											) : null}
 											<div class="impact-card-body">
@@ -106,4 +136,123 @@ const getThumbnail = (card: ImpactCard) => (card.type === 'video' ? imageByIndex
 			}
 		</div>
 	</div>
+
+	<div id="impact-video-modal" class="impact-video-modal impact-video-modal--closed" aria-hidden="true">
+		<button type="button" class="impact-video-modal-backdrop" data-impact-modal-close aria-label="Close video"></button>
+		<div class="impact-video-modal-panel" role="dialog" aria-modal="true" aria-labelledby="impact-video-modal-title">
+			<p id="impact-video-modal-title" class="impact-video-modal-title"></p>
+			<button type="button" class="impact-video-modal-close" data-impact-modal-close aria-label="Close video">
+				×
+			</button>
+			<video
+				class="impact-video-modal-video"
+				controls
+				playsinline
+				preload="metadata"
+			/>
+			<iframe
+				class="impact-video-modal-iframe"
+				title="Testimonial video"
+				allow="autoplay; fullscreen"
+				allowfullscreen
+				hidden
+			/>
+		</div>
+	</div>
 </section>
+
+<script is:inline>
+	(function () {
+		const modal = document.getElementById('impact-video-modal');
+		const modalTitle = document.getElementById('impact-video-modal-title');
+		const video = modal && modal.querySelector('.impact-video-modal-video');
+		const iframe = modal && modal.querySelector('.impact-video-modal-iframe');
+		const tracks = () => document.querySelectorAll('.impact-column-track');
+
+		function pauseMarquee(paused) {
+			tracks().forEach((track) => {
+				track.classList.toggle('is-paused', paused);
+			});
+		}
+
+		function closeModal() {
+			if (!modal || !video || !iframe) return;
+			modal.classList.add('impact-video-modal--closed');
+			modal.setAttribute('aria-hidden', 'true');
+			document.body.classList.remove('impact-video-modal-open');
+			pauseMarquee(false);
+			video.pause();
+			video.removeAttribute('src');
+			video.classList.remove('impact-video-modal-video--hidden');
+			iframe.hidden = true;
+			iframe.removeAttribute('src');
+		}
+
+		function openModal(trigger) {
+			if (!modal || !video || !iframe || !modalTitle) return;
+			const downloadUrl = trigger.getAttribute('data-drive-download');
+			const previewUrl = trigger.getAttribute('data-drive-preview');
+			const title = trigger.getAttribute('data-video-title') || 'Testimonial video';
+			if (!downloadUrl || !previewUrl) return;
+
+			modalTitle.textContent = title;
+			modal.classList.remove('impact-video-modal--closed');
+			modal.setAttribute('aria-hidden', 'false');
+			document.body.classList.add('impact-video-modal-open');
+			pauseMarquee(true);
+
+			iframe.hidden = true;
+			iframe.removeAttribute('src');
+			video.classList.remove('impact-video-modal-video--hidden');
+			video.src = downloadUrl;
+			video.load();
+			video.play().catch(function () {});
+
+			video.onerror = function () {
+				video.pause();
+				video.removeAttribute('src');
+				video.classList.add('impact-video-modal-video--hidden');
+				iframe.hidden = false;
+				iframe.src = previewUrl;
+			};
+		}
+
+		function bindTriggers() {
+			document.querySelectorAll('[data-impact-video-trigger]').forEach(function (trigger) {
+				if (trigger.dataset.impactVideoBound === '1') return;
+				trigger.dataset.impactVideoBound = '1';
+
+				var play = function (event) {
+					event.preventDefault();
+					event.stopPropagation();
+					openModal(trigger);
+				};
+
+				trigger.querySelector('[data-impact-video-play]')?.addEventListener('click', play);
+				trigger.addEventListener('click', function (event) {
+					if (event.target === trigger || event.target.closest('.impact-card-poster')) {
+						play(event);
+					}
+				});
+			});
+
+			modal?.querySelectorAll('[data-impact-modal-close]').forEach(function (btn) {
+				btn.addEventListener('click', closeModal);
+			});
+
+			document.addEventListener('keydown', function (event) {
+				if (event.key === 'Escape' && modal && !modal.classList.contains('impact-video-modal--closed')) {
+					closeModal();
+				}
+			});
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', bindTriggers);
+		} else {
+			bindTriggers();
+		}
+
+		document.addEventListener('astro:page-load', bindTriggers);
+	})();
+</script>

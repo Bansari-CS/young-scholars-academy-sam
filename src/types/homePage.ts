@@ -33,6 +33,7 @@ export interface ImpactTestimonialAuthor {
 	name: string;
 	meta: string;
 	avatarIndex: 1 | 2 | 3 | 4 | 5 | 6;
+	photoSrc?: string;
 }
 
 export interface ImpactQuoteCard {
@@ -47,7 +48,9 @@ export interface ImpactVideoCard {
 	rating: number;
 	quote: string;
 	author: ImpactTestimonialAuthor;
-	thumbnailIndex: 1 | 2 | 3 | 4 | 5 | 6;
+	thumbnailIndex?: 1 | 2 | 3 | 4 | 5 | 6;
+	posterSrc?: string;
+	driveFileId?: string;
 }
 
 export type ImpactCard = ImpactQuoteCard | ImpactVideoCard;

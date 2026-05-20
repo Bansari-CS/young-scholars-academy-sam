@@ -1,4 +1,3 @@
-/** Representative coordinates for globe markers (capitals / geographic centers). */
 export const WORLD_COUNTRY_COORDS: Record<string, { lat: number; lng: number }> = {
 	'United States': { lat: 39.8, lng: -98.6 },
 	Canada: { lat: 54.5, lng: -105.0 },
