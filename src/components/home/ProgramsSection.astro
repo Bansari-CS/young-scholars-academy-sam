@@ -1,14 +1,14 @@
 ---
 import type { ProgramCategoryId, ProgramListingCard } from '../../types/programsSection';
 import '../../styles/components/programs-section.css';
-/** Program card media only — looping previews in `public/assets/images/*.mp4` */
+/** Program card cover images in `public/assets/images/home-programs/` */
 const coverByKey: Record<ProgramCategoryId, string> = {
-	science: '/assets/images/science.mp4',
-	coding: '/assets/images/coding.mp4',
-	math: '/assets/images/match.mp4',
-	robotics: '/assets/images/robotics.mp4',
-	writing: '/assets/images/writing.mp4',
-	'critical-thinking': '/assets/images/criticalThinking.mp4',
+	science: '/assets/images/home-programs/science.png',
+	coding: '/assets/images/home-programs/coding.png',
+	math: '/assets/images/home-programs/math.jpg',
+	robotics: '/assets/images/home-programs/robotics.png',
+	writing: '/assets/images/home-programs/writing.jpg',
+	'critical-thinking': '/assets/images/home-programs/critical-thinking.png',
 };
 
 const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], string> = {
@@ -171,15 +171,12 @@ const toSlug = (value: string) =>
 							data-delivery="virtual"
 						>
 							<div class="programs-card__media">
-								<video
+								<img
 									class="programs-card__cover"
 									src={cover}
-									muted
-									playsinline
-									loop
-									autoplay
-									preload="metadata"
-									aria-label={`${card.title} preview video`}
+									alt=""
+									loading="lazy"
+									decoding="async"
 								/>
 								<span class="programs-card__age">{card.ageLabel}</span>
 							</div>
