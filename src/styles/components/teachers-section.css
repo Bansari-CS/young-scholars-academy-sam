@@ -12,6 +12,7 @@
 	--yt-border: #e9eef5;
 	--yt-photo-bg: #f3f4f6;
 	--yt-photo-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 22px -10px rgba(15, 23, 42, 0.12);
+	--yt-card-width: clamp(15.5rem, 20vw, 19rem);
 
 	padding: clamp(4.5rem, 9vw, 6rem) 0;
 	background: var(--yt-bg);
@@ -67,21 +68,43 @@
 	font-size: 1rem;
 	line-height: 1.625;
 	color: var(--yt-muted);
-	max-width: 700px
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ysa-teachers__scroll {
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+	margin: 3rem calc(-1 * clamp(1rem, 4.44vw, 2.5rem)) 0;
+	padding: 0 clamp(1rem, 4.44vw, 2.5rem) 0.75rem;
+	scrollbar-gutter: stable;
+}
+
+.ysa-teachers__scroll:focus-visible {
+	outline: 2px solid var(--yt-accent);
+	outline-offset: 4px;
+	border-radius: 0.25rem;
 }
 
 .ysa-teachers__grid {
 	list-style: none;
-	margin: 3rem auto 0;
+	margin: 0;
 	padding: 0;
-	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: clamp(1.25rem, 2.2vw, 3rem);
-	max-width: 85rem;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	gap: clamp(1rem, 2vw, 2rem);
+	width: max-content;
+	max-width: none;
 }
 
 .ysa-teachers__item {
 	margin: 0;
+	flex: 0 0 auto;
+	width: var(--yt-card-width);
 }
 
 .ysa-teachers__card {
@@ -89,7 +112,8 @@
 	display: flex;
 	flex-direction: column;
 	background: transparent;
-	max-width: 304px
+	max-width: var(--yt-card-width);
+	width: 100%;
 }
 
 .ysa-teachers__media {
@@ -184,20 +208,39 @@
 	line-height: 1;
 }
 
-@media (max-width: 1100px) {
-	.ysa-teachers__grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (prefers-reduced-motion: reduce) {
+	.ysa-teachers__scroll {
+		scroll-behavior: auto;
+	}
+}
+
+@media (max-width: 1440px) {
+	.ysa-teachers {
+		--yt-card-width: clamp(15.25rem, 19vw, 18.25rem);
+	}
+}
+
+@media (max-width: 1024px) {
+	.ysa-teachers {
+		--yt-card-width: clamp(14.75rem, 30vw, 16.5rem);
+	}
+}
+
+@media (max-width: 768px) {
+	.ysa-teachers {
+		--yt-card-width: clamp(14.25rem, 42vw, 15.25rem);
 	}
 }
 
 @media (max-width: 640px) {
 	.ysa-teachers {
 		padding: clamp(3.5rem, 10vw, 5.5rem) 0;
+		--yt-card-width: min(80vw, 15rem);
 	}
 
-	.ysa-teachers__grid {
-		grid-template-columns: 1fr;
-		margin-top: 2.5rem;
-		max-width: 22rem;
+	.ysa-teachers__item,
+	.ysa-teachers__card {
+		width: var(--yt-card-width);
+		max-width: var(--yt-card-width);
 	}
 }

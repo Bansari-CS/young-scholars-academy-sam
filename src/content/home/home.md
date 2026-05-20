@@ -392,22 +392,78 @@ teachers:
     label: Find Your Teacher
     href: '#'
   items:
-    - name: Dr. Emily Ross
-      credentials: PhD Chemistry, MIT
-      bio: 15 years teaching gifted learners. Specializes in hands-on science exploration.
+    - name: Ms. Megan Hughes
+      credentials: Details coming soon
+      bio: Details coming soon
       photoIndex: 1
-    - name: Alex Martinez
-      credentials: MS Computer Science, Stanford
-      bio: Former Google engineer. Makes coding accessible and fun for young learners.
+    - name: Mr. Salch
+      credentials: Details coming soon
+      bio: Details coming soon
       photoIndex: 2
-    - name: Dr. Sarah Chen
-      credentials: PhD Mathematics, Princeton
-      bio: Competition math coach. Passionate about problem-solving strategies.
+    - name: Ms. Jackson
+      credentials: Details coming soon
+      bio: Details coming soon
       photoIndex: 3
-    - name: Marcus Johnson
-      credentials: MS Robotics, Carnegie Mellon
-      bio: Robotics competition mentor. Brings engineering concepts to life.
+    - name: Amy Bechtol
+      credentials: Details coming soon
+      bio: Details coming soon
       photoIndex: 4
+    - name: Miss Anna
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 5
+    - name: Nelson Dean
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 6
+    - name: Mr. Z
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 7
+    - name: Nicole P.
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 8
+    - name: Ms. Wish
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 9
+    - name: Mr. Mark Tidman
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 10
+    - name: Katie Barnwell
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 11
+    - name: Jennifer Hughes
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 12
+    - name: Malikai Bass
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 13
+    - name: Sean Troy
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 14
+    - name: Miss L
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 15
+    - name: Hushbeck
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 16
+    - name: Jenny
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 17
+    - name: Mr. Jake
+      credentials: Details coming soon
+      bio: Details coming soon
+      photoIndex: 18
 world:
   eyebrow: GLOBAL COMMUNITY
   title: Our Kids Are All Around

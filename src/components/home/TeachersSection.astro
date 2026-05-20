@@ -1,5 +1,6 @@
 ---
 import type { TeacherCard } from '../../types/homePage';
+import { EDUCATOR_PHOTO_BY_INDEX } from '../../data/educatorPhotos';
 import '../../styles/components/teachers-section.css';
 
 interface Props {
@@ -13,15 +14,6 @@ interface Props {
 }
 
 const { content: d } = Astro.props;
-
-const photoByIndex: Record<TeacherCard['photoIndex'], string> = {
-	1: '/assets/images/educator1.jpg',
-	2: '/assets/images/educator2.jpg',
-	3: '/assets/images/educator4.jpg',
-	4: '/assets/images/educator3.jpg',
-	5: '/assets/images/Teacher (5).png',
-	6: '/assets/images/Teacher (6).png',
-};
 ---
 
 <section class="ysa-teachers" aria-labelledby="teachers-heading">
@@ -32,37 +24,45 @@ const photoByIndex: Record<TeacherCard['photoIndex'], string> = {
 			<p class="ysa-teachers__desc">{d.description}</p>
 		</header>
 
-		<ul class="ysa-teachers__grid">
-			{
-				d.items.map((t) => {
-					const src = photoByIndex[t.photoIndex];
-					return (
-						<li class="ysa-teachers__item">
-							<article class="ysa-teachers__card">
-								<div class="ysa-teachers__media">
-									<img
-										src={src}
-										alt={`${t.name} portrait`}
-										class="ysa-teachers__photo"
-										loading="lazy"
-									/>
-								</div>
-								<div class="ysa-teachers__body">
-									<h3 class="ysa-teachers__name">{t.name}</h3>
-									<p class="ysa-teachers__credentials">{t.credentials}</p>
-									<p class="ysa-teachers__bio">{t.bio}</p>
-									<div class="ysa-teachers__cta-wrap">
-										<a class="ysa-teachers__cta" href={d.cardCta.href}>
-											<span>{d.cardCta.label}</span>
-											<span class="ysa-teachers__cta-arrow" aria-hidden="true">&rarr;</span>
-										</a>
+		<div
+			class="ysa-teachers__scroll"
+			role="region"
+			aria-label="Educator profiles — scroll horizontally to see all"
+			tabindex="0"
+		>
+			<ul class="ysa-teachers__grid">
+				{
+					d.items.map((t) => {
+						const src = EDUCATOR_PHOTO_BY_INDEX[t.photoIndex];
+						return (
+							<li class="ysa-teachers__item">
+								<article class="ysa-teachers__card">
+									<div class="ysa-teachers__media">
+										<img
+											src={src}
+											alt={`${t.name} portrait`}
+											class="ysa-teachers__photo"
+											loading="lazy"
+											decoding="async"
+										/>
 									</div>
-								</div>
-							</article>
-						</li>
-					);
-				})
-			}
-		</ul>
+									<div class="ysa-teachers__body">
+										<h3 class="ysa-teachers__name">{t.name}</h3>
+										<p class="ysa-teachers__credentials">{t.credentials}</p>
+										<p class="ysa-teachers__bio">{t.bio}</p>
+										<div class="ysa-teachers__cta-wrap">
+											<a class="ysa-teachers__cta" href={d.cardCta.href}>
+												<span>{d.cardCta.label}</span>
+												<span class="ysa-teachers__cta-arrow" aria-hidden="true">&rarr;</span>
+											</a>
+										</div>
+									</div>
+								</article>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</div>
 	</div>
 </section>

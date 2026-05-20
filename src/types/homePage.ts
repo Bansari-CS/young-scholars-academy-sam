@@ -57,14 +57,16 @@ export interface ImpactColumn {
 	cards: ImpactCard[];
 }
 
+export type TeacherPhotoIndex =
+	| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18;
+
 /** Figma “Learn from the Best” — one card per teacher */
 export interface TeacherCard {
 	name: string;
 	/** Degree / school line (accent color in Figma) */
 	credentials: string;
 	bio: string;
-	/** Maps to `Teacher (n).png` in `/assets/images/` — replace with hi-res exports for sharp portraits */
-	photoIndex: 1 | 2 | 3 | 4 | 5 | 6;
+	photoIndex: TeacherPhotoIndex;
 }
 
 export interface FitColumn {
