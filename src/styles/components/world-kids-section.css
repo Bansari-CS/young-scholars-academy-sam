@@ -408,11 +408,6 @@
 	.ysa-world__stat--rb {
 		right: 0%;
 	}
-
-	.ysa-teachers__card {
-		width: 100%;
-		max-width: 100%;
-	}
 }
 
 @media (max-width: 900px) {
