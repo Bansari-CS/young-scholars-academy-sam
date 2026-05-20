@@ -5,9 +5,9 @@ seo:
 hero:
   trustBadges:
     - WASC Accredited
-    - 1,200+ Families Served
+    - 1.2K+ Families Served
     - 93% Re-Enroll
-    - 40+ States, 13 Countries
+    - 17 Countries · 47 US States + D.C.
   titleLineOne: Somewhere Right Now, a Kid Just Like Yours Is Laughing in a Class They Chose,
   titleHighlight: With Friends Who Finally Get Them.
   description: That's not a fantasy. That's a Tuesday at Young Scholars Academy. 150+ live online courses for gifted or 2e kids ages 5 to 18. Classes of 6 to 8. Mentors who were these kids. A virtual campus where they actually want to hang out.
@@ -409,20 +409,56 @@ teachers:
       bio: Robotics competition mentor. Brings engineering concepts to life.
       photoIndex: 4
 world:
-  eyebrow: EXPERT EDUCATORS
+  eyebrow: GLOBAL COMMUNITY
   title: Our Kids Are All Around
   titleLine2: the World
   description: From Tokyo to New York, our students are building the future. Join a global community of innovators, thinkers, and creators who are pushing the boundaries of what's possible.
   globeAlt: Global network of YSA students around the world
   stats:
-    - value: 1K+
-      label: Families
-    - value: 17+
-      label: Countries
+    - value: 1.2K+
+      label: Families Served
+    - value: "17"
+      label: Countries across 6 continents
     - value: 24/7
       label: Live Learning
     - value: 47+
-      label: US states + D.C.
+      label: US States + D.C.
+  countriesHeading: 17 Countries across 6 continents
+  countries:
+    - flag: "🇺🇸"
+      name: United States
+    - flag: "🇨🇦"
+      name: Canada
+    - flag: "🇳🇿"
+      name: New Zealand
+    - flag: "🇦🇺"
+      name: Australia
+    - flag: "🇨🇭"
+      name: Switzerland
+    - flag: "🇵🇪"
+      name: Peru
+    - flag: "🇨🇱"
+      name: Chile
+    - flag: "🇧🇷"
+      name: Brazil
+    - flag: "🇰🇷"
+      name: Korea
+    - flag: "🇮🇹"
+      name: Italy
+    - flag: "🇮🇪"
+      name: Ireland
+    - flag: "🇸🇬"
+      name: Singapore
+    - flag: "🇺🇬"
+      name: Uganda
+    - flag: "🇬🇧"
+      name: United Kingdom
+    - flag: "🇩🇪"
+      name: Germany
+    - flag: "🇳🇴"
+      name: Norway
+    - flag: "🇹🇹"
+      name: Trinidad & Tobago
 fit:
   eyebrow: FIND YOUR FIT
   title: Is YSA right fit for your child?

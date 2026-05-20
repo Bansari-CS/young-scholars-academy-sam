@@ -1,5 +1,6 @@
 ---
 import '../../styles/components/world-kids-section.css';
+import { WORLD_COUNTRY_COORDS } from '../../data/worldCountryCoords';
 
 interface Props {
 	content: {
@@ -9,15 +10,34 @@ interface Props {
 		description: string;
 		stats: Array<{ value: string; label: string }>;
 		globeAlt?: string;
+		countriesHeading?: string;
+		countries?: Array<{ flag: string; name: string }>;
 	};
 }
 
 const { content: d } = Astro.props;
 
-/** Parse CMS stat strings for count-up (e.g. 10,000+ → target + suffix); literals e.g. 24/7 unchanged */
-function statDisplayMeta(value: string): { kind: 'literal'; text: string } | { kind: 'count'; target: number; suffix: string } {
+/** Parse CMS stat strings for count-up (e.g. 1.2K+, 47+); literals e.g. 24/7 unchanged */
+function statDisplayMeta(
+	value: string
+):
+	| { kind: 'literal'; text: string }
+	| { kind: 'count'; target: number; suffix: string; format?: 'compact-k' | 'compact-m' } {
 	const t = value.trim();
 	if (/^\d+\/\d+$/.test(t)) return { kind: 'literal', text: t };
+	const km = t.match(/^(\d+(?:\.\d+)?)([KkMm])(\+)?$/);
+	if (km) {
+		const num = Number(km[1]);
+		const unit = km[2].toUpperCase();
+		const suffix = km[3] ?? '';
+		const multiplier = unit === 'K' ? 1000 : 1_000_000;
+		return {
+			kind: 'count',
+			target: Math.round(num * multiplier),
+			suffix,
+			format: unit === 'K' ? 'compact-k' : 'compact-m',
+		};
+	}
 	const normalized = t.replace(/,/g, '');
 	const m = normalized.match(/^(\d+)(\+)?$/);
 	if (m) return { kind: 'count', target: Number(m[1]), suffix: m[2] ?? '' };
@@ -26,39 +46,22 @@ function statDisplayMeta(value: string): { kind: 'literal'; text: string } | { k
 
 const statSlots = ['lt', 'rt', 'lb', 'rb'] as const;
 
-const faces = [
-	'/assets/images/Teacher (1).png',
-	'/assets/images/Teacher (2).png',
-	'/assets/images/Teacher (3).png',
-	'/assets/images/Teacher (4).png',
-	'/assets/images/Teacher (5).png',
-	'/assets/images/Teacher (6).png',
-	'/assets/images/Teacher (1).png',
-	'/assets/images/Teacher (2).png',
-	'/assets/images/Teacher (3).png',
-];
-
-/** Figma 1037:3902 — mixed sizes; squircle = 32px rounded-[16px] student pins */
-const markerPoints = [
-	{ lat: 49.2827, lng: -123.1207, face: faces[0], size: 48, shape: 'circle' },
-	{ lat: 37.7749, lng: -122.4194, face: faces[1], size: 40, shape: 'circle' },
-	{ lat: 40.7128, lng: -74.006, face: faces[2], size: 48, shape: 'circle' },
-	{ lat: -23.5505, lng: -46.6333, face: faces[3], size: 40, shape: 'circle' },
-	{ lat: -34.6037, lng: -58.3816, face: faces[4], size: 32, shape: 'squircle' },
-	{ lat: 51.5072, lng: -0.1276, face: faces[5], size: 40, shape: 'circle' },
-	{ lat: 48.8566, lng: 2.3522, face: faces[6], size: 48, shape: 'circle' },
-	{ lat: 30.0444, lng: 31.2357, face: faces[7], size: 32, shape: 'squircle' },
-	{ lat: -1.2864, lng: 36.8172, face: faces[8], size: 40, shape: 'circle' },
-	{ lat: 19.076, lng: 72.8777, face: faces[0], size: 32, shape: 'squircle' },
-	{ lat: 28.6139, lng: 77.209, face: faces[1], size: 40, shape: 'circle' },
-	{ lat: 1.3521, lng: 103.8198, face: faces[2], size: 32, shape: 'squircle' },
-	{ lat: 35.6762, lng: 139.6503, face: faces[3], size: 48, shape: 'circle' },
-	{ lat: 37.5665, lng: 126.978, face: faces[4], size: 56, shape: 'circle' },
-	{ lat: -33.8688, lng: 151.2093, face: faces[5], size: 48, shape: 'circle' },
-	{ lat: -6.2088, lng: 106.8456, face: faces[6], size: 32, shape: 'squircle' },
-	{ lat: 55.7558, lng: 37.6173, face: faces[2], size: 40, shape: 'circle' },
-	{ lat: 25.2048, lng: 55.2708, face: faces[3], size: 32, shape: 'squircle' },
-];
+/** Globe pins from CMS country list — one marker per country */
+const markerPoints =
+	d.countries
+		?.map((country) => {
+			const coords = WORLD_COUNTRY_COORDS[country.name];
+			if (!coords) return null;
+			return {
+				lat: coords.lat,
+				lng: coords.lng,
+				flag: country.flag,
+				name: country.name,
+				size: 40,
+				shape: 'circle' as const,
+			};
+		})
+		.filter((point): point is NonNullable<typeof point> => point !== null) ?? [];
 ---
 
 <section class="ysa-world" aria-labelledby="world-heading">
@@ -88,6 +91,7 @@ const markerPoints = [
 										data-stat-count
 										data-stat-target={meta.target}
 										data-stat-suffix={meta.suffix}
+										data-stat-format={meta.format}
 									>
 										0
 									</span>
@@ -112,6 +116,24 @@ const markerPoints = [
 				</div>
 			</div>
 		</div>
+
+		{
+			d.countries?.length ? (
+				<div class="ysa-world__countries">
+					{d.countriesHeading ? <p class="ysa-world__countries-heading">{d.countriesHeading}</p> : null}
+					<ul class="ysa-world__countries-list" aria-label={d.countriesHeading ?? 'Countries served'}>
+						{d.countries.map((country) => (
+							<li class="ysa-world__country">
+								<span class="ysa-world__country-flag" aria-hidden="true">
+									{country.flag}
+								</span>
+								<span class="ysa-world__country-name">{country.name}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			) : null
+		}
 	</div>
 </section>
 
@@ -314,10 +336,21 @@ const markerPoints = [
 				.htmlElement((d) => {
 					const root = document.createElement('div');
 					const shape = d.shape === 'squircle' ? 'squircle' : 'circle';
-					root.className = `ysa-world__marker ysa-world__marker--${shape}`;
+					const isCountry = Boolean(d.flag);
+					root.className = [
+						'ysa-world__marker',
+						`ysa-world__marker--${shape}`,
+						isCountry ? 'ysa-world__marker--country' : '',
+					]
+						.filter(Boolean)
+						.join(' ');
 					const markerSize = Number(d.size) || 40;
 					root.style.width = `${markerSize}px`;
 					root.style.height = `${markerSize}px`;
+					if (d.name) {
+						root.title = d.name;
+						root.setAttribute('aria-label', d.name);
+					}
 
 					const glow = document.createElement('span');
 					glow.className = 'ysa-world__marker-glow';
@@ -326,12 +359,21 @@ const markerPoints = [
 					const inner = document.createElement('div');
 					inner.className = 'ysa-world__marker-inner';
 
-					const img = document.createElement('img');
-					img.src = d.face;
-					img.alt = '';
-					img.className = 'ysa-world__marker-img';
-					img.loading = 'lazy';
-					inner.append(img);
+					if (d.flag) {
+						const flag = document.createElement('span');
+						flag.className = 'ysa-world__marker-flag';
+						flag.textContent = d.flag;
+						flag.setAttribute('aria-hidden', 'true');
+						inner.append(flag);
+					} else if (d.face) {
+						const img = document.createElement('img');
+						img.src = d.face;
+						img.alt = '';
+						img.className = 'ysa-world__marker-img';
+						img.loading = 'lazy';
+						inner.append(img);
+					}
+
 					root.append(glow, inner);
 					return root;
 				});
@@ -445,18 +487,30 @@ const markerPoints = [
 
 		const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		function formatCount(n) {
-			return Math.round(n).toLocaleString('en-US');
+		function formatCount(n, format) {
+			const v = Math.round(n);
+			if (format === 'compact-k' && v >= 1000) {
+				const k = Math.round((v / 1000) * 10) / 10;
+				const kText = k % 1 === 0 ? String(k) : k.toFixed(1);
+				return `${kText}K`;
+			}
+			if (format === 'compact-m' && v >= 1_000_000) {
+				const m = Math.round((v / 1_000_000) * 10) / 10;
+				const mText = m % 1 === 0 ? String(m) : m.toFixed(1);
+				return `${mText}M`;
+			}
+			return v.toLocaleString('en-US');
 		}
 
 		function runCountUp() {
 			els.forEach((el) => {
 				const target = Number(el.getAttribute('data-stat-target'));
 				const suffix = el.getAttribute('data-stat-suffix') || '';
+				const format = el.getAttribute('data-stat-format') || '';
 				if (!Number.isFinite(target) || target < 0) return;
 
 				if (reduceMotion) {
-					el.textContent = formatCount(target) + suffix;
+					el.textContent = formatCount(target, format) + suffix;
 					el.closest('.ysa-world__stat')?.classList.add('ysa-world__stat--counted');
 					return;
 				}
@@ -467,7 +521,7 @@ const markerPoints = [
 					const t = Math.min(1, (now - start) / duration);
 					const eased = 1 - Math.pow(1 - t, 3);
 					const v = Math.round(eased * target);
-					el.textContent = formatCount(v) + suffix;
+					el.textContent = formatCount(v, format) + suffix;
 					if (t < 1) {
 						requestAnimationFrame(tick);
 					} else {

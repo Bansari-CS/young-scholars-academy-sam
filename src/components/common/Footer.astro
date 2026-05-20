@@ -1,90 +1,176 @@
 ---
 import '../../styles/components/footer.css';
+import logo from '../../assets/common/logo.png';
 
-const programs = ['Science', 'Math', 'Coding', 'Robotics'];
-const resources = ['Blog', 'Parent Guides', 'Success Stories', 'FAQ'];
-const company = ['About', 'Careers', 'Contact', 'Privacy Policy'];
 const year = new Date().getFullYear();
+
+const socialLinks = [
+	{
+		label: 'Facebook',
+		href: 'https://www.facebook.com/YSAENRICHMENT',
+		icon: '/assets/footer/social-facebook.svg',
+		external: true,
+	},
+	{
+		label: 'LinkedIn',
+		href: 'https://www.linkedin.com/company/young-scholars-academy-la',
+		icon: '/assets/footer/social-linkedin.svg',
+		external: true,
+	},
+	{
+		label: 'YouTube',
+		href: 'https://www.youtube.com/@youngscholarsacademy1523',
+		icon: '/assets/footer/social-youtube.svg',
+		external: false,
+	},
+	{
+		label: 'Instagram',
+		href: 'https://www.instagram.com/young_scholars_academy/',
+		icon: '/assets/footer/social-instagram.svg',
+		external: true,
+	},
+	{
+		label: 'TikTok',
+		href: 'https://www.tiktok.com/@young_scholars_academy',
+		icon: '/assets/footer/social-tiktok.svg',
+		external: false,
+	},
+];
+
+const companyLinks = [
+	{ label: 'About Us', href: '#' },
+	{ label: 'Our Teachers', href: '/teachers' },
+	{ label: 'Courses Catalog', href: '/semester-sales' },
+	{ label: 'FAQ', href: '#' },
+];
+
+const resourceLinks = [
+	{ label: 'Blog', href: '/blog' },
+	{ label: 'Expert Talks', href: '#' },
+	{ label: 'Freebies', href: '#' },
+];
+
+const courseCategoryLinks = [
+	{ label: 'Academic Core, Executive Function & Life Skills', href: '#' },
+	{ label: 'Gaming & Social Skills', href: '#' },
+	{ label: 'STEM & Science', href: '#' },
+	{ label: 'Math Made Fun', href: '#' },
+	{ label: 'Creative Arts & Expression', href: '#' },
+	{ label: 'Social Connection & Friendship', href: '#' },
+	{ label: 'Communication & Life Skills', href: '#' },
+	{ label: 'History & Critical Thinking', href: '#' },
+	{ label: 'Special Interest & Culture', href: '#' },
+];
+
+const communityLinks = [
+	{ label: 'Testimonials', href: '#' },
+	{ label: 'Events', href: '#' },
+	{ label: 'Freebies', href: '#' },
+];
+
+const accreditationLinks = [
+	{ label: 'FAQ', href: '#' },
+	{ label: 'Privacy Policy', href: '#' },
+];
 ---
 
 <footer class="ysa-footer">
 	<div class="ysa-footer__inner">
-		<div class="ysa-footer__top">
+		<div class="ysa-footer__grid">
 			<div class="ysa-footer__brand-col">
-				<a class="ysa-footer__brand" href="/">
-					<span class="ysa-footer__logo" aria-hidden="true">YS</span>
-					<span class="ysa-footer__brand-name">Young Scholars Academy</span>
+				<a class="ysa-footer__logo-link" href="/" aria-label="Young Scholars Academy home">
+					<img
+						class="ysa-footer__logo-img"
+						src={logo.src}
+						width={logo.width}
+						height={logo.height}
+						alt="Young Scholars Academy"
+					/>
 				</a>
 				<p class="ysa-footer__tagline">
-					Premium STEM education for gifted, twice-exceptional, and neurodivergent learners. Small classes. Expert mentors.
-					Real results.
+					Premium STEM education for gifted, twice-exceptional, and neurodivergent learners. Small classes.
+					Expert mentors. Real results.
 				</p>
 				<div class="ysa-footer__social" aria-label="Social media">
-					<a href="https://www.facebook.com/YSAENRICHMENT" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 21v-7.9h2.7l.4-3.1h-3.1V8c0-.9.3-1.5 1.6-1.5h1.7V3.7c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.3H7.6v3.1h2.7V21h3.1Z" /></svg>
-					</a>
-					<a href="#" aria-label="Twitter">
-						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3H22l-6.8 7.7L23 21h-6.1l-4.8-6.3L6.5 21H3.4l7.3-8.2L3 3h6.3l4.3 5.7L18.9 3Zm-1.1 16.1h1.7L8.3 4.8H6.5l11.3 14.3Z" /></svg>
-					</a>
-					<a href="https://www.instagram.com/young_scholars_academy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0Zm3.1 1.1c-.1-1.4-.4-2.6-1.4-3.6s-2.2-1.3-3.6-1.4C14.7 3 9.3 3 7.9 3.2c-1.4.1-2.6.4-3.6 1.4S3 6.8 2.8 8.2C2.7 9.6 2.7 15 2.8 16.4c.1 1.4.4 2.6 1.4 3.6s2.2 1.3 3.6 1.4c1.4.1 6.8.1 8.2 0 1.4-.1 2.6-.4 3.6-1.4s1.3-2.2 1.4-3.6c.1-1.4.1-6.8 0-8.2Zm-2 10c-.3.7-.8 1.2-1.5 1.5-1 .4-3.4.3-4.6.3-1.2 0-3.7.1-4.6-.3a2.5 2.5 0 0 1-1.5-1.5c-.4-1-.3-3.4-.3-4.6 0-1.2-.1-3.7.3-4.6.3-.7.8-1.2 1.5-1.5 1-.4 3.4-.3 4.6-.3 1.2 0 3.7-.1 4.6.3.7.3 1.2.8 1.5 1.5.4 1 .3 3.4.3 4.6 0 1.2.1 3.7-.3 4.6Z" /></svg>
-					</a>
-					<a href="https://www.linkedin.com/company/young-scholars-academy-la" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 8.6H3.2V21h3V8.6Zm.2-3.8a1.8 1.8 0 1 0-3.7 0 1.8 1.8 0 0 0 3.7 0ZM20.8 21h-3V15c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21h-3V8.6h2.8v1.7h.1c.4-.8 1.4-1.7 3-1.7 3.2 0 3.8 2.1 3.8 4.8V21Z" /></svg>
-					</a>
+					{
+						socialLinks.map((item) => (
+							<a
+								href={item.href}
+								aria-label={item.label}
+								{...(item.external
+									? { target: '_blank', rel: 'noopener noreferrer' }
+									: {})}
+							>
+								<img src={item.icon} alt="" width="20" height="20" />
+							</a>
+						))
+					}
 				</div>
 			</div>
 
-			<nav class="ysa-footer__nav-col" aria-label="Programs">
-				<h3>Programs</h3>
-				<ul>
-					{programs.map((item) => <li><a href="#">{item}</a></li>)}
-				</ul>
-			</nav>
+			<div class="ysa-footer__nav-stack">
+				<nav class="ysa-footer__nav-block" aria-label="Company">
+					<h3>Company</h3>
+					<ul>
+						{companyLinks.map((item) => (
+							<li>
+								<a href={item.href}>{item.label}</a>
+							</li>
+						))}
+					</ul>
+				</nav>
+				<nav class="ysa-footer__nav-block" aria-label="Resources">
+					<h3>Resources</h3>
+					<ul>
+						{resourceLinks.map((item) => (
+							<li>
+								<a href={item.href}>{item.label}</a>
+							</li>
+						))}
+					</ul>
+				</nav>
+			</div>
 
-			<nav class="ysa-footer__nav-col" aria-label="Resources">
-				<h3>Resources</h3>
-				<ul>
-					{resources.map((item) => <li><a href={item === 'Blog' ? '/blog' : '#'}>{item}</a></li>)}
-				</ul>
-			</nav>
+			<div class="ysa-footer__nav-stack">
+				<nav class="ysa-footer__nav-block ysa-footer__nav-block--categories" aria-label="Courses Categories">
+					<h3>Courses Categories</h3>
+					<ul>
+						{courseCategoryLinks.map((item) => (
+							<li>
+								<a href={item.href}>{item.label}</a>
+							</li>
+						))}
+					</ul>
+				</nav>
+				<nav class="ysa-footer__nav-block" aria-label="Community">
+					<h3>Community</h3>
+					<ul>
+						{communityLinks.map((item) => (
+							<li>
+								<a href={item.href}>{item.label}</a>
+							</li>
+						))}
+					</ul>
+				</nav>
+			</div>
 
-			<nav class="ysa-footer__nav-col" aria-label="Company">
-				<h3>Company</h3>
-				<ul>
-					{company.map((item) => <li><a href="#">{item}</a></li>)}
+			<div class="ysa-footer__accreditation-col">
+				<img
+					class="ysa-footer__wasc"
+					src="/assets/footer/wasc-accreditation.png"
+					alt="WASC Accrediting Commission for Schools"
+					width="246"
+					height="77"
+					loading="lazy"
+				/>
+				<ul class="ysa-footer__accreditation-links">
+					{accreditationLinks.map((item) => (
+						<li>
+							<a href={item.href}>{item.label}</a>
+						</li>
+					))}
 				</ul>
-			</nav>
-		</div>
-
-		<div class="ysa-footer__contact">
-			<h3>Contact</h3>
-			<ul>
-				<li>
-					<span class="ysa-footer__contact-icon" aria-hidden="true">
-						<svg viewBox="0 0 24 24"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Zm0 2v.2l8 5.3 8-5.3V8l-8 5.3L4 8Z" /></svg>
-					</span>
-					<a href="mailto:support@youngscholarsacademy.org">support@youngscholarsacademy.org</a>
-				</li>
-				<li>
-					<span class="ysa-footer__contact-icon" aria-hidden="true">
-						<svg viewBox="0 0 24 24"><path d="M6.6 3.9c.4-.4 1-.5 1.5-.3l2.3 1a1 1 0 0 1 .5 1.3l-.9 2.1c.9 1.9 2.4 3.4 4.3 4.3l2.1-.9a1 1 0 0 1 1.3.5l1 2.3c.2.5.1 1.1-.3 1.5l-1.5 1.5a2 2 0 0 1-1.9.5 15.7 15.7 0 0 1-9.6-9.6 2 2 0 0 1 .5-1.9l1.5-1.5Z" /></svg>
-					</span>
-					<a href="tel:+14248355324">(424) 835-5324</a>
-				</li>
-				<li>
-					<span class="ysa-footer__contact-icon" aria-hidden="true">
-						<svg viewBox="0 0 24 24"><path d="M6.6 3.9c.4-.4 1-.5 1.5-.3l2.3 1a1 1 0 0 1 .5 1.3l-.9 2.1c.9 1.9 2.4 3.4 4.3 4.3l2.1-.9a1 1 0 0 1 1.3.5l1 2.3c.2.5.1 1.1-.3 1.5l-1.5 1.5a2 2 0 0 1-1.9.5 15.7 15.7 0 0 1-9.6-9.6 2 2 0 0 1 .5-1.9l1.5-1.5Z" /></svg>
-					</span>
-					<a href="tel:+14248355323">(424) 835-5323</a>
-				</li>
-				<li>
-					<span class="ysa-footer__contact-icon" aria-hidden="true">
-						<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 4.5-4.8 10.5-6.3 12.2a1 1 0 0 1-1.4 0C9.8 19.5 5 13.5 5 9a7 7 0 0 1 7-7Zm0 9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" /></svg>
-					</span>
-					<span>Santa Monica, CA</span>
-				</li>
-			</ul>
+			</div>
 		</div>
 
 		<div class="ysa-footer__bottom">

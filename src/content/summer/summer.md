@@ -156,8 +156,8 @@ camps:
       dateSlot: june-mid
   aiTitle: "Ask Scheduley AI: Your Personal Scheduling Assistant"
   aiDescription: Get personalized camp recommendations based on your child's interests.
-  aiCtaLabel: Ask Scheduley AI
-  aiCtaHref: "#"
+  aiEmbedSrc: "https://summer-camp-guide-v1.on.chipp.ai"
+  aiEmbedTitle: Summer Camp Guide
   browseLabel: Browse All 300+ Topics
   browseHref: "#"
 pricing:
@@ -201,6 +201,17 @@ pricing:
   fundsText: We accept ESA and Charter School funds.
   fundsCtaLabel: Learn how to pay with funds
   fundsCtaHref: "#"
+results:
+  eyebrow: PROVEN RESULTS
+  title: Real Growth. Measurable Impact.
+  description: Families don't just see happier kids—they see tangible academic and emotional progress
+  items:
+    - name: Melissa & Zoe
+      meta: Mother and daughter, YSA families
+      video: /images/summer/testimonial/Melissa-Zoe.mp4
+    - name: Luca
+      meta: YSA Student
+      video: /images/summer/testimonial/Luca-YSA-Student.mp4
 bonus:
   kicker: BONUS BUNDLE
   title: Everything Included With Your Enrollment

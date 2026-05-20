@@ -123,8 +123,11 @@ export interface HomePageSectionsData {
 		title: string;
 		titleLine2: string;
 		description: string;
+		globeAlt?: string;
 		stats: { value: string; label: string }[];
-		regions: string[];
+		countriesHeading?: string;
+		countries?: Array<{ flag: string; name: string }>;
+		regions?: string[];
 	};
 	fit: {
 		eyebrow: string;
