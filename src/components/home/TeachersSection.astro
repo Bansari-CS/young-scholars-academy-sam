@@ -1,7 +1,6 @@
 ---
 import type { TeacherCard } from '../../types/homePage';
 import { EDUCATOR_PHOTO_BY_INDEX } from '../../data/educatorPhotos';
-import '../../styles/components/teachers-section.css';
 
 interface Props {
 	content: {
@@ -14,46 +13,70 @@ interface Props {
 }
 
 const { content: d } = Astro.props;
+
+const cardWidth =
+	'w-[clamp(15.5rem,20vw,19rem)] max-w-[clamp(15.5rem,20vw,19rem)] max-[1440px]:w-[clamp(15.25rem,19vw,18.25rem)] max-[1440px]:max-w-[clamp(15.25rem,19vw,18.25rem)] max-lg:w-[clamp(14.75rem,30vw,16.5rem)] max-lg:max-w-[clamp(14.75rem,30vw,16.5rem)] max-md:w-[clamp(14.25rem,42vw,15.25rem)] max-md:max-w-[clamp(14.25rem,42vw,15.25rem)] max-sm:w-[min(80vw,15rem)] max-sm:max-w-[min(80vw,15rem)]';
 ---
 
-<section class="ysa-teachers" aria-labelledby="teachers-heading">
-	<div class="home-section-inner">
-		<header class="ysa-teachers__head">
-			<p class="ysa-teachers__badge">{d.eyebrow}</p>
-			<h2 class="ysa-teachers__title" id="teachers-heading">{d.title}</h2>
-			<p class="ysa-teachers__desc">{d.description}</p>
+<section
+	class="bg-white py-[clamp(4.5rem,9vw,6rem)] text-[#1a1a1a] max-sm:py-[clamp(3.5rem,10vw,5.5rem)]"
+	aria-labelledby="teachers-heading"
+>
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,2.5rem)]">
+		<header class="mx-auto max-w-[52rem] text-center">
+			<p
+				class="mb-4 inline-flex w-full max-w-[211px] items-center justify-center rounded-full bg-[#e9ddff] px-4 py-2 font-display text-xs font-bold tracking-[0.04em] text-[#7c3aed] uppercase"
+			>
+				{d.eyebrow}
+			</p>
+			<h2
+				class="m-0 font-display text-[clamp(2rem,4vw,2.75rem)] font-bold tracking-[-0.02em] text-[#1a1a1a] leading-[1.2]"
+				id="teachers-heading"
+			>
+				{d.title}
+			</h2>
+			<p class="mx-auto mt-6 mb-0 max-w-[700px] text-base leading-[1.625] text-[#666666]">{d.description}</p>
 		</header>
 
 		<div
-			class="ysa-teachers__scroll"
+			class="-mx-[clamp(1rem,4.44vw,2.5rem)] mt-12 overflow-x-auto overflow-y-hidden px-[clamp(1rem,4.44vw,2.5rem)] pb-3 [scrollbar-gutter:stable] [-webkit-overflow-scrolling:touch] scroll-smooth motion-reduce:scroll-auto focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7c3aed]"
 			role="region"
 			aria-label="Educator profiles — scroll horizontally to see all"
 			tabindex="0"
 		>
-			<ul class="ysa-teachers__grid">
+			<ul class="m-0 flex w-max max-w-none list-none flex-nowrap items-stretch gap-[clamp(1rem,2vw,2rem)] p-0">
 				{
 					d.items.map((t) => {
 						const src = EDUCATOR_PHOTO_BY_INDEX[t.photoIndex];
 						return (
-							<li class="ysa-teachers__item">
-								<article class="ysa-teachers__card">
-									<div class="ysa-teachers__media">
+							<li class:list={['m-0 shrink-0', cardWidth]}>
+								<article class:list={['flex h-full w-full flex-col bg-transparent', cardWidth]}>
+									<div class="relative aspect-square overflow-hidden rounded-2xl border border-[#e9eef5] bg-[#f3f4f6] shadow-[0_1px_2px_rgba(15,23,42,0.05),0_8px_22px_-10px_rgba(15,23,42,0.12)]">
 										<img
 											src={src}
 											alt={`${t.name} portrait`}
-											class="ysa-teachers__photo"
+											class="block h-full w-full rounded-[inherit] object-cover object-top"
 											loading="lazy"
 											decoding="async"
 										/>
 									</div>
-									<div class="ysa-teachers__body">
-										<h3 class="ysa-teachers__name">{t.name}</h3>
-										<p class="ysa-teachers__credentials">{t.credentials}</p>
-										<p class="ysa-teachers__bio">{t.bio}</p>
-										<div class="ysa-teachers__cta-wrap">
-											<a class="ysa-teachers__cta" href={d.cardCta.href}>
+									<div class="flex flex-1 flex-col gap-0 pt-5 text-left">
+										<h3 class="m-0 font-display text-[1.063rem] font-bold leading-[1.3] text-[#1a1a1a]">
+											{t.name}
+										</h3>
+										<p class="mt-1 mb-0 font-[var(--ysa-font-body)] text-sm font-semibold leading-[1.4] text-[#7c3aed]">
+											{t.credentials}
+										</p>
+										<p class="mt-2 mb-0 flex-1 font-[var(--ysa-font-body)] text-sm leading-[1.55] text-[#666666]">
+											{t.bio}
+										</p>
+										<div class="mt-3.5 border-t border-[#e9eef5] pt-4">
+											<a
+												class="inline-flex w-fit items-center gap-[0.35rem] font-[var(--ysa-font-body)] text-sm font-semibold leading-tight text-[#5751E4] no-underline transition-[color,gap] duration-150 ease-out hover:gap-2 hover:text-[#6d28d9] focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7c3aed]"
+												href={d.cardCta.href}
+											>
 												<span>{d.cardCta.label}</span>
-												<span class="ysa-teachers__cta-arrow" aria-hidden="true">&rarr;</span>
+												<span class="text-[1.05em] leading-none" aria-hidden="true">&rarr;</span>
 											</a>
 										</div>
 									</div>

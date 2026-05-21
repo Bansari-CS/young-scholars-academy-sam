@@ -1,13 +1,46 @@
 ---
-import '../../styles/components/learner-needs-section.css';
-import '../../styles/components/summer-full.css';
-
-const processStepIconBg: Record<string, string> = {
-	blue: 'expect-icon-primary',
-	purple: 'expect-icon-secondary',
-	yellow: 'expect-icon-accent',
-	green: 'expect-icon-success',
+const processStepTheme: Record<
+	string,
+	{ iconBg: string; label: string; dot: string; connector: string }
+> = {
+	blue: {
+		iconBg: 'bg-[#0a9dfb]',
+		label: 'bg-[#e0f2fe] text-[#0284c7]',
+		dot: 'bg-[#0a9dfb]',
+		connector: 'before:bg-[#0a9dfb] after:bg-[#0a9dfb]',
+	},
+	purple: {
+		iconBg: 'bg-[#7c3aed]',
+		label: 'bg-[#f3e8ff] text-[#7c3aed]',
+		dot: 'bg-[#7c3aed]',
+		connector: 'before:bg-[#7c3aed] after:bg-[#7c3aed]',
+	},
+	yellow: {
+		iconBg: 'bg-[#f2dd35]',
+		label: 'bg-[#fef9c3] text-[#ca8a04]',
+		dot: 'bg-[#f2dd35]',
+		connector: 'before:bg-[#f2dd35] after:bg-[#f2dd35]',
+	},
+	green: {
+		iconBg: 'bg-[#048c3c]',
+		label: 'bg-[#dcfce7] text-[#15803d]',
+		dot: 'bg-[#048c3c]',
+		connector: 'before:bg-[#048c3c] after:bg-[#048c3c]',
+	},
 };
+
+const processGridPlacement = [
+	'min-[901px]:col-start-1 min-[901px]:row-start-1 min-[901px]:mt-0',
+	'min-[901px]:col-start-3 min-[901px]:row-start-1 min-[901px]:mt-40',
+	'min-[901px]:col-start-1 min-[901px]:row-start-2 min-[901px]:mt-0',
+	'min-[901px]:col-start-3 min-[901px]:row-start-2 min-[901px]:mt-[83px]',
+];
+
+const processConnectorOdd =
+	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:right-[-61px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:right-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
+
+const processConnectorEven =
+	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:left-[-61px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:left-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
 
 const cardSadPathD =
 	'M12 24C18.623 24 24 18.623 24 12C24 5.37702 18.623 0 12 0C5.37702 0 0 5.37702 0 12C0 18.623 5.37702 24 12 24ZM7.46719 18.2203C7.34531 18.6141 6.92344 18.8391 6.52969 18.7125S5.91094 18.1687 6.0375 17.775C6.80625 15.2859 9.20156 13.5 12 13.5C14.7984 13.5 17.1938 15.2859 17.9672 17.7797C18.0891 18.1734 17.8687 18.5953 17.475 18.7172S16.6594 18.6187 16.5375 18.225C15.9609 16.3781 14.1609 15 12 15C9.83906 15 8.03906 16.3781 7.46719 18.2203ZM6.76875 9.75C6.76875 8.92213 7.44088 8.25 8.26875 8.25C9.09662 8.25 9.76875 8.92213 9.76875 9.75C9.76875 10.5779 9.09662 11.25 8.26875 11.25C7.44088 11.25 6.76875 10.5779 6.76875 9.75ZM15.7688 8.25C16.5966 8.25 17.2687 8.92213 17.2687 9.75C17.2687 10.5779 16.5966 11.25 15.7688 11.25C14.9409 11.25 14.2688 10.5779 14.2688 9.75C14.2688 8.92213 14.9409 8.25 15.7688 8.25Z';
@@ -52,10 +85,9 @@ const { content, processContent } = Astro.props;
 
 ---
 
-<section class="learner-section bg-[#f8fafc] py-[clamp(2.25rem,5vw,6rem)] pb-0">
-	<div class="learner-container mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
-		
-		<div class="learner-heading m-0  text-center">
+<section class="bg-white py-[clamp(2.25rem,5vw,6rem)] pb-0">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<div class="m-0 text-center">
 			
 			<span class="inline-flex items-center justify-center rounded-[999px] bg-[#EDE9FE] px-[1rem] py-[0.5rem] text-[12px] font-bold uppercase tracking-[0.06em] text-[#7C3AED]">
 				{content.badgeText}
@@ -70,14 +102,13 @@ const { content, processContent } = Astro.props;
 			</p>
 		</div>
 
-		<div class="learner-cards mt-[clamp(2rem,4vw,4rem)] grid grid-cols-3 gap-8 max-lg:grid-cols-1">
+		<div class="mt-[clamp(2rem,4vw,4rem)] grid grid-cols-3 gap-8 max-lg:grid-cols-1">
 			{
 				content.cards.map((card) => (
-					<article class="learner-card rounded-[1.25rem] border border-[#E2E8F0] bg-white px-[2.063rem] py-[2.063rem] shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_26px_-20px_rgba(15,23,42,0.2)] transition-[border-color,box-shadow] duration-200 ease-in hover:border-[#CBD5E1] hover:shadow-[0_12px_34px_-26px_rgba(15,23,42,0.28)]">
-						
+					<article class="rounded-[1.25rem] border border-[#E2E8F0] bg-white px-[2.063rem] py-[2.063rem] shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_26px_-20px_rgba(15,23,42,0.2)] transition-[border-color,box-shadow] duration-200 ease-in hover:border-[#CBD5E1] hover:shadow-[0_12px_34px_-26px_rgba(15,23,42,0.28)]">
 						<div
 							class:list={[
-								"card-icon-slot flex h-14 w-14 shrink-0 items-center justify-center rounded-[0.75rem]",
+								'flex h-14 w-14 shrink-0 items-center justify-center rounded-[0.75rem]',
 								card.icon === "stress"
 									? "bg-[linear-gradient(145deg,#F5F3FF,#EDE9FE)]"
 									: card.icon === "group"
@@ -109,11 +140,10 @@ const { content, processContent } = Astro.props;
 							{card.description}
 						</p>
 
-						<div class="card-divider mt-6 h-px bg-[#EEF2F7]"></div>
+						<div class="mt-6 h-px bg-[#EEF2F7]"></div>
 
-						<div class="card-highlight mt-6 flex items-start gap-[0.65rem]">
-							
-							<span class="card-check mt-[0.1rem] flex h-[1.05rem] w-[1.05rem] shrink-0 items-center justify-center" aria-hidden="true">
+						<div class="mt-6 flex items-start gap-[0.65rem]">
+							<span class="mt-[0.1rem] flex h-[1.05rem] w-[1.05rem] shrink-0 items-center justify-center" aria-hidden="true">
 								<svg class="block h-auto w-full" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d={cardCheckPathD} fill="#048C3C" />
 								</svg>
@@ -130,28 +160,44 @@ const { content, processContent } = Astro.props;
 	</div>
 </section>
 
-<section
-	class="summer-section summer-expect-section home-process-expect-section scroll-mt-28 py-12 pb-[4px] md:py-16 xl:py-20"
->
-	<div class="summer-wrap home-process-expect-wrap">
-		<header class="home-process-expect-header">
-			<span class="home-process-expect-badge">{processContent.badge}</span>
-			<h2 class="mx-auto mb-4 text-center font-bold leading-normal text-[#111827] text-[28px] md:text-[36px] lg:text-[44px] max-w-[1072px] md:mb-6">
+<section class="scroll-mt-28 bg-white py-12 pb-px md:py-16 xl:py-20">
+	<div class="mx-auto box-border w-full max-w-[90rem] px-4 sm:px-6 lg:px-10">
+		<header class="mb-0 text-center">
+			<span class="mb-5 inline-flex items-center justify-center rounded-full bg-[#e1f3ff] px-4 py-2 text-xs font-bold tracking-[0.06em] text-[var(--ysa-primary)] uppercase">
+				{processContent.badge}
+			</span>
+			<h2 class="mx-auto mb-4 max-w-[1072px] text-center text-[28px] leading-normal font-bold text-[#111827] md:mb-6 md:text-[36px] lg:text-[44px]">
 				{processContent.title}
 			</h2>
 			<p
-				class="summer-sub home-process-expect-description mx-auto mb-16 max-w-[549px] text-center text-[16px] leading-[26px] text-[#475569]"
+				class="mx-auto mb-16 max-w-[549px] text-center text-[16px] leading-[26px] text-[#475569] max-[900px]:mb-10"
 				set:html={processContent.description}
 			/>
 		</header>
 
-		<div class="summer-grid-3 summer-expect-grid home-process-expect-grid">
+		<div
+			class="relative mx-auto grid w-full grid-cols-1 py-5 min-[901px]:grid-cols-[1fr_126px_1fr] min-[901px]:grid-rows-[auto_auto] min-[901px]:before:absolute min-[901px]:before:top-0 min-[901px]:before:bottom-0 min-[901px]:before:left-1/2 min-[901px]:before:-ml-px min-[901px]:before:z-0 min-[901px]:before:w-0.5 min-[901px]:before:border-l-2 min-[901px]:before:border-dashed min-[901px]:before:border-[#cbd5e1]"
+		>
 			{
 				processContent.steps.map((step, index) => {
-					const iconBg = processStepIconBg[step.color] ?? processStepIconBg.blue;
+					const theme = processStepTheme[step.color] ?? processStepTheme.blue;
+					const isOdd = index % 2 === 0;
 					return (
-						<article class="summer-card summer-expect-card">
-							<span class={`summer-expect-icon home-process-expect-icon ${iconBg}`} aria-hidden="true">
+						<article
+							class:list={[
+								'relative z-[1] flex h-auto min-h-[240px] flex-col overflow-visible rounded-2xl bg-white p-8 outline outline-1 outline-[#e2e8f0]',
+								processGridPlacement[index] ?? 'min-[901px]:col-start-1 min-[901px]:row-auto min-[901px]:mt-0',
+								isOdd ? processConnectorOdd : processConnectorEven,
+								theme.connector,
+							]}
+						>
+							<span
+								class:list={[
+									'mb-[0.95rem] inline-flex size-12 shrink-0 items-center justify-center rounded-xl [&_svg]:block [&_svg]:shrink-0',
+									theme.iconBg,
+								]}
+								aria-hidden="true"
+							>
 								{step.step === '01' ? (
 									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path
@@ -182,14 +228,25 @@ const { content, processContent } = Astro.props;
 									</svg>
 								)}
 							</span>
-							<span class="summer-card-num">{step.step}</span>
-							<span class={`process-card__label process-card__label--${step.color} home-process-step-label`}>
+							<span class="pointer-events-none absolute top-4 right-4 z-0 max-w-[calc(100%-32px)] overflow-hidden text-[56px] leading-none font-bold text-[#f1f5f9] select-none">
+								{step.step}
+							</span>
+							<span
+								class:list={[
+									'relative z-[1] inline-flex self-start rounded-full px-3 py-1 text-xs font-semibold tracking-[0.03em]',
+									theme.label,
+								]}
+							>
 								STEP {index + 1}
 							</span>
-							<h3>{step.title}</h3>
-							<p class="home-process-card-desc">{step.desc}</p>
-							<footer class="process-card__footer home-process-card-footer">
-								<span class={`process-card__dot process-card__dot--${step.color}`} />
+							<h3 class="relative z-[1] m-0 text-[17px] leading-7 font-semibold text-[#111827]">
+								{step.title}
+							</h3>
+							<p class="relative z-[1] mt-[7px] m-0 max-w-[392px] p-0 text-[16px] leading-[26px] text-[#475569]">
+								{step.desc}
+							</p>
+							<footer class="relative z-[1] mt-auto flex max-w-[392px] items-center gap-[0.55rem] border-t border-[#f1f5f9] pt-4 text-[0.68rem] text-[#94a3b8]">
+								<span class:list={['size-[0.45rem] shrink-0 rounded-full', theme.dot]} />
 								{step.footer}
 							</footer>
 						</article>
@@ -198,8 +255,8 @@ const { content, processContent } = Astro.props;
 			}
 		</div>
 
-		<div class="process-cta-wrapper">
-			<p class="process-cta-note">{processContent.note}</p>
+		<div class="mt-[clamp(2rem,4.5vw,3rem)] text-center">
+			<p class="mt-4 text-xs text-[#6B7280]">{processContent.note}</p>
 		</div>
 	</div>
 </section>

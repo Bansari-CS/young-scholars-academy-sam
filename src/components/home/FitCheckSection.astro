@@ -1,6 +1,4 @@
 ---
-import '../../styles/components/fit-section.css';
-
 interface Props {
 	content: {
 		eyebrow: string;
@@ -13,29 +11,61 @@ interface Props {
 }
 
 const { content: d } = Astro.props;
+
+function splitFitNote(note: string): { lead: string | null; body: string } {
+	const q = note.indexOf('?');
+	if (q === -1) return { lead: null, body: note };
+	return { lead: note.slice(0, q + 1), body: note.slice(q + 1).trim() };
+}
+
+const fitNote = splitFitNote(d.note);
 ---
 
-<section class="ysa-fit" aria-labelledby="fit-heading">
-	<div class="home-section-inner">
-		<header class="ysa-fit__head">
-			<p class="ysa-fit__badge">{d.eyebrow}</p>
-			<h2 class="ysa-fit__title" id="fit-heading">{d.title}</h2>
-			<p class="ysa-fit__desc">{d.description}</p>
+<section
+	class="bg-slate-50 py-[clamp(4.5rem,9vw,6rem)]"
+	aria-labelledby="fit-heading"
+>
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<header class="mx-auto max-w-3xl text-center">
+			<p
+				class="mb-4 inline-flex items-center justify-center rounded-full bg-green-100 px-4 py-2 font-display text-xs font-bold tracking-[0.04em] text-green-800 uppercase"
+			>
+				{d.eyebrow}
+			</p>
+			<h2
+				class="m-0 font-display text-[clamp(2rem,4vw,2.75rem)] font-bold tracking-[-0.02em] text-[#111827] leading-[1.16]"
+				id="fit-heading"
+			>
+				{d.title}
+			</h2>
+			<p class="mt-6 mb-0 text-base leading-relaxed text-slate-500">{d.description}</p>
 		</header>
 
-		<div class="ysa-fit__grid">
-			<article class="ysa-fit__card ysa-fit__card--good">
-				<h3 class="ysa-fit__card-title">
-					<span class="ysa-fit__title-icon-wrap ysa-fit__title-icon-wrap--good" aria-hidden="true">
-						<span class="ysa-fit__title-icon ysa-fit__title-icon--good">✓</span>
+		<div class="mt-16 grid grid-cols-2 gap-8 max-[980px]:grid-cols-1">
+			<article class="rounded-2xl border border-emerald-200 bg-white p-8 shadow-[0_1px_2px_rgba(15,23,42,0.03),0_12px_26px_-18px_rgba(15,23,42,0.18)]">
+				<h3 class="m-0 flex items-center gap-[0.65rem] font-display text-[clamp(1.35rem,2.2vw,1.5rem)] font-bold leading-[1.2] text-[#111827]">
+					<span
+						class="inline-flex size-12 shrink-0 items-center justify-center rounded-[0.85rem] bg-emerald-100"
+						aria-hidden="true"
+					>
+						<span
+							class="inline-flex size-6 items-center justify-center rounded-full bg-emerald-600 text-[0.9rem] font-bold text-white"
+						>
+							✓
+						</span>
 					</span>
 					{d.goodFit.title}
 				</h3>
-				<ul class="ysa-fit__list">
+				<ul class="m-0 mt-6 flex list-none flex-col gap-[0.85rem] p-0">
 					{
 						d.goodFit.items.map((item) => (
-							<li class="ysa-fit__item">
-								<span class="ysa-fit__bullet ysa-fit__bullet--good" aria-hidden="true">✓</span>
+							<li class="grid grid-cols-[auto_1fr] gap-[0.65rem] font-[var(--ysa-font-body)] text-base leading-[1.45] text-slate-700">
+								<span
+									class="mt-[0.1rem] inline-flex size-[1.05rem] items-center justify-center rounded-full bg-emerald-500 text-[0.72rem] font-bold text-white"
+									aria-hidden="true"
+								>
+									✓
+								</span>
 								<span>{item}</span>
 							</li>
 						))
@@ -43,24 +73,47 @@ const { content: d } = Astro.props;
 				</ul>
 			</article>
 
-			<article class="ysa-fit__card ysa-fit__card--warning">
-				<h3 class="ysa-fit__card-title">
-					<span class="ysa-fit__title-icon-wrap ysa-fit__title-icon-wrap--warning" aria-hidden="true">
-						<span class="ysa-fit__title-icon ysa-fit__title-icon--warning">i</span>
+			<article class="rounded-2xl border border-[#e9eef5] bg-white p-8 shadow-[0_1px_2px_rgba(15,23,42,0.03),0_12px_26px_-18px_rgba(15,23,42,0.18)]">
+				<h3 class="m-0 flex items-center gap-[0.65rem] font-display text-[clamp(1.35rem,2.2vw,1.5rem)] font-bold leading-[1.2] text-[#111827]">
+					<span
+						class="inline-flex size-12 shrink-0 items-center justify-center rounded-[0.85rem] bg-gray-200"
+						aria-hidden="true"
+					>
+						<span
+							class="inline-flex size-6 items-center justify-center rounded-full bg-slate-900 text-[0.9rem] font-bold text-white"
+						>
+							i
+						</span>
 					</span>
 					{d.notIdeal.title}
 				</h3>
-				<ul class="ysa-fit__list">
+				<ul class="m-0 mt-6 flex list-none flex-col gap-[0.85rem] p-0">
 					{
 						d.notIdeal.items.map((item) => (
-							<li class="ysa-fit__item">
-								<span class="ysa-fit__bullet ysa-fit__bullet--warning" aria-hidden="true">−</span>
+							<li class="grid grid-cols-[auto_1fr] gap-[0.65rem] font-[var(--ysa-font-body)] text-base leading-[1.45] text-slate-700">
+								<span
+									class="mt-[0.1rem] inline-flex size-[1.05rem] items-center justify-center rounded-full bg-gray-400 text-[0.72rem] font-bold text-white"
+									aria-hidden="true"
+								>
+									−
+								</span>
 								<span>{item}</span>
 							</li>
 						))
 					}
 				</ul>
-				<p class="ysa-fit__note">{d.note}</p>
+				<p class="mt-[1.15rem] mb-0 rounded-xl bg-[#eef4ff] px-[0.95rem] py-[0.9rem] font-[var(--ysa-font-body)] text-sm leading-5">
+					{
+						fitNote.lead ? (
+							<span class="font-bold text-[#7c3aed]">{fitNote.lead}</span>
+						) : null
+					}
+					{fitNote.body ? (
+						<span class="font-normal text-[#334155]">
+							{fitNote.lead ? ` ${fitNote.body}` : fitNote.body}
+						</span>
+					) : null}
+				</p>
 			</article>
 		</div>
 	</div>

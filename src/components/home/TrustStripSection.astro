@@ -1,6 +1,5 @@
 ---
 import type { PartnerOrg } from "../../types/home";
-import "../../styles/components/trust-strip-section.css";
 
 interface Props {
   title: string;
@@ -26,222 +25,204 @@ function iconMeta(org: PartnerOrg): { kind: TrustIconKind } {
   }
 }
 
-function nameClass(org: PartnerOrg) {
-  return org.icon === "tree"
-    ? "trust-strip__name trust-strip__name--lg"
-    : "trust-strip__name trust-strip__name--md";
+/** Figma 31:2599 — STANFORD name */
+function nameClasses(org: PartnerOrg): string {
+  const base = "m-0 font-[var(--ysa-font-body)] font-bold text-[#94A3B8]";
+  if (org.icon === "tree") {
+    return `${base} text-[18px] leading-[18px] tracking-[-0.36px]`;
+  }
+  return `${base} text-base leading-4 tracking-[-0.16px]`;
 }
 
-function subtitleClass(org: PartnerOrg) {
-  if (org.icon === "tree")
-    return "trust-strip__subtitle trust-strip__subtitle--caps";
-  if (org.icon === "star")
-    return "trust-strip__subtitle trust-strip__subtitle--narrow";
-  return "trust-strip__subtitle";
+/** Figma 31:2602 (Stanford) / 31:2617 (others) */
+function subtitleClasses(org: PartnerOrg): string {
+  const base = "m-0 font-[var(--ysa-font-body)] text-[#CBD5E1]";
+  if (org.icon === "tree") {
+    return `${base} pt-0.5 text-sm font-light leading-[14px] tracking-[2.8px] uppercase`;
+  }
+  const shared = `${base} pt-[3.25px] text-xs font-normal leading-[16.5px]`;
+  if (org.icon === "star") return `${shared} max-w-[120px]`;
+  if (org.icon === "heart") return `${shared} max-w-[125px]`;
+  return shared;
 }
 ---
 
 <section
-  class="w-full border-t border-[#F1F5F9] border-b-0 bg-white py-[clamp(2.5rem,5vw,3rem)]"
+  class="w-full border-t border-[#F1F5F9] bg-white py-[clamp(2.5rem,5vw,3rem)]"
   aria-labelledby="trust-strip-heading"
 >
   <div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
-    
-    <h2
-      id="trust-strip-heading"
-      class="m-0 text-center font-[var(--ysa-font-display)] text-[clamp(1.125rem,2.5vw,1.5rem)] font-medium leading-[1.35] tracking-[0] text-[#94A3B8] normal-case max-sm:tracking-[0.03em]"
-    >
-      {title}
-    </h2>
+    <div class="flex flex-col items-center gap-5">
+      <h2
+        id="trust-strip-heading"
+        class="m-0 max-w-[42.375rem] text-center font-display text-2xl font-medium leading-normal tracking-[1.2px] text-[#94A3B8]"
+      >
+        {title}
+      </h2>
 
-    <div
-      class="mt-5 grid w-full grid-cols-5 items-center gap-0 bg-[length:1px_48px,1px_48px,1px_48px,1px_48px] bg-no-repeat [background-image:linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0)] [background-position:calc(100%/5)_50%,calc((100%/5)*2)_50%,calc((100%/5)*3)_50%,calc((100%/5)*4)_50%] max-lg:flex max-lg:flex-nowrap max-lg:justify-start max-lg:gap-0 max-lg:overflow-x-auto max-lg:bg-none max-lg:pb-1 max-lg:[scroll-snap-type:x_proximity] [-webkit-overflow-scrolling:touch]"
-      role="list"
-    >
-      {
-        organizations.map((org) => {
-          const meta = iconMeta(org);
+      <div
+        class="mt-0 grid w-full grid-cols-5 items-center gap-0 bg-[length:1px_48px,1px_48px,1px_48px,1px_48px] bg-no-repeat pb-2 [background-image:linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0),linear-gradient(#e2e8f0,#e2e8f0)] [background-position:calc(100%/5)_50%,calc((100%/5)*2)_50%,calc((100%/5)*3)_50%,calc((100%/5)*4)_50%] max-lg:flex max-lg:flex-nowrap max-lg:justify-start max-lg:overflow-x-auto max-lg:bg-none max-lg:pb-1 max-lg:[scroll-snap-type:x_proximity] [-webkit-overflow-scrolling:touch]"
+        role="list"
+      >
+        {
+          organizations.map((org) => {
+            const meta = iconMeta(org);
 
-          return (
-            <div
-              class="relative flex min-w-0 w-full items-center justify-start px-1 py-2 pb-[0.8125rem] max-lg:min-w-[11rem] max-lg:flex-[0_0_auto] max-lg:[scroll-snap-align:start]"
-              role="listitem"
-            >
-              <div class="flex max-w-full items-center gap-3 px-5">
-                
-                {meta.kind === "twoe" ? (
-                  <div
-                    class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[8px] bg-[#F1F5F9]"
-                    aria-hidden="true"
-                  >
-                    <span class="font-[var(--ysa-font-body)] text-[1.25rem] font-bold leading-none text-[#94A3B8]">
-                      2e
-                    </span>
-                  </div>
-                ) : meta.kind === "nagc" ? (
-                  <svg
-                    width="36"
-                    height="36"
-                    viewBox="0 0 36 36"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M18 3L21.5 13.5H33L23.5 20.5L27 31L18 24L9 31L12.5 20.5L3 13.5H14.5L18 3Z"
-                      fill="#94A3B8"
-                    />
-                    <path
-                      d="M18 23C20.7614 23 23 20.7614 23 18C23 15.2386 20.7614 13 18 13C15.2386 13 13 15.2386 13 18C13 20.7614 15.2386 23 18 23Z"
-                      fill="white"
-                    />
-                    <path
-                      d="M18 21C19.6569 21 21 19.6569 21 18C21 16.3431 19.6569 15 18 15C16.3431 15 15 16.3431 15 18C15 19.6569 16.3431 21 18 21Z"
-                      fill="#CBD5E1"
-                    />
-                  </svg>
-                ) : meta.kind === "tree" ? (
-                  <div
-                    class="flex h-10 w-10 shrink-0 items-center justify-center"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      class="block h-auto w-full"
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20 4C14 10 10 14 12 18C14 22 18 22 18 22V36H22V22C22 22 26 22 28 18C30 14 26 10 20 4Z"
-                        fill="#94A3B8"
-                      />
-                      <path
-                        d="M13 16C10 13 8.00001 10 12 8C10 12 14 14 13 16Z"
-                        fill="#CBD5E1"
-                      />
-                      <path
-                        d="M27 16C30 13 32 10 28 8C30 12 26 14 27 16Z"
-                        fill="#CBD5E1"
-                      />
-                    </svg>
-                  </div>
-                ) : meta.kind === "heart" ? (
-                  <div
-                    class="flex h-9 w-9 shrink-0 items-center justify-center"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      class="block h-auto w-full"
-                      width="36"
-                      height="36"
-                      viewBox="0 0 36 36"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M18 30C18 30 4 22 4 13C4 8 8 5 12 5C15 5 17.5 7 18 8C18.5 7 21 5 24 5C28 5 32 8 32 13C32 22 18 30 18 30Z"
-                        fill="#94A3B8"
-                      />
-                      <path
-                        d="M18 26C18 26 7 19.5 7 13C7 9.5 9.5 7.5 12 7.5C14.5 7.5 17 10 18 11C19 10 21.5 7.5 24 7.5C26.5 7.5 29 9.5 29 13C29 19.5 18 26 18 26Z"
-                        fill="#CBD5E1"
-                      />
-                    </svg>
-                  </div>
-                ) : (
-                  <div
-                    class="flex h-9 w-9 shrink-0 items-center justify-center"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      class="block h-auto w-full"
-                      width="36"
-                      height="36"
-                      viewBox="0 0 36 36"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M15 9H5C3.89543 9 3 9.89543 3 11V25C3 26.1046 3.89543 27 5 27H15C16.1046 27 17 26.1046 17 25V11C17 9.89543 16.1046 9 15 9Z"
-                        fill="#94A3B8"
-                      />
-                      <path
-                        d="M31 9H21C19.8954 9 19 9.89543 19 11V25C19 26.1046 19.8954 27 21 27H31C32.1046 27 33 26.1046 33 25V11C33 9.89543 32.1046 9 31 9Z"
-                        fill="#94A3B8"
-                      />
-                      <path
-                        d="M19 8C19 7.44772 18.5523 7 18 7C17.4477 7 17 7.44772 17 8V28C17 28.5523 17.4477 29 18 29C18.5523 29 19 28.5523 19 28V8Z"
-                        fill="#64748B"
-                      />
-                      <path
-                        d="M6 14H14"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M6 18H14"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M6 22H11"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M22 14H30"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M22 18H30"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M22 22H27"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </div>
-                )}
+            return (
+                <div
+                  class="relative flex w-full min-w-0 items-center justify-start px-1 py-2 pb-[0.8125rem] max-lg:min-w-[11rem] max-lg:flex-[0_0_auto] max-lg:[scroll-snap-align:start]"
+                  role="listitem"
+                >
+                  <div class="flex max-w-full items-center gap-3 px-5">
+                    {meta.kind === "twoe" ? (
+                      <div
+                        class="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-[#F1F5F9]"
+                        aria-hidden="true"
+                      >
+                        <span class="font-[var(--ysa-font-body)] text-xl font-bold leading-none text-[#94A3B8]">
+                          2e
+                        </span>
+                      </div>
+                    ) : meta.kind === "nagc" ? (
+                      <div class="flex size-9 shrink-0 items-center justify-center" aria-hidden="true">
+                        <svg
+                          class="block size-9"
+                          width="36"
+                          height="36"
+                          viewBox="0 0 36 36"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M18 3L21.5 13.5H33L23.5 20.5L27 31L18 24L9 31L12.5 20.5L3 13.5H14.5L18 3Z"
+                            fill="#94A3B8"
+                          />
+                          <path
+                            d="M18 23C20.7614 23 23 20.7614 23 18C23 15.2386 20.7614 13 18 13C15.2386 13 13 15.2386 13 18C13 20.7614 15.2386 23 18 23Z"
+                            fill="white"
+                          />
+                          <path
+                            d="M18 21C19.6569 21 21 19.6569 21 18C21 16.3431 19.6569 15 18 15C16.3431 15 15 16.3431 15 18C15 19.6569 16.3431 21 18 21Z"
+                            fill="#CBD5E1"
+                          />
+                        </svg>
+                      </div>
+                    ) : meta.kind === "tree" ? (
+                      <div class="flex size-10 shrink-0 items-center justify-center" aria-hidden="true">
+                        <svg
+                          class="block size-10"
+                          width="40"
+                          height="40"
+                          viewBox="0 0 40 40"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20 4C14 10 10 14 12 18C14 22 18 22 18 22V36H22V22C22 22 26 22 28 18C30 14 26 10 20 4Z"
+                            fill="#94A3B8"
+                          />
+                          <path
+                            d="M13 16C10 13 8.00001 10 12 8C10 12 14 14 13 16Z"
+                            fill="#CBD5E1"
+                          />
+                          <path
+                            d="M27 16C30 13 32 10 28 8C30 12 26 14 27 16Z"
+                            fill="#CBD5E1"
+                          />
+                        </svg>
+                      </div>
+                    ) : meta.kind === "heart" ? (
+                      <div class="flex size-9 shrink-0 items-center justify-center" aria-hidden="true">
+                        <svg
+                          class="block size-9"
+                          width="36"
+                          height="36"
+                          viewBox="0 0 36 36"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M18 30C18 30 4 22 4 13C4 8 8 5 12 5C15 5 17.5 7 18 8C18.5 7 21 5 24 5C28 5 32 8 32 13C32 22 18 30 18 30Z"
+                            fill="#94A3B8"
+                          />
+                          <path
+                            d="M18 26C18 26 7 19.5 7 13C7 9.5 9.5 7.5 12 7.5C14.5 7.5 17 10 18 11C19 10 21.5 7.5 24 7.5C26.5 7.5 29 9.5 29 13C29 19.5 18 26 18 26Z"
+                            fill="#CBD5E1"
+                          />
+                        </svg>
+                      </div>
+                    ) : (
+                      <div class="flex size-9 shrink-0 items-center justify-center" aria-hidden="true">
+                        <svg
+                          class="block size-9"
+                          width="36"
+                          height="36"
+                          viewBox="0 0 36 36"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M15 9H5C3.89543 9 3 9.89543 3 11V25C3 26.1046 3.89543 27 5 27H15C16.1046 27 17 26.1046 17 25V11C17 9.89543 16.1046 9 15 9Z"
+                            fill="#94A3B8"
+                          />
+                          <path
+                            d="M31 9H21C19.8954 9 19 9.89543 19 11V25C19 26.1046 19.8954 27 21 27H31C32.1046 27 33 26.1046 33 25V11C33 9.89543 32.1046 9 31 9Z"
+                            fill="#94A3B8"
+                          />
+                          <path
+                            d="M19 8C19 7.44772 18.5523 7 18 7C17.4477 7 17 7.44772 17 8V28C17 28.5523 17.4477 29 18 29C18.5523 29 19 28.5523 19 28V8Z"
+                            fill="#64748B"
+                          />
+                          <path
+                            d="M6 14H14"
+                            stroke="white"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M6 18H14"
+                            stroke="white"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M6 22H11"
+                            stroke="white"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M22 14H30"
+                            stroke="white"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M22 18H30"
+                            stroke="white"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M22 22H27"
+                            stroke="white"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                      </div>
+                    )}
 
-                <div class="flex max-w-[125px] flex-col gap-0.5">
-                  
-                  <p
-                    class:list={[
-                      "m-0 font-[var(--ysa-font-body)] font-bold leading-[1.1] tracking-[-0.02em] text-[#94A3B8] mb-[0.188rem]",
-                      org.name.length > 10
-                        ? "text-[1rem]"
-                        : "text-[1.125rem]",
-                    ]}
-                  >
-                    {org.name}
-                  </p>
-
-                  <p
-                    class:list={[
-                      "m-0 overflow-hidden text-ellipsis font-[var(--ysa-font-body)] text-[0.75rem] font-light leading-[1.2] text-[#CBD5E1] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] [display:-webkit-box]",
-                      subtitleClass(org),
-                    ]}
-                  >
-                    {org.subtitle}
-                  </p>
+                    <div class="flex min-w-0 flex-col items-start">
+                      <p class={nameClasses(org)}>{org.name}</p>
+                      <p class={subtitleClasses(org)}>{org.subtitle}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })
-      }
+            );
+          })
+        }
+      </div>
     </div>
   </div>
 </section>

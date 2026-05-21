@@ -54,10 +54,16 @@ function splitFaqAnswer(answer: string): { lead: string | null; body: string } {
 		<div class="mt-16 space-y-4">
 			{
 				items.map((item, index) => (
-					<details class="faq-item overflow-hidden rounded-xl border border-[#e2e8f0] bg-white p-0" open={item.open ?? index === 0}>
-						<summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-6">
+					<details
+						class="group overflow-hidden rounded-xl border border-[#e2e8f0] bg-white p-0"
+						open={item.open ?? index === 0}
+					>
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-6 [&::-webkit-details-marker]:hidden">
 							<h3 class="text-[17px] leading-5 font-semibold text-[#111827]">{item.question}</h3>
-							<span class="faq-chevron inline-flex h-4 w-4 flex-shrink-0 items-center justify-center text-[#94a3b8]" aria-hidden="true">
+							<span
+								class="inline-flex h-4 w-4 shrink-0 items-center justify-center text-[#94a3b8] transition-transform duration-200 ease-in group-open:rotate-180"
+								aria-hidden="true"
+							>
 								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M4.6665 6.66663L7.99984 9.99996L11.3332 6.66663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
 								</svg>
@@ -87,17 +93,3 @@ function splitFaqAnswer(answer: string): { lead: string | null; body: string } {
 		</div>
 	</div>
 </section>
-
-<style>
-	.faq-item summary::-webkit-details-marker {
-		display: none;
-	}
-
-	.faq-chevron {
-		transition: transform 0.2s ease;
-	}
-
-	.faq-item[open] .faq-chevron {
-		transform: rotate(180deg);
-	}
-</style>
