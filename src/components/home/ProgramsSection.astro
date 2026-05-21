@@ -1,6 +1,6 @@
 ---
 import type { ProgramCategoryId, ProgramListingCard } from '../../types/programsSection';
-import '../../styles/components/programs-section.css';
+
 /** Program card cover images in `public/assets/images/home-programs/` */
 const coverByKey: Record<ProgramCategoryId, string> = {
 	science: '/assets/images/home-programs/science.png',
@@ -11,6 +11,15 @@ const coverByKey: Record<ProgramCategoryId, string> = {
 	'critical-thinking': '/assets/images/home-programs/critical-thinking.png',
 };
 
+const categoryPillClasses: Record<ProgramCategoryId, string> = {
+	science: 'text-[#2563EB] bg-[#EFF6FF]',
+	coding: 'text-[#7C3AED] bg-[#F5F3FF]',
+	math: 'text-[#059669] bg-[#ECFDF5]',
+	robotics: 'text-[#EA580C] bg-[#FFF7ED]',
+	writing: 'text-[#DB2777] bg-[#FDF2F8]',
+	'critical-thinking': 'text-[#4F46E5] bg-[#EEF2FF]',
+};
+
 const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], string> = {
 	ross: '/assets/images/Teacher (1).png',
 	martinez: '/assets/images/Teacher (2).png',
@@ -19,6 +28,12 @@ const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], string> =
 	thompson: '/assets/images/Teacher (5).png',
 	lee: '/assets/images/Teacher (6).png',
 };
+
+const ageButtonClasses =
+	'cursor-pointer rounded-full border border-[#E5E7EB] bg-white px-4 py-2 font-inherit text-[13px] font-semibold leading-5 text-[#4B5563] hover:border-slate-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 aria-pressed:border-[#7c3aed] aria-pressed:bg-[#7c3aed] aria-pressed:text-white aria-pressed:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-2px_rgba(0,0,0,0.1)]';
+
+const selectChevron =
+	"bg-[url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")]";
 
 interface Props {
 	content: {
@@ -53,36 +68,55 @@ const toSlug = (value: string) =>
 		.replace(/^-+|-+$/g, '');
 ---
 
-<section class="programs-section pt-[clamp(48px,7vw,96px)] pb-[clamp(56px,8vw,96px)]" aria-labelledby="programs-heading">
-	<div class="programs-section__inner">
-		<header class="programs-section__head">
-			<p class="programs-section__badge">{d.eyebrow}</p>
-			<h2 class="programs-section__title" id="programs-heading">{d.title}</h2>
-			<p class="programs-section__sub">{d.description}</p>
+<section
+	class="bg-[#DBEAFE] pt-[clamp(48px,7vw,96px)] pb-[clamp(56px,8vw,96px)]"
+	aria-labelledby="programs-heading"
+>
+	<div
+		class="mx-auto flex max-w-[var(--ysa-max)] flex-col gap-[clamp(2rem,4vw,3rem)] px-[clamp(1rem,4.44vw,4rem)]"
+		data-programs-section-inner
+	>
+		<header class="mx-auto max-w-3xl text-center">
+			<p
+				class="mb-4 inline-block rounded-full bg-[#E1F3FF] px-4 py-[0.45rem] text-xs font-bold tracking-[0.08em] text-[#0A9DFB] uppercase"
+			>
+				{d.eyebrow}
+			</p>
+			<h2
+				class="m-0 font-display text-[clamp(1.85rem,3.3vw,44px)] font-bold tracking-[-0.02em] whitespace-nowrap text-[#111827] leading-[1.12] max-sm:whitespace-normal"
+				id="programs-heading"
+			>
+				{d.title}
+			</h2>
+			<p class="mt-6 mb-0 text-base leading-[1.625rem] text-[#475569]">{d.description}</p>
 		</header>
 
 		<div
-			class="programs-filter"
 			data-programs-filter
 			data-initial-age={initialAge}
 			data-remove-prefix={filters.removeFilterAriaPrefix ?? 'Remove'}
+			class="rounded-3xl border border-white/40 bg-white/60 p-6 shadow-[0_1px_1px_rgba(0,0,0,0.05)] backdrop-blur-[6px]"
 		>
-			<div class="programs-filter__grid">
-				<div class="programs-filter__col">
-					<div class="programs-filter__col-head">
+			<div class="grid grid-cols-1 gap-[clamp(1.25rem,3vw,2.75rem)] lg:grid-cols-3">
+				<div class="min-w-0">
+					<div class="mb-4 flex items-center gap-2 font-display text-sm font-bold leading-[1.3125rem] text-[#1a1a2e]">
 						<svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M6.56505 1.75C6.56505 1.28587 6.38068 0.840752 6.05249 0.512563C5.7243 0.184374 5.27918 0 4.81505 0C4.35092 0 3.9058 0.184374 3.57762 0.512563C3.24943 0.840752 3.06505 1.28587 3.06505 1.75C3.06505 2.21413 3.24943 2.65925 3.57762 2.98744C3.9058 3.31563 4.35092 3.5 4.81505 3.5C5.27918 3.5 5.7243 3.31563 6.05249 2.98744C6.38068 2.65925 6.56505 2.21413 6.56505 1.75ZM3.74591 4.6293C3.09786 4.39961 2.52912 3.96484 2.1381 3.37695L1.6049 2.57578C1.33693 2.17383 0.795522 2.06719 0.390834 2.33516C-0.0138534 2.60313 -0.120494 3.14727 0.147475 3.54922L0.683412 4.34766C1.17833 5.08867 1.85372 5.67109 2.62755 6.05391V13.125C2.62755 13.609 3.01857 14 3.50255 14C3.98654 14 4.37755 13.609 4.37755 13.125V10.5H5.25255V13.125C5.25255 13.609 5.64357 14 6.12755 14C6.61154 14 7.00255 13.609 7.00255 13.125V6.05938C7.79826 5.67109 8.49005 5.06953 8.99044 4.30391L9.4881 3.54102C9.7506 3.13633 9.63576 2.59492 9.23107 2.32969C8.82638 2.06445 8.28498 2.1793 8.01974 2.58672L7.52208 3.34687C6.92599 4.26016 5.91154 4.8125 4.82052 4.8125C4.47599 4.8125 4.13966 4.75781 3.81974 4.65391C3.79513 4.6457 3.77052 4.63477 3.74591 4.6293Z" fill="#0A9DFB"/>
-</svg>
+							<path
+								d="M6.56505 1.75C6.56505 1.28587 6.38068 0.840752 6.05249 0.512563C5.7243 0.184374 5.27918 0 4.81505 0C4.35092 0 3.9058 0.184374 3.57762 0.512563C3.24943 0.840752 3.06505 1.28587 3.06505 1.75C3.06505 2.21413 3.24943 2.65925 3.57762 2.98744C3.9058 3.31563 4.35092 3.5 4.81505 3.5C5.27918 3.5 5.7243 3.31563 6.05249 2.98744C6.38068 2.65925 6.56505 2.21413 6.56505 1.75ZM3.74591 4.6293C3.09786 4.39961 2.52912 3.96484 2.1381 3.37695L1.6049 2.57578C1.33693 2.17383 0.795522 2.06719 0.390834 2.33516C-0.0138534 2.60313 -0.120494 3.14727 0.147475 3.54922L0.683412 4.34766C1.17833 5.08867 1.85372 5.67109 2.62755 6.05391V13.125C2.62755 13.609 3.01857 14 3.50255 14C3.98654 14 4.37755 13.609 4.37755 13.125V10.5H5.25255V13.125C5.25255 13.609 5.64357 14 6.12755 14C6.61154 14 7.00255 13.609 7.00255 13.125V6.05938C7.79826 5.67109 8.49005 5.06953 8.99044 4.30391L9.4881 3.54102C9.7506 3.13633 9.63576 2.59492 9.23107 2.32969C8.82638 2.06445 8.28498 2.1793 8.01974 2.58672L7.52208 3.34687C6.92599 4.26016 5.91154 4.8125 4.82052 4.8125C4.47599 4.8125 4.13966 4.75781 3.81974 4.65391C3.79513 4.6457 3.77052 4.63477 3.74591 4.6293Z"
+								fill="#0A9DFB"
+							/>
+						</svg>
 
 						<span>{filters.ageRange.label}</span>
 					</div>
-					<div class="programs-filter__ages">
+					<div class="flex flex-wrap gap-2">
 						{
 							filters.ageRange.options.map((opt) => (
 								<button
 									type="button"
-									class:list={['programs-filter__age', opt.isActive && 'programs-filter__age--active']}
+									class={ageButtonClasses}
 									data-age-option={opt.label}
+									aria-pressed={opt.isActive ? 'true' : 'false'}
 								>
 									{opt.label}
 								</button>
@@ -91,16 +125,23 @@ const toSlug = (value: string) =>
 					</div>
 				</div>
 
-				<div class="programs-filter__col">
-					<div class="programs-filter__col-head">
-<svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.75 2.625C1.75 1.65977 2.53477 0.875 3.5 0.875H14C14.9652 0.875 15.75 1.65977 15.75 2.625V9.625H14V2.625H3.5V9.625H1.75V2.625ZM0 11.025C0 10.7352 0.235156 10.5 0.525 10.5H16.975C17.2648 10.5 17.5 10.7352 17.5 11.025C17.5 12.1844 16.5594 13.125 15.4 13.125H2.1C0.940625 13.125 0 12.1844 0 11.025ZM7.68359 5.71484L6.83594 6.5625L7.68359 7.41016C7.94063 7.66719 7.94063 8.08281 7.68359 8.33711C7.42656 8.59141 7.01094 8.59414 6.75664 8.33711L5.44414 7.02461C5.18711 6.76758 5.18711 6.35195 5.44414 6.09766L6.75664 4.78516C7.01367 4.52813 7.4293 4.52813 7.68359 4.78516C7.93789 5.04219 7.94063 5.45781 7.68359 5.71211V5.71484ZM10.7461 4.78516L12.0586 6.09766C12.3156 6.35469 12.3156 6.77031 12.0586 7.02461L10.7461 8.33711C10.4891 8.59414 10.0734 8.59414 9.81914 8.33711C9.56484 8.08008 9.56211 7.66445 9.81914 7.41016L10.6668 6.5625L9.81914 5.71484C9.56211 5.45781 9.56211 5.04219 9.81914 4.78789C10.0762 4.53359 10.4918 4.53086 10.7461 4.78789V4.78516Z" fill="#0A9DFB"/>
-</svg>
+				<div class="min-w-0">
+					<div class="mb-4 flex items-center gap-2 font-display text-sm font-bold leading-[1.3125rem] text-[#1a1a2e]">
+						<svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M1.75 2.625C1.75 1.65977 2.53477 0.875 3.5 0.875H14C14.9652 0.875 15.75 1.65977 15.75 2.625V9.625H14V2.625H3.5V9.625H1.75V2.625ZM0 11.025C0 10.7352 0.235156 10.5 0.525 10.5H16.975C17.2648 10.5 17.5 10.7352 17.5 11.025C17.5 12.1844 16.5594 13.125 15.4 13.125H2.1C0.940625 13.125 0 12.1844 0 11.025ZM7.68359 5.71484L6.83594 6.5625L7.68359 7.41016C7.94063 7.66719 7.94063 8.08281 7.68359 8.33711C7.42656 8.59141 7.01094 8.59414 6.75664 8.33711L5.44414 7.02461C5.18711 6.76758 5.18711 6.35195 5.44414 6.09766L6.75664 4.78516C7.01367 4.52813 7.4293 4.52813 7.68359 4.78516C7.93789 5.04219 7.94063 5.45781 7.68359 5.71211V5.71484ZM10.7461 4.78516L12.0586 6.09766C12.3156 6.35469 12.3156 6.77031 12.0586 7.02461L10.7461 8.33711C10.4891 8.59414 10.0734 8.59414 9.81914 8.33711C9.56484 8.08008 9.56211 7.66445 9.81914 7.41016L10.6668 6.5625L9.81914 5.71484C9.56211 5.45781 9.56211 5.04219 9.81914 4.78789C10.0762 4.53359 10.4918 4.53086 10.7461 4.78789V4.78516Z"
+								fill="#0A9DFB"
+							/>
+						</svg>
 						<span>{filters.campType.label}</span>
 					</div>
-					<label class="visually-hidden" for="programs-camp-type">{filters.campTypeSrLabel ?? 'Camp type'}</label>
+					<label class="sr-only" for="programs-camp-type">{filters.campTypeSrLabel ?? 'Camp type'}</label>
 					<select
-						class="programs-filter__select"
+						class:list={[
+							'w-full appearance-none rounded-[0.65rem] border border-slate-300 bg-white py-3 pr-9 pl-4 font-inherit text-sm font-medium text-slate-700 focus:border-sky-500 focus:outline-2 focus:outline-offset-px focus:outline-sky-200',
+							selectChevron,
+							'bg-[length:16px_16px] bg-[position:right_0.65rem_center] bg-no-repeat',
+						]}
 						id="programs-camp-type"
 						name="campType"
 						aria-label={filters.campType.label}
@@ -116,17 +157,23 @@ const toSlug = (value: string) =>
 					</select>
 				</div>
 
-				<div class="programs-filter__col">
-					<div class="programs-filter__col-head">
+				<div class="min-w-0">
+					<div class="mb-4 flex items-center gap-2 font-display text-sm font-bold leading-[1.3125rem] text-[#1a1a2e]">
 						<svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.375 1.75C4.375 0.784766 5.15977 0 6.125 0H15.75C16.7152 0 17.5 0.784766 17.5 1.75V9.625C17.5 10.5902 16.7152 11.375 15.75 11.375H9.20937C8.88672 10.6777 8.3918 10.0762 7.77656 9.625H10.5V8.75C10.5 8.26602 10.891 7.875 11.375 7.875H13.125C13.609 7.875 14 8.26602 14 8.75V9.625H15.75V1.75H6.125V3.09258C5.61094 2.79453 5.01211 2.625 4.375 2.625V1.75ZM4.375 3.5C4.71972 3.5 5.06106 3.5679 5.37954 3.69982C5.69802 3.83173 5.9874 4.02509 6.23116 4.26884C6.47491 4.5126 6.66827 4.80198 6.80018 5.12046C6.9321 5.43894 7 5.78028 7 6.125C7 6.46972 6.9321 6.81106 6.80018 7.12954C6.66827 7.44802 6.47491 7.7374 6.23116 7.98116C5.9874 8.22491 5.69802 8.41827 5.37954 8.55018C5.06106 8.6821 4.71972 8.75 4.375 8.75C4.03028 8.75 3.68894 8.6821 3.37046 8.55018C3.05198 8.41827 2.7626 8.22491 2.51884 7.98116C2.27509 7.7374 2.08173 7.44802 1.94982 7.12954C1.8179 6.81106 1.75 6.46972 1.75 6.125C1.75 5.78028 1.8179 5.43894 1.94982 5.12046C2.08173 4.80198 2.27509 4.5126 2.51884 4.26884C2.7626 4.02509 3.05198 3.83173 3.37046 3.69982C3.68894 3.5679 4.03028 3.5 4.375 3.5ZM3.64492 9.625H5.10234C7.11758 9.625 8.75 11.2574 8.75 13.2699C8.75 13.6719 8.42461 14 8.01992 14H0.730078C0.325391 14 0 13.6746 0 13.2699C0 11.2574 1.63242 9.625 3.64492 9.625Z" fill="#0A9DFB"/>
-</svg>
-
+							<path
+								d="M4.375 1.75C4.375 0.784766 5.15977 0 6.125 0H15.75C16.7152 0 17.5 0.784766 17.5 1.75V9.625C17.5 10.5902 16.7152 11.375 15.75 11.375H9.20937C8.88672 10.6777 8.3918 10.0762 7.77656 9.625H10.5V8.75C10.5 8.26602 10.891 7.875 11.375 7.875H13.125C13.609 7.875 14 8.26602 14 8.75V9.625H15.75V1.75H6.125V3.09258C5.61094 2.79453 5.01211 2.625 4.375 2.625V1.75ZM4.375 3.5C4.71972 3.5 5.06106 3.5679 5.37954 3.69982C5.69802 3.83173 5.9874 4.02509 6.23116 4.26884C6.47491 4.5126 6.66827 4.80198 6.80018 5.12046C6.9321 5.43894 7 5.78028 7 6.125C7 6.46972 6.9321 6.81106 6.80018 7.12954C6.66827 7.44802 6.47491 7.7374 6.23116 7.98116C5.9874 8.22491 5.69802 8.41827 5.37954 8.55018C5.06106 8.6821 4.71972 8.75 4.375 8.75C4.03028 8.75 3.68894 8.6821 3.37046 8.55018C3.05198 8.41827 2.7626 8.22491 2.51884 7.98116C2.27509 7.7374 2.08173 7.44802 1.94982 7.12954C1.8179 6.81106 1.75 6.46972 1.75 6.125C1.75 5.78028 1.8179 5.43894 1.94982 5.12046C2.08173 4.80198 2.27509 4.5126 2.51884 4.26884C2.7626 4.02509 3.05198 3.83173 3.37046 3.69982C3.68894 3.5679 4.03028 3.5 4.375 3.5ZM3.64492 9.625H5.10234C7.11758 9.625 8.75 11.2574 8.75 13.2699C8.75 13.6719 8.42461 14 8.01992 14H0.730078C0.325391 14 0 13.6746 0 13.2699C0 11.2574 1.63242 9.625 3.64492 9.625Z"
+								fill="#0A9DFB"
+							/>
+						</svg>
 						<span>{filters.teacher.label}</span>
 					</div>
-					<label class="visually-hidden" for="programs-teacher">{filters.teacherSrLabel ?? 'Teacher'}</label>
+					<label class="sr-only" for="programs-teacher">{filters.teacherSrLabel ?? 'Teacher'}</label>
 					<select
-						class="programs-filter__select"
+						class:list={[
+							'w-full appearance-none rounded-[0.65rem] border border-slate-300 bg-white py-3 pr-9 pl-4 font-inherit text-sm font-medium text-slate-700 focus:border-sky-500 focus:outline-2 focus:outline-offset-px focus:outline-sky-200',
+							selectChevron,
+							'bg-[length:16px_16px] bg-[position:right_0.65rem_center] bg-no-repeat',
+						]}
 						id="programs-teacher"
 						name="teacher"
 						aria-label={filters.teacher.label}
@@ -143,85 +190,112 @@ const toSlug = (value: string) =>
 				</div>
 			</div>
 
-			<div class="programs-filter__active-row">
-				<div class="programs-filter__active-group">
-					<span class="programs-filter__active-label">{filters.activeLabel ?? 'ACTIVE:'}</span>
-					<div class="programs-filter__chips" data-filter-chips></div>
+			<div class="mt-6 flex flex-wrap items-start justify-between gap-4 pt-6 max-lg:flex-col max-lg:items-stretch">
+				<div class="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-2">
+					<span class="shrink-0 text-xs font-bold tracking-[0.07em] text-[#9CA3AF]">
+						{filters.activeLabel ?? 'ACTIVE:'}
+					</span>
+					<div class="flex min-h-7 flex-wrap items-center gap-2" data-filter-chips></div>
 				</div>
-				<button type="button" class="programs-filter__clear" data-clear-all>
+				<button
+					type="button"
+					class="ml-auto shrink-0 cursor-pointer border-0 bg-transparent p-0 font-inherit text-[0.8125rem] font-bold text-[#0a9dfb] no-underline hover:underline max-lg:ml-0 max-lg:self-end"
+					data-clear-all
+				>
 					{filters.clearLabel}
 				</button>
 			</div>
 		</div>
 
-		<div class="programs-cards-shell">
-			<div class="programs-cards">
-			{
-				d.cards.map((card) => {
-					const cover = coverByKey[card.coverImageKey];
-					const teacherFace = teacherPhotoByKey[card.teacherPhotoKey];
-					const cardHref = `/courses/${toSlug(card.title)}`;
-					return (
-						<a
-							class="programs-card"
-							href={cardHref}
-							data-program-card
-							data-age={card.ageLabel}
-							data-teacher={card.teacherPhotoKey}
-							data-delivery="virtual"
-						>
-							<div class="programs-card__media">
-								<img
-									class="programs-card__cover"
-									src={cover}
-									alt=""
-									loading="lazy"
-									decoding="async"
-								/>
-								<span class="programs-card__age">{card.ageLabel}</span>
-							</div>
-							<div class="programs-card__body">
-								<div class="programs-card__meta">
+		<div class="flex flex-col gap-4">
+			<div class="m-0 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{
+					d.cards.map((card) => {
+						const cover = coverByKey[card.coverImageKey];
+						const teacherFace = teacherPhotoByKey[card.teacherPhotoKey];
+						const cardHref = `/courses/${toSlug(card.title)}`;
+						return (
+							<a
+								class="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white text-inherit no-underline shadow-[0_1px_8px_-1px_rgba(0,0,0,0.06)] transition-[box-shadow,transform] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-[0_8px_32px_rgba(15,23,42,0.1)]"
+								href={cardHref}
+								data-program-card
+								data-age={card.ageLabel}
+								data-teacher={card.teacherPhotoKey}
+								data-delivery="virtual"
+							>
+								<div class="relative aspect-[16/10.5] overflow-hidden bg-slate-100">
+									<img
+										class="pointer-events-none absolute inset-0 block h-full w-full object-cover"
+										src={cover}
+										alt=""
+										loading="lazy"
+										decoding="async"
+									/>
 									<span
-										class:list={[
-											'programs-card__category-pill',
-											`programs-card__category-pill--${card.category.id}`,
-										]}
+										class="absolute top-3 left-3 z-[2] rounded-[0.45rem] bg-white/88 px-3 py-[0.32rem] text-xs font-bold text-slate-900 shadow-[0_1px_3px_rgba(15,23,42,0.08)] backdrop-blur-[10px]"
 									>
-										{card.category.label}
+										{card.ageLabel}
 									</span>
-									<span class="programs-card__meta-dot" aria-hidden="true">
-										•
-									</span>
-									<span class="programs-card__duration">{card.durationWeeks} weeks</span>
 								</div>
-								<h3 class="programs-card__title">{card.title}</h3>
-								<p class="programs-card__desc">{card.description}</p>
-								<div class="programs-card__footer">
-									<div class="programs-card__teacher">
-										<img
-											src={teacherFace}
-											alt={card.teacher.name}
-											class="programs-card__avatar-img"
-											loading="lazy"
-										/>
-										<span class="programs-card__teacher-name">{card.teacher.name}</span>
+								<div class="flex flex-1 flex-col p-6">
+									<div class="mb-4 flex items-center gap-[0.35rem] text-xs font-semibold text-slate-500">
+										<span
+											class:list={[
+												'inline-block rounded-[0.4rem] px-2.5 py-1 text-[0.62rem] leading-none font-extrabold tracking-[0.07em] uppercase',
+												categoryPillClasses[card.category.id],
+											]}
+										>
+											{card.category.label}
+										</span>
+										<span class="font-normal text-slate-400" aria-hidden="true">
+											•
+										</span>
+										<span>{card.durationWeeks} weeks</span>
 									</div>
-									<span class="programs-card__link">{d.learnMoreLabel ?? 'Learn More'} →</span>
+									<h3 class="m-0 mb-[0.45rem] font-display text-[1.0625rem] font-semibold tracking-[-0.01em] text-[#111827] leading-[1.65]">
+										{card.title}
+									</h3>
+									<p
+										class="m-0 flex-1 overflow-hidden text-sm leading-[1.421875rem] text-[#475569] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] [display:-webkit-box]"
+									>
+										{card.description}
+									</p>
+									<div class="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
+										<div class="flex min-w-0 items-center gap-[0.55rem]">
+											<img
+												src={teacherFace}
+												alt={card.teacher.name}
+												class="block h-8 w-8 shrink-0 rounded-full object-cover shadow-[0_1px_4px_rgba(15,23,42,0.12)]"
+												loading="lazy"
+											/>
+											<span
+												class="overflow-hidden text-xs font-semibold text-ellipsis whitespace-nowrap text-slate-700"
+											>
+												{card.teacher.name}
+											</span>
+										</div>
+										<span
+											class="shrink-0 text-sm font-medium text-[#5751E4] group-hover:underline"
+										>
+											{d.learnMoreLabel ?? 'Learn More'} →
+										</span>
+									</div>
 								</div>
-							</div>
-						</a>
-					);
-				})
-			}
+							</a>
+						);
+					})
+				}
 			</div>
-			<p class="programs-cards__empty" data-programs-empty hidden>
+			<p class="m-0 hidden text-center text-[0.95rem] font-semibold text-slate-500" data-programs-empty>
 				{d.emptyFilterMessage ?? 'No programs match these filters.'}
 			</p>
 		</div>
 
-		<div class="programs-section__cta">
-			<a class="programs-section__cta-btn" href={d.viewAllCta.href}>
+		<div class="flex justify-center">
+			<a
+				class="inline-flex items-center justify-center gap-[0.4rem] rounded-xl bg-[#0a9dfb] px-8 py-4 font-display text-base font-semibold text-white no-underline shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] transition-[filter,transform] duration-200 ease-out hover:-translate-y-px hover:brightness-[1.03]"
+				href={d.viewAllCta.href}
+			>
 				{d.viewAllCta.label}
 				<span aria-hidden="true">→</span>
 			</a>
@@ -237,8 +311,14 @@ const toSlug = (value: string) =>
 			return d.innerHTML;
 		}
 
+		var chipPillClass =
+			'inline-flex items-center gap-[0.35rem] rounded-full bg-[#DBEAFE] py-[0.32rem] pr-[0.45rem] pl-[0.65rem] text-xs font-semibold leading-[1.2] text-[#0A9DFB]';
+		var chipTextClass = 'max-w-[14rem] overflow-hidden text-ellipsis whitespace-nowrap';
+		var chipRemoveClass =
+			'grid h-[1.15rem] w-[1.15rem] shrink-0 cursor-pointer border-0 bg-transparent p-0 font-inherit text-[0.85rem] leading-none text-[#0A9DFB]';
+
 		function setupFilter(root) {
-			var sectionInner = root.closest('.programs-section__inner');
+			var sectionInner = root.closest('[data-programs-section-inner]');
 			var ageBtns = root.querySelectorAll('[data-age-option]');
 			var campSelect = root.querySelector('[data-camp-select]');
 			var teacherSelect = root.querySelector('[data-teacher-select]');
@@ -262,7 +342,7 @@ const toSlug = (value: string) =>
 			function syncAgeButtons() {
 				ageBtns.forEach(function (btn) {
 					var label = btn.getAttribute('data-age-option');
-					btn.classList.toggle('programs-filter__age--active', label === selectedAge);
+					btn.setAttribute('aria-pressed', label === selectedAge ? 'true' : 'false');
 				});
 			}
 
@@ -280,11 +360,15 @@ const toSlug = (value: string) =>
 
 				chips.forEach(function (c) {
 					var pill = document.createElement('span');
-					pill.className = 'programs-filter__chip-pill';
+					pill.className = chipPillClass;
 					pill.innerHTML =
-						'<span class="programs-filter__chip-text">' +
+						'<span class="' +
+						chipTextClass +
+						'">' +
 						escapeHtml(c.label) +
-						'</span><button type="button" class="programs-filter__chip-remove" data-remove="' +
+						'</span><button type="button" class="' +
+						chipRemoveClass +
+						'" data-remove="' +
 						c.kind +
 						'" aria-label="' +
 						escapeHtml(removePrefix + ' ' + c.label + ' filter') +
@@ -306,7 +390,7 @@ const toSlug = (value: string) =>
 					card.hidden = !show;
 					if (show) visible++;
 				});
-				if (emptyEl) emptyEl.hidden = visible > 0;
+				if (emptyEl) emptyEl.classList.toggle('hidden', visible > 0);
 				renderChips();
 			}
 

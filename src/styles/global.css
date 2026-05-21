@@ -57,3 +57,34 @@ h5,
 h6 {
 	font-family: var(--ysa-font-display);
 }
+
+/* Home Impact marquee + World stat pop (used via Tailwind arbitrary animate-[]) */
+@keyframes impact-scroll-up {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(calc(-50% - 0.4375rem));
+	}
+}
+
+@keyframes impact-scroll-down {
+	0% {
+		transform: translateY(calc(-50% - 0.4375rem));
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@keyframes world-stat-pop {
+	0% {
+		transform: scale(1);
+	}
+	40% {
+		transform: scale(1.06);
+	}
+	100% {
+		transform: scale(1);
+	}
+}

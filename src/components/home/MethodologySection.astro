@@ -1,7 +1,6 @@
 ---
 import type { MethodologyPrinciple, MethodologyStatTile } from '../../types/homePage';
 import PrimaryButton from '../ui/PrimaryButton.astro';
-import '../../styles/components/methodology-section.css';
 
 interface Props {
 	content: {
@@ -15,45 +14,123 @@ interface Props {
 }
 
 const { content: d } = Astro.props;
+
+const statCardClasses: Record<MethodologyStatTile['variant'], string> = {
+	violet: 'border-[#e0e9ff] bg-[linear-gradient(143.75deg,#f0f4ff_0%,#f5f3ff_100%)]',
+	sky: 'border-[#cffafe] bg-[linear-gradient(146.71deg,#ecfeff_0%,#eff6ff_100%)]',
+	amber: 'border-[#fef3c7] bg-[linear-gradient(143.75deg,#fffbeb_0%,#fff7ed_100%)]',
+	emerald: 'border-[#d1fae5] bg-[linear-gradient(143.62deg,#ecfdf5_0%,#f0fdfa_100%)]',
+};
+
+const statIconBg: Record<MethodologyStatTile['variant'], string> = {
+	violet: 'bg-[#7c3aed]',
+	sky: 'bg-[#0a9dfb]',
+	amber: 'bg-[#f2dd35]',
+	emerald: 'bg-[#048c3c]',
+};
+
+const principleIconBg: Record<MethodologyPrinciple['iconTint'], string> = {
+	indigo: 'bg-[#e0e9ff]',
+	violet: 'bg-[#ede9fe]',
+	cyan: 'bg-[#cffafe]',
+	emerald: 'bg-[#d1fae5]',
+	teal: 'bg-[#ccfbf1]',
+	blue: 'bg-[#dbeafe]',
+};
 ---
 
-<section class="home-section home-section--surface ysa-methodology" aria-labelledby="method-heading">
-	<div class="ysa-methodology__inner">
-		<div class="ysa-methodology__top">
-			<div class="ysa-methodology__intro">
-				<p class="ysa-methodology__badge">{d.eyebrow}</p>
-				<h2 class="ysa-methodology__title" id="method-heading">{d.title}</h2>
-				<p class="ysa-methodology__desc">{d.description}</p>
+<section
+	class="home-section home-section--surface !py-[clamp(3.5rem,8vw,6rem)]"
+	aria-labelledby="method-heading"
+>
+	<div
+		class="mx-auto flex max-w-[var(--ysa-max)] flex-col gap-[clamp(2.5rem,5vw,3rem)] px-[clamp(1rem,4.44vw,4rem)]"
+	>
+		<div
+			class="grid grid-cols-2 items-center gap-[clamp(2rem,5vw,4rem)] max-lg:grid-cols-1"
+		>
+			<div class="flex flex-col items-start gap-4">
+				<p
+					class="m-0 rounded-full bg-[#decbfe] px-4 py-2 font-display text-xs font-bold tracking-[0.01875rem] text-[#7c3aed] uppercase"
+				>
+					{d.eyebrow}
+				</p>
+				<h2
+					class="m-0 font-display text-[clamp(2rem,4vw,2.75rem)] font-bold tracking-[-0.02em] text-[#111827] leading-[1.15]"
+					id="method-heading"
+				>
+					{d.title}
+				</h2>
+				<p class="m-0 py-2 pb-4 text-base leading-[1.625rem] text-[#475569]">{d.description}</p>
 				<PrimaryButton href={d.cta.href} label={d.cta.label} variant="lg" />
 			</div>
-			<div class="ysa-methodology__stats">
+			<div class="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
 				{
 					d.statTiles.map((tile) => (
-						<article class:list={['ysa-methodology__stat', `ysa-methodology__stat--${tile.variant}`]}>
-							<div class="ysa-methodology__stat-icon" aria-hidden="true">
+						<article
+							class:list={[
+								'flex flex-col items-start gap-2 rounded-2xl border p-8',
+								statCardClasses[tile.variant],
+							]}
+						>
+							<div
+								class:list={[
+									'grid size-14 shrink-0 place-items-center rounded-xl',
+									statIconBg[tile.variant],
+								]}
+								aria-hidden="true"
+							>
 								{tile.statIcon === 'people' ? (
-									<svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block h-6 w-[30px] object-contain"
+										width="30"
+										height="24"
+										viewBox="0 0 30 24"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M6.75 0C8.81968 0 10.5 1.68032 10.5 3.75C10.5 5.81968 8.81968 7.5 6.75 7.5C4.68032 7.5 3 5.81968 3 3.75C3 1.68032 4.68032 0 6.75 0ZM24 0C26.0697 0 27.75 1.68032 27.75 3.75C27.75 5.81968 26.0697 7.5 24 7.5C21.9303 7.5 20.25 5.81968 20.25 3.75C20.25 1.68032 21.9303 0 24 0ZM0 14.0016C0 11.2406 2.24063 9 5.00156 9H7.00313C7.74844 9 8.45625 9.16406 9.09375 9.45469C9.03281 9.79219 9.00469 10.1438 9.00469 10.5C9.00469 12.2906 9.79219 13.8984 11.0344 15C11.025 15 11.0156 15 11.0016 15H0.998438C0.45 15 0 14.55 0 14.0016ZM18.9984 15C18.9891 15 18.9797 15 18.9656 15C20.2125 13.8984 20.9953 12.2906 20.9953 10.5C20.9953 10.1438 20.9625 9.79688 20.9062 9.45469C21.5438 9.15937 22.2516 9 22.9969 9H24.9984C27.7594 9 30 11.2406 30 14.0016C30 14.5547 29.55 15 29.0016 15H18.9984ZM10.5 10.5C10.5 8.01638 12.5164 6 15 6C17.4836 6 19.5 8.01638 19.5 10.5C19.5 12.9836 17.4836 15 15 15C12.5164 15 10.5 12.9836 10.5 10.5ZM6 22.7484C6 19.2984 8.79844 16.5 12.2484 16.5H17.7516C21.2016 16.5 24 19.2984 24 22.7484C24 23.4375 23.4422 24 22.7484 24H7.25156C6.5625 24 6 23.4422 6 22.7484Z"
 											fill="white"
 										/>
 									</svg>
 								) : tile.statIcon === 'cap' ? (
-									<svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block h-6 w-[30px] object-contain"
+										width="30"
+										height="24"
+										viewBox="0 0 30 24"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M15.0007 1.5C14.621 1.5 14.246 1.56562 13.8898 1.69219L0.741347 6.44063C0.296034 6.60469 0.000721513 7.02656 0.000721513 7.5C0.000721513 7.97344 0.296034 8.39531 0.741347 8.55937L3.45541 9.53906C2.68666 10.7484 2.25072 12.1781 2.25072 13.6828V15C2.25072 16.3313 1.74447 17.7047 1.20541 18.7875C0.900722 19.3969 0.553846 19.9969 0.150722 20.55C0.000721514 20.7516 -0.041466 21.0141 0.042909 21.2531C0.127284 21.4922 0.324159 21.6703 0.567909 21.7313L3.56791 22.4813C3.76478 22.5328 3.97572 22.4953 4.14916 22.3875C4.3226 22.2797 4.44447 22.1016 4.48197 21.9C4.8851 19.8937 4.68353 18.0938 4.38353 16.8047C4.23353 16.1391 4.03197 15.4594 3.75072 14.8359V13.6828C3.75072 12.2672 4.22885 10.9313 5.05853 9.8625C5.66322 9.13594 6.44603 8.55 7.36478 8.18906L14.7242 5.29688C15.1085 5.14687 15.5445 5.33437 15.6945 5.71875C15.8445 6.10313 15.657 6.53906 15.2726 6.68906L7.91322 9.58125C7.33197 9.81094 6.82103 10.1625 6.40385 10.5938L13.8851 13.2937C14.2413 13.4203 14.6163 13.4859 14.996 13.4859C15.3757 13.4859 15.7507 13.4203 16.107 13.2937L29.2601 8.55937C29.7054 8.4 30.0007 7.97344 30.0007 7.5C30.0007 7.02656 29.7054 6.60469 29.2601 6.44063L16.1117 1.69219C15.7554 1.56562 15.3804 1.5 15.0007 1.5ZM6.00072 19.125C6.00072 20.7797 10.032 22.5 15.0007 22.5C19.9695 22.5 24.0007 20.7797 24.0007 19.125L23.2835 12.3094L16.6179 14.7188C16.0976 14.9062 15.5492 15 15.0007 15C14.4522 15 13.9038 14.9062 13.3835 14.7188L6.71791 12.3094L6.00072 19.125Z"
 											fill="white"
 										/>
 									</svg>
 								) : tile.statIcon === 'chart' ? (
-									<svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block h-6 w-[30px] object-contain"
+										width="24"
+										height="21"
+										viewBox="0 0 24 21"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M3 1.5C3 0.670313 2.32969 0 1.5 0C0.670313 0 0 0.670313 0 1.5V17.25C0 19.3219 1.67812 21 3.75 21H22.5C23.3297 21 24 20.3297 24 19.5C24 18.6703 23.3297 18 22.5 18H3.75C3.3375 18 3 17.6625 3 17.25V1.5ZM22.0594 5.55937C22.6453 4.97344 22.6453 4.02187 22.0594 3.43594C21.4734 2.85 20.5219 2.85 19.9359 3.43594L15 8.37656L12.3094 5.68594C11.7234 5.1 10.7719 5.1 10.1859 5.68594L4.93594 10.9359C4.35 11.5219 4.35 12.4734 4.93594 13.0594C5.52188 12.4734 6.47344 13.6453 7.05937 13.0594L11.25 8.87344L13.9406 11.5641C14.5266 12.15 15.4781 12.15 16.0641 11.5641L22.0641 5.56406L22.0594 5.55937Z"
 											fill="white"
 										/>
 									</svg>
 								) : (
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block size-6 object-contain"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M2.23125 14.0813L10.7016 21.9891C11.0531 22.3172 11.5172 22.5 12 22.5C12.4828 22.5 12.9469 22.3172 13.2984 21.9891L21.7687 14.0813C23.1937 12.7547 24 10.8938 24 8.94844V8.67657C24 5.40001 21.6328 2.60626 18.4031 2.06719C16.2656 1.71094 14.0906 2.40938 12.5625 3.93751L12 4.50001L11.4375 3.93751C9.90938 2.40938 7.73438 1.71094 5.59688 2.06719C2.36719 2.60626 0 5.40001 0 8.67657V8.94844C0 10.8938 0.80625 12.7547 2.23125 14.0813Z"
 											fill="white"
@@ -61,64 +138,115 @@ const { content: d } = Astro.props;
 									</svg>
 								)}
 							</div>
-							<p class="ysa-methodology__stat-value">{tile.stat}</p>
-							<p class="ysa-methodology__stat-desc">{tile.description}</p>
+							<p class="m-0 pt-2 font-display text-[1.0625rem] font-semibold leading-7 text-[#111827]">
+								{tile.stat}
+							</p>
+							<p class="m-0 whitespace-pre-line text-sm leading-[1.421875rem] text-[#475569]">
+								{tile.description}
+							</p>
 						</article>
 					))
 				}
 			</div>
 		</div>
 
-		<ul class="ysa-methodology__principles">
+		<ul
+			class="m-0 grid list-none grid-cols-3 gap-[clamp(1.5rem,3vw,2rem)] p-0 max-lg:grid-cols-2 max-sm:grid-cols-1"
+		>
 			{
 				d.principles.map((p) => (
-					<li class="ysa-methodology__principle">
-						<span class="ysa-methodology__principle-bar" aria-hidden="true"></span>
-						<div class="ysa-methodology__principle-inner">
+					<li class="relative pl-6">
+						<span
+							class="absolute top-0 bottom-[0.02px] left-0 w-1 rounded-full bg-[linear-gradient(180deg,#0a9dfb_0%,#7c3aed_100%)]"
+							aria-hidden="true"
+						/>
+						<div class="flex flex-col items-start gap-[0.43rem]">
 							<div
 								class:list={[
-									'ysa-methodology__principle-icon',
-									`ysa-methodology__principle-icon--${p.iconTint}`,
+									'grid size-12 shrink-0 place-items-center rounded-xl',
+									principleIconBg[p.iconTint],
 								]}
 								aria-hidden="true"
 							>
 								{p.principleIcon === 'depth' ? (
-									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block size-5 object-contain"
+										width="20"
+										height="20"
+										viewBox="0 0 20 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M6.25 1.25C6.25 0.558594 6.80859 0 7.5 0H8.75C9.44141 0 10 0.558594 10 1.25C10.6914 1.25 11.25 1.80859 11.25 2.5V11.25C11.25 11.9414 10.6914 12.5 10 12.5C10 13.1914 9.44141 13.75 8.75 13.75H7.5C6.80859 13.75 6.25 13.1914 6.25 12.5C5.55859 12.5 5 11.9414 5 11.25V2.5C5 1.80859 5.55859 1.25 6.25 1.25ZM1.25 17.5H12.5C15.2617 17.5 17.5 15.2617 17.5 12.5C17.5 9.73828 15.2617 7.5 12.5 7.5V5C16.6406 5 20 8.35938 20 12.5C20 14.4219 19.2773 16.1719 18.0898 17.5H18.75C19.4414 17.5 20 18.0586 20 18.75C20 19.4414 19.4414 20 18.75 20H12.5H1.25C0.558594 20 0 19.4414 0 18.75C0 18.0586 0.558594 17.5 1.25 17.5ZM4.375 15H11.875C12.2188 15 12.5 15.2812 12.5 15.625C12.5 15.9688 12.2188 16.25 11.875 16.25H4.375C4.03125 16.25 3.75 15.9688 3.75 15.625C3.75 15.2812 4.03125 15 4.375 15Z"
 											fill="#5751E4"
 										/>
 									</svg>
 								) : p.principleIcon === 'neuro' ? (
-									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block size-5 object-contain"
+										width="20"
+										height="20"
+										viewBox="0 0 20 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M7.5 4.09375C7.5 3.73438 7.27344 3.41797 6.98438 3.20312C6.53125 2.86328 6.25 2.39453 6.25 1.875C6.25 0.839844 7.37109 0 8.75 0C10.1289 0 11.25 0.839844 11.25 1.875C11.25 2.39453 10.9688 2.86328 10.5156 3.20312C10.2266 3.41797 10 3.73438 10 4.09375C10 4.59375 10.4062 5 10.9062 5H13.125C14.1602 5 15 5.83984 15 6.875V9.09375C15 9.59375 15.4062 10 15.9062 10C16.2656 10 16.582 9.77344 16.7969 9.48438C17.1367 9.03125 17.6055 8.75 18.125 8.75C19.1602 8.75 20 9.87109 20 11.25C20 12.6289 19.1602 13.75 18.125 13.75C17.6055 13.75 17.1367 13.4688 16.7969 13.0156C16.582 12.7266 16.2656 12.5 15.9062 12.5C15.4062 12.5 15 12.9062 15 13.4062V18.125C15 19.1602 14.1602 20 13.125 20H10.9062C10.4062 20 10 19.5938 10 19.0938C10 18.7344 10.2266 18.418 10.5156 18.2031C10.9688 17.8633 11.25 17.3945 11.25 16.875C11.25 15.8398 10.1289 15 8.75 15C7.37109 15 6.25 15.8398 6.25 16.875C6.25 17.3945 6.53125 17.8633 6.98438 18.2031C7.27344 18.418 7.5 18.7344 7.5 19.0938C7.5 19.5938 7.09375 20 6.59375 20H1.875C0.839844 20 0 19.1602 0 18.125V13.4062C0 12.9062 0.40625 12.5 0.90625 12.5C1.26562 12.5 1.58203 12.7266 1.79688 13.0156C2.13672 13.4688 2.60547 13.75 3.125 13.75C4.16016 13.75 5 12.6289 5 11.25C5 9.87109 4.16016 8.75 3.125 8.75C2.60547 8.75 2.13672 9.03125 1.79688 9.48438C1.58203 9.77344 1.26562 10 0.90625 10C0.40625 10 0 9.59375 0 9.09375V6.875C0 5.83984 0.839844 5 1.875 5H6.59375C7.09375 5 7.5 4.59375 7.5 4.09375Z"
 											fill="#A855F7"
 										/>
 									</svg>
 								) : p.principleIcon === 'socratic' ? (
-									<svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block h-5 w-[25px] object-contain"
+										width="25"
+										height="20"
+										viewBox="0 0 25 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M8.12543 13.75C12.6137 13.75 16.2504 10.6719 16.2504 6.875C16.2504 3.07812 12.6137 0 8.12543 0C3.63715 0 0.000427517 3.07812 0.000427517 6.875C0.000427517 8.38281 0.574646 9.77734 1.5473 10.9141C1.41058 11.2812 1.20746 11.6055 0.992615 11.8789C0.805115 12.1211 0.613709 12.3086 0.473084 12.4375C0.402771 12.5 0.344178 12.5508 0.305115 12.582C0.285584 12.5977 0.269959 12.6094 0.262146 12.6133L0.254334 12.6211C0.03949 12.7812 -0.05426 13.0625 0.0316775 13.3164C0.117615 13.5703 0.355896 13.75 0.625428 13.75C1.47699 13.75 2.33636 13.5312 3.05121 13.2617C3.41058 13.125 3.74652 12.9727 4.03949 12.8164C5.23871 13.4102 6.63324 13.75 8.12543 13.75ZM17.5004 6.875C17.5004 11.2617 13.6293 14.5664 9.0434 14.9609C9.99261 17.8672 13.1411 20 16.8754 20C18.3676 20 19.7621 19.6602 20.9653 19.0664C21.2582 19.2227 21.5903 19.375 21.9496 19.5117C22.6645 19.7812 23.5239 20 24.3754 20C24.645 20 24.8871 19.8242 24.9692 19.5664C25.0512 19.3086 24.9614 19.0273 24.7426 18.8672L24.7348 18.8594C24.727 18.8516 24.7114 18.8438 24.6918 18.8281C24.6528 18.7969 24.5942 18.75 24.5239 18.6836C24.3832 18.5547 24.1918 18.3672 24.0043 18.125C23.7895 17.8516 23.5864 17.5234 23.4496 17.1602C24.4223 16.0273 24.9965 14.6328 24.9965 13.1211C24.9965 9.49609 21.6801 6.52344 17.4731 6.26562C17.4887 6.46484 17.4965 6.66797 17.4965 6.87109L17.5004 6.875Z"
 											fill="#22D3EE"
 										/>
 									</svg>
 								) : p.principleIcon === 'async' ? (
-									<svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block h-5 w-[23px] object-contain"
+										width="23"
+										height="20"
+										viewBox="0 0 23 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M12.3789 0.703125C12.1719 0.273438 11.7344 0 11.2539 0C10.7734 0 10.3399 0.273438 10.1289 0.703125L7.6172 5.87109L2.00782 6.69922C1.53907 6.76953 1.14845 7.09766 1.00391 7.54688C0.859383 7.99609 0.97657 8.49219 1.31251 8.82422L5.38282 12.8516L4.42188 18.543C4.34376 19.0117 4.53907 19.4883 4.92579 19.7656C5.31251 20.043 5.82423 20.0781 6.2461 19.8555L11.2578 17.1797L16.2695 19.8555C16.6914 20.0781 17.2031 20.0469 17.5899 19.7656C17.9766 19.4844 18.1719 19.0117 18.0938 18.543L17.1289 12.8516L21.1992 8.82422C21.5352 8.49219 21.6563 7.99609 21.5078 7.54688C21.3594 7.09766 20.9727 6.76953 20.5039 6.69922L14.8906 5.87109L12.3789 0.703125Z"
 											fill="#059669"
 										/>
 									</svg>
 								) : p.principleIcon === 'peer' ? (
-									<svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block h-5 w-[25px] object-contain"
+										width="25"
+										height="20"
+										viewBox="0 0 25 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M21.25 9.6875V9.81641L23.9727 7.09375C24.8281 6.23828 24.8281 4.85547 23.9727 4L20.9219 0.953125C20.0664 0.0976562 18.6836 0.0976562 17.8281 0.953125L16.2617 2.51953C16.1562 2.50781 16.0469 2.5 15.9375 2.5H11.5625C10.1133 2.5 8.92188 3.59375 8.76562 5H8.75V9.6875C8.75 10.5508 9.44922 11.25 10.3125 11.25C11.1758 11.25 11.875 10.5508 11.875 9.6875V6.875V6.87109V6.25H12.5H17.8125C17.8125 6.25 17.8125 6.25 17.8164 6.25H18.125C19.8516 6.25 21.25 7.64844 21.25 9.375V9.6875ZM13.125 7.5V9.6875C13.125 11.2422 11.8658 12.5 10.3125 12.5C8.7592 12.5 7.5 11.2422 7.5 9.6875V5.05469C6.09766 5.29688 4.92969 6.31641 4.53125 7.71875L3.88672 9.96875L1.02734 12.8281C0.171875 13.6836 0.171875 15.0664 1.02734 15.9219L4.07812 18.9727C4.93359 19.8281 6.31641 19.8281 7.17188 18.9727L8.64453 17.5C8.67969 17.5 8.71484 17.5039 8.75 17.5039H15C16.0352 17.5039 16.875 16.6641 16.875 15.6289C16.875 15.4102 16.8359 15.1992 16.7695 15.0039H16.875C17.9102 15.0039 18.75 14.1641 18.75 13.1289C18.75 12.6289 18.5547 12.1758 18.2344 11.8398C19.2383 11.6445 19.9961 10.7617 20 9.69922V9.68359C19.9961 8.48047 19.0195 7.50391 17.8125 7.50391H13.125V7.5Z"
 											fill="#0D9488"
 										/>
 									</svg>
 								) : (
-									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										class="block size-5 object-contain"
+										width="20"
+										height="20"
+										viewBox="0 0 20 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M10 0C10.1797 0 10.3594 0.0390625 10.5235 0.113281L17.8789 3.23438C18.7383 3.59766 19.3789 4.44531 19.375 5.46875C19.3555 9.34375 17.7617 16.4336 11.0313 19.6562C10.3789 19.9688 9.62111 19.9688 8.96877 19.6562C2.2383 16.4336 0.644549 9.34375 0.625018 5.46875C0.621112 4.44531 1.26174 3.59766 2.12111 3.23438L9.48049 0.113281C9.64064 0.0390625 9.82033 0 10 0ZM10 2.60938V17.375C15.3906 14.7656 16.8399 8.98828 16.875 5.52344L10 2.60938Z"
 											fill="#2563EB"
@@ -126,8 +254,10 @@ const { content: d } = Astro.props;
 									</svg>
 								)}
 							</div>
-							<h3 class="ysa-methodology__principle-title">{p.title}</h3>
-							<p class="ysa-methodology__principle-desc">{p.description}</p>
+							<h3 class="m-0 pt-[0.57rem] font-display text-[1.0625rem] font-semibold leading-7 text-[#111827]">
+								{p.title}
+							</h3>
+							<p class="m-0 text-sm leading-[1.421875rem] text-[#475569]">{p.description}</p>
 						</div>
 					</li>
 				))

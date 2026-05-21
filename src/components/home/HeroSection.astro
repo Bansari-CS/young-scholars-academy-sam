@@ -1,7 +1,6 @@
 ---
 import { figmaHero } from '../../data/figmaAssets';
 import type { HeroDashboardData } from '../../types/home';
-import '../../styles/components/hero-section.css';
 import DashboardPreview from './DashboardPreview.astro';
 import PrimaryButton from '../ui/PrimaryButton.astro';
 
@@ -22,7 +21,9 @@ interface Props {
 const { content } = Astro.props;
 ---
 
-<div class="relative w-full overflow-hidden bg-[var(--ysa-hero-bg)]">
+<div
+	class="relative w-full overflow-hidden bg-[linear-gradient(150.46deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)]"
+>
 	<!-- Blur Background -->
 	<div class="pointer-events-none absolute left-[15%] top-[-5%] h-[min(600px,90vw)] w-[min(600px,90vw)] rounded-full bg-[rgba(199,213,254,0.2)] blur-[70px]"></div>
 
@@ -35,12 +36,15 @@ const { content } = Astro.props;
 			<!-- Content -->
 			<div class="flex max-w-[39.5rem] flex-col items-start gap-6">
 				<!-- Trust badges (Figma 1175:1842) -->
-				<ul class="hero-trust-badges" aria-label="Trust and reach highlights">
+				<ul
+					class="m-0 flex list-none flex-wrap items-start gap-3 p-0"
+					aria-label="Trust and reach highlights"
+				>
 					{
 						content.trustBadges.map((label) => (
-							<li>
-								<p class="hero-badge m-0">
-									<span class="hero-badge-dot" aria-hidden="true"></span>
+							<li class="m-0 p-0">
+								<p class="m-0 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-[#e0e9ff] bg-white px-[1.0625rem] py-[0.5625rem] font-display text-xs font-medium leading-4 tracking-[0.01875rem] text-[#7c3aed] shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
+									<span class="size-2 shrink-0 rounded-full bg-[#048c3c]" aria-hidden="true" />
 									<span>{label}</span>
 								</p>
 							</li>
@@ -50,7 +54,7 @@ const { content } = Astro.props;
 
 				<!-- Title -->
 				<h1
-					class="pb-[0.08em] text-[clamp(2.25rem,6vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.09375rem] text-[var(--ysa-figma-brand)]"
+					class="m-0 pb-[0.08em] text-[clamp(2.25rem,6vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.09375rem] text-[var(--ysa-figma-brand)]"
 				>
 					<span class="block leading-[1.08]">
 						{content.titleLineOne}
@@ -71,7 +75,7 @@ const { content } = Astro.props;
 				</p>
 
 				<!-- CTAs (Figma 31:2682) -->
-				<div class="hero-cta-row">
+				<div class="flex flex-wrap items-start gap-4 pb-4 pt-2">
 					<PrimaryButton
 						href={content.primaryCta.href}
 						label={content.primaryCta.label}
@@ -150,7 +154,7 @@ const { content } = Astro.props;
 							}
 						</div>
 
-						<p class="text-sm font-medium leading-5 text-[#334155]">
+						<p class="m-0 font-display text-sm font-medium leading-5 text-[#334155]">
 							{content.ratingText}
 						</p>
 					</div>
