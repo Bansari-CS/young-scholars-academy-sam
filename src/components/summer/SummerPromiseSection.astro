@@ -1,18 +1,41 @@
 ---
 interface Props {
-	content: any;
+	content: {
+		kicker: string;
+		title: string;
+		description: string;
+		ctaLabel: string;
+		ctaHref: string;
+	};
 }
 
-const { content } = Astro.props as Props;
+const { content } = Astro.props;
 ---
 
-<section class="summer-section summer-cream summer-promise-section bg-white py-20 pt-[4px]">
-	<div class="summer-wrap">
-		<div class="summer-guarantee p-5 sm:p-8 md:p-10 lg:p-12">
-			<span class="summer-guarantee-pill">{content.kicker}</span>
-			<h2 class="text-[28px] sm:text-[36px] lg:text-[44px] mt-2 sm:!mt-0 !mb-[23px]">{content.title}</h2>
-			<p>{content.description}</p>
-			<a href={content.ctaHref} class="summer-guarantee-cta !mt-[40px]">{content.ctaLabel}</a>
+<section class="bg-white py-20 pt-px">
+	<div class="mx-auto box-border w-full max-w-[90rem] px-4 sm:px-6 lg:px-10">
+		<div
+			class="relative mx-auto max-w-[53.5rem] rounded-3xl border-2 border-[#7c3aed] bg-white p-5 text-center sm:p-8 md:p-10 lg:p-12"
+		>
+			<span
+				class="absolute top-[-24px] left-1/2 -translate-x-1/2 rounded-full bg-[#7c3aed] px-6 py-2 text-sm font-bold tracking-[0.05em] text-white uppercase"
+			>
+				{content.kicker}
+			</span>
+			<h2
+				class="mt-2 mb-[23px] text-[28px] leading-tight font-semibold text-[#111827] sm:mt-[23px] sm:text-[36px] lg:text-[44px]"
+			>
+				{content.title}
+			</h2>
+			<p class="mx-auto m-0 max-w-[665px] text-base leading-[26px] text-[#475569]">
+				{content.description}
+			</p>
+			<a
+				href={content.ctaHref}
+				class="mt-10 inline-block rounded-xl bg-[#7c3aed] px-5 py-4 font-[var(--ysa-font-display)] font-semibold text-white no-underline shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)]"
+			>
+				{content.ctaLabel}
+			</a>
 		</div>
 	</div>
 </section>

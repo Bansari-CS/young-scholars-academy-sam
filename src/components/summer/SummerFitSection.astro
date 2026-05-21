@@ -1,31 +1,43 @@
 ---
 interface Props {
-	content: any;
+	content: {
+		title: string;
+		goodTitle: string;
+		goodItems: string[];
+		badTitle: string;
+		badItems: string[];
+	};
 }
 
-const { content } = Astro.props as Props;
+const { content } = Astro.props;
 ---
 
-<section class="summer-fit-dark py-12 md:py-16 xl:py-20">
+<section class="bg-[#111827] py-12 text-white md:py-16 xl:py-20">
 	<div class="mx-auto box-border w-full max-w-[90rem] px-4 sm:px-6 lg:px-10">
-		<h2 class="!text-white text-[28px] sm:text-[36px] lg:text-[44px]">{content.title}</h2>
+		<h2 class="m-0 mb-16 text-center text-[28px] font-bold text-white sm:text-[36px] lg:text-[44px]">
+			{content.title}
+		</h2>
 		<div class="grid grid-cols-1 gap-[30px] md:grid-cols-2">
-			<article class="summer-fit-card good p-5 lg:p-10">
-				<h3 class="summer-fit-heading text-[22px] md:text-[26px] lg:text-[32px]">
-					<img src="/images/summer/fit/check-circle.svg" alt="" aria-hidden="true" />
+			<article class="rounded-3xl border border-[#334155] bg-[#1e293b] p-5 lg:p-10">
+				<h3 class="m-0 mb-6 flex items-center gap-3 text-[22px] leading-tight font-semibold text-[#048c3c] md:text-[26px] lg:text-[32px]">
+					<img class="size-6 shrink-0" src="/images/summer/fit/check-circle.svg" alt="" aria-hidden="true" />
 					<span>{content.goodTitle}</span>
 				</h3>
-				<ul>
-					{content.goodItems.map((item) => <li class="max-w-[440px] list-disc ml-5">{item}</li>)}
+				<ul class="m-0 grid list-disc gap-6 pl-6 text-base leading-6 text-[#cbd5e1] [&_li::marker]:text-[#048c3c]">
+					{content.goodItems.map((item) => (
+						<li class="ml-5 max-w-[440px]">{item}</li>
+					))}
 				</ul>
 			</article>
-			<article class="summer-fit-card bad p-5 lg:p-10">
-				<h3 class="summer-fit-heading text-[22px] md:text-[26px] lg:text-[32px]">
-					<img src="/images/summer/fit/x-circle.svg" alt="" aria-hidden="true" />
+			<article class="rounded-3xl border border-[#334155] bg-[#1e293b] p-5 lg:p-10">
+				<h3 class="m-0 mb-6 flex items-center gap-3 text-[22px] leading-tight font-semibold text-[#ef4444] md:text-[26px] lg:text-[32px]">
+					<img class="size-6 shrink-0" src="/images/summer/fit/x-circle.svg" alt="" aria-hidden="true" />
 					<span>{content.badTitle}</span>
 				</h3>
-				<ul>
-					{content.badItems.map((item) => <li class="max-w-[440px] list-disc ml-5">{item}</li>)}
+				<ul class="m-0 grid list-disc gap-6 pl-6 text-base leading-6 text-[#cbd5e1] [&_li::marker]:text-[#ef4444]">
+					{content.badItems.map((item) => (
+						<li class="ml-5 max-w-[440px]">{item}</li>
+					))}
 				</ul>
 			</article>
 		</div>

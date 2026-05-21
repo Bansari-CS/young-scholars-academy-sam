@@ -5,6 +5,13 @@ interface Props {
 
 const { content } = Astro.props as Props;
 
+const tagClassMap: Record<string, string> = {
+	'tag-stem': 'bg-[#dcfce7] text-[#048c3c]',
+	'tag-humanities': 'bg-[#decbfe] text-[#7c3aed]',
+	'tag-creative': 'bg-[#e1f3ff] text-[#0a9dfb]',
+	'tag-play': 'bg-[#fffad4] text-[#f2dd35]',
+};
+
 function parseAges(ages: string | undefined): { min: number; max: number } | null {
 	if (!ages) return null;
 	const m = ages.match(/(\d+)\s*[\-–−]\s*(\d+)/u);
@@ -43,7 +50,6 @@ const ageOptions = [
 
 const searchBlob = (camp: any) => `${camp.name} ${camp.description} ${camp.tag}`.toLowerCase();
 
-/** Single safe attribute for client-side age filtering (avoids dataset / multi-attr edge cases). */
 function campAgeRangeAttr(ageRange: { min: number; max: number } | null | undefined): string {
 	if (!ageRange || !Number.isFinite(ageRange.min) || !Number.isFinite(ageRange.max)) return '';
 	return `${ageRange.min}-${ageRange.max}`;
@@ -56,42 +62,51 @@ const scheduleyEmbedSrc =
 	typeof content.aiEmbedSrc === 'string' && content.aiEmbedSrc.trim()
 		? content.aiEmbedSrc.trim()
 		: SCHEDULEY_EMBED_SRC;
+
+const selectBase =
+	'w-full min-h-11 min-w-[7.5rem] max-w-[220px] appearance-none rounded-[10px] border border-[#e2e8f0] bg-gradient-to-b from-white to-[#f8fafc] py-2.5 pr-9 pl-3.5 text-sm font-semibold leading-tight text-[#1e293b] shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] transition-[border-color,box-shadow,background] duration-150 hover:border-[#cbd5e1] hover:bg-white focus:border-[#0a9dfb] focus:outline-none focus:shadow-[0_0_0_3px_rgba(10,157,251,0.22),inset_0_1px_0_rgba(255,255,255,0.9)]';
 ---
 
-<section id="programs" class="summer-section summer-camps-section py-20 pt-0" data-summer-camps-root>
-	<div class="summer-wrap summer-camps-wrap pt-12">
+<section id="programs" class="bg-[#f8fafc] py-20 pt-0" data-summer-camps-root>
+	<div class="mx-auto box-border w-full max-w-[90rem] px-4 pt-12 sm:px-6 lg:px-10">
 		<h2 class="mx-auto max-w-[1092px] text-center text-[25px] font-bold leading-[1.15] text-[#111827] sm:text-[36px] lg:text-[44px] lg:leading-[1.1]">
 			{content.title}
 		</h2>
-		<p class="summer-sub mx-auto mt-4 max-w-[696px] text-center sm:mt-5">{content.subtitle}</p>
+		<p class="mx-auto mt-4 mb-16 max-w-[696px] text-center text-base leading-[26px] text-[#475569] sm:mt-5 md:mb-[4.5rem]">
+			{content.subtitle}
+		</p>
 
 		{
 			guided?.title ? (
-				<div class="summer-camps-guided mb-8 mt-0 w-full text-center">
-					<p class="summer-camps-guided-title">{guided.title}</p>
+				<div class="mb-8 mt-0 w-full text-center">
+					<p class="mb-3.5 w-full text-center text-lg font-semibold text-[#0f172a]">{guided.title}</p>
 				</div>
 			) : null
 		}
 
-		<div class="summer-camps-filters mb-12 flex-wrap md:flex-nowrap">
-			<label class="summer-camps-search">
-				<img src="/images/summer/camps/icon-search.svg" alt="" aria-hidden="true" />
+		<div
+			class="mb-12 flex flex-wrap items-center gap-4 rounded-2xl border border-[#e5e7eb] bg-white p-3 shadow-[0_8px_15px_rgba(0,0,0,0.08)] md:flex-nowrap"
+		>
+			<label class="flex min-w-[200px] flex-1 cursor-text items-center gap-3 rounded-xl bg-[#f9fafb] px-4 py-2.5 text-sm text-[#4b5563]">
+				<img class="size-4 shrink-0" src="/images/summer/camps/icon-search.svg" alt="" aria-hidden="true" />
 				<input
 					type="search"
-					class="summer-camps-search-input"
+					class="min-w-0 flex-1 border-0 bg-transparent text-sm text-[#111827] outline-none placeholder:text-[#6b7280]"
 					placeholder={content.searchPlaceholder}
 					autocomplete="off"
 					data-camp-search
 					aria-label={content.searchPlaceholder}
 				/>
 			</label>
-			<div class="summer-camps-filter-chips flex-wrap md:flex-nowrap">
-				<div class="summer-camps-filter-tier summer-camps-filter-tier--primary flex-wrap md:flex-nowrap">
-					<div class="summer-camps-select-wrap summer-camps-select-wrap--camp-type">
+			<div
+				class="flex flex-wrap items-center gap-3 border-l border-[#e5e7eb] pl-2 max-[900px]:mt-2 max-[900px]:w-full max-[900px]:basis-full max-[900px]:border-t max-[900px]:border-l-0 max-[900px]:pt-3 max-[900px]:pl-0"
+			>
+				<div class="flex flex-wrap items-center gap-3 max-[900px]:w-full">
+					<div class="relative inline-flex min-w-0 items-stretch focus-within:z-[1]">
 						<label class="sr-only" for="camp-filter-category">{content.filterLabels[0]}</label>
 						<select
 							id="camp-filter-category"
-							class="summer-camps-filter-select"
+							class:list={[selectBase, 'min-w-[10.5rem] max-w-[240px]']}
 							data-camp-filter="category"
 							aria-label={content.filterLabels[0]}
 						>
@@ -100,11 +115,21 @@ const scheduleyEmbedSrc =
 								<option value={cat}>{cat}</option>
 							))}
 						</select>
-						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
+						<img
+							class="pointer-events-none absolute top-1/2 right-3 size-2.5 -translate-y-1/2 opacity-55"
+							src="/images/summer/camps/icon-chevron.svg"
+							alt=""
+							aria-hidden="true"
+						/>
 					</div>
-					<div class="summer-camps-select-wrap summer-camps-select-wrap--age">
+					<div class="relative inline-flex min-w-0 items-stretch focus-within:z-[1]">
 						<label class="sr-only" for="camp-filter-age">{content.filterLabels[1]}</label>
-						<select id="camp-filter-age" class="summer-camps-filter-select" data-camp-filter="age" aria-label={content.filterLabels[1]}>
+						<select
+							id="camp-filter-age"
+							class:list={[selectBase, 'min-w-[8.25rem]']}
+							data-camp-filter="age"
+							aria-label={content.filterLabels[1]}
+						>
 							{
 								ageOptions.map((o, i) => (
 									<option value={o.value} selected={i === 0}>
@@ -113,26 +138,45 @@ const scheduleyEmbedSrc =
 								))
 							}
 						</select>
-						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
+						<img
+							class="pointer-events-none absolute top-1/2 right-3 size-2.5 -translate-y-1/2 opacity-55"
+							src="/images/summer/camps/icon-chevron.svg"
+							alt=""
+							aria-hidden="true"
+						/>
 					</div>
 				</div>
-				<div class="summer-camps-filter-tier summer-camps-filter-tier--secondary flex-wrap md:flex-nowrap">
-					<div class="summer-camps-select-wrap">
+				<div
+					class="flex flex-wrap items-center gap-3 border-l border-[#e5e7eb] pl-3 ml-1 max-[900px]:mt-1 max-[900px]:w-full max-[900px]:basis-full max-[900px]:border-t max-[900px]:border-l-0 max-[900px]:pt-2.5 max-[900px]:pl-0 max-[900px]:ml-0"
+				>
+					<div class="relative inline-flex min-w-0 items-stretch focus-within:z-[1]">
 						<label class="sr-only" for="camp-filter-level">{content.filterLabels[2]}</label>
-						<select id="camp-filter-level" class="summer-camps-filter-select" data-camp-filter="level" aria-label={content.filterLabels[2]}>
+						<select
+							id="camp-filter-level"
+							class={selectBase}
+							data-camp-filter="level"
+							aria-label={content.filterLabels[2]}
+						>
 							<option value="all" selected>All levels</option>
 							{levels.map((lvl) => (
 								<option value={lvl}>{lvl}</option>
 							))}
 						</select>
-						<img src="/images/summer/camps/icon-chevron.svg" alt="" aria-hidden="true" class="summer-camps-select-chevron" />
+						<img
+							class="pointer-events-none absolute top-1/2 right-3 size-2.5 -translate-y-1/2 opacity-55"
+							src="/images/summer/camps/icon-chevron.svg"
+							alt=""
+							aria-hidden="true"
+						/>
 					</div>
-					<div class="summer-camps-date-field">
+					<div
+						class="flex min-h-11 min-w-[10.5rem] max-w-[240px] flex-[0_1_auto] items-center gap-0.5 rounded-[10px] border border-[#e2e8f0] bg-gradient-to-b from-white to-[#f8fafc] py-1 pl-3 pr-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] transition-[border-color,box-shadow] duration-150 focus-within:z-[1] focus-within:border-[#0a9dfb] focus-within:shadow-[0_0_0_3px_rgba(10,157,251,0.22),inset_0_1px_0_rgba(255,255,255,0.9)]"
+					>
 						<label class="sr-only" for="camp-filter-date">{content.filterLabels[3]}</label>
 						<input
 							type="date"
 							id="camp-filter-date"
-							class="summer-camps-date-input"
+							class="relative min-w-0 flex-1 cursor-pointer border-0 bg-transparent text-sm font-semibold text-[#1e293b] outline-none [&::-moz-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0"
 							data-camp-filter="date"
 							min="2026-06-01"
 							max="2026-08-14"
@@ -140,27 +184,35 @@ const scheduleyEmbedSrc =
 						/>
 						<button
 							type="button"
-							class="summer-camps-date-picker-btn"
+							class="inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-lg border-0 bg-[rgba(10,157,251,0.1)] p-0 text-[#0369a1] transition-[background,transform] duration-150 hover:bg-[rgba(10,157,251,0.18)] active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0a9dfb]"
 							data-camp-date-picker
 							aria-label={`Open calendar for ${content.filterLabels[3]}`}
 						>
-							<img src="/images/summer/camps/icon-calendar.svg" alt="" aria-hidden="true" />
+							<img class="block size-4" src="/images/summer/camps/icon-calendar.svg" alt="" aria-hidden="true" />
 						</button>
 					</div>
 				</div>
 			</div>
-			<button type="button" class="summer-camps-explore-btn" data-camp-explore>
+			<button
+				type="button"
+				class="cursor-pointer rounded-xl border-0 bg-[#0a9dfb] px-8 py-3 font-medium text-white transition-[filter] duration-150 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0369a1]"
+				data-camp-explore
+			>
 				{content.exploreLabel}
 			</button>
 		</div>
 
-		<p class="summer-camps-filter-status sr-only" data-camp-status aria-live="polite" />
+		<p class="sr-only" data-camp-status aria-live="polite" />
 
-		<div id="summer-camp-results" class="summer-grid-3 summer-camp-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" data-camp-grid>
+		<div
+			id="summer-camp-results"
+			class="grid grid-cols-1 gap-x-5 gap-y-[15px] md:grid-cols-2 lg:grid-cols-3"
+			data-camp-grid
+		>
 			{
 				cards.map((camp) => (
 					<article
-						class="summer-program-card-figma"
+						class="rounded-2xl border border-[#e2e8f0] bg-white p-2"
 						data-camp-card
 						data-category={camp.tag}
 						data-level={camp.level}
@@ -170,89 +222,111 @@ const scheduleyEmbedSrc =
 						data-age-range={campAgeRangeAttr(camp.ageRange)}
 						data-search={searchBlob(camp)}
 					>
-						<div class="summer-program-image-figma">
-							<img src={camp.image} alt={camp.name} />
+						<div class="h-[200px] overflow-hidden rounded-xl">
+							<img class="block h-full w-full object-cover" src={camp.image} alt={camp.name} />
 						</div>
-						<div class="summer-program-content !pt-8">
-							<span class={camp.tagClass}>{camp.tag}</span>
-							<h3>{camp.name}</h3>
-							<p class="max-w-[285px]">{camp.description}</p>
+						<div class="p-4 pt-8">
+							<span
+								class:list={[
+									'inline-block rounded px-2 py-1 text-[10px] font-bold tracking-[0.03em] uppercase',
+									tagClassMap[camp.tagClass] ?? 'bg-[#e2e8f0] text-[#475569]',
+								]}
+							>
+								{camp.tag}
+							</span>
+							<h3 class="mt-2 mb-0 text-[17px] leading-7 font-semibold text-[#111827]">{camp.name}</h3>
+							<p class="mt-0 max-w-[285px] text-base leading-[26px] text-[#475569]">{camp.description}</p>
 						</div>
-						<div class="summer-program-footer-figma">
-							<div class="summer-program-meta-item">
-								<img src="/images/summer/camps/icon-age.svg" alt="" aria-hidden="true" />
-								<small>{camp.ages}</small>
+						<div class="flex items-center gap-4 border-t border-[#e5e7eb] p-1.5">
+							<div class="inline-flex items-center gap-1.5">
+								<img class="size-3" src="/images/summer/camps/icon-age.svg" alt="" aria-hidden="true" />
+								<small class="text-xs font-medium text-[#334155]">{camp.ages}</small>
 							</div>
-							<div class="summer-program-meta-item">
-								<img src={camp.levelIcon} alt="" aria-hidden="true" />
-								<small>{camp.level}</small>
+							<div class="inline-flex items-center gap-1.5">
+								<img src={camp.levelIcon} alt="" aria-hidden="true" class="size-3" />
+								<small class="text-xs font-medium text-[#334155]">{camp.level}</small>
 							</div>
-							<strong>{camp.price}</strong>
+							<strong class="ml-auto text-lg leading-7 text-[#0a9dfb]">{camp.price}</strong>
 						</div>
 					</article>
 				))
 			}
 		</div>
 
-		<p class="summer-camps-empty mt-8 hidden text-center text-[#64748b]" data-camp-empty>
+		<p class="mt-8 hidden text-center text-[#64748b]" data-camp-empty>
 			No camps match your filters. Try clearing search, setting camp type and age to All, or clearing the date.
 		</p>
 
-		<div class="summer-ai-strip p-5 md:p-8 lg:p-10 flex-wrap md:flex-nowrap">
+		<div
+			class="relative mt-12 flex flex-wrap items-center justify-between gap-2.5 overflow-hidden rounded-3xl border border-[rgba(10,157,251,0.1)] bg-[#e1f3ff] p-5 after:pointer-events-none after:absolute after:right-[-40px] after:bottom-[-40px] after:size-40 after:rounded-full after:bg-[rgba(10,157,251,0.05)] md:flex-nowrap md:p-8 lg:p-10 max-md:flex-col max-md:text-center"
+		>
 			<div>
-				<h3 class="font-bold">{content.aiTitle}</h3>
-				<p>{content.aiDescription}</p>
+				<h3 class="m-0 text-2xl leading-9 font-bold text-[#111827]">{content.aiTitle}</h3>
+				<p class="mt-2 mb-0 text-base text-[#475569]">{content.aiDescription}</p>
 			</div>
 			<button
 				type="button"
-				class="summer-ai-cta"
+				class="relative z-[1] inline-flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-xl border-2 border-[#0a9dfb] bg-white px-8 py-3.5 text-[#0a9dfb] font-bold transition-colors duration-150 hover:bg-[#f0f9ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0a9dfb] max-md:w-full max-md:justify-center"
 				data-scheduley-open
 				data-scheduley-embed-src={scheduleyEmbedSrc}
 				aria-haspopup="dialog"
 			>
-				<img src="/images/summer/camps/icon-ai.svg" alt="" aria-hidden="true" />
+				<img class="size-4 shrink-0" src="/images/summer/camps/icon-ai.svg" alt="" aria-hidden="true" />
 				{content.aiCtaLabel ?? 'Ask Scheduley AI'}
 			</button>
 		</div>
-		<div class="summer-browse-wrap">
-			<a href={content.browseHref} class="summer-browse-btn">{content.browseLabel}</a>
+		<div class="mt-[45px] text-center">
+			<a
+				href={content.browseHref}
+				class="inline-flex items-center justify-center rounded-xl border-2 border-[#0a9dfb] px-10 py-4 text-base font-bold text-[#0a9dfb] no-underline"
+			>
+				{content.browseLabel}
+			</a>
 		</div>
 	</div>
 
 	<div
 		id="summer-scheduley-modal"
-		class="summer-scheduley-modal summer-scheduley-modal--closed"
+		class="fixed inset-0 z-[110] flex items-center justify-center p-4 opacity-100 pointer-events-auto transition-opacity duration-200 max-md:p-2 [&.is-closed]:pointer-events-none [&.is-closed]:opacity-0"
 		aria-hidden="true"
 	>
 		<button
 			type="button"
-			class="summer-scheduley-modal__backdrop"
+			class="absolute inset-0 cursor-pointer border-0 bg-slate-900/75 p-0"
 			data-scheduley-modal-close
 			aria-label="Close Scheduley AI"
 		/>
 		<div
-			class="summer-scheduley-modal__panel"
+			class="relative z-[1] flex max-h-[min(800px,92vh)] w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-white shadow-[0_24px_48px_rgba(15,23,42,0.2)] max-md:max-h-[96vh] max-md:rounded-xl"
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="summer-scheduley-modal-title"
 		>
-			<div class="summer-scheduley-modal__head">
-				<p id="summer-scheduley-modal-title" class="summer-scheduley-modal__title">
+			<div class="flex items-center justify-between gap-3 border-b border-[#e2e8f0] bg-[#f8fafc] px-4 py-3">
+				<p id="summer-scheduley-modal-title" class="m-0 text-base font-bold text-[#0f172a]">
 					{content.aiEmbedTitle ?? content.aiCtaLabel ?? 'Scheduley AI'}
 				</p>
 				<button
 					type="button"
-					class="summer-scheduley-modal__close"
+					class="inline-flex size-10 shrink-0 items-center justify-center rounded-full border-0 bg-transparent p-0 text-[#475569] hover:bg-[#e2e8f0] hover:text-[#0f172a]"
 					data-scheduley-modal-close
 					aria-label="Close Scheduley AI"
 				>
-					<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+					<svg
+						class="block size-[1.125rem] shrink-0"
+						aria-hidden="true"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2.5"
+						stroke-linecap="round"
+					>
 						<path d="M18 6 6 18M6 6l12 12" />
 					</svg>
 				</button>
 			</div>
 			<iframe
-				class="summer-scheduley-modal__iframe"
+				class="block min-h-[min(720px,calc(92vh-3.5rem))] w-full flex-1 border-0 bg-white max-md:min-h-[min(720px,calc(96vh-3.25rem))]"
 				data-scheduley-iframe
 				title={content.aiEmbedTitle ?? 'Summer Camp Guide'}
 				allow="microphone; clipboard-write; screen-wake-lock"
@@ -269,7 +343,7 @@ const scheduleyEmbedSrc =
 
 			function closeScheduleyModal() {
 				if (!modal || !iframe) return;
-				modal.classList.add('summer-scheduley-modal--closed');
+				modal.classList.add('is-closed');
 				modal.setAttribute('aria-hidden', 'true');
 				document.body.classList.remove('overflow-hidden');
 				iframe.removeAttribute('src');
@@ -277,7 +351,7 @@ const scheduleyEmbedSrc =
 
 			function openScheduleyModal(embedSrc) {
 				if (!modal || !iframe || !embedSrc) return;
-				modal.classList.remove('summer-scheduley-modal--closed');
+				modal.classList.remove('is-closed');
 				modal.setAttribute('aria-hidden', 'false');
 				document.body.classList.add('overflow-hidden');
 				iframe.src = embedSrc;
@@ -298,18 +372,14 @@ const scheduleyEmbedSrc =
 				});
 
 				document.addEventListener('keydown', function (event) {
-					if (
-						event.key === 'Escape' &&
-						modal &&
-						!modal.classList.contains('summer-scheduley-modal--closed')
-					) {
+					if (event.key === 'Escape' && modal && !modal.classList.contains('is-closed')) {
 						closeScheduleyModal();
 					}
 				});
 			}
 
 			if (modal) {
-				modal.classList.add('summer-scheduley-modal--closed');
+				modal.classList.add('is-closed');
 			}
 
 			if (document.readyState === 'loading') {
@@ -436,7 +506,7 @@ const scheduleyEmbedSrc =
 						}
 					}
 
-					card.classList.toggle('summer-camp-card--filtered-out', !ok);
+					card.classList.toggle('hidden', !ok);
 					if (ok) visible++;
 				}
 
@@ -510,5 +580,7 @@ const scheduleyEmbedSrc =
 		} else {
 			initSummerCamps();
 		}
+
+		document.addEventListener('astro:page-load', initSummerCamps);
 	</script>
 </section>

@@ -1,14 +1,33 @@
 ---
 import GradientCtaSection from '../common/GradientCtaSection.astro';
+
+interface Props {
+	content: {
+		title: string;
+		description: string;
+		primaryCtaLabel: string;
+		primaryCtaHref: string;
+		secondaryCtaLabel?: string;
+		secondaryCtaHref?: string;
+		footnote?: string;
+	};
+}
+
+const { content } = Astro.props;
 ---
 
-<div id="cta" class="bg-[#f0f9ff]">
+<div id="cta" class="bg-[#f0f9fe]">
 	<GradientCtaSection
 		variant="outlined"
-		title="Their People Are Waiting."
-		description="Give your child a summer that doesn't just pass the time, but builds their identity and connects them with a global community of like-minded peers."
-		primaryCta={{ label: 'Find the Perfect Camp', href: '#programs' }}
+		title={content.title}
+		description={content.description}
+		primaryCta={{ label: content.primaryCtaLabel, href: content.primaryCtaHref }}
+		secondaryCta={
+			content.secondaryCtaLabel && content.secondaryCtaHref
+				? { label: content.secondaryCtaLabel, href: content.secondaryCtaHref }
+				: undefined
+		}
 		primaryTrailingIcon="/images/summer/final/arrow-right.svg"
-		footnote="Limited spots available per class. Enrollment closes June 1st."
+		footnote={content.footnote}
 	/>
 </div>
