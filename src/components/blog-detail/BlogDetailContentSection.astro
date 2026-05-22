@@ -49,6 +49,9 @@ const { content, Content, outlineItems = [] } = Astro.props;
 const showOutline = outlineItems.length >= 2;
 const article = content.article ?? content;
 const sidebar = content.sidebar ?? article.sidebar;
+
+const markdownBodyClass =
+	'min-w-0 max-w-none [&_p]:mt-4 [&_p]:leading-[1.625rem] [&_p]:text-[#475569] [&_h2]:scroll-mt-[10.5rem] [&_h2]:mt-10 [&_h2]:mb-5 [&_h2]:text-3xl [&_h2]:leading-9 [&_h2]:font-bold [&_h2]:text-[#111827] lg:[&_h2]:scroll-mt-48 [&_blockquote]:my-8 [&_blockquote]:border-l-4 [&_blockquote]:border-[#0a9dfb] [&_blockquote]:bg-[#f8fafc] [&_blockquote]:p-6 [&_blockquote]:rounded-r-2xl [&_blockquote]:text-lg [&_blockquote]:leading-8 [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-[#111827] [&_ul]:mt-4 [&_ul]:grid [&_ul]:gap-3 [&_li]:relative [&_li]:pl-8 [&_li]:leading-[1.625rem] [&_li]:text-[#475569] [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-0.5 [&_li]:before:font-bold [&_li]:before:text-[#0a9dfb] [&_li]:before:content-["✓"] [&_strong]:font-bold [&_strong]:text-[#111827] [&_img]:mt-8 [&_img]:w-full [&_img]:rounded-2xl';
 ---
 
 <section class="mx-auto w-full max-w-[1200px] px-6 pb-20 md:pb-24">
@@ -129,7 +132,7 @@ const sidebar = content.sidebar ?? article.sidebar;
 					)
 				}
 
-				<div class="blog-markdown min-w-0 max-w-none">
+				<div class={markdownBodyClass} data-article-markdown>
 					<Content />
 				</div>
 			</div>
@@ -160,7 +163,7 @@ const sidebar = content.sidebar ?? article.sidebar;
 			</div>
 		</article>
 
-		<aside class="blog-detail-aside space-y-6 text-[12px] leading-[1.5] text-[#475569] lg:sticky lg:top-24">
+		<aside class="space-y-6 text-xs leading-normal text-[#475569] lg:sticky lg:top-24">
 			<div class="rounded-2xl bg-gradient-to-br from-[#0a9dfb] to-[#7c3aed] p-5 text-white shadow-[0px_8px_32px_-8px_rgba(0,132,255,0.25)] md:p-6">
 				<h3 class="text-[12px] font-bold uppercase tracking-[0.08em] text-white/95">{sidebar.toolkit.title}</h3>
 				<p class="mt-2 text-[12px] leading-[1.55] text-[rgba(255,255,255,0.88)]">{sidebar.toolkit.description}</p>
@@ -176,16 +179,28 @@ const sidebar = content.sidebar ?? article.sidebar;
 					<svg class="h-3.5 w-3.5 shrink-0 text-amber-500" width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.3555 1.82812C13.9219 4.18359 15.75 8.05078 15.75 9.91406C15.75 14.3789 12.1992 18 7.875 18C3.51562 18 0 14.3789 0 9.91406C0 7.38281 2.42578 3.23438 5.90625 0C7.24219 1.26562 8.4375 2.60156 9.38672 3.9375C9.94922 3.19922 10.6172 2.49609 11.3555 1.82812ZM10.6875 13.7812C12.4102 12.5859 12.7969 10.2305 11.8477 8.40234C11.7422 8.19141 11.6016 7.94531 11.4609 7.69922L9.38672 10.0547C9.38672 10.0547 6.15234 5.90625 5.90625 5.625C4.21875 7.69922 3.375 8.89453 3.375 10.2305C3.375 12.9727 5.41406 14.625 7.94531 14.625C8.96484 14.625 9.91406 14.3438 10.6875 13.7812Z" fill="currentColor"/></svg>
 					<span class="text-[#0f172a]">{sidebar.trending.title}</span>
 				</h4>
-				<ul class="blog-detail-aside-trending-list m-0 mt-4 list-none space-y-4 p-0">
+				<ul class="m-0 mt-4 list-none space-y-4 p-0">
 					{
 						sidebar.trending.items.map((item) => (
-							<li class="blog-detail-trending-item">
-								<span class="blog-detail-aside-bullet-char" aria-hidden="true">&#8226;</span>
-								<a href={item.href} class="blog-detail-trend-link flex min-w-0 gap-3 no-underline">
+							<li class="group -ml-0.5 grid grid-cols-[0.875rem_minmax(0,1fr)] items-start gap-x-2 rounded-xl py-1 pr-1.5 pl-0 transition-colors duration-150 hover:bg-[#f8fafc]">
+								<span
+									class="flex w-3.5 shrink-0 justify-center pt-2 text-[1.0625rem] leading-none font-extrabold text-[#0a9dfb]"
+									aria-hidden="true"
+								>
+									&#8226;
+								</span>
+								<a
+									href={item.href}
+									class="flex min-w-0 gap-3 no-underline opacity-100 transition-opacity duration-150 hover:opacity-95"
+								>
 									<img src={item.image} alt={item.title} class="h-14 w-14 shrink-0 rounded-lg object-cover" />
 									<div class="min-w-0 pt-0.5">
-										<p class="blog-detail-trend-title text-[12px] font-semibold leading-snug text-[#0f172a]">{item.title}</p>
-										<p class="mt-0.5 text-[11px] font-medium uppercase tracking-wide text-[#64748b]">{item.category}</p>
+										<p class="text-xs font-semibold leading-snug text-[#0f172a] transition-colors duration-150 group-hover:text-[#0a9dfb]">
+											{item.title}
+										</p>
+										<p class="mt-0.5 text-[11px] font-medium tracking-wide text-[#64748b] uppercase">
+											{item.category}
+										</p>
 									</div>
 								</a>
 							</li>
@@ -196,9 +211,9 @@ const sidebar = content.sidebar ?? article.sidebar;
 
 			<div class="rounded-2xl border border-[rgba(226,232,240,0.5)] bg-white p-5 shadow-[0px_10px_40px_-10px_rgba(0,132,255,0.08),0px_4px_12px_-4px_rgba(0,0,0,0.04)]">
 				<h4 class="text-[12px] font-bold uppercase tracking-[0.06em] text-[#64748b]">{sidebar.categories.title}</h4>
-				<ul class="blog-detail-aside-categories-list">
+				<ul class="mt-3 mb-0 list-disc pl-[1.125rem] marker:text-[#0a9dfb]">
 					{sidebar.categories.items.map((c) => (
-						<li class="text-[12px] font-medium leading-snug text-[#475569]">{c}</li>
+						<li class="mb-2 pl-1.5 text-xs font-medium leading-snug text-[#475569] last:mb-0">{c}</li>
 					))}
 				</ul>
 			</div>
@@ -208,7 +223,7 @@ const sidebar = content.sidebar ?? article.sidebar;
 
 <script is:inline>
 	(function initArticleOutline() {
-		const md = document.querySelector('article .blog-markdown');
+		const md = document.querySelector('article [data-article-markdown]');
 		const shell = document.getElementById('article-outline');
 		if (!md || !shell) return;
 
@@ -314,133 +329,3 @@ const sidebar = content.sidebar ?? article.sidebar;
 		updateActiveFromScroll();
 	})();
 </script>
-
-<style>
-	.blog-markdown :global(p) {
-		margin-top: 1rem;
-		color: #475569;
-		line-height: 1.625rem;
-	}
-
-	.blog-markdown :global(h2) {
-		scroll-margin-top: 10.5rem;
-		margin-top: 2.5rem;
-		margin-bottom: 1.25rem;
-		font-size: 1.875rem;
-		line-height: 2.25rem;
-		font-weight: 700;
-		color: #111827;
-	}
-
-	@media (min-width: 1024px) {
-		.blog-markdown :global(h2) {
-			scroll-margin-top: 12rem;
-		}
-	}
-
-	.blog-detail-trending-item {
-		display: grid;
-		grid-template-columns: 0.875rem minmax(0, 1fr);
-		column-gap: 0.5rem;
-		align-items: start;
-		padding: 0.25rem 0.375rem 0.25rem 0;
-		margin-left: -0.125rem;
-		border-radius: 0.75rem;
-		transition: background-color 0.15s ease;
-	}
-
-	.blog-detail-trending-item:hover {
-		background-color: #f8fafc;
-	}
-
-	.blog-detail-aside-bullet-char {
-		display: flex;
-		width: 0.875rem;
-		flex-shrink: 0;
-		justify-content: center;
-		padding-top: 0.5rem;
-		font-size: 1.0625rem;
-		line-height: 1;
-		font-weight: 800;
-		color: #0a9dfb;
-	}
-
-	.blog-detail-trend-link:hover .blog-detail-trend-title {
-		color: #0a9dfb;
-	}
-
-	.blog-detail-trend-link {
-		transition: opacity 0.15s ease;
-	}
-
-	.blog-detail-trend-link:hover {
-		opacity: 0.95;
-	}
-
-	.blog-detail-aside-categories-list {
-		margin: 0.75rem 0 0;
-		padding: 0 0 0 1.125rem;
-		list-style-type: disc;
-		list-style-position: outside;
-	}
-
-	.blog-detail-aside-categories-list > li {
-		padding-left: 0.375rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.blog-detail-aside-categories-list > li:last-child {
-		margin-bottom: 0;
-	}
-
-	.blog-detail-aside-categories-list > li::marker {
-		color: #0a9dfb;
-		font-size: 1em;
-	}
-
-	.blog-markdown :global(blockquote) {
-		margin: 2rem 0;
-		border-left: 4px solid #0a9dfb;
-		background: #f8fafc;
-		padding: 1.5rem;
-		border-radius: 0 1rem 1rem 0;
-		font-size: 1.125rem;
-		line-height: 2rem;
-		font-style: italic;
-		font-weight: 500;
-		color: #111827;
-	}
-
-	.blog-markdown :global(ul) {
-		margin-top: 1rem;
-		display: grid;
-		gap: 0.75rem;
-	}
-
-	.blog-markdown :global(li) {
-		position: relative;
-		padding-left: 2rem;
-		color: #475569;
-		line-height: 1.625rem;
-	}
-
-	.blog-markdown :global(li)::before {
-		content: "✓";
-		position: absolute;
-		left: 0;
-		top: 0.125rem;
-		color: #0a9dfb;
-		font-weight: 700;
-	}
-
-	.blog-markdown :global(strong) {
-		color: #111827;
-		font-weight: 700;
-	}
-
-	.blog-markdown :global(img) {
-		margin-top: 2rem;
-		width: 100%;
-		border-radius: 1rem;
-	}
-</style>

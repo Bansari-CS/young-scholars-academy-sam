@@ -1,8 +1,12 @@
 ---
-import '../../styles/components/footer.css';
 import logo from '../../assets/common/logo.png';
 
 const year = new Date().getFullYear();
+
+const navHeadingClass = 'm-0 font-display text-[17px] font-bold leading-6 text-black';
+const navListClass = 'm-0 mt-4 flex list-none flex-col gap-2 p-0';
+const navLinkClass =
+	'break-words text-base leading-6 text-[#64748b] no-underline transition-colors hover:text-[#0a9dfb]';
 
 const socialLinks = [
 	{
@@ -74,107 +78,110 @@ const accreditationLinks = [
 ];
 ---
 
-<footer class="ysa-footer">
-	<div class="ysa-footer__inner">
-		<div class="ysa-footer__grid">
-			<div class="ysa-footer__brand-col">
-				<a class="ysa-footer__logo-link" href="/" aria-label="Young Scholars Academy home">
+<footer class="box-border w-full max-w-full overflow-x-clip bg-white pt-20 pb-2.5 text-[#64748b] max-md:pt-14">
+	<div class="mx-auto box-border flex w-full max-w-[90rem] flex-col gap-[50px] px-4 sm:px-6 lg:px-10 max-md:gap-10">
+		<div
+			class="grid w-full min-w-0 grid-cols-4 gap-[clamp(28px,5vw,99px)] max-[1100px]:grid-cols-2 max-[1100px]:gap-x-12 max-[1100px]:gap-y-10 max-md:grid-cols-1 max-md:gap-10"
+		>
+			<div class="flex min-w-0 max-w-[280px] flex-col items-start gap-4 max-[1100px]:max-w-none">
+				<a class="inline-flex no-underline" href="/" aria-label="Young Scholars Academy home">
 					<img
-						class="ysa-footer__logo-img"
+						class="block h-11 w-auto max-w-full object-contain"
 						src={logo.src}
 						width={logo.width}
 						height={logo.height}
 						alt="Young Scholars Academy"
 					/>
 				</a>
-				<p class="ysa-footer__tagline">
+				<p class="m-0 text-sm leading-[22.75px] font-normal">
 					Premium STEM education for gifted, twice-exceptional, and neurodivergent learners. Small classes.
 					Expert mentors. Real results.
 				</p>
-				<div class="ysa-footer__social" aria-label="Social media">
+				<div class="flex flex-wrap items-center gap-4 pt-1" aria-label="Social media">
 					{
 						socialLinks.map((item) => (
 							<a
+								class="inline-flex h-5 w-5 items-center justify-center no-underline"
 								href={item.href}
 								aria-label={item.label}
 								{...(item.external
 									? { target: '_blank', rel: 'noopener noreferrer' }
 									: {})}
 							>
-								<img src={item.icon} alt="" width="20" height="20" />
+								<img class="block h-5 w-5 object-contain" src={item.icon} alt="" width="20" height="20" />
 							</a>
 						))
 					}
 				</div>
 			</div>
 
-			<div class="ysa-footer__nav-stack">
-				<nav class="ysa-footer__nav-block" aria-label="Company">
-					<h3>Company</h3>
-					<ul>
+			<div class="flex min-w-0 flex-col gap-5">
+				<nav class="min-w-0" aria-label="Company">
+					<h3 class={navHeadingClass}>Company</h3>
+					<ul class={navListClass}>
 						{companyLinks.map((item) => (
 							<li>
-								<a href={item.href}>{item.label}</a>
+								<a class={navLinkClass} href={item.href}>{item.label}</a>
 							</li>
 						))}
 					</ul>
 				</nav>
-				<nav class="ysa-footer__nav-block" aria-label="Resources">
-					<h3>Resources</h3>
-					<ul>
+				<nav class="min-w-0" aria-label="Resources">
+					<h3 class={navHeadingClass}>Resources</h3>
+					<ul class={navListClass}>
 						{resourceLinks.map((item) => (
 							<li>
-								<a href={item.href}>{item.label}</a>
+								<a class={navLinkClass} href={item.href}>{item.label}</a>
 							</li>
 						))}
 					</ul>
 				</nav>
 			</div>
 
-			<div class="ysa-footer__nav-stack">
-				<nav class="ysa-footer__nav-block ysa-footer__nav-block--categories" aria-label="Courses Categories">
-					<h3>Courses Categories</h3>
-					<ul>
+			<div class="flex min-w-0 flex-col gap-5">
+				<nav class="min-w-0" aria-label="Courses Categories">
+					<h3 class={navHeadingClass}>Courses Categories</h3>
+					<ul class={navListClass}>
 						{courseCategoryLinks.map((item) => (
 							<li>
-								<a href={item.href}>{item.label}</a>
+								<a class={navLinkClass} href={item.href}>{item.label}</a>
 							</li>
 						))}
 					</ul>
 				</nav>
-				<nav class="ysa-footer__nav-block" aria-label="Community">
-					<h3>Community</h3>
-					<ul>
+				<nav class="min-w-0" aria-label="Community">
+					<h3 class={navHeadingClass}>Community</h3>
+					<ul class={navListClass}>
 						{communityLinks.map((item) => (
 							<li>
-								<a href={item.href}>{item.label}</a>
+								<a class={navLinkClass} href={item.href}>{item.label}</a>
 							</li>
 						))}
 					</ul>
 				</nav>
 			</div>
 
-			<div class="ysa-footer__accreditation-col">
+			<div class="flex min-w-0 flex-col items-start gap-2">
 				<img
-					class="ysa-footer__wasc"
+					class="block h-auto w-full max-w-[246px] object-contain"
 					src="/assets/footer/wasc-accreditation.png"
 					alt="WASC Accrediting Commission for Schools"
 					width="246"
 					height="77"
 					loading="lazy"
 				/>
-				<ul class="ysa-footer__accreditation-links">
+				<ul class="m-0 flex w-full min-w-0 max-w-[264px] list-none flex-col gap-2 p-0 max-md:max-w-none">
 					{accreditationLinks.map((item) => (
 						<li>
-							<a href={item.href}>{item.label}</a>
+							<a class={navLinkClass} href={item.href}>{item.label}</a>
 						</li>
 					))}
 				</ul>
 			</div>
 		</div>
 
-		<div class="ysa-footer__bottom">
-			<p>© {year} Young Scholars Academy. All rights reserved.</p>
+		<div class="box-border w-full border-t border-[#aebbd1] pt-8 text-center">
+			<p class="m-0 text-sm leading-5">© {year} Young Scholars Academy. All rights reserved.</p>
 		</div>
 	</div>
 </footer>
