@@ -9,7 +9,6 @@ import ReviewsSection from '../components/course-detail/ReviewsSection.astro';
 import AboutSection from '../components/course-detail/AboutSection.astro';
 import FinalCtaSection from '../components/course-detail/FinalCtaSection.astro';
 import { getEntry } from 'astro:content';
-import { heroData } from '../data/home';
 import SummerFaqSection from '../components/summer/SummerFaqSection.astro';
 import SummerResultsSection from '../components/summer/SummerResultsSection.astro';
 
@@ -24,7 +23,7 @@ const shareTitle = `${courseDetailContent.hero.titleLead} ${courseDetailContent.
 ---
 
 <Layout title={courseDetailContent.seo.title} description={courseDetailContent.seo.description}>
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={courseDetailContent.navItems} />
 
 	<main class="block w-full overflow-x-hidden bg-[#f8fafc]">
 		<Hero {...courseDetailContent.hero} />

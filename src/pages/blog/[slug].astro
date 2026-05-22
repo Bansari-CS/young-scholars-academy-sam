@@ -6,7 +6,7 @@ import BlogDetailContentSection from '../../components/blog-detail/BlogDetailCon
 import BlogDetailRelatedSection from '../../components/blog-detail/BlogDetailRelatedSection.astro';
 import BlogDetailFinalCtaSection from '../../components/blog-detail/BlogDetailFinalCtaSection.astro';
 import { getCollection, getEntry, render } from 'astro:content';
-import { heroData } from '../../data/home';
+import { getSiteNavItems } from '../../utils/getSiteNavItems';
 import { extractOutlineFromMarkdown } from '../../utils/blogOutline';
 
 export async function getStaticPaths() {
@@ -26,10 +26,11 @@ if (!blogDetailEntry) {
 
 const { Content } = await render(blogDetailEntry);
 const outlineItems = extractOutlineFromMarkdown(blogDetailEntry.body ?? '');
+const navItems = await getSiteNavItems();
 ---
 
 <Layout title={blogDetailEntry.data.seo.title} description={blogDetailEntry.data.seo.description}>
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main class="bg-[#f8fafc] pt-12 pb-[80px] text-[#111827]">
 		<BlogDetailContentSection content={blogDetailEntry.data} Content={Content} outlineItems={outlineItems} />
 		<BlogDetailRelatedSection content={blogDetailEntry.data.relatedSection} />

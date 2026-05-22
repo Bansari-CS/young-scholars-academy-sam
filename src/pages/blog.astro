@@ -11,9 +11,12 @@ import BlogNewsletterSection from '../components/blog/BlogNewsletterSection.astr
 import BlogFaqSection from '../components/blog/BlogFaqSection.astro';
 import BlogFinalCtaSection from '../components/blog/BlogFinalCtaSection.astro';
 import { getEntry } from 'astro:content';
-import { heroData } from '../data/home';
+import { getSiteNavItems } from '../utils/getSiteNavItems';
 
-const blogPageEntry = await getEntry('blog-page', 'blog-page');
+const [blogPageEntry, navItems] = await Promise.all([
+	getEntry('blog-page', 'blog-page'),
+	getSiteNavItems(),
+]);
 
 if (!blogPageEntry) {
 	throw new Error('Missing blog page content entry at src/content/blog-page/blog-page.md');
@@ -23,7 +26,7 @@ const blogPageContent = blogPageEntry.data;
 ---
 
 <Layout title={blogPageContent.seo.title} description={blogPageContent.seo.description}>
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main class="bg-[#f1f5f9] text-[#111827]">
 		<BlogHeroSection content={blogPageContent.hero} />
 		<BlogFeaturedInsightsSection content={blogPageContent.featuredInsights} />

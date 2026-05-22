@@ -10,16 +10,18 @@ import AboutSection from '../../components/course-detail/AboutSection.astro';
 import SummerResultsSection from '../../components/summer/SummerResultsSection.astro';
 import FinalCtaSection from '../../components/course-detail/FinalCtaSection.astro';
 import { getEntry } from 'astro:content';
-import { programsSectionData } from '../../data/programsSection';
-
 export async function getStaticPaths() {
-	const courseTemplateEntry = await getEntry('course-detail', 'course-detail');
-	if (!courseTemplateEntry) return [];
+	const [courseTemplateEntry, homeEntry] = await Promise.all([
+		getEntry('course-detail', 'course-detail'),
+		getEntry('home', 'home'),
+	]);
+	if (!courseTemplateEntry || !homeEntry) return [];
 
 	const baseContent = courseTemplateEntry.data;
+	const programCards = homeEntry.data.programs?.cards ?? [];
 	const uniqueCourseSlugs = new Map<string, string>();
 
-	for (const card of programsSectionData.cards) {
+	for (const card of programCards) {
 		const slug = card.title
 			.toLowerCase()
 			.trim()

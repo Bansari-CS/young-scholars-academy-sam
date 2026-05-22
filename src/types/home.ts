@@ -43,29 +43,3 @@ export interface HeroDashboardData {
 	nextSession: NextSessionData;
 }
 
-export interface HeroData {
-	trustBadges: string[];
-	titleLineOne: string;
-	titleHighlight: string;
-	description: string;
-	primaryCta: {
-		label: string;
-		href: string;
-	};
-	secondaryCta: {
-		label: string;
-		href: string;
-	};
-	ratingText: string;
-	navItems: NavItem[];
-	dashboard: HeroDashboardData;
-}
-
-export interface LearnerSectionData {
-	organizationsTitle: string;
-	organizations: PartnerOrg[];
-	badgeText: string;
-	title: string;
-	description: string;
-	cards: LearnerCard[];
-}

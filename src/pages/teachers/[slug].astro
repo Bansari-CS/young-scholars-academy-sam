@@ -12,8 +12,8 @@ import MentorProfileClassesSection from '../../components/mentor-profile/MentorP
 import MentorProfileStudentExperienceSection from '../../components/mentor-profile/MentorProfileStudentExperienceSection.astro';
 import MentorProfileTestimonialsSection from '../../components/mentor-profile/MentorProfileTestimonialsSection.astro';
 import MentorProfileFindClassCtaSection from '../../components/mentor-profile/MentorProfileFindClassCtaSection.astro';
-import { heroData } from '../../data/home';
 import { getCollection, getEntry } from 'astro:content';
+import { getSiteNavItems } from '../../utils/getSiteNavItems';
 
 export async function getStaticPaths() {
 	const teachersEntry = await getEntry('teachers', 'teachers');
@@ -43,10 +43,11 @@ export async function getStaticPaths() {
 }
 
 const { mentorContent, mentorName } = Astro.props;
+const navItems = await getSiteNavItems();
 ---
 
 <Layout title={`${mentorName} | Young Scholars Academy`} description={mentorContent.seo.description}>
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main>
 		<MentorProfileHeroSection content={mentorContent.hero} shareTitle={`${mentorName} | Young Scholars Academy`} />
 		<MentorProfileAboutSection content={mentorContent.about} />

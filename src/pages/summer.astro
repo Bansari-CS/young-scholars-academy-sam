@@ -5,10 +5,10 @@ import Footer from '../components/common/Footer.astro';
 import SummerHeroSection from '../components/summer/SummerHeroSection.astro';
 import SummerStruggleSection from '../components/summer/SummerStruggleSection.astro';
 import SummerFullSections from '../components/summer/SummerFullSections.astro';
-import { heroData } from '../data/home';
 import { getEntry } from 'astro:content';
+import { getSiteNavItems } from '../utils/getSiteNavItems';
 
-const summerEntry = await getEntry('summer', 'summer');
+const [summerEntry, navItems] = await Promise.all([getEntry('summer', 'summer'), getSiteNavItems()]);
 
 if (!summerEntry) {
 	throw new Error('Missing summer page content entry at src/content/summer/summer.md');
@@ -21,7 +21,7 @@ const summerContent = summerEntry.data;
 	title={summerContent.seo.title}
 	description={summerContent.seo.description}
 >
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main>
 		<SummerHeroSection content={summerContent.hero} />
 		<SummerStruggleSection content={summerContent.struggle} />
