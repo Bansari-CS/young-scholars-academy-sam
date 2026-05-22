@@ -1,6 +1,4 @@
 ---
-import '../../styles/components/top-announcement-bar.css';
-
 interface Props {
 	message: string;
 	ctaLabel: string;
@@ -10,24 +8,37 @@ interface Props {
 const { message, ctaLabel, ctaHref } = Astro.props;
 ---
 
-<div class="announcement-bar" role="region" aria-label="Site announcement">
-	<div class="announcement-bar__inner">
-		<p class="announcement-bar__message">
+<div
+	class="sticky top-0 z-[60] w-full bg-ysa-secondary text-white"
+	role="region"
+	aria-label="Site announcement"
+>
+	<div
+		class="mx-auto box-border flex w-full max-w-[var(--ysa-max)] flex-col items-center justify-center gap-4 px-4 py-3 sm:flex-row"
+	>
+		<p
+			class="m-0 max-w-[min(100%,22.875rem)] text-center font-[Inter,ui-sans-serif,system-ui,sans-serif] text-sm leading-5 font-medium text-white sm:max-w-none sm:text-left"
+		>
 			{message}
 		</p>
-		<a class="announcement-bar__cta" href={ctaHref}>
-			<span class="announcement-bar__cta-label">{ctaLabel}</span>
-			<span class="announcement-bar__cta-icon" aria-hidden="true">
+		<a
+			class="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-white px-4 py-1 font-display text-xs leading-4 font-bold text-ysa-secondary no-underline transition-opacity duration-150 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+			href={ctaHref}
+		>
+			<span>{ctaLabel}</span>
+			<span class="inline-flex shrink-0 items-center justify-center text-ysa-secondary" aria-hidden="true">
 				<svg
-				width="12"
-				height="14"
-				viewBox="0 0 16 18"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg">
+					width="12"
+					height="14"
+					viewBox="0 0 16 18"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					class="block"
+				>
 					<path
-					d="M15.4195 9.79424C15.859 9.35478 15.859 8.64111 15.4195 8.20166L9.79453 2.57666C9.35508 2.13721 8.64141 2.13721 8.20195 2.57666C7.7625 3.01611 7.7625 3.72979 8.20195 4.16924L11.9109 7.87471H1.125C0.502734 7.87471 0 8.37744 0 8.99971C0 9.62197 0.502734 10.1247 1.125 10.1247H11.9074L8.20547 13.8302C7.76602 14.2696 7.76602 14.9833 8.20547 15.4228C8.64492 15.8622 9.35859 15.8622 9.79805 15.4228L15.423 9.79775L15.4195 9.79424Z"
-					fill="currentColor">
-					</path>
+						d="M15.4195 9.79424C15.859 9.35478 15.859 8.64111 15.4195 8.20166L9.79453 2.57666C9.35508 2.13721 8.64141 2.13721 8.20195 2.57666C7.7625 3.01611 7.7625 3.72979 8.20195 4.16924L11.9109 7.87471H1.125C0.502734 7.87471 0 8.37744 0 8.99971C0 9.62197 0.502734 10.1247 1.125 10.1247H11.9074L8.20547 13.8302C7.76602 14.2696 7.76602 14.9833 8.20547 15.4228C8.64492 15.8622 9.35859 15.8622 9.79805 15.4228L15.423 9.79775L15.4195 9.79424Z"
+						fill="currentColor"
+					/>
 				</svg>
 			</span>
 		</a>

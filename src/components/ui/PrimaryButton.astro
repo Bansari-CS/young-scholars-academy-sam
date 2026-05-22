@@ -1,6 +1,4 @@
 ---
-import '../../styles/components/ui-button.css';
-
 interface Props {
 	href: string;
 	label: string;
@@ -18,17 +16,35 @@ const {
 	showTrailingArrow = false,
 	class: className = '',
 } = Astro.props;
+
+const variantClass =
+	variant === 'sm'
+		? 'min-h-11 px-6 py-3 text-sm leading-5'
+		: 'min-h-14 px-8 py-4 text-base leading-6';
 ---
 
-<a class:list={['ui-primary-btn', `ui-primary-btn--${variant}`, className].filter(Boolean)} href={href}>
-	<span class="ui-primary-btn__shadow" aria-hidden="true"></span>
-	<span class="ui-primary-btn__label">{label}</span>
+<a
+	class:list={[
+		'relative inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border-0 bg-ysa-figma-primary font-sans font-medium text-white no-underline shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] transition-[filter] duration-150 hover:brightness-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ysa-figma-primary',
+		variantClass,
+		className,
+	]}
+	href={href}
+>
+	<span class="relative z-[1]">{label}</span>
 	{
 		trailingIconSrc ? (
-			<img class="ui-primary-btn__icon" src={trailingIconSrc} alt="" width="13" height="14" loading="lazy" />
+			<img
+				class="relative z-[1] block h-3.5 w-[12.25px] shrink-0"
+				src={trailingIconSrc}
+				alt=""
+				width="13"
+				height="14"
+				loading="lazy"
+			/>
 		) : showTrailingArrow ? (
 			<svg
-				class="ui-primary-btn__icon"
+				class="relative z-[1] block h-3.5 w-[12.25px] shrink-0"
 				width="13"
 				height="14"
 				viewBox="0 0 13 14"

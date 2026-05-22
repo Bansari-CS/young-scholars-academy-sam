@@ -1,64 +1,73 @@
 @import "tailwindcss";
 
-* {
-	box-sizing: border-box;
+/* Design tokens → Tailwind utilities (font-display, text-ysa-*, bg-ysa-*, animate-*) */
+@theme {
+	--font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+	--font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+	--color-ysa-primary: #0a9dfb;
+	--color-ysa-secondary: #7c3aed;
+	--color-ysa-canvas: #e8ecf3;
+	--color-ysa-brand: #1a1647;
+	--color-ysa-figma-primary: #0a9dfb;
+	--color-ysa-text: #0f172a;
+	--color-ysa-text-muted: #64748b;
+
+	--animate-impact-scroll-up: impact-scroll-up 26s linear infinite;
+	--animate-impact-scroll-down: impact-scroll-down 26s linear infinite;
+	--animate-world-stat-pop: world-stat-pop 0.55s ease-out;
 }
 
+/*
+ * Legacy CSS variables — kept for var(--ysa-*) usage across components.
+ */
 :root {
 	--ysa-max: 90rem;
-	--ysa-primary: #0A9DFB;
-	--ysa-secondary: #7C3AED;
-	/* Figma-style page canvas (cool gray behind sections) */
+	--ysa-primary: #0a9dfb;
+	--ysa-secondary: #7c3aed;
 	--ysa-canvas: #e8ecf3;
-	--ysa-page: #f8fafc;
 	--ysa-surface: #ffffff;
-	/* Hero band: pure white */
-	--ysa-hero-bg: linear-gradient(150.46deg, #f8fafc 0%, rgba(240, 244, 255, 0.3) 50%, #f8fafc 100%);
+	--ysa-learner-bg: #ffffff;
 	--ysa-figma-primary: var(--ysa-primary);
 	--ysa-figma-brand: #1a1647;
-	--ysa-font-display: 'Plus Jakarta Sans';
-	--ysa-font-body: 'Plus Jakarta Sans';
-	/* Learner / trust band: soft cool fill (Figma home “We understand” strip) */
-	--ysa-learner-bg: #FFF;
-	--ysa-surface-muted: #f1f5f9;
-	--ysa-border: #e2e8f0;
-	--ysa-border-subtle: #eef2f7;
+	--ysa-font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+	--ysa-font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 	--ysa-text: #0f172a;
 	--ysa-text-muted: #64748b;
-	--ysa-text-soft: #94a3b8;
-	--ysa-accent: var(--ysa-primary);
-	--ysa-accent-deep: #0284c7;
-	--ysa-violet: var(--ysa-secondary);
-	--ysa-radius-lg: 1rem;
-	--ysa-radius-xl: 1.25rem;
-	--ysa-shadow-card: 0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 16px rgba(15, 23, 42, 0.06);
-	/* Overridden when top announcement bar styles load; keeps header `top` valid if bar is removed */
-	--ysa-announcement-sticky-offset: 0px;
+	--ysa-surface-muted: #f1f5f9;
+	--ysa-border: #e2e8f0;
+	/* Sticky header top offset ≈ announcement bar height (stacked mobile, single row sm+) */
+	--ysa-announcement-sticky-offset: 6.25rem;
 }
 
-html,
-body {
-	margin: 0;
-	width: 100%;
-	min-height: 100%;
-	font-family: var(--ysa-font-body);
-	background: var(--ysa-canvas);
-	color: var(--ysa-text);
-	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-	-webkit-font-smoothing: antialiased;
+@media (min-width: 640px) {
+	:root {
+		--ysa-announcement-sticky-offset: 2.75rem;
+	}
 }
 
-/* Use Plus Jakarta Sans as the global type family. */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: var(--ysa-font-display);
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	body {
+		@apply m-0 min-h-full w-full bg-ysa-canvas font-sans text-ysa-text antialiased;
+		font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-display;
+	}
 }
 
-/* Home Impact marquee + World stat pop (used via Tailwind arbitrary animate-[]) */
 @keyframes impact-scroll-up {
 	0% {
 		transform: translateY(0);
