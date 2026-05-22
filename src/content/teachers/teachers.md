@@ -40,7 +40,7 @@ mentors:
     writing: Writing
   viewProfileLabel: View Profile
   items:
-    - name: Dr. Emily Ross
+    - name: Ms. Megan Hughes
       rating: "4.9"
       credentials: PhD Chemistry, MIT
       bio:
@@ -54,8 +54,8 @@ mentors:
       facts:
         - 5+ years experience
         - Loved by 200+ students
-      imageUrl: /assets/teachers/mentor-emily-1.jpg
-    - name: Alex Martinez
+      imageUrl: /assets/educators/1-Megan-Hughes.png
+    - name: Mr. Salch
       rating: "5.0"
       credentials: MS Computer Science, Stanford
       bio:
@@ -69,8 +69,8 @@ mentors:
       facts:
         - 8+ years experience
         - Top-rated mentor
-      imageUrl: /assets/teachers/mentor-alex-1.jpg
-    - name: Dr. Sarah Chen
+      imageUrl: /assets/educators/2-Mr-Salch.png
+    - name: Ms. Jackson
       rating: "4.9"
       credentials: PhD Mathematics, Princeton
       bio:
@@ -85,8 +85,8 @@ mentors:
         - 10+ years experience
         - Loved by 500+ students
       featured: true
-      imageUrl: /assets/teachers/mentor-sarah-1.jpg
-    - name: Alex Martinez
+      imageUrl: /assets/educators/3-Ms-Jackson.png
+    - name: Amy Bechtol
       rating: "5.0"
       credentials: MS Computer Science, Stanford
       bio:
@@ -100,8 +100,8 @@ mentors:
       facts:
         - 8+ years experience
         - Top-rated mentor
-      imageUrl: /assets/teachers/mentor-alex-2.jpg
-    - name: Dr. Sarah Chen
+      imageUrl: /assets/educators/4-Amy-Bechtol.png
+    - name: Miss Anna
       rating: "4.9"
       credentials: PhD Mathematics, Princeton
       bio:
@@ -116,8 +116,8 @@ mentors:
         - 10+ years experience
         - Loved by 500+ students
       featured: true
-      imageUrl: /assets/teachers/mentor-sarah-2.jpg
-    - name: Marcus Johnson
+      imageUrl: /assets/educators/5-Miss-Anna.png
+    - name: Nelson Dean
       rating: "4.8"
       credentials: MS Robotics, Carnegie Mellon
       bio:
@@ -131,7 +131,7 @@ mentors:
       facts:
         - 6+ years experience
         - Loved by 150+ students
-      imageUrl: /assets/teachers/mentor-marcus.jpg
+      imageUrl: /assets/educators/6-Nelson-Dean.png
 adminTeam:
   title: Meet Your Admin Team
   description: The visionary leaders and dedicated coordinators working behind the scenes to ensure every child has an exceptional learning experience.
