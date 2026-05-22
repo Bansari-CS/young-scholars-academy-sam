@@ -149,94 +149,90 @@ programs:
       options:
         - value: ''
           label: Any instructor
-        - value: ross
-          label: Dr. Emily Ross
-        - value: martinez
-          label: Alex Martinez
-        - value: chen
-          label: Dr. Sarah Chen
-        - value: johnson
-          label: Marcus Johnson
+        - value: mark
+          label: Mr. Mark
+        - value: katie
+          label: Ms. Katie
+        - value: malikai
+          label: Mr. Malikai
         - value: thompson
           label: Lisa Thompson
-        - value: lee
-          label: Dr. James Lee
     activeLabel: 'ACTIVE:'
     removeFilterAriaPrefix: Remove
     clearLabel: Clear all filters
   emptyFilterMessage: No programs match these filters. Try another age or instructor.
   cards:
     - href: '#'
-      title: Young Scientists Lab
+      title: "Science Explorers: Chemistry Lab"
       description: Hands-on experiments exploring physics, chemistry,and biology fundamentals through play
-      ageLabel: Ages 6-8
+      ageLabel: Ages 8-11
       category:
         id: science
         label: Science
-      durationWeeks: 8
+      durationWeeks: 4
       teacher:
-        name: Dr. Emily Ross
-      teacherPhotoKey: ross
+        name: Mr. Mark
+      teacherPhotoKey: mark
       coverImageKey: science
     - href: '#'
-      title: Creative Coding Adventures
+      title: "Songwriting: Write Your Own Music"
       description: Build games and animations with Scratch while learning computational thinking
-      ageLabel: Ages 9-11
+      ageLabel: Ages 8-11
       category:
         id: coding
         label: Coding
-      durationWeeks: 10
+      durationWeeks: 11
       teacher:
-        name: Alex Martinez
-      teacherPhotoKey: martinez
+        name: Ms. Katie
+      teacherPhotoKey: katie
       coverImageKey: coding
     - href: '#'
-      title: Math Explorers
+      title: "Math Explorers: Probability & Game Theory"
       description: Advanced problem-solving and pattern recognition for budding mathematicians
-      ageLabel: Ages 12-14
+      ageLabel: Ages 8-12
       category:
         id: math
         label: Math
-      durationWeeks: 12
+      durationWeeks: 4
       teacher:
-        name: Dr. Sarah Chen
-      teacherPhotoKey: chen
+        name: Mr. Mark
+      teacherPhotoKey: mark
       coverImageKey: math
     - href: '#'
-      title: Little Engineers
+      title: "Astroneers: Space Exploration & Engineering"
       description: Design and build simple robots while learning engineering principles
-      ageLabel: Ages 6-8
+      ageLabel: Ages 10-14
       category:
         id: robotics
         label: Robotics
-      durationWeeks: 8
+      durationWeeks: 3
       teacher:
-        name: Marcus Johnson
-      teacherPhotoKey: johnson
+        name: Mr. Malikai
+      teacherPhotoKey: malikai
       coverImageKey: robotics
     - href: '#'
-      title: Storytelling Masters
+      title: Castle History - Nelson
       description: Develop creative writing skills through narrative building and character design
-      ageLabel: Ages 15+
+      ageLabel: Ages 12-18
       category:
         id: writing
         label: Writing
-      durationWeeks: 10
+      durationWeeks: 3
       teacher:
         name: Lisa Thompson
       teacherPhotoKey: thompson
       coverImageKey: writing
     - href: '#'
-      title: Logic & Puzzles
+      title: "Chess: Advanced"
       description: Sharpen reasoning skills with strategic games and brain teasers
-      ageLabel: Ages 9-11
+      ageLabel: Ages 8-11
       category:
         id: critical-thinking
         label: Critical Thinking
-      durationWeeks: 6
+      durationWeeks: 3
       teacher:
-        name: Dr. James Lee
-      teacherPhotoKey: lee
+        name: Mr. Malikai
+      teacherPhotoKey: malikai
       coverImageKey: critical-thinking
   viewAllCta:
     label: View All Programs

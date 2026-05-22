@@ -21,12 +21,10 @@ const categoryPillClasses: Record<ProgramCategoryId, string> = {
 };
 
 const teacherPhotoByKey: Record<ProgramListingCard['teacherPhotoKey'], string> = {
-	ross: '/assets/images/Teacher (1).png',
-	martinez: '/assets/images/Teacher (2).png',
-	chen: '/assets/images/Teacher (3).png',
-	johnson: '/assets/images/Teacher (4).png',
+	mark: '/assets/educators/10-Mark-Tidman.png',
+	katie: '/assets/educators/11-Katie-Barnwell.png',
+	malikai: '/assets/educators/13-Malikai-Bass.png',
 	thompson: '/assets/images/Teacher (5).png',
-	lee: '/assets/images/Teacher (6).png',
 };
 
 const ageButtonClasses =
@@ -377,12 +375,28 @@ const toSlug = (value: string) =>
 				});
 			}
 
+			function parseAgeRange(label) {
+				if (!label) return null;
+				var m = String(label).match(/(\d+)\s*[-–]\s*(\d+)/);
+				if (!m) return null;
+				return { min: parseInt(m[1], 10), max: parseInt(m[2], 10) };
+			}
+
+			function ageFilterMatches(cardAge, filterAge) {
+				if (!filterAge) return true;
+				if (cardAge === filterAge) return true;
+				var cardRange = parseAgeRange(cardAge);
+				var filterRange = parseAgeRange(filterAge);
+				if (!cardRange || !filterRange) return cardAge === filterAge;
+				return cardRange.min <= filterRange.max && filterRange.min <= cardRange.max;
+			}
+
 			function applyFilters() {
 				var campVal = campSelect.value;
 				var teacherVal = teacherSelect.value;
 				var visible = 0;
 				cards.forEach(function (card) {
-					var ageOk = !selectedAge || card.getAttribute('data-age') === selectedAge;
+					var ageOk = ageFilterMatches(card.getAttribute('data-age'), selectedAge);
 					var teacherOk = !teacherVal || card.getAttribute('data-teacher') === teacherVal;
 					var delivery = card.getAttribute('data-delivery') || 'virtual';
 					var campOk = !campVal || delivery === campVal;
