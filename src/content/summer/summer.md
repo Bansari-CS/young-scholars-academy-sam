@@ -99,9 +99,9 @@ camps:
   cards:
     - tag: STEM & TECH
       tagClass: tag-stem
-      name: Coding & Future AI
+      name: Poker, Probability, Solitaire, & Statistics In Balatro
       description: Master Python basics and explore neural networks in a hands-on environment.
-      ages: Ages 10-15
+      ages: Ages 12-18
       level: Elite Level
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$499"
@@ -109,7 +109,7 @@ camps:
       dateSlot: june-early
     - tag: HUMANITIES
       tagClass: tag-humanities
-      name: National Debate Prep
+      name: "Community Creation: Building & Being Connected"
       description: Refine your public speaking and logical reasoning for competitive circuits.
       ages: Ages 12-18
       level: Advanced
@@ -119,9 +119,9 @@ camps:
       dateSlot: june-mid
     - tag: CREATIVE ARTS
       tagClass: tag-creative
-      name: D&D Campaign Masters
+      name: "Rubik's Cubing: Learn to Solve for Beginners"
       description: World-building, character design, and narrative flow for aspiring DMs.
-      ages: Ages 8-18
+      ages: Ages 8-14
       level: Weekly
       levelIcon: /images/summer/camps/icon-weekly.svg
       price: "$399"
@@ -129,9 +129,9 @@ camps:
       dateSlot: june-early
     - tag: PLAY & COMMUNITY
       tagClass: tag-play
-      name: Minecraft Architecture
+      name: Advocacy & Activism
       description: Refine your public speaking and logical reasoning for competitive circuits.
-      ages: Ages 8-18
+      ages: Ages 8-11
       level: Weekly
       levelIcon: /images/summer/camps/icon-weekly.svg
       price: "$399"
@@ -139,7 +139,7 @@ camps:
       dateSlot: july-a
     - tag: HUMANITIES
       tagClass: tag-humanities
-      name: National Debate Prep
+      name: "Community Creation: Building & Being Connected"
       description: Refine your public speaking and logical reasoning for competitive circuits.
       ages: Ages 12-18
       level: Advanced
@@ -149,9 +149,9 @@ camps:
       dateSlot: july-a
     - tag: STEM & TECH
       tagClass: tag-stem
-      name: Coding & Future AI
+      name: Poker, Probability, Solitaire, & Statistics In Balatro
       description: Master Python basics and explore neural networks in a hands-on environment.
-      ages: Ages 10-15
+      ages: Ages 12-18
       level: Elite Level
       levelIcon: /images/summer/camps/icon-level.svg
       price: "$499"
