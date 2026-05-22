@@ -24,7 +24,10 @@ export async function getStaticPaths() {
 		return [];
 	}
 
-	const uniqueMentors = new Map<string, { name: string }>();
+	const uniqueMentors = new Map<
+		string,
+		{ name: string; imageUrl: string; credentials: string }
+	>();
 	for (const mentor of teachersEntry.data.mentors.items) {
 		const slug = mentor.name
 			.toLowerCase()
@@ -32,25 +35,40 @@ export async function getStaticPaths() {
 			.replace(/[^a-z0-9]+/g, '-')
 			.replace(/^-+|-+$/g, '');
 		if (!uniqueMentors.has(slug)) {
-			uniqueMentors.set(slug, { name: mentor.name });
+			uniqueMentors.set(slug, {
+				name: mentor.name,
+				imageUrl: mentor.imageUrl,
+				credentials: mentor.credentials,
+			});
 		}
 	}
 
 	return Array.from(uniqueMentors.entries()).map(([slug, mentor]) => ({
 		params: { slug },
-		props: { mentorContent: mentorTemplateContent, mentorName: mentor.name },
+		props: {
+			mentorContent: mentorTemplateContent,
+			mentorName: mentor.name,
+			mentorImageUrl: mentor.imageUrl,
+			mentorCredentials: mentor.credentials,
+		},
 	}));
 }
 
-const { mentorContent, mentorName } = Astro.props;
+const { mentorContent, mentorName, mentorImageUrl, mentorCredentials } = Astro.props;
 const navItems = await getSiteNavItems();
 ---
 
 <Layout title={`${mentorName} | Young Scholars Academy`} description={mentorContent.seo.description}>
 	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main>
-		<MentorProfileHeroSection content={mentorContent.hero} shareTitle={`${mentorName} | Young Scholars Academy`} />
-		<MentorProfileAboutSection content={mentorContent.about} />
+		<MentorProfileHeroSection
+			content={mentorContent.hero}
+			shareTitle={`${mentorName} | Young Scholars Academy`}
+			mentorName={mentorName}
+			mentorImageUrl={mentorImageUrl}
+			mentorCredentials={mentorCredentials}
+		/>
+		<MentorProfileAboutSection content={mentorContent.about} mentorName={mentorName} />
 		<MentorProfileBeyondClassroomSection content={mentorContent.beyondClassroom} />
 		<MentorProfileHowITeachSection content={mentorContent.howITeach} />
 		<MentorProfileInsideClassroomSection content={mentorContent.insideClassroom} />
