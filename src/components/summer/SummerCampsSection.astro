@@ -1,4 +1,6 @@
 ---
+import { courseHref } from '../../utils/courseRoutes';
+
 interface Props {
 	content: any;
 }
@@ -12,15 +14,6 @@ const tagClassMap: Record<string, string> = {
 	'tag-play': 'bg-[#fffad4] text-[#f2dd35]',
 };
 
-function parseAges(ages: string | undefined): { min: number; max: number } | null {
-	if (!ages) return null;
-	const m = ages.match(/(\d+)\s*[\-–−]\s*(\d+)/u);
-	if (!m) return null;
-	const min = parseInt(m[1], 10);
-	const max = parseInt(m[2], 10);
-	return Number.isFinite(min) && Number.isFinite(max) ? { min, max } : null;
-}
-
 const dateSlotRanges = (content.dateSlotRanges ?? {}) as Record<string, { start: string; end: string }>;
 
 const cards = (content.cards ?? []).map((camp: any) => {
@@ -28,7 +21,6 @@ const cards = (content.cards ?? []).map((camp: any) => {
 	const range = slot && dateSlotRanges[slot] ? dateSlotRanges[slot] : null;
 	return {
 		...camp,
-		ageRange: parseAges(camp.ages),
 		dateStart: range?.start ?? '',
 		dateEnd: range?.end ?? '',
 	};
@@ -49,11 +41,6 @@ const ageOptions = [
 ];
 
 const searchBlob = (camp: any) => `${camp.name} ${camp.description} ${camp.tag}`.toLowerCase();
-
-function campAgeRangeAttr(ageRange: { min: number; max: number } | null | undefined): string {
-	if (!ageRange || !Number.isFinite(ageRange.min) || !Number.isFinite(ageRange.max)) return '';
-	return `${ageRange.min}-${ageRange.max}`;
-}
 
 const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 
@@ -210,20 +197,29 @@ const selectBase =
 			data-camp-grid
 		>
 			{
-				cards.map((camp) => (
-					<article
-						class="rounded-2xl border border-[#e2e8f0] bg-white p-2"
+				cards.map((camp) => {
+					const campHref = courseHref(camp.name);
+					return (
+					<a
+						class="block rounded-2xl border border-[#e2e8f0] bg-white p-2 text-inherit no-underline transition-[box-shadow,border-color] duration-200 ease-out hover:border-[#cbd5e1] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)]"
+						href={campHref}
 						data-camp-card
 						data-category={camp.tag}
 						data-level={camp.level}
 						data-date-slot={camp.dateSlot ?? ''}
 						data-date-start={camp.dateStart ?? ''}
 						data-date-end={camp.dateEnd ?? ''}
-						data-age-range={campAgeRangeAttr(camp.ageRange)}
+						data-age={camp.ages ?? ''}
 						data-search={searchBlob(camp)}
 					>
-						<div class="h-[200px] overflow-hidden rounded-xl">
-							<img class="block h-full w-full object-cover" src={camp.image} alt={camp.name} />
+						<div class="h-[200px] overflow-hidden rounded-xl bg-[#f1f5f9]">
+							<img
+								class="block h-full w-full object-cover object-top"
+								src={camp.image}
+								alt={camp.name}
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 						<div class="p-4 pt-8">
 							<span
@@ -248,8 +244,9 @@ const selectBase =
 							</div>
 							<strong class="ml-auto text-lg leading-7 text-[#0a9dfb]">{camp.price}</strong>
 						</div>
-					</article>
-				))
+					</a>
+					);
+				})
 			}
 		</div>
 
@@ -402,10 +399,6 @@ const selectBase =
 			}
 		}
 
-		function agesOverlap(cMin: number, cMax: number, fMin: number, fMax: number) {
-			return cMin <= fMax && cMax >= fMin;
-		}
-
 		function initSummerCamps() {
 			const root = document.querySelector('[data-summer-camps-root]');
 			if (!root) return;
@@ -428,15 +421,31 @@ const selectBase =
 
 			let guidedCategories: string[] | null = null;
 
-			function parseAgeFilter(val: string): { min: number; max: number } | null {
-				const v = (val || '').trim().toLowerCase();
-				if (!v || v === 'all') return null;
-				const m = /^(\d+)\s*-\s*(\d+)$/.exec(v);
+			/** Same range-overlap rules as home `ProgramsSection` age filters. */
+			function parseAgeRange(label: string): { min: number; max: number } | null {
+				if (!label) return null;
+				const m = String(label).match(/(\d+)\s*[-–]\s*(\d+)/);
 				if (!m) return null;
 				const min = parseInt(m[1], 10);
 				const max = parseInt(m[2], 10);
 				if (!Number.isFinite(min) || !Number.isFinite(max) || min > max) return null;
 				return { min, max };
+			}
+
+			function ageFilterMatches(cardAge: string, filterAge: string): boolean {
+				if (!filterAge) return true;
+				if (cardAge === filterAge) return true;
+				const cardRange = parseAgeRange(cardAge);
+				const filterRange = parseAgeRange(filterAge);
+				if (!cardRange || !filterRange) return cardAge === filterAge;
+				return cardRange.min <= filterRange.max && filterRange.min <= cardRange.max;
+			}
+
+			function selectedAgeFilterLabel(): string {
+				const val = (ageEl?.value || '').trim();
+				if (!val || val === 'all') return '';
+				const opt = ageEl?.selectedOptions[0];
+				return opt?.textContent?.trim() || `Ages ${val}`;
 			}
 
 			function filterSentinel(raw: string | undefined): string {
@@ -452,23 +461,12 @@ const selectBase =
 
 			function applyFilters() {
 				const q = (searchEl?.value || '').trim().toLowerCase();
-				const ageFilter = parseAgeFilter(ageEl?.value || '');
+				const filterAgeLabel = selectedAgeFilterLabel();
 				const catVal = filterSentinel(categoryEl?.value);
 				const levelVal = filterSentinel(levelEl?.value);
 				const datePick = (dateEl?.value || '').trim();
 
 				let visible = 0;
-
-				function readCampAgeRange(card: HTMLElement): { min: number; max: number } | null {
-					const raw = card.getAttribute('data-age-range')?.trim() || '';
-					if (!raw) return null;
-					const m = /^(\d+)-(\d+)$/.exec(raw);
-					if (!m) return null;
-					const min = parseInt(m[1], 10);
-					const max = parseInt(m[2], 10);
-					if (!Number.isFinite(min) || !Number.isFinite(max) || min > max) return null;
-					return { min, max };
-				}
 
 				const catValKey = catVal.trim().toLowerCase();
 				const levelValKey = levelVal.trim().toLowerCase();
@@ -479,7 +477,7 @@ const selectBase =
 					const level = (card.getAttribute('data-level') || '').trim();
 					const dateStart = card.getAttribute('data-date-start') || '';
 					const dateEnd = card.getAttribute('data-date-end') || '';
-					const campAge = readCampAgeRange(card);
+					const cardAge = (card.getAttribute('data-age') || '').trim();
 
 					let ok = true;
 
@@ -498,13 +496,7 @@ const selectBase =
 						if (!dateInRange(datePick, dateStart, dateEnd)) ok = false;
 					}
 
-					if (ok && ageFilter) {
-						if (campAge) {
-							if (!agesOverlap(campAge.min, campAge.max, ageFilter.min, ageFilter.max)) ok = false;
-						} else {
-							ok = false;
-						}
-					}
+					if (ok && filterAgeLabel && !ageFilterMatches(cardAge, filterAgeLabel)) ok = false;
 
 					card.classList.toggle('hidden', !ok);
 					if (ok) visible++;

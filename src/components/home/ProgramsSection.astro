@@ -1,5 +1,6 @@
 ---
 import type { ProgramCategoryId, ProgramListingCard } from '../../types/programsSection';
+import { courseHref } from '../../utils/courseRoutes';
 
 /** Program card cover images in `public/assets/images/home-programs/` */
 const coverByKey: Record<ProgramCategoryId, string> = {
@@ -58,12 +59,6 @@ interface Props {
 const { content: d } = Astro.props;
 const { filters } = d;
 const initialAge = filters.ageRange.options.find((o) => o.isActive)?.label ?? '';
-const toSlug = (value: string) =>
-	value
-		.toLowerCase()
-		.trim()
-		.replace(/[^a-z0-9]+/g, '-')
-		.replace(/^-+|-+$/g, '');
 ---
 
 <section
@@ -211,7 +206,7 @@ const toSlug = (value: string) =>
 					d.cards.map((card) => {
 						const cover = coverByKey[card.coverImageKey];
 						const teacherFace = teacherPhotoByKey[card.teacherPhotoKey];
-						const cardHref = `/courses/${toSlug(card.title)}`;
+						const cardHref = courseHref(card.title);
 						return (
 							<a
 								class="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white text-inherit no-underline shadow-[0_1px_8px_-1px_rgba(0,0,0,0.06)] transition-[box-shadow,transform] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-[0_8px_32px_rgba(15,23,42,0.1)]"
