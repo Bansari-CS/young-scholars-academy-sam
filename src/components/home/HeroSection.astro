@@ -1,5 +1,4 @@
 ---
-import { figmaHero } from '../../data/figmaAssets';
 import type { HeroDashboardData } from '../../types/home';
 import DashboardPreview from './DashboardPreview.astro';
 import PrimaryButton from '../ui/PrimaryButton.astro';
@@ -14,6 +13,7 @@ interface Props {
 		secondaryCta: { label: string; href: string };
 		ratingText: string;
 		ratingAriaLabel?: string;
+		socialProofAvatars: string[];
 		dashboard: HeroDashboardData;
 	};
 }
@@ -99,7 +99,7 @@ const { content } = Astro.props;
 					<div class="flex items-center">
 						<img
 							class="-mr-3 block h-11 w-11 shrink-0 rounded-full border-2 border-white object-cover shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
-							src={figmaHero.avatar2}
+							src={content.socialProofAvatars[0]}
 							alt=""
 							width="44"
 							height="44"
@@ -108,7 +108,7 @@ const { content } = Astro.props;
 
 						<img
 							class="-mr-3 block h-11 w-11 shrink-0 rounded-full border-2 border-white object-cover shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
-							src={figmaHero.avatar1}
+							src={content.socialProofAvatars[1]}
 							alt=""
 							width="44"
 							height="44"
@@ -117,7 +117,7 @@ const { content } = Astro.props;
 
 						<img
 							class="-mr-3 block h-11 w-11 shrink-0 rounded-full border-2 border-white object-cover shadow-[0_1px_2px_rgba(0,0,0,0.05)]"
-							src={figmaHero.avatar3}
+							src={content.socialProofAvatars[2]}
 							alt=""
 							width="44"
 							height="44"

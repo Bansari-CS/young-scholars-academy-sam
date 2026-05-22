@@ -12,10 +12,13 @@ import MentorProfileClassesSection from '../components/mentor-profile/MentorProf
 import MentorProfileStudentExperienceSection from '../components/mentor-profile/MentorProfileStudentExperienceSection.astro';
 import MentorProfileTestimonialsSection from '../components/mentor-profile/MentorProfileTestimonialsSection.astro';
 import MentorProfileFindClassCtaSection from '../components/mentor-profile/MentorProfileFindClassCtaSection.astro';
-import { heroData } from '../data/home';
 import { getEntry } from 'astro:content';
+import { getSiteNavItems } from '../utils/getSiteNavItems';
 
-const mentorProfileEntry = await getEntry('mentor-profile', 'mentor-profile');
+const [mentorProfileEntry, navItems] = await Promise.all([
+	getEntry('mentor-profile', 'mentor-profile'),
+	getSiteNavItems(),
+]);
 
 if (!mentorProfileEntry) {
 	throw new Error('Missing mentor profile content entry at src/content/mentor-profile/mentor-profile.md');
@@ -28,7 +31,7 @@ const mentorProfileContent = mentorProfileEntry.data;
 	title={mentorProfileContent.seo.title}
 	description={mentorProfileContent.seo.description}
 >
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main>
 		<MentorProfileHeroSection
 			content={mentorProfileContent.hero}

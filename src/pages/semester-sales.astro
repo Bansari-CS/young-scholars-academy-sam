@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
-import { heroData } from '../data/home';
+import { getSiteNavItems } from '../utils/getSiteNavItems';
 import SemesterSalesHeroSection from '../components/semester-sales/SemesterSalesHeroSection.astro';
 import SemesterSalesChallengeSection from '../components/semester-sales/SemesterSalesChallengeSection.astro';
 import SemesterSalesAcademySection from '../components/semester-sales/SemesterSalesAcademySection.astro';
@@ -16,8 +16,11 @@ import SemesterSalesFaqSection from '../components/semester-sales/SemesterSalesF
 import SemesterSalesFinalCtaSection from '../components/semester-sales/SemesterSalesFinalCtaSection.astro';
 import { getEntry } from 'astro:content';
 
-const semesterSalesEntry = await getEntry('semester-sales', 'semester-sales');
-const summerEntry = await getEntry('summer', 'summer');
+const [semesterSalesEntry, summerEntry, navItems] = await Promise.all([
+	getEntry('semester-sales', 'semester-sales'),
+	getEntry('summer', 'summer'),
+	getSiteNavItems(),
+]);
 
 if (!semesterSalesEntry) {
 	throw new Error(
@@ -36,7 +39,7 @@ const summerCampsContent = summerEntry.data.camps;
 	title={semesterSalesContent.seo.title}
 	description={semesterSalesContent.seo.description}
 >
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main>
 		<SemesterSalesHeroSection content={semesterSalesContent.hero} />
 		<SemesterSalesChallengeSection content={semesterSalesContent.challenge} />

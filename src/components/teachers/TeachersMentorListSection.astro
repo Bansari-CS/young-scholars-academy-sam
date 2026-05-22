@@ -73,10 +73,14 @@ const toSlug = (value: string) =>
 								))}
 							</p>
 
-							<ul class="mt-6 flex list-none flex-wrap gap-2 p-0">
+							<ul class="mt-6 flex list-none flex-wrap items-start gap-2 p-0">
 								{
 									mentor.tags.map((tag) => (
-										<li class={`rounded-lg px-3 py-1 text-xs font-semibold leading-[5px] ${toneClasses[tag.tone]}`}>{tag.label}</li>
+										<li
+											class={`inline-flex shrink-0 items-center rounded-lg px-3 py-1 text-xs font-semibold leading-[18px] ${toneClasses[tag.tone]}`}
+										>
+											{tag.label}
+										</li>
 									))
 								}
 							</ul>

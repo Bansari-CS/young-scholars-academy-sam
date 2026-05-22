@@ -2,6 +2,17 @@
 seo:
   title: Young Scholars Academy | Where Gifted & 2e Kids Find Their People
   description: 150+ live online courses for gifted or 2e kids ages 5-18. WASC accredited. Classes of 6-8. Mentors who get it.
+navItems:
+  - label: Programs
+    href: '#'
+  - label: How It Works
+    href: /summer#how-it-works
+  - label: Why YSA
+    href: '#'
+  - label: Blog
+    href: /blog
+  - label: Our Teachers
+    href: /teachers
 hero:
   trustBadges:
     - WASC Accredited
@@ -19,6 +30,10 @@ hero:
     label: Browse All Courses
     href: /#programs-heading
   ratingText: 4.9/5 from parent reviews
+  socialProofAvatars:
+    - /assets/images/Parent-2.jpg
+    - /assets/images/parent-1.jpg
+    - /assets/images/Parent-3.jpg
   dashboard:
     studentName: Alex's Dashboard
     course: Advanced Math • Grade 6

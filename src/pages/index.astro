@@ -1,6 +1,5 @@
 ---
 import Header from '../components/common/Header.astro';
-import { heroData } from '../data/home';
 import HeroSection from '../components/home/HeroSection.astro';
 import TrustStripSection from '../components/home/TrustStripSection.astro';
 import LearnerNeedsSection from '../components/home/LearnerNeedsSection.astro';
@@ -30,7 +29,7 @@ const homeContent = homeEntry.data;
 	title={homeContent.seo.title}
 	description={homeContent.seo.description}
 >
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={homeContent.navItems} />
 	<main class="block w-full">
 		<HeroSection content={homeContent.hero} />
 		<TrustStripSection

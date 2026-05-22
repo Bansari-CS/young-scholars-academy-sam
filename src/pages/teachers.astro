@@ -9,10 +9,13 @@ import TeachersParentQuoteSection from '../components/teachers/TeachersParentQuo
 import TeachersAdminTeamSection from '../components/teachers/TeachersAdminTeamSection.astro';
 import TeachersParentTestimonialsSection from '../components/teachers/TeachersParentTestimonialsSection.astro';
 import TeachersMentorFitCtaSection from '../components/teachers/TeachersMentorFitCtaSection.astro';
-import { heroData } from '../data/home';
 import { getEntry } from 'astro:content';
+import { getSiteNavItems } from '../utils/getSiteNavItems';
 
-const teachersEntry = await getEntry('teachers', 'teachers');
+const [teachersEntry, navItems] = await Promise.all([
+	getEntry('teachers', 'teachers'),
+	getSiteNavItems(),
+]);
 
 if (!teachersEntry) {
 	throw new Error('Missing teachers page content entry at src/content/teachers/teachers.md');
@@ -25,7 +28,7 @@ const teachersContent = teachersEntry.data;
 	title={teachersContent.seo.title}
 	description={teachersContent.seo.description}
 >
-	<Header brand="Young Scholars Academy" navItems={heroData.navItems} />
+	<Header brand="Young Scholars Academy" navItems={navItems} />
 	<main>
 		<TeachersHeroSection content={teachersContent.hero} />
 		<TeachersParentLoveSection content={teachersContent.parentLove} />
