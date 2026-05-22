@@ -6,32 +6,64 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 
-<section class="summer-pricing-figma py-12 md:py-16 xl:py-20">
-	<div class="summer-wrap">
-		<h2 class="mb-4 font-bold text-[25px] md:text-[36px] lg:text-[44px]">{content.title}</h2>
-		<p class="summer-sub mb-16 text-base">{content.subtitle}</p>
+<section class="bg-[#f8fafc] pt-[67px] pb-[90px] md:py-16 xl:py-20">
+	<div class="mx-auto box-border w-full max-w-[90rem] px-4 sm:px-6 lg:px-10">
+		<h2 class="mb-4 text-center text-[25px] font-bold md:text-[36px] lg:text-[44px]">{content.title}</h2>
+		<p class="mx-auto mb-16 text-center text-base text-[#475569]">{content.subtitle}</p>
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{
 				content.plans.map((plan) => (
-					<article class={`summer-price-card ${plan.featured ? 'featured' : ''}`.trim()}>
-						{plan.badge && <span>{plan.badge}</span>}
-						<h3 class="font-bold">{plan.name}</h3>
-						<p class="price font-bold">
+					<article
+						class:list={[
+							'relative flex h-[436px] flex-col rounded-2xl border border-[#e2e8f0] bg-white p-10',
+							plan.featured &&
+								'border-2 border-[#7c3aed] shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]',
+						]}
+					>
+						{plan.badge && (
+							<span class="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#7c3aed] px-4 py-1 text-xs font-bold tracking-[0.12em] text-white uppercase">
+								{plan.badge}
+							</span>
+						)}
+						<h3 class="m-0 text-[17px] font-bold text-[#1e293b]">{plan.name}</h3>
+						<p class="price m-0 mt-2 mb-2 text-[30px] leading-9 font-bold text-[#111827]">
 							{plan.price}
-							<small>{plan.unit}</small>
+							<small class="text-base font-normal">{plan.unit}</small>
 						</p>
-						{plan.savingText && <b>{plan.savingText}</b>}
-						{plan.description && <p>{plan.description}</p>}
-						<ul>
-							{plan.features.map((feature) => <li><img src={plan.checkIcon} alt="" />{feature}</li>)}
+						{plan.savingText && (
+							<b class="text-[12.6px] font-bold text-[#048c3c]">{plan.savingText}</b>
+						)}
+						{plan.description && (
+							<p class="m-0 text-sm leading-relaxed text-[#475569]">{plan.description}</p>
+						)}
+						<ul class="m-0 grid list-none gap-4 py-4 pb-10">
+							{plan.features.map((feature) => (
+								<li class="flex items-center gap-3 text-sm text-[#475569]">
+									<img class="block h-3.5 w-[12.25px] shrink-0 object-contain" src={plan.checkIcon} alt="" />
+									{feature}
+								</li>
+							))}
 						</ul>
-						<a href={plan.ctaHref} class={plan.outline ? 'outline' : ''}>{plan.ctaLabel}</a>
+						<a
+							class:list={[
+								'mt-auto grid h-[60px] place-items-center rounded-xl font-medium no-underline',
+								plan.featured
+									? 'bg-[#7c3aed] text-white'
+									: plan.outline
+										? 'border-2 border-[#0a9dfb] bg-white text-[#0a9dfb]'
+										: 'bg-[#0a9dfb] text-white',
+							]}
+							href={plan.ctaHref}
+						>
+							{plan.ctaLabel}
+						</a>
 					</article>
 				))
 			}
 		</div>
-		<p class="summer-pricing-note">
-			{content.fundsText} <a href={content.fundsCtaHref} class="underline">{content.fundsCtaLabel}</a>
+		<p class="mt-16 text-center text-sm text-[#64748b]">
+			{content.fundsText}{' '}
+			<a href={content.fundsCtaHref} class="font-bold text-[#0a9dfb] underline">{content.fundsCtaLabel}</a>
 		</p>
 	</div>
 </section>

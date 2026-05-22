@@ -31,18 +31,22 @@ function getPoster(item: TestimonialItem) {
 ---
 
 <section
-	class="summer-results-section summer-section py-16 md:py-20 xl:py-24"
+	class="bg-[#1a0f3a] py-16 md:py-20 xl:py-24"
 	aria-labelledby="summer-results-heading"
 >
-	<div class="summer-wrap summer-results-wrap">
-		<p class="summer-results-kicker">{content.eyebrow}</p>
+	<div class="mx-auto box-border w-full max-w-[90rem] px-4 sm:px-6 lg:px-10">
+		<p class="mx-auto mb-4 w-max rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-white">
+			{content.eyebrow}
+		</p>
 		<h2
 			id="summer-results-heading"
-			class="m-0 text-[28px] font-bold sm:text-[36px] lg:text-[44px]"
+			class="m-0 text-center text-[28px] font-bold text-white sm:text-[36px] lg:text-[44px]"
 		>
 			{content.title}
 		</h2>
-		<p class="summer-sub">{content.description}</p>
+		<p class="mx-auto mt-4 mb-16 max-w-[48rem] text-center text-base text-[#c7d5fe]">
+			{content.description}
+		</p>
 
 		<div
 			class="mx-auto grid max-w-[960px] grid-cols-1 gap-6 md:grid-cols-2 md:gap-8"
@@ -101,7 +105,7 @@ function getPoster(item: TestimonialItem) {
 
 	<div
 		id="summer-video-modal"
-		class="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 transition-opacity duration-200 [&:not(.summer-video-modal--closed)]:pointer-events-auto [&:not(.summer-video-modal--closed)]:opacity-100"
+		class="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 transition-opacity duration-200 [&:not(.is-closed)]:pointer-events-auto [&:not(.is-closed)]:opacity-100"
 		aria-hidden="true"
 	>
 		<button
@@ -155,7 +159,7 @@ function getPoster(item: TestimonialItem) {
 
 		function closeModal() {
 			if (!modal || !video || !iframe) return;
-			modal.classList.add('summer-video-modal--closed');
+			modal.classList.add('is-closed');
 			modal.setAttribute('aria-hidden', 'true');
 			document.body.classList.remove('overflow-hidden');
 			video.pause();
@@ -173,7 +177,7 @@ function getPoster(item: TestimonialItem) {
 			if (!downloadUrl || !previewUrl) return;
 
 			modalTitle.textContent = title;
-			modal.classList.remove('summer-video-modal--closed');
+			modal.classList.remove('is-closed');
 			modal.setAttribute('aria-hidden', 'false');
 			document.body.classList.add('overflow-hidden');
 
@@ -217,14 +221,14 @@ function getPoster(item: TestimonialItem) {
 			});
 
 			document.addEventListener('keydown', function (event) {
-				if (event.key === 'Escape' && modal && !modal.classList.contains('summer-video-modal--closed')) {
+				if (event.key === 'Escape' && modal && !modal.classList.contains('is-closed')) {
 					closeModal();
 				}
 			});
 		}
 
 		if (modal) {
-			modal.classList.add('summer-video-modal--closed');
+			modal.classList.add('is-closed');
 		}
 
 		if (document.readyState === 'loading') {

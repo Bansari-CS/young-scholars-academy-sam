@@ -12,24 +12,42 @@ const {
 } = Astro.props;
 ---
 
-<div id={countdownId} class="summer-hero-countdown" aria-live="polite">
-	<p class="summer-hero-countdown__label">{label}</p>
-	<div class="summer-hero-countdown__grid" role="timer">
-		<div class="summer-hero-countdown__unit">
-			<span class="summer-hero-countdown__value" data-countdown-days>00</span>
-			<span class="summer-hero-countdown__name">Days</span>
+<div id={countdownId} class="mb-6 max-w-md" aria-live="polite">
+	<p class="mb-3 font-[var(--ysa-font-display)] text-[0.8125rem] font-semibold tracking-[0.02em] text-[#64748b] uppercase">
+		{label}
+	</p>
+	<div class="grid grid-cols-4 gap-2.5 max-[480px]:gap-2" role="timer">
+		<div
+			class="flex flex-col items-center justify-center gap-1 rounded-xl border border-[#e2e8f0] bg-white px-2 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]"
+		>
+			<span
+				class="font-[var(--ysa-font-display)] text-2xl leading-none font-bold tabular-nums text-[#111827] max-[480px]:text-xl"
+				data-countdown-days>00</span>
+			<span class="text-[0.6875rem] font-semibold tracking-[0.04em] text-[#94a3b8] uppercase">Days</span>
 		</div>
-		<div class="summer-hero-countdown__unit">
-			<span class="summer-hero-countdown__value" data-countdown-hours>00</span>
-			<span class="summer-hero-countdown__name">Hours</span>
+		<div
+			class="flex flex-col items-center justify-center gap-1 rounded-xl border border-[#e2e8f0] bg-white px-2 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]"
+		>
+			<span
+				class="font-[var(--ysa-font-display)] text-2xl leading-none font-bold tabular-nums text-[#111827] max-[480px]:text-xl"
+				data-countdown-hours>00</span>
+			<span class="text-[0.6875rem] font-semibold tracking-[0.04em] text-[#94a3b8] uppercase">Hours</span>
 		</div>
-		<div class="summer-hero-countdown__unit">
-			<span class="summer-hero-countdown__value" data-countdown-minutes>00</span>
-			<span class="summer-hero-countdown__name">Minutes</span>
+		<div
+			class="flex flex-col items-center justify-center gap-1 rounded-xl border border-[#e2e8f0] bg-white px-2 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]"
+		>
+			<span
+				class="font-[var(--ysa-font-display)] text-2xl leading-none font-bold tabular-nums text-[#111827] max-[480px]:text-xl"
+				data-countdown-minutes>00</span>
+			<span class="text-[0.6875rem] font-semibold tracking-[0.04em] text-[#94a3b8] uppercase">Minutes</span>
 		</div>
-		<div class="summer-hero-countdown__unit">
-			<span class="summer-hero-countdown__value" data-countdown-seconds>00</span>
-			<span class="summer-hero-countdown__name">Seconds</span>
+		<div
+			class="flex flex-col items-center justify-center gap-1 rounded-xl border border-[#e2e8f0] bg-white px-2 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]"
+		>
+			<span
+				class="font-[var(--ysa-font-display)] text-2xl leading-none font-bold tabular-nums text-[#111827] max-[480px]:text-xl"
+				data-countdown-seconds>00</span>
+			<span class="text-[0.6875rem] font-semibold tracking-[0.04em] text-[#94a3b8] uppercase">Seconds</span>
 		</div>
 	</div>
 </div>

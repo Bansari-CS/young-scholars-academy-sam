@@ -1,30 +1,44 @@
 ---
 import FaqSection from '../common/FaqSection.astro';
-import '../../styles/components/summer-full.css';
 
-interface Props {
-	containerClass?: string;
+interface FaqContent {
+	title: string;
+	subtitle: string;
+	items: Array<{ q: string; a: string; open: boolean }>;
 }
 
-const { containerClass = 'summer-wrap faq' } = Astro.props;
+interface Props {
+	content?: FaqContent;
+}
 
-const faqItems = [
-	{
-		question: 'Will my child get "Zoom fatigue"?',
-		answer:
-			'No - our sessions are designed to keep students engaged, not exhausted.\nEach 50-minute class uses a high-engagement model where students actively participate instead of passively watching. In addition, our Topia virtual campus allows movement and social interaction, making the experience feel more like a game than a traditional online class.',
-		open: true,
-	},
-	{ question: 'Do you require a formal diagnosis for 2e or giftedness?' },
-	{ question: 'Can I pay with ESA or Charter School funds?' },
-	{ question: 'What is the refund policy?' },
-];
+const defaultContent: FaqContent = {
+	title: 'Answers to Your Questions',
+	subtitle: 'Everything you need to know before getting started',
+	items: [
+		{
+			q: 'Will my child get "Zoom fatigue"?',
+			a: 'No - our sessions are designed to keep students engaged, not exhausted.\nEach 50-minute class uses a high-engagement model where students actively participate instead of passively watching. In addition, our Topia virtual campus allows movement and social interaction, making the experience feel more like a game than a traditional online class.',
+			open: true,
+		},
+		{ q: 'Do you require a formal diagnosis for 2e or giftedness?', a: '', open: false },
+		{ q: 'Can I pay with ESA or Charter School funds?', a: '', open: false },
+		{ q: 'What is the refund policy?', a: '', open: false },
+	],
+};
+
+const { content = defaultContent } = Astro.props;
+
+const faqItems = content.items.map((item) => ({
+	question: item.q,
+	answer: item.a?.trim() ? item.a : undefined,
+	open: item.open,
+}));
 ---
 
 <FaqSection
-	title="Answers to Your Questions"
-	description="Everything you need to know before getting started"
+	title={content.title}
+	description={content.subtitle}
 	items={faqItems}
-	sectionClass="summer-section bg-[#F8FAFC] py-20"
-	containerClass={containerClass}
+	sectionClass="bg-[#f8fafc] py-20"
+	containerClass="mx-auto w-full max-w-[56rem] px-4 sm:px-6 lg:px-10"
 />

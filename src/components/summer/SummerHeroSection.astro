@@ -1,6 +1,5 @@
 ---
 import SummerCountdown from './SummerCountdown.astro';
-import '../../styles/components/summer-hero.css';
 
 interface Props {
 	content: any;
@@ -9,8 +8,12 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 
-<section class="relative summer-hero bg-[linear-gradient(169deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)] py-20">
-	<div class="mx-auto box-border grid w-full max-w-[90rem] grid-cols-1 items-center gap-[48px] px-4 sm:px-6 lg:px-10 lg:grid-cols-[1fr_576px]">
+<section class="relative overflow-hidden bg-[linear-gradient(169deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)] py-20">
+	<div
+		class="pointer-events-none absolute right-0 bottom-0 z-0 h-[446px] w-[500px] rounded-full bg-[rgba(124,58,237,0.16)] blur-[32px]"
+		aria-hidden="true"
+	></div>
+	<div class="relative z-[1] mx-auto box-border grid w-full max-w-[90rem] grid-cols-1 items-center gap-[48px] px-4 sm:px-6 lg:px-10 lg:grid-cols-[1fr_576px]">
 		<div>
 			<span class="inline-flex items-center gap-2 rounded-full border border-[#e0e9ff] bg-white px-4 py-2 font-[Inter,ui-sans-serif,system-ui,sans-serif] text-[12px] font-medium tracking-[-0.3px] text-[#7c3aed] uppercase">
 				<span class="h-2 w-2 rounded-full bg-[#048c3c]"></span>
