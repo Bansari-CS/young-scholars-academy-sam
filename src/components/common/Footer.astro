@@ -76,6 +76,9 @@ const accreditationLinks = [
 	{ label: 'FAQ', href: '#' },
 	{ label: 'Privacy Policy', href: '#' },
 ];
+
+const zohoSalesiqWidgetSrc =
+	'https://salesiq.zohopublic.com/widget?wc=siq244a406bd3e5c1728eb7c19d176638596c755680f51f77d52eb30588c880508b';
 ---
 
 <footer class="box-border w-full max-w-full overflow-x-clip bg-white pt-20 pb-2.5 text-[#64748b] max-md:pt-14">
@@ -185,3 +188,9 @@ const accreditationLinks = [
 		</div>
 	</div>
 </footer>
+
+<script is:inline>
+	window.$zoho = window.$zoho || {};
+	$zoho.salesiq = $zoho.salesiq || { ready: function () {} };
+</script>
+<script is:inline id="zsiqscript" src={zohoSalesiqWidgetSrc} defer></script>
