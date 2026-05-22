@@ -18,8 +18,8 @@ export interface ProgramListingCard {
 	category: { id: ProgramCategoryId; label: string };
 	durationWeeks: number;
 	teacher: { name: string };
-	/** Matches `/assets/images/Teacher (n).png` via component map */
-	teacherPhotoKey: 'ross' | 'martinez' | 'chen' | 'johnson' | 'thompson' | 'lee';
+	/** Matches educator/mentor image via `ProgramsSection` map */
+	teacherPhotoKey: 'mark' | 'katie' | 'malikai' | 'thompson';
 	/** Matches hero image import in `ProgramsSection.astro` */
 	coverImageKey: ProgramCategoryId;
 }
