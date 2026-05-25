@@ -40,98 +40,278 @@ mentors:
     writing: Writing
   viewProfileLabel: View Profile
   items:
-    - name: Ms. Megan Hughes
-      rating: "4.9"
-      credentials: PhD Chemistry, MIT
-      bio:
-        - Helping brilliant minds find patterns
-        - in the chaos of science.
-      tags:
-        - label: Chemistry
-          tone: blue
-        - label: Mastery
-          tone: violet
-      facts:
-        - 5+ years experience
-        - Loved by 200+ students
-      imageUrl: /assets/educators/1-Megan-Hughes.png
     - name: Mr. Salch
       rating: "5.0"
-      credentials: MS Computer Science, Stanford
+      credentials: Retired Tech Executive, Robotics Specialist
       bio:
-        - Ex-Google engineer turning
-        - complex code into creative play.
+        - Retired tech executive who has taught
+        - over 10,000 students online.
       tags:
-        - label: Coding
+        - label: Robotics
           tone: blue
-        - label: Gaming
-          tone: green
+        - label: STEM
+          tone: blue
       facts:
-        - 8+ years experience
-        - Top-rated mentor
+        - 10,000+ students taught
+        - Hands-on activity specialist
       imageUrl: /assets/educators/2-Mr-Salch.png
     - name: Ms. Jackson
       rating: "4.9"
-      credentials: PhD Mathematics, Princeton
+      credentials: 26 Years Theatre & Performing Arts
       bio:
-        - Making math a language for
-        - solving the world's puzzles.
+        - Theatre educator with nearly 60
+        - productions and 26 years of experience.
       tags:
-        - label: Advanced Math
-          tone: blue
-        - label: Debate
-          tone: amber
+        - label: Theatre
+          tone: violet
+        - label: Creative Writing
+          tone: violet
       facts:
-        - 10+ years experience
-        - Loved by 500+ students
+        - 26+ years experience
+        - 60+ productions directed
       featured: true
       imageUrl: /assets/educators/3-Ms-Jackson.png
     - name: Amy Bechtol
       rating: "5.0"
-      credentials: MS Computer Science, Stanford
+      credentials: Strength-Based Learning Specialist
       bio:
-        - Ex-Google engineer turning
-        - complex code into creative play.
+        - Connecting neurodivergent students to
+        - meaningful curriculum in engaging ways.
       tags:
-        - label: Coding
-          tone: blue
-        - label: Gaming
-          tone: green
+        - label: History
+          tone: amber
+        - label: Digital Art
+          tone: violet
       facts:
-        - 8+ years experience
-        - Top-rated mentor
+        - Neurodivergent educator
+        - STEM & Creative specialist
       imageUrl: /assets/educators/4-Amy-Bechtol.png
     - name: Miss Anna
       rating: "4.9"
-      credentials: PhD Mathematics, Princeton
+      credentials: Youth Mentor & Play-Based Educator
       bio:
-        - Making math a language for
-        - solving the world's puzzles.
+        - Helping students feel seen, heard,
+        - and valued through play-based learning.
       tags:
-        - label: Advanced Math
-          tone: blue
-        - label: Debate
-          tone: amber
-      facts:
-        - 10+ years experience
-        - Loved by 500+ students
-      featured: true
-      imageUrl: /assets/educators/5-Miss-Anna.png
-    - name: Nelson Dean
-      rating: "4.8"
-      credentials: MS Robotics, Carnegie Mellon
-      bio:
-        - Master of mechanical wonders and
-        - neurodivergent advocacy.
-      tags:
-        - label: Robotics
-          tone: blue
-        - label: Life Skills
+        - label: Gaming
+          tone: green
+        - label: Social Skills
           tone: violet
       facts:
-        - 6+ years experience
-        - Loved by 150+ students
+        - 10+ years experience
+        - Play-based learning expert
+      featured: true
+      imageUrl: /assets/educators/5-Miss-Anna.png
+    - name: Megan Hardy
+      rating: "5.0"
+      credentials: Professional Dungeon Master & Game Educator
+      bio:
+        - Building D&D adventures tailored to
+        - each student's unique individual needs.
+      tags:
+        - label: Dungeons & Dragons
+          tone: green
+        - label: Gaming
+          tone: green
+      facts:
+        - 4,000+ students taught
+        - Neurodivergent parent & educator
+      imageUrl: /assets/educators/1-Megan-Hughes.png
+    - name: Nelson Dean
+      rating: "4.8"
+      credentials: STAR Teacher Award Recipient
+      bio:
+        - 20 years of education experience across
+        - all ages, backgrounds, and subjects.
+      tags:
+        - label: History
+          tone: amber
+        - label: Music
+          tone: violet
+      facts:
+        - 20+ years experience
+        - Teacher of the Year semi-finalist
       imageUrl: /assets/educators/6-Nelson-Dean.png
+    - name: Mr. Z
+      rating: "5.0"
+      credentials: MS Curriculum & Instruction
+      bio:
+        - Certified educator with expertise in math,
+        - coding, AI, and 3D printing.
+      tags:
+        - label: Mathematics
+          tone: blue
+        - label: Coding & AI
+          tone: blue
+      facts:
+        - PreK-12 certified
+        - Multiple active certifications
+      imageUrl: /assets/educators/7-Mr-Z.png
+    - name: Nicole P
+      rating: "4.9"
+      credentials: M.Ed, Educator, Author & Artist
+      bio:
+        - Using story and games to spark
+        - student curiosity and deep engagement.
+      tags:
+        - label: Gaming
+          tone: green
+        - label: History
+          tone: amber
+      facts:
+        - M.Ed holder
+        - Author & entrepreneur
+      imageUrl: /assets/educators/8-Nicole-P.png
+    - name: Ms. Wish
+      rating: "4.8"
+      credentials: Former Private School Teacher
+      bio:
+        - Developing social skills through safe,
+        - age-appropriate online gaming environments.
+      tags:
+        - label: Gaming
+          tone: green
+        - label: Social Skills
+          tone: violet
+      facts:
+        - Lifelong gamer
+        - Safe online learning expert
+      imageUrl: /assets/educators/9-Ms-Wish.png
+    - name: Mr. Mark
+      rating: "4.9"
+      credentials: Science Educator & Neurodivergent Advocate
+      bio:
+        - Championing growth mindset and the
+        - brilliance of neurodivergent learners.
+      tags:
+        - label: Science
+          tone: blue
+        - label: STEM
+          tone: blue
+      facts:
+        - Neurodivergent advocate
+        - Growth mindset specialist
+      imageUrl: /assets/educators/10-Mark-Tidman.png
+    - name: Ms. Katie
+      rating: "4.9"
+      credentials: Film & Music Educator, Former 2e Student
+      bio:
+        - Empowering each student's strengths through
+        - adaptability, film, and music.
+      tags:
+        - label: Film
+          tone: violet
+        - label: Music
+          tone: violet
+      facts:
+        - 5+ years experience
+        - Former 2e student
+      imageUrl: /assets/educators/11-Katie-Barnwell.png
+    - name: Kylie Hushbeck
+      rating: "5.0"
+      credentials: Teacher of the Year, BA Political Science
+      bio:
+        - Creating inclusive, flexible environments
+        - to develop life skills and executive function.
+      tags:
+        - label: Life Skills
+          tone: green
+        - label: Executive Function
+          tone: amber
+      facts:
+        - Teacher of the Year
+        - Chickasaw Nation citizen
+      imageUrl: /assets/educators/16-Hushbeck.png
+    - name: Jennifer Hughes
+      rating: "4.9"
+      credentials: Retired Attorney, 30+ Years Legal Experience
+      bio:
+        - Former attorney with 15+ years teaching
+        - mock trial, debate, and government.
+      tags:
+        - label: Debate
+          tone: amber
+        - label: Government
+          tone: amber
+      facts:
+        - 15+ years teaching experience
+        - Former History Dept. Chair
+      imageUrl: /assets/educators/12-Jennifer-Hughes.png
+    - name: Malikai Bass
+      rating: "5.0"
+      credentials: 2e Educator & Chess Expert
+      bio:
+        - Twice exceptional teacher who truly
+        - understands the 2e student experience.
+      tags:
+        - label: Chess
+          tone: blue
+        - label: Puzzle-Solving
+          tone: blue
+      facts:
+        - 1,000+ students taught
+        - Profoundly gifted educator
+      imageUrl: /assets/educators/13-Malikai-Bass.png
+    - name: Miss L
+      rating: "4.8"
+      credentials: Geometry & Gaming Educator
+      bio:
+        - Creating welcoming classrooms where students
+        - learn Minecraft, Roblox, and geometry.
+      tags:
+        - label: Gaming
+          tone: green
+        - label: Geometry
+          tone: blue
+      facts:
+        - Student-paced learning
+        - Patient & flexible teacher
+      imageUrl: /assets/educators/15-Miss-L.png
+    - name: Sean Troy
+      rating: "4.9"
+      credentials: Geography & Creative Writing Educator
+      bio:
+        - Exploring world wonders through geography,
+        - D&D, and creative writing adventures.
+      tags:
+        - label: Geography
+          tone: amber
+        - label: Creative Writing
+          tone: violet
+      facts:
+        - Global geography expert
+        - D&D adventure leader
+      imageUrl: /assets/educators/14-Sean Troy.png
+    - name: Mr. Jake Noonan
+      rating: "5.0"
+      credentials: MFA Humanities, Digital Media Expert
+      bio:
+        - Academic coach and digital media educator
+        - co-hosting a neurodiversity podcast.
+      tags:
+        - label: Digital Media
+          tone: blue
+        - label: Philosophy
+          tone: violet
+      facts:
+        - 10+ years experience
+        - Neurodiversity podcast co-host
+      imageUrl: /assets/educators/18-Mr.-Jake.png
+    - name: Jenny
+      rating: "4.8"
+      credentials: Philosophy Degree, Neurodivergent Educator
+      bio:
+        - Using video games and pop culture
+        - to make critical thinking come alive.
+      tags:
+        - label: Pop Culture
+          tone: green
+        - label: Critical Thinking
+          tone: amber
+      facts:
+        - 5 years community teaching
+        - Comic book reviewer
+      imageUrl: /assets/educators/17-Jenny.png
 adminTeam:
   title: Meet Your Admin Team
   description: The visionary leaders and dedicated coordinators working behind the scenes to ensure every child has an exceptional learning experience.
