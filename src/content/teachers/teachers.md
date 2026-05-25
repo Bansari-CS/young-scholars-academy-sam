@@ -331,19 +331,19 @@ parentTestimonials:
   title: What Our Parents Say...
   description: Discover why hundreds of families trust Young Scholars Academy to nurture and inspire their gifted and neurodivergent learners.
   items:
-    - quote: Finding YSA was a turning point for our son. For the first time, he’s in a space where his 'intensity' is seen as a superpower, not a problem. The mentors truly 'get' him.
-      name: Jennifer M.
-      role: Parent of a 9-year-old scholar
-      imageUrl: /assets/teachers/parent-testimonial-jennifer.jpg
-    - quote: The Chemistry program didn't just teach my daughter facts; it ignited a passion. Dr. Emily Ross has this incredible way of making complex topics feel like a thrilling mystery to solve.
-      name: David K.
-      role: Parent of an 11-year-old scholar
-      imageUrl: /assets/teachers/parent-testimonial-david.jpg
+    - quote: I was so impressed with the report we received after class. It showed how he did and highlighted the strengths his teacher noticed—something we've never gotten before. And he is absolutely loving D&D right now!
+      name: Christina
+      role: YSA Parent
+      imageUrl: /assets/images/home-testimonials/lindsay-testimonial.png
+    - quote: Your level of empathy, authenticity, and genuine care and concern is truly incredible, and rare. It is so obvious that you are true to your word and your mission to serve and support these children who have been cast aside by all the industrial complexes—medical, educational, and more—leaving us parents lost at sea.
+      name: YSA Mom
+      role: YSA Parent
+      imageUrl: /assets/course-detail/testimonial-ysa-moms.png
       featured: true
-    - quote: We've tried countless online courses, but nothing compares to the community here. The small class sizes mean my child isn't just a face on a screen-they're a valued member of a team.
-      name: Michelle T.
-      role: Parent of a 14-year-old scholar
-      imageUrl: /assets/teachers/parent-testimonial-michelle.jpg
+    - quote: When we're having a day that is so tough and our kid just says no to everything, the only thing he says yes to is his YSA classes. I'm always blown away!
+      name: YSA Dad
+      role: YSA Parent
+      imageUrl: /assets/teachers/parent-testimonial-david.jpg
 mentorFitCta:
   title: Not Sure Which Mentor Is Right?
   description: Every child is unique. Let us help you find the mentor whose teaching style and personality perfectly match your child's interests and learning style.

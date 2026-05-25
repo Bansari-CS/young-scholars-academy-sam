@@ -208,6 +208,7 @@ const semesterSalesCollection = defineCollection({
 					name: z.string(),
 					role: z.string(),
 					avatarAlt: z.string(),
+					avatarSrc: z.string().optional(),
 				}),
 			),
 		}),

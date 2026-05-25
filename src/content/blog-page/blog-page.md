@@ -83,12 +83,14 @@ topics:
 testimonials:
   title: From Families Like Yours
   items:
-    - quote: For years we felt like we were failing our son because traditional school wasn't working. The insights here helped us realize he wasn't broken-he was just different. Today, he's thriving in a home-learning environment that honors his intensity.
-      name: Sarah Jenkins
-      role: Parent of two 2e boys
-    - quote: Finding a community that understands the unique combination of high IQ and executive dysfunction was a game changer. We've gone from constant frustration to celebrating small wins and building a world that works for our daughter's brain.
-      name: Mark Thompson
-      role: Homeschooling Dad
+    - quote: Thank you for helping me get a 4 on my AP GOV test. Considering I would have struggled studying on my own, you really pulled off a miracle. You introduced me to a subject I knew nothing about and made everything feel natural—a huge weight off my back as I begin college search.
+      name: YSA Student
+      role: AP Government
+      imageUrl: /assets/images/home-testimonials/jonathan-testimonial.png
+    - quote: I was so impressed with the report we received after class. It showed how he did and highlighted the strengths his teacher noticed—something we've never gotten before. And he is absolutely loving D&D right now!
+      name: Christina
+      role: YSA Parent
+      imageUrl: /assets/images/home-testimonials/lindsay-testimonial.png
 newsletter:
   title: Not Ready Yet? Start Here.
   description: Join 5,000+ parents receiving weekly insights, strategies, and curated resources delivered straight to your inbox.
