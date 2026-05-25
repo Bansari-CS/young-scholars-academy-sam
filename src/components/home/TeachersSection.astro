@@ -1,6 +1,7 @@
 ---
 import type { TeacherCard } from '../../types/homePage';
 import { EDUCATOR_PHOTO_BY_INDEX } from '../../lib/educatorPhotos';
+import { toSlug } from '../../utils/slug';
 
 interface Props {
 	content: {
@@ -48,6 +49,7 @@ const cardWidth =
 				{
 					d.items.map((t) => {
 						const src = EDUCATOR_PHOTO_BY_INDEX[t.photoIndex];
+						const profileHref = `/teachers/${toSlug(t.name)}`;
 						return (
 							<li class:list={['m-0 shrink-0', cardWidth]}>
 								<article class:list={['flex h-full w-full flex-col bg-transparent', cardWidth]}>
@@ -73,7 +75,7 @@ const cardWidth =
 										<div class="mt-3.5 border-t border-[#e9eef5] pt-4">
 											<a
 												class="inline-flex w-fit items-center gap-[0.35rem] font-[var(--ysa-font-body)] text-sm font-semibold leading-tight text-[#5751E4] no-underline transition-[color,gap] duration-150 ease-out hover:gap-2 hover:text-[#6d28d9] focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7c3aed]"
-												href={d.cardCta.href}
+												href={profileHref}
 											>
 												<span>{d.cardCta.label}</span>
 												<span class="text-[1.05em] leading-none" aria-hidden="true">&rarr;</span>

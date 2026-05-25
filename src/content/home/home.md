@@ -417,77 +417,77 @@ teachers:
     label: Find Your Teacher
     href: '#'
   items:
-    - name: Ms. Megan Hughes
-      credentials: Details coming soon
-      bio: Details coming soon
+    - name: Megan Hardy
+      credentials: Professional Dungeon Master & Game Educator
+      bio: Building D&D adventures tailored to each student's unique individual needs.
       photoIndex: 1
     - name: Mr. Salch
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Retired Tech Executive, Robotics Specialist
+      bio: Retired tech executive who has taught over 10,000 students online.
       photoIndex: 2
     - name: Ms. Jackson
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: 26 Years Theatre & Performing Arts
+      bio: Theatre educator with nearly 60 productions and 26 years of experience.
       photoIndex: 3
     - name: Amy Bechtol
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Strength-Based Learning Specialist
+      bio: Connecting neurodivergent students to meaningful curriculum in engaging ways.
       photoIndex: 4
     - name: Miss Anna
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Youth Mentor & Play-Based Educator
+      bio: Helping students feel seen, heard, and valued through play-based learning.
       photoIndex: 5
     - name: Nelson Dean
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: STAR Teacher Award Recipient
+      bio: 20 years of education experience across all ages, backgrounds, and subjects.
       photoIndex: 6
     - name: Mr. Z
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: MS Curriculum & Instruction
+      bio: Certified educator with expertise in math, coding, AI, and 3D printing.
       photoIndex: 7
-    - name: Nicole P.
-      credentials: Details coming soon
-      bio: Details coming soon
+    - name: Nicole P
+      credentials: M.Ed, Educator, Author & Artist
+      bio: Using story and games to spark student curiosity and deep engagement.
       photoIndex: 8
     - name: Ms. Wish
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Former Private School Teacher
+      bio: Developing social skills through safe, age-appropriate online gaming environments.
       photoIndex: 9
-    - name: Mr. Mark Tidman
-      credentials: Details coming soon
-      bio: Details coming soon
+    - name: Mr. Tidman
+      credentials: Science Educator & Neurodivergent Advocate
+      bio: Championing growth mindset and the brilliance of neurodivergent learners.
       photoIndex: 10
     - name: Katie Barnwell
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Film & Music Educator, Former 2e Student
+      bio: Empowering each student's strengths through adaptability, film, and music.
       photoIndex: 11
     - name: Jennifer Hughes
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Retired Attorney, 30+ Years Legal Experience
+      bio: Former attorney with 15+ years teaching mock trial, debate, and government.
       photoIndex: 12
     - name: Malikai Bass
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: 2e Educator & Chess Expert
+      bio: Twice exceptional teacher who truly understands the 2e student experience.
       photoIndex: 13
     - name: Sean Troy
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Geography & Creative Writing Educator
+      bio: Exploring world wonders through geography, D&D, and creative writing adventures.
       photoIndex: 14
     - name: Miss L
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Geometry & Gaming Educator
+      bio: Creating welcoming classrooms where students learn Minecraft, Roblox, and geometry.
       photoIndex: 15
     - name: Hushbeck
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Teacher of the Year, BA Political Science
+      bio: Creating inclusive, flexible environments to develop life skills and executive function.
       photoIndex: 16
     - name: Jenny
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: Philosophy Degree, Neurodivergent Educator
+      bio: Using video games and pop culture to make critical thinking come alive.
       photoIndex: 17
     - name: Mr. Jake
-      credentials: Details coming soon
-      bio: Details coming soon
+      credentials: MFA Humanities, Digital Media Expert
+      bio: Academic coach and digital media educator co-hosting a neurodiversity podcast.
       photoIndex: 18
 world:
   eyebrow: GLOBAL COMMUNITY
