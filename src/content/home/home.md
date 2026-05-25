@@ -327,52 +327,87 @@ impact:
       cards:
         - type: video
           rating: 5
-          quote: '"When we sign up for a class at YSA, I don''t have to worry. Excitement and big ideas are met kindly—not with the negative reinforcement we''d gotten elsewhere."'
+          quote: '"Compared to other classes, at YSA you get to talk so much more—they explain it and help you many times if you get lost. Nice teachers, a great variety of classes, and we haven''t had substitutes once."'
           author:
-            name: Amanda C.
-            meta: YSA Mother
-            avatarIndex: 3
-            photoSrc: /assets/images/home-testimonials/amanda-c.png
-          driveFileId: 1m7KdAR81aaNJ8YpajjU_DARlBtT485O0
+            name: Jonathan
+            meta: YSA Student
+            avatarIndex: 1
+            photoSrc: /assets/images/home-testimonials/jonathan-testimonial.png
+          posterSrc: /assets/images/home-testimonials/jonathan-testimonial.png
+          driveFileId: 1qsKTyVG4qI_WJMCgNjpZOhQaChKhtxzy
         - type: video
           rating: 5
-          quote: '"It was immediately clear I wouldn''t just be a fly on the wall—with smaller cohorts you genuinely get to know other students on a deep intellectual level."'
+          quote: '"The educational approach you presented—and the idea of flipping priorities in education—was so mind-blowing that I thought your talk could and should have been the keynote address for the Summit. Your presentation was incredible; it was that inspirational."'
           author:
-            name: Sapros
-            meta: YSA Student
-            avatarIndex: 5
-            photoSrc: /assets/images/home-testimonials/sapros.png
-          driveFileId: 1wyQXAURt9ozQl3JZKzyYkahLr2kMiwK9
+            name: Lindsay
+            meta: Davidson Parent
+            avatarIndex: 2
+            photoSrc: /assets/images/home-testimonials/lindsay-testimonial.png
+          posterSrc: /assets/images/home-testimonials/lindsay-testimonial.png
+          driveFileId: 1BMrgc2BsbQKKehhsYTnXE9uv_id4LGM6
     - flow: down
       cards:
+        - type: video
+          rating: 5
+          quote: '"She swooped in and started having a detailed conversation with the store owner about all things D&D. She loves the game, and I know a big part of the reason is that she had the opportunity to connect with others around it through your amazing class."'
+          author:
+            name: YSA Parent
+            meta: Parent of D&D student
+            avatarIndex: 4
+            photoSrc: /assets/images/home-testimonials/ysa-parent-testimonial.png
+          posterSrc: /assets/images/home-testimonials/ysa-parent-testimonial.png
+          driveFileId: 1psx3tq7wWAy0MX6A93Tj53orSCZhQuey
         - type: video
           rating: 5
           quote: '"All of the classes are really fun with crazy variety—from Mathlandia to cryptography. Ryan stays up until 1 a.m. Switzerland time because the topics are that interesting."'
           author:
             name: Ryan & Christian
             meta: Father and son, YSA families
-            avatarIndex: 2
+            avatarIndex: 5
             photoSrc: /assets/images/image2.jpg
+          posterSrc: /assets/images/image2.jpg
           driveFileId: 1Tao5FiTOJCPD70dEmEL-EvK2io41gVW_
         - type: video
           rating: 5
-          quote: '"Students are encouraged to speak their minds and reframe what they''re learning in a way that makes sense—especially meaningful for neurodivergent learners."'
+          quote: '"It was immediately clear I wouldn''t just be a fly on the wall—with smaller cohorts you genuinely get to know other students on a deep intellectual level."'
           author:
             name: Sapros
             meta: YSA Student
-            avatarIndex: 5
+            avatarIndex: 6
             photoSrc: /assets/images/home-testimonials/sapros.png
-          driveFileId: 1C9kAOFlhSypHrIy33O1AEihTjAFOsITs
+          posterSrc: /assets/images/home-testimonials/sapros.png
+          driveFileId: 1wyQXAURt9ozQl3JZKzyYkahLr2kMiwK9
     - flow: up
       cards:
+        - type: video
+          rating: 5
+          quote: '"When we sign up for a class at YSA, I don''t have to worry. Excitement and big ideas are met kindly—not with the negative reinforcement we''d gotten elsewhere."'
+          author:
+            name: Amanda C.
+            meta: YSA Mother
+            avatarIndex: 3
+            photoSrc: /assets/images/home-testimonials/amanda-c.png
+          posterSrc: /assets/images/home-testimonials/amanda-c.png
+          driveFileId: 1m7KdAR81aaNJ8YpajjU_DARlBtT485O0
+        - type: video
+          rating: 5
+          quote: '"Before YSA, Alonso was very shy and struggled with confidence. We gave it a try and we''re so glad we did—he''s gained confidence, he''s happy, and he looks forward to every class where he can express himself and be himself. Give it a try; you''ll see the change in your kids."'
+          author:
+            name: Fabrizio
+            meta: Parent of Alonso
+            avatarIndex: 5
+            photoSrc: /assets/images/home-testimonials/fabrizio-testimonial.png
+          posterSrc: /assets/images/home-testimonials/fabrizio-testimonial.png
+          driveFileId: 1MKXdHLFg1tYoEf3P7AUy0ZqjpWvSTkmV
         - type: video
           rating: 5
           quote: '"Those little moments—when my teacher asks how my day was and genuinely cares—add up to a foundation where I know I can grow out of my comfort zone."'
           author:
             name: Sapros
-            meta: YSA Student
-            avatarIndex: 5
+            meta: YSA Student · Mentorship
+            avatarIndex: 6
             photoSrc: /assets/images/home-testimonials/sapros.png
+          posterSrc: /assets/images/home-testimonials/sapros.png
           driveFileId: 1hnWjLoWVAc_QMGuiw8HcFZLPVmbuFjoy
 teachers:
   eyebrow: EXPERT EDUCATORS

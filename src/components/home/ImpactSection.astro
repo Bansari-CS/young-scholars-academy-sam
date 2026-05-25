@@ -102,7 +102,10 @@ const trackDownClasses = `${trackBaseClasses} motion-safe:animate-[impact-scroll
 		>
 			{
 				d.columns.map((column) => {
-					const repeatedCards = [...column.cards, ...column.cards];
+					const repeatedCards =
+						column.cards.length > 1
+							? [...column.cards, ...column.cards]
+							: [...column.cards, ...column.cards, ...column.cards];
 					return (
 						<div class="relative overflow-hidden max-sm:overflow-visible">
 							<div class={column.flow === 'up' ? trackUpClasses : trackDownClasses} data-impact-column-track>
@@ -121,7 +124,10 @@ const trackDownClasses = `${trackBaseClasses} motion-safe:animate-[impact-scroll
 														src={getThumbnail(card)}
 														alt={`${card.author.name} ${d.videoAltSuffix ?? 'video testimonial'}`}
 														loading="lazy"
+														decoding="async"
 														class="impact-card-poster block h-full w-full object-cover"
+														data-poster-fallback={card.author.photoSrc ?? card.posterSrc ?? imageByIndex[card.author.avatarIndex]}
+														onerror="if(this.dataset.posterFallback){this.onerror=null;this.src=this.dataset.posterFallback}"
 													/>
 													<button
 														type="button"
