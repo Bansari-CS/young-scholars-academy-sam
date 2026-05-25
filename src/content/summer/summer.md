@@ -209,17 +209,78 @@ results:
   eyebrow: PROVEN RESULTS
   title: Real Growth. Measurable Impact.
   description: Families don't just see happier kids—they see tangible academic and emotional progress
-  items:
-    - name: Melissa & Zoe
-      meta: Mother and daughter, YSA families
-      driveFileId: 1e7BFlvhqRRWJfcdsQErbAmvJjkB8rK2l
-      posterSrc: /images/summer/testimonial/melissa-zoe.png
-      quote: "At the end of open house, Zoe looked at me and said, \"I have to sign up for those classes because these people get me.\" It's been amazing to connect with other neurodivergent lifelong learners—and both kids have had incredible experiences in fall, spring, and summer classes."
-    - name: Luca
-      meta: YSA Student
-      driveFileId: 1KtB4G2o4w8EGvQxLl04W6U1ia8SUFVw2
-      posterSrc: /images/summer/testimonial/luca.png
-      quote: "Before YSA there weren't really enriching classes—YSA brought stuff that challenged my mind. I got to think in new and unexpected ways. The teachers are super fun, welcoming, and cool, and you'll definitely make lasting friendships here."
+  columnsAriaLabel: Summer camp family testimonials
+  videoAltSuffix: video testimonial
+  playVideoAlt: Play video
+  starsAriaSuffix: out of 5 stars
+  stats: []
+  columns:
+    - flow: up
+      cards:
+        - type: video
+          rating: 5
+          quote: '"At the end of open house, Zoe looked at me and said, \"I have to sign up for those classes because these people get me.\" It''s been amazing to connect with other neurodivergent lifelong learners—and both kids have had incredible experiences in fall, spring, and summer classes."'
+          author:
+            name: Melissa & Zoe
+            meta: Mother and daughter, YSA families
+            avatarIndex: 1
+            photoSrc: /images/summer/testimonial/melissa-zoe.png
+          posterSrc: /images/summer/testimonial/melissa-zoe.png
+          driveFileId: 1e7BFlvhqRRWJfcdsQErbAmvJjkB8rK2l
+        - type: video
+          rating: 5
+          quote: '"Before YSA there weren''t really enriching classes—YSA brought stuff that challenged my mind. I got to think in new and unexpected ways. The teachers are super fun, welcoming, and cool, and you''ll definitely make lasting friendships here."'
+          author:
+            name: Luca
+            meta: YSA Student
+            avatarIndex: 2
+            photoSrc: /images/summer/testimonial/luca.png
+          posterSrc: /images/summer/testimonial/luca.png
+          driveFileId: 1KtB4G2o4w8EGvQxLl04W6U1ia8SUFVw2
+    - flow: down
+      cards:
+        - type: video
+          rating: 5
+          quote: '"It''s been a night-and-day difference—from difficult struggles elsewhere to hilarious, joyful learning here. When we sign up for YSA, excitement and big ideas are met kindly, not with the negative reinforcement we''d gotten before."'
+          author:
+            name: Lucas & Amanda
+            meta: Mother and son, YSA families
+            avatarIndex: 3
+            photoSrc: /images/summer/testimonial/lucas-amanda.png
+          posterSrc: /images/summer/testimonial/lucas-amanda.png
+          driveFileId: 14gXY8JGF7pHvkEdBPCa6D3oMLKAssPil
+        - type: video
+          rating: 5
+          quote: '"The educational approach you presented—and the idea of flipping priorities in education—was so mind-blowing that I thought your talk could and should have been the keynote address for the Summit. Your presentation was incredible; it was that inspirational."'
+          author:
+            name: Lindsay
+            meta: Davidson Parent
+            avatarIndex: 4
+            photoSrc: /images/summer/testimonial/webinar-ad-6.png
+          posterSrc: /images/summer/testimonial/webinar-ad-6.png
+          driveFileId: 1u4bUbxqhzyKP_bUOSw0aiwMUe6hdGPTd
+    - flow: up
+      cards:
+        - type: video
+          rating: 5
+          quote: '"All of the classes are really fun with crazy variety—from Mathlandia to cryptography. Ryan stays up until 1 a.m. Switzerland time because the topics are that interesting."'
+          author:
+            name: Ryan & Christian
+            meta: Father and son, YSA families
+            avatarIndex: 5
+            photoSrc: /assets/images/image2.jpg
+          posterSrc: /assets/images/image2.jpg
+          driveFileId: 1Tao5FiTOJCPD70dEmEL-EvK2io41gVW_
+        - type: video
+          rating: 5
+          quote: '"If anyone''s on the fence, absolutely jump on this opportunity. My twice-exceptional son really struggles with online learning—but that happens with Young Scholars Academy. Mr. Sam was the most influential, encouraging teacher my son had. I cannot say enough wonderful things about YSA."'
+          author:
+            name: YSA Mom
+            meta: Parent of a 2e student
+            avatarIndex: 6
+            photoSrc: /assets/course-detail/testimonial-ysa-moms.png
+          posterSrc: /assets/course-detail/testimonial-ysa-moms.png
+          driveFileId: 1kdXFd6_ycvbReETQmXUiM6GMOFEhdol6
 bonus:
   kicker: BONUS BUNDLE
   title: Everything Included With Your Enrollment

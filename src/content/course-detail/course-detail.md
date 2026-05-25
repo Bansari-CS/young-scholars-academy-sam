@@ -106,17 +106,78 @@ testimonials:
   eyebrow: PROVEN RESULTS
   title: Real Growth. Measurable Impact.
   description: Families don't just see happier kids—they see tangible academic and emotional progress
-  items:
-    - name: YSA Mom
-      meta: Parent of a 2e student
-      driveFileId: 1kdXFd6_ycvbReETQmXUiM6GMOFEhdol6
-      posterSrc: /assets/course-detail/testimonial-ysa-moms.png
-      quote: "If anyone's on the fence, absolutely jump on this opportunity. My twice-exceptional son really struggles with online learning—but that happens with Young Scholars Academy. Mr. Sam was the most influential, encouraging teacher my son had. I cannot say enough wonderful things about YSA."
-    - name: Melissa & Zoe
-      meta: Mother and daughter, YSA families
-      driveFileId: 1e7BFlvhqRRWJfcdsQErbAmvJjkB8rK2l
-      posterSrc: /images/summer/testimonial/melissa-zoe.png
-      quote: "At the end of open house, Zoe looked at me and said, \"I have to sign up for those classes because these people get me.\" It's been amazing to connect with other neurodivergent lifelong learners—and both kids have had incredible experiences in fall, spring, and summer classes."
+  columnsAriaLabel: Parent testimonials
+  videoAltSuffix: video testimonial
+  playVideoAlt: Play video
+  starsAriaSuffix: out of 5 stars
+  stats: []
+  columns:
+    - flow: up
+      cards:
+        - type: video
+          rating: 5
+          quote: '"If anyone''s on the fence, absolutely jump on this opportunity. My twice-exceptional son really struggles with online learning—but that happens with Young Scholars Academy. Mr. Sam was the most influential, encouraging teacher my son had. I cannot say enough wonderful things about YSA."'
+          author:
+            name: YSA Mom
+            meta: Parent of a 2e student
+            avatarIndex: 1
+            photoSrc: /assets/course-detail/testimonial-ysa-moms.png
+          posterSrc: /assets/course-detail/testimonial-ysa-moms.png
+          driveFileId: 1kdXFd6_ycvbReETQmXUiM6GMOFEhdol6
+        - type: video
+          rating: 5
+          quote: '"There''s stuff for little kids and big kids in the summer—you can do Minecraft, superheroes, and way more. It''s so cool. I think you should join; you may like it."'
+          author:
+            name: YSA Student
+            meta: Summer camps
+            avatarIndex: 2
+            photoSrc: /assets/course-detail/testimonial-summer-fun.png
+          posterSrc: /assets/course-detail/testimonial-summer-fun.png
+          driveFileId: 1aqKCOct6wfMS8AXkr4wSJ_9_nOjZMj6b
+    - flow: down
+      cards:
+        - type: video
+          rating: 5
+          quote: '"At the end of open house, Zoe looked at me and said, \"I have to sign up for those classes because these people get me.\" It''s been amazing to connect with other neurodivergent lifelong learners—and both kids have had incredible experiences in fall, spring, and summer classes."'
+          author:
+            name: Melissa & Zoe
+            meta: Mother and daughter, YSA families
+            avatarIndex: 3
+            photoSrc: /images/summer/testimonial/melissa-zoe.png
+          posterSrc: /images/summer/testimonial/melissa-zoe.png
+          driveFileId: 1e7BFlvhqRRWJfcdsQErbAmvJjkB8rK2l
+        - type: video
+          rating: 5
+          quote: '"Compared to other classes, at YSA you get to talk so much more—they explain it and help you many times if you get lost. Nice teachers, a great variety of classes, and we haven''t had substitutes once."'
+          author:
+            name: Jonathan
+            meta: YSA Student
+            avatarIndex: 4
+            photoSrc: /assets/course-detail/testimonial-jonthan.png
+          posterSrc: /assets/course-detail/testimonial-jonthan.png
+          driveFileId: 1QvF8J0OYIVpCZ1l8jsPworbEBfHsdXmU
+    - flow: up
+      cards:
+        - type: video
+          rating: 5
+          quote: '"Why are there not more classes like this? Why was I just introduced to this now—and not earlier?!"'
+          author:
+            name: Alonso
+            meta: YSA Student
+            avatarIndex: 5
+            photoSrc: /assets/course-detail/testimonial-alonso.png
+          posterSrc: /assets/course-detail/testimonial-alonso.png
+          driveFileId: 1JJwexAjG0Z-HpWV8hKfxkVfDwyemqHVq
+        - type: video
+          rating: 5
+          quote: '"Debate helped me academically—I could apply it to essays and papers. Mr. Sam makes it fun, you learn, and you''re excited after every class. I highly recommend it if you want to become a better speaker and writer."'
+          author:
+            name: YSA Student
+            meta: Debate & academics
+            avatarIndex: 6
+            photoSrc: /assets/course-detail/testimonial-debate.png
+          posterSrc: /assets/course-detail/testimonial-debate.png
+          driveFileId: 1YT9hut7yJJ-84dAB97NvQ-eZThIY635p
 reviews:
   title: Parent Reviews
   rating: 4.9/5.0

@@ -4,7 +4,7 @@ import SummerPromiseSection from './SummerPromiseSection.astro';
 import SummerCampsSection from './SummerCampsSection.astro';
 import SummerBonusSection from './SummerBonusSection.astro';
 import SummerPricingSection from './SummerPricingSection.astro';
-import SummerResultsSection from './SummerResultsSection.astro';
+import RealGrowthSection from '../common/RealGrowthSection.astro';
 import SummerFitSection from './SummerFitSection.astro';
 import SummerFaqSection from './SummerFaqSection.astro';
 import SummerFinalCtaSection from './SummerFinalCtaSection.astro';
@@ -20,7 +20,7 @@ const { content } = Astro.props as Props;
 <SummerPromiseSection content={content.promise} />
 <SummerCampsSection content={content.camps} />
 <SummerPricingSection content={content.pricing} />
-<SummerResultsSection content={content.results} />
+<RealGrowthSection hideStats content={content.results} />
 <SummerBonusSection content={content.bonus} />
 <SummerFitSection content={content.fit} />
 <SummerFaqSection content={content.faq} />

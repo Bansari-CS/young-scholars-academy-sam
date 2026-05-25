@@ -357,16 +357,16 @@ impact:
             photoSrc: /assets/images/home-testimonials/ysa-parent-testimonial.png
           posterSrc: /assets/images/home-testimonials/ysa-parent-testimonial.png
           driveFileId: 1psx3tq7wWAy0MX6A93Tj53orSCZhQuey
-        - type: video
-          rating: 5
-          quote: '"All of the classes are really fun with crazy variety—from Mathlandia to cryptography. Ryan stays up until 1 a.m. Switzerland time because the topics are that interesting."'
-          author:
-            name: Ryan & Christian
-            meta: Father and son, YSA families
-            avatarIndex: 5
-            photoSrc: /assets/images/image2.jpg
-          posterSrc: /assets/images/image2.jpg
-          driveFileId: 1Tao5FiTOJCPD70dEmEL-EvK2io41gVW_
+        # - type: video
+        #   rating: 5
+        #   quote: '"All of the classes are really fun with crazy variety—from Mathlandia to cryptography. Ryan stays up until 1 a.m. Switzerland time because the topics are that interesting."'
+        #   author:
+        #     name: Ryan & Christian
+        #     meta: Father and son, YSA families
+        #     avatarIndex: 5
+        #     photoSrc: /assets/images/image2.jpg
+        #   posterSrc: /assets/images/image2.jpg
+        #   driveFileId: 1Tao5FiTOJCPD70dEmEL-EvK2io41gVW_
         - type: video
           rating: 5
           quote: '"It was immediately clear I wouldn''t just be a fly on the wall—with smaller cohorts you genuinely get to know other students on a deep intellectual level."'
@@ -399,16 +399,16 @@ impact:
             photoSrc: /assets/images/home-testimonials/fabrizio-testimonial.png
           posterSrc: /assets/images/home-testimonials/fabrizio-testimonial.png
           driveFileId: 1MKXdHLFg1tYoEf3P7AUy0ZqjpWvSTkmV
-        - type: video
-          rating: 5
-          quote: '"Those little moments—when my teacher asks how my day was and genuinely cares—add up to a foundation where I know I can grow out of my comfort zone."'
-          author:
-            name: Sapros
-            meta: YSA Student · Mentorship
-            avatarIndex: 6
-            photoSrc: /assets/images/home-testimonials/sapros.png
-          posterSrc: /assets/images/home-testimonials/sapros.png
-          driveFileId: 1hnWjLoWVAc_QMGuiw8HcFZLPVmbuFjoy
+        # - type: video
+        #   rating: 5
+        #   quote: '"Those little moments—when my teacher asks how my day was and genuinely cares—add up to a foundation where I know I can grow out of my comfort zone."'
+        #   author:
+        #     name: Sapros
+        #     meta: YSA Student · Mentorship
+        #     avatarIndex: 6
+        #     photoSrc: /assets/images/home-testimonials/sapros.png
+        #   posterSrc: /assets/images/home-testimonials/sapros.png
+        #   driveFileId: 1hnWjLoWVAc_QMGuiw8HcFZLPVmbuFjoy
 teachers:
   eyebrow: EXPERT EDUCATORS
   title: Learn from the Best
