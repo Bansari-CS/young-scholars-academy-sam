@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 
 	const uniqueMentors = new Map<
 		string,
-		{ name: string; imageUrl: string; credentials: string }
+		{ name: string; imageUrl: string; credentials: string; aboutParagraphs: string[] }
 	>();
 	for (const mentor of teachersEntry.data.mentors.items) {
 		const slug = mentor.name
@@ -39,6 +39,7 @@ export async function getStaticPaths() {
 				name: mentor.name,
 				imageUrl: mentor.imageUrl,
 				credentials: mentor.credentials,
+				aboutParagraphs: mentor.aboutParagraphs,
 			});
 		}
 	}
@@ -50,11 +51,12 @@ export async function getStaticPaths() {
 			mentorName: mentor.name,
 			mentorImageUrl: mentor.imageUrl,
 			mentorCredentials: mentor.credentials,
+			mentorAboutParagraphs: mentor.aboutParagraphs,
 		},
 	}));
 }
 
-const { mentorContent, mentorName, mentorImageUrl, mentorCredentials } = Astro.props;
+const { mentorContent, mentorName, mentorImageUrl, mentorCredentials, mentorAboutParagraphs } = Astro.props;
 const navItems = await getSiteNavItems();
 ---
 
@@ -68,7 +70,11 @@ const navItems = await getSiteNavItems();
 			mentorImageUrl={mentorImageUrl}
 			mentorCredentials={mentorCredentials}
 		/>
-		<MentorProfileAboutSection content={mentorContent.about} mentorName={mentorName} />
+		<MentorProfileAboutSection
+			content={mentorContent.about}
+			mentorName={mentorName}
+			paragraphs={mentorAboutParagraphs}
+		/>
 		<MentorProfileBeyondClassroomSection content={mentorContent.beyondClassroom} />
 		<MentorProfileHowITeachSection content={mentorContent.howITeach} />
 		<MentorProfileInsideClassroomSection content={mentorContent.insideClassroom} />

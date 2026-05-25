@@ -58,6 +58,7 @@ const teachersCollection = defineCollection({
 					facts: z.array(z.string()),
 					featured: z.boolean().optional(),
 					imageUrl: z.string(),
+					aboutParagraphs: z.array(z.string()),
 				}),
 			),
 		}),

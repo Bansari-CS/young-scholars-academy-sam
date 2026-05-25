@@ -6,10 +6,12 @@ type AboutContent = CollectionEntry<'mentor-profile'>['data']['about'];
 interface Props {
 	content: AboutContent;
 	mentorName?: string;
+	paragraphs?: string[];
 }
 
-const { content, mentorName } = Astro.props as Props;
+const { content, mentorName, paragraphs } = Astro.props as Props;
 const aboutTitle = mentorName?.trim() ? `About ${mentorName.trim()}` : content.title;
+const aboutParagraphs = paragraphs?.length ? paragraphs : content.paragraphs;
 ---
 
 <section class="bg-white px-5 py-14 md:px-16 md:py-20" aria-labelledby="mentor-about-title">
@@ -20,7 +22,7 @@ const aboutTitle = mentorName?.trim() ? `About ${mentorName.trim()}` : content.t
 		</div>
 
 		<div class="w-full max-w-[821.34px] space-y-8">
-			{content.paragraphs.map((paragraph) => <p class="text-base leading-[26px] text-[#475569]">{paragraph}</p>)}
+			{aboutParagraphs.map((paragraph) => <p class="text-base leading-[26px] text-[#475569]">{paragraph}</p>)}
 		</div>
 	</div>
 </section>
