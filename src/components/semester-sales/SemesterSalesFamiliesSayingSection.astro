@@ -4,12 +4,12 @@ import { semesterSalesAssets } from './data';
 interface Props {
 	content: {
 		title: string;
-		reviews: { quote: string; name: string; role: string; avatarAlt: string }[];
+		reviews: { quote: string; name: string; role: string; avatarAlt: string; avatarSrc?: string }[];
 	};
 }
 
 const { content } = Astro.props as Props;
-const avatars = [
+const defaultAvatars = [
 	semesterSalesAssets.familyAvatar1Url,
 	semesterSalesAssets.familyAvatar2Url,
 	semesterSalesAssets.familyAvatar3Url,
@@ -26,13 +26,21 @@ const avatars = [
 		<ul class="grid list-none grid-cols-1 gap-8 p-0 lg:grid-cols-3 mt-[16px]">
 			{
 				content.reviews.map((review, index) => (
-					<li class="h-[288px] rounded-2xl border border-[#0a9dfb] bg-[rgba(255,255,255,0.15)] p-8 backdrop-blur-[4px]">
-						<div class="flex gap-1">
+					<li class="flex h-[288px] flex-col rounded-2xl border border-[#0a9dfb] bg-[rgba(255,255,255,0.15)] p-8 backdrop-blur-[4px]">
+						<div class="flex shrink-0 gap-1">
 							{[0, 1, 2, 3, 4].map(() => <img class="h-4 w-[18px]" src={semesterSalesAssets.familyStarUrl} alt="" aria-hidden="true" />)}
 						</div>
-						<p class="pt-4 text-base leading-[26px] text-white">{review.quote}</p>
-						<div class="flex items-center gap-3 pt-6">
-							<img class="h-10 w-10 rounded-full object-cover" src={avatars[index] ?? avatars[0]} alt={review.avatarAlt} />
+						<p class="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain pt-4 text-base leading-[26px] text-white">{review.quote}</p>
+						<div class="mt-auto flex shrink-0 items-center gap-3 pt-6">
+							<img
+								class="h-10 w-10 shrink-0 rounded-full border border-white/20 object-cover object-center"
+								src={review.avatarSrc ?? defaultAvatars[index] ?? defaultAvatars[0]}
+								alt={review.avatarAlt}
+								width={40}
+								height={40}
+								loading="lazy"
+								decoding="async"
+							/>
 							<div>
 								<p class="text-sm font-bold leading-5 text-white">{review.name}</p>
 								<p class="text-xs leading-4 text-white">{review.role}</p>

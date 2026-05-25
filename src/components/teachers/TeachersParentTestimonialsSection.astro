@@ -20,10 +20,10 @@ const { content } = Astro.props;
 			</p>
 		</header>
 
-		<ul class="mt-12 grid list-none grid-cols-1 gap-[30px] p-0 lg:grid-cols-3">
+		<ul class="mt-12 grid list-none grid-cols-1 gap-[30px] p-0 lg:grid-cols-3 lg:items-stretch">
 			{
 				content.items.map((testimonial) => (
-					<li>
+					<li class="h-full min-h-0">
 						<article
 							class:list={[
 								'relative flex h-full flex-col overflow-hidden rounded-[24px] border border-[#f1f5f9] p-10',
@@ -47,16 +47,23 @@ const { content } = Astro.props;
 								}
 							</div>
 
-							<p class="min-h-[176px] text-[18px] leading-[29.25px] text-[#111827]">"{testimonial.quote}"</p>
+							<div
+								class="mb-8 min-h-[176px] flex-1 basis-0 overflow-x-hidden overflow-y-auto overscroll-contain pr-1 [scrollbar-color:rgba(148,163,184,0.6)_transparent] [scrollbar-width:thin]"
+							>
+								<p class="text-[18px] leading-[29.25px] text-[#111827]">"{testimonial.quote}"</p>
+							</div>
 
-							<div class="mt-6 flex items-center gap-4 border-t border-[#e2e8f0] pt-11">
+							<div class="mt-auto flex shrink-0 items-center gap-4 border-t border-[#e2e8f0] pt-8">
 								<img
-									class="h-12 w-12 rounded-full border-2 border-white object-cover shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]"
+									class="h-12 w-12 shrink-0 rounded-full border-2 border-white object-cover object-center shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]"
 									src={testimonial.imageUrl}
 									alt={`${testimonial.name} avatar`}
+									width={48}
+									height={48}
 									loading="lazy"
+									decoding="async"
 								/>
-								<div>
+								<div class="min-w-0">
 									<p class="text-base font-bold leading-6 text-[#111827]">{testimonial.name}</p>
 									<p class="text-sm leading-5 text-[#64748b]">{testimonial.role}</p>
 								</div>

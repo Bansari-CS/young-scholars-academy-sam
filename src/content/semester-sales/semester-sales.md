@@ -89,18 +89,21 @@ virtualWorks:
 familiesSaying:
   title: What Families Are Saying
   reviews:
-    - quote: My daughter finally found a place where her intense interests were celebrated, not shushed. The Debate camp was life-changing.
-      name: Jessica K.
-      role: Gifted Parent
-      avatarAlt: Jessica K. avatar
-    - quote: YSA is the only program that understands asynchrony. My 8-year-old was able to take a high-level history camp because of the supportive environment.
-      name: David R.
-      role: Homeschool Dad
-      avatarAlt: David R. avatar
-    - quote: The mentors are incredible. They didn't just teach coding; they taught confidence. Best investment we've made in his education.
-      name: Maria L.
-      role: 2e Specialist
-      avatarAlt: Maria L. avatar
+    - quote: '"Why are there not more classes like this? Why was I just introduced to this now—and not earlier?!" Thank you for providing this space for her to grow.'
+      name: YSA Parent
+      role: Parent · Mr. Salch's class
+      avatarAlt: YSA parent, parent of a 2e student
+      avatarSrc: /assets/course-detail/testimonial-ysa-moms.png
+    - quote: '"She swooped in and started having a detailed conversation with the store owner about all things D&D. She loves the game, and I know a big part of the reason is that she had the opportunity to connect with others around it through your amazing class."'
+      name: YSA Parent
+      role: Parent of a D&D student
+      avatarAlt: Amanda C., YSA mother
+      avatarSrc: /assets/images/home-testimonials/amanda-c.png
+    - quote: '"The educational approach you presented—and the idea of flipping priorities in education—was so mind-blowing that I thought your talk could and should have been the keynote address for the Summit. Your presentation was incredible."'
+      name: Lindsay
+      role: Davidson Parent
+      avatarAlt: Lindsay, Davidson parent
+      avatarSrc: /assets/images/home-testimonials/lindsay-testimonial.png
 pricing:
   title: Simple, Flexible Pricing
   subtitle: Enroll with confidence. No hidden fees, just growth.
