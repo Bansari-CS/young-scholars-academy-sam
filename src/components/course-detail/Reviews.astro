@@ -1,5 +1,7 @@
 ---
-import { googleDriveDownloadUrl, googleDrivePreviewUrl, googleDriveThumbnailUrl } from '../../utils/googleDrive';
+import { googleDriveDownloadUrl, googleDrivePreviewUrl } from '../../utils/googleDrive';
+
+const videoPosterSrc = '/assets/images/ysa-video-poster.png';
 
 interface Props {
 	title: string;
@@ -15,7 +17,7 @@ const { title, rating, total, starsText, writeReviewLabel, galleryTitle, items }
 const insideClassroomVideoFileId = '1Bnzq3-lpkgr87KBcVA7mbPjl85DiZv_2';
 const insideClassroomVideoDownloadUrl = googleDriveDownloadUrl(insideClassroomVideoFileId);
 const insideClassroomVideoPreviewUrl = googleDrivePreviewUrl(insideClassroomVideoFileId);
-const insideClassroomVideoPosterUrl = googleDriveThumbnailUrl(insideClassroomVideoFileId, 800);
+const insideClassroomVideoPosterUrl = videoPosterSrc;
 ---
 
 <section class="flex flex-col gap-8">
