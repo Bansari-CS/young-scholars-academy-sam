@@ -135,7 +135,6 @@ programs:
         - label: Ages 8-12
         - label: Ages 10-14
         - label: Ages 12-18
-        - label: Ages 15+
     campType:
       label: Format
       campTypeSrLabel: Program format
