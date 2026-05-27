@@ -65,26 +65,26 @@ const insideClassroomVideoPosterUrl = googleDriveThumbnailUrl(insideClassroomVid
 	<section class="flex flex-col gap-6 pt-[61px]">
 		<h2 class="m-0 text-[24px] leading-8 font-bold text-slate-900">{galleryTitle}</h2>
 		<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-			<div class="relative h-48 w-full overflow-hidden rounded-2xl bg-slate-900" data-inside-classroom-video data-drive-preview={insideClassroomVideoPreviewUrl}>
-				<video
-					class="inside-classroom-video block h-full w-full object-cover object-center bg-black"
-					src={insideClassroomVideoDownloadUrl}
-					poster={insideClassroomVideoPosterUrl}
-					preload="metadata"
-					playsinline
-					autoplay
-					muted
-					loop
-					controls
-					aria-label="Inside the classroom video"
+			<div class="relative h-48 w-full overflow-hidden rounded-2xl bg-slate-900">
+				<img
+					class="block h-full w-full object-cover object-center"
+					src={insideClassroomVideoPosterUrl}
+					alt="Inside the classroom video thumbnail"
+					loading="lazy"
 				/>
-
-				<iframe
-					class="inside-classroom-video-iframe hidden h-full w-full border-0"
-					title="Inside the classroom video"
-					allow="autoplay; fullscreen"
-					allowfullscreen
-				/>
+				<button
+					type="button"
+					class="absolute inset-0 z-[2] flex cursor-pointer items-center justify-center border-0 bg-[rgba(15,23,42,0.28)] p-0 transition-colors hover:bg-[rgba(15,23,42,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0a9dfb]"
+					data-inside-classroom-open
+					aria-label="Play inside the classroom video"
+					aria-haspopup="dialog"
+				>
+					<span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/95 shadow-md">
+						<svg class="ml-0.5 h-5 w-5 text-slate-900" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.7-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14Z" />
+						</svg>
+					</span>
+				</button>
 			</div>
 			<img
 				class="block h-48 w-full rounded-2xl object-cover"
@@ -102,21 +102,77 @@ const insideClassroomVideoPosterUrl = googleDriveThumbnailUrl(insideClassroomVid
 	</section>
 </section>
 
-<script is:inline>
+<script is:inline define:vars={{ insideClassroomVideoDownloadUrl, insideClassroomVideoPreviewUrl }}>
 	(function () {
-		const wrap = document.querySelector('[data-inside-classroom-video]');
-		if (!wrap) return;
+		const openBtn = document.querySelector('[data-inside-classroom-open]');
+		if (!openBtn) return;
 
-		const video = wrap.querySelector('.inside-classroom-video');
-		const iframe = wrap.querySelector('.inside-classroom-video-iframe');
-		const previewUrl = wrap.getAttribute('data-drive-preview');
-		if (!video || !iframe || !previewUrl) return;
+		const modal = document.createElement('div');
+		modal.className = 'fixed inset-0 z-[210] hidden items-center justify-center p-4';
+		modal.setAttribute('aria-hidden', 'true');
+		modal.innerHTML = `
+			<button type="button" class="absolute inset-0 border-0 bg-[rgba(15,23,42,0.82)] p-0" data-modal-close aria-label="Close video"></button>
+			<div class="relative z-[1] w-full max-w-[56rem] overflow-hidden rounded-xl bg-black shadow-[0_24px_48px_rgba(0,0,0,0.45)]" role="dialog" aria-modal="true" aria-label="Inside the classroom video">
+				<button type="button" class="absolute right-2 top-2 z-[3] inline-flex h-8 w-8 items-center justify-center rounded-full border-0 bg-white/15 p-0 text-white" data-modal-close aria-label="Close video">
+					<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+				</button>
+				<video class="inside-classroom-modal-video block aspect-video w-full bg-black" controls playsinline preload="metadata"></video>
+				<iframe class="inside-classroom-modal-iframe hidden aspect-video w-full border-0 bg-black" title="Inside the classroom video" allow="autoplay; fullscreen" allowfullscreen></iframe>
+			</div>
+		`;
+		document.body.appendChild(modal);
 
-		video.addEventListener('error', function () {
-			video.classList.add('hidden');
-			video.removeAttribute('src');
-			iframe.classList.remove('hidden');
-			iframe.src = previewUrl;
+		const modalVideo = modal.querySelector('.inside-classroom-modal-video');
+		const modalIframe = modal.querySelector('.inside-classroom-modal-iframe');
+		const downloadUrl = insideClassroomVideoDownloadUrl;
+		const previewUrl = insideClassroomVideoPreviewUrl;
+
+		function closeModal() {
+			modal.classList.add('hidden');
+			modal.classList.remove('flex');
+			modal.setAttribute('aria-hidden', 'true');
+			document.body.classList.remove('overflow-hidden');
+			if (modalVideo) {
+				modalVideo.pause();
+				modalVideo.removeAttribute('src');
+			}
+			if (modalIframe) {
+				modalIframe.classList.add('hidden');
+				modalIframe.removeAttribute('src');
+			}
+		}
+
+		function openModal() {
+			if (!modalVideo || !modalIframe) return;
+			modal.classList.remove('hidden');
+			modal.classList.add('flex');
+			modal.setAttribute('aria-hidden', 'false');
+			document.body.classList.add('overflow-hidden');
+
+			modalIframe.classList.add('hidden');
+			modalIframe.removeAttribute('src');
+			modalVideo.classList.remove('hidden');
+			modalVideo.src = downloadUrl;
+			modalVideo.load();
+			modalVideo.play().catch(function () {});
+
+			modalVideo.onerror = function () {
+				modalVideo.pause();
+				modalVideo.removeAttribute('src');
+				modalVideo.classList.add('hidden');
+				modalIframe.classList.remove('hidden');
+				modalIframe.src = previewUrl;
+			};
+		}
+
+		openBtn.addEventListener('click', openModal);
+
+		modal.querySelectorAll('[data-modal-close]').forEach(function (btn) {
+			btn.addEventListener('click', closeModal);
+		});
+
+		document.addEventListener('keydown', function (event) {
+			if (event.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
 		});
 	})();
 </script>

@@ -131,9 +131,10 @@ programs:
     ageRange:
       label: Age Range
       options:
-        - label: Ages 6-8
-        - label: Ages 9-11
-        - label: Ages 12-14
+        - label: Ages 8-11
+        - label: Ages 8-12
+        - label: Ages 10-14
+        - label: Ages 12-18
         - label: Ages 15+
     campType:
       label: Format
@@ -167,7 +168,7 @@ programs:
     - href: '#'
       title: "Science Explorers: Chemistry Lab"
       description: Hands-on experiments exploring physics, chemistry,and biology fundamentals through play
-      ageLabel: Ages 8-11
+      ageLabel: Ages 12-18
       category:
         id: science
         label: Science
