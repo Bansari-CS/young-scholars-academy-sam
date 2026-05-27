@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { mentorProfileAssets } from './data';
+import { teacherPageAssets } from '../teachers/data';
 
 type HeroContent = CollectionEntry<'mentor-profile'>['data']['hero'];
 
@@ -35,7 +36,7 @@ const quoteAvatarAlt = `${displayName} avatar`;
 
 			<div class="absolute -bottom-[29px] lg:right-[-8px] flex items-center gap-4 rounded-3xl border border-[#e2e8f0] bg-white p-6 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] md:right-[-2px]">
 				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(4,140,60,0.1)]">
-					<img class="h-[30.53px] w-[30.53px]" src={mentorProfileAssets.topRatedIconUrl} alt="" aria-hidden="true" />
+					<img class="h-[30.53px] w-[30.53px]" src={teacherPageAssets.checkIconUrl} alt="" aria-hidden="true" />
 				</div>
 				<div>
 					<p class="text-[17px] font-semibold leading-[22.5px] text-[#111827]">{content.topRatedTitle}</p>
@@ -92,56 +93,76 @@ const quoteAvatarAlt = `${displayName} avatar`;
 	</div>
 </section>
 
-<script lang="ts">
-	const roots = document.querySelectorAll<HTMLElement>('[data-course-share]');
-	roots.forEach((root) => {
-		const toggle = root.querySelector<HTMLButtonElement>('[data-share-toggle]');
-		if (!toggle) return;
-
-		const titleFromDom = root.dataset.shareTitle?.trim() || '';
-
-		async function copyUrlToClipboard(url: string): Promise<boolean> {
-			if (navigator.clipboard?.writeText) {
+<script is:inline>
+	(function () {
+		function copyUrlToClipboard(url) {
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				return navigator.clipboard.writeText(url).then(
+					function () {
+						return true;
+					},
+					function () {
+						return false;
+					},
+				);
+			}
+			return new Promise(function (resolve) {
 				try {
-					await navigator.clipboard.writeText(url);
-					return true;
-				} catch {
-					/* continue */
+					var ta = document.createElement('textarea');
+					ta.value = url;
+					ta.setAttribute('readonly', '');
+					ta.style.position = 'fixed';
+					ta.style.left = '-9999px';
+					document.body.appendChild(ta);
+					ta.select();
+					var ok = document.execCommand('copy');
+					document.body.removeChild(ta);
+					resolve(ok);
+				} catch (e) {
+					resolve(false);
 				}
-			}
-			try {
-				const ta = document.createElement('textarea');
-				ta.value = url;
-				ta.setAttribute('readonly', '');
-				ta.style.position = 'fixed';
-				ta.style.left = '-9999px';
-				document.body.appendChild(ta);
-				ta.select();
-				const ok = document.execCommand('copy');
-				document.body.removeChild(ta);
-				return ok;
-			} catch {
-				return false;
-			}
+			});
 		}
 
-		toggle.addEventListener('click', async (e) => {
-			e.stopPropagation();
-			const url = window.location.href;
-			const title = titleFromDom || document.title;
-			const payload: ShareData = { title, text: title, url };
+		function initCourseShare() {
+			document.querySelectorAll('[data-course-share]:not([data-share-init])').forEach(function (root) {
+				root.setAttribute('data-share-init', 'true');
+				var toggle = root.querySelector('[data-share-toggle]');
+				if (!toggle) return;
 
-			if (typeof navigator.share === 'function') {
-				try {
-					await navigator.share(payload);
-					return;
-				} catch (err) {
-					const name = err instanceof Error ? err.name : '';
-					if (name === 'AbortError') return;
-				}
-			}
+				var titleFromDom = (root.getAttribute('data-share-title') || '').trim();
 
-			await copyUrlToClipboard(url);
-		});
-	});
+				toggle.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					var url = window.location.href;
+					var title = titleFromDom || document.title;
+					var payload = { title: title, text: title, url: url };
+
+					if (typeof navigator.share === 'function') {
+						navigator
+							.share(payload)
+							.catch(function (err) {
+								if (err && err.name === 'AbortError') return;
+								copyUrlToClipboard(url);
+							});
+						return;
+					}
+
+					copyUrlToClipboard(url);
+				});
+			});
+		}
+
+		function boot() {
+			initCourseShare();
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', boot);
+		} else {
+			boot();
+		}
+		document.addEventListener('astro:page-load', boot);
+	})();
 </script>

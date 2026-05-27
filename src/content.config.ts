@@ -35,13 +35,14 @@ const teachersCollection = defineCollection({
 			title: z.string(),
 			description: z.string(),
 			searchPlaceholder: z.string(),
-			filterLabels: z.object({
-				all: z.string(),
-				stem: z.string(),
-				creative: z.string(),
-				gaming: z.string(),
-				writing: z.string(),
-			}),
+			emptyFilterMessage: z.string().optional(),
+			filters: z.array(
+				z.object({
+					id: z.string(),
+					label: z.string(),
+					matchTags: z.array(z.string()).optional(),
+				}),
+			),
 			viewProfileLabel: z.string(),
 			items: z.array(
 				z.object({

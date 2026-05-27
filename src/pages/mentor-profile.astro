@@ -15,8 +15,9 @@ import MentorProfileFindClassCtaSection from '../components/mentor-profile/Mento
 import { getEntry } from 'astro:content';
 import { getSiteNavItems } from '../utils/getSiteNavItems';
 
-const [mentorProfileEntry, navItems] = await Promise.all([
+const [mentorProfileEntry, teachersEntry, navItems] = await Promise.all([
 	getEntry('mentor-profile', 'mentor-profile'),
+	getEntry('teachers', 'teachers'),
 	getSiteNavItems(),
 ]);
 
@@ -25,6 +26,13 @@ if (!mentorProfileEntry) {
 }
 
 const mentorProfileContent = mentorProfileEntry.data;
+const fallbackMentor = mentorProfileContent.hero;
+const mrSalch =
+	teachersEntry?.data.mentors.items.find((mentor) => mentor.name.trim().toLowerCase() === 'mr. salch') ??
+	null;
+const mentorName = mrSalch?.name ?? fallbackMentor.name;
+const mentorImageUrl = mrSalch?.imageUrl;
+const mentorCredentials = mrSalch?.credentials ?? fallbackMentor.credentials;
 ---
 
 <Layout
@@ -35,7 +43,10 @@ const mentorProfileContent = mentorProfileEntry.data;
 	<main>
 		<MentorProfileHeroSection
 			content={mentorProfileContent.hero}
-			shareTitle={`${mentorProfileContent.hero.name} | Young Scholars Academy`}
+			shareTitle={`${mentorName} | Young Scholars Academy`}
+			mentorName={mentorName}
+			mentorImageUrl={mentorImageUrl}
+			mentorCredentials={mentorCredentials}
 		/>
 		<MentorProfileAboutSection content={mentorProfileContent.about} />
 		<MentorProfileBeyondClassroomSection content={mentorProfileContent.beyondClassroom} />

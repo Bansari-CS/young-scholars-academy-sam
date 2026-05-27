@@ -15,9 +15,14 @@ const toSlug = (value: string) =>
 		.trim()
 		.replace(/[^a-z0-9]+/g, '-')
 		.replace(/^-+|-+$/g, '');
+
+const pillActive =
+	'rounded-full border border-[#0a9dfb] bg-[#0a9dfb] px-6 py-2.5 text-sm font-medium leading-5 text-white cursor-pointer';
+const pillInactive =
+	'rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569] cursor-pointer';
 ---
 
-<section class="bg-white px-5 pb-20 pt-14 md:px-12 md:pb-24 md:pt-12" aria-label="Mentor listing">
+<section class="bg-white px-5 pb-20 pt-14 md:px-12 md:pb-24 md:pt-12" aria-label="Mentor listing" data-teachers-mentors>
 	<header class="text-center">
 		<h2 class="text-4xl font-bold leading-tight text-[#111827] md:text-[44px]">{content.title}</h2>
 		<p class="mx-auto mt-4 max-w-[800px] text-base leading-[26px] text-[#475569]">
@@ -25,39 +30,80 @@ const toSlug = (value: string) =>
 		</p>
 	</header>
 
-	<div class="mx-auto mt-12 flex w-full max-w-[1184px] flex-col gap-4 rounded-2xl border border-[rgba(226,232,240,0.5)] bg-white p-4 shadow-[0px_1px_1px_rgba(0,0,0,0.05)] lg:flex-row lg:items-center" role="search">
-		<label class="relative flex flex-1 items-center rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-4 pb-[14px] pl-12 pt-[13px]" for="mentor-search">
+	<div
+		class="mx-auto mt-12 flex w-full max-w-[1184px] flex-col gap-4 rounded-2xl border border-[rgba(226,232,240,0.5)] bg-white p-4 shadow-[0px_1px_1px_rgba(0,0,0,0.05)] lg:flex-row lg:items-center"
+		role="search"
+		data-mentor-filter-bar
+	>
+		<label
+			class="relative flex flex-1 items-center rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-4 pb-[14px] pl-12 pt-[13px]"
+			for="mentor-search"
+		>
 			<img class="absolute left-4 h-4 w-4" src={teacherPageAssets.searchIconUrl} alt="" aria-hidden="true" />
-			<input class="w-full border-none bg-transparent text-sm leading-5 text-[#0f172a] outline-none placeholder:text-[#9ca3af]" id="mentor-search" type="search" name="mentorSearch" placeholder={content.searchPlaceholder} />
+			<input
+				class="w-full border-none bg-transparent text-sm leading-5 text-[#0f172a] outline-none placeholder:text-[#9ca3af]"
+				id="mentor-search"
+				type="search"
+				name="mentorSearch"
+				placeholder={content.searchPlaceholder}
+				data-mentor-search
+				autocomplete="off"
+			/>
 		</label>
 		<div class="flex flex-wrap gap-2" aria-label="Categories">
-			<button class="rounded-full border border-[#0a9dfb] bg-[#0a9dfb] px-6 py-2.5 text-sm font-medium leading-5 text-white" type="button">{content.filterLabels.all}</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.stem}</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.creative}</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.gaming}</button>
-			<button class="rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]" type="button">{content.filterLabels.writing}</button>
+			{
+				content.filters.map((filter, index) => (
+					<button
+						class={index === 0 ? pillActive : pillInactive}
+						type="button"
+						data-mentor-filter={filter.id}
+						data-match-tags={JSON.stringify(filter.matchTags ?? [])}
+						aria-pressed={index === 0 ? 'true' : 'false'}
+					>
+						{filter.label}
+					</button>
+				))
+			}
 		</div>
 	</div>
 
-	<ul class="mx-auto mt-[42px] grid max-w-[1152px] list-none grid-cols-1 gap-5 p-0 lg:grid-cols-2 xl:grid-cols-3 xl:gap-[30px]">
+	<p class="mx-auto mt-8 hidden max-w-[1152px] text-center text-[0.95rem] font-semibold text-[#64748b]" data-mentor-empty>
+		{content.emptyFilterMessage ?? 'No mentors match your search. Try another topic or clear your filters.'}
+	</p>
+
+	<ul class="mx-auto mt-[42px] grid max-w-[1152px] list-none grid-cols-1 items-stretch gap-5 p-0 lg:grid-cols-2 xl:grid-cols-3 xl:gap-[30px]">
 		{
 			content.items.map((mentor) => (
-				<li>
+				<li
+					class="flex min-h-0"
+					data-mentor-card
+					data-tags={mentor.tags.map((tag) => tag.label).join('|')}
+					data-search={[mentor.name, mentor.credentials, mentor.rating, ...mentor.bio, ...mentor.facts, ...mentor.tags.map((tag) => tag.label)]
+						.join(' ')
+						.toLowerCase()}
+				>
 					<a
 						href={`/teachers/${toSlug(mentor.name)}`}
-						class={`flex h-full flex-col overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white no-underline ${mentor.featured ? 'shadow-[0_10px_40px_-10px_rgba(0,132,255,0.08),0_4px_12px_-4px_rgba(0,0,0,0.04)]' : ''}`}
+						class={`flex h-full w-full flex-col overflow-hidden rounded-3xl border border-[#e2e8f0] bg-white no-underline cursor-pointer ${mentor.featured ? 'shadow-[0_10px_40px_-10px_rgba(0,132,255,0.08),0_4px_12px_-4px_rgba(0,0,0,0.04)]' : ''}`}
 					>
-						<div class="relative h-[304px]">
+						<div class="relative h-[304px] shrink-0">
 							<img class="block h-full w-full object-cover" src={mentor.imageUrl} alt={`${mentor.name} profile`} loading="lazy" />
-							{mentor.featured && <span class="absolute right-4 top-4 rounded-full bg-[#0a9dfb] px-3 py-1 text-[10px] font-bold leading-[15px] text-white">PEER FAVORITE</span>}
+							{mentor.featured && (
+								<span class="absolute right-4 top-4 rounded-full bg-[#0a9dfb] px-3 py-1 text-[10px] font-bold leading-[15px] text-white">
+									PEER FAVORITE
+								</span>
+							)}
 						</div>
 
-						<div class="flex flex-col p-6">
-							<div class="flex items-center justify-between">
-								<h3 class="m-0 text-[17px] font-semibold leading-[30px] text-[#111827]" style="font-family: 'Plus Jakarta Sans'; font-style: normal;">
+						<div class="flex flex-1 flex-col p-6">
+							<div class="flex items-center justify-between gap-3">
+								<h3
+									class="m-0 text-[17px] font-semibold leading-[30px] text-[#111827]"
+									style="font-family: 'Plus Jakarta Sans'; font-style: normal;"
+								>
 									{mentor.name}
 								</h3>
-								<span class="inline-flex items-center gap-1 text-xs leading-4 text-[#111827]">
+								<span class="inline-flex shrink-0 items-center gap-1 text-xs leading-4 text-[#111827]">
 									<img class="h-4 w-4" src={teacherPageAssets.starIconUrl} alt="" aria-hidden="true" />
 									{mentor.rating}
 								</span>
@@ -73,7 +119,7 @@ const toSlug = (value: string) =>
 								))}
 							</p>
 
-							<ul class="mt-6 flex list-none flex-wrap items-start gap-2 p-0">
+							<ul class="mt-6 flex flex-1 list-none flex-wrap content-start items-start gap-2 p-0">
 								{
 									mentor.tags.map((tag) => (
 										<li
@@ -85,11 +131,11 @@ const toSlug = (value: string) =>
 								}
 							</ul>
 
-							<ul class="mt-6 grid list-none gap-2 border-t border-[#e2e8f0] pt-4">
+							<ul class="mt-6 grid shrink-0 list-none gap-2 border-t border-[#e2e8f0] pt-4">
 								{
 									mentor.facts.map((fact) => (
 										<li class="flex items-center gap-2 text-xs leading-[18px] text-[#94a3b8]">
-											<img class="h-4 w-4" src={teacherPageAssets.checkIconUrl} alt="" aria-hidden="true" />
+											<img class="h-4 w-4 shrink-0" src={teacherPageAssets.checkIconUrl} alt="" aria-hidden="true" />
 											<span>{fact}</span>
 										</li>
 									))
@@ -107,3 +153,76 @@ const toSlug = (value: string) =>
 		}
 	</ul>
 </section>
+
+<script is:inline>
+	(function () {
+		var active =
+			'cursor-pointer rounded-full border border-[#0a9dfb] bg-[#0a9dfb] px-6 py-2.5 text-sm font-medium leading-5 text-white';
+		var idle =
+			'cursor-pointer rounded-full border border-[#e2e8f0] bg-[#f8fafc] px-6 py-2.5 text-sm font-medium leading-5 text-[#475569]';
+
+		function init(bar) {
+			var section = bar.closest('[data-teachers-mentors]');
+			var search = bar.querySelector('[data-mentor-search]');
+			var pills = bar.querySelectorAll('[data-mentor-filter]');
+			var cards = section ? section.querySelectorAll('[data-mentor-card]') : [];
+			var empty = section ? section.querySelector('[data-mentor-empty]') : null;
+			if (!search || !pills.length || !cards.length) return;
+
+			var activeId = 'all';
+			var activeTags = [];
+
+			function setActive(btn) {
+				activeId = btn.getAttribute('data-mentor-filter') || 'all';
+				try {
+					activeTags = JSON.parse(btn.getAttribute('data-match-tags') || '[]');
+				} catch (e) {
+					activeTags = [];
+				}
+				pills.forEach(function (pill) {
+					var on = pill === btn;
+					pill.setAttribute('aria-pressed', on ? 'true' : 'false');
+					pill.className = on ? active : idle;
+				});
+			}
+
+			function matchesCategory(cardTags) {
+				if (activeId === 'all') return true;
+				return activeTags.some(function (tag) {
+					return cardTags.indexOf(tag) !== -1;
+				});
+			}
+
+			function apply() {
+				var q = (search.value || '').trim().toLowerCase();
+				var n = 0;
+				cards.forEach(function (card) {
+					var blob = (card.getAttribute('data-search') || '').toLowerCase();
+					var tags = (card.getAttribute('data-tags') || '').split('|');
+					var show = (!q || blob.indexOf(q) !== -1) && matchesCategory(tags);
+					card.classList.toggle('hidden', !show);
+					if (show) n++;
+				});
+				if (empty) empty.classList.toggle('hidden', n > 0);
+			}
+
+			pills.forEach(function (pill) {
+				pill.addEventListener('click', function () {
+					setActive(pill);
+					apply();
+				});
+			});
+			search.addEventListener('input', apply);
+			search.addEventListener('search', apply);
+			setActive(pills[0]);
+			apply();
+		}
+
+		function boot() {
+			document.querySelectorAll('[data-mentor-filter-bar]').forEach(init);
+		}
+		if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+		else boot();
+		document.addEventListener('astro:page-load', boot);
+	})();
+</script>

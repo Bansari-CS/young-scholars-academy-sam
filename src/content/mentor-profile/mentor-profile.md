@@ -1,75 +1,74 @@
 ---
 seo:
   title: Mentor Profile | Young Scholars Academy
-  description: Discover Dr. Emily Ross, a gifted specialist mentor at Young Scholars Academy.
+  description: Discover Mr. Salch, a robotics and STEM mentor at Young Scholars Academy.
 hero:
-  imageAlt: Dr. Emily Ross profile
+  imageAlt: Mr. Salch profile
   topRatedTitle: Top Rated Mentor
-  topRatedSubtitle: 4.9/5 from 200+ reviews
-  badgeLabel: GIFTED SPECIALIST
-  experienceLabel: 8+ YEARS EXPERIENCE
-  name: Dr. Emily Ross
-  credentials: PhD Chemistry, MIT • Master Mentor
-  quoteAvatarAlt: Dr. Emily Ross avatar
-  quote: "\"I don't just teach science; I help brilliant minds find patterns in the chaos. Every neurodivergent child has a unique rhythm of learning, and my job is to dance to that beat.\""
+  topRatedSubtitle: 5.0/5 from families and students
+  badgeLabel: ROBOTICS & STEM MENTOR
+  experienceLabel: 10,000+ STUDENTS TAUGHT
+  name: Mr. Salch
+  credentials: Retired Tech Executive, Robotics Specialist
+  quoteAvatarAlt: Mr. Salch avatar
+  quote: "\"I don't just teach robotics and STEM; I help students build confidence by creating, testing, and solving real problems with their own hands.\""
   primaryCtaLabel: View My Classes
   primaryCtaHref: "#"
   secondaryCtaLabel: Enroll Now
   secondaryCtaHref: "#"
 about:
-  title: About Dr. Ross
+  title: About Mr. Salch
   paragraphs:
-    - Dr. Emily Ross joined Young Scholars Academy with a mission to bridge the gap between high-level academic rigor and the emotional safety that 2e learners require. With a PhD in Chemistry from MIT and a background in neuroeducational research, she specializes in making complex scientific concepts accessible through narrative and hands-on discovery.
-    - Having grown up as a twice-exceptional learner herself, Emily understands the frustration of being bored in a traditional classroom while simultaneously feeling overwhelmed by social expectations. Her classes are designed to be deep dives where curiosity is the only limit, and mistakes are celebrated as essential data points in the scientific process.
+    - Mr. Salch is a retired tech executive and experienced teacher who has successfully taught over 10,000 students across several platforms, schools, and approaches.
+    - He has perfected the art of online teaching with hands-on activities in an exciting and inviting environment, helping gifted and neurodivergent learners stay challenged and engaged.
 beyondClassroom:
   title: Beyond the Classroom
-  description: Get to know the human behind the PhD.
+  description: Get to know the mentor behind the robotics classes.
   items:
-    - title: Global Explorer
-      description: Dr. Ross has traveled to over 30 countries, always bringing back a local science story.
-    - title: Vintage Collector
-      description: She has a growing collection of over 50 vintage science beakers from the early 20th century.
-    - title: Antarctic Researcher
-      description: She once spent an entire summer in Antarctica studying ice core samples in sub-zero temperatures.
-    - title: Chemistry Baker
-      description: In her free time, she bakes elaborate, scientifically accurate cakes (Periodic Table cupcakes!).
+    - title: Hands-On Builder
+      description: Mr. Salch loves project-based learning and helping students prototype ideas from day one.
+    - title: Robotics Mentor
+      description: He is known for making robotics approachable through practical, step-by-step challenges.
+    - title: STEM Problem Solver
+      description: He teaches students to break big problems into smaller parts and iterate with confidence.
+    - title: Student Champion
+      description: Families value his patient coaching style and his ability to keep advanced learners motivated.
 howITeach:
   title: How I Teach
-  description: Creating an environment where high-potential minds can thrive through specific pedagogical pillars.
+  description: Creating an environment where high-potential minds thrive through structure, challenge, and hands-on discovery.
   cards:
     - title: Discussion-Based
       lines:
-        - We learn through Socratic
-        - dialogue, where every
-        - question is an invitation to
-        - explore deeper.
+        - We start with student
+        - questions and guide thinking
+        - through clear, supportive
+        - coaching conversations.
     - title: Interactive Discovery
       lines:
-        - Students don't just watch;
-        - they manipulate variables
-        - and conduct virtual
-        - experiments in real-time.
+        - Students build, test, and
+        - improve projects in real
+        - time so learning feels
+        - active and memorable.
     - title: Student-Led Pace
       lines:
-        - We follow the spark of
-        - student curiosity, allowing
-        - the cohort to steer the
-        - direction of our inquiry.
+        - We follow each learner's
+        - curiosity and challenge
+        - level, so students can go
+        - deeper at the right pace.
     - title: Personalized Approach
       lines:
-        - Assignments are adjusted
-        - to match each child's
-        - specific output style-
-        - writing, drawing, or
-        - presenting.
+        - Assignments are adapted
+        - to each learner's strengths
+        - with multiple ways to
+        - show understanding.
 insideClassroom:
   title: Inside the Classroom
-  description: A glimpse into our daily discoveries and breakthrough moments.
-  mainVideoLabel: "Watch: Why Alchemy Matters"
+  description: A glimpse into robotics sessions, problem-solving, and student breakthroughs.
+  mainVideoLabel: "Watch: Hands-On Robotics in Action"
   projectBadge: STUDENT PROJECT
-  projectTitle: "\"Complex Molecule Visualization\" - Leo, Age 12"
+  projectTitle: "\"Autonomous Robot Challenge\" - Student Showcase"
   liveBadge: LIVE MOMENT
-  liveTitle: The "Aha!" moment during titration lab
+  liveTitle: The "Aha!" moment during a live build session
 classroomVideoGallery:
   title: Videos gallery
   description: Short moments from class and what students say about learning with this mentor.
@@ -91,39 +90,39 @@ classroomVideoGallery:
     - videoSrc: /assets/images/videoGallery.mp4
       label: Student testimonial — project showcase
 classes:
-  title: Classes Taught by Emily
-  description: Engaging, high-level courses for curious minds.
+  title: Classes Taught by Mr. Salch
+  description: Engaging robotics and STEM courses for curious minds.
   viewAllLabel: View All Classes
   viewAllHref: "#"
   featuredAgeLabel: Ages 10-14
-  featuredTitle: Alchemy to Atoms
-  featuredDescription: A deep dive into the history of chemistry, from ancient mysteries to modern molecular science. Perfect for kids who love to ask why about the physical world.
+  featuredTitle: Robotics Lab Foundations
+  featuredDescription: A hands-on class where students design, test, and improve robotics concepts while building real-world STEM confidence.
   featuredStartsLabel: Starts
   featuredStartsValue: Oct 12th
   featuredEnrollLabel: Enroll Now
   featuredEnrollHref: "#"
   upcomingTitle: New Course Coming Soon
-  upcomingDescription: Dr. Ross is currently developing "Neurobiology of Genius".
+  upcomingDescription: Mr. Salch is currently developing an advanced robotics problem-solving series.
   upcomingCtaLabel: Get Notified
   upcomingCtaHref: "#"
 studentExperience:
   title: What Students Experience
-  description: Beyond the curriculum, Dr. Ross focuses on the holistic growth of the 2e scholar.
+  description: Beyond the curriculum, Mr. Salch focuses on confidence, creativity, and problem-solving growth.
   items:
     - title: High Engagement
       lines:
-        - No more "boring" science. We use narrative
-        - loops and gamified discovery to keep bright
-        - minds hooked.
+        - No passive lessons. Students build and
+        - test ideas in class, keeping curious minds
+        - fully engaged.
     - title: Intellectual Safety
       lines:
-        - A space where being different is the norm.
-        - We celebrate quirks and intense hyper-
-        - fixations.
+        - A space where gifted and neurodivergent
+        - learners can think differently and still
+        - feel supported.
     - title: True Belonging
       lines:
-        - Connecting with intellectual peers who finally
-        - speak the same language of curiosity.
+        - Connecting with peers who share similar
+        - curiosity, intensity, and love for learning.
 testimonials:
   title: What Our Parents Say...
   description: Discover why hundreds of families trust Young Scholars Academy to nurture and inspire their gifted and neurodivergent learners.
@@ -132,7 +131,7 @@ testimonials:
       name: Jennifer M.
       meta: Parent of a 9-year-old scholar
       highlight: false
-    - quote: The Chemistry program didn't just teach my daughter facts; it ignited a passion. Dr. Emily Ross has this incredible way of making complex topics feel like a thrilling mystery to solve.
+    - quote: Mr. Salch's robotics classes didn't just teach our daughter skills; they gave her confidence to solve hard problems and think like an engineer.
       name: David K.
       meta: Parent of an 11-year-old scholar
       highlight: true
