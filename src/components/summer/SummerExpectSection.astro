@@ -42,10 +42,10 @@ const expectGridPlacement = [
 ];
 
 const expectConnectorOdd =
-	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:right-[-61px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:right-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
+	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:right-[-88px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:right-[-80px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[80px]";
 
 const expectConnectorEven =
-	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:left-[-61px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:left-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
+	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:left-[-88px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:left-[-80px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[80px]";
 ---
 
 <section
@@ -69,7 +69,7 @@ const expectConnectorEven =
 					return (
 						<article
 							class:list={[
-								'relative z-[1] flex h-auto min-h-[240px] flex-col overflow-visible rounded-2xl bg-white p-8 outline outline-1 outline-[#e2e8f0] max-[900px]:col-start-1 max-[900px]:row-auto max-[900px]:mt-0 max-[600px]:p-6',
+								'relative z-[1] self-start flex h-auto min-h-[240px] flex-col overflow-visible rounded-2xl bg-white p-8 outline outline-1 outline-[#e2e8f0] max-[900px]:col-start-1 max-[900px]:row-auto max-[900px]:mt-0 max-[600px]:p-6',
 								expectGridPlacement[index] ?? 'min-[901px]:col-start-1 min-[901px]:row-auto min-[901px]:mt-0',
 								isOdd ? expectConnectorOdd : expectConnectorEven,
 								connector,

@@ -37,10 +37,10 @@ const processGridPlacement = [
 ];
 
 const processConnectorOdd =
-	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:right-[-61px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:right-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
+	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:right-[-69px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:right-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
 
 const processConnectorEven =
-	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:left-[-61px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:left-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
+	"min-[901px]:before:content-[''] min-[901px]:before:absolute min-[901px]:before:top-[102px] min-[901px]:before:left-[-69px] min-[901px]:before:z-[3] min-[901px]:before:size-3 min-[901px]:before:rounded-full min-[901px]:after:content-[''] min-[901px]:after:absolute min-[901px]:after:top-[108px] min-[901px]:after:left-[-55px] min-[901px]:after:z-[2] min-[901px]:after:h-0.5 min-[901px]:after:w-[55px]";
 
 const cardSadPathD =
 	'M12 24C18.623 24 24 18.623 24 12C24 5.37702 18.623 0 12 0C5.37702 0 0 5.37702 0 12C0 18.623 5.37702 24 12 24ZM7.46719 18.2203C7.34531 18.6141 6.92344 18.8391 6.52969 18.7125S5.91094 18.1687 6.0375 17.775C6.80625 15.2859 9.20156 13.5 12 13.5C14.7984 13.5 17.1938 15.2859 17.9672 17.7797C18.0891 18.1734 17.8687 18.5953 17.475 18.7172S16.6594 18.6187 16.5375 18.225C15.9609 16.3781 14.1609 15 12 15C9.83906 15 8.03906 16.3781 7.46719 18.2203ZM6.76875 9.75C6.76875 8.92213 7.44088 8.25 8.26875 8.25C9.09662 8.25 9.76875 8.92213 9.76875 9.75C9.76875 10.5779 9.09662 11.25 8.26875 11.25C7.44088 11.25 6.76875 10.5779 6.76875 9.75ZM15.7688 8.25C16.5966 8.25 17.2687 8.92213 17.2687 9.75C17.2687 10.5779 16.5966 11.25 15.7688 11.25C14.9409 11.25 14.2688 10.5779 14.2688 9.75C14.2688 8.92213 14.9409 8.25 15.7688 8.25Z';
@@ -185,7 +185,7 @@ const { content, processContent } = Astro.props;
 					return (
 						<article
 							class:list={[
-								'relative z-[1] flex h-auto min-h-[240px] flex-col overflow-visible rounded-2xl bg-white p-8 outline outline-1 outline-[#e2e8f0]',
+								'relative z-[1] self-start flex h-auto min-h-[240px] flex-col overflow-visible rounded-2xl bg-white p-8 outline outline-1 outline-[#e2e8f0]',
 								processGridPlacement[index] ?? 'min-[901px]:col-start-1 min-[901px]:row-auto min-[901px]:mt-0',
 								isOdd ? processConnectorOdd : processConnectorEven,
 								theme.connector,
@@ -245,7 +245,7 @@ const { content, processContent } = Astro.props;
 							<p class="relative z-[1] mt-[7px] m-0 max-w-[392px] p-0 text-[16px] leading-[26px] text-[#475569]">
 								{step.desc}
 							</p>
-							<footer class="relative z-[1] mt-auto flex max-w-[392px] items-center gap-[0.55rem] border-t border-[#f1f5f9] pt-4 text-[0.68rem] text-[#94a3b8]">
+								<footer class="relative z-[1] mt-4 flex max-w-[392px] items-center gap-[0.55rem] border-t border-[#f1f5f9] pt-4 text-[0.68rem] text-[#94a3b8]">
 								<span class:list={['size-[0.45rem] shrink-0 rounded-full', theme.dot]} />
 								{step.footer}
 							</footer>
