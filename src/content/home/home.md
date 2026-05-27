@@ -31,14 +31,16 @@ hero:
     href: /#programs-heading
   ratingText: 4.9/5 from parent reviews
   socialProofAvatars:
-    - /assets/images/Parent-2.jpg
-    - /assets/images/parent-1.jpg
-    - /assets/images/Parent-3.jpg
+    - /assets/educators/1-Megan-Hughes.png
+    - /assets/educators/2-Mr-Salch.png
+    - /assets/educators/3-Ms-Jackson.png
   dashboard:
     studentName: Alex's Dashboard
     course: Advanced Math • Grade 6
     streakLabel: 15 Day Streak
     cardAriaLabel: Product preview
+    videoDriveFileId: 1FQx0D2DyjFd27dWf-5uqED267R6xCGKv
+    videoAriaLabel: Children laughing and using a laptop at Young Scholars Academy
     progressTag: In Progress
     lessonProgressLabel: Lesson Progress
     lessonTitle: Algebraic Expressions

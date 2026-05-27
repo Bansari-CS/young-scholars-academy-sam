@@ -1,5 +1,10 @@
 ---
 import PrimaryButton from '../ui/PrimaryButton.astro';
+import {
+	googleDriveDownloadUrl,
+	googleDrivePreviewUrl,
+	googleDriveThumbnailUrl,
+} from '../../utils/googleDrive';
 
 interface Props {
 	badges: string[];
@@ -13,6 +18,8 @@ interface Props {
 	taughtByLabel: string;
 	primaryCtaLabel: string;
 	secondaryCtaLabel: string;
+	videoDriveFileId?: string;
+	videoAriaLabel?: string;
 }
 
 const {
@@ -27,7 +34,15 @@ const {
 	taughtByLabel,
 	primaryCtaLabel,
 	secondaryCtaLabel,
+	videoDriveFileId: videoDriveFileIdProp,
+	videoAriaLabel: videoAriaLabelProp,
 } = Astro.props;
+
+const videoDriveFileId = videoDriveFileIdProp?.trim();
+const videoDownloadUrl = videoDriveFileId ? googleDriveDownloadUrl(videoDriveFileId) : null;
+const videoPreviewUrl = videoDriveFileId ? googleDrivePreviewUrl(videoDriveFileId) : null;
+const videoPosterUrl = videoDriveFileId ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
+const videoAriaLabel = videoAriaLabelProp ?? 'Course preview video';
 ---
 
 <section class="course-hero">
@@ -92,16 +107,44 @@ const {
 		<aside class="relative h-[532px] w-full lg:max-w-[560px] max-w-full">
 			<div class="absolute inset-[16px_-16px_-16px_16px] rounded-[40px]"></div>
 			<div class="relative overflow-hidden rounded-[40px] border-[8px] border-white shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]">
-				<div class="relative aspect-video w-full min-h-[220px] bg-slate-900 lg:min-h-[516px]">
-					<iframe
-						class="absolute inset-0 h-full w-full border-0"
-						src="https://www.youtube.com/embed/NpEaa2P7qZI?si=aKDUpgdln8tkIYHV"
-						title="YouTube video player"
-						loading="lazy"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-						referrerpolicy="strict-origin-when-cross-origin"
-						allowfullscreen
-					/>
+				<div
+					class="relative aspect-video w-full min-h-[220px] bg-slate-900 lg:min-h-[516px]"
+					data-course-hero-video={videoDriveFileId ? '' : undefined}
+					data-drive-preview={videoPreviewUrl ?? undefined}
+				>
+					{
+						videoDriveFileId ? (
+							<>
+								<video
+									class="course-hero-video absolute inset-0 h-full w-full object-cover"
+									poster={videoPosterUrl ?? undefined}
+									autoplay
+									muted
+									loop
+									playsinline
+									preload="metadata"
+									aria-label={videoAriaLabel}
+									src={videoDownloadUrl ?? undefined}
+								/>
+								<iframe
+									class="course-hero-video-iframe absolute inset-0 hidden h-full w-full border-0"
+									title={videoAriaLabel}
+									allow="autoplay; fullscreen"
+									allowfullscreen
+								/>
+							</>
+						) : (
+							<iframe
+								class="absolute inset-0 h-full w-full border-0"
+								src="https://www.youtube.com/embed/NpEaa2P7qZI?si=aKDUpgdln8tkIYHV"
+								title="YouTube video player"
+								loading="lazy"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								referrerpolicy="strict-origin-when-cross-origin"
+								allowfullscreen
+							/>
+						)
+					}
 				</div>
 			<!-- <div class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 backdrop-blur-[4px]">
 				<img
@@ -120,3 +163,23 @@ const {
 		</aside>
 	</div>
 </section>
+
+<script is:inline>
+	(function () {
+		const wrap = document.querySelector('[data-course-hero-video]');
+		if (!wrap) return;
+
+		const video = wrap.querySelector('.course-hero-video');
+		const iframe = wrap.querySelector('.course-hero-video-iframe');
+		const previewUrl = wrap.getAttribute('data-drive-preview');
+
+		if (!video || !iframe || !previewUrl) return;
+
+		video.addEventListener('error', function () {
+			video.classList.add('hidden');
+			video.removeAttribute('src');
+			iframe.classList.remove('hidden');
+			iframe.src = previewUrl;
+		});
+	})();
+</script>
