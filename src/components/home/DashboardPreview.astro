@@ -1,5 +1,10 @@
 ---
 import type { HeroDashboardData } from '../../types/home';
+import {
+	googleDriveDownloadUrl,
+	googleDrivePreviewUrl,
+	googleDriveThumbnailUrl,
+} from '../../utils/googleDrive';
 
 interface Props {
 	dashboard: HeroDashboardData;
@@ -8,163 +13,216 @@ interface Props {
 const { dashboard } = Astro.props;
 
 const studentAvatarSrc = '/assets/images/Student.jpg';
+const videoDriveFileId = dashboard.videoDriveFileId?.trim();
+const videoDownloadUrl = videoDriveFileId ? googleDriveDownloadUrl(videoDriveFileId) : null;
+const videoPreviewUrl = videoDriveFileId ? googleDrivePreviewUrl(videoDriveFileId) : null;
+const videoPosterUrl = videoDriveFileId ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
+const videoAriaLabel =
+	dashboard.videoAriaLabel ?? 'Young Scholars Academy students in class';
 
 const statIconBgClass: Record<string, string> = {
 	accuracy: 'bg-emerald-50',
 	points: 'bg-blue-50',
 	study: 'bg-violet-50',
 };
+
+const cardShellClasses =
+	'relative box-border min-h-[560px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]';
 ---
 
 <aside
 	class="w-full max-w-[39.5rem] justify-self-end max-[1020px]:max-w-none max-[1020px]:justify-self-stretch"
-	aria-label={dashboard.cardAriaLabel ?? 'Product preview'}
+	aria-label={videoDriveFileId ? videoAriaLabel : (dashboard.cardAriaLabel ?? 'Product preview')}
 >
-	<div
-		class="relative box-border min-h-[560px] rounded-3xl border border-slate-200 bg-white p-[1.5625rem] pb-[1.875rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] before:pointer-events-none before:absolute before:inset-px before:z-0 before:rounded-[23px] before:bg-[linear-gradient(138.47deg,rgba(240,244,255,0.4)_0%,rgba(245,243,255,0.4)_100%)] before:content-[''] [&>*]:relative [&>*]:z-[1]"
-	>
-		<div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-[1.3125rem]">
-			<div class="flex min-w-0 items-center gap-3">
-				<img
-					class="h-12 w-12 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
-					src={studentAvatarSrc}
-					alt=""
-					width="48"
-					height="48"
-					loading="lazy"
+	{
+		videoDriveFileId ? (
+			<div class={cardShellClasses} data-hero-dashboard-video data-drive-preview={videoPreviewUrl}>
+				<video
+					class="hero-dashboard-video absolute inset-0 h-full w-full object-cover"
+					poster={videoPosterUrl ?? undefined}
+					autoplay
+					muted
+					loop
+					playsinline
+					preload="metadata"
+					aria-label={videoAriaLabel}
+					src={videoDownloadUrl ?? undefined}
 				/>
-				<div class="min-w-0">
-					<p class="m-0 font-display text-base font-bold leading-6 text-slate-800">{dashboard.studentName}</p>
-					<p class="m-0 text-xs leading-4 text-slate-500">{dashboard.course}</p>
-				</div>
+				<iframe
+					class="hero-dashboard-video-iframe absolute inset-0 hidden h-full w-full border-0"
+					title={videoAriaLabel}
+					allow="autoplay; fullscreen"
+					allowfullscreen
+				/>
 			</div>
-			<p
-				class="m-0 inline-flex shrink-0 items-center gap-1.5 rounded-xl border border-[#048c3c] bg-[#e3ffee] px-[17px] py-[9px] font-display text-xs font-bold leading-4 text-[#048c3c] shadow-sm"
-			>
-				<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="block shrink-0">
-					<path
-						d="M3.73359 0.127154C3.91641 -0.0439393 4.2 -0.0415955 4.38281 0.129498C5.02969 0.736529 5.63672 1.39044 6.20391 2.09825C6.46172 1.76075 6.75469 1.39278 7.07109 1.09278C7.25625 0.919342 7.54219 0.919342 7.72734 1.09512C8.53828 1.86856 9.225 2.89044 9.70781 3.86075C10.1836 4.817 10.5 5.79434 10.5 6.4834C10.5 9.47403 8.16094 12.0006 5.25 12.0006C2.30625 12.0006 0 9.47169 0 6.48106C0 5.58106 0.417187 4.48184 1.06406 3.39434C1.71797 2.29044 2.64141 1.13965 3.73359 0.127154ZM5.28984 9.75059C5.88281 9.75059 6.40781 9.58653 6.90234 9.2584C7.88906 8.56934 8.15391 7.19122 7.56094 6.1084C7.45547 5.89747 7.18594 5.8834 7.03359 6.06153L6.44297 6.74825C6.28828 6.92637 6.00937 6.92169 5.86406 6.73653C5.47734 6.24434 4.78594 5.36544 4.39219 4.86622C4.24453 4.67872 3.96328 4.67637 3.81328 4.86387C3.02109 5.85997 2.62266 6.48809 2.62266 7.19356C2.625 8.79903 3.81094 9.75059 5.28984 9.75059Z"
-						fill="#048C3C"
-					/>
-				</svg>
-				<span>{dashboard.streakLabel}</span>
-			</p>
-		</div>
-
-		<div
-			class="relative mt-6 overflow-hidden rounded-2xl bg-[linear-gradient(160.95deg,#5751e4_0%,#4a42c9_100%)] p-6 text-white shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)] before:pointer-events-none before:absolute before:right-0 before:top-0 before:h-32 before:w-32 before:rounded-full before:bg-white/10 before:blur-[20px] before:content-['']"
-		>
-			<span
-				class="relative z-[1] inline-block rounded-lg bg-white/20 px-3 py-1.5 font-display text-[0.625rem] font-bold uppercase leading-[0.9375rem] tracking-[0.025rem] text-white"
-			>
-				{dashboard.progressTag}
-			</span>
-			<h3 class="relative z-[1] m-0 mt-2 font-display text-lg font-bold leading-7 text-white">
-				{dashboard.lessonTitle}
-			</h3>
-			<p class="relative z-[1] m-0 text-sm leading-5 text-[#e0e9ff]">{dashboard.lessonDescription}</p>
-
-			<div class="relative z-[1] flex items-center justify-between pb-1 pt-2 mt-3">
-				<span class="font-display text-xs font-medium leading-4 text-white/80">
-					{dashboard.lessonProgressLabel}
-				</span>
-				<span class="font-display text-sm font-bold leading-5 text-white">{dashboard.progressPercent}%</span>
-			</div>
+		) : (
 			<div
-				class="relative z-[1] h-2.5 w-full overflow-hidden rounded-full bg-[rgba(61,55,163,0.5)]"
-				role="progressbar"
-				aria-valuenow={dashboard.progressPercent}
-				aria-valuemin="0"
-				aria-valuemax="100"
+				class={`${cardShellClasses} p-[1.5625rem] pb-[1.875rem] before:pointer-events-none before:absolute before:inset-px before:z-0 before:rounded-[23px] before:bg-[linear-gradient(138.47deg,rgba(240,244,255,0.4)_0%,rgba(245,243,255,0.4)_100%)] before:content-[''] [&>*]:relative [&>*]:z-[1]`}
 			>
-				<div
-					class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-white"
-					style={`width: ${dashboard.progressPercent}%`}
-				/>
-			</div>
-		</div>
+				<div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-[1.3125rem]">
+					<div class="flex min-w-0 items-center gap-3">
+						<img
+							class="h-12 w-12 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
+							src={studentAvatarSrc}
+							alt=""
+							width="48"
+							height="48"
+							loading="lazy"
+						/>
+						<div class="min-w-0">
+							<p class="m-0 font-display text-base font-bold leading-6 text-slate-800">{dashboard.studentName}</p>
+							<p class="m-0 text-xs leading-4 text-slate-500">{dashboard.course}</p>
+						</div>
+					</div>
+					<p
+						class="m-0 inline-flex shrink-0 items-center gap-1.5 rounded-xl border border-[#048c3c] bg-[#e3ffee] px-[17px] py-[9px] font-display text-xs font-bold leading-4 text-[#048c3c] shadow-sm"
+					>
+						<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="block shrink-0">
+							<path
+								d="M3.73359 0.127154C3.91641 -0.0439393 4.2 -0.0415955 4.38281 0.129498C5.02969 0.736529 5.63672 1.39044 6.20391 2.09825C6.46172 1.76075 6.75469 1.39278 7.07109 1.09278C7.25625 0.919342 7.54219 0.919342 7.72734 1.09512C8.53828 1.86856 9.225 2.89044 9.70781 3.86075C10.1836 4.817 10.5 5.79434 10.5 6.4834C10.5 9.47403 8.16094 12.0006 5.25 12.0006C2.30625 12.0006 0 9.47169 0 6.48106C0 5.58106 0.417187 4.48184 1.06406 3.39434C1.71797 2.29044 2.64141 1.13965 3.73359 0.127154ZM5.28984 9.75059C5.88281 9.75059 6.40781 9.58653 6.90234 9.2584C7.88906 8.56934 8.15391 7.19122 7.56094 6.1084C7.45547 5.89747 7.18594 5.8834 7.03359 6.06153L6.44297 6.74825C6.28828 6.92637 6.00937 6.92169 5.86406 6.73653C5.47734 6.24434 4.78594 5.36544 4.39219 4.86622C4.24453 4.67872 3.96328 4.67637 3.81328 4.86387C3.02109 5.85997 2.62266 6.48809 2.62266 7.19356C2.625 8.79903 3.81094 9.75059 5.28984 9.75059Z"
+								fill="#048C3C"
+							/>
+						</svg>
+						<span>{dashboard.streakLabel}</span>
+					</p>
+				</div>
 
-		<div class="mt-6 grid grid-cols-3 gap-4 max-[760px]:grid-cols-1">
-			{
-				dashboard.stats.map((item) => (
-					<article class="relative flex flex-col gap-1 rounded-xl border border-slate-100 bg-white p-[17px] shadow-[0_1px_8px_-1px_rgba(0,0,0,0.06)]">
+				<div
+					class="relative mt-6 overflow-hidden rounded-2xl bg-[linear-gradient(160.95deg,#5751e4_0%,#4a42c9_100%)] p-6 text-white shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)] before:pointer-events-none before:absolute before:right-0 before:top-0 before:h-32 before:w-32 before:rounded-full before:bg-white/10 before:blur-[20px] before:content-['']"
+				>
+					<span
+						class="relative z-[1] inline-block rounded-lg bg-white/20 px-3 py-1.5 font-display text-[0.625rem] font-bold uppercase leading-[0.9375rem] tracking-[0.025rem] text-white"
+					>
+						{dashboard.progressTag}
+					</span>
+					<h3 class="relative z-[1] m-0 mt-2 font-display text-lg font-bold leading-7 text-white">
+						{dashboard.lessonTitle}
+					</h3>
+					<p class="relative z-[1] m-0 text-sm leading-5 text-[#e0e9ff]">{dashboard.lessonDescription}</p>
+
+					<div class="relative z-[1] flex items-center justify-between pb-1 pt-2 mt-3">
+						<span class="font-display text-xs font-medium leading-4 text-white/80">
+							{dashboard.lessonProgressLabel}
+						</span>
+						<span class="font-display text-sm font-bold leading-5 text-white">{dashboard.progressPercent}%</span>
+					</div>
+					<div
+						class="relative z-[1] h-2.5 w-full overflow-hidden rounded-full bg-[rgba(61,55,163,0.5)]"
+						role="progressbar"
+						aria-valuenow={dashboard.progressPercent}
+						aria-valuemin="0"
+						aria-valuemax="100"
+					>
 						<div
-							class={`relative z-[1] grid h-10 w-10 place-items-center rounded-lg ${statIconBgClass[item.icon] ?? 'bg-slate-50'}`}
+							class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-white"
+							style={`width: ${dashboard.progressPercent}%`}
+						/>
+					</div>
+				</div>
+
+				<div class="mt-6 grid grid-cols-3 gap-4 max-[760px]:grid-cols-1">
+					{
+						dashboard.stats.map((item) => (
+							<article class="relative flex flex-col gap-1 rounded-xl border border-slate-100 bg-white p-[17px] shadow-[0_1px_8px_-1px_rgba(0,0,0,0.06)]">
+								<div
+									class={`relative z-[1] grid h-10 w-10 place-items-center rounded-lg ${statIconBgClass[item.icon] ?? 'bg-slate-50'}`}
+									aria-hidden="true"
+								>
+									{item.icon === 'accuracy' ? (
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-auto max-w-full">
+											<path
+												d="M15.75 9C15.75 5.27457 12.7254 2.25 9 2.25C5.27457 2.25 2.25 5.27457 2.25 9C2.25 12.7254 5.27457 15.75 9 15.75C12.7254 15.75 15.75 12.7254 15.75 9ZM0 9C0 4.03276 4.03276 0 9 0C13.9672 0 18 4.03276 18 9C18 13.9672 13.9672 18 9 18C4.03276 18 0 13.9672 0 9ZM9 11.8125C10.5523 11.8125 11.8125 10.5523 11.8125 9C11.8125 7.44774 10.5523 6.1875 9 6.1875C7.44774 6.1875 6.1875 7.44774 6.1875 9C6.1875 10.5523 7.44774 11.8125 9 11.8125ZM9 3.9375C11.7941 3.9375 14.0625 6.20593 14.0625 9C14.0625 11.7941 11.7941 14.0625 9 14.0625C6.20593 14.0625 3.9375 11.7941 3.9375 9C3.9375 6.20593 6.20593 3.9375 9 3.9375ZM7.875 9C7.875 8.3791 8.3791 7.875 9 7.875C9.6209 7.875 10.125 8.3791 10.125 9C10.125 9.6209 9.6209 10.125 9 10.125C8.3791 10.125 7.875 9.6209 7.875 9Z"
+												fill="#048C3C"
+											/>
+										</svg>
+									) : item.icon === 'points' ? (
+										<svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-auto max-w-full">
+											<path
+												d="M14.0625 0H6.1875C5.25586 0 4.49648 0.766406 4.53164 1.69453C4.53867 1.88086 4.5457 2.06719 4.55625 2.25H0.84375C0.376172 2.25 0 2.62617 0 3.09375C0 6.34922 1.17773 8.61328 2.75977 10.1496C4.31719 11.6648 6.21562 12.4277 7.61484 12.8145C8.4375 13.043 9 13.7285 9 14.4176C9 15.1523 8.40234 15.75 7.66758 15.75H6.75C6.12773 15.75 5.625 16.2527 5.625 16.875C5.625 17.4973 6.12773 18 6.75 18H13.5C14.1223 18 14.625 17.4973 14.625 16.875C14.625 16.2527 14.1223 15.75 13.5 15.75H12.5824C11.8477 15.75 11.25 15.1523 11.25 14.4176C11.25 13.7285 11.809 13.0395 12.6352 12.8145C14.0379 12.4277 15.9363 11.6648 17.4937 10.1496C19.0723 8.61328 20.25 6.34922 20.25 3.09375C20.25 2.62617 19.8738 2.25 19.4062 2.25H15.6938C15.7043 2.06719 15.7113 1.88437 15.7184 1.69453C15.7535 0.766406 14.9941 0 14.0625 0ZM1.71914 3.9375H4.68633C5.00625 7.10508 5.71289 9.22148 6.51094 10.6383C5.63555 10.2516 4.725 9.70664 3.9375 8.94023C2.8125 7.84687 1.89844 6.26836 1.72266 3.9375H1.71914ZM16.316 8.94023C15.5285 9.70664 14.618 10.2516 13.7426 10.6383C14.5406 9.22148 15.2473 7.10508 15.5672 3.9375H18.5344C18.3551 6.26836 17.441 7.84687 16.3195 8.94023H16.316Z"
+												fill="#0A9DFB"
+											/>
+										</svg>
+									) : (
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-auto max-w-full">
+											<path
+												d="M9 0C13.9672 0 18 4.03276 18 9C18 13.9672 13.9672 18 9 18C4.03276 18 0 13.9672 0 9C0 4.03276 4.03276 0 9 0ZM8.15625 4.21875V9C8.15625 9.28125 8.29688 9.54492 8.53242 9.70312L11.9074 11.9531C12.2941 12.2133 12.818 12.1078 13.0781 11.7176C13.3383 11.3275 13.2328 10.807 12.8426 10.5469L9.84375 8.55V4.21875C9.84375 3.75117 9.46758 3.375 9 3.375C8.53242 3.375 8.15625 3.75117 8.15625 4.21875Z"
+												fill="#7C3AED"
+											/>
+										</svg>
+									)}
+								</div>
+								<p class="relative z-[1] m-0 pt-2 font-display text-xs font-medium leading-4 text-slate-500">
+									{item.label}
+								</p>
+								<div class="relative z-[1] flex flex-wrap items-baseline gap-1.5">
+									<strong class="font-display text-2xl font-bold leading-8 text-slate-800">{item.value}</strong>
+									{item.change ? (
+										<span class="inline-flex items-center gap-0.5 font-display text-xs font-medium leading-4 text-emerald-500">
+											<svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="block shrink-0">
+												<path
+													d="M5.03145 0.970215C4.73848 0.677246 4.2627 0.677246 3.96973 0.970215L0.219727 4.72021C-0.0732422 5.01318 -0.0732422 5.48897 0.219727 5.78193C0.512695 6.0749 0.988477 6.0749 1.28145 5.78193L3.75176 3.30928V10.4999C3.75176 10.9147 4.08691 11.2499 4.50176 11.2499C4.9166 11.2499 5.25176 10.9147 5.25176 10.4999V3.30928L7.72207 5.77959C8.01504 6.07256 8.49082 6.07256 8.78379 5.77959C9.07676 5.48662 9.07676 5.01084 8.78379 4.71787L5.03379 0.967871L5.03145 0.970215Z"
+													fill="#10B981"
+												/>
+											</svg>
+											<span class="ml-0.5">{item.change.replace(/^\+/, '')}</span>
+										</span>
+									) : null}
+								</div>
+							</article>
+						))
+					}
+				</div>
+
+				<div class="mt-6 flex flex-col gap-3 rounded-xl border border-slate-100 bg-slate-50 p-[17px]" role="group" aria-labelledby="next-session-label">
+					<p
+						id="next-session-label"
+						class="m-0 font-display text-xs font-bold uppercase leading-[1.15] tracking-[0.01875rem] text-slate-700"
+					>
+						{dashboard.nextSession.label}
+					</p>
+					<div class="flex min-w-0 items-center gap-3">
+						<div
+							class="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-purple-500 to-[#5751e4]"
 							aria-hidden="true"
 						>
-							{item.icon === 'accuracy' ? (
-								<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-auto max-w-full">
-									<path
-										d="M15.75 9C15.75 5.27457 12.7254 2.25 9 2.25C5.27457 2.25 2.25 5.27457 2.25 9C2.25 12.7254 5.27457 15.75 9 15.75C12.7254 15.75 15.75 12.7254 15.75 9ZM0 9C0 4.03276 4.03276 0 9 0C13.9672 0 18 4.03276 18 9C18 13.9672 13.9672 18 9 18C4.03276 18 0 13.9672 0 9ZM9 11.8125C10.5523 11.8125 11.8125 10.5523 11.8125 9C11.8125 7.44774 10.5523 6.1875 9 6.1875C7.44774 6.1875 6.1875 7.44774 6.1875 9C6.1875 10.5523 7.44774 11.8125 9 11.8125ZM9 3.9375C11.7941 3.9375 14.0625 6.20593 14.0625 9C14.0625 11.7941 11.7941 14.0625 9 14.0625C6.20593 14.0625 3.9375 11.7941 3.9375 9C3.9375 6.20593 6.20593 3.9375 9 3.9375ZM7.875 9C7.875 8.3791 8.3791 7.875 9 7.875C9.6209 7.875 10.125 8.3791 10.125 9C10.125 9.6209 9.6209 10.125 9 10.125C8.3791 10.125 7.875 9.6209 7.875 9Z"
-										fill="#048C3C"
-									/>
-								</svg>
-							) : item.icon === 'points' ? (
-								<svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-auto max-w-full">
-									<path
-										d="M14.0625 0H6.1875C5.25586 0 4.49648 0.766406 4.53164 1.69453C4.53867 1.88086 4.5457 2.06719 4.55625 2.25H0.84375C0.376172 2.25 0 2.62617 0 3.09375C0 6.34922 1.17773 8.61328 2.75977 10.1496C4.31719 11.6648 6.21562 12.4277 7.61484 12.8145C8.4375 13.043 9 13.7285 9 14.4176C9 15.1523 8.40234 15.75 7.66758 15.75H6.75C6.12773 15.75 5.625 16.2527 5.625 16.875C5.625 17.4973 6.12773 18 6.75 18H13.5C14.1223 18 14.625 17.4973 14.625 16.875C14.625 16.2527 14.1223 15.75 13.5 15.75H12.5824C11.8477 15.75 11.25 15.1523 11.25 14.4176C11.25 13.7285 11.809 13.0395 12.6352 12.8145C14.0379 12.4277 15.9363 11.6648 17.4937 10.1496C19.0723 8.61328 20.25 6.34922 20.25 3.09375C20.25 2.62617 19.8738 2.25 19.4062 2.25H15.6938C15.7043 2.06719 15.7113 1.88437 15.7184 1.69453C15.7535 0.766406 14.9941 0 14.0625 0ZM1.71914 3.9375H4.68633C5.00625 7.10508 5.71289 9.22148 6.51094 10.6383C5.63555 10.2516 4.725 9.70664 3.9375 8.94023C2.8125 7.84687 1.89844 6.26836 1.72266 3.9375H1.71914ZM16.316 8.94023C15.5285 9.70664 14.618 10.2516 13.7426 10.6383C14.5406 9.22148 15.2473 7.10508 15.5672 3.9375H18.5344C18.3551 6.26836 17.441 7.84687 16.3195 8.94023H16.316Z"
-										fill="#0A9DFB"
-									/>
-								</svg>
-							) : (
-								<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-auto max-w-full">
-									<path
-										d="M9 0C13.9672 0 18 4.03276 18 9C18 13.9672 13.9672 18 9 18C4.03276 18 0 13.9672 0 9C0 4.03276 4.03276 0 9 0ZM8.15625 4.21875V9C8.15625 9.28125 8.29688 9.54492 8.53242 9.70312L11.9074 11.9531C12.2941 12.2133 12.818 12.1078 13.0781 11.7176C13.3383 11.3275 13.2328 10.807 12.8426 10.5469L9.84375 8.55V4.21875C9.84375 3.75117 9.46758 3.375 9 3.375C8.53242 3.375 8.15625 3.75117 8.15625 4.21875Z"
-										fill="#7C3AED"
-									/>
-								</svg>
-							)}
+							<svg class="block size-[1.35rem]" width="23" height="15" viewBox="0 0 23 15" fill="none" aria-hidden="true">
+								<path
+									d="M0 2.5C0 1.12109 1.12109 0 2.5 0H12.5C13.8789 0 15 1.12109 15 2.5V12.5C15 13.8789 13.8789 15 12.5 15H2.5C1.12109 15 0 13.8789 0 12.5V2.5ZM21.8398 1.39844C22.2461 1.61719 22.5 2.03906 22.5 2.5V12.5C22.5 12.9609 22.2461 13.3828 21.8398 13.6016C21.4336 13.7969 20.9414 13.7969 20.5547 13.5391L16.8047 11.0391L16.25 10.668V10V5V4.33203L16.8047 3.96094L20.5547 1.46094C20.9375 1.20703 21.4297 1.17969 21.8398 1.39844Z"
+									fill="white"
+								/>
+							</svg>
 						</div>
-						<p class="relative z-[1] m-0 pt-2 font-display text-xs font-medium leading-4 text-slate-500">
-							{item.label}
+						<p class="m-0 min-w-0 flex-1 font-display text-sm font-medium leading-5 text-slate-800">
+							{dashboard.nextSession.title}
 						</p>
-						<div class="relative z-[1] flex flex-wrap items-baseline gap-1.5">
-							<strong class="font-display text-2xl font-bold leading-8 text-slate-800">{item.value}</strong>
-							{item.change ? (
-								<span class="inline-flex items-center gap-0.5 font-display text-xs font-medium leading-4 text-emerald-500">
-									<svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="block shrink-0">
-										<path
-											d="M5.03145 0.970215C4.73848 0.677246 4.2627 0.677246 3.96973 0.970215L0.219727 4.72021C-0.0732422 5.01318 -0.0732422 5.48897 0.219727 5.78193C0.512695 6.0749 0.988477 6.0749 1.28145 5.78193L3.75176 3.30928V10.4999C3.75176 10.9147 4.08691 11.2499 4.50176 11.2499C4.9166 11.2499 5.25176 10.9147 5.25176 10.4999V3.30928L7.72207 5.77959C8.01504 6.07256 8.49082 6.07256 8.78379 5.77959C9.07676 5.48662 9.07676 5.01084 8.78379 4.71787L5.03379 0.967871L5.03145 0.970215Z"
-											fill="#10B981"
-										/>
-									</svg>
-									<span class="ml-0.5">{item.change.replace(/^\+/, '')}</span>
-								</span>
-							) : null}
-						</div>
-					</article>
-				))
-			}
-		</div>
-
-		<div class="mt-6 flex flex-col gap-3 rounded-xl border border-slate-100 bg-slate-50 p-[17px]" role="group" aria-labelledby="next-session-label">
-			<p
-				id="next-session-label"
-				class="m-0 font-display text-xs font-bold uppercase leading-[1.15] tracking-[0.01875rem] text-slate-700"
-			>
-				{dashboard.nextSession.label}
-			</p>
-			<div class="flex min-w-0 items-center gap-3">
-				<div
-					class="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-purple-500 to-[#5751e4]"
-					aria-hidden="true"
-				>
-					<svg class="block size-[1.35rem]" width="23" height="15" viewBox="0 0 23 15" fill="none" aria-hidden="true">
-						<path
-							d="M0 2.5C0 1.12109 1.12109 0 2.5 0H12.5C13.8789 0 15 1.12109 15 2.5V12.5C15 13.8789 13.8789 15 12.5 15H2.5C1.12109 15 0 13.8789 0 12.5V2.5ZM21.8398 1.39844C22.2461 1.61719 22.5 2.03906 22.5 2.5V12.5C22.5 12.9609 22.2461 13.3828 21.8398 13.6016C21.4336 13.7969 20.9414 13.7969 20.5547 13.5391L16.8047 11.0391L16.25 10.668V10V5V4.33203L16.8047 3.96094L20.5547 1.46094C20.9375 1.20703 21.4297 1.17969 21.8398 1.39844Z"
-							fill="white"
-						/>
-					</svg>
+						<span
+							class="inline-flex shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white px-[17px] py-[9px] font-display text-xs font-medium leading-4 text-[#5751e4]"
+						>
+							{dashboard.nextSession.chipText}
+						</span>
+					</div>
 				</div>
-				<p class="m-0 min-w-0 flex-1 font-display text-sm font-medium leading-5 text-slate-800">
-					{dashboard.nextSession.title}
-				</p>
-				<span
-					class="inline-flex shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white px-[17px] py-[9px] font-display text-xs font-medium leading-4 text-[#5751e4]"
-				>
-					{dashboard.nextSession.chipText}
-				</span>
 			</div>
-		</div>
-	</div>
+		)
+	}
 </aside>
+
+<script is:inline>
+	(function () {
+		const wrap = document.querySelector('[data-hero-dashboard-video]');
+		if (!wrap) return;
+
+		const video = wrap.querySelector('.hero-dashboard-video');
+		const iframe = wrap.querySelector('.hero-dashboard-video-iframe');
+		const previewUrl = wrap.getAttribute('data-drive-preview');
+
+		if (!video || !iframe || !previewUrl) return;
+
+		video.addEventListener('error', function () {
+			video.classList.add('hidden');
+			video.removeAttribute('src');
+			iframe.classList.remove('hidden');
+			iframe.src = previewUrl;
+		});
+	})();
+</script>

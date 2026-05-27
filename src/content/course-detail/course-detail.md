@@ -36,6 +36,8 @@ hero:
   taughtByLabel: Taught by
   primaryCtaLabel: Enroll Now
   secondaryCtaLabel: View Schedule
+  videoDriveFileId: 1N2Akxwft79oIqiP0_G2bBkvKaTGneaU1
+  videoAriaLabel: See the class in action
 tabs:
   - Overview
   - Learning Outcomes

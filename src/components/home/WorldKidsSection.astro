@@ -47,15 +47,23 @@ function statDisplayMeta(
 const statSlots = ['lt', 'rt', 'lb', 'rb'] as const;
 
 const faces = [
-	'/assets/images/Teacher (1).png',
-	'/assets/images/Teacher (2).png',
-	'/assets/images/Teacher (3).png',
-	'/assets/images/Teacher (4).png',
-	'/assets/images/Teacher (5).png',
-	'/assets/images/Teacher (6).png',
-	'/assets/images/Teacher (1).png',
-	'/assets/images/Teacher (2).png',
-	'/assets/images/Teacher (3).png',
+	'/assets/globe/child1.jpg',
+	'/assets/globe/chile2.jpg',
+	'/assets/globe/chile3.jpg',
+	'/assets/globe/chile4.jpg',
+	'/assets/globe/chile5.jpg',
+	'/assets/globe/chile6.jpg',
+	'/assets/globe/chile7.jpg',
+	'/assets/globe/chile8.jpg',
+	'/assets/globe/chile9.jpg',
+	'/assets/globe/chile10.jpg',
+	'/assets/globe/chile11.jpg',
+	'/assets/globe/chile12.jpg',
+	'/assets/globe/chile13.jpg',
+	'/assets/globe/chile14.jpg',
+	'/assets/globe/chile15.jpg',
+	'/assets/globe/chile16.jpg',
+	'/assets/globe/chile17.jpg',
 ];
 
 /** Same size/shape rhythm as original globe pins (Figma), applied to each CMS country in order */
@@ -83,13 +91,14 @@ const markerStyleByIndex = [
 const markerPoints =
 	d.countries
 		?.map((country, index) => {
+			if (index >= faces.length) return null;
 			const coords = WORLD_COUNTRY_COORDS[country.name];
 			if (!coords) return null;
 			const style = markerStyleByIndex[index] ?? { size: 40, shape: 'circle' as const };
 			return {
 				lat: coords.lat,
 				lng: coords.lng,
-				face: faces[index % faces.length],
+				face: faces[index],
 				name: country.name,
 				size: style.size,
 				shape: style.shape,

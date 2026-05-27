@@ -1,4 +1,6 @@
 ---
+import { googleDriveDownloadUrl, googleDrivePreviewUrl, googleDriveThumbnailUrl } from '../../utils/googleDrive';
+
 interface Props {
 	title: string;
 	rating: string;
@@ -10,6 +12,10 @@ interface Props {
 }
 
 const { title, rating, total, starsText, writeReviewLabel, galleryTitle, items } = Astro.props;
+const insideClassroomVideoFileId = '1Bnzq3-lpkgr87KBcVA7mbPjl85DiZv_2';
+const insideClassroomVideoDownloadUrl = googleDriveDownloadUrl(insideClassroomVideoFileId);
+const insideClassroomVideoPreviewUrl = googleDrivePreviewUrl(insideClassroomVideoFileId);
+const insideClassroomVideoPosterUrl = googleDriveThumbnailUrl(insideClassroomVideoFileId, 800);
 ---
 
 <section class="flex flex-col gap-8">
@@ -59,12 +65,27 @@ const { title, rating, total, starsText, writeReviewLabel, galleryTitle, items }
 	<section class="flex flex-col gap-6 pt-[61px]">
 		<h2 class="m-0 text-[24px] leading-8 font-bold text-slate-900">{galleryTitle}</h2>
 		<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-			<img
-				class="block h-48 w-full rounded-2xl object-cover"
-				src="/assets/course-detail/gallery-1.png"
-				alt="Robot project on desk"
-				loading="lazy"
-			/>
+			<div class="relative h-48 w-full overflow-hidden rounded-2xl bg-slate-900" data-inside-classroom-video data-drive-preview={insideClassroomVideoPreviewUrl}>
+				<video
+					class="inside-classroom-video block h-full w-full object-cover object-center bg-black"
+					src={insideClassroomVideoDownloadUrl}
+					poster={insideClassroomVideoPosterUrl}
+					preload="metadata"
+					playsinline
+					autoplay
+					muted
+					loop
+					controls
+					aria-label="Inside the classroom video"
+				/>
+
+				<iframe
+					class="inside-classroom-video-iframe hidden h-full w-full border-0"
+					title="Inside the classroom video"
+					allow="autoplay; fullscreen"
+					allowfullscreen
+				/>
+			</div>
 			<img
 				class="block h-48 w-full rounded-2xl object-cover"
 				src="/assets/course-detail/gallery-2.png"
@@ -80,3 +101,22 @@ const { title, rating, total, starsText, writeReviewLabel, galleryTitle, items }
 		</div>
 	</section>
 </section>
+
+<script is:inline>
+	(function () {
+		const wrap = document.querySelector('[data-inside-classroom-video]');
+		if (!wrap) return;
+
+		const video = wrap.querySelector('.inside-classroom-video');
+		const iframe = wrap.querySelector('.inside-classroom-video-iframe');
+		const previewUrl = wrap.getAttribute('data-drive-preview');
+		if (!video || !iframe || !previewUrl) return;
+
+		video.addEventListener('error', function () {
+			video.classList.add('hidden');
+			video.removeAttribute('src');
+			iframe.classList.remove('hidden');
+			iframe.src = previewUrl;
+		});
+	})();
+</script>
