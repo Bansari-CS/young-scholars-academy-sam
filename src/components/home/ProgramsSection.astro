@@ -370,31 +370,22 @@ const initialAge = filters.ageRange.options.find((o) => o.isActive)?.label ?? ''
 				});
 			}
 
-			function parseAgeRange(label) {
-				if (!label) return null;
-				var m = String(label).match(/(\d+)\s*[-–]\s*(\d+)/);
-				if (!m) return null;
-				return { min: parseInt(m[1], 10), max: parseInt(m[2], 10) };
-			}
-
 			function ageFilterMatches(cardAge, filterAge) {
 				if (!filterAge) return true;
-				if (cardAge === filterAge) return true;
-				var cardRange = parseAgeRange(cardAge);
-				var filterRange = parseAgeRange(filterAge);
-				if (!cardRange || !filterRange) return cardAge === filterAge;
-				return cardRange.min <= filterRange.max && filterRange.min <= cardRange.max;
+				if (!cardAge) return false;
+				return String(cardAge).trim().toLowerCase() === String(filterAge).trim().toLowerCase();
 			}
 
 			function applyFilters() {
 				var campVal = campSelect.value;
 				var teacherVal = teacherSelect.value;
+				var normalizedCampVal = String(campVal || '').trim().toLowerCase();
 				var visible = 0;
 				cards.forEach(function (card) {
 					var ageOk = ageFilterMatches(card.getAttribute('data-age'), selectedAge);
 					var teacherOk = !teacherVal || card.getAttribute('data-teacher') === teacherVal;
-					var delivery = card.getAttribute('data-delivery') || 'virtual';
-					var campOk = !campVal || delivery === campVal;
+					var delivery = String(card.getAttribute('data-delivery') || '').trim().toLowerCase();
+					var campOk = !normalizedCampVal || delivery === normalizedCampVal;
 					var show = ageOk && teacherOk && campOk;
 					card.hidden = !show;
 					if (show) visible++;
