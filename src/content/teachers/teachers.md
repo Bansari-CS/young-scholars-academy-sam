@@ -32,12 +32,48 @@ mentors:
   title: "The #1 Reason Parents Return"
   description: Learn from world-class experts dedicated to your growth and success.
   searchPlaceholder: Search mentors, topics, or specialties...
-  filterLabels:
-    all: All
-    stem: STEM
-    creative: Creative
-    gaming: Gaming
-    writing: Writing
+  emptyFilterMessage: No mentors match your search. Try another topic or clear your filters.
+  filters:
+    - id: all
+      label: All
+    - id: stem
+      label: STEM
+      matchTags:
+        - STEM
+        - Robotics
+        - Science
+        - Mathematics
+        - Coding & AI
+        - Chess
+        - Puzzle-Solving
+        - Geometry
+        - Geography
+    - id: creative
+      label: Creative
+      matchTags:
+        - Theatre
+        - Film
+        - Music
+        - Digital Art
+        - Digital Media
+        - Pop Culture
+        - Life Skills
+        - Executive Function
+    - id: gaming
+      label: Gaming
+      matchTags:
+        - Gaming
+        - Dungeons & Dragons
+        - Social Skills
+    - id: writing
+      label: Writing
+      matchTags:
+        - Creative Writing
+        - Debate
+        - Government
+        - History
+        - Philosophy
+        - Critical Thinking
   viewProfileLabel: View Profile
   items:
     - name: Mr. Salch
