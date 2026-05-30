@@ -40,6 +40,7 @@ hero:
     streakLabel: 15 Day Streak
     cardAriaLabel: Product preview
     videoDriveFileId: 1FQx0D2DyjFd27dWf-5uqED267R6xCGKv
+    videoYouTubeId: 
     videoAriaLabel: Children laughing and using a laptop at Young Scholars Academy
     progressTag: In Progress
     lessonProgressLabel: Lesson Progress

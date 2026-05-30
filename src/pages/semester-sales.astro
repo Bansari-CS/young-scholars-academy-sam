@@ -32,7 +32,17 @@ if (!summerEntry) {
 }
 
 const semesterSalesContent = semesterSalesEntry.data;
-const summerCampsContent = summerEntry.data.camps;
+
+// Build a courses-specific content block reusing the camps section structure
+const semesterCoursesContent = {
+	...summerEntry.data.camps,
+	title: '97 Semester Courses Across 5 Categories.',
+	subtitle: 'From Creative Writing to Chess, Minecraft to Mock Trial — live, small-group courses that run all semester long.',
+	searchPlaceholder: 'Search courses (e.g. "Minecraft", "Debate")...',
+	filterLabels: ['Course type', 'Age range', 'Level', 'Date'],
+	browseLabel: 'Browse All 97 Courses',
+	browseHref: '#',
+};
 ---
 
 <Layout
@@ -46,7 +56,7 @@ const summerCampsContent = summerEntry.data.camps;
 		<SemesterSalesAcademySection content={semesterSalesContent.academy} />
 		<SemesterSalesDifferentThinkersSection content={semesterSalesContent.differentThinkers} />
 		<SemesterSalesHowSemesterWorksSection content={semesterSalesContent.howSemesterWorks} />
-		<SummerCampsSection content={summerCampsContent} />
+		<SummerCampsSection content={semesterCoursesContent} dataFile="semester_courses" />
 		<SemesterSalesVirtualWorksSection content={semesterSalesContent.virtualWorks} />
 		<SemesterSalesFamiliesSayingSection content={semesterSalesContent.familiesSaying} />
 		<SemesterSalesPricingSection content={semesterSalesContent.pricing} />

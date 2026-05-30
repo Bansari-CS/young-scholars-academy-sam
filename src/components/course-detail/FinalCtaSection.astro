@@ -4,11 +4,12 @@ interface Props {
 	descriptionLine1: string;
 	descriptionLine2: string;
 	primaryButtonLabel: string;
+	primaryButtonHref?: string;
 	secondaryButtonLabel: string;
 	imageAlt: string;
 }
 
-const { title, descriptionLine1, descriptionLine2, primaryButtonLabel, secondaryButtonLabel, imageAlt } = Astro.props;
+const { title, descriptionLine1, descriptionLine2, primaryButtonLabel, primaryButtonHref, secondaryButtonLabel, imageAlt } = Astro.props;
 ---
 
 <section class="bg-[#f8fafc] px-4 py-24 pt-[80px]">
@@ -22,8 +23,10 @@ const { title, descriptionLine1, descriptionLine2, primaryButtonLabel, secondary
 			</p>
 			<div class="flex flex-wrap gap-4">
 				<a
-					href="#"
+					href={primaryButtonHref || '#'}
 					class="inline-flex min-h-[68px] items-center justify-center rounded-2xl bg-gradient-to-r from-[#0084ff] to-[#7c3aed] px-13 text-[16px] leading-6 font-medium text-white no-underline"
+					target={primaryButtonHref ? '_blank' : undefined}
+					rel={primaryButtonHref ? 'noopener noreferrer' : undefined}
 				>
 					{primaryButtonLabel}
 				</a>
