@@ -1,7 +1,6 @@
 ---
 import type { HeroDashboardData } from '../../types/home';
 import {
-	googleDriveDownloadUrl,
 	googleDrivePreviewUrl,
 	googleDriveThumbnailUrl,
 } from '../../utils/googleDrive';
@@ -13,12 +12,20 @@ interface Props {
 const { dashboard } = Astro.props;
 
 const studentAvatarSrc = '/assets/images/Student.jpg';
-const videoDriveFileId = dashboard.videoDriveFileId?.trim();
-const videoDownloadUrl = videoDriveFileId ? googleDriveDownloadUrl(videoDriveFileId) : null;
-const videoPreviewUrl = videoDriveFileId ? googleDrivePreviewUrl(videoDriveFileId) : null;
-const videoPosterUrl = videoDriveFileId ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
-const videoAriaLabel =
-	dashboard.videoAriaLabel ?? 'Young Scholars Academy students in class';
+const videoDriveFileId  = dashboard.videoDriveFileId?.trim();
+const videoYouTubeId    = dashboard.videoYouTubeId?.trim();
+const videoAriaLabel    = dashboard.videoAriaLabel ?? 'Young Scholars Academy students in class';
+
+// YouTube preferred — supports mute, loop, no controls natively
+const youTubeEmbedUrl = videoYouTubeId
+	? `https://www.youtube.com/embed/${videoYouTubeId}?autoplay=1&mute=1&loop=1&playlist=${videoYouTubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`
+	: null;
+
+// Google Drive fallback (no mute support, JS loop)
+const videoPreviewUrl = (!videoYouTubeId && videoDriveFileId) ? googleDrivePreviewUrl(videoDriveFileId) : null;
+const videoPosterUrl  = videoDriveFileId ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
+
+const hasVideo = !!(videoYouTubeId || videoDriveFileId);
 
 const statIconBgClass: Record<string, string> = {
 	accuracy: 'bg-emerald-50',
@@ -32,28 +39,44 @@ const cardShellClasses =
 
 <aside
 	class="w-full max-w-[39.5rem] justify-self-end max-[1020px]:max-w-none max-[1020px]:justify-self-stretch"
-	aria-label={videoDriveFileId ? videoAriaLabel : (dashboard.cardAriaLabel ?? 'Product preview')}
+	aria-label={hasVideo ? videoAriaLabel : (dashboard.cardAriaLabel ?? 'Product preview')}
 >
 	{
-		videoDriveFileId ? (
-			<div class={cardShellClasses} data-hero-dashboard-video data-drive-preview={videoPreviewUrl}>
-				<video
-					class="hero-dashboard-video absolute inset-0 h-full w-full object-cover"
-					poster={videoPosterUrl ?? undefined}
-					autoplay
-					muted
-					loop
-					playsinline
-					preload="metadata"
-					aria-label={videoAriaLabel}
-					src={videoDownloadUrl ?? undefined}
-				/>
-				<iframe
-					class="hero-dashboard-video-iframe absolute inset-0 hidden h-full w-full border-0"
-					title={videoAriaLabel}
-					allow="autoplay; fullscreen"
-					allowfullscreen
-				/>
+		hasVideo ? (
+			<div
+				class={cardShellClasses}
+				data-hero-dashboard-video
+				data-youtube-id={videoYouTubeId || ''}
+				data-drive-preview={videoPreviewUrl || ''}
+			>
+				{/* Poster — fades out once iframe loads */}
+				{videoPosterUrl && (
+					<img
+						class="hero-dashboard-poster absolute inset-0 z-[2] h-full w-full object-cover transition-opacity duration-700"
+						src={videoPosterUrl}
+						alt={videoAriaLabel}
+						aria-hidden="true"
+					/>
+				)}
+
+				{/*
+					Iframe wrapper — overflow:hidden clips the scaled-up iframe.
+					The iframe is 180×180% centered so black bars, title bar, and
+					control bar are all pushed outside the visible area.
+				*/}
+				<div class="absolute inset-0 overflow-hidden rounded-3xl" style="background:#000;">
+					<iframe
+						class="hero-dashboard-video-iframe absolute border-0"
+						style="top:50%;left:50%;width:180%;height:180%;transform:translate(-50%,-50%);"
+						title={videoAriaLabel}
+						allow="autoplay; fullscreen; picture-in-picture"
+						allowfullscreen
+					/>
+				</div>
+
+				{/* Click-blocker — prevents users from interacting with player controls */}
+				<div class="absolute inset-0 z-[3]" aria-hidden="true" style="pointer-events:all;cursor:default;"></div>
+
 			</div>
 		) : (
 			<div
@@ -208,21 +231,139 @@ const cardShellClasses =
 </aside>
 
 <script is:inline>
-	(function () {
-		const wrap = document.querySelector('[data-hero-dashboard-video]');
-		if (!wrap) return;
+(function () {
+	function initHeroVideo() {
+		var wrap = document.querySelector('[data-hero-dashboard-video]');
+		if (!wrap || wrap.dataset.videoInited === '1') return;
+		wrap.dataset.videoInited = '1';
 
-		const video = wrap.querySelector('.hero-dashboard-video');
-		const iframe = wrap.querySelector('.hero-dashboard-video-iframe');
-		const previewUrl = wrap.getAttribute('data-drive-preview');
+		var iframe      = wrap.querySelector('.hero-dashboard-video-iframe');
+		var poster      = wrap.querySelector('.hero-dashboard-poster');
+		var youtubeId   = (wrap.getAttribute('data-youtube-id') || '').trim();
+		var driveUrl    = (wrap.getAttribute('data-drive-preview') || '').trim();
+		if (!iframe) return;
 
-		if (!video || !iframe || !previewUrl) return;
+		// ── Build embed URL ────────────────────────────────────────────────
+		// YouTube: muted, looped, no controls, autoplay
+		// Google Drive: autoplay + loop flag (no mute support — cross-origin)
+		var isYouTube = !!youtubeId;
+		var embedUrl  = isYouTube
+			? 'https://www.youtube.com/embed/' + youtubeId
+				+ '?autoplay=1&mute=1&loop=1&playlist=' + youtubeId
+				+ '&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1'
+			: driveUrl
+				? driveUrl + (driveUrl.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1&loop=1&rm=minimal'
+				: '';
 
-		video.addEventListener('error', function () {
-			video.classList.add('hidden');
-			video.removeAttribute('src');
-			iframe.classList.remove('hidden');
-			iframe.src = previewUrl;
+		if (!embedUrl) return;
+
+		// ── Helpers ────────────────────────────────────────────────────────
+		function hidePoster() {
+			if (poster) { poster.style.opacity = '0'; poster.style.pointerEvents = 'none'; }
+		}
+		function showPoster() {
+			if (poster) { poster.style.opacity = '1'; poster.style.pointerEvents = 'none'; }
+		}
+
+		// ── State ──────────────────────────────────────────────────────────
+		var isLoaded      = false;
+		var loopTimeout   = null;
+		var videoDuration = 0;   // learned from postMessage (Google Drive)
+		var startedAt     = 0;   // Date.now() when current playthrough began
+
+		// ── Force reload (src='' then back) ────────────────────────────────
+		function reloadIframe() {
+			clearTimeout(loopTimeout);
+			iframe.src = '';
+			setTimeout(function () {
+				iframe.src  = embedUrl;
+				startedAt   = Date.now();
+				setTimeout(hidePoster, 800);
+				// After reload, reschedule next loop if we know the duration
+				if (videoDuration > 0) scheduleLoop();
+			}, 150);
+		}
+
+		// Schedule next reload using elapsed time so timing stays accurate
+		function scheduleLoop() {
+			clearTimeout(loopTimeout);
+			if (videoDuration <= 0) return;
+			var elapsed   = startedAt ? (Date.now() - startedAt) / 1000 : 0;
+			var remaining = videoDuration - elapsed - 0.3; // fire 300ms before end
+			loopTimeout   = setTimeout(reloadIframe, Math.max(300, remaining * 1000));
+		}
+
+		// ── Load / unload ──────────────────────────────────────────────────
+		function loadVideo() {
+			if (isLoaded) return;
+			isLoaded  = true;
+			startedAt = Date.now();
+			iframe.src = embedUrl;
+			setTimeout(hidePoster, 800);
+		}
+
+		function unloadVideo() {
+			if (!isLoaded) return;
+			isLoaded = false;
+			clearTimeout(loopTimeout);
+			iframe.src = '';
+			showPoster();
+		}
+
+		// ── postMessage — Google Drive duration / ended events ─────────────
+		// YouTube loop=1&playlist= handles looping natively; no JS needed.
+		// For Google Drive we use postMessage to learn the duration, then
+		// schedule an elapsed-time-aware reload before the video ends.
+		if (!isYouTube) {
+			window.addEventListener('message', function (e) {
+				if (!iframe.src) return;
+				try {
+					var d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+					if (!d || !d.info) return;
+
+					// Learn duration on first report
+					if (d.info.duration > 0 && d.info.duration !== videoDuration) {
+						videoDuration = d.info.duration;
+						scheduleLoop();
+					}
+
+					// Also schedule from currentTime for accuracy
+					if (videoDuration > 0 && d.info.currentTime !== undefined) {
+						var remaining = videoDuration - d.info.currentTime - 0.3;
+						if (remaining > 0 && remaining < videoDuration * 0.2) {
+							// Only reschedule when we're in the last 20% of the video
+							clearTimeout(loopTimeout);
+							loopTimeout = setTimeout(reloadIframe, Math.max(100, remaining * 1000));
+						}
+					}
+
+					// Explicit ended signal
+					if (d.info.playerState === 0) reloadIframe();
+				} catch (_) {}
+			});
+		}
+
+		// ── IntersectionObserver — play/pause on scroll ────────────────────
+		var observer = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) { loadVideo(); } else { unloadVideo(); }
+			});
+		}, { threshold: 0.25 });
+
+		observer.observe(wrap);
+
+		// Catch the case where observer fires before the script runs
+		window.addEventListener('load', function () {
+			var r = wrap.getBoundingClientRect();
+			if (r.top < window.innerHeight && r.bottom > 0) loadVideo();
 		});
-	})();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initHeroVideo);
+	} else {
+		initHeroVideo();
+	}
+	document.addEventListener('astro:page-load', initHeroVideo);
+})();
 </script>

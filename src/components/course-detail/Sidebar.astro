@@ -6,8 +6,9 @@ interface Props {
 	cohort: string;
 	includesTitle: string;
 	includes: { text: string }[];
-	related: { image: string; tag: string; title: string; meta: string }[];
+	related: { image: string; tag: string; title: string; meta: string; href?: string }[];
 	primaryCtaLabel: string;
+	primaryCtaHref?: string;
 	guaranteeText: string;
 	relatedTitle: string;
 	shareTitle?: string;
@@ -20,6 +21,7 @@ const {
 	includesTitle,
 	related,
 	primaryCtaLabel,
+	primaryCtaHref,
 	guaranteeText,
 	relatedTitle,
 	shareTitle,
@@ -49,7 +51,7 @@ const {
 				}
 			</ul>
 		</div>
-		<PrimaryButton href="#" label={primaryCtaLabel} variant="lg" class="mt-6 w-full" />
+		<PrimaryButton href={primaryCtaHref || '#'} label={primaryCtaLabel} variant="lg" class="mt-6 w-full" target={primaryCtaHref ? '_blank' : undefined} rel={primaryCtaHref ? 'noopener noreferrer' : undefined} />
 		<div class="mt-4 w-full" data-course-share data-share-title={shareTitle ?? ''}>
 			<button
 				type="button"
@@ -74,28 +76,40 @@ const {
 		<h3 class="mb-4 text-[18px] leading-7 font-bold text-slate-900">{relatedTitle}</h3>
 		<div class="flex flex-col gap-4 pt-[16px]">
 			{
-				related.map((item) => (
-					<article class="flex gap-4 rounded-[24px] bg-white p-4 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.04)]">
-						<img
-							class="h-[78px] w-[78px] flex-shrink-0 rounded-xl object-cover"
-							src={item.image}
-							alt={item.title}
-							loading="lazy"
-						/>
-						<div>
-							<small
-								class:list={[
-									'block text-[12px] leading-4 font-bold tracking-[0.3px] uppercase',
-									item.tag.toLowerCase() === 'science' ? 'text-[#048c3c]' : 'text-sky-500',
-								]}
-							>
-								{item.tag}
-							</small>
-							<strong class="mt-0.5 block text-[17px] leading-6 font-semibold text-slate-800">{item.title}</strong>
-							<p class="mt-0.5 text-[12px] leading-4 text-slate-500">{item.meta}</p>
-						</div>
-					</article>
-				))
+				related.map((item) => {
+					const tagLower = item.tag.toLowerCase();
+					const tagColor =
+						tagLower.includes('science') || tagLower.includes('stem')
+							? 'text-[#048c3c]'
+							: tagLower.includes('social') || tagLower.includes('life')
+								? 'text-violet-600'
+								: tagLower.includes('art') || tagLower.includes('creative')
+									? 'text-pink-500'
+									: 'text-sky-500';
+					const card = (
+						<article class="flex gap-3 rounded-[20px] bg-white overflow-hidden shadow-[0px_4px_12px_0px_rgba(0,0,0,0.06)] transition hover:shadow-[0px_6px_18px_0px_rgba(0,0,0,0.10)]">
+							<div class="w-[96px] flex-shrink-0 overflow-hidden">
+								<img
+									class="h-full w-full object-cover"
+									style="aspect-ratio:1/1;"
+									src={item.image}
+									alt={item.title}
+									loading="lazy"
+								/>
+							</div>
+							<div class="flex flex-col justify-center gap-0.5 py-3 pr-3">
+								<small class:list={['block text-[11px] leading-4 font-bold tracking-[0.3px] uppercase', tagColor]}>
+									{item.tag}
+								</small>
+								<strong class="block text-[14px] leading-5 font-semibold text-slate-800">{item.title}</strong>
+								<p class="mt-0.5 text-[12px] leading-4 text-slate-500">{item.meta}</p>
+							</div>
+						</article>
+					);
+					return item.href
+						? <a href={item.href} target="_blank" rel="noopener noreferrer" class="no-underline block">{card}</a>
+						: <div>{card}</div>;
+				})
 			}
 		</div>
 	</div>

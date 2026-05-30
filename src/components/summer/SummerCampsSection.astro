@@ -1,11 +1,14 @@
 ---
 import { courseHref } from '../../utils/courseRoutes';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 
 interface Props {
 	content: any;
+	dataFile?: 'summer_camps' | 'semester_courses';
 }
 
-const { content } = Astro.props as Props;
+const { content, dataFile = 'summer_camps' } = Astro.props as Props;
 
 const tagClassMap: Record<string, string> = {
 	'tag-stem': 'bg-[#dcfce7] text-[#048c3c]',
@@ -14,15 +17,50 @@ const tagClassMap: Record<string, string> = {
 	'tag-play': 'bg-[#fffad4] text-[#f2dd35]',
 };
 
-const dateSlotRanges = (content.dateSlotRanges ?? {}) as Record<string, { start: string; end: string }>;
+// Load JSON data from file
+let rawCards: any[] = [];
+try {
+	const jsonPath = resolve(`./src/assets/${dataFile}.json`);
+	const jsonContent = readFileSync(jsonPath, 'utf-8');
+	const jsonData = JSON.parse(jsonContent);
+	rawCards = Array.isArray(jsonData) ? jsonData : (content.cards ?? []);
+} catch (e) {
+	console.warn(`Could not load JSON ${dataFile}, using content fallback`, e);
+	rawCards = content.cards ?? [];
+}
 
-const cards = (content.cards ?? []).map((camp: any) => {
-	const slot = camp.dateSlot as string | undefined;
-	const range = slot && dateSlotRanges[slot] ? dateSlotRanges[slot] : null;
+const cards = rawCards.map((camp: any) => {
+	// Map JSON fields to card fields
+	const name = camp.course_name || camp.name || '';
+	const ages = camp.age_group || camp.ages || '';
+	const description = camp.description || '';
+	const image = camp.image || '/images/summer/camps/placeholder.jpg';
+	const price = camp.price || 0;
+	const dateStart = camp.start_date || '';
+	const dateEnd = camp.end_date || '';
+	const dateStartDisplay = camp.start_date_display || '';
+	const dateEndDisplay   = camp.end_date_display   || '';
+	const tag = camp.tag || 'Creative';
+	const level = camp.level || 'Beginner';
+	const tagClass = camp.tagClass || 'tag-creative';
+	const levelIcon = camp.levelIcon || '/images/summer/camps/icon-level.svg';
+
 	return {
-		...camp,
-		dateStart: range?.start ?? '',
-		dateEnd: range?.end ?? '',
+		name,
+		ages,
+		description,
+		image,
+		price,
+		dateStart,
+		dateEnd,
+		dateStartDisplay,
+		dateEndDisplay,
+		tag,
+		level,
+		tagClass,
+		levelIcon,
+		registration_link: camp.registration_link || '',
+		teacher: camp.teacher || '',
 	};
 });
 
@@ -33,14 +71,19 @@ const guided = content.guided as
 	| { title: string; options: { label: string; categories: string[] }[] }
 	| undefined;
 
+// Build age options dynamically from actual data, sorted numerically
+const rawAgeGroups = [...new Set(cards.map((c: any) => c.ages).filter(Boolean))] as string[];
+const sortedAgeGroups = rawAgeGroups.sort((a, b) => {
+	const aFrom = parseInt(a.split('-')[0]) || 0;
+	const bFrom = parseInt(b.split('-')[0]) || 0;
+	return aFrom !== bFrom ? aFrom - bFrom : (parseInt(a.split('-')[1]) || 0) - (parseInt(b.split('-')[1]) || 0);
+});
 const ageOptions = [
 	{ value: 'all', label: 'All ages' },
-	{ value: '8-11', label: 'Ages 8-11' },
-	{ value: '8-14', label: 'Ages 8-14' },
-	{ value: '12-18', label: 'Ages 12-18' },
+	...sortedAgeGroups.map((ag) => ({ value: ag, label: `Ages ${ag}` })),
 ];
 
-const searchBlob = (camp: any) => `${camp.name} ${camp.description} ${camp.tag}`.toLowerCase();
+const searchBlob = (camp: any) => `${camp.name} ${camp.description} ${camp.tag} ${camp.teacher || ''}`.toLowerCase();
 
 const campsConfig = JSON.stringify({ guidedOptions: guided?.options ?? [] });
 
@@ -212,14 +255,23 @@ const selectBase =
 						data-age={camp.ages ?? ''}
 						data-search={searchBlob(camp)}
 					>
-						<div class="h-[200px] overflow-hidden rounded-xl bg-[#f1f5f9]">
+						<div class="relative w-full overflow-hidden rounded-xl bg-[#f1f5f9]" style="aspect-ratio:16/9;">
 							<img
-								class="block h-full w-full object-cover object-top"
+								class="absolute inset-0 h-full w-full object-contain"
 								src={camp.image}
 								alt={camp.name}
 								loading="lazy"
 								decoding="async"
 							/>
+							{camp.dateStartDisplay && (
+								<span class="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-md bg-black/60 px-2 py-1 text-[10px] font-semibold text-white backdrop-blur-sm">
+									<img class="size-2.5 shrink-0 invert" src="/images/summer/camps/icon-calendar.svg" alt="" aria-hidden="true" />
+									{camp.dateStartDisplay}
+									{camp.dateEndDisplay && camp.dateEndDisplay !== camp.dateStartDisplay
+										? ` – ${camp.dateEndDisplay}`
+										: ''}
+								</span>
+							)}
 						</div>
 						<div class="p-4 pt-8">
 							<span
@@ -242,12 +294,38 @@ const selectBase =
 								<img src={camp.levelIcon} alt="" aria-hidden="true" class="size-3" />
 								<small class="text-xs font-medium text-[#334155]">{camp.level}</small>
 							</div>
-							<strong class="ml-auto text-lg leading-7 text-[#0a9dfb]">{camp.price}</strong>
+							<strong class="ml-auto text-lg leading-7 text-[#0a9dfb]">${camp.price}</strong>
 						</div>
 					</a>
 					);
 				})
 			}
+		</div>
+
+		<!-- Pagination Controls -->
+		<div
+			class="mt-8 flex flex-wrap items-center justify-center gap-2"
+			data-camp-pagination
+			role="navigation"
+			aria-label="Camps pagination"
+		>
+			<button
+				type="button"
+				class="inline-flex items-center gap-2 rounded-lg border border-[#e2e8f0] bg-white px-4 py-2 text-sm font-medium text-[#1e293b] transition-[border-color,background] duration-150 hover:border-[#cbd5e1] hover:bg-[#f8fafc] disabled:opacity-50 disabled:cursor-not-allowed"
+				data-camp-prev-page
+				aria-label="Previous page"
+			>
+				Prev
+			</button>
+			<div class="text-sm font-medium text-[#475569]" data-camp-page-buttons></div>
+			<button
+				type="button"
+				class="inline-flex items-center gap-2 rounded-lg border border-[#e2e8f0] bg-white px-4 py-2 text-sm font-medium text-[#1e293b] transition-[border-color,background] duration-150 hover:border-[#cbd5e1] hover:bg-[#f8fafc] disabled:opacity-50 disabled:cursor-not-allowed"
+				data-camp-next-page
+				aria-label="Next page"
+			>
+				Next
+			</button>
 		</div>
 
 		<p class="mt-8 hidden text-center text-[#64748b]" data-camp-empty>
@@ -418,20 +496,26 @@ const selectBase =
 			const statusEl = root.querySelector('[data-camp-status]') as HTMLElement | null;
 			const exploreBtn = root.querySelector('[data-camp-explore]') as HTMLButtonElement | null;
 			const grid = root.querySelector('[data-camp-grid]') as HTMLElement | null;
+			const paginationEl = root.querySelector('[data-camp-pagination]') as HTMLElement | null;
+			const pageButtonsContainer = root.querySelector('[data-camp-page-buttons]') as HTMLElement | null;
+			const prevBtn = root.querySelector('[data-camp-prev-page]') as HTMLButtonElement | null;
+			const nextBtn = root.querySelector('[data-camp-next-page]') as HTMLButtonElement | null;
 
 			let guidedCategories: string[] | null = null;
+			let currentPage = 1;
+			const campsPerPage = 6; // 2 rows × 3 columns
 
 			function ageFilterMatches(cardAge: string, filterAge: string): boolean {
-				if (!filterAge) return true;
+				if (!filterAge || filterAge === 'all') return true;
 				if (!cardAge) return false;
-				return String(cardAge).trim().toLowerCase() === String(filterAge).trim().toLowerCase();
+				// Both are range strings like "8-11" — direct comparison
+				return String(cardAge).trim() === String(filterAge).trim();
 			}
 
-			function selectedAgeFilterLabel(): string {
+			function selectedAgeFilterValue(): string {
 				const val = (ageEl?.value || '').trim();
 				if (!val || val === 'all') return '';
-				const opt = ageEl?.selectedOptions[0];
-				return opt?.textContent?.trim() || `Ages ${val}`;
+				return val;
 			}
 
 			function filterSentinel(raw: string | undefined): string {
@@ -445,9 +529,104 @@ const selectBase =
 				return pick >= start && pick <= end;
 			}
 
-			function applyFilters() {
+			function updateSelectOptions(selectEl: HTMLSelectElement, options: { value: string; label: string }[], defaultLabel: string, selectedValue: string) {
+				selectEl.innerHTML = '';
+				for (const option of options) {
+					const opt = document.createElement('option');
+					opt.value = option.value;
+					opt.textContent = option.label;
+					if (option.value === selectedValue) opt.selected = true;
+					selectEl.appendChild(opt);
+				}
+				if (!options.some((opt) => opt.value === selectedValue)) {
+					selectEl.value = 'all';
+				}
+			}
+
+			function updateFilterOptions(searchMatchedCards: HTMLElement[]) {
+				if (!categoryEl || !levelEl || !ageEl) return;
+
+				const categories = [...new Set(searchMatchedCards.map((card) => (card.dataset.category || '').trim()).filter(Boolean))].sort();
+				const levels = [...new Set(searchMatchedCards.map((card) => (card.dataset.level || '').trim()).filter(Boolean))].sort();
+
+				// Build age options from matched cards, sorted numerically by lower bound
+				const ageSet = [...new Set(searchMatchedCards.map((card) => (card.dataset.age || '').trim()).filter(Boolean))];
+				const ageSorted = ageSet.sort((a, b) => {
+					const aFrom = parseInt(a.split('-')[0]) || 0;
+					const bFrom = parseInt(b.split('-')[0]) || 0;
+					return aFrom !== bFrom ? aFrom - bFrom : (parseInt(a.split('-')[1]) || 0) - (parseInt(b.split('-')[1]) || 0);
+				});
+				const ageValues = [
+					{ value: 'all', label: defaultAgeLabel() },
+					...ageSorted.map((ag) => ({ value: ag, label: `Ages ${ag}` })),
+				];
+
+				updateSelectOptions(
+					categoryEl,
+					[{ value: 'all', label: defaultCategoryLabel() }, ...categories.map((value) => ({ value, label: value }))],
+					defaultCategoryLabel(),
+					categoryEl.value,
+				);
+
+				updateSelectOptions(
+					levelEl,
+					[{ value: 'all', label: defaultLevelLabel() }, ...levels.map((value) => ({ value, label: value }))],
+					defaultLevelLabel(),
+					levelEl.value,
+				);
+
+				updateSelectOptions(ageEl, ageValues, defaultAgeLabel(), ageEl.value);
+			}
+
+			function defaultCategoryLabel() {
+				return 'All camp types';
+			}
+
+			function defaultLevelLabel() {
+				return 'All levels';
+			}
+
+			function defaultAgeLabel() {
+				return 'All ages';
+			}
+
+			function updatePaginationButtons() {
+				const visibleCards = cards.filter((card) => !card.classList.contains('hidden'));
+				const totalPages = Math.ceil(visibleCards.length / campsPerPage);
+
+				if (pageButtonsContainer) {
+					pageButtonsContainer.textContent = totalPages > 0 ? `page ${currentPage} of ${totalPages}` : '';
+				}
+
+				if (prevBtn) prevBtn.disabled = currentPage === 1;
+				if (nextBtn) nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+			}
+
+			function applyPagination(scroll = true) {
+				const visibleCards = cards.filter((card) => !card.classList.contains('hidden'));
+				const start = (currentPage - 1) * campsPerPage;
+				const end = start + campsPerPage;
+
+				visibleCards.forEach((card, index) => {
+					card.style.display = index >= start && index < end ? '' : 'none';
+				});
+
+				updatePaginationButtons();
+
+				// Only scroll when triggered by a user action, not on initial load
+				if (scroll && grid) {
+					grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}
+			}
+
+			function applyFilters(scroll = true) {
 				const q = (searchEl?.value || '').trim().toLowerCase();
-				const filterAgeLabel = selectedAgeFilterLabel();
+				const searchMatchedCards = q
+					? cards.filter((card) => (card.dataset.search || '').includes(q))
+					: cards;
+				updateFilterOptions(searchMatchedCards);
+
+				const filterAgeLabel = selectedAgeFilterValue();
 				const catVal = filterSentinel(categoryEl?.value);
 				const levelVal = filterSentinel(levelEl?.value);
 				const datePick = (dateEl?.value || '').trim();
@@ -495,6 +674,10 @@ const selectBase =
 							? `Showing all ${visible} camps`
 							: `Showing ${visible} of ${cards.length} camps`;
 				}
+
+				// Reset to page 1 and apply pagination
+				currentPage = 1;
+				applyPagination(scroll);
 			}
 
 			function clearGuided() {
@@ -517,6 +700,27 @@ const selectBase =
 
 			dateEl?.addEventListener('change', () => applyFilters());
 			dateEl?.addEventListener('input', () => applyFilters());
+
+			// Pagination button listeners
+			if (prevBtn) {
+				prevBtn.addEventListener('click', () => {
+					if (currentPage > 1) {
+						currentPage--;
+						applyPagination();
+					}
+				});
+			}
+
+			if (nextBtn) {
+				nextBtn.addEventListener('click', () => {
+					const visibleCards = cards.filter((card) => !card.classList.contains('hidden'));
+					const totalPages = Math.ceil(visibleCards.length / campsPerPage);
+					if (currentPage < totalPages) {
+						currentPage++;
+						applyPagination();
+					}
+				});
+			}
 
 			datePickerBtn?.addEventListener('click', () => {
 				const inp = dateEl;
@@ -550,7 +754,8 @@ const selectBase =
 				grid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			});
 
-			applyFilters();
+			// Initial render — do NOT scroll, just show the cards
+			applyFilters(false);
 		}
 
 		if (document.readyState === 'loading') {

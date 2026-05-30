@@ -5,6 +5,8 @@ interface Props {
 	variant?: 'lg' | 'sm';
 	trailingIconSrc?: string;
 	showTrailingArrow?: boolean;
+	target?: string;
+	rel?: string;
 	class?: string;
 }
 
@@ -14,6 +16,8 @@ const {
 	variant = 'lg',
 	trailingIconSrc,
 	showTrailingArrow = false,
+	target,
+	rel,
 	class: className = '',
 } = Astro.props;
 
@@ -30,6 +34,8 @@ const variantClass =
 		className,
 	]}
 	href={href}
+	target={target}
+	rel={rel}
 >
 	<span class="relative z-[1]">{label}</span>
 	{

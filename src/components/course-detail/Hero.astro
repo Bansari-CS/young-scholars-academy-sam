@@ -1,7 +1,6 @@
 ---
 import PrimaryButton from '../ui/PrimaryButton.astro';
 import {
-	googleDriveDownloadUrl,
 	googleDrivePreviewUrl,
 	googleDriveThumbnailUrl,
 } from '../../utils/googleDrive';
@@ -17,8 +16,10 @@ interface Props {
 	instructor: string;
 	taughtByLabel: string;
 	primaryCtaLabel: string;
+	primaryCtaHref?: string;
 	secondaryCtaLabel: string;
 	videoDriveFileId?: string;
+	videoYouTubeId?: string;
 	videoAriaLabel?: string;
 }
 
@@ -33,16 +34,27 @@ const {
 	instructor,
 	taughtByLabel,
 	primaryCtaLabel,
+	primaryCtaHref,
 	secondaryCtaLabel,
 	videoDriveFileId: videoDriveFileIdProp,
+	videoYouTubeId: videoYouTubeIdProp,
 	videoAriaLabel: videoAriaLabelProp,
 } = Astro.props;
 
 const videoDriveFileId = videoDriveFileIdProp?.trim();
-const videoDownloadUrl = videoDriveFileId ? googleDriveDownloadUrl(videoDriveFileId) : null;
-const videoPreviewUrl = videoDriveFileId ? googleDrivePreviewUrl(videoDriveFileId) : null;
-const videoPosterUrl = videoDriveFileId ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
-const videoAriaLabel = videoAriaLabelProp ?? 'Course preview video';
+const videoYouTubeId   = videoYouTubeIdProp?.trim();
+const videoAriaLabel   = videoAriaLabelProp ?? 'Course preview video';
+
+// YouTube preferred — muted, looped, no controls natively
+const youTubeEmbedUrl = videoYouTubeId
+	? `https://www.youtube.com/embed/${videoYouTubeId}?autoplay=1&mute=1&loop=1&playlist=${videoYouTubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`
+	: null;
+
+// Google Drive fallback
+const videoPreviewUrl = (!videoYouTubeId && videoDriveFileId) ? googleDrivePreviewUrl(videoDriveFileId) : null;
+const videoPosterUrl  = videoDriveFileId ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
+
+const hasVideo = !!(videoYouTubeId || videoDriveFileId);
 ---
 
 <section class="course-hero">
@@ -89,10 +101,12 @@ const videoAriaLabel = videoAriaLabelProp ?? 'Course preview video';
 				</div>
 				<div class="flex w-[353px] items-center justify-between flex-wrap gap-y-4">
 					<PrimaryButton
-						href="#"
+						href={primaryCtaHref || '#'}
 						label={primaryCtaLabel}
 						variant="lg"
 						trailingIconSrc="/assets/course-detail/icon-arrow-right.svg"
+						target={primaryCtaHref ? '_blank' : undefined}
+						rel={primaryCtaHref ? 'noopener noreferrer' : undefined}
 					/>
 					<a
 						href="#"
@@ -106,80 +120,181 @@ const videoAriaLabel = videoAriaLabelProp ?? 'Course preview video';
 
 		<aside class="relative h-[532px] w-full lg:max-w-[560px] max-w-full">
 			<div class="absolute inset-[16px_-16px_-16px_16px] rounded-[40px]"></div>
-			<div class="relative overflow-hidden rounded-[40px] border-[8px] border-white shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)]">
-				<div
-					class="relative aspect-video w-full min-h-[220px] bg-slate-900 lg:min-h-[516px]"
-					data-course-hero-video={videoDriveFileId ? '' : undefined}
-					data-drive-preview={videoPreviewUrl ?? undefined}
-				>
-					{
-						videoDriveFileId ? (
-							<>
-								<video
-									class="course-hero-video absolute inset-0 h-full w-full object-cover"
-									poster={videoPosterUrl ?? undefined}
-									autoplay
-									muted
-									loop
-									playsinline
-									preload="metadata"
-									aria-label={videoAriaLabel}
-									src={videoDownloadUrl ?? undefined}
-								/>
-								<iframe
-									class="course-hero-video-iframe absolute inset-0 hidden h-full w-full border-0"
-									title={videoAriaLabel}
-									allow="autoplay; fullscreen"
-									allowfullscreen
-								/>
-							</>
-						) : (
+			<div class="relative overflow-hidden rounded-[40px] border-[8px] border-white shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] h-full">
+				{hasVideo ? (
+					<div
+						class="relative w-full h-full bg-black overflow-hidden"
+						data-course-hero-video
+						data-youtube-id={videoYouTubeId || ''}
+						data-drive-preview={videoPreviewUrl || ''}
+					>
+						{/* Poster fades out once iframe loads */}
+						{videoPosterUrl && (
+							<img
+								class="course-hero-poster absolute inset-0 z-[2] h-full w-full object-cover transition-opacity duration-700"
+								src={videoPosterUrl}
+								alt={videoAriaLabel}
+								aria-hidden="true"
+							/>
+						)}
+
+						{/*
+							Iframe is 180×180% of the container, centered.
+							overflow-hidden on parent clips:
+							  • black letterbox bars (aspect ratio mismatch)
+							  • Google Drive title bar (top)
+							  • Google Drive / YouTube control bar (bottom)
+						*/}
+						<div class="absolute inset-0 overflow-hidden" style="background:#000;">
 							<iframe
-								class="absolute inset-0 h-full w-full border-0"
-								src="https://www.youtube.com/embed/NpEaa2P7qZI?si=aKDUpgdln8tkIYHV"
-								title="YouTube video player"
-								loading="lazy"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-								referrerpolicy="strict-origin-when-cross-origin"
+								class="course-hero-video-iframe absolute border-0"
+								style="top:50%;left:50%;width:180%;height:180%;transform:translate(-50%,-50%);"
+								title={videoAriaLabel}
+								allow="autoplay; fullscreen; picture-in-picture"
 								allowfullscreen
 							/>
-						)
-					}
-				</div>
-			<!-- <div class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 backdrop-blur-[4px]">
-				<img
-					class="h-12 w-12 rounded-full object-cover"
-					src="/assets/course-detail/hero-teacher.png"
-					alt=""
-					aria-hidden="true"
-					loading="lazy"
-				/>
-				<div>
-					<span class="block text-[11px] leading-tight text-slate-500">{taughtByLabel}</span>
-					<strong class="block text-[13px] leading-tight text-slate-900">{instructor}</strong>
-				</div>
-			</div> -->
+						</div>
+
+						{/* Click-blocker — prevents interaction with player controls */}
+						<div class="absolute inset-0 z-[3]" aria-hidden="true" style="pointer-events:all;cursor:default;"></div>
+					</div>
+				) : (
+					<div class="relative aspect-video w-full min-h-[220px] bg-slate-900 lg:min-h-[516px]">
+						<iframe
+							class="absolute inset-0 h-full w-full border-0"
+							src="https://www.youtube.com/embed/NpEaa2P7qZI?si=aKDUpgdln8tkIYHV"
+							title="YouTube video player"
+							loading="lazy"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						/>
+					</div>
+				)}
 			</div>
 		</aside>
 	</div>
 </section>
 
 <script is:inline>
-	(function () {
-		const wrap = document.querySelector('[data-course-hero-video]');
-		if (!wrap) return;
+(function () {
+	function initCourseHeroVideo() {
+		var wrap = document.querySelector('[data-course-hero-video]');
+		if (!wrap || wrap.dataset.videoInited === '1') return;
+		wrap.dataset.videoInited = '1';
 
-		const video = wrap.querySelector('.course-hero-video');
-		const iframe = wrap.querySelector('.course-hero-video-iframe');
-		const previewUrl = wrap.getAttribute('data-drive-preview');
+		var iframe     = wrap.querySelector('.course-hero-video-iframe');
+		var poster     = wrap.querySelector('.course-hero-poster');
+		var youtubeId  = (wrap.getAttribute('data-youtube-id') || '').trim();
+		var driveUrl   = (wrap.getAttribute('data-drive-preview') || '').trim();
+		if (!iframe) return;
 
-		if (!video || !iframe || !previewUrl) return;
+		// YouTube: muted + looped + no controls natively
+		// Google Drive: autoplay only (no mute — cross-origin restriction)
+		var isYouTube = !!youtubeId;
+		var embedUrl  = isYouTube
+			? 'https://www.youtube.com/embed/' + youtubeId
+				+ '?autoplay=1&mute=1&loop=1&playlist=' + youtubeId
+				+ '&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1'
+			: driveUrl
+				? driveUrl + (driveUrl.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1&loop=1&rm=minimal'
+				: '';
 
-		video.addEventListener('error', function () {
-			video.classList.add('hidden');
-			video.removeAttribute('src');
-			iframe.classList.remove('hidden');
-			iframe.src = previewUrl;
+		if (!embedUrl) return;
+
+		function hidePoster() {
+			if (poster) { poster.style.opacity = '0'; poster.style.pointerEvents = 'none'; }
+		}
+		function showPoster() {
+			if (poster) { poster.style.opacity = '1'; poster.style.pointerEvents = 'none'; }
+		}
+
+		var isLoaded      = false;
+		var loopTimeout   = null;
+		var videoDuration = 0;
+		var startedAt     = 0;
+
+		function reloadIframe() {
+			clearTimeout(loopTimeout);
+			iframe.src = '';
+			setTimeout(function () {
+				iframe.src = embedUrl;
+				startedAt  = Date.now();
+				setTimeout(hidePoster, 800);
+				if (videoDuration > 0) scheduleLoop();
+			}, 150);
+		}
+
+		function scheduleLoop() {
+			clearTimeout(loopTimeout);
+			if (videoDuration <= 0) return;
+			var elapsed   = startedAt ? (Date.now() - startedAt) / 1000 : 0;
+			var remaining = videoDuration - elapsed - 0.3;
+			loopTimeout   = setTimeout(reloadIframe, Math.max(300, remaining * 1000));
+		}
+
+		function loadVideo() {
+			if (isLoaded) return;
+			isLoaded  = true;
+			startedAt = Date.now();
+			iframe.src = embedUrl;
+			setTimeout(hidePoster, 800);
+		}
+
+		function unloadVideo() {
+			if (!isLoaded) return;
+			isLoaded = false;
+			clearTimeout(loopTimeout);
+			iframe.src = '';
+			showPoster();
+		}
+
+		// Google Drive postMessage loop detection
+		if (!isYouTube) {
+			window.addEventListener('message', function (e) {
+				if (!iframe.src) return;
+				try {
+					var d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+					if (!d || !d.info) return;
+
+					if (d.info.duration > 0 && d.info.duration !== videoDuration) {
+						videoDuration = d.info.duration;
+						scheduleLoop();
+					}
+
+					if (videoDuration > 0 && d.info.currentTime !== undefined) {
+						var remaining = videoDuration - d.info.currentTime - 0.3;
+						if (remaining > 0 && remaining < videoDuration * 0.2) {
+							clearTimeout(loopTimeout);
+							loopTimeout = setTimeout(reloadIframe, Math.max(100, remaining * 1000));
+						}
+					}
+
+					if (d.info.playerState === 0) reloadIframe();
+				} catch (_) {}
+			});
+		}
+
+		// IntersectionObserver — autoplay when visible, pause when off-screen
+		var observer = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) { loadVideo(); } else { unloadVideo(); }
+			});
+		}, { threshold: 0.25 });
+
+		observer.observe(wrap);
+
+		window.addEventListener('load', function () {
+			var r = wrap.getBoundingClientRect();
+			if (r.top < window.innerHeight && r.bottom > 0) loadVideo();
 		});
-	})();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initCourseHeroVideo);
+	} else {
+		initCourseHeroVideo();
+	}
+	document.addEventListener('astro:page-load', initCourseHeroVideo);
+})();
 </script>

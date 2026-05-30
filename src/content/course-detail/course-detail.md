@@ -1,7 +1,7 @@
 ---
 seo:
-  title: Course Detail | Young Scholars Academy
-  description: Course details for robotics and coding program.
+  title: Advocacy & Activism | Young Scholars Academy
+  description: Help your child find their voice and make a difference. A live, small-group course on advocacy, civic engagement, and real-world activism for ages 8–12.
 navItems:
   - label: Programs
     href: "#"
@@ -15,29 +15,31 @@ navItems:
     href: "/teachers"
 hero:
   badges:
-    - Science & Tech
-    - Ages 10-14
-  titleLead: Introduction to
-  titleAccent: Robotics & Coding
-  description: Build real robots and learn Python fundamentals in this hands-on, interactive 8-week course designed specifically for middle school innovators.
+    - Social & Life Skills
+    - Ages 8–12
+  titleLead: Advocacy &
+  titleAccent: Activism
+  description: Help your child find their voice and make a difference. Students explore real-world issues, build persuasive communication skills, and learn how to create meaningful change in their communities.
   stats:
     - label: Duration
-      value: 8 Weeks
+      value: 1 Week (5 days)
     - label: Level
-      value: Beginner
+      value: Intermediate
     - label: Class Size
-      value: Max 12
+      value: Small Group
     - label: Format
       value: Live Online
-  price: "$299"
-  priceNote: Full course access
+  price: "$159"
+  priceNote: Pay upfront & save 10% — only $31.80/day
   ratingText: Rated 4.9/5 by 120+ parents
-  instructor: Dr. Alex Watson
+  instructor: Ms. Katie Barnwell
   taughtByLabel: Taught by
   primaryCtaLabel: Enroll Now
+  primaryCtaHref: "https://campscui.active.com/orgs/YoungScholarsAcademy0?season=3782943&session=70245344"
   secondaryCtaLabel: View Schedule
   videoDriveFileId: 1N2Akxwft79oIqiP0_G2bBkvKaTGneaU1
-  videoAriaLabel: See the class in action
+  videoYouTubeId: 
+  videoAriaLabel: See the Advocacy & Activism class in action
 tabs:
   - Overview
   - Learning Outcomes
@@ -45,43 +47,46 @@ tabs:
   - Teacher
   - Reviews
 sidebar:
-  price: "$299"
-  cohort: Next cohort starts Nov 12
+  price: "$159"
+  cohort: Multiple sessions available — Wk 2, 3, 9 & 11
   includesTitle: "Course Includes:"
   includes:
-    - text: 16 hours live instruction
-    - text: Physical robotics kit shipped
+    - text: 5 live daily sessions (1 week)
+    - text: Small-group interactive format
+    - text: Real-world activism projects
     - text: Certificate of completion
-    - text: Lifetime community access
-  related:
-    - tag: Design
-      title: Game Design for Kids
-      meta: "$199 • 6 Weeks"
-      image: /assets/course-detail/related-design.png
-    - tag: Science
-      title: Junior Chemist Labs
-      meta: "$249 • 4 Weeks"
-      image: /assets/course-detail/related-science.png
-  primaryCtaLabel: Enroll Now
+  primaryCtaLabel: "Enroll Now - $159"
+  primaryCtaHref: "https://campscui.active.com/orgs/YoungScholarsAcademy0?season=3782943&session=70245344"
   guaranteeText: 14-day money-back guarantee
   relatedTitle: Related Courses
+  related:
+    - tag: Social & Life Skills
+      title: "Mock Trial: Build Your Case"
+      meta: "$159 - 1 Week - Ages 8-18"
+      image: /images/summer/camps/mock_trial_build_your_case.jpg
+      href: "https://campscui.active.com/orgs/YoungScholarsAcademy0?season=3782943&session=70241344"
+    - tag: Social & Life Skills
+      title: Debate Camp Public Speaking
+      meta: "$159 - 1 Week - Ages 8-11"
+      image: /images/summer/camps/debate_camp_public_speaking.jpg
+      href: "https://campscui.active.com/orgs/YoungScholarsAcademy0?season=3782943&session=70241444"
 content:
   overviewTitle: Course Overview
-  overview: Welcome to the exciting world of robotics! This course is designed to take students from absolute beginners to confident creators. We focus on practical, hands-on projects that make abstract coding concepts tangible and fun.
-  overview2: Students will work in small groups, ensuring personalized attention. By the end of the 8 weeks, each student will have built and programmed their own autonomous navigating robot.
+  overview: In Advocacy & Activism, students discover the power of their own voice. Through dynamic discussions, real-world case studies, and hands-on projects, they learn how everyday people — including young people just like them — have shaped history and continue to drive change today.
+  overview2: Students work in small groups to explore issues they care about, craft compelling arguments, and develop actionable plans to make a difference in their schools and communities. This course builds confidence, critical thinking, and civic responsibility.
   pillars:
-    - title: Python Basics
-      description: Variables, loops, and logic tailored for hardware control.
-    - title: Hardware Assembly
-      description: Connecting sensors, motors, and microcontrollers safely.
+    - title: Civic Engagement
+      description: Understanding how systems work and how individuals can influence them.
+    - title: Persuasive Communication
+      description: Crafting arguments, writing letters, and speaking up effectively.
   gains:
-    - text: Mastery over Python syntax and logic structures.
-    - text: "Understanding of electronics: circuits, voltage, and current."
-    - text: Critical thinking and algorithmic problem-solving.
-    - text: Confidence to explore advanced engineering topics.
+    - text: Confidence to voice opinions and advocate for causes they believe in.
+    - text: Understanding of civic processes, rights, and responsibilities.
+    - text: Skills to research issues and build evidence-based arguments.
+    - text: Experience creating a real advocacy project or campaign.
   gainsTitle: What Your Child Will Gain
   videoTitle: See the Class in Action
-  videoCaptionTitle: Watch a 2-minute demo
+  videoCaptionTitle: Watch a 2-minute preview
   videoCaptionText: Experience our interactive teaching style
   scheduleTitle: Class Schedule
   scheduleHeaderSession: Session
@@ -89,21 +94,27 @@ content:
   scheduleHeaderDate: Date
   downloadCurriculumLabel: Download Full Curriculum (PDF)
   instructorTitle: Meet Your Instructor
-  instructorName: Dr. Alex Watson
-  instructorRole: Robotics Engineer & Educator
+  instructorName: Katie Barnwell
+  instructorRole: Film & Music Educator | Former 2e Student
   instructorPortfolioLabel: View Portfolio
-  instructorOtherCoursesLabel: Other Courses (4)
+  instructorOtherCoursesLabel: Other Courses
   sessions:
-    - session: Session 01
-      topic: Introduction to Hardware & Tools
-      date: Nov 12, 4:00 PM
-    - session: Session 02
-      topic: "Python: Variables & Basic Logic"
-      date: Nov 19, 4:00 PM
-    - session: Session 03
-      topic: Sensors and Data Inputs
-      date: Nov 26, 4:00 PM
-  instructorBio: With over 15 years of experience in aerospace robotics and a PhD in Educational Technology, Dr. Watson specializes in making complex engineering concepts accessible to young minds. He has taught over 5,000 students globally.
+    - session: Day 1
+      topic: What Is Advocacy? Stories That Changed the World
+      date: Mon, Week starts Jun 8
+    - session: Day 2
+      topic: Finding Your Issue — Research & Evidence
+      date: Tue
+    - session: Day 3
+      topic: "Persuasion Toolbox: Writing, Speaking & Visuals"
+      date: Wed
+    - session: Day 4
+      topic: Building Your Campaign or Action Plan
+      date: Thu
+    - session: Day 5
+      topic: Present Your Advocacy Project
+      date: Fri
+  instructorBio: Katie has been teaching in a variety of settings for over 5 years — from virtual school to one-on-one music lessons. As a former 2e student and lifelong learner, she understands the complexity in all people and the importance of not forcing anyone into a box. Her teaching style is one of adaptability and innovation, allowing each student's unique strengths to flourish.
 testimonials:
   eyebrow: PROVEN RESULTS
   title: Real Growth. Measurable Impact.
@@ -189,21 +200,22 @@ reviews:
   galleryTitle: Inside the Classroom
   items:
     - name: Sarah Miller
-      role: Parent of 12yo
-      text: My son was always playing video games, now he's building them! Dr. Watson is incredible at keeping them engaged.
-    - name: David Chen
       role: Parent of 10yo
-      text: The kit arrived quickly and was high quality. The online sessions feel like they are in a real classroom.
+      text: My daughter came home every day excited to share what she learned. Ms. Katie has an incredible gift for making every student feel heard and valued.
+    - name: David Chen
+      role: Parent of 11yo
+      text: My son used to be shy about sharing his opinions. After this course he's passionate, articulate, and confident. Absolutely transformative.
 about:
   badgeLetter: "Y"
   title: About Young Scholars Academy
   description: We believe that the best way to learn is by doing. Founded by educators and engineers, YSA provides a safe, interactive, and high-energy environment for kids to explore their passions in STEM and Beyond.
   linkLabel: Learn more about our mission →
 finalCta:
-  title: Ready to build the future?
-  descriptionLine1: Join 400+ families. Enrollment for the Winter 2026
-  descriptionLine2: cohort is now open. Limited seats per class to ensure quality.
-  primaryButtonLabel: Enroll Now - $299
+  title: Ready to find your voice?
+  descriptionLine1: Join 400+ families. Multiple sessions available across
+  descriptionLine2: Weeks 2, 3, 9 & 11. Limited seats — small groups only.
+  primaryButtonLabel: "Enroll Now - $159"
+  primaryButtonHref: "https://campscui.active.com/orgs/YoungScholarsAcademy0?season=3782943&session=70245344"
   secondaryButtonLabel: Contact Us
-  imageAlt: Student holding a robot
+  imageAlt: Student presenting their advocacy project
 ---
