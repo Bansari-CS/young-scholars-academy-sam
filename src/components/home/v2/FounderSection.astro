@@ -1,0 +1,110 @@
+---
+// §16 — From the Founder — warm editorial, centered, personal
+---
+
+<section class="w-full bg-[#FAFAFA] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="founder-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<div class="mx-auto max-w-[64rem]">
+
+			<!-- Top: avatar + byline -->
+			<div class="mb-10 flex flex-col items-center gap-4 text-center">
+				<!-- Real photo -->
+				<div class="relative">
+					<img
+						src="/assets/teachers/admin-sam.png"
+						alt="Mr. Sam, M.Ed. — Head of School & Founder, Young Scholars Academy"
+						class="size-24 rounded-full object-cover shadow-[0_4px_24px_rgba(124,58,237,0.22)] ring-4 ring-white"
+						width="96"
+						height="96"
+						loading="lazy"
+					/>
+					<!-- Online dot -->
+					<span class="absolute bottom-1 right-1 flex size-4 items-center justify-center rounded-full border-2 border-[#FAFAFA] bg-[#10B981]" aria-hidden="true"></span>
+				</div>
+
+				<div>
+					<p class="m-0 font-display text-lg font-bold text-[#0F172A]">Mr. Sam, M.Ed.</p>
+					<p class="m-0 mt-1 text-sm text-[#64748B]">Head of School &amp; Founder · Young Scholars Academy</p>
+				</div>
+
+				<!-- Credential pills — from teachers page data -->
+				<div class="flex flex-wrap justify-center gap-2">
+					{['Two-time Fulbright Scholar', 'TEDx Speaker', 'Neurodivergent Educator', 'ADHD Advocate'].map((c) => (
+						<span class="rounded-full border border-[#E2E8F0] bg-white px-3 py-1.5 text-xs font-semibold text-[#374151] shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
+							{c}
+						</span>
+					))}
+				</div>
+
+				<!-- Eyebrow divider -->
+				<div class="mt-2 flex items-center gap-3 text-[0.625rem] font-bold tracking-[0.18em] text-[#94A3B8] uppercase">
+					<div class="h-px w-10 bg-[#E2E8F0]"></div>
+					From the Founder
+					<div class="h-px w-10 bg-[#E2E8F0]"></div>
+				</div>
+			</div>
+
+			<!-- Story + pull quote layout -->
+			<div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_280px]">
+
+				<!-- Left: Story -->
+				<div>
+					<h2 id="founder-heading" class="m-0 mb-6 text-[clamp(1.625rem,2.8vw,2rem)] font-bold leading-[1.3] tracking-[-0.02em] text-[#0F172A]">
+						I built Young Scholars Academy because I was the kid who needed it.
+					</h2>
+
+					<div class="space-y-4 text-[0.9375rem] leading-[1.85] text-[#475569]">
+						<p class="m-0">
+							I was "too much" and "not enough" in the same breath. Too intense. Too sensitive. Not focused enough. Not compliant enough.
+							<strong class="font-semibold text-[#0F172A]">I know what it costs when no one in the room sees you clearly.</strong>
+						</p>
+						<p class="m-0">
+							I also know what changes when someone finally does.
+						</p>
+						<p class="m-0">
+							This isn't a business I started because I saw a market opportunity. It's a place I built because I couldn't find it anywhere — and I knew other families couldn't either.
+						</p>
+					</div>
+
+					<!-- CTA -->
+					<a
+						href="/summer"
+						class="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#7C3AED] px-6 py-3 text-sm font-semibold text-white no-underline shadow-[0_2px_12px_rgba(124,58,237,0.25)] transition-[opacity,transform] hover:-translate-y-px hover:opacity-90"
+					>
+						Explore Programs
+						<svg class="block size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+							<path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+				</div>
+
+				<!-- Right: pull quote + stats -->
+				<div class="flex flex-col gap-5">
+					<!-- Pull quote card -->
+					<div class="rounded-2xl bg-[linear-gradient(135deg,#F5F3FF_0%,#EFF6FF_100%)] border border-[#DDD6FE] p-6">
+						<div class="mb-3 text-4xl font-serif leading-none text-[#7C3AED]/20 select-none" aria-hidden="true">&ldquo;</div>
+						<p class="m-0 text-[0.9375rem] font-semibold italic leading-[1.75] text-[#4A42C9]">
+							93% come back every semester. Not because we market to them. Because their kids won't let them leave.
+						</p>
+					</div>
+
+					<!-- Stats grid -->
+					<div class="grid grid-cols-2 gap-3">
+						{[
+							{ value: '1,200+', label: 'Families served' },
+							{ value: '93%', label: 'Re-enroll' },
+							{ value: '47', label: 'US States' },
+							{ value: '17', label: 'Countries' },
+						].map((s) => (
+							<div class="rounded-xl border border-[#E2E8F0] bg-white px-4 py-4 text-center shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
+								<p class="m-0 font-display text-xl font-black text-[#7C3AED]">{s.value}</p>
+								<p class="m-0 mt-0.5 text-xs text-[#94A3B8]">{s.label}</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>

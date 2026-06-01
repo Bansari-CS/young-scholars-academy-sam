@@ -1,0 +1,65 @@
+---
+import DashboardPreview from '../DashboardPreview.astro';
+import PrimaryButton from '../../ui/PrimaryButton.astro';
+import type { HeroDashboardData } from '../../../types/home';
+
+interface Props {
+	content: {
+		trustBadges: string[];
+		titleLineOne: string;
+		titleHighlight: string;
+		description: string;
+		primaryCta: { label: string; href: string };
+		dashboard: HeroDashboardData;
+	};
+}
+
+const { content } = Astro.props;
+---
+
+<div
+	class="relative w-full overflow-hidden bg-[linear-gradient(150.46deg,#f8fafc_0%,rgba(240,244,255,0.3)_50%,#f8fafc_100%)]"
+>
+	<div class="pointer-events-none absolute left-[9%] top-[-9%] h-[min(620px,92vw)] w-[min(620px,92vw)] rounded-full bg-[rgba(199,213,254,0.22)] blur-[74px]"></div>
+	<div class="pointer-events-none absolute bottom-[5%] left-1/2 h-[min(540px,78vw)] w-[min(540px,78vw)] -translate-x-1/2 rounded-full bg-[rgba(168,85,247,0.18)] blur-[68px]"></div>
+
+	<div class="mx-auto max-w-[var(--ysa-max)] px-4 pb-10 sm:px-6 md:px-10 lg:px-10 lg:pb-24">
+		<section
+			class="relative z-[1] grid min-h-0 grid-cols-1 items-start gap-6 pt-20 lg:grid-cols-2 lg:items-center lg:gap-12"
+		>
+			<div class="flex max-w-[39.5rem] flex-col items-start gap-6">
+				<!-- Trust badge pills -->
+				<ul class="m-0 flex list-none flex-wrap items-start gap-3 p-0" aria-label="Trust and reach highlights">
+					{content.trustBadges.map((label) => (
+						<li class="m-0 p-0">
+							<p class="m-0 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-[#e0e9ff] bg-white px-[1.0625rem] py-[0.5625rem] font-display text-xs font-medium leading-4 tracking-[0.01875rem] text-[#7c3aed] shadow-[0_1px_1px_rgba(0,0,0,0.05)]">
+								<span class="size-2 shrink-0 rounded-full bg-[#048c3c]" aria-hidden="true" />
+								<span>{label}</span>
+							</p>
+						</li>
+					))}
+				</ul>
+
+				<!-- Title -->
+				<h1 class="m-0 pb-[0.08em] text-[clamp(2.25rem,6vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.09375rem] text-[var(--ysa-figma-brand)]">
+					<span class="block leading-[1.08]">{content.titleLineOne}</span>
+					<span class="mt-1 block bg-[linear-gradient(90deg,#0A9DFB_18.75%,#7C3AED_66.35%)] bg-clip-text pb-[0.08em] leading-[1.08] text-transparent">
+						{content.titleHighlight}
+					</span>
+				</h1>
+
+				<!-- Description -->
+				<p class="max-w-[39.5rem] text-[clamp(1rem,2vw,1.125rem)] leading-[2.03125rem] text-[#475569]">
+					{content.description}
+				</p>
+
+				<!-- Single CTA -->
+				<div class="flex flex-wrap items-start gap-4 pb-4 pt-2">
+					<PrimaryButton href={content.primaryCta.href} label={content.primaryCta.label} variant="lg" showTrailingArrow />
+				</div>
+			</div>
+
+			<DashboardPreview dashboard={content.dashboard} />
+		</section>
+	</div>
+</div>

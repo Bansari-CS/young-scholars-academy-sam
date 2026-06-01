@@ -1,0 +1,165 @@
+---
+// §13 — YSA Runs Year-Round
+
+const seasons = [
+	{
+		season: 'Fall',
+		duration: '16 Weeks',
+		months: 'Sep – Dec',
+		description: 'Enrichment courses meet once a week. Your child picks the subjects they love, goes deep, and builds friendships over the semester. This is where most families start.',
+		highlight: 'Most families start here',
+		border: 'border-[#FDE68A]',
+		iconBg: 'bg-[linear-gradient(135deg,#FEF3C7_0%,#FDE68A_100%)]',
+		iconColor: '#B45309',
+		iconStroke: '#B45309',
+		durationBg: 'bg-[#FFF7ED]',
+		durationText: 'text-[#9A3412]',
+		monthsBg: 'bg-[#FEF3C7]',
+		monthsText: 'text-[#92400E]',
+		highlightBg: 'bg-[#FFFBEB]',
+		highlightText: 'text-[#92400E]',
+		dotColor: 'bg-[#F59E0B]',
+		// Leaf / autumn icon
+		iconPath: 'M17 8C8 10 5.9 16.17 3.82 19.5a1 1 0 11-1.71-1C4 16 6.09 10.31 7 8C5 9 3 9.83 3 9.83S5 7 7 5c0 0-2 0-3 1C6 4 8 2 12 2c0 0 0 4-4 6 2.21-1.11 5-1.52 5-1.52S11.5 9.5 9 12c2-1 7.04-1.15 8-4z',
+	},
+	{
+		season: 'Spring',
+		duration: '20 Weeks',
+		months: 'Jan – May',
+		description: 'The longest semester — more time means deeper dives and stronger friendships. Students who joined in Fall often add more classes by Spring.',
+		highlight: 'Longest & deepest semester',
+		border: 'border-[#A7F3D0]',
+		iconBg: 'bg-[linear-gradient(135deg,#D1FAE5_0%,#A7F3D0_100%)]',
+		iconColor: '#047857',
+		iconStroke: '#047857',
+		durationBg: 'bg-[#ECFDF5]',
+		durationText: 'text-[#065F46]',
+		monthsBg: 'bg-[#D1FAE5]',
+		monthsText: 'text-[#065F46]',
+		highlightBg: 'bg-[#ECFDF5]',
+		highlightText: 'text-[#065F46]',
+		dotColor: 'bg-[#10B981]',
+		// Seedling / sprout icon
+		iconPath: 'M12 22V13m0 0C12 13 7 10 7 6C7 3.8 9.2 2 12 2C14.8 2 17 3.8 17 6C17 10 12 13 12 13ZM12 13C12 13 9 11 7 12M12 13C12 13 15 11 17 12',
+	},
+	{
+		season: 'Summer',
+		duration: '10 Weeks',
+		months: 'Jun – Aug',
+		description: 'Camps run Monday–Friday, 50 minutes a day, one week at a time. Stack multiple camps and unlock the virtual campus between sessions.',
+		highlight: 'Many families discover YSA here',
+		border: 'border-[#BFDBFE]',
+		iconBg: 'bg-[linear-gradient(135deg,#DBEAFE_0%,#BFDBFE_100%)]',
+		iconColor: '#1D4ED8',
+		iconStroke: '#1D4ED8',
+		durationBg: 'bg-[#EFF6FF]',
+		durationText: 'text-[#1D4ED8]',
+		monthsBg: 'bg-[#DBEAFE]',
+		monthsText: 'text-[#1E40AF]',
+		highlightBg: 'bg-[#EFF6FF]',
+		highlightText: 'text-[#1E40AF]',
+		dotColor: 'bg-[#3B82F6]',
+		// Sun / rays icon
+		iconPath: 'M12 3V5M12 19V21M5.64 5.64L7.05 7.05M16.95 16.95L18.36 18.36M3 12H5M19 12H21M5.64 18.36L7.05 16.95M16.95 7.05L18.36 5.64',
+	},
+];
+---
+
+<section class="w-full bg-[#F0F4FF] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="year-round-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+
+		<header class="mb-12 text-center">
+			<p class="mb-4 inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-xs font-bold tracking-[0.06em] text-[#7C3AED] uppercase shadow-sm">
+				Year-Round Programs
+			</p>
+			<h2 id="year-round-heading" class="m-0 text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-[#0F172A]">
+				YSA Runs Year-Round.
+			</h2>
+			<p class="mx-auto mt-4 max-w-[36rem] text-base leading-[1.7] text-[#64748B]">
+				Every season brings a different way in. Most families stay for all three.
+			</p>
+		</header>
+
+		<!-- Timeline connector on desktop -->
+		<div class="relative">
+			<div
+				class="absolute left-[calc(100%/6)] right-[calc(100%/6)] hidden h-px bg-[linear-gradient(90deg,#E2E8F0_0%,#CBD5E1_50%,#E2E8F0_100%)] lg:block"
+				style="top: 2.875rem"
+				aria-hidden="true"
+			></div>
+
+			<div class="grid grid-cols-1 gap-5 lg:grid-cols-3">
+				{seasons.map((s) => (
+					<article class:list={['relative flex flex-col overflow-hidden rounded-2xl border bg-white shadow-[0_1px_3px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.1)]', s.border]}>
+
+						<!-- Heading row with icon -->
+						<div class="flex items-start justify-between gap-4 border-b border-[#F1F5F9] px-6 pt-6 pb-5">
+							<div class="flex items-center gap-3.5">
+								<!-- Timeline dot (desktop only) -->
+								<div class:list={['hidden size-2.5 shrink-0 rounded-full ring-[3px] ring-[#F0F4FF] lg:block', s.dotColor]} aria-hidden="true"></div>
+
+								<!-- Styled icon container -->
+								<div
+									class:list={['flex size-11 shrink-0 items-center justify-center rounded-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]', s.iconBg]}
+									aria-hidden="true"
+								>
+									{s.season === 'Summer' ? (
+										<!-- Sun: circle + rays as separate paths -->
+										<svg class="block size-5" viewBox="0 0 24 24" fill="none" stroke={s.iconColor} stroke-width="2" stroke-linecap="round" aria-hidden="true">
+											<circle cx="12" cy="12" r="4" fill={s.iconColor} fill-opacity="0.15"/>
+											<path d={s.iconPath}/>
+										</svg>
+									) : s.season === 'Fall' ? (
+										<!-- Leaf -->
+										<svg class="block size-5" viewBox="0 0 24 24" fill={s.iconColor} fill-opacity="0.9" aria-hidden="true">
+											<path d={s.iconPath}/>
+										</svg>
+									) : (
+										<!-- Spring sprout — filled + stroked combo -->
+										<svg class="block size-5" viewBox="0 0 24 24" fill="none" stroke={s.iconColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+											<path d="M12 22V13"/>
+											<path d="M12 13C12 13 7 10 7 6C7 3.8 9.2 2 12 2C14.8 2 17 3.8 17 6C17 10 12 13 12 13Z" fill={s.iconColor} fill-opacity="0.15"/>
+											<path d="M12 13C10 12 8 11.5 7 12"/>
+											<path d="M12 13C14 12 16 11.5 17 12"/>
+										</svg>
+									)}
+								</div>
+
+								<h3 class="m-0 text-[1.125rem] font-bold text-[#0F172A]">{s.season}</h3>
+							</div>
+
+							<!-- Months pill -->
+							<span class:list={['shrink-0 self-center rounded-full px-2.5 py-1 text-[0.6875rem] font-bold tracking-[0.03em]', s.monthsBg, s.monthsText]}>
+								{s.months}
+							</span>
+						</div>
+
+						<!-- Body -->
+						<div class="flex flex-1 flex-col px-6 py-5">
+							<!-- Duration badge -->
+							<span class:list={['mb-4 self-start rounded-lg px-3 py-1.5 text-sm font-bold', s.durationBg, s.durationText]}>
+								{s.duration}
+							</span>
+
+							<p class="m-0 flex-1 text-[0.9375rem] leading-[1.7] text-[#475569]">{s.description}</p>
+
+							<!-- Highlight -->
+							<div class:list={['mt-5 flex items-center gap-2 rounded-xl px-4 py-2.5', s.highlightBg]}>
+								<svg class="block size-3.5 shrink-0" viewBox="0 0 14 14" fill="currentColor" class:list={[s.highlightText]} aria-hidden="true">
+									<path d="M7 1L8.5 4.5H12.5L9.5 6.5L10.5 10L7 8L3.5 10L4.5 6.5L1.5 4.5H5.5L7 1Z"/>
+								</svg>
+								<span class:list={['text-xs font-semibold', s.highlightText]}>{s.highlight}</span>
+							</div>
+						</div>
+
+					</article>
+				))}
+			</div>
+		</div>
+
+		<p class="mt-10 text-center text-sm text-[#64748B]">
+			Most families start with one semester and stay for years. Many discover summer first and never leave.
+		</p>
+
+	</div>
+</section>

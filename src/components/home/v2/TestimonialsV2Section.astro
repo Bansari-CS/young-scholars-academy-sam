@@ -1,0 +1,253 @@
+---
+// §10 — What Families Say — with video testimonial popup
+
+const testimonials = [
+	{
+		quote: "Ben loves YSA because he and the other kids WANT TO BE THERE. The teaching style is Socratic and discussion-based. I didn't experience learning like that until law school.",
+		author: 'Nicole',
+		role: "Ben's Mom",
+		initial: 'N',
+		avatarBg: 'bg-[#7C3AED]',
+	},
+	{
+		quote: "It has fundamentally changed the way we homeschool. I had no idea the teaching quality was that good. I just knew my kids were thriving.",
+		author: 'Amber',
+		role: 'YSA Parent',
+		initial: 'A',
+		avatarBg: 'bg-[#0A9DFB]',
+	},
+	{
+		quote: "They had acceleration, but not belonging. Young Scholars Academy changed that.",
+		author: 'Roger',
+		role: 'YSA Parent',
+		initial: 'R',
+		avatarBg: 'bg-[#059669]',
+	},
+	{
+		quote: "This is by far the best academic year my kid has experienced since kindergarten!",
+		author: 'Laura',
+		role: "Elijah's Mom",
+		initial: 'L',
+		avatarBg: 'bg-[#EA580C]',
+	},
+];
+
+// Video testimonial data — using real Google Drive video
+const videoTestimonial = {
+	name: 'Jonathan',
+	role: 'YSA Student',
+	quote: '"Compared to other classes, at YSA you get to talk so much more — they explain it and help you many times if you get lost."',
+	driveFileId: '1qsKTyVG4qI_WJMCgNjpZOhQaChKhtxzy',
+	posterSrc: '/assets/images/home-testimonials/nicole-testimonial.webp',
+};
+
+const videoEmbedUrl = `https://drive.google.com/file/d/${videoTestimonial.driveFileId}/preview`;
+---
+
+<section class="w-full bg-[#F8FAFC] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="testimonials-v2-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+
+		<header class="mb-12 text-center">
+			<p class="mb-4 inline-flex items-center justify-center rounded-full bg-[#E0E9FF] px-4 py-2 text-xs font-bold tracking-[0.06em] text-[#4A42C9] uppercase">
+				What Families Say
+			</p>
+			<h2 id="testimonials-v2-heading" class="m-0 text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-[#0F172A]">
+				Real YSA Families.<br class="hidden sm:block"/> Unedited. Unscripted.
+			</h2>
+		</header>
+
+		<div class="grid grid-cols-1 gap-5 lg:grid-cols-3">
+
+			<!-- Video testimonial card — spans left column -->
+			<div class="lg:row-span-2">
+				<button
+					type="button"
+					class="group relative w-full overflow-hidden rounded-2xl shadow-[0_4px_24px_rgba(15,23,42,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-2"
+					aria-label="Play video testimonial from Jonathan, YSA Student"
+					id="open-video-modal"
+					style="height:100%;min-height:280px;"
+				>
+					<!-- Poster image -->
+					<img
+						src={videoTestimonial.posterSrc}
+						alt={`${videoTestimonial.name} — ${videoTestimonial.role}`}
+						class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+						loading="lazy"
+					/>
+
+					<!-- Dark overlay gradient -->
+					<div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.2)_50%,transparent_100%)]"></div>
+
+					<!-- Play button -->
+					<div class="absolute inset-0 flex items-center justify-center">
+						<div class="flex size-16 items-center justify-center rounded-full bg-white/90 shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-transform duration-200 group-hover:scale-110">
+							<svg class="block size-6 translate-x-0.5 text-[#7C3AED]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path d="M8 5.14v14l11-7-11-7z"/>
+							</svg>
+						</div>
+					</div>
+
+					<!-- Bottom content -->
+					<div class="absolute bottom-0 left-0 right-0 p-6 text-left">
+						<!-- Stars -->
+						<div class="mb-3 flex gap-1">
+							{Array.from({length: 5}).map(() => (
+								<svg class="block size-4" viewBox="0 0 16 16" fill="#FBBF24" aria-hidden="true">
+									<path d="M8 1L10 6H15.5L11 9.5L12.5 15L8 12L3.5 15L5 9.5L0.5 6H6L8 1Z"/>
+								</svg>
+							))}
+						</div>
+						<p class="m-0 text-sm italic leading-[1.6] text-white/90">{videoTestimonial.quote}</p>
+						<div class="mt-4 flex items-center gap-2.5">
+							<div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#7C3AED]">
+								<span class="text-xs font-bold text-white">J</span>
+							</div>
+							<div>
+								<p class="m-0 text-sm font-bold text-white">{videoTestimonial.name}</p>
+								<p class="m-0 text-xs text-white/60">{videoTestimonial.role}</p>
+							</div>
+							<!-- Video pill -->
+							<span class="ml-auto flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[0.6875rem] font-semibold text-white backdrop-blur-sm">
+								<svg class="block size-3" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+									<path d="M4 2.5v7L10 6 4 2.5Z"/>
+								</svg>
+								Watch
+							</span>
+						</div>
+					</div>
+				</button>
+			</div>
+
+			<!-- Featured text quote — Nicole -->
+			<article class="flex flex-col rounded-2xl bg-[linear-gradient(135deg,#7C3AED_0%,#5751E4_100%)] p-7 shadow-[0_4px_20px_rgba(124,58,237,0.2)]">
+				<div class="mb-4 flex gap-1">
+					{Array.from({length:5}).map(() => (
+						<svg class="block size-3.5" viewBox="0 0 16 16" fill="#FDE68A" aria-hidden="true">
+							<path d="M8 1L10 6H15.5L11 9.5L12.5 15L8 12L3.5 15L5 9.5L0.5 6H6L8 1Z"/>
+						</svg>
+					))}
+				</div>
+				<div class="mb-4 text-4xl font-serif leading-none text-white/15 select-none" aria-hidden="true">"</div>
+				<blockquote class="m-0 flex-1">
+					<p class="m-0 text-[0.9375rem] leading-[1.8] text-white/90">{testimonials[0].quote}</p>
+				</blockquote>
+				<footer class="mt-6 flex items-center gap-3 border-t border-white/15 pt-5">
+					<div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/20">
+						<span class="text-xs font-bold text-white">{testimonials[0].initial}</span>
+					</div>
+					<div>
+						<p class="m-0 text-sm font-bold text-white">{testimonials[0].author}</p>
+						<p class="m-0 text-xs text-white/50">{testimonials[0].role}</p>
+					</div>
+				</footer>
+			</article>
+
+			<!-- Remaining 3 text quotes -->
+			{testimonials.slice(1).map((t) => (
+				<article class="flex flex-col rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)]">
+					<div class="mb-4 flex gap-1">
+						{Array.from({length:5}).map(() => (
+							<svg class="block size-3.5" viewBox="0 0 16 16" fill="#FBBF24" aria-hidden="true">
+								<path d="M8 1L10 6H15.5L11 9.5L12.5 15L8 12L3.5 15L5 9.5L0.5 6H6L8 1Z"/>
+							</svg>
+						))}
+					</div>
+					<blockquote class="m-0 flex-1">
+						<p class="m-0 text-[0.9375rem] leading-[1.7] text-[#374151]">&ldquo;{t.quote}&rdquo;</p>
+					</blockquote>
+					<footer class="mt-5 flex items-center gap-3 border-t border-[#F1F5F9] pt-4">
+						<div class:list={['flex size-9 shrink-0 items-center justify-center rounded-full', t.avatarBg]}>
+							<span class="text-xs font-bold text-white">{t.initial}</span>
+						</div>
+						<div>
+							<p class="m-0 text-sm font-bold text-[#0F172A]">{t.author}</p>
+							<p class="m-0 text-xs text-[#94A3B8]">{t.role}</p>
+						</div>
+					</footer>
+				</article>
+			))}
+
+		</div>
+
+		<div class="mt-10 text-center">
+			<a href="/summer" class="inline-flex items-center gap-2 rounded-xl border border-[#E2E8F0] bg-white px-6 py-3 text-sm font-semibold text-[#374151] no-underline shadow-sm transition-[box-shadow,transform] hover:-translate-y-px hover:shadow-md">
+				Read More Family Stories
+				<svg class="block size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+					<path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- Video Modal -->
+<dialog
+	id="video-modal"
+	class="fixed inset-0 z-[200] m-auto max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl bg-black p-0 shadow-[0_32px_80px_rgba(0,0,0,0.6)] backdrop:bg-black/70 backdrop:backdrop-blur-sm open:flex open:flex-col"
+	aria-label="Video testimonial"
+>
+	<!-- Modal header -->
+	<div class="flex items-center justify-between border-b border-white/10 bg-[#0F172A] px-5 py-3">
+		<div>
+			<p class="m-0 text-sm font-bold text-white">{videoTestimonial.name} — {videoTestimonial.role}</p>
+			<p class="m-0 text-xs text-white/40">YSA Video Testimonial</p>
+		</div>
+		<button
+			id="close-video-modal"
+			class="flex size-8 items-center justify-center rounded-full bg-white/10 text-white/70 transition-colors hover:bg-white/20 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+			aria-label="Close video"
+			type="button"
+		>
+			<svg class="block size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+				<path d="M3 3L13 13M13 3L3 13"/>
+			</svg>
+		</button>
+	</div>
+
+	<!-- Video iframe -->
+	<div class="relative w-full" style="aspect-ratio:16/9;">
+		<iframe
+			id="video-modal-iframe"
+			class="absolute inset-0 h-full w-full border-0"
+			title="Jonathan — YSA Student testimonial"
+			allow="autoplay; fullscreen"
+			allowfullscreen
+		></iframe>
+	</div>
+</dialog>
+
+<script is:inline>
+(function () {
+	var openBtn   = document.getElementById('open-video-modal');
+	var modal     = document.getElementById('video-modal');
+	var closeBtn  = document.getElementById('close-video-modal');
+	var iframe    = document.getElementById('video-modal-iframe');
+	var embedSrc  = 'https://drive.google.com/file/d/1qsKTyVG4qI_WJMCgNjpZOhQaChKhtxzy/preview';
+
+	function openModal() {
+		if (!modal || !iframe) return;
+		iframe.src = embedSrc;
+		modal.showModal();
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeModal() {
+		if (!modal || !iframe) return;
+		modal.close();
+		iframe.src = '';
+		document.body.style.overflow = '';
+	}
+
+	if (openBtn) openBtn.addEventListener('click', openModal);
+	if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+	// Close on backdrop click
+	if (modal) {
+		modal.addEventListener('click', function (e) {
+			if (e.target === modal) closeModal();
+		});
+		// Close on ESC (native to <dialog>, but also clear iframe)
+		modal.addEventListener('cancel', closeModal);
+	}
+})();
+</script>

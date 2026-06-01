@@ -1,0 +1,168 @@
+---
+// §15 — Our Kids Are All Around the World — v2 redesign with stats + globe + flags
+
+const stats = [
+	{ value: '1,200+', label: 'Families Served', icon: '👨‍👩‍👧' },
+	{ value: '17',     label: 'Countries across 6 continents', icon: '🌍' },
+	{ value: '47+',    label: 'US States + D.C.', icon: '🇺🇸' },
+];
+
+const countries = [
+	{ flag: '🇺🇸', name: 'United States' },
+	{ flag: '🇨🇦', name: 'Canada' },
+	{ flag: '🇳🇿', name: 'New Zealand' },
+	{ flag: '🇦🇺', name: 'Australia' },
+	{ flag: '🇨🇭', name: 'Switzerland' },
+	{ flag: '🇵🇪', name: 'Peru' },
+	{ flag: '🇨🇱', name: 'Chile' },
+	{ flag: '🇧🇷', name: 'Brazil' },
+	{ flag: '🇰🇷', name: 'Korea' },
+	{ flag: '🇮🇹', name: 'Italy' },
+	{ flag: '🇮🇪', name: 'Ireland' },
+	{ flag: '🇸🇬', name: 'Singapore' },
+	{ flag: '🇺🇬', name: 'Uganda' },
+	{ flag: '🇬🇧', name: 'United Kingdom' },
+	{ flag: '🇩🇪', name: 'Germany' },
+	{ flag: '🇳🇴', name: 'Norway' },
+	{ flag: '🇹🇹', name: 'Trinidad & Tobago' },
+];
+---
+
+<section class="relative w-full overflow-hidden bg-[#0A0F1E] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="world-v2-heading">
+
+	<!-- Ambient glows -->
+	<div class="pointer-events-none absolute left-1/4 top-0 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7C3AED]/10 blur-[120px]" aria-hidden="true"></div>
+	<div class="pointer-events-none absolute bottom-0 right-1/4 h-64 w-64 translate-x-1/4 translate-y-1/4 rounded-full bg-[#0A9DFB]/8 blur-[80px]" aria-hidden="true"></div>
+
+	<div class="relative mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+
+		<!-- Header -->
+		<div class="mb-12 text-center">
+			<p class="mb-4 text-[0.625rem] font-bold tracking-[0.2em] text-[#7C3AED] uppercase">Global Community</p>
+			<h2 id="world-v2-heading" class="m-0 text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white">
+				Our Kids Are All Around the World.
+			</h2>
+			<p class="mx-auto mt-4 max-w-[36rem] text-[0.9375rem] leading-[1.7] text-[#64748B]">
+				From Tokyo to New York, gifted and 2e kids are finding their people at YSA.
+			</p>
+		</div>
+
+		<!-- Stats row -->
+		<div class="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
+			{stats.map((s) => (
+				<div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-6 py-5 backdrop-blur-sm">
+					<span class="text-3xl" aria-hidden="true">{s.icon}</span>
+					<div>
+						<p class="m-0 font-display text-[clamp(1.5rem,3vw,2rem)] font-black text-white leading-none">{s.value}</p>
+						<p class="m-0 mt-1 text-sm text-[#64748B]">{s.label}</p>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- Globe + flags layout -->
+		<div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_auto]">
+
+			<!-- Globe -->
+			<div class="flex justify-center">
+				<div
+					id="world-globe-v2"
+					class="h-[360px] w-full max-w-[360px] opacity-0 transition-opacity duration-700"
+					aria-label="Animated globe showing YSA student locations worldwide"
+					role="img"
+				></div>
+			</div>
+
+			<!-- Flags grid -->
+			<div class="lg:w-72">
+				<p class="mb-4 text-[0.625rem] font-bold tracking-[0.14em] text-[#475569] uppercase">17 Countries</p>
+				<div class="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-3">
+					{countries.map((c) => (
+						<div
+							class="flex flex-col items-center gap-1.5 rounded-xl border border-white/6 bg-white/4 p-2.5 text-center transition-colors hover:bg-white/8"
+							title={c.name}
+						>
+							<span class="text-xl leading-none">{c.flag}</span>
+							<span class="text-[0.5rem] font-medium leading-tight text-[#64748B]">{c.name.split(' ')[0]}</span>
+						</div>
+					))}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+(function () {
+	function initGlobe() {
+		var el = document.getElementById('world-globe-v2');
+		if (!el || el.dataset.globeInited === '1') return;
+		el.dataset.globeInited = '1';
+
+		if (typeof Globe === 'undefined') {
+			var script = document.createElement('script');
+			script.src = 'https://unpkg.com/globe.gl@2/dist/globe.gl.min.js';
+			script.onload = buildGlobe;
+			document.head.appendChild(script);
+		} else {
+			buildGlobe();
+		}
+
+		function buildGlobe() {
+			var POINTS = [
+				{ lat: 37.09, lng: -95.71 }, // USA
+				{ lat: 56.13, lng: -106.35 }, // Canada
+				{ lat: -40.9, lng: 174.89 }, // NZ
+				{ lat: -25.27, lng: 133.77 }, // Australia
+				{ lat: 46.82, lng: 8.23 },   // Switzerland
+				{ lat: -9.19, lng: -75.02 }, // Peru
+				{ lat: -35.68, lng: -71.54 }, // Chile
+				{ lat: -14.24, lng: -51.93 }, // Brazil
+				{ lat: 35.91, lng: 127.77 }, // Korea
+				{ lat: 41.87, lng: 12.57 },  // Italy
+				{ lat: 53.41, lng: -8.24 },  // Ireland
+				{ lat: 1.35, lng: 103.82 },  // Singapore
+				{ lat: 1.37, lng: 32.29 },   // Uganda
+				{ lat: 55.38, lng: -3.44 },  // UK
+				{ lat: 51.17, lng: 10.45 },  // Germany
+				{ lat: 60.47, lng: 8.47 },   // Norway
+				{ lat: 10.69, lng: -61.22 }, // Trinidad
+			];
+
+			var globe = Globe({ animateIn: false })(el)
+				.globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+				.backgroundColor('rgba(0,0,0,0)')
+				.pointsData(POINTS)
+				.pointColor(function () { return '#7C3AED'; })
+				.pointAltitude(0.02)
+				.pointRadius(0.4)
+				.atmosphereColor('#7C3AED')
+				.atmosphereAltitude(0.18)
+				.width(el.clientWidth || 360)
+				.height(el.clientHeight || 360);
+
+			globe.controls().autoRotate = true;
+			globe.controls().autoRotateSpeed = 0.8;
+			globe.controls().enableZoom = false;
+
+			el.style.opacity = '1';
+		}
+	}
+
+	var observer = new IntersectionObserver(function (entries) {
+		if (entries[0].isIntersecting) {
+			initGlobe();
+			observer.disconnect();
+		}
+	}, { threshold: 0.2 });
+
+	var target = document.getElementById('world-globe-v2');
+	if (target) observer.observe(target);
+
+	document.addEventListener('astro:page-load', function () {
+		var t = document.getElementById('world-globe-v2');
+		if (t) observer.observe(t);
+	});
+})();
+</script>

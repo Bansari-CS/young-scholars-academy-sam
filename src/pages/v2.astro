@@ -1,0 +1,300 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+
+// V2-specific components
+import HeroSectionV2 from '../components/home/v2/HeroSectionV2.astro';
+import TrustStripV2 from '../components/home/v2/TrustStripV2.astro';
+import DoesThisSoundSection from '../components/home/v2/DoesThisSoundSection.astro';
+import DifferentSection from '../components/home/v2/DifferentSection.astro';
+import ExpertEndorsementSection from '../components/home/v2/ExpertEndorsementSection.astro';
+import PathwaysSection from '../components/home/v2/PathwaysSection.astro';
+import TestimonialsV2Section from '../components/home/v2/TestimonialsV2Section.astro';
+import HowItWorksV2Section from '../components/home/v2/HowItWorksV2Section.astro';
+import YearRoundSection from '../components/home/v2/YearRoundSection.astro';
+import FounderSection from '../components/home/v2/FounderSection.astro';
+import PromiseSection from '../components/home/v2/PromiseSection.astro';
+import ESASection from '../components/home/v2/ESASection.astro';
+import LeadCaptureCtaSection from '../components/home/v2/LeadCaptureCtaSection.astro';
+
+// Reused components with v2-appropriate data
+import ProgramsSection from '../components/home/ProgramsSection.astro';
+import MethodologySection from '../components/home/MethodologySection.astro';
+import TeachersSection from '../components/home/TeachersSection.astro';
+import WorldKidsSection from '../components/home/WorldKidsSection.astro';
+import FaqSection from '../components/home/FaqSection.astro';
+
+// ── Nav items (per PDF §2) ────────────────────────────────────────────────────
+const navItems = [
+	{ label: 'Programs',     href: '#' },
+	{ label: 'How It Works', href: '#how-it-works-v2' },
+	{ label: 'Why YSA',      href: '#different' },
+	{ label: 'Blog',         href: '/blog' },
+	{ label: 'Our Teachers', href: '/teachers' },
+];
+
+// ── Hero content (§3) — fixed numbers, no rating bar ─────────────────────────
+const heroContent = {
+	trustBadges: [
+		'WASC Accredited',
+		'1,200+ Families Served',
+		'93% Re-Enroll',
+		'17 Countries · 47 US States + D.C.',
+	],
+	titleLineOne: 'Somewhere Right Now, a Kid Just Like Yours Is Laughing in a Class They Chose,',
+	titleHighlight: 'With Friends Who Finally Get Them.',
+	description: "That's not a fantasy. That's a Tuesday at Young Scholars Academy. 150+ live online courses for gifted or 2e kids ages 5 to 18. Classes of 6 to 8. Mentors who were these kids. A virtual campus where they actually want to hang out.",
+	primaryCta: { label: 'Explore Summer Camps', href: '/summer' },
+	dashboard: {
+		studentName: "Alex's Dashboard",
+		course: 'Advanced Math • Grade 6',
+		streakLabel: '15 Day Streak',
+		cardAriaLabel: 'Product preview',
+		videoLocalSrc: '/assets/videos/home-hero-section-video.mp4',
+		videoDriveFileId: '',
+		videoYouTubeId: '',
+		videoAriaLabel: 'Children laughing and using a laptop at Young Scholars Academy',
+		progressTag: 'In Progress',
+		lessonProgressLabel: 'Lesson Progress',
+		lessonTitle: 'Algebraic Expressions',
+		lessonDescription: 'Master variables and solve complex equations',
+		progressPercent: 68,
+		stats: [
+			{ label: 'Accuracy', value: '94%', change: '+6%', icon: 'accuracy' },
+			{ label: 'Points',   value: '2,847', icon: 'points' },
+			{ label: 'Study Time', value: '5.2h', icon: 'study' },
+		],
+		nextSession: {
+			label: 'Next Session',
+			title: 'Live Class: Geometry Basics',
+			chipText: 'Join',
+		},
+	},
+};
+
+// ── Programs section (§8) — reuse existing component ─────────────────────────
+const programsContent = {
+	eyebrow: 'Find the Perfect Program',
+	title: 'AI Coding. Mock Trial. Minecraft Engineering. AP Psychology. D&D.',
+	description: '150+ courses your kid will actually want to take.',
+	viewAllCta: { label: 'Browse the Full Catalog →', href: '/summer' },
+	emptyFilterMessage: 'No programs match these filters. Try another age or instructor.',
+};
+
+// ── Methodology (§11) — 2 stat tiles only, keep 6 pillars ─────────────────────
+const methodologyContent = {
+	eyebrow: 'The YSA Methodology',
+	title: 'The YSA Methodology',
+	description: "We don't just teach subjects — we nurture the whole learner. Our approach combines academic rigor with emotional safety, creating an environment where brilliant minds flourish.",
+	cta: { label: 'Learn Our Approach', href: '/summer' },
+	statTiles: [
+		{
+			stat: '6–8 kids',
+			description: 'Per class, always — no exceptions',
+			variant: 'violet' as const,
+			statIcon: 'people' as const,
+		},
+		{
+			stat: 'Expert-level',
+			description: 'Instructors specializing in gifted or 2e learning',
+			variant: 'sky' as const,
+			statIcon: 'cap' as const,
+		},
+	],
+	principles: [
+		{
+			title: 'Depth Over Breadth',
+			description: 'We go deep into subjects kids care about, encouraging mastery and genuine understanding rather than surface-level coverage.',
+			iconTint: 'indigo' as const,
+			principleIcon: 'depth' as const,
+		},
+		{
+			title: 'Neurodivergent-Affirming',
+			description: 'Our educators are trained in gifted or 2e learning styles. We celebrate different ways of thinking — not just accommodate them.',
+			iconTint: 'violet' as const,
+			principleIcon: 'neuro' as const,
+		},
+		{
+			title: 'Socratic Discussion',
+			description: 'Students learn through dialogue and inquiry, not passive listening. Critical thinking develops naturally when a kid has 6 peers who actually push back.',
+			iconTint: 'cyan' as const,
+			principleIcon: 'socratic' as const,
+		},
+		{
+			title: 'Expert Mentorship',
+			description: 'Your child learns from mentors who guide with understanding — not correction. Many were these kids. They see your child because they remember what it felt like to not be seen.',
+			iconTint: 'emerald' as const,
+			principleIcon: 'async' as const,
+		},
+		{
+			title: 'Peer Community',
+			description: 'Small cohorts of 6–8 create lasting friendships with true intellectual peers.',
+			iconTint: 'teal' as const,
+			principleIcon: 'peer' as const,
+		},
+		{
+			title: 'Emotionally Safe',
+			description: 'We create spaces where mistakes are learning opportunities and every voice is valued. Cameras optional. No cold-calling. No public grading.',
+			iconTint: 'blue' as const,
+			principleIcon: 'safe' as const,
+		},
+	],
+};
+
+// ── Teachers (§14) ────────────────────────────────────────────────────────────
+const teachersContent = {
+	eyebrow: 'EXPERT EDUCATORS',
+	title: 'Learn From the Best.',
+	description: 'Real YSA mentors — neurodivergent educators, former 2e students, and specialists who were these kids.',
+	cardCta: { label: 'Find Your Teacher', href: '/teachers' },
+	items: [
+		{ name: 'Megan Hardy',      credentials: 'Professional Dungeon Master & Game Educator', bio: 'Building D&D adventures tailored to each student\'s unique individual needs.', photoIndex: 1 },
+		{ name: 'Mr. Salch',        credentials: 'Retired Tech Executive, Robotics Specialist',  bio: 'Retired tech executive who has taught over 10,000 students online.', photoIndex: 2 },
+		{ name: 'Ms. Jackson',      credentials: '26 Years Theatre & Performing Arts',           bio: 'Theatre educator with nearly 60 productions and 26 years of experience.', photoIndex: 3 },
+		{ name: 'Amy Bechtol',      credentials: 'Strength-Based Learning Specialist',           bio: 'Connecting neurodivergent students to meaningful curriculum in engaging ways.', photoIndex: 4 },
+		{ name: 'Miss Anna',        credentials: 'Youth Mentor & Play-Based Educator',           bio: 'Helping students feel seen, heard, and valued through play-based learning.', photoIndex: 5 },
+		{ name: 'Nelson Dean',      credentials: 'STAR Teacher Award Recipient',                  bio: '20 years of education experience across all ages, backgrounds, and subjects.', photoIndex: 6 },
+	],
+};
+
+// ── World (§15) — fixed stats, remove "24/7 Live Learning" ─────────────────────
+const worldContent = {
+	eyebrow: 'GLOBAL COMMUNITY',
+	title: 'Our Kids Are All Around',
+	titleLine2: 'the World',
+	description: 'From Tokyo to New York, 1,200+ families in 17 countries across 6 continents have found their people at YSA.',
+	globeAlt: 'Global network of YSA students around the world',
+	stats: [
+		{ value: '1,200+', label: 'Families Served' },
+		{ value: '17',     label: 'Countries across 6 continents' },
+		{ value: '47+',    label: 'US States + D.C.' },
+		{ value: '93%',    label: 'Re-Enroll Every Semester' },
+	],
+	countriesHeading: '17 Countries across 6 continents',
+	countries: [
+		{ flag: '🇺🇸', name: 'United States' },
+		{ flag: '🇨🇦', name: 'Canada' },
+		{ flag: '🇳🇿', name: 'New Zealand' },
+		{ flag: '🇦🇺', name: 'Australia' },
+		{ flag: '🇨🇭', name: 'Switzerland' },
+		{ flag: '🇵🇪', name: 'Peru' },
+		{ flag: '🇨🇱', name: 'Chile' },
+		{ flag: '🇧🇷', name: 'Brazil' },
+		{ flag: '🇰🇷', name: 'Korea' },
+		{ flag: '🇮🇹', name: 'Italy' },
+		{ flag: '🇮🇪', name: 'Ireland' },
+		{ flag: '🇸🇬', name: 'Singapore' },
+		{ flag: '🇺🇬', name: 'Uganda' },
+		{ flag: '🇬🇧', name: 'United Kingdom' },
+		{ flag: '🇩🇪', name: 'Germany' },
+		{ flag: '🇳🇴', name: 'Norway' },
+		{ flag: '🇹🇹', name: 'Trinidad & Tobago' },
+	],
+};
+
+// ── FAQ (§20) ─────────────────────────────────────────────────────────────────
+const faqContent = {
+	eyebrow: 'QUESTIONS PARENTS ASK',
+	title: 'Questions Parents Ask.',
+	description: 'Everything you need to know before getting started.',
+	items: [
+		{
+			question: 'Who is YSA for?',
+			answer: 'Gifted or 2e learners ages 5–18. ADHD, autism, giftedness, anxiety, dyslexia, PDA, and profiles that don\'t fit neatly into any one label. What they share: they\'re bright, they\'re different, and they haven\'t found their people yet.',
+		},
+		{
+			question: 'How big are the classes?',
+			answer: '6 to 8. Always. No exceptions.',
+		},
+		{
+			question: 'Is this Zoom?',
+			answer: 'Classes on Zoom + a virtual campus where kids walk between buildings as avatars and build a real social life. Cameras always optional.',
+		},
+		{
+			question: 'What does a week look like?',
+			answer: 'Some families take one class. Others use us as their primary community. Sessions are live, 50 min. Campus open 7 AM–7 PM Pacific.',
+		},
+		{
+			question: 'Is YSA accredited?',
+			answer: 'Yes. WASC accredited. Transcripts and homeschool portfolio documentation provided.',
+		},
+		{
+			question: 'How much does it cost?',
+			answer: 'From $500/semester. Summer camps priced separately. Payment plans and ESA/charter funding accepted.',
+		},
+		{
+			question: "What if it doesn't work for my kid?",
+			answer: '30-Day Promise. Better-fit course, full credit, or payments stopped. No questions.',
+		},
+	],
+};
+---
+
+<Layout
+	title="Young Scholars Academy | Where Gifted & 2e Kids Find Their People"
+	description="150+ live online courses for gifted or 2e kids ages 5-18. WASC accredited. Classes of 6-8. Mentors who get it."
+>
+	<!-- §2 Navigation -->
+	<Header brand="Young Scholars Academy" navItems={navItems} />
+
+	<main class="block w-full">
+		<!-- §3 Hero -->
+		<HeroSectionV2 content={heroContent} />
+
+		<!-- §4 Trust Bar — "As Featured On" (Davidson, B&Q, WASC, TEDx, Uniquely Human, Tilt) -->
+		<TrustStripV2 />
+
+		<!-- §5 "Does This Sound Like Your Kid?" + Fit Check -->
+		<DoesThisSoundSection />
+
+		<!-- §6 Here's How We're Different (Mentors / Size / THE Campus) -->
+		<DifferentSection />
+
+		<!-- §7 Expert Endorsement — Debbie Steinberg-Kuntz -->
+		<ExpertEndorsementSection />
+
+		<!-- §8 Find the Perfect Program — course catalog with real data -->
+		<ProgramsSection content={programsContent} />
+
+		<!-- §9 How Families Use YSA — 4 parallel pathways -->
+		<PathwaysSection />
+
+		<!-- §10 What Families Say — real testimonials -->
+		<TestimonialsV2Section />
+
+		<!-- §11 The YSA Methodology — 2 stat tiles, 6 pillars -->
+		<MethodologySection content={methodologyContent} />
+
+		<!-- §12 How It Works — 4 steps, updated copy -->
+		<div id="how-it-works-v2">
+			<HowItWorksV2Section />
+		</div>
+
+		<!-- §13 Year-Round Rhythm -->
+		<YearRoundSection />
+
+		<!-- §14 Teachers -->
+		<TeachersSection content={teachersContent} />
+
+		<!-- §15 Globe -->
+		<WorldKidsSection content={worldContent} />
+
+		<!-- §16 From the Founder -->
+		<FounderSection />
+
+		<!-- §17 Our Promise -->
+		<PromiseSection />
+
+		<!-- §18 ESA / Charter funding -->
+		<ESASection />
+
+		<!-- §20 FAQ -->
+		<FaqSection content={faqContent} />
+
+		<!-- §19 Lead Capture + Final CTA -->
+		<LeadCaptureCtaSection />
+	</main>
+
+	<Footer />
+</Layout>
