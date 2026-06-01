@@ -1,0 +1,135 @@
+---
+// §19 — "Not Ready? That's Fine." + Final CTA — Redesigned
+---
+
+<!-- Lead Capture -->
+<section class="w-full bg-[#F0F4FF] py-[clamp(3rem,7vw,5rem)]" aria-labelledby="lead-capture-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<div class="mx-auto max-w-[64rem] overflow-hidden rounded-3xl bg-white shadow-[0_1px_3px_rgba(15,23,42,0.04),0_16px_40px_-16px_rgba(15,23,42,0.1)]">
+			<div class="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
+
+				<!-- Content -->
+				<div class="px-6 py-8 sm:px-8 lg:px-12 lg:py-12">
+					<p class="mb-2 text-[0.625rem] font-bold tracking-[0.18em] text-[#7C3AED] uppercase">Not Ready? That's Fine.</p>
+					<h2 id="lead-capture-heading" class="m-0 text-[clamp(1.375rem,2.5vw,1.75rem)] font-bold leading-[1.25] tracking-[-0.02em] text-[#0F172A]">
+						Grab the free parent guide.
+					</h2>
+					<p class="mt-3 max-w-[28rem] text-[0.9375rem] leading-[1.7] text-[#64748B]">
+						<em class="not-italic font-medium text-[#374151]">"5 Signs Your Gifted or 2e Child Is Being Under-Served — And What Actually Works"</em>
+					</p>
+
+					<form class="mt-6 flex flex-col gap-3 sm:flex-row sm:max-w-md" onsubmit="return false;">
+						<label class="sr-only" for="lead-email-v2">Your email address</label>
+						<input
+							id="lead-email-v2"
+							type="email"
+							placeholder="Enter your email"
+							class="min-w-0 flex-1 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#CBD5E1] focus:border-[#7C3AED] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/20 transition-colors"
+						/>
+						<button
+							type="submit"
+							class="shrink-0 rounded-xl bg-[#7C3AED] px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(124,58,237,0.25)] transition-[opacity,transform] hover:-translate-y-px hover:opacity-90"
+						>
+							Get the Guide
+						</button>
+					</form>
+					<p class="mt-3 text-xs text-[#CBD5E1]">No spam. Unsubscribe anytime. Free forever.</p>
+				</div>
+
+				<!-- Right: What's inside -->
+				<div class="hidden border-l border-[#F1F5F9] bg-[#F8FAFC] px-8 py-10 lg:block lg:w-64">
+					<p class="m-0 mb-4 text-[0.625rem] font-bold tracking-[0.14em] text-[#94A3B8] uppercase">What's inside</p>
+					<ul class="m-0 list-none space-y-3 p-0">
+						{[
+							'5 clear warning signs to watch for',
+							'Why typical solutions fail 2e kids',
+							'What actually works — and why',
+							'How to advocate effectively',
+							'Questions to ask any program',
+						].map((item) => (
+							<li class="flex items-start gap-2.5">
+								<svg class="mt-0.5 block size-4 shrink-0 text-[#7C3AED]" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+									<path d="M8 1C4.1 1 1 4.1 1 8C1 11.9 4.1 15 8 15C11.9 15 15 11.9 15 8C15 4.1 11.9 1 8 1ZM6.8 11.3L3.7 8.2L4.8 7.1L6.8 9.1L11.2 4.7L12.3 5.8L6.8 11.3Z"/>
+								</svg>
+								<span class="text-xs leading-[1.6] text-[#475569]">{item}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Final CTA -->
+<section class="relative w-full overflow-hidden py-[clamp(5rem,11vw,8rem)]" aria-labelledby="final-cta-heading">
+	<div class="absolute inset-0 bg-[#080C18]" aria-hidden="true"></div>
+	<!-- Glows -->
+	<div class="pointer-events-none absolute left-1/4 top-0 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7C3AED]/12 blur-[120px]" aria-hidden="true"></div>
+	<div class="pointer-events-none absolute bottom-0 right-1/4 h-80 w-80 translate-x-1/4 translate-y-1/4 rounded-full bg-[#0A9DFB]/8 blur-[80px]" aria-hidden="true"></div>
+	<!-- Subtle grid -->
+	<div class="pointer-events-none absolute inset-0 opacity-[0.02]" style="background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:60px 60px;" aria-hidden="true"></div>
+
+	<div class="relative mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<div class="mx-auto max-w-[56rem] text-center">
+
+			<p class="mb-5 text-[0.625rem] font-bold tracking-[0.22em] text-[#7C3AED] uppercase">Their People Are Here.</p>
+
+			<h2 id="final-cta-heading" class="m-0 text-[clamp(2.25rem,5.5vw,3.75rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
+				Right now, a kid who thinks like yours is finding their people.
+			</h2>
+
+			<p class="mx-auto mt-6 max-w-[40rem] text-[0.9375rem] leading-[1.85] text-[#64748B]">
+				In a class they chose. With a mentor who was once just like them. Surrounded by friends who don't think they're weird — they think they're <em class="font-medium not-italic text-[#94A3B8]">interesting</em>.
+			</p>
+
+			<!-- Social proof bar -->
+			<div class="mx-auto my-8 flex max-w-sm flex-wrap items-center justify-center gap-x-5 gap-y-2 rounded-2xl border border-white/8 bg-white/4 px-5 py-4 backdrop-blur-sm">
+				{[
+					{ value: '1,200+', label: 'Families' },
+					{ value: '93%', label: 'Re-enroll' },
+					{ value: '17', label: 'Countries' },
+				].map((s, i) => (
+					<>
+						<div class="text-center">
+							<p class="m-0 font-display text-[1.125rem] font-black text-white">{s.value}</p>
+							<p class="m-0 text-[0.65rem] text-[#64748B]">{s.label}</p>
+						</div>
+						{i < 2 && <div class="h-6 w-px bg-white/10" aria-hidden="true"></div>}
+					</>
+				))}
+			</div>
+
+			<!-- CTAs -->
+			<div class="flex flex-wrap items-center justify-center gap-4">
+				<a
+					href="/summer"
+					class="inline-flex items-center gap-2.5 rounded-xl bg-[#7C3AED] px-8 py-4 text-[0.9375rem] font-bold text-white no-underline shadow-[0_4px_24px_rgba(124,58,237,0.4)] transition-[opacity,transform] hover:-translate-y-0.5 hover:opacity-95"
+				>
+					Explore Summer Camps 2026
+					<svg class="block size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</a>
+				<a
+					href="/summer"
+					class="inline-flex items-center gap-2.5 rounded-xl border border-white/15 bg-white/8 px-8 py-4 text-[0.9375rem] font-semibold text-white no-underline backdrop-blur-sm transition-[background,transform] hover:-translate-y-0.5 hover:bg-white/12"
+				>
+					Browse Year-Round Courses
+				</a>
+			</div>
+
+			<!-- Trust pills -->
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-[#475569]">
+				{['No phone call required', 'Start in minutes', 'Day 1 money-back promise', 'WASC Accredited'].map((t) => (
+					<span class="flex items-center gap-1.5">
+						<span class="size-1 rounded-full bg-[#7C3AED]" aria-hidden="true"></span>
+						{t}
+					</span>
+				))}
+			</div>
+
+		</div>
+	</div>
+</section>

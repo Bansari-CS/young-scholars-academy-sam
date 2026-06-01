@@ -1,0 +1,43 @@
+---
+// §4 — "As Featured On" — 6 confirmed partners
+const partners = [
+	{ name: 'Davidson Institute', sub: 'For Talent Development' },
+	{ name: 'Bright & Quirky', sub: 'Gifted Education Summit' },
+	{ name: 'WASC', sub: 'Accredited School' },
+	{ name: 'TEDx', sub: 'Featured Speaker' },
+	{ name: 'Uniquely Human', sub: 'Podcast Guest' },
+	{ name: 'Tilt Parenting', sub: '2e Families' },
+];
+---
+
+<section
+	class="w-full border-y border-[#F1F5F9] bg-white py-10"
+	aria-labelledby="trust-strip-v2-heading"
+>
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<p
+			id="trust-strip-v2-heading"
+			class="mb-8 text-center text-[0.6875rem] font-bold tracking-[0.18em] text-[#CBD5E1] uppercase"
+		>
+			As Featured On
+		</p>
+
+		<div class="relative flex flex-wrap items-center justify-center gap-0">
+			{partners.map((p, i) => (
+				<div class="group flex items-center">
+					<div class="flex flex-col items-center px-7 py-3 text-center transition-opacity duration-200 hover:opacity-80">
+						<p class="m-0 font-bold text-[#94A3B8] text-[0.9375rem] leading-5 tracking-[-0.01em] transition-colors duration-200 group-hover:text-[#64748B]">
+							{p.name}
+						</p>
+						<p class="m-0 mt-0.5 text-[0.6875rem] text-[#CBD5E1] leading-4 tracking-[0.02em]">
+							{p.sub}
+						</p>
+					</div>
+					{i < partners.length - 1 && (
+						<div class="h-8 w-px shrink-0 bg-[#E2E8F0]" aria-hidden="true" />
+					)}
+				</div>
+			))}
+		</div>
+	</div>
+</section>

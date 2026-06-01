@@ -14,18 +14,22 @@ const { dashboard } = Astro.props;
 const studentAvatarSrc = '/assets/images/Student.jpg';
 const videoDriveFileId  = dashboard.videoDriveFileId?.trim();
 const videoYouTubeId    = dashboard.videoYouTubeId?.trim();
+const videoLocalSrc     = dashboard.videoLocalSrc?.trim();
 const videoAriaLabel    = dashboard.videoAriaLabel ?? 'Young Scholars Academy students in class';
 
-// YouTube preferred — supports mute, loop, no controls natively
-const youTubeEmbedUrl = videoYouTubeId
+// Local video — highest priority (autoplay, muted, loop natively)
+const hasLocalVideo = !!videoLocalSrc;
+
+// YouTube preferred over Drive
+const youTubeEmbedUrl = (!hasLocalVideo && videoYouTubeId)
 	? `https://www.youtube.com/embed/${videoYouTubeId}?autoplay=1&mute=1&loop=1&playlist=${videoYouTubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`
 	: null;
 
-// Google Drive fallback (no mute support, JS loop)
-const videoPreviewUrl = (!videoYouTubeId && videoDriveFileId) ? googleDrivePreviewUrl(videoDriveFileId) : null;
-const videoPosterUrl  = videoDriveFileId ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
+// Google Drive fallback
+const videoPreviewUrl = (!hasLocalVideo && !videoYouTubeId && videoDriveFileId) ? googleDrivePreviewUrl(videoDriveFileId) : null;
+const videoPosterUrl  = (!hasLocalVideo && videoDriveFileId) ? googleDriveThumbnailUrl(videoDriveFileId, 800) : null;
 
-const hasVideo = !!(videoYouTubeId || videoDriveFileId);
+const hasVideo = !!(hasLocalVideo || videoYouTubeId || videoDriveFileId);
 
 const statIconBgClass: Record<string, string> = {
 	accuracy: 'bg-emerald-50',
@@ -42,7 +46,21 @@ const cardShellClasses =
 	aria-label={hasVideo ? videoAriaLabel : (dashboard.cardAriaLabel ?? 'Product preview')}
 >
 	{
-		hasVideo ? (
+		hasLocalVideo ? (
+			<div class={cardShellClasses}>
+				<video
+					class="absolute inset-0 h-full w-full object-cover rounded-3xl"
+					src={videoLocalSrc}
+					autoplay
+					muted
+					loop
+					playsinline
+					aria-label={videoAriaLabel}
+				/>
+				{/* Click-blocker — prevents users from interacting with controls */}
+				<div class="absolute inset-0 z-[3] rounded-3xl" aria-hidden="true" style="pointer-events:all;cursor:default;"></div>
+			</div>
+		) : hasVideo ? (
 			<div
 				class={cardShellClasses}
 				data-hero-dashboard-video

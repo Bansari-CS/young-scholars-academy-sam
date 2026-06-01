@@ -1,0 +1,140 @@
+---
+// §12 — Simple Process — horizontal 4-step timeline
+
+const steps = [
+	{
+		num: '01',
+		color: '#0A9DFB',
+		bgClass: 'bg-[#EFF6FF]',
+		ringClass: 'ring-[#BFDBFE]',
+		textClass: 'text-[#0A9DFB]',
+		badgeClass: 'bg-[#E0F2FE] text-[#0369A1]',
+		title: 'Start with what lights them up.',
+		desc: "Browse 150+ courses by interest, age, or schedule. We build from strengths — not what they're behind on.",
+		tag: 'No prerequisites',
+		iconPath: 'M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18',
+	},
+	{
+		num: '02',
+		color: '#7C3AED',
+		bgClass: 'bg-[#F5F3FF]',
+		ringClass: 'ring-[#DDD6FE]',
+		textClass: 'text-[#7C3AED]',
+		badgeClass: 'bg-[#F3E8FF] text-[#7C3AED]',
+		title: 'Pick a class — or build a whole schedule.',
+		desc: '50 minutes, live on Zoom, with 6–8 kids and an expert mentor. One class or full schedule. No lock-in.',
+		tag: 'No minimum',
+		iconPath: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5',
+	},
+	{
+		num: '03',
+		color: '#059669',
+		bgClass: 'bg-[#ECFDF5]',
+		ringClass: 'ring-[#A7F3D0]',
+		textClass: 'text-[#059669]',
+		badgeClass: 'bg-[#DCFCE7] text-[#15803D]',
+		title: 'They meet kids who finally get them.',
+		desc: 'Same cohort all week or all semester. Friendships form fast when kids share real interests.',
+		tag: 'Groups of 6–8',
+		iconPath: 'M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0z',
+	},
+	{
+		num: '04',
+		color: '#D97706',
+		bgClass: 'bg-[#FFFBEB]',
+		ringClass: 'ring-[#FDE68A]',
+		textClass: 'text-[#D97706]',
+		badgeClass: 'bg-[#FEF3C7] text-[#B45309]',
+		title: 'Watch what happens.',
+		desc: "93% of families re-enroll — not because we ask them to, but because their kids won't let them stop.",
+		tag: '93% re-enroll',
+		iconPath: 'M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+	},
+];
+---
+
+<section class="w-full bg-[#F8FAFC] py-[clamp(3rem,7vw,5rem)]" aria-labelledby="how-it-works-v2-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+
+		<header class="mb-10 text-center">
+			<p class="mb-3 inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-xs font-bold tracking-[0.06em] text-[#64748B] uppercase shadow-sm">
+				Simple Process
+			</p>
+			<h2 id="how-it-works-v2-heading" class="m-0 text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-[#0F172A]">
+				Getting Started Is Easy.
+			</h2>
+			<p class="mx-auto mt-3 max-w-[34rem] text-sm leading-[1.7] text-[#64748B]">
+				No placement test. No prerequisite. No phone call.
+			</p>
+		</header>
+
+		<!-- ── Desktop: horizontal timeline ── -->
+		<div class="hidden lg:block">
+			<!-- Connector row -->
+			<div class="relative flex items-start justify-between px-[3%]">
+				<!-- Background connecting line -->
+				<div class="absolute top-[1.375rem] left-[calc(3%+2.75rem)] right-[calc(3%+2.75rem)] h-px bg-[#E2E8F0]" aria-hidden="true"></div>
+
+				{steps.map((step, i) => (
+					<div class="relative flex w-[23%] flex-col items-center">
+						<!-- Circle -->
+						<div
+							class:list={[
+								'relative z-[1] flex size-11 shrink-0 items-center justify-center rounded-full ring-2',
+								step.bgClass, step.ringClass,
+							]}
+						>
+							<span class:list={['font-black text-sm', step.textClass]}>{step.num}</span>
+						</div>
+
+						<!-- Card below circle -->
+						<div class="mt-5 w-full rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_4px_16px_-8px_rgba(15,23,42,0.1)]">
+							<!-- Icon -->
+							<div class:list={['mb-4 flex size-9 items-center justify-center rounded-lg', step.bgClass]} aria-hidden="true">
+								<svg class="block size-4" viewBox="0 0 24 24" fill="none" stroke={step.color} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+									<path d={step.iconPath}/>
+								</svg>
+							</div>
+							<h3 class="m-0 text-[0.9375rem] font-bold leading-[1.35] text-[#0F172A]">{step.title}</h3>
+							<p class="m-0 mt-2.5 text-[0.8125rem] leading-[1.65] text-[#64748B]">{step.desc}</p>
+							<div class="mt-4 flex items-center gap-1.5">
+								<span class="size-1.5 rounded-full shrink-0" style={`background:${step.color}`} aria-hidden="true"></span>
+								<span class:list={['rounded-full px-2.5 py-0.5 text-[0.6875rem] font-bold', step.badgeClass]}>{step.tag}</span>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- ── Mobile: compact vertical cards ── -->
+		<div class="flex flex-col gap-3 lg:hidden">
+			{steps.map((step) => (
+				<div class="flex items-start gap-4 rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
+					<!-- Number circle -->
+					<div class:list={['flex size-9 shrink-0 items-center justify-center rounded-full ring-2', step.bgClass, step.ringClass]}>
+						<span class:list={['text-xs font-black', step.textClass]}>{step.num}</span>
+					</div>
+					<div class="min-w-0 flex-1">
+						<h3 class="m-0 text-[0.9375rem] font-bold leading-[1.35] text-[#0F172A]">{step.title}</h3>
+						<p class="m-0 mt-1.5 text-[0.8125rem] leading-[1.65] text-[#64748B]">{step.desc}</p>
+						<span class:list={['mt-3 inline-block rounded-full px-2.5 py-1 text-[0.6875rem] font-bold', step.badgeClass]}>{step.tag}</span>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- Trust footer -->
+		<div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[#94A3B8]">
+			{['No commitment required', 'No phone call', 'Start in minutes', 'Day 1 money-back promise'].map((item) => (
+				<span class="flex items-center gap-1.5">
+					<svg class="block size-3 text-[#048C3C]" fill="currentColor" viewBox="0 0 12 12" aria-hidden="true">
+						<path d="M6 0.5C2.96 0.5 0.5 2.96 0.5 6S2.96 11.5 6 11.5 11.5 9.04 11.5 6 9.04 0.5 6 0.5ZM5 8.8L2.6 6.4L3.4 5.6L5 7.2L8.6 3.6L9.4 4.4L5 8.8Z"/>
+					</svg>
+					{item}
+				</span>
+			))}
+		</div>
+
+	</div>
+</section>

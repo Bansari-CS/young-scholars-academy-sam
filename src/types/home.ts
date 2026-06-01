@@ -36,6 +36,7 @@ export interface HeroDashboardData {
 	cardAriaLabel?: string;
 	videoDriveFileId?: string;
 	videoYouTubeId?: string;
+	videoLocalSrc?: string;
 	videoAriaLabel?: string;
 	progressTag: string;
 	lessonProgressLabel: string;

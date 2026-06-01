@@ -1,0 +1,207 @@
+---
+// §5 — "Does This Sound Like Your Kid?" — cinematic editorial + fit check (compact)
+
+const goodFitItems = [
+	{ icon: '🧠', text: 'Is clever and quirky — often described as "a lot" by people who just don\'t get it' },
+	{ icon: '😮', text: 'Is bored by school yet overwhelmed by production demands at the same time' },
+	{ icon: '🫂', text: 'Feels isolated or "different" from peers, or has given up looking for friends who get them' },
+	{ icon: '🔭', text: 'Has intense curiosity about specific subjects they want to go incredibly deep on' },
+	{ icon: '✋', text: 'Thrives with personalized attention — not a classroom of 30' },
+	{ icon: '🛡️', text: 'Needs a safe space to take intellectual risks without fear of judgment' },
+	{ icon: '💡', text: 'Has been called "too much" or "not enough" by a system that doesn\'t see them' },
+];
+
+const notIdealItems = [
+	'You want a program that rewards compliance over curiosity',
+	'You\'re looking for passive video lessons your child watches alone',
+	'Your child thrives in large groups where they\'re one of 30',
+	'You believe the solution is to fix your child rather than change the environment',
+];
+---
+
+<!-- PART 1: Cinematic Emotional Mirror -->
+<section
+	class="relative w-full overflow-hidden bg-[#080C18]"
+	aria-labelledby="emotional-mirror-heading"
+>
+	<!-- Ambient glows -->
+	<div class="pointer-events-none absolute -top-24 left-0 h-96 w-96 -translate-x-1/3 rounded-full bg-[#7C3AED]/10 blur-[100px]" aria-hidden="true"></div>
+	<div class="pointer-events-none absolute bottom-0 right-0 h-72 w-72 translate-x-1/3 translate-y-1/3 rounded-full bg-[#0A9DFB]/8 blur-[80px]" aria-hidden="true"></div>
+	<!-- Subtle grid -->
+	<div class="pointer-events-none absolute inset-0 opacity-[0.02]" style="background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:48px 48px;" aria-hidden="true"></div>
+
+	<div class="relative mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)] py-[clamp(3rem,7vw,5.5rem)]">
+
+		<!-- Eyebrow -->
+		<p class="mb-8 text-center text-[0.625rem] font-bold tracking-[0.22em] text-[#7C3AED] uppercase" id="emotional-mirror-heading">
+			Does This Sound Like Your Kid?
+		</p>
+
+		<!-- Beat 1: The Hook -->
+		<div class="mx-auto mb-10 max-w-[52rem] text-center">
+			<p class="m-0 text-[clamp(1.25rem,2.8vw,2.125rem)] font-bold leading-[1.22] tracking-[-0.02em] text-white sm:whitespace-nowrap">
+				They're the one who corrects the teacher&hellip;
+			</p>
+			<p class="m-0 mt-1 text-[clamp(1.625rem,3.5vw,2.375rem)] font-bold leading-[1.22] tracking-[-0.02em] bg-[linear-gradient(90deg,#A78BFA,#38BDF8)] bg-clip-text text-transparent">
+				and then eats lunch alone.
+			</p>
+		</div>
+
+		<!-- Dot separator -->
+		<div class="mx-auto mb-10 flex items-center gap-3 max-w-xs" aria-hidden="true">
+			<div class="h-px flex-1 bg-white/6"></div>
+			<div class="flex gap-1.5">
+				<span class="size-1 rounded-full bg-[#7C3AED]/40"></span>
+				<span class="size-1.5 rounded-full bg-[#7C3AED]/60"></span>
+				<span class="size-1 rounded-full bg-[#7C3AED]/40"></span>
+			</div>
+			<div class="h-px flex-1 bg-white/6"></div>
+		</div>
+
+		<!-- Beat 2: Passion vs isolation (2-col) -->
+		<div class="mx-auto mb-10 grid max-w-[58rem] grid-cols-1 gap-4 md:grid-cols-2">
+			<div class="rounded-xl border border-white/6 bg-white/[0.03] px-7 py-5">
+				<p class="m-0 text-[0.9375rem] leading-[1.8] text-[#94A3B8]">
+					They can talk for two hours about black holes or medieval siege weapons or the lore behind their favorite game.
+				</p>
+			</div>
+			<div class="rounded-xl border border-[#7C3AED]/20 bg-[#7C3AED]/5 px-7 py-5">
+				<p class="m-0 text-[0.9375rem] font-semibold leading-[1.8] text-white">
+					But they can't find a single person their age who cares.
+				</p>
+			</div>
+		</div>
+
+		<!-- Beat 3: School contradiction -->
+		<div class="mx-auto mb-10 max-w-[58rem]">
+			<div class="relative overflow-hidden rounded-xl border border-white/6 bg-white/[0.025] px-8 py-6">
+				<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-[linear-gradient(180deg,#7C3AED,#0A9DFB)]" aria-hidden="true"></div>
+				<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+					<div>
+						<p class="m-0 mb-2 text-[0.625rem] font-bold tracking-[0.14em] text-[#7C3AED] uppercase">What's true about them</p>
+						<p class="m-0 text-[0.9375rem] font-semibold leading-[1.7] text-white">They have extraordinary strengths.</p>
+					</div>
+					<div>
+						<p class="m-0 mb-2 text-[0.625rem] font-bold tracking-[0.14em] text-[#475569] uppercase">What the school sends home</p>
+						<p class="m-0 text-[0.9375rem] leading-[1.7] text-[#64748B]">Notes about what's wrong — not what's remarkable.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Beat 4: Parent empathy -->
+		<div class="mx-auto mb-10 max-w-[40rem] text-center">
+			<p class="m-0 text-[0.9375rem] leading-[1.85] text-[#64748B]">
+				And you&hellip; you're tired. You've been advocating for this child their entire life. You know exactly how remarkable they are.
+			</p>
+			<p class="m-0 mt-3 text-[0.9375rem] font-semibold leading-[1.75] text-[#94A3B8]">
+				You just haven't found anywhere that sees it too.
+			</p>
+		</div>
+
+		<!-- Payoff -->
+		<div class="text-center">
+			<p class="m-0 text-[clamp(2.5rem,7vw,4.5rem)] font-black leading-none tracking-[-0.03em] bg-[linear-gradient(135deg,#ffffff_30%,#A78BFA_60%,#38BDF8_100%)] bg-clip-text text-transparent">
+				We see it.
+			</p>
+			<div class="mx-auto mt-3 h-0.5 w-16 rounded-full bg-[linear-gradient(90deg,#7C3AED,#0A9DFB)]"></div>
+		</div>
+
+	</div>
+</section>
+
+<!-- PART 2: Fit Check -->
+<section class="w-full bg-white py-[clamp(2.5rem,6vw,5rem)]" aria-labelledby="fit-check-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+
+		<header class="mb-10 text-center">
+			<p class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-[#F0FDF4] px-4 py-1.5 text-xs font-bold tracking-[0.07em] text-[#15803D] uppercase">
+				<svg class="block size-3" viewBox="0 0 12 12" fill="#15803D" aria-hidden="true"><path d="M6 0.5C2.96 0.5 0.5 2.96 0.5 6S2.96 11.5 6 11.5 11.5 9.04 11.5 6 9.04 0.5 6 0.5ZM5 8.8L2.6 6.4L3.4 5.6L5 7.2L8.6 3.6L9.4 4.4L5 8.8Z"/></svg>
+				Find Your Fit
+			</p>
+			<h2 id="fit-check-heading" class="m-0 text-[clamp(1.75rem,3.5vw,2.25rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#0F172A]">
+				Is YSA right for your child?
+			</h2>
+			<p class="mt-3 text-sm leading-[1.7] text-[#64748B]">
+				We're not for everyone — and that's okay. Clarity saves everyone's time.
+			</p>
+		</header>
+
+		<div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-5">
+
+			<!-- Great Fit — 3/5 width -->
+			<div class="lg:col-span-3">
+				<div class="overflow-hidden rounded-2xl border border-emerald-100 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_12px_32px_-12px_rgba(5,150,105,0.12)]">
+					<!-- Header -->
+					<div class="flex items-center gap-3 border-b border-emerald-100 bg-[linear-gradient(135deg,#ECFDF5,#F0FFF4)] px-6 py-4">
+						<div class="flex size-8 items-center justify-center rounded-lg bg-emerald-500 shadow-[0_2px_6px_rgba(16,185,129,0.3)]">
+							<svg class="block size-4" viewBox="0 0 16 16" fill="white" aria-hidden="true"><path d="M8 1C4.1 1 1 4.1 1 8C1 11.9 4.1 15 8 15C11.9 15 15 11.9 15 8C15 4.1 11.9 1 8 1ZM6.8 11.3L3.7 8.2L4.8 7.1L6.8 9.1L11.2 4.7L12.3 5.8L6.8 11.3Z"/></svg>
+						</div>
+						<div>
+							<h3 class="m-0 text-sm font-bold text-[#065F46]">Great Fit If Your Child…</h3>
+							<p class="m-0 text-[0.6875rem] text-emerald-500 mt-0.5">No diagnosis required</p>
+						</div>
+					</div>
+					<!-- Items -->
+					<div class="divide-y divide-[#F0FDF4] bg-white">
+						{goodFitItems.map((item) => (
+							<div class="flex items-center gap-3 px-6 py-3.5 transition-colors duration-100 hover:bg-[#FAFFFE]">
+								<span class="shrink-0 text-base leading-none" aria-hidden="true">{item.icon}</span>
+								<p class="m-0 text-sm leading-[1.6] text-[#1E293B]">{item.text}</p>
+							</div>
+						))}
+					</div>
+					<!-- Footer -->
+					<div class="border-t border-emerald-100 bg-[#ECFDF5] px-6 py-3">
+						<p class="m-0 flex items-center gap-1.5 text-xs font-semibold text-[#065F46]">
+							<svg class="block size-3.5 shrink-0" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M7 0.5C3.4 0.5 0.5 3.4 0.5 7S3.4 13.5 7 13.5 13.5 10.6 13.5 7 10.6 0.5 7 0.5ZM5.8 10L2.8 7L3.9 5.9L5.8 7.8L10.1 3.5L11.2 4.6L5.8 10Z"/></svg>
+							Recognize your child? They belong here.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Not Ideal + CTA — 2/5 width -->
+			<div class="flex flex-col gap-4 lg:col-span-2">
+				<div class="overflow-hidden rounded-2xl border border-slate-200 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_12px_32px_-12px_rgba(15,23,42,0.07)]">
+					<!-- Header -->
+					<div class="flex items-center gap-3 border-b border-slate-100 bg-slate-50 px-6 py-4">
+						<div class="flex size-8 items-center justify-center rounded-lg bg-slate-200">
+							<svg class="block size-4" viewBox="0 0 16 16" fill="#64748B" aria-hidden="true"><path d="M8 1C4.03 1 1 4.03 1 8C1 11.97 4.03 15 8 15C11.97 15 15 11.97 15 8C15 4.03 11.97 1 8 1ZM8.75 11H7.25V7.25H8.75V11ZM8 6.5C7.45 6.5 7 6.05 7 5.5C7 4.95 7.45 4.5 8 4.5C8.55 4.5 9 4.95 9 5.5C9 6.05 8.55 6.5 8 6.5Z"/></svg>
+						</div>
+						<div>
+							<h3 class="m-0 text-sm font-bold text-[#374151]">May Not Be Ideal If…</h3>
+							<p class="m-0 text-[0.6875rem] text-slate-400 mt-0.5">Good to know upfront</p>
+						</div>
+					</div>
+					<!-- Items -->
+					<div class="divide-y divide-slate-50 bg-white">
+						{notIdealItems.map((item) => (
+							<div class="flex items-start gap-3 px-6 py-3.5">
+								<span class="mt-1.5 size-1.5 shrink-0 rounded-full bg-slate-300" aria-hidden="true"></span>
+								<p class="m-0 text-[0.8125rem] leading-[1.65] text-[#64748B]">{item}</p>
+							</div>
+						))}
+					</div>
+					<div class="border-t border-slate-100 bg-slate-50 px-6 py-3">
+						<p class="m-0 text-xs text-slate-400">We'd rather you find the right fit — even if it's not us.</p>
+					</div>
+				</div>
+
+				<!-- Bridge CTA -->
+				<div class="rounded-xl border border-[#DDD6FE] bg-[#F5F3FF] p-5 text-center">
+					<p class="m-0 text-sm font-medium leading-[1.6] text-[#4A42C9]">
+						Not sure? Let your child try a class and decide for themselves.
+					</p>
+					<a href="/summer" class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[#7C3AED] px-5 py-2.5 text-sm font-semibold text-white no-underline transition-opacity hover:opacity-90">
+						Try a Class
+						<svg class="block size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+							<path d="M2 7H12M7.5 2.5L12 7L7.5 11.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>

@@ -190,37 +190,35 @@ const markerPoints =
 
 		{
 			d.countries?.length ? (
-				<div class="mx-auto max-w-[52rem] pb-16 text-center">
-					{
-						d.countriesHeading ? (
-							<h3 class="m-0 mb-6 text-[clamp(2rem,4.1vw,2.8rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
-								{d.countriesHeading}
-							</h3>
-						) : null
-					}
+				<div class="pb-16 text-center">
+					{d.countriesHeading ? (
+						<p class="mb-5 text-[0.6875rem] font-bold tracking-[0.16em] text-[#94A3B8] uppercase">
+							{d.countriesHeading}
+						</p>
+					) : null}
 					<ul
-						class="m-0 grid list-none grid-cols-1 gap-x-5 gap-y-2.5 p-0 text-left sm:grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(11rem,1fr))]"
+						class="m-0 flex list-none flex-wrap items-center justify-center gap-2 p-0"
 						aria-label={d.countriesHeading ?? 'Countries served'}
 					>
 						{d.countries.map((country) => {
 							const iso = WORLD_COUNTRY_FLAG_ISO[country.name];
 							return (
-								<li class="flex items-center gap-2.5">
-									{iso ? (
-										<img
-											src={`https://flagcdn.com/w40/${iso}.png`}
-											srcset={`https://flagcdn.com/w80/${iso}.png 2x`}
-											alt=""
-											width={40}
-											height={27}
-											class="h-5 w-7 shrink-0 rounded-sm object-cover shadow-sm ring-1 ring-slate-200/80"
-											loading="lazy"
-											decoding="async"
-										/>
-									) : null}
-									<span class="text-left text-[0.9375rem] font-medium leading-[1.35] text-slate-700">
-										{country.name}
-									</span>
+								<li>
+									<div class="flex items-center gap-2 rounded-full border border-[#E2E8F0] bg-white px-3 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-shadow hover:shadow-[0_2px_8px_rgba(15,23,42,0.08)]">
+										{iso ? (
+											<img
+												src={`https://flagcdn.com/w40/${iso}.png`}
+												srcset={`https://flagcdn.com/w80/${iso}.png 2x`}
+												alt=""
+												width={20}
+												height={14}
+												class="h-3.5 w-5 shrink-0 rounded-[2px] object-cover shadow-sm ring-1 ring-slate-200/60"
+												loading="lazy"
+												decoding="async"
+											/>
+										) : null}
+										<span class="text-xs font-medium text-[#374151]">{country.name}</span>
+									</div>
 								</li>
 							);
 						})}
