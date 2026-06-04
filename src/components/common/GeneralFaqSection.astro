@@ -1,0 +1,71 @@
+---
+/**
+ * General FAQ — "Every Page" version (June 2026 Final)
+ * Add to every page EXCEPT: summer.astro, courses/[slug].astro, and standalone FAQ page.
+ * Includes FAQPage JSON-LD schema for AI-SEO / LLM indexing.
+ */
+import FaqSection from './FaqSection.astro';
+
+const faqs = [
+	{
+		question: 'What is Young Scholars Academy?',
+		answer: "YSA is a WASC-accredited virtual village for gifted, twice-exceptional, and differently-wired students ages 5–18. We offer 150+ live online courses (from Minecraft Redstone Engineering to AP Psychology to Mock Trial) with a maximum of 6–8 students per course, taught by hand-selected mentor teachers who are neurodivergent themselves. We serve 1,200+ families across 47 states and 17 countries. This is not a marketplace. It's a school and a community.",
+	},
+	{
+		question: 'How does it work?',
+		answer: "During Fall and Spring semesters, courses meet once a week, live on Zoom, 50 minutes per session. During Summer, camps run Monday through Friday, one week at a time. When your child enrolls in any 2 courses, they get free access to Homeroom Social Club — a weekly gathering with a consistent group of friends. Between courses, students hang out on our virtual campus where they walk as avatars, eat lunch together, and build real friendships with kids from around the world who finally get them.",
+	},
+	{
+		question: 'Who is this for?',
+		answer: "Gifted, twice-exceptional, and differently-wired students, including kids with ADHD, autism, giftedness, anxiety, dyslexia, and PDA. No diagnosis required. If your child is clever, quirky, and hasn't found their people yet, they belong here. About 65% of our families homeschool. The rest use us alongside traditional or charter schools.",
+	},
+	{
+		question: 'Is this a low-demand environment?',
+		answer: "Yes. No grades. No traditional homework. Cameras always optional. Challenge by choice. Students are never cold-called, never forced to participate, and never penalized for how they choose to engage. For students with PDA, demand avoidance, or anxiety, this is the difference between a program they resist and one they ask to log into.",
+	},
+	{
+		question: 'How much does it cost?',
+		answer: "Semester courses start around $500. Summer camps start around $160/week. Payment plans, sibling discounts, referral credits, and ESA/charter funding accepted. We're an approved vendor with 10+ state ESA programs.",
+	},
+	{
+		question: 'Will my child actually make friends?',
+		answer: "This is the part that surprises parents most. Your child joins a course about something they love and meets 6–8 kids who love it too. Same group all semester (or all week for camps). Parents tell us their children are more connected with this community than with anyone physically around them. 93% of families re-enroll because their kids won't let them stop.",
+	},
+	{
+		question: "What if it doesn't work?",
+		answer: "100% Satisfaction Guarantee. Switch courses, receive a credit, or stop payments. No questions asked. We can offer this because we know what happens when these kids find their people.",
+	},
+	{
+		question: 'What do parents get?',
+		answer: "Virtual Coffee & Connect hours every couple of weeks. Regular Expert Talks with leaders like Seth Perler, Debbie Reber, and Dr. Temple Grandin. A Facebook group where families connect and support each other. Progress updates from mentors. And the ability to watch your child's courses anytime (just stay off camera). You're not just enrolling your child. You're joining a village.",
+	},
+];
+
+const faqItems = faqs.map((f, i) => ({ ...f, open: i === 0 }));
+
+// JSON-LD for AI-SEO / FAQPage schema
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((f) => ({
+		'@type': 'Question',
+		name: f.question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: f.answer,
+		},
+	})),
+};
+---
+
+<FaqSection
+	eyebrow="COMMON QUESTIONS"
+	title="Questions Parents Ask."
+	description="Everything you need to know about Young Scholars Academy."
+	items={faqItems}
+	sectionClass="bg-[#f8fafc] px-6 pb-[clamp(3rem,8vw,6rem)] pt-[clamp(3rem,8vw,6rem)]"
+	containerClass="mx-auto w-full max-w-[896px]"
+/>
+
+<!-- FAQPage JSON-LD schema — helps AI search engines (Perplexity, ChatGPT, SGE) surface YSA answers -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

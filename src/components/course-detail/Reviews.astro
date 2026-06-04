@@ -30,12 +30,6 @@ const insideClassroomVideoPosterUrl = videoPosterSrc;
 				<em class="text-[14px] leading-5 not-italic text-slate-400">{total}</em>
 			</p>
 		</div>
-		<a
-			href="#"
-			class="inline-flex items-center justify-center rounded-[12px] border border-slate-200 px-4 py-2 text-[14px] leading-5 font-semibold text-slate-900 no-underline"
-		>
-			{writeReviewLabel}
-		</a>
 	</div>
 
 	<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -118,7 +112,7 @@ const insideClassroomVideoPosterUrl = videoPosterSrc;
 				<button type="button" class="absolute right-2 top-2 z-[3] inline-flex h-8 w-8 items-center justify-center rounded-full border-0 bg-white/15 p-0 text-white" data-modal-close aria-label="Close video">
 					<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
 				</button>
-				<video class="inside-classroom-modal-video block aspect-video w-full bg-black" controls playsinline preload="metadata"></video>
+				<video class="inside-classroom-modal-video block aspect-video w-full bg-black" controls playsinline preload="metadata" muted></video>
 				<iframe class="inside-classroom-modal-iframe hidden aspect-video w-full border-0 bg-black" title="Inside the classroom video" allow="autoplay; fullscreen" allowfullscreen></iframe>
 			</div>
 		`;
@@ -155,6 +149,7 @@ const insideClassroomVideoPosterUrl = videoPosterSrc;
 			modalIframe.removeAttribute('src');
 			modalVideo.classList.remove('hidden');
 			modalVideo.src = downloadUrl;
+			modalVideo.muted = true;
 			modalVideo.load();
 			modalVideo.play().catch(function () {});
 

@@ -10,8 +10,8 @@ import RealGrowthSection from '../components/common/RealGrowthSection.astro';
 import TeachersSection from '../components/home/TeachersSection.astro';
 import WorldKidsSection from '../components/home/WorldKidsSection.astro';
 import FitCheckSection from '../components/home/FitCheckSection.astro';
-import FaqSection from '../components/home/FaqSection.astro';
 import CommunityCtaSection from '../components/home/CommunityCtaSection.astro';
+import GeneralFaqSection from '../components/common/GeneralFaqSection.astro';
 import Footer from '../components/common/Footer.astro';
 import Layout from '../layouts/Layout.astro';
 import { getEntry } from 'astro:content';
@@ -44,8 +44,8 @@ const homeContent = homeEntry.data;
 		<TeachersSection content={homeContent.teachers} />
 		<WorldKidsSection content={homeContent.world} />
 		<FitCheckSection content={homeContent.fit} />
-		<FaqSection content={homeContent.faq} />
 		<CommunityCtaSection content={homeContent.communityCta} />
+		<GeneralFaqSection />
 	</main>
 	<Footer />
 </Layout>

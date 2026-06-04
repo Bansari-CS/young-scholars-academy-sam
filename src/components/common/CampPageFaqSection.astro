@@ -1,0 +1,66 @@
+---
+/**
+ * Individual Camp Page FAQ — 8 objection-crushers
+ * Add to the bottom of every individual camp/course page (courses/[slug].astro)
+ * Includes FAQPage JSON-LD schema for AEO/AI-SEO
+ */
+import FaqSection from './FaqSection.astro';
+
+const faqs = [
+	{
+		question: 'How does this camp work?',
+		answer: "This camp meets Monday through Friday, roughly 50 minutes a day, for one week. Your child joins the same tight-knit group of 6–8 students and the same mentor all week long. Same friends, same teacher, a new adventure every day. These aren't strangers. By Tuesday, they have inside jokes. By Thursday, they're texting after camp. If your child takes 3 or more camps in a week, they unlock access to the Virtual Campus during the 11:00 AM Pacific lunch break — a supervised hangout where kids eat lunch together as avatars and build friendships that last far beyond the summer.",
+	},
+	{
+		question: 'What if my child is not the right age for this camp?',
+		answer: "Our gifted and 2e students experience such asynchronous development that hard age limits rarely tell the full story. A 9-year-old who devours college-level history content doesn't belong in a course designed for kids who've never heard of the Roman Empire. If your student should be aged up or aged down, please contact us at support@youngscholarsacademy.org or click the chat in the bottom right corner of the screen. We'd be happy to help override the system and find the right fit. We do this all the time.",
+	},
+	{
+		question: 'What if my child has had a difficult time learning virtually?',
+		answer: "Please don't confuse reactive distance learning with what happens at YSA. A student who is completely fried from a boring Zoom class at school is often quick to pick up a tablet or phone, right? Our camps are not the same animal. When a kid is doing Minecraft Redstone Engineering or arguing a criminal case in Mock Trial with 6 peers who share their exact obsession, taught by a mentor who was one of these kids, the screen disappears. They're not on a screen. They're with their people. Parents tell us their children fight to log on to YSA. That's not something they say about school.",
+	},
+	{
+		question: "What if my child doesn't love this camp?",
+		answer: "Summer Camp Satisfaction Guarantee: If your child isn't loving this camp by the end of Day 1, you have two easy options. Transfer into another camp that week to find the perfect fit, or receive a credit to use toward a future camp or course. No risk. No stress. No awkward conversations. We built this guarantee because we've watched hundreds of kids walk into their first YSA session unsure, and walk out asking when the next one is. But if it's not the right fit, we'd rather help you find one that is than keep your money for something that isn't working.",
+	},
+	{
+		question: 'Does my child need to turn their camera on?',
+		answer: "No. Cameras are always optional. Always. Many of our students start with cameras off and turn them on when they're comfortable, which sometimes takes a day and sometimes takes a whole semester. For kids with sensory sensitivities, social anxiety, or demand avoidance profiles, this isn't a small thing. It's the difference between showing up and shutting down. Our mentors are trained to engage every student equally, cameras on or off. Your child will never be forced, never singled out, and never penalized.",
+	},
+	{
+		question: 'Does my child need a diagnosis to enroll?',
+		answer: "No. If you're here, you're in the right place. We don't require paperwork, evaluations, or labels. Whether your child has been formally identified as gifted or twice-exceptional, whether you suspect it but haven't pursued testing, or whether you just know your kid's brain works differently and nothing else has fit, they're welcome here. Many of our families discover what twice-exceptional means after they've already been with us. The community helps them understand their child in a way no assessment ever could.",
+	},
+	{
+		question: 'Can I use ESA or charter funds for this camp?',
+		answer: "Yes. YSA is an approved vendor with 10+ state ESA programs including Arizona ESA, Utah Fits All, ClassWallet, My Tech High, Florida Step Up, and others. Enroll directly to secure your child's spot, submit the invoice to your ESA, and your payment method is refunded when funds transfer. Many families pay zero out of pocket. We walk you through every step.",
+	},
+	{
+		question: 'How do I enroll?',
+		answer: "Click the enroll button on this page. No phone call. No placement test. No prerequisite. Your child's spot is secured immediately. If you need help building a full summer schedule, use Scheduley AI for personalized camp recommendations, or email support@youngscholarsacademy.org and we'll help you put together a week your kid will actually be excited about.",
+	},
+];
+
+const faqItems = faqs.map((f, i) => ({ ...f, open: i === 0 }));
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((f) => ({
+		'@type': 'Question',
+		name: f.question,
+		acceptedAnswer: { '@type': 'Answer', text: f.answer },
+	})),
+};
+---
+
+<FaqSection
+	eyebrow="CAMP QUESTIONS"
+	title="Questions About This Camp"
+	description="Everything you need to know before enrolling your child."
+	items={faqItems}
+	sectionClass="bg-[#f8fafc] px-6 pb-[clamp(3rem,8vw,6rem)] pt-[clamp(3rem,8vw,6rem)]"
+	containerClass="mx-auto w-full max-w-[896px]"
+/>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

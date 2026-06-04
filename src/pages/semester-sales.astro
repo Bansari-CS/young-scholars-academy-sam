@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import GeneralFaqSection from '../components/common/GeneralFaqSection.astro';
 import { getSiteNavItems } from '../utils/getSiteNavItems';
 import SemesterSalesHeroSection from '../components/semester-sales/SemesterSalesHeroSection.astro';
 import SemesterSalesChallengeSection from '../components/semester-sales/SemesterSalesChallengeSection.astro';
@@ -12,7 +13,6 @@ import SummerCampsSection from '../components/summer/SummerCampsSection.astro';
 import SemesterSalesVirtualWorksSection from '../components/semester-sales/SemesterSalesVirtualWorksSection.astro';
 import SemesterSalesFamiliesSayingSection from '../components/semester-sales/SemesterSalesFamiliesSayingSection.astro';
 import SemesterSalesPricingSection from '../components/semester-sales/SemesterSalesPricingSection.astro';
-import SemesterSalesFaqSection from '../components/semester-sales/SemesterSalesFaqSection.astro';
 import SemesterSalesFinalCtaSection from '../components/semester-sales/SemesterSalesFinalCtaSection.astro';
 import { getEntry } from 'astro:content';
 
@@ -60,7 +60,7 @@ const semesterCoursesContent = {
 		<SemesterSalesVirtualWorksSection content={semesterSalesContent.virtualWorks} />
 		<SemesterSalesFamiliesSayingSection content={semesterSalesContent.familiesSaying} />
 		<SemesterSalesPricingSection content={semesterSalesContent.pricing} />
-		<SemesterSalesFaqSection content={semesterSalesContent.faq} />
+		<GeneralFaqSection />
 		<SemesterSalesFinalCtaSection content={semesterSalesContent.finalCta} />
 	</main>
 	<Footer />

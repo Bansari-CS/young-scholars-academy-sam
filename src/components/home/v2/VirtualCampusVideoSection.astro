@@ -1,0 +1,104 @@
+---
+// Virtual Campus video — after "Here's How We're Different"
+// Drive file ID: 1mdVzEB0HtphSSHJrEqPrXGnUK29luRel
+const driveFileId = '1mdVzEB0HtphSSHJrEqPrXGnUK29luRel';
+const embedUrl = `https://drive.google.com/file/d/${driveFileId}/preview?rm=minimal`;
+---
+
+<section class="w-full bg-[#F8FAFC] py-[clamp(3rem,7vw,5rem)]" aria-labelledby="virtual-campus-video-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+
+		<div class="mx-auto max-w-[64rem]">
+			<div class="mb-8 text-center">
+				<p class="mb-3 text-[0.625rem] font-bold tracking-[0.18em] text-[#7C3AED] uppercase">See It For Yourself</p>
+				<h2 id="virtual-campus-video-heading" class="m-0 text-[clamp(1.75rem,3.5vw,2.25rem)] font-bold leading-[1.2] tracking-[-0.02em] text-[#0F172A]">
+					This Is What It Looks Like.
+				</h2>
+				<p class="mx-auto mt-3 max-w-[36rem] text-[0.9375rem] leading-[1.7] text-[#64748B]">
+					Real YSA students on the virtual campus — laughing, connecting, and just being kids.
+				</p>
+			</div>
+
+			<!-- Video container -->
+			<div
+				class="relative overflow-hidden rounded-2xl shadow-[0_8px_40px_rgba(15,23,42,0.15)]"
+				style="aspect-ratio:16/9"
+				data-campus-video-wrap
+			>
+				<!-- Poster / play overlay before load -->
+				<div
+					class="absolute inset-0 z-[2] flex cursor-pointer flex-col items-center justify-center bg-[#0F172A]"
+					id="campus-video-poster"
+				>
+					<div class="flex size-20 items-center justify-center rounded-full bg-[#7C3AED] shadow-[0_4px_24px_rgba(124,58,237,0.5)] transition-transform hover:scale-105">
+						<svg class="block size-8 translate-x-0.5 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M8 5.14v14l11-7-11-7z"/>
+						</svg>
+					</div>
+					<p class="mt-5 text-sm font-semibold text-white/70">Watch the virtual campus in action</p>
+					<p class="mt-1 text-xs text-white/40">Starts muted · Click to play</p>
+				</div>
+
+				<iframe
+					id="campus-video-iframe"
+					class="absolute inset-0 h-full w-full border-0"
+					title="YSA virtual campus — students laughing and connecting"
+					allow="autoplay; fullscreen"
+					allowfullscreen
+					data-src={embedUrl}
+				></iframe>
+
+				<!-- Mute toggle -->
+				<button
+					type="button"
+					id="campus-video-mute-btn"
+					class="absolute bottom-4 right-4 z-[5] hidden items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-opacity hover:bg-black/70"
+					aria-label="Unmute video"
+				>
+					<svg class="block size-3.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+						<path d="M8 2L4 6H1V10H4L8 14V2Z"/>
+						<path d="M11 5L14 8M14 8L11 11M14 8L11 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+					</svg>
+					Unmute
+				</button>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<script is:inline>
+(function () {
+	function initCampusVideo() {
+		var poster   = document.getElementById('campus-video-poster');
+		var iframe   = document.getElementById('campus-video-iframe');
+		var muteBtn  = document.getElementById('campus-video-mute-btn');
+		if (!poster || !iframe) return;
+
+		poster.addEventListener('click', function () {
+			var src = iframe.getAttribute('data-src');
+			if (src) {
+				iframe.src = src + '&autoplay=1&mute=1';
+				poster.style.display = 'none';
+				if (muteBtn) muteBtn.style.display = 'flex';
+			}
+		});
+
+		// Mute toggle (visual only — Drive iframe doesn't expose mute API)
+		if (muteBtn) {
+			muteBtn.addEventListener('click', function () {
+				// Reload without mute param to effectively unmute
+				var src = iframe.getAttribute('data-src');
+				if (src) {
+					iframe.src = src + '&autoplay=1';
+					muteBtn.style.display = 'none';
+				}
+			});
+		}
+	}
+
+	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initCampusVideo);
+	else initCampusVideo();
+	document.addEventListener('astro:page-load', initCampusVideo);
+})();
+</script>

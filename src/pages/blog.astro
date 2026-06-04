@@ -2,13 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import GeneralFaqSection from '../components/common/GeneralFaqSection.astro';
 import BlogHeroSection from '../components/blog/BlogHeroSection.astro';
 import BlogFeaturedInsightsSection from '../components/blog/BlogFeaturedInsightsSection.astro';
 import BlogLatestArticlesSection from '../components/blog/BlogLatestArticlesSection.astro';
 import BlogTopicsSection from '../components/blog/BlogTopicsSection.astro';
 import BlogTestimonialsSection from '../components/blog/BlogTestimonialsSection.astro';
 import BlogNewsletterSection from '../components/blog/BlogNewsletterSection.astro';
-import BlogFaqSection from '../components/blog/BlogFaqSection.astro';
 import BlogFinalCtaSection from '../components/blog/BlogFinalCtaSection.astro';
 import { getEntry } from 'astro:content';
 import { getSiteNavItems } from '../utils/getSiteNavItems';
@@ -36,7 +36,7 @@ const blogPageContent = blogPageEntry.data;
 
 		<!-- <BlogNewsletterSection content={blogPageContent.newsletter} /> -->
 
-		<BlogFaqSection content={blogPageContent.faq} />
+		<GeneralFaqSection />
 
 		<BlogFinalCtaSection content={blogPageContent.finalCta} />
 	</main>

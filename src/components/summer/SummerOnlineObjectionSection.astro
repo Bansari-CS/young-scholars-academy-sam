@@ -1,0 +1,60 @@
+---
+// "YOU MIGHT BE THINKING: BUT IT'S ONLINE." — objection crusher section
+---
+
+<section class="w-full bg-[#0F172A] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="online-objection-heading">
+	<!-- Ambient glows -->
+	<div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+		<div class="absolute left-0 top-0 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7C3AED]/10 blur-[100px]"></div>
+		<div class="absolute bottom-0 right-0 h-64 w-64 translate-x-1/2 translate-y-1/2 rounded-full bg-[#0A9DFB]/8 blur-[80px]"></div>
+	</div>
+
+	<div class="relative mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<div class="mx-auto max-w-[56rem]">
+
+			<p class="mb-6 text-center text-[0.625rem] font-bold tracking-[0.2em] text-[#7C3AED] uppercase">
+				We hear this all the time
+			</p>
+			<h2 id="online-objection-heading" class="m-0 mb-10 text-center text-[clamp(1.875rem,4vw,2.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white">
+				"But... it's online."
+			</h2>
+
+			<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+				{[
+					{
+						objection: 'My child already has too much screen time.',
+						response: 'There\'s screen time, and there\'s this. Arguing a criminal case in Mock Trial with 6 peers who share your obsession, taught by a mentor who was once just like you — that\'s not the same as scrolling TikTok. Parents tell us their kids fight to log on to YSA. That\'s not something they say about school.',
+					},
+					{
+						objection: 'My child already burned out on Zoom school.',
+						response: 'Please don\'t confuse reactive distance learning with what happens at YSA. When a kid is doing Minecraft Redstone Engineering or debating history with 6 kids who finally get them, the screen disappears. They\'re not on a screen. They\'re with their people.',
+					},
+					{
+						objection: 'They won\'t make real friends online.',
+						response: 'This is the part that surprises parents most. Same cohort all week, every week. By Tuesday, inside jokes. By Thursday, they\'re texting after camp. 93% of families re-enroll because their kids\' friendships don\'t end when camp does.',
+					},
+					{
+						objection: 'I\'d rather they be outside or active.',
+						response: 'So would we — and that\'s why camps are 50 minutes a day, not 8 hours. What fills the rest of their summer is up to you. But these 50 minutes? They change things. Ask any parent who\'s watched their kid walk out of their first session asking when the next one is.',
+					},
+				].map((item) => (
+					<div class="rounded-2xl border border-white/8 bg-white/[0.04] p-7">
+						<p class="m-0 mb-4 text-[0.875rem] font-bold italic leading-relaxed text-white/50">
+							&ldquo;{item.objection}&rdquo;
+						</p>
+						<div class="mb-4 h-px bg-white/10"></div>
+						<p class="m-0 text-[0.9375rem] leading-[1.8] text-white/75">{item.response}</p>
+					</div>
+				))}
+			</div>
+
+			<div class="mt-10 rounded-2xl border border-[#7C3AED]/30 bg-[#7C3AED]/8 px-8 py-6 text-center">
+				<p class="m-0 text-[clamp(1rem,1.8vw,1.125rem)] font-semibold leading-[1.7] text-white">
+					Cameras are always optional. There are no grades. No cold-calling. No homework. Your child chooses to show up — because they want to be there.
+				</p>
+				<p class="m-0 mt-3 text-sm text-white/50">That's the difference.</p>
+			</div>
+
+		</div>
+	</div>
+</section>

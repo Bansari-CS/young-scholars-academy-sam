@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import GeneralFaqSection from '../components/common/GeneralFaqSection.astro';
 import MentorProfileHeroSection from '../components/mentor-profile/MentorProfileHeroSection.astro';
 import MentorProfileAboutSection from '../components/mentor-profile/MentorProfileAboutSection.astro';
 import MentorProfileBeyondClassroomSection from '../components/mentor-profile/MentorProfileBeyondClassroomSection.astro';
@@ -57,6 +58,7 @@ const mentorCredentials = mrSalch?.credentials ?? fallbackMentor.credentials;
 		<MentorProfileStudentExperienceSection content={mentorProfileContent.studentExperience} />
 		<MentorProfileTestimonialsSection content={mentorProfileContent.testimonials} />
 		<MentorProfileFindClassCtaSection content={mentorProfileContent.findClassCta} />
+		<GeneralFaqSection />
 	</main>
 	<Footer />
 </Layout>

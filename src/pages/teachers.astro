@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import GeneralFaqSection from '../components/common/GeneralFaqSection.astro';
 import TeachersHeroSection from '../components/teachers/TeachersHeroSection.astro';
 import TeachersMentorListSection from '../components/teachers/TeachersMentorListSection.astro';
 import TeachersParentLoveSection from '../components/teachers/TeachersParentLoveSection.astro';
@@ -37,6 +38,7 @@ const teachersContent = teachersEntry.data;
 		<TeachersAdminTeamSection content={teachersContent.adminTeam} />
 		<TeachersParentTestimonialsSection content={teachersContent.parentTestimonials} />
 		<TeachersMentorFitCtaSection content={teachersContent.mentorFitCta} />
+		<GeneralFaqSection />
 	</main>
 	<Footer />
 </Layout>

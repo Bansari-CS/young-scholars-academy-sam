@@ -1,168 +1,224 @@
 ---
-// §15 — Our Kids Are All Around the World — v2 redesign with stats + globe + flags
-
+// §15 — Global Community — globe.gl 3D interactive globe
 const stats = [
-	{ value: '1,200+', label: 'Families Served', icon: '👨‍👩‍👧' },
-	{ value: '17',     label: 'Countries across 6 continents', icon: '🌍' },
-	{ value: '47+',    label: 'US States + D.C.', icon: '🇺🇸' },
+	{ value: '1,200+', label: 'Families Served' },
+	{ value: '17',     label: 'Countries' },
+	{ value: '47+',    label: 'US States + D.C.' },
+	{ value: '93%',    label: 'Re-Enroll' },
 ];
-
 const countries = [
-	{ flag: '🇺🇸', name: 'United States' },
-	{ flag: '🇨🇦', name: 'Canada' },
-	{ flag: '🇳🇿', name: 'New Zealand' },
-	{ flag: '🇦🇺', name: 'Australia' },
-	{ flag: '🇨🇭', name: 'Switzerland' },
-	{ flag: '🇵🇪', name: 'Peru' },
-	{ flag: '🇨🇱', name: 'Chile' },
-	{ flag: '🇧🇷', name: 'Brazil' },
-	{ flag: '🇰🇷', name: 'Korea' },
-	{ flag: '🇮🇹', name: 'Italy' },
-	{ flag: '🇮🇪', name: 'Ireland' },
-	{ flag: '🇸🇬', name: 'Singapore' },
-	{ flag: '🇺🇬', name: 'Uganda' },
-	{ flag: '🇬🇧', name: 'United Kingdom' },
-	{ flag: '🇩🇪', name: 'Germany' },
-	{ flag: '🇳🇴', name: 'Norway' },
-	{ flag: '🇹🇹', name: 'Trinidad & Tobago' },
+	{ name: 'United States', iso: 'us' },{ name: 'Canada', iso: 'ca' },
+	{ name: 'Ireland', iso: 'ie' },{ name: 'United Kingdom', iso: 'gb' },
+	{ name: 'Germany', iso: 'de' },{ name: 'Switzerland', iso: 'ch' },
+	{ name: 'Norway', iso: 'no' },{ name: 'Italy', iso: 'it' },
+	{ name: 'Korea', iso: 'kr' },{ name: 'Singapore', iso: 'sg' },
+	{ name: 'Australia', iso: 'au' },{ name: 'New Zealand', iso: 'nz' },
+	{ name: 'Brazil', iso: 'br' },{ name: 'Chile', iso: 'cl' },
+	{ name: 'Peru', iso: 'pe' },{ name: 'Uganda', iso: 'ug' },
+	{ name: 'Trinidad & Tobago', iso: 'tt' },
+];
+const pins = [
+	{lat:39.8,lng:-98.6,face:'/assets/globe/child1.jpg',size:48,shape:'circle'},
+	{lat:37.09,lng:-95.71,face:'/assets/globe/chile2.jpg',size:40,shape:'circle'},
+	{lat:34.05,lng:-118.2,face:'/assets/globe/chile3.jpg',size:48,shape:'circle'},
+	{lat:40.71,lng:-74.0,face:'/assets/globe/chile4.jpg',size:40,shape:'circle'},
+	{lat:41.88,lng:-87.63,face:'/assets/globe/chile5.jpg',size:32,shape:'squircle'},
+	{lat:29.76,lng:-95.37,face:'/assets/globe/chile6.jpg',size:40,shape:'circle'},
+	{lat:33.45,lng:-112.07,face:'/assets/globe/chile7.jpg',size:32,shape:'squircle'},
+	{lat:47.61,lng:-122.33,face:'/assets/globe/chile8.jpg',size:48,shape:'circle'},
+	{lat:33.75,lng:-84.39,face:'/assets/globe/chile9.jpg',size:40,shape:'circle'},
+	{lat:39.95,lng:-75.17,face:'/assets/globe/chile10.jpg',size:32,shape:'squircle'},
+	{lat:42.36,lng:-71.06,face:'/assets/globe/chile11.jpg',size:40,shape:'circle'},
+	{lat:32.78,lng:-96.8,face:'/assets/globe/chile12.jpg',size:48,shape:'circle'},
+	{lat:44.98,lng:-93.27,face:'/assets/globe/chile13.jpg',size:32,shape:'squircle'},
+	{lat:39.74,lng:-104.98,face:'/assets/globe/chile14.jpg',size:40,shape:'circle'},
+	{lat:38.89,lng:-77.04,face:'/assets/globe/chile15.jpg',size:48,shape:'circle'},
+	{lat:25.77,lng:-80.19,face:'/assets/globe/chile16.jpg',size:40,shape:'circle'},
+	{lat:30.27,lng:-97.74,face:'/assets/globe/chile17.jpg',size:32,shape:'squircle'},
+	{lat:56.13,lng:-106.35,face:'/assets/globe/child1.jpg',size:40,shape:'circle'},
+	{lat:51.51,lng:-0.13,face:'/assets/globe/chile2.jpg',size:48,shape:'circle'},
+	{lat:51.17,lng:10.45,face:'/assets/globe/chile3.jpg',size:32,shape:'squircle'},
+	{lat:46.82,lng:8.23,face:'/assets/globe/chile4.jpg',size:40,shape:'circle'},
+	{lat:60.47,lng:8.47,face:'/assets/globe/chile5.jpg',size:32,shape:'squircle'},
+	{lat:53.35,lng:-6.26,face:'/assets/globe/chile6.jpg',size:40,shape:'circle'},
+	{lat:41.87,lng:12.57,face:'/assets/globe/chile7.jpg',size:48,shape:'circle'},
+	{lat:35.91,lng:127.77,face:'/assets/globe/chile8.jpg',size:40,shape:'circle'},
+	{lat:1.35,lng:103.82,face:'/assets/globe/chile9.jpg',size:32,shape:'squircle'},
+	{lat:-25.27,lng:133.77,face:'/assets/globe/chile10.jpg',size:40,shape:'circle'},
+	{lat:-40.9,lng:174.89,face:'/assets/globe/chile11.jpg',size:48,shape:'circle'},
+	{lat:-14.24,lng:-51.93,face:'/assets/globe/chile12.jpg',size:40,shape:'circle'},
+	{lat:-35.68,lng:-71.54,face:'/assets/globe/chile13.jpg',size:32,shape:'squircle'},
+	{lat:-9.19,lng:-75.02,face:'/assets/globe/chile14.jpg',size:40,shape:'circle'},
+	{lat:1.37,lng:32.29,face:'/assets/globe/chile15.jpg',size:32,shape:'squircle'},
+	{lat:10.69,lng:-61.22,face:'/assets/globe/chile16.jpg',size:40,shape:'circle'},
 ];
 ---
 
-<section class="relative w-full overflow-hidden bg-[#0A0F1E] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="world-v2-heading">
-
-	<!-- Ambient glows -->
-	<div class="pointer-events-none absolute left-1/4 top-0 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7C3AED]/10 blur-[120px]" aria-hidden="true"></div>
-	<div class="pointer-events-none absolute bottom-0 right-1/4 h-64 w-64 translate-x-1/4 translate-y-1/4 rounded-full bg-[#0A9DFB]/8 blur-[80px]" aria-hidden="true"></div>
-
-	<div class="relative mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
-
-		<!-- Header -->
-		<div class="mb-12 text-center">
-			<p class="mb-4 text-[0.625rem] font-bold tracking-[0.2em] text-[#7C3AED] uppercase">Global Community</p>
-			<h2 id="world-v2-heading" class="m-0 text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white">
-				Our Kids Are All Around the World.
-			</h2>
-			<p class="mx-auto mt-4 max-w-[36rem] text-[0.9375rem] leading-[1.7] text-[#64748B]">
-				From Tokyo to New York, gifted and 2e kids are finding their people at YSA.
-			</p>
+<section class="w-full bg-white py-[clamp(3rem,8vw,6rem)]" aria-labelledby="world-v2-heading">
+	<div class="mx-auto max-w-[var(--ysa-max)] px-[clamp(1rem,4.44vw,4rem)]">
+		<div class="mb-10 text-center">
+			<p class="mb-3 text-[0.625rem] font-bold tracking-[0.2em] text-[#7C3AED] uppercase">Global Community</p>
+			<h2 id="world-v2-heading" class="m-0 text-[clamp(2rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-[#0F172A]">Our Kids Are All Around the World.</h2>
+			<p class="mx-auto mt-3 max-w-[36rem] text-[0.9375rem] leading-[1.7] text-[#64748B]">1,200+ families across 47 US states and 17 countries have found their people at YSA.</p>
 		</div>
-
-		<!-- Stats row -->
-		<div class="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
+		<div class="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
 			{stats.map((s) => (
-				<div class="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/4 px-6 py-5 backdrop-blur-sm">
-					<span class="text-3xl" aria-hidden="true">{s.icon}</span>
-					<div>
-						<p class="m-0 font-display text-[clamp(1.5rem,3vw,2rem)] font-black text-white leading-none">{s.value}</p>
-						<p class="m-0 mt-1 text-sm text-[#64748B]">{s.label}</p>
-					</div>
+				<div class="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] px-5 py-4 text-center shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
+					<p class="m-0 font-display text-[clamp(1.5rem,2.5vw,2rem)] font-black text-[#7C3AED]">{s.value}</p>
+					<p class="m-0 mt-0.5 text-xs text-[#94A3B8]">{s.label}</p>
 				</div>
 			))}
 		</div>
-
-		<!-- Globe + flags layout -->
-		<div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_auto]">
-
-			<!-- Globe -->
-			<div class="flex justify-center">
-				<div
-					id="world-globe-v2"
-					class="h-[360px] w-full max-w-[360px] opacity-0 transition-opacity duration-700"
-					aria-label="Animated globe showing YSA student locations worldwide"
-					role="img"
-				></div>
+		<div class="relative mx-auto" style="max-width:640px;">
+			<div class="relative mx-auto overflow-hidden rounded-full shadow-[0_0_0_6px_#1E1B4B,0_20px_60px_rgba(30,27,75,0.4),0_0_80px_rgba(124,58,237,0.15)]" style="padding-bottom:100%;height:0;background:radial-gradient(circle at 48% 38%,#0278cb 0%,#061897 38%,#001a5a 68%,#000d46 100%);">
+				<div id="world-globe-v2" class="absolute inset-0 cursor-grab [&.is-dragging]:cursor-grabbing" data-points={JSON.stringify(pins)} role="img" aria-label="Interactive 3D globe showing YSA student locations worldwide"></div>
+				<p id="globe-hint" class="pointer-events-none absolute bottom-4 left-0 right-0 z-[5] text-center text-[0.6rem] font-semibold tracking-[0.08em] text-white/50 uppercase transition-opacity duration-500">Drag to rotate · Scroll to zoom</p>
 			</div>
-
-			<!-- Flags grid -->
-			<div class="lg:w-72">
-				<p class="mb-4 text-[0.625rem] font-bold tracking-[0.14em] text-[#475569] uppercase">17 Countries</p>
-				<div class="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-3">
-					{countries.map((c) => (
-						<div
-							class="flex flex-col items-center gap-1.5 rounded-xl border border-white/6 bg-white/4 p-2.5 text-center transition-colors hover:bg-white/8"
-							title={c.name}
-						>
-							<span class="text-xl leading-none">{c.flag}</span>
-							<span class="text-[0.5rem] font-medium leading-tight text-[#64748B]">{c.name.split(' ')[0]}</span>
-						</div>
-					))}
-				</div>
+		</div>
+		<div class="mt-8 text-center">
+			<p class="mb-4 text-[0.6875rem] font-bold tracking-[0.14em] text-[#94A3B8] uppercase">17 Countries across 6 continents</p>
+			<div class="flex flex-wrap items-center justify-center gap-2">
+				{countries.map((c) => (
+					<div class="flex items-center gap-2 rounded-full border border-[#E2E8F0] bg-white px-3 py-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-shadow hover:shadow-[0_2px_8px_rgba(15,23,42,0.08)]">
+						<img src={`https://flagcdn.com/w40/${c.iso}.png`} srcset={`https://flagcdn.com/w80/${c.iso}.png 2x`} alt="" width="20" height="14" class="h-3.5 w-5 shrink-0 rounded-[2px] object-cover shadow-sm ring-1 ring-slate-200/60" loading="lazy"/>
+						<span class="text-xs font-medium text-[#374151]">{c.name}</span>
+					</div>
+				))}
 			</div>
-
 		</div>
 	</div>
 </section>
 
-<script is:inline>
-(function () {
-	function initGlobe() {
-		var el = document.getElementById('world-globe-v2');
-		if (!el || el.dataset.globeInited === '1') return;
-		el.dataset.globeInited = '1';
+<script>
+import Globe from 'globe.gl';
+import * as THREE from 'three';
 
-		if (typeof Globe === 'undefined') {
-			var script = document.createElement('script');
-			script.src = 'https://unpkg.com/globe.gl@2/dist/globe.gl.min.js';
-			script.onload = buildGlobe;
-			document.head.appendChild(script);
-		} else {
-			buildGlobe();
-		}
+function ss(e0: number, e1: number, x: number) { const t = Math.min(1,Math.max(0,(x-e0)/(e1-e0))); return t*t*(3-2*t); }
+function c255(v: number) { return v<0?0:v>255?255:v|0; }
 
-		function buildGlobe() {
-			var POINTS = [
-				{ lat: 37.09, lng: -95.71 }, // USA
-				{ lat: 56.13, lng: -106.35 }, // Canada
-				{ lat: -40.9, lng: 174.89 }, // NZ
-				{ lat: -25.27, lng: 133.77 }, // Australia
-				{ lat: 46.82, lng: 8.23 },   // Switzerland
-				{ lat: -9.19, lng: -75.02 }, // Peru
-				{ lat: -35.68, lng: -71.54 }, // Chile
-				{ lat: -14.24, lng: -51.93 }, // Brazil
-				{ lat: 35.91, lng: 127.77 }, // Korea
-				{ lat: 41.87, lng: 12.57 },  // Italy
-				{ lat: 53.41, lng: -8.24 },  // Ireland
-				{ lat: 1.35, lng: 103.82 },  // Singapore
-				{ lat: 1.37, lng: 32.29 },   // Uganda
-				{ lat: 55.38, lng: -3.44 },  // UK
-				{ lat: 51.17, lng: 10.45 },  // Germany
-				{ lat: 60.47, lng: 8.47 },   // Norway
-				{ lat: 10.69, lng: -61.22 }, // Trinidad
-			];
-
-			var globe = Globe({ animateIn: false })(el)
-				.globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
-				.backgroundColor('rgba(0,0,0,0)')
-				.pointsData(POINTS)
-				.pointColor(function () { return '#7C3AED'; })
-				.pointAltitude(0.02)
-				.pointRadius(0.4)
-				.atmosphereColor('#7C3AED')
-				.atmosphereAltitude(0.18)
-				.width(el.clientWidth || 360)
-				.height(el.clientHeight || 360);
-
-			globe.controls().autoRotate = true;
-			globe.controls().autoRotateSpeed = 0.8;
-			globe.controls().enableZoom = false;
-
-			el.style.opacity = '1';
-		}
+async function buildTex(dark: string, night: string) {
+	const ck = 'ysa-globe-v2-t';
+	try { const h = sessionStorage.getItem(ck); if (h && h.length > 80000) return h; } catch {}
+	const loadImg = (src: string) => new Promise<HTMLImageElement>((res,rej) => { const i=new Image(); i.crossOrigin='anonymous'; i.onload=()=>res(i); i.onerror=()=>rej(new Error('')); i.src=src; });
+	const [dImg,nImg] = await Promise.all([loadImg(dark),loadImg(night)]);
+	const W=1024,H=512,cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+	const ctx=cv.getContext('2d',{willReadFrequently:true})!;
+	ctx.drawImage(dImg,0,0,W,H); const dd=ctx.getImageData(0,0,W,H).data;
+	ctx.drawImage(nImg,0,0,W,H); const nd=ctx.getImageData(0,0,W,H).data;
+	const out=ctx.createImageData(W,H); const o=out.data;
+	for (let y=0;y<H;y++) for (let x=0;x<W;x++) {
+		const i=(y*W+x)*4;
+		const lD=(0.299*dd[i]+0.587*dd[i+1]+0.114*dd[i+2])/255;
+		const lN=(0.299*nd[i]+0.587*nd[i+1]+0.114*nd[i+2])/255;
+		const lW=1-ss(0.07,0.12,lD); let lr=6,lg=38,lb=116;
+		if (lN>0.1) { const k=Math.min(1,(lN-0.1)/0.5); lr+=(255-lr)*k; lg+=(250-lg)*k; lb+=(255-lb)*k; }
+		const or=lD*44,og=10+lD*34,ob=40+lD*98;
+		const cst=ss(0.072,0.096,lD)*(1-ss(0.096,0.14,lD));
+		o[i]=c255(or*(1-lW)+lr*lW+cst*88); o[i+1]=c255(og*(1-lW)+lg*lW+cst*205);
+		o[i+2]=c255(ob*(1-lW)+lb*lW+cst*238); o[i+3]=255;
 	}
+	ctx.putImageData(out,0,0);
+	const url=cv.toDataURL('image/png');
+	try { sessionStorage.setItem(ck,url); } catch {}
+	return url;
+}
 
-	var observer = new IntersectionObserver(function (entries) {
-		if (entries[0].isIntersecting) {
-			initGlobe();
-			observer.disconnect();
+function buildDots(n: number) {
+	const R=[{lat:[-55,72],lng:[-130,-30]},{lat:[-38,38],lng:[-25,55]},{lat:[-12,55],lng:[70,180]},{lat:[-12,55],lng:[-180,-95]}];
+	const C=['#ffffff','#e8fdff','#4df0f0','#18e0eb','#b8f6ff'];
+	const rnd=(a: number,b: number)=>a+Math.random()*(b-a);
+	return Array.from({length:n},()=>{ const r=R[Math.floor(Math.random()*R.length)]; return {lat:rnd(r.lat[0],r.lat[1]),lng:rnd(r.lng[0],r.lng[1]),size:0.0016+Math.random()*0.005,r:0.022+Math.random()*0.045,color:C[Math.floor(Math.random()*C.length)]}; });
+}
+
+function initGlobe() {
+	const el = document.getElementById('world-globe-v2') as HTMLElement & {_gi?: boolean};
+	if (!el || el._gi) return;
+	el._gi = true;
+	const pins = JSON.parse(el.getAttribute('data-points') || '[]');
+	const hint = document.getElementById('globe-hint');
+
+	(async () => {
+		const globe = Globe({ animateIn: false, waitForGlobeReady: true })(el);
+		const dark = '/assets/globe/textures/earth-dark.jpg';
+		const night = '/assets/globe/textures/earth-night.jpg';
+		let tex = dark;
+		try { tex = await buildTex(dark, night); } catch {}
+
+		const dots = buildDots(1800);
+		globe
+			.backgroundColor('rgba(0,0,0,0)')
+			.width(el.clientWidth).height(el.clientHeight)
+			.globeImageUrl(tex)
+			.showAtmosphere(true).atmosphereColor('#4df0f0').atmosphereAltitude(0.2)
+			.showGraticules(false)
+			.pointsData(dots).pointLat('lat').pointLng('lng')
+			.pointAltitude('size').pointColor('color').pointRadius('r').pointResolution(14)
+			.htmlElementsData(pins)
+			.htmlLat((d: any) => d.lat).htmlLng((d: any) => d.lng)
+			.htmlAltitude(() => 0.012)
+			.htmlElement((d: any) => {
+				const root = document.createElement('div');
+				const sq = d.shape === 'squircle';
+				root.style.cssText = `width:${d.size}px;height:${d.size}px;position:relative;transform:translate(-50%,-50%);pointer-events:none;`;
+				const glow = document.createElement('span');
+				glow.style.cssText = `position:absolute;inset:-8px;z-index:0;border-radius:${sq?'20px':'50%'};background:#061897;opacity:.4;filter:blur(6px);`;
+				const inner = document.createElement('div');
+				inner.style.cssText = `position:relative;z-index:1;width:100%;height:100%;border-radius:${sq?'8px':'50%'};overflow:hidden;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.25);`;
+				if (d.face) { const img=document.createElement('img'); img.src=d.face; img.alt=''; img.style.cssText='display:block;width:100%;height:100%;object-fit:cover;'; img.loading='lazy'; inner.appendChild(img); }
+				root.appendChild(glow); root.appendChild(inner);
+				return root;
+			});
+
+		const arcs: any[] = []; let tries=0;
+		while (arcs.length<180 && tries++<10000) {
+			const a=dots[Math.floor(Math.random()*dots.length)],b=dots[Math.floor(Math.random()*dots.length)];
+			const dL=Math.abs(a.lat-b.lat),dN=Math.abs(a.lng-b.lng),sp=dL+dN;
+			if (dL<40&&dN<100&&sp>6&&sp<58) arcs.push({startLat:a.lat,startLng:a.lng,endLat:b.lat,endLng:b.lng});
 		}
-	}, { threshold: 0.2 });
+		globe.arcsData(arcs).arcColor(()=>'rgba(77,240,240,0.35)').arcStroke(0.14).arcAltitude(0.085).arcDashLength(0.2).arcDashGap(0.16).arcDashAnimateTime(11000);
 
-	var target = document.getElementById('world-globe-v2');
-	if (target) observer.observe(target);
+		const ctrl = globe.controls();
+		ctrl.enableZoom = true; ctrl.zoomSpeed = 0.8;
+		ctrl.enableRotate = true; ctrl.rotateSpeed = 0.7;
+		ctrl.enableDamping = true; ctrl.dampingFactor = 0.08;
+		ctrl.autoRotate = true; ctrl.autoRotateSpeed = 0.7;
+		ctrl.enablePan = false;
+		ctrl.minDistance = 120; ctrl.maxDistance = 400;
 
-	document.addEventListener('astro:page-load', function () {
-		var t = document.getElementById('world-globe-v2');
-		if (t) observer.observe(t);
-	});
-})();
+		el.addEventListener('pointerdown', () => {
+			ctrl.autoRotate = false;
+			el.classList.add('is-dragging');
+			if (hint) hint.style.opacity = '0';
+		}, { once: true });
+		el.addEventListener('pointerdown', () => { ctrl.autoRotate = false; el.classList.add('is-dragging'); });
+		window.addEventListener('pointerup', () => { setTimeout(()=>{ ctrl.autoRotate=true; }, 2000); el.classList.remove('is-dragging'); });
+
+		globe.pointOfView({ lat: 20, lng: -20, altitude: 1.4 }, 0);
+
+		const mat = globe.globeMaterial() as any;
+		if (mat) { mat.emissive=new THREE.Color(0x041028); mat.emissiveIntensity=0.07; if ('shininess' in mat) mat.shininess=68; if ('metalness' in mat) mat.metalness=0.12; if ('roughness' in mat) mat.roughness=0.32; }
+		for (const l of globe.lights() as any[]) {
+			if (l.type==='AmbientLight') { l.color=new THREE.Color('#2a5088'); l.intensity=0.62; }
+			if (l.type==='DirectionalLight') { l.color=new THREE.Color('#f2fbff'); l.intensity=1.05; l.position.set(1.25,0.9,0.65); }
+		}
+		const sc=globe.scene() as any;
+		if (!sc.getObjectByName('ysa-hemi')) {
+			const h=new THREE.HemisphereLight(0x7eedf5,0x000814,0.32); h.name='ysa-hemi'; sc.add(h);
+		}
+		window.addEventListener('resize', () => globe.width(el.clientWidth).height(el.clientHeight));
+	})();
+}
+
+function observe() {
+	const s = document.querySelector('[aria-labelledby="world-v2-heading"]');
+	if (!s) return;
+	const io = new IntersectionObserver(e => { if (e[0].isIntersecting) { initGlobe(); io.disconnect(); } }, { threshold: 0.1 });
+	io.observe(s);
+}
+observe();
+window.addEventListener('load', () => {
+	const el = document.getElementById('world-globe-v2');
+	if (el) { const r=el.getBoundingClientRect(); if (r.top<window.innerHeight&&r.bottom>0) initGlobe(); }
+});
+document.addEventListener('astro:page-load', observe);
 </script>

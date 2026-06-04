@@ -1,6 +1,7 @@
 ---
 import Header from '../../components/common/Header.astro';
 import Footer from '../../components/common/Footer.astro';
+import CampPageFaqSection from '../../components/common/CampPageFaqSection.astro';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/course-detail/Hero.astro';
 import TabsBar from '../../components/course-detail/TabsBar.astro';
@@ -54,6 +55,7 @@ const shareTitle = `${courseContent.hero.titleLead} ${courseContent.hero.titleAc
 		{courseContent.testimonials && <RealGrowthSection hideStats content={courseContent.testimonials} />}
 		<AboutSection {...courseContent.about} />
 		<FinalCtaSection {...courseContent.finalCta} />
+		<CampPageFaqSection />
 	</main>
 
 	<Footer />

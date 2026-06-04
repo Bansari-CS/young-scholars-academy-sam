@@ -2,12 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import { getEntry } from 'astro:content';
+
+const homeEntry = await getEntry('home', 'home');
+if (!homeEntry) throw new Error('Missing home content');
+const homeContent = homeEntry.data;
 
 // V2-specific components
 import HeroSectionV2 from '../components/home/v2/HeroSectionV2.astro';
 import TrustStripV2 from '../components/home/v2/TrustStripV2.astro';
 import DoesThisSoundSection from '../components/home/v2/DoesThisSoundSection.astro';
 import DifferentSection from '../components/home/v2/DifferentSection.astro';
+import VirtualCampusVideoSection from '../components/home/v2/VirtualCampusVideoSection.astro';
 import ExpertEndorsementSection from '../components/home/v2/ExpertEndorsementSection.astro';
 import PathwaysSection from '../components/home/v2/PathwaysSection.astro';
 import TestimonialsV2Section from '../components/home/v2/TestimonialsV2Section.astro';
@@ -22,8 +28,8 @@ import LeadCaptureCtaSection from '../components/home/v2/LeadCaptureCtaSection.a
 import ProgramsSection from '../components/home/ProgramsSection.astro';
 import MethodologySection from '../components/home/MethodologySection.astro';
 import TeachersSection from '../components/home/TeachersSection.astro';
-import WorldKidsSection from '../components/home/WorldKidsSection.astro';
-import FaqSection from '../components/home/FaqSection.astro';
+import WorldKidsSectionV2 from '../components/home/v2/WorldKidsSectionV2.astro';
+import GeneralFaqSection from '../components/common/GeneralFaqSection.astro';
 
 // ── Nav items (per PDF §2) ────────────────────────────────────────────────────
 const navItems = [
@@ -76,7 +82,7 @@ const heroContent = {
 // ── Programs section (§8) — reuse existing component ─────────────────────────
 const programsContent = {
 	eyebrow: 'Find the Perfect Program',
-	title: 'AI Coding. Mock Trial. Minecraft Engineering. AP Psychology. D&D.',
+	title: 'Esports. Dark History. Executive Function. AI Coding. Mock Trial. Minecraft Engineering. 8+ AP Courses. D&D. Robotics. Fan Fiction. Digital Art. Adulting & Life Skills.',
 	description: '150+ courses your kid will actually want to take.',
 	viewAllCta: { label: 'Browse the Full Catalog →', href: '/summer' },
 	emptyFilterMessage: 'No programs match these filters. Try another age or instructor.',
@@ -158,77 +164,19 @@ const teachersContent = {
 	],
 };
 
-// ── World (§15) — fixed stats, remove "24/7 Live Learning" ─────────────────────
+// ── World (§15) — use exact home.md data so globe renders identically to homepage
 const worldContent = {
-	eyebrow: 'GLOBAL COMMUNITY',
-	title: 'Our Kids Are All Around',
-	titleLine2: 'the World',
-	description: 'From Tokyo to New York, 1,200+ families in 17 countries across 6 continents have found their people at YSA.',
-	globeAlt: 'Global network of YSA students around the world',
+	...homeContent.world,
+	// Override stats only: fix number format + replace "24/7 Live Learning" with 93%
 	stats: [
 		{ value: '1,200+', label: 'Families Served' },
 		{ value: '17',     label: 'Countries across 6 continents' },
 		{ value: '47+',    label: 'US States + D.C.' },
 		{ value: '93%',    label: 'Re-Enroll Every Semester' },
 	],
-	countriesHeading: '17 Countries across 6 continents',
-	countries: [
-		{ flag: '🇺🇸', name: 'United States' },
-		{ flag: '🇨🇦', name: 'Canada' },
-		{ flag: '🇳🇿', name: 'New Zealand' },
-		{ flag: '🇦🇺', name: 'Australia' },
-		{ flag: '🇨🇭', name: 'Switzerland' },
-		{ flag: '🇵🇪', name: 'Peru' },
-		{ flag: '🇨🇱', name: 'Chile' },
-		{ flag: '🇧🇷', name: 'Brazil' },
-		{ flag: '🇰🇷', name: 'Korea' },
-		{ flag: '🇮🇹', name: 'Italy' },
-		{ flag: '🇮🇪', name: 'Ireland' },
-		{ flag: '🇸🇬', name: 'Singapore' },
-		{ flag: '🇺🇬', name: 'Uganda' },
-		{ flag: '🇬🇧', name: 'United Kingdom' },
-		{ flag: '🇩🇪', name: 'Germany' },
-		{ flag: '🇳🇴', name: 'Norway' },
-		{ flag: '🇹🇹', name: 'Trinidad & Tobago' },
-	],
 };
 
 // ── FAQ (§20) ─────────────────────────────────────────────────────────────────
-const faqContent = {
-	eyebrow: 'QUESTIONS PARENTS ASK',
-	title: 'Questions Parents Ask.',
-	description: 'Everything you need to know before getting started.',
-	items: [
-		{
-			question: 'Who is YSA for?',
-			answer: 'Gifted or 2e learners ages 5–18. ADHD, autism, giftedness, anxiety, dyslexia, PDA, and profiles that don\'t fit neatly into any one label. What they share: they\'re bright, they\'re different, and they haven\'t found their people yet.',
-		},
-		{
-			question: 'How big are the classes?',
-			answer: '6 to 8. Always. No exceptions.',
-		},
-		{
-			question: 'Is this Zoom?',
-			answer: 'Classes on Zoom + a virtual campus where kids walk between buildings as avatars and build a real social life. Cameras always optional.',
-		},
-		{
-			question: 'What does a week look like?',
-			answer: 'Some families take one class. Others use us as their primary community. Sessions are live, 50 min. Campus open 7 AM–7 PM Pacific.',
-		},
-		{
-			question: 'Is YSA accredited?',
-			answer: 'Yes. WASC accredited. Transcripts and homeschool portfolio documentation provided.',
-		},
-		{
-			question: 'How much does it cost?',
-			answer: 'From $500/semester. Summer camps priced separately. Payment plans and ESA/charter funding accepted.',
-		},
-		{
-			question: "What if it doesn't work for my kid?",
-			answer: '30-Day Promise. Better-fit course, full credit, or payments stopped. No questions.',
-		},
-	],
-};
 ---
 
 <Layout
@@ -245,11 +193,14 @@ const faqContent = {
 		<!-- §4 Trust Bar — "As Featured On" (Davidson, B&Q, WASC, TEDx, Uniquely Human, Tilt) -->
 		<TrustStripV2 />
 
-		<!-- §5 "Does This Sound Like Your Kid?" + Fit Check -->
-		<DoesThisSoundSection />
-
-		<!-- §6 Here's How We're Different (Mentors / Size / THE Campus) -->
+		<!-- §6 Here's How We're Different (moved first per client comment) -->
 		<DifferentSection />
+
+		<!-- Virtual Campus video — after "How We're Different" per client request -->
+		<VirtualCampusVideoSection />
+
+		<!-- §5 "Does This Sound Like Your Kid?" + Fit Check (moved after Different) -->
+		<DoesThisSoundSection />
 
 		<!-- §7 Expert Endorsement — Debbie Steinberg-Kuntz -->
 		<ExpertEndorsementSection />
@@ -277,8 +228,8 @@ const faqContent = {
 		<!-- §14 Teachers -->
 		<TeachersSection content={teachersContent} />
 
-		<!-- §15 Globe -->
-		<WorldKidsSection content={worldContent} />
+		<!-- §15 Leaflet Map -->
+		<WorldKidsSectionV2 />
 
 		<!-- §16 From the Founder -->
 		<FounderSection />
@@ -290,7 +241,7 @@ const faqContent = {
 		<ESASection />
 
 		<!-- §20 FAQ -->
-		<FaqSection content={faqContent} />
+		<GeneralFaqSection />
 
 		<!-- §19 Lead Capture + Final CTA -->
 		<LeadCaptureCtaSection />
