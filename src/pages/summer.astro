@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import SummerSalesFaqSection from '../components/common/SummerSalesFaqSection.astro';
 import SummerHeroSection from '../components/summer/SummerHeroSection.astro';
 import SummerStruggleSection from '../components/summer/SummerStruggleSection.astro';
 import SummerFullSections from '../components/summer/SummerFullSections.astro';
@@ -26,6 +27,7 @@ const summerContent = summerEntry.data;
 		<SummerHeroSection content={summerContent.hero} />
 		<SummerStruggleSection content={summerContent.struggle} />
 		<SummerFullSections content={summerContent} />
+		<SummerSalesFaqSection />
 	</main>
 	<Footer />
 </Layout>

@@ -59,11 +59,13 @@ function teacherPhoto(name: string): string {
 	return teacherPhotoMap[(name || '').toLowerCase().trim()] ?? '/assets/educators/10-Mark-Tidman.png';
 }
 
-// Unique sorted categories, teachers, age groups
+// Unique sorted categories, teachers, age groups, dates, times
 const categories = [...new Set(allItems.map(i => i.tag).filter(Boolean))].sort() as string[];
 const teachers   = [...new Set(allItems.map(i => i.teacher).filter(Boolean))].sort() as string[];
 const ageGroups  = [...new Set(allItems.map(i => i.age_group).filter(Boolean))]
 	.sort((a,b) => parseInt(a)-parseInt(b)) as string[];
+const startDates = [...new Set(allItems.map(i => i.start_date_display).filter(Boolean))].sort() as string[];
+const startTimes = [...new Set(allItems.map(i => i.start_time_display).filter(Boolean))].sort() as string[];
 
 // Embed all card data as JSON for client-side search/filter
 const allItemsJson = JSON.stringify(allItems.map(item => ({
@@ -79,6 +81,8 @@ const allItemsJson = JSON.stringify(allItems.map(item => ({
 	href:        courseHref(item.course_name || ''),
 	teacherPhoto:teacherPhoto(item.teacher   || ''),
 	type:        item.session_count ? 'course' : 'camp',
+	startDate:   item.start_date_display || '',
+	startTime:   item.start_time_display || '',
 })));
 
 const selectChevron =
@@ -131,8 +135,8 @@ const inputBase = 'w-full appearance-none rounded-[0.65rem] border border-slate-
 				</div>
 			</div>
 
-			<!-- Filter row -->
-			<div class="grid grid-cols-1 gap-[clamp(1.25rem,3vw,2rem)] sm:grid-cols-3">
+			<!-- Filter row — Age → Category → Date → Time → Teacher -->
+			<div class="grid grid-cols-1 gap-[clamp(1rem,2vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-5">
 				<!-- Category -->
 				<div class="min-w-0">
 					<label class="mb-2 flex items-center gap-2 font-display text-sm font-bold leading-[1.3125rem] text-[#1a1a2e]" for="programs-category">
@@ -154,6 +158,30 @@ const inputBase = 'w-full appearance-none rounded-[0.65rem] border border-slate-
 					<select id="programs-age" class:list={[inputBase, selectChevron, 'bg-[length:16px_16px] bg-[position:right_0.65rem_center] bg-no-repeat']} data-programs-filter="age">
 						<option value="">All ages</option>
 						{ageGroups.map(ag => <option value={ag}>Ages {ag}</option>)}
+					</select>
+				</div>
+
+				<!-- Date -->
+				<div class="min-w-0">
+					<label class="mb-2 flex items-center gap-2 font-display text-sm font-bold leading-[1.3125rem] text-[#1a1a2e]" for="programs-date">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A9DFB" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+						Date
+					</label>
+					<select id="programs-date" class:list={[inputBase, selectChevron, 'bg-[length:16px_16px] bg-[position:right_0.65rem_center] bg-no-repeat']} data-programs-filter="startDate">
+						<option value="">Any date</option>
+						{startDates.map(d => <option value={d}>{d}</option>)}
+					</select>
+				</div>
+
+				<!-- Time -->
+				<div class="min-w-0">
+					<label class="mb-2 flex items-center gap-2 font-display text-sm font-bold leading-[1.3125rem] text-[#1a1a2e]" for="programs-time">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A9DFB" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+						Time
+					</label>
+					<select id="programs-time" class:list={[inputBase, selectChevron, 'bg-[length:16px_16px] bg-[position:right_0.65rem_center] bg-no-repeat']} data-programs-filter="startTime">
+						<option value="">Any time</option>
+						{startTimes.map(t => <option value={t}>{t}</option>)}
 					</select>
 				</div>
 
@@ -273,6 +301,8 @@ const inputBase = 'w-full appearance-none rounded-[0.65rem] border border-slate-
 		var searchClearBtn = root.querySelector('[data-programs-search-clear]');
 		var categoryEl = root.querySelector('[data-programs-filter="category"]');
 		var ageEl      = root.querySelector('[data-programs-filter="age"]');
+		var dateEl     = root.querySelector('[data-programs-filter="startDate"]');
+		var timeEl     = root.querySelector('[data-programs-filter="startTime"]');
 		var teacherEl  = root.querySelector('[data-programs-filter="teacher"]');
 		var grid       = root.querySelector('[data-programs-grid]');
 		var emptyEl    = root.querySelector('[data-programs-empty]');
@@ -292,6 +322,8 @@ const inputBase = 'w-full appearance-none rounded-[0.65rem] border border-slate-
 				q:       (searchEl  ? searchEl.value.trim().toLowerCase()  : ''),
 				cat:     (categoryEl ? categoryEl.value : ''),
 				age:     (ageEl      ? ageEl.value      : ''),
+				date:    (dateEl     ? dateEl.value     : ''),
+				time:    (timeEl     ? timeEl.value     : ''),
 				teacher: (teacherEl  ? teacherEl.value  : ''),
 			};
 		}
@@ -305,6 +337,8 @@ const inputBase = 'w-full appearance-none rounded-[0.65rem] border border-slate-
 				}
 				if (f.cat     && item.tag     !== f.cat)     return false;
 				if (f.age     && item.age     !== f.age)     return false;
+				if (f.date    && item.startDate !== f.date)   return false;
+				if (f.time    && item.startTime !== f.time)   return false;
 				if (f.teacher && item.teacher !== f.teacher) return false;
 				return true;
 			});
@@ -338,7 +372,9 @@ const inputBase = 'w-full appearance-none rounded-[0.65rem] border border-slate-
 			if (f.q)       chips.push({ kind:'q',       label:'Search: ' + f.q });
 			if (f.cat)     chips.push({ kind:'cat',     label: f.cat });
 			if (f.age)     chips.push({ kind:'age',     label:'Ages ' + f.age });
-			if (f.teacher) chips.push({ kind:'teacher', label: f.teacher });
+			if (f.date)    chips.push({ kind:'date',    label: f.date });
+				if (f.time)    chips.push({ kind:'time',    label: f.time });
+				if (f.teacher) chips.push({ kind:'teacher', label: f.teacher });
 
 			chipsEl.innerHTML = chips.map(function(c) {
 				return '<span class="inline-flex items-center gap-1 rounded-full bg-[#DBEAFE] py-1 pl-3 pr-2 text-xs font-semibold text-[#0A9DFB]">'
@@ -371,7 +407,7 @@ const inputBase = 'w-full appearance-none rounded-[0.65rem] border border-slate-
 			});
 		}
 
-		[categoryEl, ageEl, teacherEl].forEach(function(el) {
+		[categoryEl, ageEl, dateEl, timeEl, teacherEl].forEach(function(el) {
 			if (el) el.addEventListener('change', applyFilters);
 		});
 

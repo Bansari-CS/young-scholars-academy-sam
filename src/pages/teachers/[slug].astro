@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/common/Header.astro';
 import Footer from '../../components/common/Footer.astro';
+import GeneralFaqSection from '../../components/common/GeneralFaqSection.astro';
 import MentorProfileHeroSection from '../../components/mentor-profile/MentorProfileHeroSection.astro';
 import MentorProfileAboutSection from '../../components/mentor-profile/MentorProfileAboutSection.astro';
 import MentorProfileBeyondClassroomSection from '../../components/mentor-profile/MentorProfileBeyondClassroomSection.astro';
@@ -83,6 +84,7 @@ const navItems = await getSiteNavItems();
 		<MentorProfileStudentExperienceSection content={mentorContent.studentExperience} />
 		<MentorProfileTestimonialsSection content={mentorContent.testimonials} />
 		<MentorProfileFindClassCtaSection content={mentorContent.findClassCta} />
+		<GeneralFaqSection />
 	</main>
 	<Footer />
 </Layout>

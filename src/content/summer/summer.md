@@ -13,7 +13,7 @@ hero:
   secondaryCtaHref: "#how-it-works"
   countdown:
     targetDate: "2026-05-22T23:59:59"
-    label: Enrollment closes May 22
+    label: "New Camps Blasting Off In:"
   stats:
     - value: 80+
       label: Camps
@@ -157,9 +157,9 @@ camps:
       price: "$499"
       image: /assets/images/summer-camp/stem-tech.jpg
       dateSlot: june-mid
-  aiTitle: "Ask Scheduley AI: Your Personal Scheduling Assistant"
-  aiDescription: Get personalized camp recommendations based on your child's interests.
-  aiCtaLabel: Ask Scheduley AI
+  aiTitle: "NOT SURE WHERE TO START?"
+  aiDescription: "Chat with Scheduley AI — our intelligent scheduling assistant — for personalized camp recommendations based on your child's interests, age, and schedule."
+  aiCtaLabel: "✨ Chat with Scheduley AI"
   aiEmbedSrc: "https://summer-camp-guide-v1.on.chipp.ai"
   aiEmbedTitle: Summer Camp Guide
   browseLabel: Browse All 300+ Topics
@@ -287,28 +287,28 @@ bonus:
   description: A complete set of resources and experiences designed to accelerate progress, included at no extra cost.
   cards:
     - icon: /images/summer/bonus/icon-vault.svg
-      title: Expert Vault - 8 Recordings
-      description: Access our library of past masterclasses featuring world-renowned specialists.
+      title: Live Expert Talks
+      description: 5 live sessions with world-renowned specialists including Dr. Barry Prizant, Dr. Susan Baum, Emily Kircher-Morris, Seth Perler, and Dr. Marielly Mitchell.
       valueLabel: VALUE
-      value: "$1,032"
+      value: "$995"
     - icon: /images/summer/bonus/icon-campus.svg
       iconClass: bonus-yellow
-      title: Virtual Village Campus
-      description: Access our library of past masterclasses featuring world-renowned specialists.
+      title: Metaverse Virtual Village Access
+      description: Year-round access to the Virtual World where your child can play with friends between classes and build lasting connections.
       valueLabel: VALUE
-      value: "$1,032"
+      value: "$599"
     - icon: /images/summer/bonus/icon-community.svg
       iconClass: bonus-purple
-      title: Parent Village Community
-      description: Weekly webinars and a dedicated support forum for parents of neurodivergent kids.
+      title: VIP Parent Facebook Group
+      description: 9-month access to connect with like-minded parents, feel seen, and set up playdates with YSA families worldwide.
       valueLabel: VALUE
-      value: "$297"
+      value: "$999"
     - icon: /images/summer/bonus/icon-ambassador.svg
       iconClass: bonus-green
-      title: Ambassador Program
-      description: Earn rewards and community credits for sharing the academy with other families.
-      valueLabel: PER FAMILY
-      value: "$199"
+      title: Weekly Progress Reports
+      description: Stay in the loop with weekly class updates and progress reports sent straight to your inbox every week.
+      valueLabel: VALUE
+      value: "$799"
       tall: true
   security:
     icon: /images/summer/bonus/icon-security.svg
@@ -325,24 +325,36 @@ bonus:
       - /images/summer/bonus/avatar-a.jpg
       - /images/summer/bonus/avatar-b.jpg
       - /images/summer/bonus/avatar-c.jpg
-    avatarsCountLabel: +8
+    avatarsCountLabel: "+8"
     items:
-      - image: /images/summer/bonus/mentor-1.jpg
-        name: Dr. Sarah Jenkins
-        specialty: Executive Function
-      - image: /images/summer/bonus/mentor-2.jpg
-        name: Mark Thompson
-        specialty: Creative Writing
-      - image: /images/summer/bonus/mentor-3.jpg
-        name: Alex Chen
-        specialty: Game Design & Logic
-      - image: /images/summer/bonus/mentor-4.jpg
-        name: Dr. Elena Rodriguez
-        specialty: Social Dynamics
+      - image: /images/summer/bonus/expert-barry-prizant.jpeg
+        name: Dr. Barry Prizant
+        specialty: Supporting Emotional Regulation — Author of Uniquely Human
+      - image: /images/summer/bonus/expert-emily-kircher-morris.jpg
+        name: Emily Kircher-Morris
+        specialty: Top Tips for Supporting Twice-Exceptional Students
+      - image: /images/summer/bonus/expert-marielly-mitchell.png
+        name: Dr. Marielly Mitchell
+        specialty: How Poor Breathing & Sleep Impact Learning
+      - image: /images/summer/bonus/expert-kara-scanlon.jpeg
+        name: Kara Scanlon
+        specialty: Top Executive Function Tools for Families
+      - image: /images/summer/bonus/expert-kate-stone.png
+        name: Kate Stone
+        specialty: College Admissions for 2e & Gifted Kids
+      - image: /images/summer/bonus/expert-sandra-clifton.jpg
+        name: Dr. Sandra Clifton
+        specialty: Trauma in Neurodivergent Children
+      - image: /images/summer/bonus/expert-dan-peters.jpg
+        name: Dr. Dan Peters
+        specialty: Ask Me Anything with a Top Expert
+      - image: /images/summer/bonus/expert-matt-zakreski.jpeg
+        name: Dr. Matt Zakreski
+        specialty: Dealing with Perfectionism & Anxiety
   total:
     label: TOTAL VALUE INCLUDED
-    value: "$2,500+"
-    suffix: Bonus Resources
+    value: "$5,574"
+    suffix: In Free Bonuses
     chipLabel: with enrollment
     chipIcon: /images/summer/bonus/free.svg
     description: Unlock all rewards immediately after completing your student registration today.
@@ -385,5 +397,5 @@ finalCta:
   primaryCtaHref: "#programs"
   secondaryCtaLabel: View All 80 Camps
   secondaryCtaHref: "#programs"
-  footnote: Limited spots available per class. Enrollment closes June 1st.
+  footnote: Limited spots available per class.
 ---

@@ -1,0 +1,233 @@
+---
+/**
+ * Summer Sales Page FAQ — category tabs + AEO JSON-LD
+ * 5 categories, 18 questions
+ */
+
+const categories = [
+	{
+		id: 'how-it-works',
+		label: 'How It Works',
+		faqs: [
+			{
+				q: 'How do YSA summer camps work?',
+				a: "Summer camps run Monday through Friday, 50 minutes a day, one week at a time, for 10 weeks (June through August). YSA offers roughly 100 unique camp titles across 321 sessions in 7 categories: Gaming, STEM, History & Humanities, Arts, Life Skills, College Prep, and Social. Every camp has a maximum of 6–8 students and is taught by the same mentor all week. Camps don't repeat, so your child can take different ones all summer.",
+			},
+			{
+				q: 'Can my child take more than one camp per day?',
+				a: "Absolutely. Most families stack multiple camps. Camps run throughout the day from 7 AM to 7 PM Pacific. Your child might do Minecraft Redstone Engineering at 9 AM, D&D at 10 AM, and Speech & Debate at noon. It's like building your own summer day camp, except every activity is something they chose.",
+			},
+			{
+				q: 'What is the Virtual Campus during summer?',
+				a: "When your child takes 3+ camps in a week, they unlock the Virtual Campus at 11 AM for a supervised lunch break. Kids hang out as avatars, eat lunch together, and just be kids. Think of it as the camp lunch table, virtual. For many families, it's their child's favorite part of the day.",
+			},
+			{
+				q: 'What ages are summer camps for?',
+				a: "Ages 5 to 18. Every camp listing shows the recommended age range. Filter by age in our catalog.",
+			},
+		],
+	},
+	{
+		id: 'choosing-enrolling',
+		label: 'Choosing & Enrolling',
+		faqs: [
+			{
+				q: 'How do I choose the right camps?',
+				a: "Start with what lights your child up. Obsessed with military history? Tools of War. Building Minecraft worlds? Redstone Engineering. Argues about everything? Mock Trial. Calculating game odds? Balatro. Can't stop drawing? Art Club or Mythical Drawing Lab. Browse by age, interest, or schedule, or use Scheduley AI for personalized recommendations.",
+			},
+			{
+				q: 'How much do summer camps cost?',
+				a: "Individual camps usually start around $160/week. The All-Access Summer Pass starts at $1,997 for the summer (Bronze: 3 camps/week; Silver: 5 camps/week at $2,797; Gold: 5 camps/week + 10 private 1:1 sessions at $4,997). The pass saves up to 64% vs. à la carte. Payment plans and ESA/charter funds accepted.",
+			},
+			{
+				q: "What's the All-Access Summer Pass?",
+				a: "Unlimited camps every week, all summer, one flat price. Pass holders get automatic daily Virtual Campus access. Includes over $5,000 in bonuses: Expert Vault recordings (featuring Dr. Temple Grandin, Seth Perler, Dr. Barry Prizant), Parent Cheat Codes guides, and community perks. If the pass isn't working after the first full week, 100% converts to a never-expiring YSA credit.",
+			},
+			{
+				q: 'Can I use ESA or charter funds?',
+				a: "Yes. YSA is approved with 10+ state ESA programs. Many families pay zero out of pocket. Enroll directly, submit the invoice, and when funds transfer, your payment method is refunded.",
+			},
+		],
+	},
+	{
+		id: 'safety-quality',
+		label: 'Safety & Quality',
+		faqs: [
+			{
+				q: 'Who teaches the summer camps?',
+				a: "The same 14 hand-selected mentors who teach year-round. They're the grown-up versions of your kids — neurodivergent themselves, or parents of neurodivergent kids at YSA. They include Jennifer Hughes (retired attorney, 30+ years, Mock Trial), Megan Hardy (professional DM, 4,000+ students, D&D), Nelson Dean (20 years, STAR teacher award, Tools of War), and Ms. Jackson (26 years theatre). All background-checked. Every session recorded.",
+			},
+			{
+				q: 'Is this safe?',
+				a: "Every adult is vetted and background-checked. Sessions recorded. Campus moderated. Groups of 6–8. No anonymous users. A community of 1,200+ families who know each other. A village, not a platform.",
+			},
+			{
+				q: 'What about screen time?',
+				a: "Each camp is 50 minutes/day. Not all screen time is created equal. This is active participation: Socratic discussion, building flying machines in Minecraft, arguing cases, collaborating on D&D quests. The campus has set hours and closes at night.",
+			},
+			{
+				q: 'My child has PDA. Will summer camps work for them?',
+				a: "YSA summer camps are challenge-by-choice. No homework. No grades. Cameras optional. Students are never forced to participate. Mentors lead with invitation, not demand. For PDA kids, this means they can engage on their own terms. Many PDA families tell us summer at YSA is the first time their child was excited about a structured program.",
+			},
+		],
+	},
+	{
+		id: 'experience',
+		label: 'The Experience',
+		faqs: [
+			{
+				q: 'What does a typical day look like?',
+				a: "Sample day (3 camps): 9 AM, Minecraft Redstone Engineering with Ms. L (same friends all week). 10 AM, D&D with Megan (same friends all week). 11 AM, Virtual Campus lunch break. 12 PM, Speech & Debate with Coach Hughes (same friends all week). Each camp is 50 minutes with the same cohort of 6–8 and the same mentor, all week.",
+			},
+			{
+				q: 'Will my child make friends?',
+				a: "Every time. Your child joins a camp about something they love and meets kids who love it too. Same group all week. By Tuesday, inside jokes. By Thursday, texting after camp. Parents tell us their children are more connected here than anywhere in their physical lives. 93% of families re-enroll.",
+			},
+			{
+				q: "What if my child doesn't love their camp?",
+				a: "Summer Camp Satisfaction Guarantee: If your child isn't loving camp by the end of Day 1, transfer to another camp that week or receive a full credit. No risk. No stress.",
+			},
+			{
+				q: 'What is the best online summer camp for gifted or 2e kids?',
+				a: "Young Scholars Academy offers one of the most comprehensive virtual summer camp experiences for gifted, twice-exceptional, and differently-wired kids ages 5–18. With 100+ unique camp titles across 10 weeks, course sizes of 6–8, hand-selected neurodivergent mentors, and a virtual campus for socializing between sessions, YSA summer is designed for kids who need more than a generic camp.",
+			},
+		],
+	},
+	{
+		id: 'logistics',
+		label: 'Logistics',
+		faqs: [
+			{
+				q: 'What tech does my child need?',
+				a: "Computer or tablet with webcam, microphone, and stable internet. Courses on Zoom. Some camps (Minecraft, Roblox, Kerbal, etc.) require owning the game. Each listing specifies materials.",
+			},
+			{
+				q: 'What time zone are camps in?',
+				a: "All times Pacific (PT). Camps run 7 AM to 7 PM PT to accommodate families worldwide.",
+			},
+			{
+				q: 'How do I get started?',
+				a: "Browse camps at youngscholarsacademy.org. No account needed. Register online. No phone call, no placement test. Use Scheduley AI for personalized recommendations. Questions: support@youngscholarsacademy.org.",
+			},
+		],
+	},
+];
+
+const allFaqs = categories.flatMap((c) => c.faqs);
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: allFaqs.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: { '@type': 'Answer', text: f.a },
+	})),
+};
+---
+
+<section class="w-full bg-[#f8fafc] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="summer-faq-heading">
+	<div class="mx-auto max-w-[896px] px-6">
+
+		<!-- Header -->
+		<div class="mb-8 text-center">
+			<p class="mb-3 inline-flex items-center justify-center rounded-full bg-[#E1F3FF] px-4 py-1.5 text-xs font-bold tracking-[0.08em] text-[#0A9DFB] uppercase">
+				Summer Questions
+			</p>
+			<h2 id="summer-faq-heading" class="m-0 text-[clamp(1.875rem,4vw,2.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[#111827]">
+				Everything About YSA Summer Camps
+			</h2>
+			<p class="mt-3 text-sm leading-[1.7] text-[#64748B]">
+				From how it works to who teaches — your questions answered.
+			</p>
+		</div>
+
+		<!-- Category tabs -->
+		<div class="mb-8 flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="FAQ categories" id="summer-faq-tabs">
+			<button
+				role="tab"
+				aria-selected="true"
+				aria-controls="summer-faq-all"
+				data-faq-tab="all"
+				class="rounded-full border border-[#CBD5E1] bg-white px-4 py-2 text-sm font-semibold text-[#64748B] transition-colors hover:border-[#0A9DFB] hover:text-[#0A9DFB] data-[active]:border-[#0A9DFB] data-[active]:bg-[#E1F3FF] data-[active]:text-[#0A9DFB]"
+				data-active
+			>
+				All
+			</button>
+			{categories.map((cat) => (
+				<button
+					role="tab"
+					aria-selected="false"
+					aria-controls={`summer-faq-${cat.id}`}
+					data-faq-tab={cat.id}
+					class="rounded-full border border-[#CBD5E1] bg-white px-4 py-2 text-sm font-semibold text-[#64748B] transition-colors hover:border-[#0A9DFB] hover:text-[#0A9DFB] data-[active]:border-[#0A9DFB] data-[active]:bg-[#E1F3FF] data-[active]:text-[#0A9DFB]"
+				>
+					{cat.label}
+				</button>
+			))}
+		</div>
+
+		<!-- FAQ panels -->
+		<div id="summer-faq-all" role="tabpanel" data-faq-panel="all">
+			{categories.map((cat) => (
+				<div data-faq-category={cat.id} class="mb-8">
+					<p class="mb-3 text-[0.6875rem] font-bold tracking-[0.14em] text-[#94A3B8] uppercase">{cat.label}</p>
+					<div class="space-y-3">
+						{cat.faqs.map((faq, i) => (
+							<details class="group overflow-hidden rounded-xl border border-[#e2e8f0] bg-white p-0" open={i === 0 && cat === categories[0]}>
+								<summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-5 [&::-webkit-details-marker]:hidden">
+									<h3 class="text-[0.9375rem] font-semibold leading-5 text-[#111827]">{faq.q}</h3>
+									<span class="inline-flex h-4 w-4 shrink-0 items-center justify-center text-[#94a3b8] transition-transform duration-200 group-open:rotate-180" aria-hidden="true">
+										<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.67 6.67L8 10L11.33 6.67" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+									</span>
+								</summary>
+								<div class="px-6 pb-5">
+									<p class="m-0 text-[0.9375rem] leading-[1.7] text-[#475569]">{faq.a}</p>
+								</div>
+							</details>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+
+	</div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<script is:inline>
+(function () {
+	function initSummerFaqTabs() {
+		var tabs = document.querySelectorAll('[data-faq-tab]');
+		if (!tabs.length) return;
+
+		tabs.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var target = btn.getAttribute('data-faq-tab');
+
+				// Update tab active states
+				tabs.forEach(function (t) {
+					t.removeAttribute('data-active');
+					t.setAttribute('aria-selected', 'false');
+				});
+				btn.setAttribute('data-active', '');
+				btn.setAttribute('aria-selected', 'true');
+
+				// Show/hide category blocks
+				var categories = document.querySelectorAll('[data-faq-category]');
+				categories.forEach(function (cat) {
+					if (target === 'all' || cat.getAttribute('data-faq-category') === target) {
+						cat.style.display = '';
+					} else {
+						cat.style.display = 'none';
+					}
+				});
+			});
+		});
+	}
+
+	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSummerFaqTabs);
+	else initSummerFaqTabs();
+	document.addEventListener('astro:page-load', initSummerFaqTabs);
+})();
+</script>

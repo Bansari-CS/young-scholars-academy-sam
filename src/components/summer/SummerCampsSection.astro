@@ -333,22 +333,34 @@ const selectBase =
 		</p>
 
 		<div
-			class="relative mt-12 flex flex-wrap items-center justify-between gap-2.5 overflow-hidden rounded-3xl border border-[rgba(10,157,251,0.1)] bg-[#e1f3ff] p-5 after:pointer-events-none after:absolute after:right-[-40px] after:bottom-[-40px] after:size-40 after:rounded-full after:bg-[rgba(10,157,251,0.05)] md:flex-nowrap md:p-8 lg:p-10 max-md:flex-col max-md:text-center"
+			class="relative mt-12 overflow-hidden rounded-3xl border border-[rgba(124,58,237,0.2)] bg-[linear-gradient(135deg,#F5F3FF_0%,#EFF6FF_100%)] p-8 lg:p-10"
 		>
-			<div>
-				<h3 class="m-0 text-2xl leading-9 font-bold text-[#111827]">{content.aiTitle}</h3>
-				<p class="mt-2 mb-0 text-base text-[#475569]">{content.aiDescription}</p>
+			<!-- Decorative sparkle blobs -->
+			<div class="pointer-events-none absolute right-0 top-0 size-48 -translate-y-1/3 translate-x-1/3 rounded-full bg-[#7C3AED]/8 blur-[60px]" aria-hidden="true"></div>
+			<div class="pointer-events-none absolute left-0 bottom-0 size-32 translate-y-1/3 -translate-x-1/3 rounded-full bg-[#0A9DFB]/8 blur-[40px]" aria-hidden="true"></div>
+
+			<div class="relative flex flex-wrap items-center justify-between gap-6 md:flex-nowrap max-md:flex-col max-md:text-center">
+				<div>
+					<!-- AI badge -->
+					<div class="mb-3 inline-flex items-center gap-1.5 rounded-full bg-[#7C3AED]/10 px-3 py-1 max-md:mx-auto">
+						<span class="text-base leading-none" aria-hidden="true">✨</span>
+						<span class="text-xs font-bold tracking-[0.08em] text-[#7C3AED] uppercase">AI-Powered Scheduling</span>
+						<span class="text-base leading-none" aria-hidden="true">✨</span>
+					</div>
+					<h3 class="m-0 text-2xl leading-9 font-bold text-[#111827]">{content.aiTitle}</h3>
+					<p class="mt-2 mb-0 text-base text-[#475569]">{content.aiDescription}</p>
+				</div>
+				<button
+					type="button"
+					class="relative z-[1] inline-flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-xl bg-[#7C3AED] px-8 py-3.5 text-white font-bold shadow-[0_4px_16px_rgba(124,58,237,0.3)] transition-[opacity,transform] hover:-translate-y-px hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7C3AED] max-md:w-full max-md:justify-center"
+					data-scheduley-open
+					data-scheduley-embed-src={scheduleyEmbedSrc}
+					aria-haspopup="dialog"
+				>
+					<span class="text-lg leading-none" aria-hidden="true">✨</span>
+					{content.aiCtaLabel ?? '✨ Chat with Scheduley AI'}
+				</button>
 			</div>
-			<button
-				type="button"
-				class="relative z-[1] inline-flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-xl border-2 border-[#0a9dfb] bg-white px-8 py-3.5 text-[#0a9dfb] font-bold transition-colors duration-150 hover:bg-[#f0f9ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0a9dfb] max-md:w-full max-md:justify-center"
-				data-scheduley-open
-				data-scheduley-embed-src={scheduleyEmbedSrc}
-				aria-haspopup="dialog"
-			>
-				<img class="size-4 shrink-0" src="/images/summer/camps/icon-ai.svg" alt="" aria-hidden="true" />
-				{content.aiCtaLabel ?? 'Ask Scheduley AI'}
-			</button>
 		</div>
 		<div class="mt-[45px] text-center">
 			<a

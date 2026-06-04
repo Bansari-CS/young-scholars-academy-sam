@@ -47,7 +47,7 @@ const cardShellClasses =
 >
 	{
 		hasLocalVideo ? (
-			<div class={cardShellClasses}>
+			<div class={cardShellClasses} data-local-video-wrap>
 				<video
 					class="absolute inset-0 h-full w-full object-cover rounded-3xl"
 					src={videoLocalSrc}
@@ -56,8 +56,26 @@ const cardShellClasses =
 					loop
 					playsinline
 					aria-label={videoAriaLabel}
+					data-local-video
 				/>
-				{/* Click-blocker — prevents users from interacting with controls */}
+				{/* Unmute button */}
+				<button
+					type="button"
+					class="absolute bottom-4 right-4 z-[5] flex items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-opacity hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+					data-unmute-btn
+					aria-label="Unmute video"
+				>
+					<svg data-muted-icon class="block size-3.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+						<path d="M8 2L4 6H1V10H4L8 14V2Z"/>
+						<path d="M11 5L14 8M14 8L11 11M14 8L11 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+					</svg>
+					<svg data-unmuted-icon class="hidden size-3.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+						<path d="M8 2L4 6H1V10H4L8 14V2Z"/>
+						<path d="M10.5 5.5A3 3 0 0113.5 8A3 3 0 0110.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+					</svg>
+					<span data-unmute-label>Unmute</span>
+				</button>
+				{/* Click-blocker over video (not over button) */}
 				<div class="absolute inset-0 z-[3] rounded-3xl" aria-hidden="true" style="pointer-events:all;cursor:default;"></div>
 			</div>
 		) : hasVideo ? (
@@ -383,5 +401,47 @@ const cardShellClasses =
 		initHeroVideo();
 	}
 	document.addEventListener('astro:page-load', initHeroVideo);
+})();
+</script>
+
+<script is:inline>
+// Local video unmute toggle
+(function () {
+	function initUnmute() {
+		var wrap = document.querySelector('[data-local-video-wrap]');
+		if (!wrap || wrap.dataset.unmuteInited === '1') return;
+		wrap.dataset.unmuteInited = '1';
+
+		var video = wrap.querySelector('[data-local-video]');
+		var btn   = wrap.querySelector('[data-unmute-btn]');
+		if (!video || !btn) return;
+
+		// Make button sit above click-blocker
+		btn.style.pointerEvents = 'all';
+		btn.style.zIndex = '10';
+
+		var mutedIcon   = btn.querySelector('[data-muted-icon]');
+		var unmutedIcon = btn.querySelector('[data-unmuted-icon]');
+		var label       = btn.querySelector('[data-unmute-label]');
+
+		btn.addEventListener('click', function () {
+			video.muted = !video.muted;
+			if (video.muted) {
+				if (mutedIcon)   mutedIcon.classList.remove('hidden');
+				if (unmutedIcon) unmutedIcon.classList.add('hidden');
+				if (label) label.textContent = 'Unmute';
+				btn.setAttribute('aria-label', 'Unmute video');
+			} else {
+				if (mutedIcon)   mutedIcon.classList.add('hidden');
+				if (unmutedIcon) unmutedIcon.classList.remove('hidden');
+				if (label) label.textContent = 'Mute';
+				btn.setAttribute('aria-label', 'Mute video');
+			}
+		});
+	}
+
+	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initUnmute);
+	else initUnmute();
+	document.addEventListener('astro:page-load', initUnmute);
 })();
 </script>

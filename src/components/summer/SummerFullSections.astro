@@ -6,8 +6,9 @@ import SummerBonusSection from './SummerBonusSection.astro';
 import SummerPricingSection from './SummerPricingSection.astro';
 import RealGrowthSection from '../common/RealGrowthSection.astro';
 import SummerFitSection from './SummerFitSection.astro';
-import SummerFaqSection from './SummerFaqSection.astro';
 import SummerFinalCtaSection from './SummerFinalCtaSection.astro';
+import SummerOnlineObjectionSection from './SummerOnlineObjectionSection.astro';
+import SummerDebbieQuoteSection from './SummerDebbieQuoteSection.astro';
 
 interface Props {
 	content: any;
@@ -16,12 +17,32 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 
+<!-- What to expect / how it works -->
 <SummerExpectSection content={content.expect} />
-<SummerPromiseSection content={content.promise} />
+
+<!-- Debbie Reber expert endorsement -->
+<SummerDebbieQuoteSection />
+
+<!-- Camp catalog with filters + Scheduley AI (moved here; Promise moved below) -->
 <SummerCampsSection content={content.camps} />
+
+<!-- "Try From The Inside" Guarantee — below search feature per client request -->
+<SummerPromiseSection content={content.promise} />
+
+<!-- "But It's Online" objection crusher -->
+<SummerOnlineObjectionSection />
+
+<!-- Pricing -->
 <SummerPricingSection content={content.pricing} />
+
+<!-- Real growth / testimonials -->
 <RealGrowthSection hideStats content={content.results} />
+
+<!-- Bonus bundle + Expert Vault (updated speakers) -->
 <SummerBonusSection content={content.bonus} />
+
+<!-- Is YSA right for your child -->
 <SummerFitSection content={content.fit} />
-<SummerFaqSection content={content.faq} />
+
+<!-- Final CTA -->
 <SummerFinalCtaSection content={content.finalCta} />

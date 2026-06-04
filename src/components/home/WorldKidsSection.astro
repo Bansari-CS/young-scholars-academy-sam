@@ -385,15 +385,20 @@ const markerPoints =
 
 	const globeRoot = document.querySelector('[data-world-globe]');
 	if (globeRoot) {
-		const points = JSON.parse(globeRoot.getAttribute('data-points') ?? '[]');
-		Promise.all([import('globe.gl'), import('three')]).then(async ([{ default: Globe }, THREE]) => {
+		// Use IntersectionObserver — init only when the globe scrolls into view
+		// This ensures clientWidth/clientHeight are non-zero when Globe() is called
+		const initGlobe = () => {
+			if (globeRoot.dataset.globeInited === '1') return;
+			globeRoot.dataset.globeInited = '1';
+			const points = JSON.parse(globeRoot.getAttribute('data-points') ?? '[]');
+			Promise.all([import('globe.gl'), import('three')]).then(async ([{ default: Globe }, THREE]) => {
 			const globe = Globe({
 				animateIn: false,
 				waitForGlobeReady: true
 			})(globeRoot);
 
-			const earthDark = 'https://unpkg.com/three-globe/example/img/earth-dark.jpg';
-			const earthNight = 'https://unpkg.com/three-globe/example/img/earth-night.jpg';
+			const earthDark = '/assets/globe/textures/earth-dark.jpg';
+			const earthNight = '/assets/globe/textures/earth-night.jpg';
 
 			let globeMapUrl = earthDark;
 			try {
@@ -496,7 +501,8 @@ const markerPoints =
 			controls.enableZoom = false;
 			controls.enablePan = false;
 			controls.enableRotate = true;
-			controls.autoRotate = false;
+			controls.autoRotate = true;
+				controls.autoRotateSpeed = 0.6;
 			controls.rotateSpeed = 0.7;
 			controls.enableDamping = true;
 			controls.dampingFactor = 0.08;
@@ -562,6 +568,27 @@ const markerPoints =
 			};
 
 			window.addEventListener('resize', onResize);
+		});
+		}; // end initGlobe
+
+		// Trigger on scroll into view (with 15% margin so it starts slightly before visible)
+		const globeObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						initGlobe();
+						globeObserver.disconnect();
+					}
+				});
+			},
+			{ threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
+		);
+		globeObserver.observe(globeRoot);
+
+		// Also trigger immediately if already visible on page load
+		window.addEventListener('load', () => {
+			const r = globeRoot.getBoundingClientRect();
+			if (r.top < window.innerHeight && r.bottom > 0) initGlobe();
 		});
 	}
 

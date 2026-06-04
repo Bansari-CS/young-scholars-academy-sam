@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/common/Header.astro';
 import Footer from '../../components/common/Footer.astro';
+import GeneralFaqSection from '../../components/common/GeneralFaqSection.astro';
 import BlogDetailContentSection from '../../components/blog-detail/BlogDetailContentSection.astro';
 import BlogDetailRelatedSection from '../../components/blog-detail/BlogDetailRelatedSection.astro';
 import BlogDetailFinalCtaSection from '../../components/blog-detail/BlogDetailFinalCtaSection.astro';
@@ -35,6 +36,7 @@ const navItems = await getSiteNavItems();
 		<BlogDetailContentSection content={blogDetailEntry.data} Content={Content} outlineItems={outlineItems} />
 		<BlogDetailRelatedSection content={blogDetailEntry.data.relatedSection} />
 		<BlogDetailFinalCtaSection content={blogDetailEntry.data.finalCta} />
+		<GeneralFaqSection />
 	</main>
 	<Footer />
 </Layout>

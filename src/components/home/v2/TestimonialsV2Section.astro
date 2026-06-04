@@ -30,18 +30,25 @@ const testimonials = [
 		initial: 'L',
 		avatarBg: 'bg-[#EA580C]',
 	},
+	{
+		quote: "All the kids are just like him, so he doesn't feel as out of place.",
+		author: 'Krystin',
+		role: 'YSA Parent',
+		initial: 'K',
+		avatarBg: 'bg-[#7C3AED]',
+	},
 ];
 
 // Video testimonial data — using real Google Drive video
 const videoTestimonial = {
-	name: 'Jonathan',
-	role: 'YSA Student',
+	name: 'Christina',
+	role: 'YSA Mom',
 	quote: '"Compared to other classes, at YSA you get to talk so much more — they explain it and help you many times if you get lost."',
 	driveFileId: '1qsKTyVG4qI_WJMCgNjpZOhQaChKhtxzy',
 	posterSrc: '/assets/images/home-testimonials/nicole-testimonial.webp',
 };
 
-const videoEmbedUrl = `https://drive.google.com/file/d/${videoTestimonial.driveFileId}/preview`;
+const videoEmbedUrl = `https://drive.google.com/file/d/${videoTestimonial.driveFileId}/preview?rm=minimal`;
 ---
 
 <section class="w-full bg-[#F8FAFC] py-[clamp(3rem,8vw,6rem)]" aria-labelledby="testimonials-v2-heading">
@@ -63,7 +70,7 @@ const videoEmbedUrl = `https://drive.google.com/file/d/${videoTestimonial.driveF
 				<button
 					type="button"
 					class="group relative w-full overflow-hidden rounded-2xl shadow-[0_4px_24px_rgba(15,23,42,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-2"
-					aria-label="Play video testimonial from Jonathan, YSA Student"
+					aria-label="Play video testimonial from Christina, YSA Mom"
 					id="open-video-modal"
 					style="height:100%;min-height:280px;"
 				>
@@ -100,7 +107,7 @@ const videoEmbedUrl = `https://drive.google.com/file/d/${videoTestimonial.driveF
 						<p class="m-0 text-sm italic leading-[1.6] text-white/90">{videoTestimonial.quote}</p>
 						<div class="mt-4 flex items-center gap-2.5">
 							<div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#7C3AED]">
-								<span class="text-xs font-bold text-white">J</span>
+								<span class="text-xs font-bold text-white">C</span>
 							</div>
 							<div>
 								<p class="m-0 text-sm font-bold text-white">{videoTestimonial.name}</p>
@@ -190,7 +197,7 @@ const videoEmbedUrl = `https://drive.google.com/file/d/${videoTestimonial.driveF
 	<div class="flex items-center justify-between border-b border-white/10 bg-[#0F172A] px-5 py-3">
 		<div>
 			<p class="m-0 text-sm font-bold text-white">{videoTestimonial.name} — {videoTestimonial.role}</p>
-			<p class="m-0 text-xs text-white/40">YSA Video Testimonial</p>
+			<p class="m-0 text-xs text-white/40">Starts muted · use player controls to unmute</p>
 		</div>
 		<button
 			id="close-video-modal"
@@ -209,7 +216,7 @@ const videoEmbedUrl = `https://drive.google.com/file/d/${videoTestimonial.driveF
 		<iframe
 			id="video-modal-iframe"
 			class="absolute inset-0 h-full w-full border-0"
-			title="Jonathan — YSA Student testimonial"
+			title="Christina — YSA Mom testimonial"
 			allow="autoplay; fullscreen"
 			allowfullscreen
 		></iframe>
